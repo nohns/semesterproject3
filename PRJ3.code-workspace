@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "All",
+			"path": "."
+		},
+		{
+			"name": "Kernel driver prototype",
+			"path": "prototyping/rpi-uart-kernel-module"
+		}
+	]
+}
