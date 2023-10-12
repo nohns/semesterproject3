@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Driver",
+            "includePath": [
+                "/home/stud/sources/rpi-5.4.83/include",
+                "/home/stud/sources/rpi-5.4.83/include/uapi",
+                "/home/stud/sources/rpi-5.4.83/include/generated",
+                "/home/stud/sources/rpi-5.4.83/include/generated/uapi",
+                "/home/stud/sources/rpi-5.4.83/arch/arm/include",
+                "/home/stud/sources/rpi-5.4.83/arch/arm/include/uapi",
+                "/home/stud/sources/rpi-5.4.83/arch/arm/include/generated",
+                "/home/stud/sources/rpi-5.4.83/arch/arm/include/generated/uapi"
+            ],
+            "defines": [
+                "__KERNEL__",
+                "MODULE"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm64"
+        }
+    ],
+    "version": 4
+}
