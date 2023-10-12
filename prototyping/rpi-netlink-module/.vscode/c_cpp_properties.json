@@ -1,0 +1,47 @@
+{
+    "configurations": [
+        {
+            "name": "RPi driver",
+            "includePath": [
+                "~/sources/rpi-5.4.83/include",
+                "~/sources/rpi-5.4.83/include/uapi",
+                "~/sources/rpi-5.4.83/include/generated",
+                "~/sources/rpi-5.4.83/include/generated/uapi",
+                "~/sources/rpi-5.4.83/arch/arm/include",
+                "~/sources/rpi-5.4.83/arch/arm/include/uapi",
+                "~/sources/rpi-5.4.83/arch/arm/include/generated",
+                "~/sources/rpi-5.4.83/arch/arm/include/generated/uapi"
+            ],
+            "defines": [
+                "__KERNEL__",
+                "MODULE"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm64"
+        },
+        {
+            "name": "Ubuntu ARM driver",
+            "includePath": [
+                "~/sources/linux-6.2.0/include",
+                "~/sources/linux-6.2.0/include/uapi",
+                "~/sources/linux-6.2.0/include/generated",
+                "~/sources/linux-6.2.0/include/generated/uapi",
+                "~/sources/linux-6.2.0/arch/arm64/include",
+                "~/sources/linux-6.2.0/arch/arm64/include/uapi",
+                "~/sources/linux-6.2.0/arch/arm64/include/generated",
+                "~/sources/linux-6.2.0/arch/arm64/include/generated/uapi"
+            ],
+            "defines": [
+                "__KERNEL__",
+                "MODULE"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm64"
+        }
+    ],
+    "version": 4
+}
