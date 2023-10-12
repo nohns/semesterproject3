@@ -1,0 +1,2006 @@
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	__aeabi_i2d
+  20              		.global	__aeabi_ddiv
+  21              		.global	__aeabi_dsub
+  22              		.section	.text.main,"ax",%progbits
+  23              		.align	2
+  24              		.global	main
+  25              		.thumb
+  26              		.thumb_func
+  27              		.type	main, %function
+  28              	main:
+  29              	.LFB64:
+  30              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** #include <stdio.h>
+  14:main.c        **** 
+  15:main.c        **** CY_ISR_PROTO(ISR_UART_rx_handler);
+  16:main.c        **** void handleByteReceived(uint8_t byteReceived);
+  17:main.c        **** 
+  18:main.c        **** int offset_weight1 = 374;
+  19:main.c        **** float64 divider_weight1 = 1201.3;
+  20:main.c        **** int offset_weight2 = 316;
+  21:main.c        **** float64 divider_weight2 = 1841.3;
+  22:main.c        **** float64 tara_weight1 = 0;
+  23:main.c        **** float64 tara_weight2 = 0;
+  24:main.c        **** float64 result = 0;
+  25:main.c        **** int weight = 1;
+  26:main.c        **** 
+  27:main.c        **** int main(void)
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 2
+
+
+  28:main.c        **** {
+  31              		.loc 1 28 0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 256
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35 0000 70B5     		push	{r4, r5, r6, lr}
+  36              		.cfi_def_cfa_offset 16
+  37              		.cfi_offset 4, -16
+  38              		.cfi_offset 5, -12
+  39              		.cfi_offset 6, -8
+  40              		.cfi_offset 14, -4
+  41 0002 C2B0     		sub	sp, sp, #264
+  42              		.cfi_def_cfa_offset 280
+  29:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  43              		.loc 1 29 0
+  44              		.syntax unified
+  45              	@ 29 "main.c" 1
+  46 0004 62B6     		CPSIE   i
+  47              	@ 0 "" 2
+  30:main.c        ****     char uartBuffer[256];
+  31:main.c        ****     AMux_1_Init();
+  48              		.loc 1 31 0
+  49              		.thumb
+  50              		.syntax unified
+  51 0006 FFF7FEFF 		bl	AMux_1_Start
+  52              	.LVL0:
+  32:main.c        **** 
+  33:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+  34:main.c        ****     isr_uart_rx_StartEx(ISR_UART_rx_handler);
+  53              		.loc 1 34 0
+  54 000a 3848     		ldr	r0, .L9
+  55 000c FFF7FEFF 		bl	isr_uart_rx_StartEx
+  56              	.LVL1:
+  35:main.c        ****     UART_1_Start();
+  57              		.loc 1 35 0
+  58 0010 FFF7FEFF 		bl	UART_1_Start
+  59              	.LVL2:
+  36:main.c        ****     ADC_SAR_1_Start();
+  60              		.loc 1 36 0
+  61 0014 FFF7FEFF 		bl	ADC_SAR_1_Start
+  62              	.LVL3:
+  37:main.c        ****     ADC_SAR_1_StartConvert();
+  63              		.loc 1 37 0
+  64 0018 FFF7FEFF 		bl	ADC_SAR_1_StartConvert
+  65              	.LVL4:
+  38:main.c        ****     
+  39:main.c        ****     // Start explaining program
+  40:main.c        ****     UART_1_PutString("Scale application started\r\n");
+  66              		.loc 1 40 0
+  67 001c 3448     		ldr	r0, .L9+4
+  68 001e FFF7FEFF 		bl	UART_1_PutString
+  69              	.LVL5:
+  41:main.c        ****     UART_1_PutString("q: Remove tara\r\n");
+  70              		.loc 1 41 0
+  71 0022 3448     		ldr	r0, .L9+8
+  72 0024 FFF7FEFF 		bl	UART_1_PutString
+  73              	.LVL6:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 3
+
+
+  42:main.c        ****     UART_1_PutString("w: Tara\r\n");
+  74              		.loc 1 42 0
+  75 0028 3348     		ldr	r0, .L9+12
+  76 002a FFF7FEFF 		bl	UART_1_PutString
+  77              	.LVL7:
+  43:main.c        ****     UART_1_PutString("1 or 2: Weight select\r\n");
+  78              		.loc 1 43 0
+  79 002e 3348     		ldr	r0, .L9+16
+  80 0030 FFF7FEFF 		bl	UART_1_PutString
+  81              	.LVL8:
+  82              	.L6:
+  83              	.LBB2:
+  84              	.LBB3:
+  44:main.c        **** 
+  45:main.c        ****     for(;;)
+  46:main.c        ****     {
+  47:main.c        ****         uint16_t sum = 0; //Initialize sum
+  48:main.c        ****         /* Place your application code here. */
+  49:main.c        ****         for(size_t i = 0; i < 9; i++) //9 ADC messurements are summed up with 0.1 s dalay between
+  85              		.loc 1 49 0
+  86 0034 0024     		movs	r4, #0
+  87              	.LBE3:
+  47:main.c        ****         /* Place your application code here. */
+  88              		.loc 1 47 0
+  89 0036 2546     		mov	r5, r4
+  90              	.LBB4:
+  91              		.loc 1 49 0
+  92 0038 0BE0     		b	.L2
+  93              	.LVL9:
+  94              	.L4:
+  50:main.c        ****         {
+  51:main.c        ****             if (ADC_SAR_1_IsEndConversion(ADC_SAR_1_WAIT_FOR_RESULT))
+  95              		.loc 1 51 0
+  96 003a 0020     		movs	r0, #0
+  97 003c FFF7FEFF 		bl	ADC_SAR_1_IsEndConversion
+  98              	.LVL10:
+  99 0040 18B1     		cbz	r0, .L3
+  52:main.c        ****             {
+  53:main.c        ****                 sum += ADC_SAR_1_GetResult16();
+ 100              		.loc 1 53 0
+ 101 0042 FFF7FEFF 		bl	ADC_SAR_1_GetResult16
+ 102              	.LVL11:
+ 103 0046 2844     		add	r0, r0, r5
+ 104 0048 85B2     		uxth	r5, r0
+ 105              	.LVL12:
+ 106              	.L3:
+  54:main.c        ****             }
+  55:main.c        ****             CyDelay(100);
+ 107              		.loc 1 55 0 discriminator 2
+ 108 004a 6420     		movs	r0, #100
+ 109 004c FFF7FEFF 		bl	CyDelay
+ 110              	.LVL13:
+  49:main.c        ****         {
+ 111              		.loc 1 49 0 discriminator 2
+ 112 0050 0134     		adds	r4, r4, #1
+ 113              	.LVL14:
+ 114              	.L2:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 4
+
+
+  49:main.c        ****         {
+ 115              		.loc 1 49 0 is_stmt 0 discriminator 1
+ 116 0052 082C     		cmp	r4, #8
+ 117 0054 F1D9     		bls	.L4
+ 118              	.LBE4:
+  56:main.c        ****         }
+  57:main.c        ****         
+  58:main.c        ****         /*result = sum/9; // The ADC sum is converted to a kg result.
+  59:main.c        ****         snprintf(uartBuffer, sizeof(uartBuffer), "ADC result: %.3f\r\n", result); //String is creat
+  60:main.c        ****         UART_1_PutString(uartBuffer); //String is sent through UART*/
+  61:main.c        ****         
+  62:main.c        ****         if (weight == 1)
+ 119              		.loc 1 62 0 is_stmt 1
+ 120 0056 2A4B     		ldr	r3, .L9+20
+ 121 0058 1C68     		ldr	r4, [r3]
+ 122              	.LVL15:
+ 123 005a 012C     		cmp	r4, #1
+ 124 005c 20D1     		bne	.L5
+  63:main.c        ****         {
+  64:main.c        ****         result = ((sum/9 - offset_weight1)/divider_weight1 - tara_weight1); // The ADC sum is conve
+ 125              		.loc 1 64 0
+ 126 005e 294B     		ldr	r3, .L9+24
+ 127 0060 A3FB0523 		umull	r2, r3, r3, r5
+ 128 0064 C3F34F03 		ubfx	r3, r3, #1, #16
+ 129 0068 254E     		ldr	r6, .L9+20
+ 130 006a 7068     		ldr	r0, [r6, #4]
+ 131 006c 181A     		subs	r0, r3, r0
+ 132 006e FFF7FEFF 		bl	__aeabi_i2d
+ 133              	.LVL16:
+ 134 0072 D6E90223 		ldrd	r2, [r6, #8]
+ 135 0076 FFF7FEFF 		bl	__aeabi_ddiv
+ 136              	.LVL17:
+ 137 007a 234E     		ldr	r6, .L9+28
+ 138 007c D6E90023 		ldrd	r2, [r6]
+ 139 0080 FFF7FEFF 		bl	__aeabi_dsub
+ 140              	.LVL18:
+ 141 0084 C6E90201 		strd	r0, [r6, #8]
+  65:main.c        ****         snprintf(uartBuffer, sizeof(uartBuffer), "ADC result for weight %d: %.3f kg\r\n", weight ,r
+ 142              		.loc 1 65 0
+ 143 0088 CDE90001 		strd	r0, [sp]
+ 144 008c 2346     		mov	r3, r4
+ 145 008e 1F4A     		ldr	r2, .L9+32
+ 146 0090 4FF48071 		mov	r1, #256
+ 147 0094 02A8     		add	r0, sp, #8
+ 148 0096 FFF7FEFF 		bl	snprintf
+ 149              	.LVL19:
+  66:main.c        ****         UART_1_PutString(uartBuffer); //String is sent through UART
+ 150              		.loc 1 66 0
+ 151 009a 02A8     		add	r0, sp, #8
+ 152 009c FFF7FEFF 		bl	UART_1_PutString
+ 153              	.LVL20:
+ 154              	.L5:
+  67:main.c        ****         }
+  68:main.c        ****         
+  69:main.c        ****         if (weight == 2)
+ 155              		.loc 1 69 0
+ 156 00a0 174B     		ldr	r3, .L9+20
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 5
+
+
+ 157 00a2 1C68     		ldr	r4, [r3]
+ 158 00a4 022C     		cmp	r4, #2
+ 159 00a6 C5D1     		bne	.L6
+  70:main.c        ****         {
+  71:main.c        ****             result = ((sum/9 - offset_weight1)/divider_weight1 - tara_weight1); // The ADC sum is c
+ 160              		.loc 1 71 0
+ 161 00a8 164B     		ldr	r3, .L9+24
+ 162 00aa A3FB0523 		umull	r2, r3, r3, r5
+ 163 00ae C3F34F03 		ubfx	r3, r3, #1, #16
+ 164 00b2 134D     		ldr	r5, .L9+20
+ 165              	.LVL21:
+ 166 00b4 6868     		ldr	r0, [r5, #4]
+ 167 00b6 181A     		subs	r0, r3, r0
+ 168 00b8 FFF7FEFF 		bl	__aeabi_i2d
+ 169              	.LVL22:
+ 170 00bc D5E90223 		ldrd	r2, [r5, #8]
+ 171 00c0 FFF7FEFF 		bl	__aeabi_ddiv
+ 172              	.LVL23:
+ 173 00c4 104D     		ldr	r5, .L9+28
+ 174 00c6 D5E90023 		ldrd	r2, [r5]
+ 175 00ca FFF7FEFF 		bl	__aeabi_dsub
+ 176              	.LVL24:
+ 177 00ce C5E90201 		strd	r0, [r5, #8]
+  72:main.c        ****             snprintf(uartBuffer, sizeof(uartBuffer), "ADC result for weight %d: %.3f kg\r\n", weigh
+ 178              		.loc 1 72 0
+ 179 00d2 CDE90001 		strd	r0, [sp]
+ 180 00d6 2346     		mov	r3, r4
+ 181 00d8 0C4A     		ldr	r2, .L9+32
+ 182 00da 4FF48071 		mov	r1, #256
+ 183 00de 02A8     		add	r0, sp, #8
+ 184 00e0 FFF7FEFF 		bl	snprintf
+ 185              	.LVL25:
+  73:main.c        ****             UART_1_PutString(uartBuffer); //String is sent through UART
+ 186              		.loc 1 73 0
+ 187 00e4 02A8     		add	r0, sp, #8
+ 188 00e6 FFF7FEFF 		bl	UART_1_PutString
+ 189              	.LVL26:
+ 190 00ea A3E7     		b	.L6
+ 191              	.L10:
+ 192              		.align	2
+ 193              	.L9:
+ 194 00ec 00000000 		.word	ISR_UART_rx_handler
+ 195 00f0 00000000 		.word	.LC0
+ 196 00f4 1C000000 		.word	.LC1
+ 197 00f8 30000000 		.word	.LC2
+ 198 00fc 3C000000 		.word	.LC3
+ 199 0100 00000000 		.word	.LANCHOR0
+ 200 0104 398EE338 		.word	954437177
+ 201 0108 00000000 		.word	.LANCHOR1
+ 202 010c 54000000 		.word	.LC4
+ 203              	.LBE2:
+ 204              		.cfi_endproc
+ 205              	.LFE64:
+ 206              		.size	main, .-main
+ 207              		.global	__aeabi_dadd
+ 208              		.section	.text.handleByteReceived,"ax",%progbits
+ 209              		.align	2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 6
+
+
+ 210              		.global	handleByteReceived
+ 211              		.thumb
+ 212              		.thumb_func
+ 213              		.type	handleByteReceived, %function
+ 214              	handleByteReceived:
+ 215              	.LFB66:
+  74:main.c        ****         }
+  75:main.c        ****     }
+  76:main.c        **** }
+  77:main.c        **** 
+  78:main.c        **** CY_ISR(ISR_UART_rx_handler)
+  79:main.c        **** {
+  80:main.c        ****     uint8_t bytesToRead = UART_1_GetRxBufferSize();
+  81:main.c        ****     while (bytesToRead > 0)
+  82:main.c        ****     {
+  83:main.c        ****         uint8_t byteReceived = UART_1_ReadRxData();
+  84:main.c        ****         UART_1_WriteTxData(byteReceived); // echo back
+  85:main.c        ****         
+  86:main.c        ****         handleByteReceived(byteReceived);
+  87:main.c        ****         
+  88:main.c        ****         bytesToRead--;
+  89:main.c        ****     }
+  90:main.c        **** }
+  91:main.c        **** 
+  92:main.c        **** void handleByteReceived(uint8_t byteReceived)
+  93:main.c        **** {
+ 216              		.loc 1 93 0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 0
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ 220              	.LVL27:
+ 221 0000 38B5     		push	{r3, r4, r5, lr}
+ 222              		.cfi_def_cfa_offset 16
+ 223              		.cfi_offset 3, -16
+ 224              		.cfi_offset 4, -12
+ 225              		.cfi_offset 5, -8
+ 226              		.cfi_offset 14, -4
+  94:main.c        ****     switch(byteReceived)
+ 227              		.loc 1 94 0
+ 228 0002 3228     		cmp	r0, #50
+ 229 0004 20D0     		beq	.L13
+ 230 0006 02D8     		bhi	.L14
+ 231 0008 3128     		cmp	r0, #49
+ 232 000a 16D0     		beq	.L15
+ 233 000c 38BD     		pop	{r3, r4, r5, pc}
+ 234              	.L14:
+ 235 000e 7128     		cmp	r0, #113
+ 236 0010 02D0     		beq	.L16
+ 237 0012 7728     		cmp	r0, #119
+ 238 0014 1FD0     		beq	.L17
+ 239 0016 38BD     		pop	{r3, r4, r5, pc}
+ 240              	.L16:
+  95:main.c        ****     {
+  96:main.c        ****         case 'q' :
+  97:main.c        ****         {
+  98:main.c        ****             if (weight == 1)
+ 241              		.loc 1 98 0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 7
+
+
+ 242 0018 1B4B     		ldr	r3, .L21
+ 243 001a 1B68     		ldr	r3, [r3]
+ 244 001c 012B     		cmp	r3, #1
+ 245 001e 04D1     		bne	.L18
+  99:main.c        ****                 tara_weight1 = 0; //Tara reset
+ 246              		.loc 1 99 0
+ 247 0020 0020     		movs	r0, #0
+ 248              	.LVL28:
+ 249 0022 0021     		movs	r1, #0
+ 250 0024 194A     		ldr	r2, .L21+4
+ 251 0026 C2E90001 		strd	r0, [r2]
+ 252              	.L18:
+ 100:main.c        ****             if (weight == 2)
+ 253              		.loc 1 100 0
+ 254 002a 022B     		cmp	r3, #2
+ 255 002c 2BD1     		bne	.L11
+ 101:main.c        ****                 tara_weight2 = 0; //Tara reset
+ 256              		.loc 1 101 0
+ 257 002e 0020     		movs	r0, #0
+ 258 0030 0021     		movs	r1, #0
+ 259 0032 164B     		ldr	r3, .L21+4
+ 260 0034 C3E90401 		strd	r0, [r3, #16]
+ 261 0038 38BD     		pop	{r3, r4, r5, pc}
+ 262              	.LVL29:
+ 263              	.L15:
+ 102:main.c        ****         }
+ 103:main.c        ****         break;
+ 104:main.c        ****         case '1' :
+ 105:main.c        ****         {
+ 106:main.c        ****             AMux_1_Select(0); //Select weight 1
+ 264              		.loc 1 106 0
+ 265 003a 0020     		movs	r0, #0
+ 266              	.LVL30:
+ 267 003c FFF7FEFF 		bl	AMux_1_Select
+ 268              	.LVL31:
+ 107:main.c        ****             weight = 1;
+ 269              		.loc 1 107 0
+ 270 0040 0122     		movs	r2, #1
+ 271 0042 114B     		ldr	r3, .L21
+ 272 0044 1A60     		str	r2, [r3]
+ 108:main.c        ****         }
+ 109:main.c        ****         break;
+ 273              		.loc 1 109 0
+ 274 0046 38BD     		pop	{r3, r4, r5, pc}
+ 275              	.LVL32:
+ 276              	.L13:
+ 110:main.c        ****         case '2' :
+ 111:main.c        ****         {
+ 112:main.c        ****             AMux_1_Select(1); //Select weight 2
+ 277              		.loc 1 112 0
+ 278 0048 0120     		movs	r0, #1
+ 279              	.LVL33:
+ 280 004a FFF7FEFF 		bl	AMux_1_Select
+ 281              	.LVL34:
+ 113:main.c        ****             weight = 2;
+ 282              		.loc 1 113 0
+ 283 004e 0222     		movs	r2, #2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 8
+
+
+ 284 0050 0D4B     		ldr	r3, .L21
+ 285 0052 1A60     		str	r2, [r3]
+ 114:main.c        ****         }
+ 115:main.c        ****         break;
+ 286              		.loc 1 115 0
+ 287 0054 38BD     		pop	{r3, r4, r5, pc}
+ 288              	.LVL35:
+ 289              	.L17:
+ 116:main.c        ****         case 'w' :
+ 117:main.c        ****         {
+ 118:main.c        ****             if (weight == 1)
+ 290              		.loc 1 118 0
+ 291 0056 0C4B     		ldr	r3, .L21
+ 292 0058 1C68     		ldr	r4, [r3]
+ 293 005a 012C     		cmp	r4, #1
+ 294 005c 08D1     		bne	.L19
+ 119:main.c        ****                 tara_weight1 += result; //Tara set
+ 295              		.loc 1 119 0
+ 296 005e 0B4D     		ldr	r5, .L21+4
+ 297 0060 D5E90223 		ldrd	r2, [r5, #8]
+ 298 0064 D5E90001 		ldrd	r0, [r5]
+ 299              	.LVL36:
+ 300 0068 FFF7FEFF 		bl	__aeabi_dadd
+ 301              	.LVL37:
+ 302 006c C5E90001 		strd	r0, [r5]
+ 303              	.L19:
+ 120:main.c        ****             if (weight == 2)
+ 304              		.loc 1 120 0
+ 305 0070 022C     		cmp	r4, #2
+ 306 0072 08D1     		bne	.L11
+ 121:main.c        ****                 tara_weight1 += result; //Tara set
+ 307              		.loc 1 121 0
+ 308 0074 054C     		ldr	r4, .L21+4
+ 309 0076 D4E90223 		ldrd	r2, [r4, #8]
+ 310 007a D4E90001 		ldrd	r0, [r4]
+ 311 007e FFF7FEFF 		bl	__aeabi_dadd
+ 312              	.LVL38:
+ 313 0082 C4E90001 		strd	r0, [r4]
+ 314              	.L11:
+ 315 0086 38BD     		pop	{r3, r4, r5, pc}
+ 316              	.L22:
+ 317              		.align	2
+ 318              	.L21:
+ 319 0088 00000000 		.word	.LANCHOR0
+ 320 008c 00000000 		.word	.LANCHOR1
+ 321              		.cfi_endproc
+ 322              	.LFE66:
+ 323              		.size	handleByteReceived, .-handleByteReceived
+ 324              		.section	.text.ISR_UART_rx_handler,"ax",%progbits
+ 325              		.align	2
+ 326              		.global	ISR_UART_rx_handler
+ 327              		.thumb
+ 328              		.thumb_func
+ 329              		.type	ISR_UART_rx_handler, %function
+ 330              	ISR_UART_rx_handler:
+ 331              	.LFB65:
+  79:main.c        ****     uint8_t bytesToRead = UART_1_GetRxBufferSize();
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 9
+
+
+ 332              		.loc 1 79 0
+ 333              		.cfi_startproc
+ 334              		@ args = 0, pretend = 0, frame = 0
+ 335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 336 0000 38B5     		push	{r3, r4, r5, lr}
+ 337              		.cfi_def_cfa_offset 16
+ 338              		.cfi_offset 3, -16
+ 339              		.cfi_offset 4, -12
+ 340              		.cfi_offset 5, -8
+ 341              		.cfi_offset 14, -4
+  80:main.c        ****     while (bytesToRead > 0)
+ 342              		.loc 1 80 0
+ 343 0002 FFF7FEFF 		bl	UART_1_GetRxBufferSize
+ 344              	.LVL39:
+ 345 0006 0446     		mov	r4, r0
+ 346              	.LVL40:
+  81:main.c        ****     {
+ 347              		.loc 1 81 0
+ 348 0008 09E0     		b	.L24
+ 349              	.L25:
+ 350              	.LBB5:
+  83:main.c        ****         UART_1_WriteTxData(byteReceived); // echo back
+ 351              		.loc 1 83 0
+ 352 000a FFF7FEFF 		bl	UART_1_ReadRxData
+ 353              	.LVL41:
+ 354 000e 0546     		mov	r5, r0
+ 355              	.LVL42:
+  84:main.c        ****         
+ 356              		.loc 1 84 0
+ 357 0010 FFF7FEFF 		bl	UART_1_WriteTxData
+ 358              	.LVL43:
+  86:main.c        ****         
+ 359              		.loc 1 86 0
+ 360 0014 2846     		mov	r0, r5
+ 361 0016 FFF7FEFF 		bl	handleByteReceived
+ 362              	.LVL44:
+  88:main.c        ****     }
+ 363              		.loc 1 88 0
+ 364 001a 013C     		subs	r4, r4, #1
+ 365              	.LVL45:
+ 366 001c E4B2     		uxtb	r4, r4
+ 367              	.LVL46:
+ 368              	.L24:
+ 369              	.LBE5:
+  81:main.c        ****     {
+ 370              		.loc 1 81 0
+ 371 001e 002C     		cmp	r4, #0
+ 372 0020 F3D1     		bne	.L25
+  90:main.c        **** 
+ 373              		.loc 1 90 0
+ 374 0022 38BD     		pop	{r3, r4, r5, pc}
+ 375              		.cfi_endproc
+ 376              	.LFE65:
+ 377              		.size	ISR_UART_rx_handler, .-ISR_UART_rx_handler
+ 378              		.global	weight
+ 379              		.global	result
+ 380              		.global	tara_weight2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 10
+
+
+ 381              		.global	tara_weight1
+ 382              		.global	divider_weight2
+ 383              		.global	offset_weight2
+ 384              		.global	divider_weight1
+ 385              		.global	offset_weight1
+ 386              		.data
+ 387              		.align	3
+ 388              		.set	.LANCHOR0,. + 0
+ 389              		.type	weight, %object
+ 390              		.size	weight, 4
+ 391              	weight:
+ 392 0000 01000000 		.word	1
+ 393              		.type	offset_weight1, %object
+ 394              		.size	offset_weight1, 4
+ 395              	offset_weight1:
+ 396 0004 76010000 		.word	374
+ 397              		.type	divider_weight1, %object
+ 398              		.size	divider_weight1, 8
+ 399              	divider_weight1:
+ 400 0008 33333333 		.word	858993459
+ 401 000c 33C59240 		.word	1083360563
+ 402              		.type	divider_weight2, %object
+ 403              		.size	divider_weight2, 8
+ 404              	divider_weight2:
+ 405 0010 33333333 		.word	858993459
+ 406 0014 33C59C40 		.word	1084015923
+ 407              		.type	offset_weight2, %object
+ 408              		.size	offset_weight2, 4
+ 409              	offset_weight2:
+ 410 0018 3C010000 		.word	316
+ 411              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 412              		.align	2
+ 413              	.LC0:
+ 414 0000 5363616C 		.ascii	"Scale application started\015\012\000"
+ 414      65206170 
+ 414      706C6963 
+ 414      6174696F 
+ 414      6E207374 
+ 415              	.LC1:
+ 416 001c 713A2052 		.ascii	"q: Remove tara\015\012\000"
+ 416      656D6F76 
+ 416      65207461 
+ 416      72610D0A 
+ 416      00
+ 417 002d 000000   		.space	3
+ 418              	.LC2:
+ 419 0030 773A2054 		.ascii	"w: Tara\015\012\000"
+ 419      6172610D 
+ 419      0A00
+ 420 003a 0000     		.space	2
+ 421              	.LC3:
+ 422 003c 31206F72 		.ascii	"1 or 2: Weight select\015\012\000"
+ 422      20323A20 
+ 422      57656967 
+ 422      68742073 
+ 422      656C6563 
+ 423              	.LC4:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 11
+
+
+ 424 0054 41444320 		.ascii	"ADC result for weight %d: %.3f kg\015\012\000"
+ 424      72657375 
+ 424      6C742066 
+ 424      6F722077 
+ 424      65696768 
+ 425              		.bss
+ 426              		.align	3
+ 427              		.set	.LANCHOR1,. + 0
+ 428              		.type	tara_weight1, %object
+ 429              		.size	tara_weight1, 8
+ 430              	tara_weight1:
+ 431 0000 00000000 		.space	8
+ 431      00000000 
+ 432              		.type	result, %object
+ 433              		.size	result, 8
+ 434              	result:
+ 435 0008 00000000 		.space	8
+ 435      00000000 
+ 436              		.type	tara_weight2, %object
+ 437              		.size	tara_weight2, 8
+ 438              	tara_weight2:
+ 439 0010 00000000 		.space	8
+ 439      00000000 
+ 440              		.text
+ 441              	.Letext0:
+ 442              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 443              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 444              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 445              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 446              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 447              		.file 7 "Generated_Source\\PSoC5/ADC_SAR_1.h"
+ 448              		.file 8 "Generated_Source\\PSoC5/CyLib.h"
+ 449              		.file 9 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 450              		.file 10 "Generated_Source\\PSoC5/UART_1.h"
+ 451              		.file 11 "Generated_Source\\PSoC5/AMux_1.h"
+ 452              		.file 12 "Generated_Source\\PSoC5/isr_uart_rx.h"
+ 453              		.section	.debug_info,"",%progbits
+ 454              	.Ldebug_info0:
+ 455 0000 7E040000 		.4byte	0x47e
+ 456 0004 0400     		.2byte	0x4
+ 457 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 458 000a 04       		.byte	0x4
+ 459 000b 01       		.uleb128 0x1
+ 460 000c C6000000 		.4byte	.LASF50
+ 461 0010 0C       		.byte	0xc
+ 462 0011 B2020000 		.4byte	.LASF51
+ 463 0015 E8020000 		.4byte	.LASF52
+ 464 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 465 001d 00000000 		.4byte	0
+ 466 0021 00000000 		.4byte	.Ldebug_line0
+ 467 0025 02       		.uleb128 0x2
+ 468 0026 01       		.byte	0x1
+ 469 0027 06       		.byte	0x6
+ 470 0028 64020000 		.4byte	.LASF0
+ 471 002c 03       		.uleb128 0x3
+ 472 002d 21000000 		.4byte	.LASF3
+ 473 0031 02       		.byte	0x2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 12
+
+
+ 474 0032 1D       		.byte	0x1d
+ 475 0033 37000000 		.4byte	0x37
+ 476 0037 02       		.uleb128 0x2
+ 477 0038 01       		.byte	0x1
+ 478 0039 08       		.byte	0x8
+ 479 003a B8000000 		.4byte	.LASF1
+ 480 003e 02       		.uleb128 0x2
+ 481 003f 02       		.byte	0x2
+ 482 0040 05       		.byte	0x5
+ 483 0041 CC020000 		.4byte	.LASF2
+ 484 0045 03       		.uleb128 0x3
+ 485 0046 C3010000 		.4byte	.LASF4
+ 486 004a 02       		.byte	0x2
+ 487 004b 2B       		.byte	0x2b
+ 488 004c 50000000 		.4byte	0x50
+ 489 0050 02       		.uleb128 0x2
+ 490 0051 02       		.byte	0x2
+ 491 0052 07       		.byte	0x7
+ 492 0053 65000000 		.4byte	.LASF5
+ 493 0057 03       		.uleb128 0x3
+ 494 0058 52000000 		.4byte	.LASF6
+ 495 005c 02       		.byte	0x2
+ 496 005d 3F       		.byte	0x3f
+ 497 005e 62000000 		.4byte	0x62
+ 498 0062 02       		.uleb128 0x2
+ 499 0063 04       		.byte	0x4
+ 500 0064 05       		.byte	0x5
+ 501 0065 DF020000 		.4byte	.LASF7
+ 502 0069 02       		.uleb128 0x2
+ 503 006a 04       		.byte	0x4
+ 504 006b 07       		.byte	0x7
+ 505 006c 7B010000 		.4byte	.LASF8
+ 506 0070 02       		.uleb128 0x2
+ 507 0071 08       		.byte	0x8
+ 508 0072 05       		.byte	0x5
+ 509 0073 A4020000 		.4byte	.LASF9
+ 510 0077 02       		.uleb128 0x2
+ 511 0078 08       		.byte	0x8
+ 512 0079 07       		.byte	0x7
+ 513 007a 27020000 		.4byte	.LASF10
+ 514 007e 04       		.uleb128 0x4
+ 515 007f 04       		.byte	0x4
+ 516 0080 05       		.byte	0x5
+ 517 0081 696E7400 		.ascii	"int\000"
+ 518 0085 02       		.uleb128 0x2
+ 519 0086 04       		.byte	0x4
+ 520 0087 07       		.byte	0x7
+ 521 0088 FA010000 		.4byte	.LASF11
+ 522 008c 03       		.uleb128 0x3
+ 523 008d 3E020000 		.4byte	.LASF12
+ 524 0091 03       		.byte	0x3
+ 525 0092 18       		.byte	0x18
+ 526 0093 2C000000 		.4byte	0x2c
+ 527 0097 03       		.uleb128 0x3
+ 528 0098 D6020000 		.4byte	.LASF13
+ 529 009c 03       		.byte	0x3
+ 530 009d 24       		.byte	0x24
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 13
+
+
+ 531 009e 45000000 		.4byte	0x45
+ 532 00a2 03       		.uleb128 0x3
+ 533 00a3 70020000 		.4byte	.LASF14
+ 534 00a7 03       		.byte	0x3
+ 535 00a8 2C       		.byte	0x2c
+ 536 00a9 57000000 		.4byte	0x57
+ 537 00ad 02       		.uleb128 0x2
+ 538 00ae 04       		.byte	0x4
+ 539 00af 04       		.byte	0x4
+ 540 00b0 8B000000 		.4byte	.LASF15
+ 541 00b4 05       		.uleb128 0x5
+ 542 00b5 4A000000 		.4byte	.LASF16
+ 543 00b9 04       		.byte	0x4
+ 544 00ba 9C01     		.2byte	0x19c
+ 545 00bc C0000000 		.4byte	0xc0
+ 546 00c0 02       		.uleb128 0x2
+ 547 00c1 08       		.byte	0x8
+ 548 00c2 04       		.byte	0x4
+ 549 00c3 CE010000 		.4byte	.LASF17
+ 550 00c7 02       		.uleb128 0x2
+ 551 00c8 01       		.byte	0x1
+ 552 00c9 08       		.byte	0x8
+ 553 00ca B9020000 		.4byte	.LASF18
+ 554 00ce 03       		.uleb128 0x3
+ 555 00cf 2B000000 		.4byte	.LASF19
+ 556 00d3 05       		.byte	0x5
+ 557 00d4 D8       		.byte	0xd8
+ 558 00d5 85000000 		.4byte	0x85
+ 559 00d9 02       		.uleb128 0x2
+ 560 00da 08       		.byte	0x8
+ 561 00db 04       		.byte	0x4
+ 562 00dc 32030000 		.4byte	.LASF20
+ 563 00e0 02       		.uleb128 0x2
+ 564 00e1 04       		.byte	0x4
+ 565 00e2 07       		.byte	0x7
+ 566 00e3 78020000 		.4byte	.LASF21
+ 567 00e7 06       		.uleb128 0x6
+ 568 00e8 F5010000 		.4byte	.LASF53
+ 569 00ec 01       		.byte	0x1
+ 570 00ed 1B       		.byte	0x1b
+ 571 00ee 7E000000 		.4byte	0x7e
+ 572 00f2 00000000 		.4byte	.LFB64
+ 573 00f6 10010000 		.4byte	.LFE64-.LFB64
+ 574 00fa 01       		.uleb128 0x1
+ 575 00fb 9C       		.byte	0x9c
+ 576 00fc 7F020000 		.4byte	0x27f
+ 577 0100 07       		.uleb128 0x7
+ 578 0101 3F000000 		.4byte	.LASF22
+ 579 0105 01       		.byte	0x1
+ 580 0106 1E       		.byte	0x1e
+ 581 0107 7F020000 		.4byte	0x27f
+ 582 010b 03       		.uleb128 0x3
+ 583 010c 91       		.byte	0x91
+ 584 010d F07D     		.sleb128 -272
+ 585 010f 08       		.uleb128 0x8
+ 586 0110 34000000 		.4byte	.LBB2
+ 587 0114 DC000000 		.4byte	.LBE2-.LBB2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 14
+
+
+ 588 0118 EB010000 		.4byte	0x1eb
+ 589 011c 09       		.uleb128 0x9
+ 590 011d 73756D00 		.ascii	"sum\000"
+ 591 0121 01       		.byte	0x1
+ 592 0122 2F       		.byte	0x2f
+ 593 0123 97000000 		.4byte	0x97
+ 594 0127 00000000 		.4byte	.LLST0
+ 595 012b 0A       		.uleb128 0xa
+ 596 012c 00000000 		.4byte	.Ldebug_ranges0+0
+ 597 0130 6E010000 		.4byte	0x16e
+ 598 0134 09       		.uleb128 0x9
+ 599 0135 6900     		.ascii	"i\000"
+ 600 0137 01       		.byte	0x1
+ 601 0138 31       		.byte	0x31
+ 602 0139 CE000000 		.4byte	0xce
+ 603 013d 1F000000 		.4byte	.LLST1
+ 604 0141 0B       		.uleb128 0xb
+ 605 0142 40000000 		.4byte	.LVL10
+ 606 0146 E7030000 		.4byte	0x3e7
+ 607 014a 54010000 		.4byte	0x154
+ 608 014e 0C       		.uleb128 0xc
+ 609 014f 01       		.uleb128 0x1
+ 610 0150 50       		.byte	0x50
+ 611 0151 01       		.uleb128 0x1
+ 612 0152 30       		.byte	0x30
+ 613 0153 00       		.byte	0
+ 614 0154 0D       		.uleb128 0xd
+ 615 0155 46000000 		.4byte	.LVL11
+ 616 0159 F2030000 		.4byte	0x3f2
+ 617 015d 0E       		.uleb128 0xe
+ 618 015e 50000000 		.4byte	.LVL13
+ 619 0162 FD030000 		.4byte	0x3fd
+ 620 0166 0C       		.uleb128 0xc
+ 621 0167 01       		.uleb128 0x1
+ 622 0168 50       		.byte	0x50
+ 623 0169 02       		.uleb128 0x2
+ 624 016a 08       		.byte	0x8
+ 625 016b 64       		.byte	0x64
+ 626 016c 00       		.byte	0
+ 627 016d 00       		.byte	0
+ 628 016e 0B       		.uleb128 0xb
+ 629 016f 9A000000 		.4byte	.LVL19
+ 630 0173 08040000 		.4byte	0x408
+ 631 0177 99010000 		.4byte	0x199
+ 632 017b 0C       		.uleb128 0xc
+ 633 017c 01       		.uleb128 0x1
+ 634 017d 50       		.byte	0x50
+ 635 017e 03       		.uleb128 0x3
+ 636 017f 91       		.byte	0x91
+ 637 0180 F07D     		.sleb128 -272
+ 638 0182 0C       		.uleb128 0xc
+ 639 0183 01       		.uleb128 0x1
+ 640 0184 51       		.byte	0x51
+ 641 0185 03       		.uleb128 0x3
+ 642 0186 0A       		.byte	0xa
+ 643 0187 0001     		.2byte	0x100
+ 644 0189 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 15
+
+
+ 645 018a 01       		.uleb128 0x1
+ 646 018b 52       		.byte	0x52
+ 647 018c 05       		.uleb128 0x5
+ 648 018d 03       		.byte	0x3
+ 649 018e 54000000 		.4byte	.LC4
+ 650 0192 0C       		.uleb128 0xc
+ 651 0193 01       		.uleb128 0x1
+ 652 0194 53       		.byte	0x53
+ 653 0195 02       		.uleb128 0x2
+ 654 0196 74       		.byte	0x74
+ 655 0197 00       		.sleb128 0
+ 656 0198 00       		.byte	0
+ 657 0199 0B       		.uleb128 0xb
+ 658 019a A0000000 		.4byte	.LVL20
+ 659 019e 13040000 		.4byte	0x413
+ 660 01a2 AE010000 		.4byte	0x1ae
+ 661 01a6 0C       		.uleb128 0xc
+ 662 01a7 01       		.uleb128 0x1
+ 663 01a8 50       		.byte	0x50
+ 664 01a9 03       		.uleb128 0x3
+ 665 01aa 91       		.byte	0x91
+ 666 01ab F07D     		.sleb128 -272
+ 667 01ad 00       		.byte	0
+ 668 01ae 0B       		.uleb128 0xb
+ 669 01af E4000000 		.4byte	.LVL25
+ 670 01b3 08040000 		.4byte	0x408
+ 671 01b7 D9010000 		.4byte	0x1d9
+ 672 01bb 0C       		.uleb128 0xc
+ 673 01bc 01       		.uleb128 0x1
+ 674 01bd 50       		.byte	0x50
+ 675 01be 03       		.uleb128 0x3
+ 676 01bf 91       		.byte	0x91
+ 677 01c0 F07D     		.sleb128 -272
+ 678 01c2 0C       		.uleb128 0xc
+ 679 01c3 01       		.uleb128 0x1
+ 680 01c4 51       		.byte	0x51
+ 681 01c5 03       		.uleb128 0x3
+ 682 01c6 0A       		.byte	0xa
+ 683 01c7 0001     		.2byte	0x100
+ 684 01c9 0C       		.uleb128 0xc
+ 685 01ca 01       		.uleb128 0x1
+ 686 01cb 52       		.byte	0x52
+ 687 01cc 05       		.uleb128 0x5
+ 688 01cd 03       		.byte	0x3
+ 689 01ce 54000000 		.4byte	.LC4
+ 690 01d2 0C       		.uleb128 0xc
+ 691 01d3 01       		.uleb128 0x1
+ 692 01d4 53       		.byte	0x53
+ 693 01d5 02       		.uleb128 0x2
+ 694 01d6 74       		.byte	0x74
+ 695 01d7 00       		.sleb128 0
+ 696 01d8 00       		.byte	0
+ 697 01d9 0E       		.uleb128 0xe
+ 698 01da EA000000 		.4byte	.LVL26
+ 699 01de 13040000 		.4byte	0x413
+ 700 01e2 0C       		.uleb128 0xc
+ 701 01e3 01       		.uleb128 0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 16
+
+
+ 702 01e4 50       		.byte	0x50
+ 703 01e5 03       		.uleb128 0x3
+ 704 01e6 91       		.byte	0x91
+ 705 01e7 F07D     		.sleb128 -272
+ 706 01e9 00       		.byte	0
+ 707 01ea 00       		.byte	0
+ 708 01eb 0D       		.uleb128 0xd
+ 709 01ec 0A000000 		.4byte	.LVL0
+ 710 01f0 1E040000 		.4byte	0x41e
+ 711 01f4 0B       		.uleb128 0xb
+ 712 01f5 10000000 		.4byte	.LVL1
+ 713 01f9 29040000 		.4byte	0x429
+ 714 01fd 0B020000 		.4byte	0x20b
+ 715 0201 0C       		.uleb128 0xc
+ 716 0202 01       		.uleb128 0x1
+ 717 0203 50       		.byte	0x50
+ 718 0204 05       		.uleb128 0x5
+ 719 0205 03       		.byte	0x3
+ 720 0206 00000000 		.4byte	ISR_UART_rx_handler
+ 721 020a 00       		.byte	0
+ 722 020b 0D       		.uleb128 0xd
+ 723 020c 14000000 		.4byte	.LVL2
+ 724 0210 34040000 		.4byte	0x434
+ 725 0214 0D       		.uleb128 0xd
+ 726 0215 18000000 		.4byte	.LVL3
+ 727 0219 3F040000 		.4byte	0x43f
+ 728 021d 0D       		.uleb128 0xd
+ 729 021e 1C000000 		.4byte	.LVL4
+ 730 0222 4A040000 		.4byte	0x44a
+ 731 0226 0B       		.uleb128 0xb
+ 732 0227 22000000 		.4byte	.LVL5
+ 733 022b 13040000 		.4byte	0x413
+ 734 022f 3D020000 		.4byte	0x23d
+ 735 0233 0C       		.uleb128 0xc
+ 736 0234 01       		.uleb128 0x1
+ 737 0235 50       		.byte	0x50
+ 738 0236 05       		.uleb128 0x5
+ 739 0237 03       		.byte	0x3
+ 740 0238 00000000 		.4byte	.LC0
+ 741 023c 00       		.byte	0
+ 742 023d 0B       		.uleb128 0xb
+ 743 023e 28000000 		.4byte	.LVL6
+ 744 0242 13040000 		.4byte	0x413
+ 745 0246 54020000 		.4byte	0x254
+ 746 024a 0C       		.uleb128 0xc
+ 747 024b 01       		.uleb128 0x1
+ 748 024c 50       		.byte	0x50
+ 749 024d 05       		.uleb128 0x5
+ 750 024e 03       		.byte	0x3
+ 751 024f 1C000000 		.4byte	.LC1
+ 752 0253 00       		.byte	0
+ 753 0254 0B       		.uleb128 0xb
+ 754 0255 2E000000 		.4byte	.LVL7
+ 755 0259 13040000 		.4byte	0x413
+ 756 025d 6B020000 		.4byte	0x26b
+ 757 0261 0C       		.uleb128 0xc
+ 758 0262 01       		.uleb128 0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 17
+
+
+ 759 0263 50       		.byte	0x50
+ 760 0264 05       		.uleb128 0x5
+ 761 0265 03       		.byte	0x3
+ 762 0266 30000000 		.4byte	.LC2
+ 763 026a 00       		.byte	0
+ 764 026b 0E       		.uleb128 0xe
+ 765 026c 34000000 		.4byte	.LVL8
+ 766 0270 13040000 		.4byte	0x413
+ 767 0274 0C       		.uleb128 0xc
+ 768 0275 01       		.uleb128 0x1
+ 769 0276 50       		.byte	0x50
+ 770 0277 05       		.uleb128 0x5
+ 771 0278 03       		.byte	0x3
+ 772 0279 3C000000 		.4byte	.LC3
+ 773 027d 00       		.byte	0
+ 774 027e 00       		.byte	0
+ 775 027f 0F       		.uleb128 0xf
+ 776 0280 C7000000 		.4byte	0xc7
+ 777 0284 8F020000 		.4byte	0x28f
+ 778 0288 10       		.uleb128 0x10
+ 779 0289 E0000000 		.4byte	0xe0
+ 780 028d FF       		.byte	0xff
+ 781 028e 00       		.byte	0
+ 782 028f 11       		.uleb128 0x11
+ 783 0290 E2010000 		.4byte	.LASF23
+ 784 0294 01       		.byte	0x1
+ 785 0295 5C       		.byte	0x5c
+ 786 0296 00000000 		.4byte	.LFB66
+ 787 029a 90000000 		.4byte	.LFE66-.LFB66
+ 788 029e 01       		.uleb128 0x1
+ 789 029f 9C       		.byte	0x9c
+ 790 02a0 D6020000 		.4byte	0x2d6
+ 791 02a4 12       		.uleb128 0x12
+ 792 02a5 AB000000 		.4byte	.LASF26
+ 793 02a9 01       		.byte	0x1
+ 794 02aa 5C       		.byte	0x5c
+ 795 02ab 8C000000 		.4byte	0x8c
+ 796 02af 3E000000 		.4byte	.LLST2
+ 797 02b3 0B       		.uleb128 0xb
+ 798 02b4 40000000 		.4byte	.LVL31
+ 799 02b8 55040000 		.4byte	0x455
+ 800 02bc C6020000 		.4byte	0x2c6
+ 801 02c0 0C       		.uleb128 0xc
+ 802 02c1 01       		.uleb128 0x1
+ 803 02c2 50       		.byte	0x50
+ 804 02c3 01       		.uleb128 0x1
+ 805 02c4 30       		.byte	0x30
+ 806 02c5 00       		.byte	0
+ 807 02c6 0E       		.uleb128 0xe
+ 808 02c7 4E000000 		.4byte	.LVL34
+ 809 02cb 55040000 		.4byte	0x455
+ 810 02cf 0C       		.uleb128 0xc
+ 811 02d0 01       		.uleb128 0x1
+ 812 02d1 50       		.byte	0x50
+ 813 02d2 01       		.uleb128 0x1
+ 814 02d3 31       		.byte	0x31
+ 815 02d4 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 18
+
+
+ 816 02d5 00       		.byte	0
+ 817 02d6 13       		.uleb128 0x13
+ 818 02d7 67010000 		.4byte	.LASF24
+ 819 02db 01       		.byte	0x1
+ 820 02dc 4E       		.byte	0x4e
+ 821 02dd 00000000 		.4byte	.LFB65
+ 822 02e1 24000000 		.4byte	.LFE65-.LFB65
+ 823 02e5 01       		.uleb128 0x1
+ 824 02e6 9C       		.byte	0x9c
+ 825 02e7 4E030000 		.4byte	0x34e
+ 826 02eb 14       		.uleb128 0x14
+ 827 02ec 7F000000 		.4byte	.LASF25
+ 828 02f0 01       		.byte	0x1
+ 829 02f1 50       		.byte	0x50
+ 830 02f2 8C000000 		.4byte	0x8c
+ 831 02f6 AA000000 		.4byte	.LLST3
+ 832 02fa 08       		.uleb128 0x8
+ 833 02fb 0A000000 		.4byte	.LBB5
+ 834 02ff 14000000 		.4byte	.LBE5-.LBB5
+ 835 0303 44030000 		.4byte	0x344
+ 836 0307 14       		.uleb128 0x14
+ 837 0308 AB000000 		.4byte	.LASF26
+ 838 030c 01       		.byte	0x1
+ 839 030d 53       		.byte	0x53
+ 840 030e 8C000000 		.4byte	0x8c
+ 841 0312 C8000000 		.4byte	.LLST4
+ 842 0316 0D       		.uleb128 0xd
+ 843 0317 0E000000 		.4byte	.LVL41
+ 844 031b 60040000 		.4byte	0x460
+ 845 031f 0B       		.uleb128 0xb
+ 846 0320 14000000 		.4byte	.LVL43
+ 847 0324 6B040000 		.4byte	0x46b
+ 848 0328 33030000 		.4byte	0x333
+ 849 032c 0C       		.uleb128 0xc
+ 850 032d 01       		.uleb128 0x1
+ 851 032e 50       		.byte	0x50
+ 852 032f 02       		.uleb128 0x2
+ 853 0330 75       		.byte	0x75
+ 854 0331 00       		.sleb128 0
+ 855 0332 00       		.byte	0
+ 856 0333 0E       		.uleb128 0xe
+ 857 0334 1A000000 		.4byte	.LVL44
+ 858 0338 8F020000 		.4byte	0x28f
+ 859 033c 0C       		.uleb128 0xc
+ 860 033d 01       		.uleb128 0x1
+ 861 033e 50       		.byte	0x50
+ 862 033f 02       		.uleb128 0x2
+ 863 0340 75       		.byte	0x75
+ 864 0341 00       		.sleb128 0
+ 865 0342 00       		.byte	0
+ 866 0343 00       		.byte	0
+ 867 0344 0D       		.uleb128 0xd
+ 868 0345 06000000 		.4byte	.LVL39
+ 869 0349 76040000 		.4byte	0x476
+ 870 034d 00       		.byte	0
+ 871 034e 15       		.uleb128 0x15
+ 872 034f B6010000 		.4byte	.LASF27
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 19
+
+
+ 873 0353 06       		.byte	0x6
+ 874 0354 9606     		.2byte	0x696
+ 875 0356 5A030000 		.4byte	0x35a
+ 876 035a 16       		.uleb128 0x16
+ 877 035b A2000000 		.4byte	0xa2
+ 878 035f 17       		.uleb128 0x17
+ 879 0360 3E030000 		.4byte	.LASF28
+ 880 0364 01       		.byte	0x1
+ 881 0365 12       		.byte	0x12
+ 882 0366 7E000000 		.4byte	0x7e
+ 883 036a 05       		.uleb128 0x5
+ 884 036b 03       		.byte	0x3
+ 885 036c 00000000 		.4byte	offset_weight1
+ 886 0370 17       		.uleb128 0x17
+ 887 0371 07020000 		.4byte	.LASF29
+ 888 0375 01       		.byte	0x1
+ 889 0376 13       		.byte	0x13
+ 890 0377 B4000000 		.4byte	0xb4
+ 891 037b 05       		.uleb128 0x5
+ 892 037c 03       		.byte	0x3
+ 893 037d 00000000 		.4byte	divider_weight1
+ 894 0381 17       		.uleb128 0x17
+ 895 0382 4D030000 		.4byte	.LASF30
+ 896 0386 01       		.byte	0x1
+ 897 0387 14       		.byte	0x14
+ 898 0388 7E000000 		.4byte	0x7e
+ 899 038c 05       		.uleb128 0x5
+ 900 038d 03       		.byte	0x3
+ 901 038e 00000000 		.4byte	offset_weight2
+ 902 0392 17       		.uleb128 0x17
+ 903 0393 17020000 		.4byte	.LASF31
+ 904 0397 01       		.byte	0x1
+ 905 0398 15       		.byte	0x15
+ 906 0399 B4000000 		.4byte	0xb4
+ 907 039d 05       		.uleb128 0x5
+ 908 039e 03       		.byte	0x3
+ 909 039f 00000000 		.4byte	divider_weight2
+ 910 03a3 17       		.uleb128 0x17
+ 911 03a4 81020000 		.4byte	.LASF32
+ 912 03a8 01       		.byte	0x1
+ 913 03a9 16       		.byte	0x16
+ 914 03aa B4000000 		.4byte	0xb4
+ 915 03ae 05       		.uleb128 0x5
+ 916 03af 03       		.byte	0x3
+ 917 03b0 00000000 		.4byte	tara_weight1
+ 918 03b4 17       		.uleb128 0x17
+ 919 03b5 32000000 		.4byte	.LASF33
+ 920 03b9 01       		.byte	0x1
+ 921 03ba 17       		.byte	0x17
+ 922 03bb B4000000 		.4byte	0xb4
+ 923 03bf 05       		.uleb128 0x5
+ 924 03c0 03       		.byte	0x3
+ 925 03c1 00000000 		.4byte	tara_weight2
+ 926 03c5 17       		.uleb128 0x17
+ 927 03c6 5D020000 		.4byte	.LASF34
+ 928 03ca 01       		.byte	0x1
+ 929 03cb 18       		.byte	0x18
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 20
+
+
+ 930 03cc B4000000 		.4byte	0xb4
+ 931 03d0 05       		.uleb128 0x5
+ 932 03d1 03       		.byte	0x3
+ 933 03d2 00000000 		.4byte	result
+ 934 03d6 17       		.uleb128 0x17
+ 935 03d7 78000000 		.4byte	.LASF35
+ 936 03db 01       		.byte	0x1
+ 937 03dc 19       		.byte	0x19
+ 938 03dd 7E000000 		.4byte	0x7e
+ 939 03e1 05       		.uleb128 0x5
+ 940 03e2 03       		.byte	0x3
+ 941 03e3 00000000 		.4byte	weight
+ 942 03e7 18       		.uleb128 0x18
+ 943 03e8 91000000 		.4byte	.LASF36
+ 944 03ec 91000000 		.4byte	.LASF36
+ 945 03f0 07       		.byte	0x7
+ 946 03f1 39       		.byte	0x39
+ 947 03f2 18       		.uleb128 0x18
+ 948 03f3 8E020000 		.4byte	.LASF37
+ 949 03f7 8E020000 		.4byte	.LASF37
+ 950 03fb 07       		.byte	0x7
+ 951 03fc 3B       		.byte	0x3b
+ 952 03fd 18       		.uleb128 0x18
+ 953 03fe 7D030000 		.4byte	.LASF38
+ 954 0402 7D030000 		.4byte	.LASF38
+ 955 0406 08       		.byte	0x8
+ 956 0407 76       		.byte	0x76
+ 957 0408 18       		.uleb128 0x18
+ 958 0409 5C000000 		.4byte	.LASF39
+ 959 040d 5C000000 		.4byte	.LASF39
+ 960 0411 09       		.byte	0x9
+ 961 0412 FD       		.byte	0xfd
+ 962 0413 18       		.uleb128 0x18
+ 963 0414 6C030000 		.4byte	.LASF40
+ 964 0418 6C030000 		.4byte	.LASF40
+ 965 041c 0A       		.byte	0xa
+ 966 041d 8B       		.byte	0x8b
+ 967 041e 18       		.uleb128 0x18
+ 968 041f D5010000 		.4byte	.LASF41
+ 969 0423 D5010000 		.4byte	.LASF41
+ 970 0427 0B       		.byte	0xb
+ 971 0428 25       		.byte	0x25
+ 972 0429 18       		.uleb128 0x18
+ 973 042a 00000000 		.4byte	.LASF42
+ 974 042e 00000000 		.4byte	.LASF42
+ 975 0432 0C       		.byte	0xc
+ 976 0433 18       		.byte	0x18
+ 977 0434 18       		.uleb128 0x18
+ 978 0435 14000000 		.4byte	.LASF43
+ 979 0439 14000000 		.4byte	.LASF43
+ 980 043d 0A       		.byte	0xa
+ 981 043e 54       		.byte	0x54
+ 982 043f 18       		.uleb128 0x18
+ 983 0440 5C030000 		.4byte	.LASF44
+ 984 0444 5C030000 		.4byte	.LASF44
+ 985 0448 07       		.byte	0x7
+ 986 0449 34       		.byte	0x34
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 21
+
+
+ 987 044a 18       		.uleb128 0x18
+ 988 044b 9F010000 		.4byte	.LASF45
+ 989 044f 9F010000 		.4byte	.LASF45
+ 990 0453 07       		.byte	0x7
+ 991 0454 D1       		.byte	0xd1
+ 992 0455 18       		.uleb128 0x18
+ 993 0456 BE020000 		.4byte	.LASF46
+ 994 045a BE020000 		.4byte	.LASF46
+ 995 045e 0B       		.byte	0xb
+ 996 045f 57       		.byte	0x57
+ 997 0460 18       		.uleb128 0x18
+ 998 0461 8D010000 		.4byte	.LASF47
+ 999 0465 8D010000 		.4byte	.LASF47
+ 1000 0469 0A       		.byte	0xa
+ 1001 046a 6F       		.byte	0x6f
+ 1002 046b 18       		.uleb128 0x18
+ 1003 046c 54010000 		.4byte	.LASF48
+ 1004 0470 54010000 		.4byte	.LASF48
+ 1005 0474 0A       		.byte	0xa
+ 1006 0475 88       		.byte	0x88
+ 1007 0476 18       		.uleb128 0x18
+ 1008 0477 46020000 		.4byte	.LASF49
+ 1009 047b 46020000 		.4byte	.LASF49
+ 1010 047f 0A       		.byte	0xa
+ 1011 0480 73       		.byte	0x73
+ 1012 0481 00       		.byte	0
+ 1013              		.section	.debug_abbrev,"",%progbits
+ 1014              	.Ldebug_abbrev0:
+ 1015 0000 01       		.uleb128 0x1
+ 1016 0001 11       		.uleb128 0x11
+ 1017 0002 01       		.byte	0x1
+ 1018 0003 25       		.uleb128 0x25
+ 1019 0004 0E       		.uleb128 0xe
+ 1020 0005 13       		.uleb128 0x13
+ 1021 0006 0B       		.uleb128 0xb
+ 1022 0007 03       		.uleb128 0x3
+ 1023 0008 0E       		.uleb128 0xe
+ 1024 0009 1B       		.uleb128 0x1b
+ 1025 000a 0E       		.uleb128 0xe
+ 1026 000b 55       		.uleb128 0x55
+ 1027 000c 17       		.uleb128 0x17
+ 1028 000d 11       		.uleb128 0x11
+ 1029 000e 01       		.uleb128 0x1
+ 1030 000f 10       		.uleb128 0x10
+ 1031 0010 17       		.uleb128 0x17
+ 1032 0011 00       		.byte	0
+ 1033 0012 00       		.byte	0
+ 1034 0013 02       		.uleb128 0x2
+ 1035 0014 24       		.uleb128 0x24
+ 1036 0015 00       		.byte	0
+ 1037 0016 0B       		.uleb128 0xb
+ 1038 0017 0B       		.uleb128 0xb
+ 1039 0018 3E       		.uleb128 0x3e
+ 1040 0019 0B       		.uleb128 0xb
+ 1041 001a 03       		.uleb128 0x3
+ 1042 001b 0E       		.uleb128 0xe
+ 1043 001c 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 22
+
+
+ 1044 001d 00       		.byte	0
+ 1045 001e 03       		.uleb128 0x3
+ 1046 001f 16       		.uleb128 0x16
+ 1047 0020 00       		.byte	0
+ 1048 0021 03       		.uleb128 0x3
+ 1049 0022 0E       		.uleb128 0xe
+ 1050 0023 3A       		.uleb128 0x3a
+ 1051 0024 0B       		.uleb128 0xb
+ 1052 0025 3B       		.uleb128 0x3b
+ 1053 0026 0B       		.uleb128 0xb
+ 1054 0027 49       		.uleb128 0x49
+ 1055 0028 13       		.uleb128 0x13
+ 1056 0029 00       		.byte	0
+ 1057 002a 00       		.byte	0
+ 1058 002b 04       		.uleb128 0x4
+ 1059 002c 24       		.uleb128 0x24
+ 1060 002d 00       		.byte	0
+ 1061 002e 0B       		.uleb128 0xb
+ 1062 002f 0B       		.uleb128 0xb
+ 1063 0030 3E       		.uleb128 0x3e
+ 1064 0031 0B       		.uleb128 0xb
+ 1065 0032 03       		.uleb128 0x3
+ 1066 0033 08       		.uleb128 0x8
+ 1067 0034 00       		.byte	0
+ 1068 0035 00       		.byte	0
+ 1069 0036 05       		.uleb128 0x5
+ 1070 0037 16       		.uleb128 0x16
+ 1071 0038 00       		.byte	0
+ 1072 0039 03       		.uleb128 0x3
+ 1073 003a 0E       		.uleb128 0xe
+ 1074 003b 3A       		.uleb128 0x3a
+ 1075 003c 0B       		.uleb128 0xb
+ 1076 003d 3B       		.uleb128 0x3b
+ 1077 003e 05       		.uleb128 0x5
+ 1078 003f 49       		.uleb128 0x49
+ 1079 0040 13       		.uleb128 0x13
+ 1080 0041 00       		.byte	0
+ 1081 0042 00       		.byte	0
+ 1082 0043 06       		.uleb128 0x6
+ 1083 0044 2E       		.uleb128 0x2e
+ 1084 0045 01       		.byte	0x1
+ 1085 0046 3F       		.uleb128 0x3f
+ 1086 0047 19       		.uleb128 0x19
+ 1087 0048 03       		.uleb128 0x3
+ 1088 0049 0E       		.uleb128 0xe
+ 1089 004a 3A       		.uleb128 0x3a
+ 1090 004b 0B       		.uleb128 0xb
+ 1091 004c 3B       		.uleb128 0x3b
+ 1092 004d 0B       		.uleb128 0xb
+ 1093 004e 27       		.uleb128 0x27
+ 1094 004f 19       		.uleb128 0x19
+ 1095 0050 49       		.uleb128 0x49
+ 1096 0051 13       		.uleb128 0x13
+ 1097 0052 8701     		.uleb128 0x87
+ 1098 0054 19       		.uleb128 0x19
+ 1099 0055 11       		.uleb128 0x11
+ 1100 0056 01       		.uleb128 0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 23
+
+
+ 1101 0057 12       		.uleb128 0x12
+ 1102 0058 06       		.uleb128 0x6
+ 1103 0059 40       		.uleb128 0x40
+ 1104 005a 18       		.uleb128 0x18
+ 1105 005b 9642     		.uleb128 0x2116
+ 1106 005d 19       		.uleb128 0x19
+ 1107 005e 01       		.uleb128 0x1
+ 1108 005f 13       		.uleb128 0x13
+ 1109 0060 00       		.byte	0
+ 1110 0061 00       		.byte	0
+ 1111 0062 07       		.uleb128 0x7
+ 1112 0063 34       		.uleb128 0x34
+ 1113 0064 00       		.byte	0
+ 1114 0065 03       		.uleb128 0x3
+ 1115 0066 0E       		.uleb128 0xe
+ 1116 0067 3A       		.uleb128 0x3a
+ 1117 0068 0B       		.uleb128 0xb
+ 1118 0069 3B       		.uleb128 0x3b
+ 1119 006a 0B       		.uleb128 0xb
+ 1120 006b 49       		.uleb128 0x49
+ 1121 006c 13       		.uleb128 0x13
+ 1122 006d 02       		.uleb128 0x2
+ 1123 006e 18       		.uleb128 0x18
+ 1124 006f 00       		.byte	0
+ 1125 0070 00       		.byte	0
+ 1126 0071 08       		.uleb128 0x8
+ 1127 0072 0B       		.uleb128 0xb
+ 1128 0073 01       		.byte	0x1
+ 1129 0074 11       		.uleb128 0x11
+ 1130 0075 01       		.uleb128 0x1
+ 1131 0076 12       		.uleb128 0x12
+ 1132 0077 06       		.uleb128 0x6
+ 1133 0078 01       		.uleb128 0x1
+ 1134 0079 13       		.uleb128 0x13
+ 1135 007a 00       		.byte	0
+ 1136 007b 00       		.byte	0
+ 1137 007c 09       		.uleb128 0x9
+ 1138 007d 34       		.uleb128 0x34
+ 1139 007e 00       		.byte	0
+ 1140 007f 03       		.uleb128 0x3
+ 1141 0080 08       		.uleb128 0x8
+ 1142 0081 3A       		.uleb128 0x3a
+ 1143 0082 0B       		.uleb128 0xb
+ 1144 0083 3B       		.uleb128 0x3b
+ 1145 0084 0B       		.uleb128 0xb
+ 1146 0085 49       		.uleb128 0x49
+ 1147 0086 13       		.uleb128 0x13
+ 1148 0087 02       		.uleb128 0x2
+ 1149 0088 17       		.uleb128 0x17
+ 1150 0089 00       		.byte	0
+ 1151 008a 00       		.byte	0
+ 1152 008b 0A       		.uleb128 0xa
+ 1153 008c 0B       		.uleb128 0xb
+ 1154 008d 01       		.byte	0x1
+ 1155 008e 55       		.uleb128 0x55
+ 1156 008f 17       		.uleb128 0x17
+ 1157 0090 01       		.uleb128 0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 24
+
+
+ 1158 0091 13       		.uleb128 0x13
+ 1159 0092 00       		.byte	0
+ 1160 0093 00       		.byte	0
+ 1161 0094 0B       		.uleb128 0xb
+ 1162 0095 898201   		.uleb128 0x4109
+ 1163 0098 01       		.byte	0x1
+ 1164 0099 11       		.uleb128 0x11
+ 1165 009a 01       		.uleb128 0x1
+ 1166 009b 31       		.uleb128 0x31
+ 1167 009c 13       		.uleb128 0x13
+ 1168 009d 01       		.uleb128 0x1
+ 1169 009e 13       		.uleb128 0x13
+ 1170 009f 00       		.byte	0
+ 1171 00a0 00       		.byte	0
+ 1172 00a1 0C       		.uleb128 0xc
+ 1173 00a2 8A8201   		.uleb128 0x410a
+ 1174 00a5 00       		.byte	0
+ 1175 00a6 02       		.uleb128 0x2
+ 1176 00a7 18       		.uleb128 0x18
+ 1177 00a8 9142     		.uleb128 0x2111
+ 1178 00aa 18       		.uleb128 0x18
+ 1179 00ab 00       		.byte	0
+ 1180 00ac 00       		.byte	0
+ 1181 00ad 0D       		.uleb128 0xd
+ 1182 00ae 898201   		.uleb128 0x4109
+ 1183 00b1 00       		.byte	0
+ 1184 00b2 11       		.uleb128 0x11
+ 1185 00b3 01       		.uleb128 0x1
+ 1186 00b4 31       		.uleb128 0x31
+ 1187 00b5 13       		.uleb128 0x13
+ 1188 00b6 00       		.byte	0
+ 1189 00b7 00       		.byte	0
+ 1190 00b8 0E       		.uleb128 0xe
+ 1191 00b9 898201   		.uleb128 0x4109
+ 1192 00bc 01       		.byte	0x1
+ 1193 00bd 11       		.uleb128 0x11
+ 1194 00be 01       		.uleb128 0x1
+ 1195 00bf 31       		.uleb128 0x31
+ 1196 00c0 13       		.uleb128 0x13
+ 1197 00c1 00       		.byte	0
+ 1198 00c2 00       		.byte	0
+ 1199 00c3 0F       		.uleb128 0xf
+ 1200 00c4 01       		.uleb128 0x1
+ 1201 00c5 01       		.byte	0x1
+ 1202 00c6 49       		.uleb128 0x49
+ 1203 00c7 13       		.uleb128 0x13
+ 1204 00c8 01       		.uleb128 0x1
+ 1205 00c9 13       		.uleb128 0x13
+ 1206 00ca 00       		.byte	0
+ 1207 00cb 00       		.byte	0
+ 1208 00cc 10       		.uleb128 0x10
+ 1209 00cd 21       		.uleb128 0x21
+ 1210 00ce 00       		.byte	0
+ 1211 00cf 49       		.uleb128 0x49
+ 1212 00d0 13       		.uleb128 0x13
+ 1213 00d1 2F       		.uleb128 0x2f
+ 1214 00d2 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 25
+
+
+ 1215 00d3 00       		.byte	0
+ 1216 00d4 00       		.byte	0
+ 1217 00d5 11       		.uleb128 0x11
+ 1218 00d6 2E       		.uleb128 0x2e
+ 1219 00d7 01       		.byte	0x1
+ 1220 00d8 3F       		.uleb128 0x3f
+ 1221 00d9 19       		.uleb128 0x19
+ 1222 00da 03       		.uleb128 0x3
+ 1223 00db 0E       		.uleb128 0xe
+ 1224 00dc 3A       		.uleb128 0x3a
+ 1225 00dd 0B       		.uleb128 0xb
+ 1226 00de 3B       		.uleb128 0x3b
+ 1227 00df 0B       		.uleb128 0xb
+ 1228 00e0 27       		.uleb128 0x27
+ 1229 00e1 19       		.uleb128 0x19
+ 1230 00e2 11       		.uleb128 0x11
+ 1231 00e3 01       		.uleb128 0x1
+ 1232 00e4 12       		.uleb128 0x12
+ 1233 00e5 06       		.uleb128 0x6
+ 1234 00e6 40       		.uleb128 0x40
+ 1235 00e7 18       		.uleb128 0x18
+ 1236 00e8 9642     		.uleb128 0x2116
+ 1237 00ea 19       		.uleb128 0x19
+ 1238 00eb 01       		.uleb128 0x1
+ 1239 00ec 13       		.uleb128 0x13
+ 1240 00ed 00       		.byte	0
+ 1241 00ee 00       		.byte	0
+ 1242 00ef 12       		.uleb128 0x12
+ 1243 00f0 05       		.uleb128 0x5
+ 1244 00f1 00       		.byte	0
+ 1245 00f2 03       		.uleb128 0x3
+ 1246 00f3 0E       		.uleb128 0xe
+ 1247 00f4 3A       		.uleb128 0x3a
+ 1248 00f5 0B       		.uleb128 0xb
+ 1249 00f6 3B       		.uleb128 0x3b
+ 1250 00f7 0B       		.uleb128 0xb
+ 1251 00f8 49       		.uleb128 0x49
+ 1252 00f9 13       		.uleb128 0x13
+ 1253 00fa 02       		.uleb128 0x2
+ 1254 00fb 17       		.uleb128 0x17
+ 1255 00fc 00       		.byte	0
+ 1256 00fd 00       		.byte	0
+ 1257 00fe 13       		.uleb128 0x13
+ 1258 00ff 2E       		.uleb128 0x2e
+ 1259 0100 01       		.byte	0x1
+ 1260 0101 3F       		.uleb128 0x3f
+ 1261 0102 19       		.uleb128 0x19
+ 1262 0103 03       		.uleb128 0x3
+ 1263 0104 0E       		.uleb128 0xe
+ 1264 0105 3A       		.uleb128 0x3a
+ 1265 0106 0B       		.uleb128 0xb
+ 1266 0107 3B       		.uleb128 0x3b
+ 1267 0108 0B       		.uleb128 0xb
+ 1268 0109 27       		.uleb128 0x27
+ 1269 010a 19       		.uleb128 0x19
+ 1270 010b 11       		.uleb128 0x11
+ 1271 010c 01       		.uleb128 0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 26
+
+
+ 1272 010d 12       		.uleb128 0x12
+ 1273 010e 06       		.uleb128 0x6
+ 1274 010f 40       		.uleb128 0x40
+ 1275 0110 18       		.uleb128 0x18
+ 1276 0111 9742     		.uleb128 0x2117
+ 1277 0113 19       		.uleb128 0x19
+ 1278 0114 01       		.uleb128 0x1
+ 1279 0115 13       		.uleb128 0x13
+ 1280 0116 00       		.byte	0
+ 1281 0117 00       		.byte	0
+ 1282 0118 14       		.uleb128 0x14
+ 1283 0119 34       		.uleb128 0x34
+ 1284 011a 00       		.byte	0
+ 1285 011b 03       		.uleb128 0x3
+ 1286 011c 0E       		.uleb128 0xe
+ 1287 011d 3A       		.uleb128 0x3a
+ 1288 011e 0B       		.uleb128 0xb
+ 1289 011f 3B       		.uleb128 0x3b
+ 1290 0120 0B       		.uleb128 0xb
+ 1291 0121 49       		.uleb128 0x49
+ 1292 0122 13       		.uleb128 0x13
+ 1293 0123 02       		.uleb128 0x2
+ 1294 0124 17       		.uleb128 0x17
+ 1295 0125 00       		.byte	0
+ 1296 0126 00       		.byte	0
+ 1297 0127 15       		.uleb128 0x15
+ 1298 0128 34       		.uleb128 0x34
+ 1299 0129 00       		.byte	0
+ 1300 012a 03       		.uleb128 0x3
+ 1301 012b 0E       		.uleb128 0xe
+ 1302 012c 3A       		.uleb128 0x3a
+ 1303 012d 0B       		.uleb128 0xb
+ 1304 012e 3B       		.uleb128 0x3b
+ 1305 012f 05       		.uleb128 0x5
+ 1306 0130 49       		.uleb128 0x49
+ 1307 0131 13       		.uleb128 0x13
+ 1308 0132 3F       		.uleb128 0x3f
+ 1309 0133 19       		.uleb128 0x19
+ 1310 0134 3C       		.uleb128 0x3c
+ 1311 0135 19       		.uleb128 0x19
+ 1312 0136 00       		.byte	0
+ 1313 0137 00       		.byte	0
+ 1314 0138 16       		.uleb128 0x16
+ 1315 0139 35       		.uleb128 0x35
+ 1316 013a 00       		.byte	0
+ 1317 013b 49       		.uleb128 0x49
+ 1318 013c 13       		.uleb128 0x13
+ 1319 013d 00       		.byte	0
+ 1320 013e 00       		.byte	0
+ 1321 013f 17       		.uleb128 0x17
+ 1322 0140 34       		.uleb128 0x34
+ 1323 0141 00       		.byte	0
+ 1324 0142 03       		.uleb128 0x3
+ 1325 0143 0E       		.uleb128 0xe
+ 1326 0144 3A       		.uleb128 0x3a
+ 1327 0145 0B       		.uleb128 0xb
+ 1328 0146 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 27
+
+
+ 1329 0147 0B       		.uleb128 0xb
+ 1330 0148 49       		.uleb128 0x49
+ 1331 0149 13       		.uleb128 0x13
+ 1332 014a 3F       		.uleb128 0x3f
+ 1333 014b 19       		.uleb128 0x19
+ 1334 014c 02       		.uleb128 0x2
+ 1335 014d 18       		.uleb128 0x18
+ 1336 014e 00       		.byte	0
+ 1337 014f 00       		.byte	0
+ 1338 0150 18       		.uleb128 0x18
+ 1339 0151 2E       		.uleb128 0x2e
+ 1340 0152 00       		.byte	0
+ 1341 0153 3F       		.uleb128 0x3f
+ 1342 0154 19       		.uleb128 0x19
+ 1343 0155 3C       		.uleb128 0x3c
+ 1344 0156 19       		.uleb128 0x19
+ 1345 0157 6E       		.uleb128 0x6e
+ 1346 0158 0E       		.uleb128 0xe
+ 1347 0159 03       		.uleb128 0x3
+ 1348 015a 0E       		.uleb128 0xe
+ 1349 015b 3A       		.uleb128 0x3a
+ 1350 015c 0B       		.uleb128 0xb
+ 1351 015d 3B       		.uleb128 0x3b
+ 1352 015e 0B       		.uleb128 0xb
+ 1353 015f 00       		.byte	0
+ 1354 0160 00       		.byte	0
+ 1355 0161 00       		.byte	0
+ 1356              		.section	.debug_loc,"",%progbits
+ 1357              	.Ldebug_loc0:
+ 1358              	.LLST0:
+ 1359 0000 34000000 		.4byte	.LVL8
+ 1360 0004 3A000000 		.4byte	.LVL9
+ 1361 0008 0200     		.2byte	0x2
+ 1362 000a 30       		.byte	0x30
+ 1363 000b 9F       		.byte	0x9f
+ 1364 000c 3A000000 		.4byte	.LVL9
+ 1365 0010 B4000000 		.4byte	.LVL21
+ 1366 0014 0100     		.2byte	0x1
+ 1367 0016 55       		.byte	0x55
+ 1368 0017 00000000 		.4byte	0
+ 1369 001b 00000000 		.4byte	0
+ 1370              	.LLST1:
+ 1371 001f 34000000 		.4byte	.LVL8
+ 1372 0023 3A000000 		.4byte	.LVL9
+ 1373 0027 0200     		.2byte	0x2
+ 1374 0029 30       		.byte	0x30
+ 1375 002a 9F       		.byte	0x9f
+ 1376 002b 3A000000 		.4byte	.LVL9
+ 1377 002f 5A000000 		.4byte	.LVL15
+ 1378 0033 0100     		.2byte	0x1
+ 1379 0035 54       		.byte	0x54
+ 1380 0036 00000000 		.4byte	0
+ 1381 003a 00000000 		.4byte	0
+ 1382              	.LLST2:
+ 1383 003e 00000000 		.4byte	.LVL27
+ 1384 0042 22000000 		.4byte	.LVL28
+ 1385 0046 0100     		.2byte	0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 28
+
+
+ 1386 0048 50       		.byte	0x50
+ 1387 0049 22000000 		.4byte	.LVL28
+ 1388 004d 3A000000 		.4byte	.LVL29
+ 1389 0051 0400     		.2byte	0x4
+ 1390 0053 F3       		.byte	0xf3
+ 1391 0054 01       		.uleb128 0x1
+ 1392 0055 50       		.byte	0x50
+ 1393 0056 9F       		.byte	0x9f
+ 1394 0057 3A000000 		.4byte	.LVL29
+ 1395 005b 3C000000 		.4byte	.LVL30
+ 1396 005f 0100     		.2byte	0x1
+ 1397 0061 50       		.byte	0x50
+ 1398 0062 3C000000 		.4byte	.LVL30
+ 1399 0066 48000000 		.4byte	.LVL32
+ 1400 006a 0400     		.2byte	0x4
+ 1401 006c F3       		.byte	0xf3
+ 1402 006d 01       		.uleb128 0x1
+ 1403 006e 50       		.byte	0x50
+ 1404 006f 9F       		.byte	0x9f
+ 1405 0070 48000000 		.4byte	.LVL32
+ 1406 0074 4A000000 		.4byte	.LVL33
+ 1407 0078 0100     		.2byte	0x1
+ 1408 007a 50       		.byte	0x50
+ 1409 007b 4A000000 		.4byte	.LVL33
+ 1410 007f 56000000 		.4byte	.LVL35
+ 1411 0083 0400     		.2byte	0x4
+ 1412 0085 F3       		.byte	0xf3
+ 1413 0086 01       		.uleb128 0x1
+ 1414 0087 50       		.byte	0x50
+ 1415 0088 9F       		.byte	0x9f
+ 1416 0089 56000000 		.4byte	.LVL35
+ 1417 008d 68000000 		.4byte	.LVL36
+ 1418 0091 0100     		.2byte	0x1
+ 1419 0093 50       		.byte	0x50
+ 1420 0094 68000000 		.4byte	.LVL36
+ 1421 0098 90000000 		.4byte	.LFE66
+ 1422 009c 0400     		.2byte	0x4
+ 1423 009e F3       		.byte	0xf3
+ 1424 009f 01       		.uleb128 0x1
+ 1425 00a0 50       		.byte	0x50
+ 1426 00a1 9F       		.byte	0x9f
+ 1427 00a2 00000000 		.4byte	0
+ 1428 00a6 00000000 		.4byte	0
+ 1429              	.LLST3:
+ 1430 00aa 08000000 		.4byte	.LVL40
+ 1431 00ae 1C000000 		.4byte	.LVL45
+ 1432 00b2 0100     		.2byte	0x1
+ 1433 00b4 54       		.byte	0x54
+ 1434 00b5 1E000000 		.4byte	.LVL46
+ 1435 00b9 24000000 		.4byte	.LFE65
+ 1436 00bd 0100     		.2byte	0x1
+ 1437 00bf 54       		.byte	0x54
+ 1438 00c0 00000000 		.4byte	0
+ 1439 00c4 00000000 		.4byte	0
+ 1440              	.LLST4:
+ 1441 00c8 10000000 		.4byte	.LVL42
+ 1442 00cc 1E000000 		.4byte	.LVL46
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 29
+
+
+ 1443 00d0 0100     		.2byte	0x1
+ 1444 00d2 55       		.byte	0x55
+ 1445 00d3 00000000 		.4byte	0
+ 1446 00d7 00000000 		.4byte	0
+ 1447              		.section	.debug_aranges,"",%progbits
+ 1448 0000 2C000000 		.4byte	0x2c
+ 1449 0004 0200     		.2byte	0x2
+ 1450 0006 00000000 		.4byte	.Ldebug_info0
+ 1451 000a 04       		.byte	0x4
+ 1452 000b 00       		.byte	0
+ 1453 000c 0000     		.2byte	0
+ 1454 000e 0000     		.2byte	0
+ 1455 0010 00000000 		.4byte	.LFB64
+ 1456 0014 10010000 		.4byte	.LFE64-.LFB64
+ 1457 0018 00000000 		.4byte	.LFB66
+ 1458 001c 90000000 		.4byte	.LFE66-.LFB66
+ 1459 0020 00000000 		.4byte	.LFB65
+ 1460 0024 24000000 		.4byte	.LFE65-.LFB65
+ 1461 0028 00000000 		.4byte	0
+ 1462 002c 00000000 		.4byte	0
+ 1463              		.section	.debug_ranges,"",%progbits
+ 1464              	.Ldebug_ranges0:
+ 1465 0000 34000000 		.4byte	.LBB3
+ 1466 0004 36000000 		.4byte	.LBE3
+ 1467 0008 38000000 		.4byte	.LBB4
+ 1468 000c 56000000 		.4byte	.LBE4
+ 1469 0010 00000000 		.4byte	0
+ 1470 0014 00000000 		.4byte	0
+ 1471 0018 00000000 		.4byte	.LFB64
+ 1472 001c 10010000 		.4byte	.LFE64
+ 1473 0020 00000000 		.4byte	.LFB66
+ 1474 0024 90000000 		.4byte	.LFE66
+ 1475 0028 00000000 		.4byte	.LFB65
+ 1476 002c 24000000 		.4byte	.LFE65
+ 1477 0030 00000000 		.4byte	0
+ 1478 0034 00000000 		.4byte	0
+ 1479              		.section	.debug_line,"",%progbits
+ 1480              	.Ldebug_line0:
+ 1481 0000 02030000 		.section	.debug_str,"MS",%progbits,1
+ 1481      02008402 
+ 1481      00000201 
+ 1481      FB0E0D00 
+ 1481      01010101 
+ 1482              	.LASF42:
+ 1483 0000 6973725F 		.ascii	"isr_uart_rx_StartEx\000"
+ 1483      75617274 
+ 1483      5F72785F 
+ 1483      53746172 
+ 1483      74457800 
+ 1484              	.LASF43:
+ 1485 0014 55415254 		.ascii	"UART_1_Start\000"
+ 1485      5F315F53 
+ 1485      74617274 
+ 1485      00
+ 1486              	.LASF3:
+ 1487 0021 5F5F7569 		.ascii	"__uint8_t\000"
+ 1487      6E74385F 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 30
+
+
+ 1487      7400
+ 1488              	.LASF19:
+ 1489 002b 73697A65 		.ascii	"size_t\000"
+ 1489      5F7400
+ 1490              	.LASF33:
+ 1491 0032 74617261 		.ascii	"tara_weight2\000"
+ 1491      5F776569 
+ 1491      67687432 
+ 1491      00
+ 1492              	.LASF22:
+ 1493 003f 75617274 		.ascii	"uartBuffer\000"
+ 1493      42756666 
+ 1493      657200
+ 1494              	.LASF16:
+ 1495 004a 666C6F61 		.ascii	"float64\000"
+ 1495      74363400 
+ 1496              	.LASF6:
+ 1497 0052 5F5F696E 		.ascii	"__int32_t\000"
+ 1497      7433325F 
+ 1497      7400
+ 1498              	.LASF39:
+ 1499 005c 736E7072 		.ascii	"snprintf\000"
+ 1499      696E7466 
+ 1499      00
+ 1500              	.LASF5:
+ 1501 0065 73686F72 		.ascii	"short unsigned int\000"
+ 1501      7420756E 
+ 1501      7369676E 
+ 1501      65642069 
+ 1501      6E7400
+ 1502              	.LASF35:
+ 1503 0078 77656967 		.ascii	"weight\000"
+ 1503      687400
+ 1504              	.LASF25:
+ 1505 007f 62797465 		.ascii	"bytesToRead\000"
+ 1505      73546F52 
+ 1505      65616400 
+ 1506              	.LASF15:
+ 1507 008b 666C6F61 		.ascii	"float\000"
+ 1507      7400
+ 1508              	.LASF36:
+ 1509 0091 4144435F 		.ascii	"ADC_SAR_1_IsEndConversion\000"
+ 1509      5341525F 
+ 1509      315F4973 
+ 1509      456E6443 
+ 1509      6F6E7665 
+ 1510              	.LASF26:
+ 1511 00ab 62797465 		.ascii	"byteReceived\000"
+ 1511      52656365 
+ 1511      69766564 
+ 1511      00
+ 1512              	.LASF1:
+ 1513 00b8 756E7369 		.ascii	"unsigned char\000"
+ 1513      676E6564 
+ 1513      20636861 
+ 1513      7200
+ 1514              	.LASF50:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 31
+
+
+ 1515 00c6 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1515      43313120 
+ 1515      352E342E 
+ 1515      31203230 
+ 1515      31363036 
+ 1516 00f9 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1516      20726576 
+ 1516      6973696F 
+ 1516      6E203233 
+ 1516      37373135 
+ 1517 012c 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1517      66756E63 
+ 1517      74696F6E 
+ 1517      2D736563 
+ 1517      74696F6E 
+ 1518              	.LASF48:
+ 1519 0154 55415254 		.ascii	"UART_1_WriteTxData\000"
+ 1519      5F315F57 
+ 1519      72697465 
+ 1519      54784461 
+ 1519      746100
+ 1520              	.LASF24:
+ 1521 0167 4953525F 		.ascii	"ISR_UART_rx_handler\000"
+ 1521      55415254 
+ 1521      5F72785F 
+ 1521      68616E64 
+ 1521      6C657200 
+ 1522              	.LASF8:
+ 1523 017b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1523      20756E73 
+ 1523      69676E65 
+ 1523      6420696E 
+ 1523      7400
+ 1524              	.LASF47:
+ 1525 018d 55415254 		.ascii	"UART_1_ReadRxData\000"
+ 1525      5F315F52 
+ 1525      65616452 
+ 1525      78446174 
+ 1525      6100
+ 1526              	.LASF45:
+ 1527 019f 4144435F 		.ascii	"ADC_SAR_1_StartConvert\000"
+ 1527      5341525F 
+ 1527      315F5374 
+ 1527      61727443 
+ 1527      6F6E7665 
+ 1528              	.LASF27:
+ 1529 01b6 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1529      52784275 
+ 1529      66666572 
+ 1529      00
+ 1530              	.LASF4:
+ 1531 01c3 5F5F7569 		.ascii	"__uint16_t\000"
+ 1531      6E743136 
+ 1531      5F7400
+ 1532              	.LASF17:
+ 1533 01ce 646F7562 		.ascii	"double\000"
+ 1533      6C6500
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 32
+
+
+ 1534              	.LASF41:
+ 1535 01d5 414D7578 		.ascii	"AMux_1_Start\000"
+ 1535      5F315F53 
+ 1535      74617274 
+ 1535      00
+ 1536              	.LASF23:
+ 1537 01e2 68616E64 		.ascii	"handleByteReceived\000"
+ 1537      6C654279 
+ 1537      74655265 
+ 1537      63656976 
+ 1537      656400
+ 1538              	.LASF53:
+ 1539 01f5 6D61696E 		.ascii	"main\000"
+ 1539      00
+ 1540              	.LASF11:
+ 1541 01fa 756E7369 		.ascii	"unsigned int\000"
+ 1541      676E6564 
+ 1541      20696E74 
+ 1541      00
+ 1542              	.LASF29:
+ 1543 0207 64697669 		.ascii	"divider_weight1\000"
+ 1543      6465725F 
+ 1543      77656967 
+ 1543      68743100 
+ 1544              	.LASF31:
+ 1545 0217 64697669 		.ascii	"divider_weight2\000"
+ 1545      6465725F 
+ 1545      77656967 
+ 1545      68743200 
+ 1546              	.LASF10:
+ 1547 0227 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1547      206C6F6E 
+ 1547      6720756E 
+ 1547      7369676E 
+ 1547      65642069 
+ 1548              	.LASF12:
+ 1549 023e 75696E74 		.ascii	"uint8_t\000"
+ 1549      385F7400 
+ 1550              	.LASF49:
+ 1551 0246 55415254 		.ascii	"UART_1_GetRxBufferSize\000"
+ 1551      5F315F47 
+ 1551      65745278 
+ 1551      42756666 
+ 1551      65725369 
+ 1552              	.LASF34:
+ 1553 025d 72657375 		.ascii	"result\000"
+ 1553      6C7400
+ 1554              	.LASF0:
+ 1555 0264 7369676E 		.ascii	"signed char\000"
+ 1555      65642063 
+ 1555      68617200 
+ 1556              	.LASF14:
+ 1557 0270 696E7433 		.ascii	"int32_t\000"
+ 1557      325F7400 
+ 1558              	.LASF21:
+ 1559 0278 73697A65 		.ascii	"sizetype\000"
+ 1559      74797065 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 33
+
+
+ 1559      00
+ 1560              	.LASF32:
+ 1561 0281 74617261 		.ascii	"tara_weight1\000"
+ 1561      5F776569 
+ 1561      67687431 
+ 1561      00
+ 1562              	.LASF37:
+ 1563 028e 4144435F 		.ascii	"ADC_SAR_1_GetResult16\000"
+ 1563      5341525F 
+ 1563      315F4765 
+ 1563      74526573 
+ 1563      756C7431 
+ 1564              	.LASF9:
+ 1565 02a4 6C6F6E67 		.ascii	"long long int\000"
+ 1565      206C6F6E 
+ 1565      6720696E 
+ 1565      7400
+ 1566              	.LASF51:
+ 1567 02b2 6D61696E 		.ascii	"main.c\000"
+ 1567      2E6300
+ 1568              	.LASF18:
+ 1569 02b9 63686172 		.ascii	"char\000"
+ 1569      00
+ 1570              	.LASF46:
+ 1571 02be 414D7578 		.ascii	"AMux_1_Select\000"
+ 1571      5F315F53 
+ 1571      656C6563 
+ 1571      7400
+ 1572              	.LASF2:
+ 1573 02cc 73686F72 		.ascii	"short int\000"
+ 1573      7420696E 
+ 1573      7400
+ 1574              	.LASF13:
+ 1575 02d6 75696E74 		.ascii	"uint16_t\000"
+ 1575      31365F74 
+ 1575      00
+ 1576              	.LASF7:
+ 1577 02df 6C6F6E67 		.ascii	"long int\000"
+ 1577      20696E74 
+ 1577      00
+ 1578              	.LASF52:
+ 1579 02e8 433A5C55 		.ascii	"C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\Sk"
+ 1579      73657273 
+ 1579      5C52756E 
+ 1579      65675C4F 
+ 1579      6E654472 
+ 1580 0317 72697665 		.ascii	"rivebord\\Scale\\Scale.cydsn\000"
+ 1580      626F7264 
+ 1580      5C536361 
+ 1580      6C655C53 
+ 1580      63616C65 
+ 1581              	.LASF20:
+ 1582 0332 6C6F6E67 		.ascii	"long double\000"
+ 1582      20646F75 
+ 1582      626C6500 
+ 1583              	.LASF28:
+ 1584 033e 6F666673 		.ascii	"offset_weight1\000"
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccolw6td.s 			page 34
+
+
+ 1584      65745F77 
+ 1584      65696768 
+ 1584      743100
+ 1585              	.LASF30:
+ 1586 034d 6F666673 		.ascii	"offset_weight2\000"
+ 1586      65745F77 
+ 1586      65696768 
+ 1586      743200
+ 1587              	.LASF44:
+ 1588 035c 4144435F 		.ascii	"ADC_SAR_1_Start\000"
+ 1588      5341525F 
+ 1588      315F5374 
+ 1588      61727400 
+ 1589              	.LASF40:
+ 1590 036c 55415254 		.ascii	"UART_1_PutString\000"
+ 1590      5F315F50 
+ 1590      75745374 
+ 1590      72696E67 
+ 1590      00
+ 1591              	.LASF38:
+ 1592 037d 43794465 		.ascii	"CyDelay\000"
+ 1592      6C617900 
+ 1593              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
