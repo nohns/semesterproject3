@@ -5,8 +5,42 @@
 			"path": "."
 		},
 		{
-			"name": "Kernel driver prototype",
+			"name": "UART driver prototype",
 			"path": "prototyping/rpi-uart-kernel-module"
+		},
+		{
+			"name": "Netlink driver prototype",
+			"path": "prototyping/rpi-netlink-module"
 		}
-	]
+	],
+	"settings": {
+		"files.associations": {
+			"rpi-netlink.h": "c",
+			"module.h": "c",
+			"list.h": "c",
+			"container_of.h": "c",
+			"build_bug.h": "c",
+			"compiler.h": "c",
+			"compiler_types.h": "c",
+			"genetlink.h": "c",
+			"netlink.h": "c",
+			"export.h": "c",
+			"skbuff.h": "c",
+			"cache.h": "c",
+			"bvec.h": "c",
+			"highmem.h": "c",
+			"hardirq.h": "c",
+			"bug.h": "c",
+			"kernel.h": "c",
+			"fs.h": "c",
+			"cacheflush.h": "c",
+			"uaccess.h": "c",
+			"irq.h": "c",
+			"io.h": "c"
+		},
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.black-formatter"
+		},
+		"python.formatting.provider": "none"
+	}
 }
