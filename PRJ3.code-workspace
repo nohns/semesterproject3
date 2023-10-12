@@ -7,6 +7,10 @@
 		{
 			"name": "Kernel driver prototype",
 			"path": "prototyping/rpi-uart-kernel-module"
+		},
+		{
+			"name": "Flask Web server prototype",
+			"path": "prototyping/rpi-api"
 		}
 	]
 }
