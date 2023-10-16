@@ -1,14 +1,63 @@
 /** @format */
+import { useState } from "react";
 
-import Home from "./views/Home";
+import Waiting from "./views/Waiting";
+import Selection from "./views/Selection";
+import Pouring from "./views/Pouring";
+import { useEffect } from "react";
+import { CSSTransition, SwitchTransition } from "react-transition-group";
+
+//Create typed enum for our 3 different states
+export enum DrinkMachineState {
+  Waiting = "Waiting",
+  Selection = "Selection",
+  Pouring = "Pouring",
+}
 
 function App() {
+  const [view, setView] = useState<DrinkMachineState>(
+    DrinkMachineState.Waiting
+  );
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setView(DrinkMachineState.Waiting);
+    }, 120000);
+
+    return () => clearTimeout(timeout);
+  }, [view, setView]);
+
+  const renderView = () => {
+    return (
+      <SwitchTransition>
+        <CSSTransition
+          key={view}
+          addEndListener={(node, done) => {
+            node.addEventListener("transitionend", done, false);
+          }}
+          classNames="fade"
+        >
+          {() => {
+            switch (view) {
+              case DrinkMachineState.Selection:
+                return <Selection setView={setView} />;
+              case DrinkMachineState.Pouring:
+                return <Pouring setView={setView} />;
+              case DrinkMachineState.Waiting:
+                return <Waiting setView={setView} />;
+              default:
+                return <Selection setView={setView} />;
+            }
+          }}
+        </CSSTransition>
+      </SwitchTransition>
+    );
+  };
+
   return (
-    <>
-      <div className="dark max-w-[800px] max-h-[480px] bg-red-500 flex flex-col h-screen w-screen">
-        <Home />
-      </div>
-    </>
+    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-screen w-screen bg-[#302E37]">
+      {renderView()}
+    </div>
   );
 }
 
