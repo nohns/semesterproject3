@@ -10,33 +10,42 @@ if (ENV.MOCKED) {
   await import("./getDrinks.mock.ts");
 }
 
-interface GetDrinksResponse {
-  drinks: Drink[];
-}
-
 export interface Drink {
-  id: string;
+  id: number;
+  image: Image;
   name: string;
+  amountInCl: number;
   remainingFluid: number;
 }
 
-const getDrinks = async () => {
-  const { data } = await http.get(`v1/drinks`);
+interface Image {
+  id: number;
+  path: string;
+}
 
-  return data as GetDrinksResponse;
+interface GetDrinksRequest {}
+export interface GetDrinksResponse {
+  drinks: Drink[];
+}
+
+const getDrinks = async ({}: GetDrinksRequest) => {
+  const response = await http.get<GetDrinksResponse>(`v1/drinks`);
+
+  if (response.status !== 200) {
+    console.log(response);
+    throw new Error("No data");
+  }
+
+  return response.data;
 };
 
 const useGetDrinks = () => {
-  const { data, isLoading, error } = useQuery({
+  const query = useQuery({
     queryKey: ["getDrinks"],
-    queryFn: () => getDrinks(),
+    queryFn: () => getDrinks({}),
   });
 
-  if (error) {
-    console.error(error);
-  }
-
-  return { data, isLoading, error };
+  return query;
 };
 
 export default useGetDrinks;
