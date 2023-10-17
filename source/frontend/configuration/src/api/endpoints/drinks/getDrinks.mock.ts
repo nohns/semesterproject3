@@ -3,6 +3,7 @@
 import httpMock from "@/api/axios.mock";
 import { GetDrinksResponse } from "./getDrinks";
 
+//Url to match v1/drinks
 const url = new RegExp(/v1\/drinks/); //I hate fucking regexes
 httpMock.onGet(url).reply(() => {
   const res: GetDrinksResponse = {

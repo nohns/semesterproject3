@@ -3,7 +3,7 @@
 @tailwind utilities;
  
 
-@layer base {
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -48,8 +48,54 @@
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
   }
-}
+} */
 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 1rem;
+  }
+ 
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+  }
+}
  
 @layer base {
   * {
@@ -57,5 +103,147 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.bg-martin{
+  background-image: url("src/assets/drink.png");
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: bottom;
+}
+
+/* .bg-drink{
+  background-image: url("src/assets/drink.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  animation: tilt 2s infinite;
+}
+
+@keyframes tilt {
+  0%, 100% {
+    transform: rotate(-0.5deg);
+  }
+  50% {
+    transform: rotate(0.5deg);
+  }
+} */
+
+.bg-drink {
+  position: relative;
+  }
+  
+  .bg-drink::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("src/assets/drink.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  animation: tilt 3s infinite;
+  z-index: 1; /* Adjust the z-index to position the pseudo-element behind the components */
+  }
+  
+  @keyframes tilt {
+  0%, 100% {
+  transform: rotate(-1deg);
+  }
+  50% {
+  transform: rotate(1deg);
+  }
+  }
+
+
+
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+
+@keyframes wave {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.selectedCard {
+  animation: wave 2s infinite;
+}
+
+/* .fill {
+  height: 400px;
+  width: 400px;
+  border: 5px solid white;
+  border-radius: 50%;
+  background: url(src/assets/wave.png);
+  background-size: 400px 400px;
+  background-repeat: repeat-x;
+  animation: flow 60s linear infinite;
+}
+
+@keyframes flow {
+  0% {
+    background-position: -1200px 400px
+  }
+
+  100% {
+    background-position: 0px 0px
+  }
+} */
+
+.fill {
+  height: 350px;
+  width: 350px;
+  border-radius: 50%;
+  border: 5px solid white;
+  
+  margin-top: auto;
+  line-height: 400px;
+  text-align: center;
+  color: #ddd;
+  font-size: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.fill:before {
+content: "";
+position: absolute;
+width: 700px;
+height: 700px;
+background: linear-gradient(to bottom, #007AFF, #00C6FF);
+left: 50%;
+transform: translateX(-50%);
+border-radius: 40%;
+animation: flow 60s linear infinite;
+}
+
+@keyframes flow {
+  from {
+    top: 350px;
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    top: 0px;
+    transform: translateX(-50%) rotate(360deg);
   }
 }
