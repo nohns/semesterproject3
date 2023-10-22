@@ -1,11 +1,15 @@
 from flask import Blueprint, request, jsonify
 
-fluid = Blueprint("fluid", __name__, url_prefix="/fluid/")
+fluid = Blueprint("fluid", __name__, url_prefix="/fluid")
 
 
 @fluid.route("/", methods=["GET"])
-def index():
-    return get_fluids()
+def get_fluids():
+    try:
+        fluids = get_fluids_from_database()
+        return jsonify(fluids), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @fluid.route("/", methods=["POST"])
@@ -44,14 +48,6 @@ def create_fluid_in_database(name):
 def delete_fluid_from_database(fluid_id):
     # do the deletings
     return 0
-
-
-def get_fluids():
-    try:
-        fluids = get_fluids_from_database()
-        return jsonify(fluids), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
 
 def get_fluids_from_database():
