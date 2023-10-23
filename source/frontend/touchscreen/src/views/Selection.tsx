@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 
 import usePourDrink from "@/api/endpoints/drinks/pourDrink";
 import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
-import Clock from "@/components/Clock";
 
 interface SelectionProps {
   setView: React.Dispatch<React.SetStateAction<DrinkMachineState>>;
@@ -37,15 +36,9 @@ function Selection({ setView }: SelectionProps): JSX.Element {
   if (drinksQuery.isLoading) {
     return (
       <>
-        <div className="flex flex-col items-center h-screen w-screen">
-          <div>
-            <h1 className="scroll-m-20 text-white mt-10 text-6xl font-extrabold tracking-tight lg:text-5xl border-b border-white">
-              Drinks Machine
-            </h1>
-            <Clock />
-          </div>
-          <h1 className="scroll-m-20 text-white mt-10 text-6xl font-extrabold tracking-tight lg:text-5xl border-b border-white">
-            Select drink
+        <div className="flex flex-col items-center h-full w-full  ">
+          <h1 className="scroll-m-20  text-white mt-10 text-6xl font-extrabold  tracking-tight lg:text-5xl border-b border-white">
+            SELECT DRINK
           </h1>
           <Spinner />
           <Button
@@ -63,17 +56,12 @@ function Selection({ setView }: SelectionProps): JSX.Element {
 
   return (
     <>
-      <div className="flex flex-col items-center h-screen w-screen">
-        <div className="flex flex-row mt-4 justify-center w-full mx-20">
-          {/*   <h1 className="text-sm text-muted-foreground">Drinks Machine</h1> */}
-          <small className="text-sm font-medium leading-none text-muted-foreground">
-            Drinks Machine
-          </small>
-          <Clock />
+      <div className="flex flex-col items-center h-full w-full   ">
+        <div className="drop-shadow-2xl shadow-green-700 mt-10 pb-4">
+          <h1 className="scroll-m-20 text-white   text-6xl font-extrabold tracking-tight lg:text-5xl   ">
+            SELECT DRINK
+          </h1>
         </div>
-        <h1 className="scroll-m-20 text-white mt-10 text-6xl font-extrabold tracking-tight lg:text-5xl border-white">
-          Select drink
-        </h1>
         {drinksQuery.data?.drinks?.map((drink) => (
           <DrinkSelection
             key={drink.id}
@@ -83,15 +71,14 @@ function Selection({ setView }: SelectionProps): JSX.Element {
           />
         ))}
         <Button
-          /* onClick={() => setView(DrinkMachineState.Pouring)} */
           onClick={handleClick}
           className="mt-auto mb-8 p-8 bg-white"
           disabled={selectedDrink ? false : true}
         >
           <h2 className="scroll-m-20  text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-            Pour drink
+            Pour Drink
           </h2>
-        </Button>{" "}
+        </Button>
       </div>
     </>
   );
