@@ -46,7 +46,7 @@ class Api:
 class Main:
 #Database and publishing events to psoc via netlink (pump control)
     database: Database
-    fileStore: FileStore
+    file_store: FileStore
     netlink_publisher: NetlinkPublisher
     
 #Controller which handles logic will import domain classes
@@ -60,10 +60,10 @@ class Main:
     def __init__(self):
     #Initialize all classes
         database = Database()
-        fileStore = FileStore()
+        file_store = FileStore()
         netlink_publisher = NetlinkPublisher()
 
-        controller = Controller(database, fileStore, netlink_publisher)
+        controller = Controller(database, file_store, netlink_publisher)
 
 
 #Since we are going to be recieving events from psoc and http requests from frontend we need to create threads for both
