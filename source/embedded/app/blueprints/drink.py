@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 
+
 drink = Blueprint("drink", __name__, url_prefix="/drink")
 
 
@@ -51,4 +52,8 @@ def get_drinks_from_database():
 
 
 def create_drink_in_database(image_id, name, ingredients):
+    return 0
+
+
+def delete_drink_from_database(drink):
     return 0
