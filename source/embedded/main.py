@@ -13,54 +13,47 @@ class FileStore:
         pass
 
 #call netlink publisher class
-class Netlink_publisher:
+class NetlinkPublisher:
     
     def __init__(self):
-            pass
+        pass
 
 #Call controller class
 class Controller:
     database: Database
     fileStore: FileStore
-    netlink_publisher: Netlink_publisher
+    netlink_publisher: NetlinkPublisher
     
-    def __init__(self, database, fileStore, netlink_publisher):
+    def __init__(self, database: Database, fileStore: FileStore, netlink_publisher: NetlinkPublisher):
         self.database = database
         self.fileStore = fileStore
         self.netlink_publisher = netlink_publisher
 
 #Call netlink reciever class
-class Netlink_reciever:
+class NetlinkReciever:
     controller: Controller
     
-    def __init__(self, controller):
-        pass
-    
-    def run(self):
-        pass
-
+    def __init__(self, controller: Controller):
+        self.controller = controller
 
 #call api class
 class Api:
     controller: Controller
         
-    def __init__(self, controller):
-        pass
+    def __init__(self, controller: Controller):
+        self.controller = controller
         
-    def run(self):
-        pass
-
 class Main:
 #Database and publishing events to psoc via netlink (pump control)
     database: Database
     fileStore: FileStore
-    netlink_publisher: Netlink_publisher
+    netlink_publisher: NetlinkPublisher
     
 #Controller which handles logic will import domain classes
     controller: Controller
 
 #Recieving events from psoc via netlink (weight sensor)
-    netlink_reciever: Netlink_reciever
+    netlink_reciever: NetlinkReciever
 #Recieving http requests from frontend
     api: Api
 
@@ -68,13 +61,13 @@ class Main:
     #Initialize all classes
         database = Database()
         fileStore = FileStore()
-        netlink_publisher = Netlink_publisher()
+        netlink_publisher = NetlinkPublisher()
 
         controller = Controller(database, fileStore, netlink_publisher)
 
 
 #Since we are going to be recieving events from psoc and http requests from frontend we need to create threads for both
-        netlink_reciever = Netlink_reciever(controller)
+        netlink_reciever = NetlinkReciever(controller)
         api = Api(controller)
 
         # Create threads for netlink_reciever and api
