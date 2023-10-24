@@ -55,8 +55,10 @@ function App() {
   };
 
   return (
-    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-screen w-screen bg-[#302E37]">
-      {renderView()}
+    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-[800px] w-[480px]   bg-gradient-to-t from-yellow-500 via-gray-700 to-gray-500 p-1.5">
+      <div className="bg-gradient-to-t w-full h-full from-[#302E37] to bg-slate-800">
+        {renderView()}
+      </div>
     </div>
   );
 }

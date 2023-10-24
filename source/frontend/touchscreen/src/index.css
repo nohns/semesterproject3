@@ -158,6 +158,16 @@
   }
   }
 
+  .pouring-container {
+    background-image: url("src/assets/test.png");
+    background-position: center;
+    background-size: auto 60%;
+    background-repeat: no-repeat;
+    position: relative;
+    /* Add any other styles or animations here */
+  }
+
+ 
 
 
 
@@ -187,63 +197,3 @@
   animation: wave 2s infinite;
 }
 
-/* .fill {
-  height: 400px;
-  width: 400px;
-  border: 5px solid white;
-  border-radius: 50%;
-  background: url(src/assets/wave.png);
-  background-size: 400px 400px;
-  background-repeat: repeat-x;
-  animation: flow 60s linear infinite;
-}
-
-@keyframes flow {
-  0% {
-    background-position: -1200px 400px
-  }
-
-  100% {
-    background-position: 0px 0px
-  }
-} */
-
-.fill {
-  height: 350px;
-  width: 350px;
-  border-radius: 50%;
-  border: 5px solid white;
-  
-  margin-top: auto;
-  line-height: 400px;
-  text-align: center;
-  color: #ddd;
-  font-size: 25px;
-  font-weight: 600;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-}
-
-.fill:before {
-content: "";
-position: absolute;
-width: 700px;
-height: 700px;
-background: linear-gradient(to bottom, #007AFF, #00C6FF);
-left: 50%;
-transform: translateX(-50%);
-border-radius: 40%;
-animation: flow 60s linear infinite;
-}
-
-@keyframes flow {
-  from {
-    top: 350px;
-    transform: translateX(-50%) rotate(0deg);
-  }
-  to {
-    top: 0px;
-    transform: translateX(-50%) rotate(360deg);
-  }
-}

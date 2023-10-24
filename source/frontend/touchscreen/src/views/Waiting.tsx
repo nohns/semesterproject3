@@ -13,7 +13,7 @@ interface WaitingProps {
 function Waiting({ setView }: WaitingProps): JSX.Element {
   return (
     <>
-      <div className="flex flex-col  items-center h-screen w-screen bg-drink">
+      <div className="flex flex-col  items-center h-full w-full bg-drink ">
         <h1 className="scroll-m-20 text-white mt-10 text-6xl font-extrabold z-10 tracking-tight lg:text-5xl border-white">
           Drinks Machine
         </h1>
