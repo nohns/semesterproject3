@@ -8,12 +8,12 @@ class Fluid:
 
 class Ingredient:
     id: int
-    amountInCl: int
+    amount_in_cl: int
     fluid: Fluid
     
 class Statistics:
-    amountPoured: int
-    pourDuration: int
+    amount_poured: int
+    pour_duration: int
     error: str
     timestamp: str
 
@@ -24,14 +24,14 @@ class Image:
 class Drink:
     id: int
     name: str
-    amountInCl: int #0-100
+    amount_in_cl: int #0-100
     image: Image
     Ingredients: list[Ingredient]
 
 class FluidContainer:
-    containerId: int
-    fluidAmountInCl: int
-    fluidType: Fluid
+    container_id: int
+    fluid_amount_in_cl: int
+    fluid_type: Fluid
 
 
 
