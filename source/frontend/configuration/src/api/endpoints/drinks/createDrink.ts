@@ -23,7 +23,7 @@ const createDrink = async ({
   name,
   Ingredient,
 }: CreateDrinkRequest) => {
-  const response = await http.post<CreateDrinkResponse>(`v1/drink`, {
+  const response = await http.post<CreateDrinkResponse>(`v1/drinks`, {
     imageId,
     name,
     Ingredient,

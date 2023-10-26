@@ -17,7 +17,7 @@ interface DeleteFluidRequest {
 export interface DeleteFluidResponse {}
 
 const deleteFluid = async ({ id }: DeleteFluidRequest) => {
-  const response = await http.delete<DeleteFluidResponse>(`v1/fluid/${id}`);
+  const response = await http.delete<DeleteFluidResponse>(`v1/fluids/${id}`);
 
   if (response.status !== 200) {
     console.log(response);

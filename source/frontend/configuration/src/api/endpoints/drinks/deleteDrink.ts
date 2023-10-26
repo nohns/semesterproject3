@@ -10,7 +10,7 @@ interface DeleteDrinkRequest {
 export interface DeleteDrinkResponse {}
 
 const deleteDrink = async ({ id }: DeleteDrinkRequest) => {
-  const response = await http.delete<DeleteDrinkResponse>(`v1/drink/${id}`);
+  const response = await http.delete<DeleteDrinkResponse>(`v1/drinks/${id}`);
 
   if (response.status !== 200) {
     console.log(response);
