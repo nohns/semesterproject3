@@ -1,41 +1,19 @@
 import threading
 
 
+from controller.controller import Controller
+from database.database import Database
+from netlink.publisher import NetlinkPublisher
+from netlink.reciever import NetlinkReciever
+from api.api import Api
 
- #Call database class
-class Database:
 
-    def __init__(self):
-        pass
 
-#call netlink publisher class
-class NetlinkPublisher:
-    
-    def __init__(self):
-        pass
 
-#Call controller class
-class Controller:
-    database: Database
-    netlink_publisher: NetlinkPublisher
-    
-    def __init__(self, database: Database, netlink_publisher: NetlinkPublisher):
-        self.database = database
-        self.netlink_publisher = netlink_publisher
 
-#Call netlink reciever class
-class NetlinkReciever:
-    controller: Controller
-    
-    def __init__(self, controller: Controller):
-        self.controller = controller
 
-#call api class
-class Api:
-    controller: Controller
-        
-    def __init__(self, controller: Controller):
-        self.controller = controller
+
+
         
 class Main:
 #Database and publishing events to psoc via netlink (pump control)
@@ -63,8 +41,8 @@ class Main:
         api = Api(controller)
 
         # Create threads for netlink_reciever and api
-        netlink_reciever_thread = threading.Thread(target=netlink_reciever.run)
-        api_thread = threading.Thread(target=api.run)
+        netlink_reciever_thread = threading.Thread(target=netlink_reciever)
+        api_thread = threading.Thread(target=api)
 
         # Start the threads
         netlink_reciever_thread.start()
