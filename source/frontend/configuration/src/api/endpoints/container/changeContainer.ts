@@ -13,7 +13,7 @@ export interface ChangeContainerResponse {}
 
 const changeContainer = async ({ id, newFluidId }: ChangeContainerRequest) => {
   const response = await http.patch<ChangeContainerResponse>(
-    `v1/container/${id}`,
+    `v1/containers/${id}`,
     {
       newFluidId,
     }

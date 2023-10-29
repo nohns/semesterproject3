@@ -17,7 +17,7 @@ interface CreateFluidRequest {
 export interface CreateFluidResponse {}
 
 const createFluid = async ({ name }: CreateFluidRequest) => {
-  const response = await http.post<CreateFluidResponse>(`v1/fluid`, {
+  const response = await http.post<CreateFluidResponse>(`v1/fluids`, {
     name,
   });
 
