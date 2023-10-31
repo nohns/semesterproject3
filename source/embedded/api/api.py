@@ -5,9 +5,10 @@ from flask import Flask, Blueprint
 
 # <- THIS IS THE IMPORTS FOR THE ROUTES -> #
 from api.containers import get_containers, change_containers
-from api.drinks import get_drinks, create_drink, delete_drink, pour_drink, cancel_pour_drink
+from api.drinks import get_drinks, create_drink, delete_drink, pour_drink
 from api.images import get_images
 from api.fluids import get_fluids, create_fluid, delete_fluid
+from api.update import update
 # <- THIS IS THE IMPORTS FOR THE ROUTES -> #
 
 class Api:
@@ -18,6 +19,7 @@ class Api:
       
     # --> THIS IS THE CLASS CONSTRUCTOR <- #
     def __init__(self, controller: Controller):
+        print("api initialized")
         self.controller = controller
         self.app = Flask(__name__)
 
@@ -41,7 +43,6 @@ class Api:
         drinks.add_url_rule("/", "get_drinks",  lambda: get_drinks(self.controller), methods=["GET"])
 
         drinks.add_url_rule("/pour", "pour_drink", lambda: pour_drink(self.controller), methods=["POST"])
-        drinks.add_url_rule("/cancel", "cancel_pour_drink", lambda: cancel_pour_drink(self.controller), methods=["POST"])
         self.app.register_blueprint(drinks)
         
         #Routes for fluids
@@ -56,6 +57,11 @@ class Api:
         images.add_url_rule("/", "/get_images", lambda: get_images(self.controller), methods=["GET"])
         self.app.register_blueprint(images)
 
+        #routes for update
+        updates = Blueprint("v1/updates", __name__, url_prefix="/v1/updates")
+        updates.add_url_rule("/", "/updates", lambda: update(self.controller), methods=["GET"])
+        self.app.register_blueprint(updates)
+ 
     
 
 

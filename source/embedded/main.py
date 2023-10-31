@@ -7,14 +7,6 @@ from netlink.publisher import NetlinkPublisher
 from netlink.reciever import NetlinkReciever
 from api.api import Api
 
-
-
-
-
-
-
-
-        
 class Main:
 #Database and publishing events to psoc via netlink (pump control)
     database: Database
@@ -51,6 +43,7 @@ class Main:
         # Wait for the threads to finish (which should be never)
         netlink_reciever_thread.join()
         api_thread.join()
+        #api = Api(controller)
 
 if __name__ == '__main__':
     Main()
