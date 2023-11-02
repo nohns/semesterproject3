@@ -6,9 +6,11 @@ from database.drinks import create_drink, delete_drink, get_drinks, pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
 
+from domain.drink import Drink
+
  #Call database class
 class Database:
-    connnection: sqlite3.Connection
+    connection: sqlite3.Connection
 
     def __init__(self):
         print("Database initialized")
@@ -32,14 +34,65 @@ class Database:
     """
                     )
         #create a table for containers
-        cursor.execute("")
-
+        cursor.execute(
+         """
+    CREATE TABLE IF NOT EXISTS FluidContainers 
+    (
+        container_id INTEGER PRIMARY KEY,
+        fluid_amount_in_cl INTEGER NOT NULL,
+        fluid_type_id INTEGER NOT NULL,
+        FOREIGN KEY (fluid_type_id) REFERENCES Fluids(id)
+    )
+    """
+                    )        
         #create a table for drinks
-        cursor.execute("")
+        cursor.execute(
+         """
+    CREATE TABLE IF NOT EXISTS Drinks 
+    (
+        id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL,
+        amount_in_cl INTEGER CHECK(amount_in_cl BETWEEN 0 AND 100) NOT NULL,
+        image_id INTEGER,
+        FOREIGN KEY (image_id) REFERENCES Images(id)
+    )
+    """
+                    )
         #create a table for fluids
-        cursor.execute("")
+        cursor.execute(
+         """
+    CREATE TABLE IF NOT EXISTS Fluids 
+    (
+        id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL
+    )
+    """
+                    )
         #create a table for images
-        cursor.execute("")
+        cursor.execute(
+         """
+    CREATE TABLE IF NOT EXISTS Images 
+    (
+        id INTEGER PRIMARY KEY,
+        path TEXT NOT NULL
+    )
+    """
+                    )
+        #create a table for ingredients
+        cursor.execute(
+         """
+    
+    CREATE TABLE IF NOT EXISTS Ingredients 
+    (
+        id INTEGER PRIMARY KEY,
+        amount_in_cl INTEGER NOT NULL,
+        fluid_id INTEGER NOT NULL,
+        drink_id INTEGER NOT NULL, 
+        FOREIGN KEY (fluid_id) REFERENCES Fluids(id)
+        FOREIGN KEY (drink_id) REFERENCES Drinks(id)
+    )
+    """
+                    )
 
         #Close the cursor again
         cursor.close()
@@ -72,8 +125,8 @@ class Database:
     def get_containers(self):
         return get_containers(self.connection)
     
-    def create_drink(self):
-        return create_drink(self.connection)
+    def create_drink(self, drink: Drink):
+        return create_drink(self.connection, drink)
     
     def delete_drink(self):
         return delete_drink(self.connection)
