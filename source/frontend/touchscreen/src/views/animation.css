@@ -24,8 +24,9 @@ body { background-color: #0e83cd }
   border: 10px solid #FFF;
   border-top: 0;
   border-radius: 0 0 30px 30px;
-  height: 250px;
-  left: 14px;
+  height: 255px;
+  /* left: 14px; */
+  left: 25px;
   bottom: 0;
   width: 200px;
 }
@@ -129,6 +130,9 @@ body { background-color: #0e83cd }
   bottom: 0px;
 }
 
+/*Create color variable as background*/
+
+
 .foam {
   float: left;
   position: absolute;
@@ -136,66 +140,74 @@ body { background-color: #0e83cd }
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background-color: #fefefe;
+  background-color: #FFF;
 }
 .foam-1 {
-  top: -30px;
+  top: -15px;
   left: -5px;
 }
 .foam-1-2 {
-  top: -28px;
+  top: -13px;
   left: 10px;
 }
 .foam-2 {
-  top: -32px;
+  top: -19px;
   left: 20px; 
 }
 .foam-2-3 {
-  top: -28px;
+  top: -19px;
   left: 35px; 
 }
 .foam-3 {
-  top: -24px;
+  top: -21px;
   left: 50px; 
 }
 .foam-3-4 {
-  top: -30px;
+  top: -17px;
   left: 65px; 
+  
 }
 .foam-4 {
-  top: -27px;
+  top: -21px;
   left: 80px; 
+  
 }
 .foam-4-5 {
-  top: -32px;
+  top: -19px;
   left: 95px; 
+  
 }
 .foam-5 {
-  top: -28px;
+  top: -15px;
   left: 110px; 
+  
 }
 .foam-5-6 {
-  top: -30px;
+  top: -13px;
   left: 125px; 
+  
 }
 .foam-6 {
-  top: -25px;
+  top: -15px;
   left: 140px; 
+  
 }
 .foam-6-7 {
-  top: -22px;
+  top: -19px;
   left: 150px; 
+  
 }
 .foam-7 {
-  top: -27px;
+  top: -21px;
   left: 160px;
+  
 }
 .foam-7-8 {
-  top: -23px;
-  left: 175px; 
+  top: -19px;
+  left: 165px; 
 }
 .foam-8 {
-  top: -27px;
+  top: -17px;
   left: 185px; 
 }
 /* Drunk Text */
