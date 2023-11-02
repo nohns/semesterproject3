@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setView(DrinkMachineState.Waiting);
-    }, 120000);
+    }, 1200000);
 
     return () => clearTimeout(timeout);
   }, [view, setView]);
@@ -55,7 +55,7 @@ function App() {
   };
 
   return (
-    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-[800px] w-[480px]   bg-gradient-to-t from-yellow-500 via-gray-700 to-gray-500 p-1.5">
+    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-[800px] w-[480px]   bg-gradient-to-t from-green-400 via-red-600 to-green-400 p-1.5">
       <div className="bg-gradient-to-t w-full h-full from-[#302E37] to bg-slate-800">
         {renderView()}
       </div>

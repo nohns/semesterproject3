@@ -62,6 +62,7 @@ function Selection({ setView }: SelectionProps): JSX.Element {
             SELECT DRINK
           </h1>
         </div>
+
         {drinksQuery.data?.drinks?.map((drink) => (
           <DrinkSelection
             key={drink.id}
@@ -70,6 +71,7 @@ function Selection({ setView }: SelectionProps): JSX.Element {
             setSelectedDrink={setSelectedDrink}
           />
         ))}
+
         <Button
           onClick={handleClick}
           className="mt-auto mb-8 p-8 bg-white"
