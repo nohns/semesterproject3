@@ -5,10 +5,6 @@ import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids from "@/api/endpoints/fluid/getFluids";
 import useGetImages from "@/api/endpoints/images/getImages";
 
-import MultiStep from "react-multistep";
-import Multistepform from "./multistepform/Multistepform";
-import useCreateDrink from "@/api/endpoints/drinks/createDrink";
-
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
   const images = useGetImages();
@@ -22,29 +18,6 @@ function Home(): JSX.Element {
   const fluids = useGetFluids();
 
   const drinks = useGetDrinks();
-
-  const createDrinks = useCreateDrink();
-
-  createDrinks.mutate({
-    imageId: 1,
-    name: "blå vand",
-    ingredients: [
-      {
-        id: 1,
-        amountInCl: 10,
-        fluid: {
-          id: 1,
-        },
-      },
-      {
-        id: 2,
-        amountInCl: 25,
-        fluid: {
-          id: 2,
-        },
-      },
-    ],
-  });
 
   const containers = useGetContainers();
 
@@ -67,14 +40,11 @@ function Home(): JSX.Element {
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
-      <div className="flex flex-col">
-        <Multistepform />
-        {images.data?.images?.map((image) => (
-          <div key={image.id}>
-            <img src={image.path} />
-          </div>
-        ))}
-      </div>
+      {images.data?.images?.map((image) => (
+        <div key={image.id}>
+          <img src={image.path} />
+        </div>
+      ))}
     </>
   );
 }
