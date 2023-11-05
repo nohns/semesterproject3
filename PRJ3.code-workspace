@@ -40,7 +40,9 @@
 			"cacheflush.h": "c",
 			"uaccess.h": "c",
 			"irq.h": "c",
-			"io.h": "c"
+			"io.h": "c",
+			"serial.h": "c",
+			"serial_core.h": "c"
 		},
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.black-formatter"
