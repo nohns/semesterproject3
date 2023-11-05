@@ -68,6 +68,7 @@ $(BUILD_DIR)/Makefile: Makefile
 # same directory as the source files, which is not very nice. So before building the module, we copy all the headers,
 # source files and the Makefile into a build directory (created if it doesn't exist). We then run make command from here.
 modules: $(BUILD_DIR) $(BUILD_DIR)/$(HEADERS) $(BUILD_DIR)/$(SOURCES) $(BUILD_DIR)/Makefile 
+	@echo "\n\nReally do be buildin' tho\n\n"
 	$(MAKE_CMD) $@
 
 # Pass target onto the kernel module Makefile
