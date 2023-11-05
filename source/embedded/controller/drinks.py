@@ -1,4 +1,5 @@
 from database.database import Database
+from domain.domain import Drink
 
 def create_drink(database: Database):
 
