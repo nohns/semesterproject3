@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Driver",
+            "name": "UART Driver",
             "includePath": [
                 "/home/stud/sources/rpi-5.4.83/include",
                 "/home/stud/sources/rpi-5.4.83/include/uapi",
