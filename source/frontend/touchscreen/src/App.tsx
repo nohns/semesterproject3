@@ -31,7 +31,6 @@ function App() {
 
   //will retry every 5 seconds
   const updater = useUpdate();
-  console.log("Updated?", updater.data);
 
   //We need to hold the state for the selected drink so we can pass it to multiple components
   const [selectedDrink, setSelectedDrink] = useState<Drink>();
