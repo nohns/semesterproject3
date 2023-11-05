@@ -26,14 +26,14 @@ def create_drink(controller: Controller):
  
 def delete_drink(id: int, controller: Controller):
     try:
-        delete_drink_from_database(drink)
+        controller.delete_drink(id)
         return jsonify({"message": "Fluid deleted succesfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
 def get_drinks(controller: Controller):
     try:
-        drinks = get_drinks_from_database()
+        drinks = controller.get_drinks()
         return jsonify(drinks), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
