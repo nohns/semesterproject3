@@ -6,7 +6,7 @@ from database.drinks import create_drink, delete_drink, get_drinks, pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
 
-from domain.drink import Drink
+from domain.domain import Drink, Fluid, Image, FluidContainer
 
  #Call database class
 class Database:
@@ -119,38 +119,39 @@ class Database:
         except sqlite3.Error as e:
             print("SQLite error:", e)
 
-    def change_containers(self, id: int):
-        return change_containers(id, self.connection)
+    def change_containers(self, container_id: int, fluid_type_id: int, fluid_amount: int):
+        return change_containers(self.connection, id)
     
-    def get_containers(self):
+    def get_containers(self)-> FluidContainer :
         return get_containers(self.connection)
     
-    def create_drink(self, drink: Drink):
+    def create_drink(self, drink: Drink) ->None:
         return create_drink(self.connection, drink)
     
-    def delete_drink(self):
+    def delete_drink(self, id: int)->None:
         return delete_drink(self.connection)
     
-    def get_drinks(self):
+    def get_drinks(self) -> list(Drink):
         return get_drinks(self.connection)
     
-    def pour_drink(self):
-        return pour_drink(self.connection)
+    def pour_drink(self, id: int)->None:
+        return pour_drink(self.connection, id)
     
-    def get_fluids(self):
+    def get_fluids(self) -> list(Fluid):
         return get_fluids(self.connection)
     
-    def create_fluid(self):
-        return create_fluid(self.connection)
+    def create_fluid(self, fluid: Fluid)->None:
+        return create_fluid(self.connection, fluid)
     
-    def delete_fluid(self):
-        return delete_fluid(self.connection)
+    def delete_fluid(self, id: int)->None:
+        return delete_fluid(self.connection, id)
     
-    def get_images(self):
+    def get_images(self) -> list(Image):
         return get_images(self.connection)
        
-    def update(self):
+    def update(self) ->bool:
         return update(self.connection)
 
+    #This function is just there for now I think it has some purpose
     def set_status_to_true(self):
         return set_status_to_true(self.connection)

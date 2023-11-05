@@ -1,14 +1,15 @@
 from database.database import Database
+from domain.domain import Drink
 
-def create_drink(database: Database):
+def create_drink(database: Database)->None:
     return 0
     
-def delete_drink(id: int, database: Database):
+def delete_drink(database: Database, id: int,)->None:
     return 0
     
-def get_drinks(database: Database):
+def get_drinks(database: Database) -> list(Drink) :
     return 0
     
-def pour_drink(database: Database):
+def pour_drink(database: Database)->None:
     return 0
     
