@@ -21,12 +21,14 @@ const getUpdate = async () => {
   return response.data;
 };
 
-const useGetDrinks = () => {
+const useUpdate = () => {
   const queryClient = useQueryClient();
 
   const query = useQuery({
     queryKey: ["getUpdate"],
     queryFn: () => getUpdate(),
+    retryDelay: 5000,
+    retry: true,
     onSuccess: () => {
       //TODO: Verify if this works
       queryClient.invalidateQueries(["getDrinks", "getFluids"]);
@@ -37,4 +39,4 @@ const useGetDrinks = () => {
   return query;
 };
 
-export default useGetDrinks;
+export default useUpdate;

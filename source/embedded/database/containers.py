@@ -1,6 +1,7 @@
 import sqlite3
+from domain.domain import FluidContainer
 
-def get_containers(connection: sqlite3.Connection):
+def get_containers(connection: sqlite3.Connection)-> list(FluidContainer):
     cursor = connection.cursor()
 
     try:
@@ -30,7 +31,7 @@ def get_containers(connection: sqlite3.Connection):
 
 
     
-def change_containers(connection: sqlite3.Connection, container_id: int, fluid_type_id: int, fluid_amount: int):
+def change_containers(connection: sqlite3.Connection, container_id: int, fluid_type_id: int, fluid_amount: int)->None:
     cursor = connection.cursor()
 
     try:

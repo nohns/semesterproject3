@@ -1,7 +1,7 @@
 import sqlite3
+from domain.domain import Fluid
 
-
-def create_fluid(connection: sqlite3.Connection, name: str):
+def create_fluid(connection: sqlite3.Connection, name: str)->None:
     cursor = connection.cursor()
 
     try:
@@ -26,7 +26,7 @@ def create_fluid(connection: sqlite3.Connection, name: str):
         cursor.close()
 
     
-def delete_fluid(connection: sqlite3.Connection, fluid_id: int):
+def delete_fluid(connection: sqlite3.Connection, fluid_id: int)->None:
     cursor = connection.cursor()
 
     try:
@@ -47,7 +47,7 @@ def delete_fluid(connection: sqlite3.Connection, fluid_id: int):
         cursor.close()  
 
     
-def get_fluids(connection: sqlite3.Connection):
+def get_fluids(connection: sqlite3.Connection)-> list(Fluid) :
     cursor = connection.cursor()
 
     try:

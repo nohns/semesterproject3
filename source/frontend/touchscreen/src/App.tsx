@@ -6,6 +6,8 @@ import Selection from "./views/Selection";
 import Pouring from "./views/Pouring";
 import { useEffect } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
+import useUpdate from "./api/endpoints/drinks/getUpdate";
+import { Drink } from "./api/endpoints/drinks/getDrinks";
 
 //Create typed enum for our 3 different states
 export enum DrinkMachineState {
@@ -27,6 +29,12 @@ function App() {
     return () => clearTimeout(timeout);
   }, [view, setView]);
 
+  //will retry every 5 seconds
+  const updater = useUpdate();
+
+  //We need to hold the state for the selected drink so we can pass it to multiple components
+  const [selectedDrink, setSelectedDrink] = useState<Drink>();
+
   const renderView = () => {
     return (
       <SwitchTransition>
@@ -42,7 +50,13 @@ function App() {
               case DrinkMachineState.Selection:
                 return <Selection setView={setView} />;
               case DrinkMachineState.Pouring:
-                return <Pouring setView={setView} />;
+                return (
+                  <Pouring
+                    setView={setView}
+                    selectedDrink={selectedDrink}
+                    setSelectedDrink={setSelectedDrink}
+                  />
+                );
               case DrinkMachineState.Waiting:
                 return <Waiting setView={setView} />;
               default:
