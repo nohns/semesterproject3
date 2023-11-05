@@ -11,6 +11,9 @@ interface WaitingProps {
 //This view must show an awaiting screen when the UI has been inactive for a few minutes.
 //It should have a taking up majority of the screen and a button at the bottum to toggle to home screen.
 function Waiting({ setView }: WaitingProps): JSX.Element {
+  let beat = new Audio("src/assets/jaja.mp3");
+  beat.volume = 0.1;
+
   return (
     <>
       <div className="flex flex-col  items-center h-full w-full bg-drink ">
