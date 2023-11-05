@@ -1,8 +1,6 @@
 from database.database import Database
 from domain.domain import Drink
 
-def create_drink(database: Database)->None:
-
 def create_drink(database: Database):
 
     return 0

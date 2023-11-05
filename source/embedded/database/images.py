@@ -1,7 +1,7 @@
 import sqlite3
 from domain.domain import Image
 
-def get_images(connection: sqlite3.Connection):
+def get_images(connection: sqlite3.Connection) -> list(Image):
     cursor = connection.cursor()
     
     try:

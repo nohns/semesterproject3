@@ -25,32 +25,8 @@ def create_fluid(connection: sqlite3.Connection, name: str)->None:
     finally:
         cursor.close()
 
-def create_fluid(connection: sqlite3.Connection, name: str):
-    cursor = connection.cursor()
-
-    try:
-        cursor.execute(
-            "INSERT INTO Fluids (name) VALUES (?)",
-            (name,)
-        )
-        
-        fluid_id = cursor.lastrowid
-        
-        
-        connection.commit()
-        
-        return fluid_id 
-
-    except sqlite3.Error as e:
-        print(f"SQLite error: {e}")
-        connection.rollback()  
-        return None  
-
-    finally:
-        cursor.close()
-
     
-def delete_fluid(connection: sqlite3.Connection, fluid_id: int):
+def delete_fluid(connection: sqlite3.Connection, fluid_id: int)->None:
     cursor = connection.cursor()
 
     try:
@@ -71,7 +47,7 @@ def delete_fluid(connection: sqlite3.Connection, fluid_id: int):
         cursor.close()  
 
     
-def get_fluids(connection: sqlite3.Connection):
+def get_fluids(connection: sqlite3.Connection)-> list(Fluid) :
     cursor = connection.cursor()
 
     try:

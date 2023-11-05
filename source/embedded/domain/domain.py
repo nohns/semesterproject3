@@ -1,7 +1,5 @@
 from dataclasses import dataclass
-import dataclasses
 from typing import Optional
-from types import SimpleNamespace
 
 import json
 
@@ -25,6 +23,13 @@ class Ingredient:
     id: Optional[int]
     amount_in_cl: int
     fluid: Fluid
+
+@dataclass
+class Statistics:
+    amount_poured: int
+    pour_duration: int
+    error: str
+    timestamp: str
 
 @dataclass
 class Image:

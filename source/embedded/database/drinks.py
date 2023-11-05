@@ -3,7 +3,7 @@ from domain.domain import Drink
 
 #Tvivler sgu på den her kommer til at virke
 #At dette virker vil kræve vi får ingredient information
-def create_drink(connection: sqlite3.Connection, drink: Drink):
+def create_drink(connection: sqlite3.Connection, drink: Drink)-> None:
     cursor = connection.cursor()
 
     try:
@@ -36,7 +36,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink):
     return drink_id 
 
     
-def delete_drink(connection: sqlite3.Connection, drink_id: int)-> None:
+def delete_drink(connection: sqlite3.Connection, drink_id: int)->None:
     cursor = connection.cursor()
 
     try:
@@ -54,7 +54,7 @@ def delete_drink(connection: sqlite3.Connection, drink_id: int)-> None:
 
 
     
-def get_drinks(connection: sqlite3.Connection)->list(Drink):
+def get_drinks(connection: sqlite3.Connection) -> list(Drink):
     cursor = connection.cursor()
 
     try:
@@ -64,6 +64,10 @@ def get_drinks(connection: sqlite3.Connection)->list(Drink):
             FROM Drinks LEFT JOIN Images ON Drinks.image_id = Images.id
         """)
         drinks_data = cursor.fetchall()
+
+        #create list of drinks class objects
+        
+
 
         drinks = []
         for drink_data in drinks_data:
@@ -99,6 +103,6 @@ def get_drinks(connection: sqlite3.Connection)->list(Drink):
         cursor.close()
 
     
-def pour_drink(connection: sqlite3.Connection):
+def pour_drink(connection: sqlite3.Connection)-> None:
     #TODO: Implement
     return 0
