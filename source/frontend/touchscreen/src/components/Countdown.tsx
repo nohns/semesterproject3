@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 
-interface CountdownProps {
-  ms: number;
-}
-function Countdown({ ms }: CountdownProps): JSX.Element {
-  const convertToSeconds = (ms: number) => {
-    return ms / 1000;
-  };
-
-  const [count, setCount] = useState(convertToSeconds(ms));
+function Countdown(): JSX.Element {
+  const [count, setCount] = useState(60);
 
   useEffect(() => {
     const interval = setInterval(() => {
