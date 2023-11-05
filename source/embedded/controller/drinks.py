@@ -3,9 +3,11 @@ from domain.domain import Drink
 
 def create_drink(database: Database)->None:
 
+def create_drink(database: Database):
+
     return 0
     
-def delete_drink(id: int, database: Database)->None:
+def delete_drink(id: int, database: Database):
     try:
         database.delete_drink(id)
         return 1
@@ -13,7 +15,7 @@ def delete_drink(id: int, database: Database)->None:
         print(f"error {e}, when trying to delete drink via controller")
         return None
     
-def get_drinks(database: Database)-> list(Drink):
+def get_drinks(database: Database):
     try:
         drinks=database.get_drinks()
         return drinks
