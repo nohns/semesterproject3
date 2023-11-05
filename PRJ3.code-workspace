@@ -11,7 +11,11 @@
 		{
 			"name": "Netlink driver prototype",
 			"path": "prototyping/rpi-netlink-module"
-		}
+		},
+    {
+      "name": "Flask Web server prototype",
+			"path": "prototyping/rpi-api"
+    }
 	],
 	"settings": {
 		"files.associations": {

@@ -1,16 +1,74 @@
 /** @format */
-import CocktailSvg from "./CocktailSvg";
-import { Card, CardTitle } from "./ui/card";
+import { Drink } from "@/api/endpoints/drinks/getDrinks";
+
+import { Card, CardFooter, CardTitle } from "./ui/card";
+import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 interface DrinkSelectionProps {
-  name: string;
+  drink: Drink;
+  selected: number;
+  setSelectedDrink: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 
-function DrinkSelection({ name }: DrinkSelectionProps): JSX.Element {
+function DrinkSelection({
+  drink,
+  selected,
+  setSelectedDrink,
+}: DrinkSelectionProps): JSX.Element {
+  const handleSelectDrink = () => {
+    setSelectedDrink(drink.id);
+  };
+
+  const indicatorHeight = `${drink.remainingFluid}%`;
+  console.log(indicatorHeight);
+
   return (
     <>
-      <Card>
-        <CardTitle title="hello" />
+      <Card
+        onClick={drink.remainingFluid <= 10 ? undefined : handleSelectDrink}
+        className={`flex flex-col w-80 h-60 m-3 bg-zinc-700 shadow-slate-800 shadow-2xl border-2 border-zinc-600 ${
+          selected === drink.id ? "bg-zinc-800 selectedCard" : ""
+        }`}
+        style={{
+          backgroundImage: `url(${drink.image.path})`,
+          backgroundPosition: "center",
+          backgroundSize: "auto 90%",
+          backgroundRepeat: "no-repeat",
+          position: "relative", // Add position relative to the card
+        }}
+      >
+        {drink.remainingFluid <= 10 && (
+          <div
+            className="absolute top-0 left-0 w-full h-full flex items-center text-9xl justify-center text-red-500  text-center"
+            style={{ pointerEvents: "none" }}
+          >
+            X
+          </div>
+        )}
+        <CardTitle className="text-white mx-auto pt-2">{drink.name}</CardTitle>
+
+        <div className="flex flex-row justify-between mx-1 ">
+          <div>
+            <div className="relative h-4">
+              <div
+                className="absolute bottom-0 left-0 w-full bg-blue-500"
+                style={{ height: indicatorHeight }}
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        {drink.remainingFluid <= 10 && (
+          <div className="h-8 rounded-b-xl mt-auto text-center text-lg bg-red-400 border-white">
+            Refill container with vodka
+          </div>
+        )}
+
+        {drink.remainingFluid > 10 && (
+          <div className="h-8 rounded-b-xl mt-auto text-center text-lg bg-green-400 border-white">
+            {drink.remainingFluid} % remaining
+          </div>
+        )}
       </Card>
     </>
   );

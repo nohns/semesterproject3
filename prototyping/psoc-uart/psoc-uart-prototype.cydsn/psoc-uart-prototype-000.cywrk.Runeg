@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="psoc-uart-prototype-000\psoc-uart-prototype\Source Files\main.c">
+<ExpandedNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\TopDesign</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Pins</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Analog</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Clocks</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Interrupts</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\DMA</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\System</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Directives</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Flash Security</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\EEPROM</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Header Files</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Header Files\cyapicallbacks.h</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Source Files</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Source Files\main.c</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\TopDesign</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Pins</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Analog</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Clocks</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Interrupts</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\DMA</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\System</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Directives</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\Flash Security</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.cydwr\EEPROM</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Header Files</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Header Files\cyapicallbacks.h</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Source Files</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Source Files\main.c</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\ADC_SAR_1</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\ADC_SAR_1_ExtVref</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\ADC_SAR_1_IRQ</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\ADC_SAR_1_theACLK</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\AMux_1</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cy_boot</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\isr_uart_rx</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\Pin_ADC_in_1</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\Pin_ADC_in_2</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\UART_1</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\UART_1_IntClock</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cycodeshareexport.ld</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cycodeshareimport.ld</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cycodeshareimport.scat</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cydevice.h</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cydevice_trm.h</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cydevicegnu.inc</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cydevicegnu_trm.inc</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\Generated_Source\PSoC5\cydeviceiar.inc</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\TopDesign</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\TopDesign</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_ExtVref.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_theACLK.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\AMux_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_ADC_in_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_ADC_in_2.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_BOOT.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_INT.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\psoc-uart-prototype.elf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\psoc-uart-prototype.hex</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\psoc-uart-prototype.map</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.gpdsc</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.rpt</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_ExtVref.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_theACLK.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\AMux_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_ADC_in_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_ADC_in_2.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_BOOT.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_INT.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\psoc-uart-prototype.elf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\psoc-uart-prototype.hex</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CortexM3\ARM_GCC_541\Debug\psoc-uart-prototype.map</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.gpdsc</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype.rpt</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\psoc-uart-prototype_timing.html</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\PSoC 5LP Architecture TRM</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CY8C58LP Family Datasheet</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\System Reference Guides</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\System Reference Guides\cy_boot_v5_50</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\ADC_SAR_v3_0.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\AMux_v1_80.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\cy_isr_v1_70.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\cy_pins_v2_20</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\UART_v2_50.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>psoc-uart-prototype-000</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\PSoC 5LP Architecture TRM</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\CY8C58LP Family Datasheet</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\System Reference Guides</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\System Reference Guides\cy_boot_v5_50</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\ADC_SAR_v3_0.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\AMux_v1_80.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\cy_isr_v1_70.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\cy_pins_v2_20</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>psoc-uart-prototype-000\psoc-uart-prototype\UART_v2_50.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\main.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1084, 556" SelectedTabbedMdiWindow="5d24d120-3e2a-4be4-b2af-317a912b612b"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3135dc3c-b690-43d3-926f-001b95cec47b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\prototyping\psoc-uart\psoc-uart-prototype.cydsn\main.c" Guid="5d24d120-3e2a-4be4-b2af-317a912b612b" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>
