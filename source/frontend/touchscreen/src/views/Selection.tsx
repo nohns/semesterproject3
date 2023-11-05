@@ -7,10 +7,12 @@ import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 
 import usePourDrink from "@/api/endpoints/drinks/pourDrink";
-import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
+import useGetDrinks, { Drink } from "@/api/endpoints/drinks/getDrinks";
 
 interface SelectionProps {
   setView: React.Dispatch<React.SetStateAction<DrinkMachineState>>;
+  selectedDrink: Drink | undefined;
+  setSelectedDrink: React.Dispatch<React.SetStateAction<Drink | undefined>>;
 }
 
 function Selection({ setView }: SelectionProps): JSX.Element {
