@@ -5,13 +5,29 @@ import "./animation.css";
 import Countdown from "@/components/Countdown";
 
 interface PouringProps {
-  drinkId: number;
+  /* drinkId: number; */
   setView: React.Dispatch<React.SetStateAction<DrinkMachineState>>;
+  selectedDrink: Drink | undefined;
+  setSelectedDrink: React.Dispatch<React.SetStateAction<Drink | undefined>>;
 }
 
-function Pouring({ drinkId, setView }: PouringProps): JSX.Element {
+function Pouring({
+  selectedDrink,
+  setSelectedDrink,
+}: PouringProps): JSX.Element {
+  //We need to perform some sort of calculation to determine how long the pour should take
+  //We can determine this based on the amount of ingredients in the drink
   const POUR_TIME = 60000;
 
+  /*   const pourTime = function (drink: Drink) {
+    let pourTime = 0;
+    drink.ingredients.forEach((ingredient) => {
+      pourTime += ingredient.pourTime;
+    });
+    return pourTime;
+  } */
+
+  //Timeout function which will change the view back to the selection screen
   useEffect(() => {
     //const pour = document.querySelector(".pour") as HTMLDivElement | null;
     const liquid = document.getElementById("liquid") as HTMLDivElement | null;

@@ -15,7 +15,11 @@ interface SelectionProps {
   setSelectedDrink: React.Dispatch<React.SetStateAction<Drink | undefined>>;
 }
 
-function Selection({ setView }: SelectionProps): JSX.Element {
+function Selection({
+  setView,
+  selectedDrink,
+  setSelectedDrink,
+}: SelectionProps): JSX.Element {
   const drinksQuery = useGetDrinks();
 
   if (drinksQuery.error) {
@@ -23,14 +27,14 @@ function Selection({ setView }: SelectionProps): JSX.Element {
   }
 
   //Create some state to manage which drink has been selected
-  const [selectedDrink, setSelectedDrink] = useState<number>();
+  //const [selectedDrink, setSelectedDrink] = useState<number>();
 
   const mutate = usePourDrink();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    mutate.mutate({ id: selectedDrink! });
+    mutate.mutate({ id: selectedDrink?.id! });
 
     setView(DrinkMachineState.Pouring);
   };
@@ -69,7 +73,7 @@ function Selection({ setView }: SelectionProps): JSX.Element {
           <DrinkSelection
             key={drink.id}
             drink={drink}
-            selected={selectedDrink!}
+            selectedDrink={selectedDrink!}
             setSelectedDrink={setSelectedDrink}
           />
         ))}

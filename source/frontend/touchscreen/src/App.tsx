@@ -48,7 +48,13 @@ function App() {
           {() => {
             switch (view) {
               case DrinkMachineState.Selection:
-                return <Selection setView={setView} />;
+                return (
+                  <Selection
+                    setView={setView}
+                    selectedDrink={selectedDrink}
+                    setSelectedDrink={setSelectedDrink}
+                  />
+                );
               case DrinkMachineState.Pouring:
                 return (
                   <Pouring
@@ -60,7 +66,13 @@ function App() {
               case DrinkMachineState.Waiting:
                 return <Waiting setView={setView} />;
               default:
-                return <Selection setView={setView} />;
+                return (
+                  <Selection
+                    setView={setView}
+                    selectedDrink={selectedDrink}
+                    setSelectedDrink={setSelectedDrink}
+                  />
+                );
             }
           }}
         </CSSTransition>
