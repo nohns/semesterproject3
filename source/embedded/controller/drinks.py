@@ -2,8 +2,13 @@ from database.database import Database
 from domain.domain import Drink
 
 
-def create_drink(database: Database) -> None:
-    return 0
+def create_drink(
+    database: Database, image_path: str, name: str, ingredients: list
+) -> int:
+    drink = Drink(
+        image=image_path, name=name, ingredients=ingredients, amount_in_cl=0, id=None
+    )
+    return database.create_drink(drink)
 
 
 def delete_drink(id: int, database: Database) -> None:
