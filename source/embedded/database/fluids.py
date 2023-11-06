@@ -2,11 +2,11 @@ import sqlite3
 from domain.domain import Fluid
 
 
-def create_fluid(connection: sqlite3.Connection, name: str) -> None:
+def create_fluid(connection: sqlite3.Connection, fluid: Fluid) -> None:
     cursor = connection.cursor()
 
     try:
-        cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (name,))
+        cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid.name,))
 
         fluid_id = cursor.lastrowid
 

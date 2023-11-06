@@ -128,7 +128,7 @@ class Database:
     def get_containers(self) -> FluidContainer:
         return get_containers(self.connection)
 
-    def create_drink(self, drink: Drink) -> None:
+    def create_drink(self, drink: Drink) -> int:
         return create_drink(self.connection, drink)
 
     def delete_drink(self, id: int) -> None:
@@ -143,7 +143,7 @@ class Database:
     def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.connection)
 
-    def create_fluid(self, fluid: Fluid) -> None:
+    def create_fluid(self, fluid: Fluid) -> int:
         return create_fluid(self.connection, fluid)
 
     def delete_fluid(self, id: int) -> None:
