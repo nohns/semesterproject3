@@ -7,6 +7,7 @@ import useGetImages from "@/api/endpoints/images/getImages";
 
 import MultiStep from "react-multistep";
 import Multistepform from "./multistepform/Multistepform";
+import useCreateDrink from "@/api/endpoints/drinks/createDrink";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
@@ -21,6 +22,29 @@ function Home(): JSX.Element {
   const fluids = useGetFluids();
 
   const drinks = useGetDrinks();
+
+  const createDrinks = useCreateDrink();
+
+  createDrinks.mutate({
+    imageId: 1,
+    name: "blå vand",
+    ingredients: [
+      {
+        id: 1,
+        amountInCl: 10,
+        fluid: {
+          id: 1,
+        },
+      },
+      {
+        id: 2,
+        amountInCl: 25,
+        fluid: {
+          id: 2,
+        },
+      },
+    ],
+  });
 
   const containers = useGetContainers();
 

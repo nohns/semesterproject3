@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { http } from "@/api/axios";
 
-interface Ingredient {
+export interface Ingredient {
   id: number;
   fluid: Fluid;
   amountInCl: number;
@@ -14,19 +14,19 @@ interface Ingredient {
 interface CreateDrinkRequest {
   imageId: number;
   name: string;
-  Ingredient: Ingredient[];
+  ingredients: Ingredient[];
 }
 export interface CreateDrinkResponse {}
 
 const createDrink = async ({
   imageId,
   name,
-  Ingredient,
+  ingredients,
 }: CreateDrinkRequest) => {
   const response = await http.post<CreateDrinkResponse>(`v1/drinks`, {
     imageId,
     name,
-    Ingredient,
+    ingredients,
   });
 
   if (response.status !== 200) {

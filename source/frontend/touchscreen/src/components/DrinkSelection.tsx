@@ -1,33 +1,39 @@
 /** @format */
 import { Drink } from "@/api/endpoints/drinks/getDrinks";
 
-import { Card, CardFooter, CardTitle } from "./ui/card";
-import { BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { Card, CardTitle } from "./ui/card";
 
 interface DrinkSelectionProps {
   drink: Drink;
-  selected: number;
-  setSelectedDrink: React.Dispatch<React.SetStateAction<number | undefined>>;
+  selectedDrink: Drink | undefined;
+  setSelectedDrink: React.Dispatch<React.SetStateAction<Drink | undefined>>;
 }
 
 function DrinkSelection({
   drink,
-  selected,
+  selectedDrink,
   setSelectedDrink,
 }: DrinkSelectionProps): JSX.Element {
   const handleSelectDrink = () => {
-    setSelectedDrink(drink.id);
+    setSelectedDrink(drink);
+    beat2.play();
   };
 
   const indicatorHeight = `${drink.remainingFluid}%`;
   console.log(indicatorHeight);
+
+  let beat = new Audio("src/assets/noselect.mp3");
+  beat.volume = 0.1;
+
+  let beat2 = new Audio("src/assets/jaja.mp3");
+  beat2.volume = 0.1;
 
   return (
     <>
       <Card
         onClick={drink.remainingFluid <= 10 ? undefined : handleSelectDrink}
         className={`flex flex-col w-80 h-60 m-3 bg-zinc-700 shadow-slate-800 shadow-2xl border-2 border-zinc-600 ${
-          selected === drink.id ? "bg-zinc-800 selectedCard" : ""
+          selectedDrink === drink ? "bg-zinc-800 selectedCard" : ""
         }`}
         style={{
           backgroundImage: `url(${drink.image.path})`,
@@ -40,7 +46,8 @@ function DrinkSelection({
         {drink.remainingFluid <= 10 && (
           <div
             className="absolute top-0 left-0 w-full h-full flex items-center text-9xl justify-center text-red-500  text-center"
-            style={{ pointerEvents: "none" }}
+            /*  style={{ pointerEvents: "none" }} */
+            onClick={() => beat.play()}
           >
             X
           </div>

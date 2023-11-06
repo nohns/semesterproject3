@@ -3,14 +3,39 @@ import { DrinkMachineState } from "@/App";
 import { useState, useEffect } from "react";
 import "./animation.css";
 import Countdown from "@/components/Countdown";
+import { Drink } from "@/api/endpoints/drinks/getDrinks";
 
 interface PouringProps {
-  drinkId: number;
+  /* drinkId: number; */
   setView: React.Dispatch<React.SetStateAction<DrinkMachineState>>;
+  selectedDrink: Drink | undefined;
+  setSelectedDrink: React.Dispatch<React.SetStateAction<Drink | undefined>>;
 }
 
-function Pouring({ drinkId, setView }: PouringProps): JSX.Element {
+function Pouring({
+  selectedDrink,
+  setSelectedDrink,
+}: PouringProps): JSX.Element {
+  //We need to perform some sort of calculation to determine how long the pour should take
+  //We can determine this based on the amount of ingredients in the drink
   const POUR_TIME = 60000;
+
+  /*   const pourTime = function (drink: Drink) {
+    let pourTime = 0;
+    drink.ingredients.forEach((ingredient) => {
+      pourTime += ingredient.pourTime;
+    });
+    return pourTime;
+  } */
+
+  //Timeout function which will change the view back to the selection screen
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSelectedDrink(undefined);
+    }, POUR_TIME + 500);
+
+    return () => clearTimeout(timeout);
+  }, [selectedDrink, setSelectedDrink]);
 
   useEffect(() => {
     //const pour = document.querySelector(".pour") as HTMLDivElement | null;
@@ -39,11 +64,11 @@ function Pouring({ drinkId, setView }: PouringProps): JSX.Element {
           POURING DRINK
         </h1>
         <h2 className="scroll-m-20 text-white text-3xl font-semibold tracking-tight lg:text-5xl mb-4">
-          Blå vand
+          {selectedDrink?.name}
         </h2>
         <div className=" w-[70%]    h-[70%] flex flex-col rounded-xl mt-auto mb-10">
           <div className="h-60 mx-auto my-auto">
-            <Countdown />
+            <Countdown ms={POUR_TIME} />
           </div>
           <div id="container" className="">
             <div
@@ -105,8 +130,8 @@ function Pouring({ drinkId, setView }: PouringProps): JSX.Element {
               </div>
             </div>
           </div>
-          <div className=" absolute bottom-1.5  w-[21rem] h-16 rounded-t-3xl  bg-white border  border-zinc-600   flex flex-col justify-center">
-            <div className="text-center text-black font-semibold text-xl ">
+          <div className=" absolute bottom-1.5  w-[21rem] h-16 rounded-t-3xl  border-zinc-600   flex flex-col justify-center">
+            <div className="text-center text-white font-semibold text-xl ">
               Dispensing {20} cl
             </div>
           </div>

@@ -31,6 +31,7 @@ function App() {
 
   //will retry every 5 seconds
   const updater = useUpdate();
+  console.log("Updated?", updater.data);
 
   //We need to hold the state for the selected drink so we can pass it to multiple components
   const [selectedDrink, setSelectedDrink] = useState<Drink>();
@@ -48,7 +49,13 @@ function App() {
           {() => {
             switch (view) {
               case DrinkMachineState.Selection:
-                return <Selection setView={setView} />;
+                return (
+                  <Selection
+                    setView={setView}
+                    selectedDrink={selectedDrink}
+                    setSelectedDrink={setSelectedDrink}
+                  />
+                );
               case DrinkMachineState.Pouring:
                 return (
                   <Pouring
@@ -60,7 +67,13 @@ function App() {
               case DrinkMachineState.Waiting:
                 return <Waiting setView={setView} />;
               default:
-                return <Selection setView={setView} />;
+                return (
+                  <Selection
+                    setView={setView}
+                    selectedDrink={selectedDrink}
+                    setSelectedDrink={setSelectedDrink}
+                  />
+                );
             }
           }}
         </CSSTransition>
