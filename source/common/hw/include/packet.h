@@ -12,7 +12,7 @@
  */
 enum dmc_packet_type
 {
-  DMC_PACKET_OUT_OF_ORDER            = 0b10000000,
+  DMC_PACKET_OUT_OF_ORDER = 0b10000000,
   DMC_PACKET_CONTAINER_WEIGHT_UPDATE = 0b10010010,
 };
 
@@ -49,9 +49,9 @@ struct dmc_packet *dmc_packet_init(enum dmc_packet_type type)
 #else
   packet = (struct dmc_packet *)malloc(sizeof(struct dmc_packet));
 #endif
-  packet->type     = type;
+  packet->type = type;
   packet->data_len = 0;
-  packet->data     = NULL;
+  packet->data = NULL;
 
   // Allocate packet data if needed
   if (data_bytes > 0)
@@ -96,7 +96,7 @@ unsigned char dmc_packet_complete(struct dmc_packet *packet)
  * @returns 0 if successful, 1 if payload is already at capacity.
  */
 unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
-                                     unsigned char      data)
+                                     unsigned char data)
 {
   unsigned char data_bytes = packet->type & 0b00001111;
   if (data_bytes == packet->data_len)
