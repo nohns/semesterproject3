@@ -1,24 +1,26 @@
 import sqlite3
 from domain.domain import FluidContainer
 
-def get_containers(connection: sqlite3.Connection)-> list(FluidContainer):
+
+def get_containers(connection: sqlite3.Connection) -> list[FluidContainer]:
     cursor = connection.cursor()
 
     try:
-        cursor.execute("""
+        cursor.execute(
+            """
             SELECT FluidContainers.container_id, FluidContainers.fluid_amount_in_cl, 
                    Fluids.name as fluid_name
             FROM FluidContainers
             LEFT JOIN Fluids ON FluidContainers.fluid_type_id = Fluids.id
-        """)
+        """
+        )
         containers_data = cursor.fetchall()
 
         # Format the data into a list of dictionaries
-        containers = [{
-            "container_id": c_id,
-            "fluid_amount_in_cl": f_amount,
-            "fluid_name": f_name
-        } for (c_id, f_amount, f_name) in containers_data]
+        containers = [
+            {"container_id": c_id, "fluid_amount_in_cl": f_amount, "fluid_name": f_name}
+            for (c_id, f_amount, f_name) in containers_data
+        ]
 
         return containers
 
@@ -30,16 +32,23 @@ def get_containers(connection: sqlite3.Connection)-> list(FluidContainer):
         cursor.close()
 
 
-    
-def change_containers(connection: sqlite3.Connection, container_id: int, fluid_type_id: int, fluid_amount: int)->None:
+def change_containers(
+    connection: sqlite3.Connection,
+    container_id: int,
+    fluid_type_id: int,
+    fluid_amount: int,
+) -> None:
     cursor = connection.cursor()
 
     try:
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE FluidContainers 
             SET fluid_type_id = ?, fluid_amount_in_cl = ? 
             WHERE container_id = ?
-        """, (fluid_type_id, fluid_amount, container_id))
+        """,
+            (fluid_type_id, fluid_amount, container_id),
+        )
 
         connection.commit()
 
