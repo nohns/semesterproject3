@@ -6,6 +6,8 @@ import Selection from "./views/Selection";
 import Pouring from "./views/Pouring";
 import { useEffect } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
+import useUpdate from "./api/endpoints/drinks/getUpdate";
+import { Drink } from "./api/endpoints/drinks/getDrinks";
 
 //Create typed enum for our 3 different states
 export enum DrinkMachineState {
@@ -22,10 +24,16 @@ function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setView(DrinkMachineState.Waiting);
-    }, 120000);
+    }, 1200000);
 
     return () => clearTimeout(timeout);
   }, [view, setView]);
+
+  //will retry every 5 seconds
+  const updater = useUpdate();
+
+  //We need to hold the state for the selected drink so we can pass it to multiple components
+  const [selectedDrink, setSelectedDrink] = useState<Drink>();
 
   const renderView = () => {
     return (
@@ -42,7 +50,13 @@ function App() {
               case DrinkMachineState.Selection:
                 return <Selection setView={setView} />;
               case DrinkMachineState.Pouring:
-                return <Pouring setView={setView} />;
+                return (
+                  <Pouring
+                    setView={setView}
+                    selectedDrink={selectedDrink}
+                    setSelectedDrink={setSelectedDrink}
+                  />
+                );
               case DrinkMachineState.Waiting:
                 return <Waiting setView={setView} />;
               default:
@@ -55,7 +69,7 @@ function App() {
   };
 
   return (
-    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-[800px] w-[480px]   bg-gradient-to-t from-yellow-500 via-gray-700 to-gray-500 p-1.5">
+    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-[800px] w-[480px]   bg-gradient-to-t from-green-400 via-red-600 to-green-400 p-1.5">
       <div className="bg-gradient-to-t w-full h-full from-[#302E37] to bg-slate-800">
         {renderView()}
       </div>

@@ -1,4 +1,8 @@
+from dataclasses import dataclass
+
+
 # Domain classes
+@dataclass
 class Fluid:
     def __init__(self, name: str):
         self.name = name
@@ -8,6 +12,7 @@ class Fluid:
     name: str
 
 
+@dataclass
 class Ingredient:
     def __init__(self, fluid: Fluid, amount_in_cl: int):
         self.fluid = fluid
@@ -19,6 +24,7 @@ class Ingredient:
     fluid: Fluid
 
 
+@dataclass
 class Statistics:
     amount_poured: int
     pour_duration: int
@@ -26,6 +32,7 @@ class Statistics:
     timestamp: str
 
 
+@dataclass
 class Image:
     def __init__(self, path: str):
         self.path = path
@@ -35,6 +42,7 @@ class Image:
     path: str
 
 
+@dataclass
 class Drink:
     def __init__(
         self, name: str, amount_in_cl: int, image: Image, ingredients: list[Ingredient]
@@ -52,6 +60,7 @@ class Drink:
     ingredients: list[Ingredient]
 
 
+@dataclass
 class FluidContainer:
     def __init__(self, fluid_amount_in_cl: int, fluid_type: Fluid):
         self.fluid_amount_in_cl = fluid_amount_in_cl

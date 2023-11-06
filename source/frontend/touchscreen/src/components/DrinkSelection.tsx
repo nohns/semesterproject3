@@ -26,7 +26,7 @@ function DrinkSelection({
     <>
       <Card
         onClick={drink.remainingFluid <= 10 ? undefined : handleSelectDrink}
-        className={`flex flex-col w-80 h-60 m-3 bg-zinc-700 shadow-slate-800 shadow-2xl ${
+        className={`flex flex-col w-80 h-60 m-3 bg-zinc-700 shadow-slate-800 shadow-2xl border-2 border-zinc-600 ${
           selected === drink.id ? "bg-zinc-800 selectedCard" : ""
         }`}
         style={{
@@ -57,9 +57,18 @@ function DrinkSelection({
             </div>
           </div>
         </div>
-        <div className="h-8 rounded-b-xl mt-auto text-center bg-zinc-600 border-white">
-          {drink.remainingFluid} % remaining
-        </div>
+
+        {drink.remainingFluid <= 10 && (
+          <div className="h-8 rounded-b-xl mt-auto text-center text-lg bg-red-400 border-white">
+            Refill container with vodka
+          </div>
+        )}
+
+        {drink.remainingFluid > 10 && (
+          <div className="h-8 rounded-b-xl mt-auto text-center text-lg bg-green-400 border-white">
+            {drink.remainingFluid} % remaining
+          </div>
+        )}
       </Card>
     </>
   );

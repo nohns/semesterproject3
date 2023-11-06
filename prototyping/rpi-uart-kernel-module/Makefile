@@ -2,18 +2,18 @@
 #### Kernel module compilation configuration ####
 #################################################
 
-obj-m := rpi-netlink.o
+obj-m := rpi-uart.o
 ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Werror
 
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-#KERNELDIR ?= ~/sources/rpi-5.4.83
+KERNELDIR ?= ~/sources/rpi-5.4.83
 KERNELDIR ?= ~/sources/linux-6.2.0
 CURR_DIR := $(shell pwd)
 BUILD_DIR := $(CURR_DIR)/build
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-#CROSS_COMPILE := arm-poky-linux-gnueabi-
+CROSS_COMPILE := arm-poky-linux-gnueabi-
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-#ARCH ?= arm
+ARCH ?= arm
 HEADERS := $(obj-m:.o=.h)
 SOURCES := $(obj-m:.o=.c)
 

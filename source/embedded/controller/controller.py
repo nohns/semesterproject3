@@ -22,35 +22,36 @@ class Controller:
         self.database = database
         self.netlink_publisher = netlink_publisher
 
-    def change_containers(self, id: int, fluid_type: str, fluid_amount_in_cl: int):
-        return change_containers(id, self.database)
+    # Probaly need to add more parameters to this
+    def change_containers(self, id: int):
+        return change_containers(self.database, id)
 
-    def get_containers(self):
+    def get_containers(self) -> list(FluidContainer):
         return get_containers(self.database)
 
-    def create_drink(self):
+    def create_drink(self) -> None:
         return create_drink(self.database)
 
-    def delete_drink(self, id: int):
-        return delete_drink(id, self.database)
+    def delete_drink(self) -> None:
+        return delete_drink(self.database)
 
-    def get_drinks(self):
+    def get_drinks(self) -> list(Drink):
         return get_drinks(self.database)
 
-    def pour_drink(self):
+    def pour_drink(self) -> None:
         return pour_drink(self.database)
 
-    def get_fluids(self):
+    def get_fluids(self) -> list(Fluid):
         return get_fluids(self.database)
 
-    def create_fluid(self, fluid: Fluid):
+    def create_fluid(self) -> None:
         return create_fluid(self.database)
 
-    def delete_fluid(self, id: int):
+    def delete_fluid(self) -> None:
         return delete_fluid(self.database)
 
-    def get_images(self):
+    def get_images(self) -> list(Image):
         return get_images(self.database)
 
-    def update(self):
+    def update(self) -> bool:
         return update(self.database)
