@@ -5,8 +5,11 @@ import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids from "@/api/endpoints/fluid/getFluids";
 import useGetImages from "@/api/endpoints/images/getImages";
 
-import MultiStep from "react-multistep";
-import Multistepform from "./multistepform/Multistepform";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ShowFluid from "./fluid/ShowFluid";
+import ShowDrink from "./drink/ShowDrink";
+import ShowImage from "./image/ShowImage";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
@@ -44,13 +47,19 @@ function Home(): JSX.Element {
   return (
     <>
       <div className="flex flex-col">
-        <Multistepform />
-        {images.data?.images?.map((image) => (
-          <div key={image.id}>
-            <img src={image.path} />
-          </div>
-        ))}
+        <Header />
+        {/* <div className="flex-row flex"> */}
+        <ShowFluid fluids={fluids.data?.fluids!} />
+        <ShowDrink drinks={drinks.data?.drinks!} />
+        <ShowImage images={images.data?.images!} />
+        {/*   {images.data?.images?.map((image) => (
+            <div className="flex flex-row" key={image.id}>
+              <img src={image.path} />
+            </div>
+          ))} */}
       </div>
+      {/* </div> */}
+      <Footer />
     </>
   );
 }
