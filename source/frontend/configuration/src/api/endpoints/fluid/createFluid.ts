@@ -35,8 +35,12 @@ const useCreateFluid = () => {
   return useMutation({
     mutationKey: ["createFluid"],
     mutationFn: (request: CreateFluidRequest) => createFluid(request),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       queryClient.invalidateQueries(["getFluids"]);
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
 };

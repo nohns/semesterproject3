@@ -22,7 +22,7 @@ import useCreateDrink, {
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
-  const images = useGetImages();
+  //const images = useGetImages();
   //I kan kalde flere ting på dem de eneste som rigtigt er relevante er isLoading, isError og data
   //Altså om den er igang med at loade dataen stadig, om der er sket en fejl og så selve dataen
 
@@ -30,27 +30,27 @@ function Home(): JSX.Element {
   //Når man har et array så bruger man en funktion som hedder map til at loope henover dataen så kan man nemlig få flere ting til at render
   //Se neget i JSX'en
 
-  const fluids = useGetFluids();
+  //const fluids = useGetFluids();
 
-  const drinks = useGetDrinks();
+  //const drinks = useGetDrinks();
 
-  const containers = useGetContainers();
+  //const containers = useGetContainers();
 
   //Her tjekker vi altså for om dataen er loadet ind endnu, hvis den ikke er så viser vi bare en loading besked
-  if (
+  /*   if (
     images.isLoading ||
     fluids.isLoading ||
     drinks.isLoading ||
     containers.isLoading
   ) {
     return <div>Loading...</div>;
-  }
+  } */
 
-  //Hvis i åbner browseren og trykker inspect så kan i åbne developer tooling hvor i kan finde consollen browseren der logger jeg dataen ud
+  /*   //Hvis i åbner browseren og trykker inspect så kan i åbne developer tooling hvor i kan finde consollen browseren der logger jeg dataen ud
   console.log(images.data?.images);
   console.log(fluids.data?.fluids);
   console.log(drinks.data?.drinks);
-  console.log(containers.data?.containers);
+  console.log(containers.data?.containers); */
 
   //Mutation functions er til at lave POST, PUT, DELETE requests
   //De fungerer lidt anderledes ved at de først kører når man kalder .mutate på dem hvorimod query funktionerne vil køre lige med det samme
@@ -94,12 +94,12 @@ function Home(): JSX.Element {
       <div className="flex flex-col">
         <Header />
         {/* <div className="flex-row flex"> */}
-        <ShowFluid fluids={fluids.data?.fluids!} />
+        {/* <ShowFluid fluids={fluids.data?.fluids!} /> */}
         <CreateFluidButton createFluid={handleFluidClick} />
 
-        <ShowDrink drinks={drinks.data?.drinks!} />
+        {/* <ShowDrink drinks={drinks.data?.drinks!} /> */}
         <CreateDrinkButton createDrink={handleDrinkClick} />
-        <ShowImage images={images.data?.images!} />
+        {/* <ShowImage images={images.data?.images!} /> */}
         {/*   {images.data?.images?.map((image) => (
             <div className="flex flex-row" key={image.id}>
               <img src={image.path} />

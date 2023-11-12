@@ -13,8 +13,8 @@ export interface Ingredient {
 
 export interface CreateDrinkRequest {
   imageId: number;
-  name: string;
   ingredients: Ingredient[];
+  name: string;
 }
 export interface CreateDrinkResponse {}
 
@@ -43,8 +43,12 @@ const useCreateDrink = () => {
   return useMutation({
     mutationKey: ["createDrink"],
     mutationFn: (request: CreateDrinkRequest) => createDrink(request),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       queryClient.invalidateQueries(["getDrinks"]);
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
 };
