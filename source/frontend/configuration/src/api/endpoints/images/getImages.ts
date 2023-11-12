@@ -12,7 +12,7 @@ if (ENV.MOCKED) {
 
 export interface Image {
   id: number;
-  path: string;
+  path?: string;
 }
 
 interface GetImagesRequest {}

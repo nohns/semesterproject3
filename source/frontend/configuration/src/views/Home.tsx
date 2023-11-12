@@ -3,7 +3,7 @@
 import useGetContainers from "@/api/endpoints/container/getContainers";
 import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
-import useGetImages from "@/api/endpoints/images/getImages";
+import useGetImages, { Image } from "@/api/endpoints/images/getImages";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -79,9 +79,13 @@ function Home(): JSX.Element {
       amountInCl: 10,
     };
 
+    const newImage: Image = {
+      id: 1,
+    };
+
     const newDrink: CreateDrinkRequest = {
       name: "new drink",
-      imageId: 1,
+      image: newImage,
       ingredients: [newIngredient, newIngredient],
     };
 
