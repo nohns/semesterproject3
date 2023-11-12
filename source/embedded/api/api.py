@@ -1,5 +1,6 @@
 from controller.controller import Controller
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, request
+from flask_cors import CORS
 
 
 
@@ -23,11 +24,27 @@ class Api:
         self.controller = controller
         self.app = Flask(__name__)
 
+        
+
+       # Add CORS with custom settings
+        CORS(self.app, origins=["http://localhost:5173"],
+             allow_headers=["Content-Type", "Origin"],
+             methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"])
+        
+
         #Register the routes
         self.register_routes()
 
+        # Handle OPTIONS requests
+        self.app.before_request(self.handle_options_request)
+
         #Start running the flask application
         self.app.run(self.host, self.port)
+
+    def handle_options_request(self):
+        if request.method == "OPTIONS":
+            response = self.app.make_default_options_response()
+            return response
 
     def register_routes(self):
         #Routes for containers

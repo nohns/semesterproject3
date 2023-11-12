@@ -5,7 +5,6 @@ from domain.domain import Drink
 #At dette virker vil kræve vi får ingredient information
 def create_drink(connection: sqlite3.Connection, drink: Drink)-> None:
     cursor = connection.cursor()
-
     try:
         # Don't know if this should be here, trying to calculate the amount of fluid in the drink from the ingredients
         drink.amount_in_cl = sum(ingredient.amount_in_cl for ingredient in drink.Ingredients)
@@ -17,8 +16,9 @@ def create_drink(connection: sqlite3.Connection, drink: Drink)-> None:
         )
         drink_id = cursor.lastrowid
 
+
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
-        for ingredient in drink.Ingredients:
+        for ingredient in drink.ingredients:
             cursor.execute(
                 "INSERT INTO Ingredients (id, amount_in_cl, fluid_id, drink_id) VALUES (?, ?, ?, ?)",
                 (ingredient.id, ingredient.amount_in_cl, ingredient.fluid.id, drink_id)
