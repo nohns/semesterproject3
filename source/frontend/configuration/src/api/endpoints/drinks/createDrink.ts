@@ -4,6 +4,7 @@ import { Fluid } from "../fluid/getFluids";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { http } from "@/api/axios";
+import { Image } from "../images/getImages";
 
 export interface Ingredient {
   id?: number;
@@ -12,19 +13,19 @@ export interface Ingredient {
 }
 
 export interface CreateDrinkRequest {
-  imageId: number;
+  image: Image;
   ingredients: Ingredient[];
   name: string;
 }
 export interface CreateDrinkResponse {}
 
 const createDrink = async ({
-  imageId,
+  image,
   name,
   ingredients,
 }: CreateDrinkRequest) => {
   const response = await http.post<CreateDrinkResponse>(`v1/drinks`, {
-    imageId,
+    image,
     name,
     ingredients,
   });
