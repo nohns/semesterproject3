@@ -15,4 +15,4 @@ def change_containers(database: Database, id: int)->None:
         return None
     except Exception as e:
         print(f"error {e}, when trying to change containers via controller")
-        return None
+        raise Exception("fix the issue",e)
