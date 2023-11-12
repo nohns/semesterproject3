@@ -7,7 +7,9 @@ def create_drink(database: Database, drink: Drink)->None:
         return drink_id
     except Exception as e:
         print(f"error {e}, when trying to create drink via controller")
-        return None
+
+        raise Exception("Something went to shit fix this error mesg if you find it")
+        
     
 def delete_drink(id: int, database: Database)->None:
     try:
