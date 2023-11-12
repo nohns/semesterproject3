@@ -4,36 +4,74 @@ from domain.domain import Drink
 #Tvivler sgu på den her kommer til at virke
 #At dette virker vil kræve vi får ingredient information
 def create_drink(connection: sqlite3.Connection, drink: Drink)-> None:
+    
+
+    """   id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        ingredients_ids TEXT,
+        image_id INTEGER,
+        FOREIGN KEY (image_id) REFERENCES Images(id)
+    
+
+     id INTEGER PRIMARY KEY AUTOINCREMENT,
+        amount_in_cl INTEGER NOT NULL,
+        fluid_id INTEGER NOT NULL, """
+    
     cursor = connection.cursor()
+
+
     try:
-        # Don't know if this should be here, trying to calculate the amount of fluid in the drink from the ingredients
-        drink.amount_in_cl = sum(ingredient.amount_in_cl for ingredient in drink.Ingredients)
+        print("Trying to do the thing")
 
-        # Insert into Drinks table using the existing image_id since we can't directly insert the image object
-        cursor.execute(
-            "INSERT INTO Drinks (name, amount_in_cl, image_id) VALUES (?, ?, ?)",
-            (drink.name, drink.amount_in_cl, drink.image.id)
-        )
-        drink_id = cursor.lastrowid
+        #Create array to hold the result
+        ingredient_array = []
+        print("Printing drink object: ", drink)
 
 
+
+        #append the ingredients to the array
+        for ingredient in drink.ingredients:
+            ingredient_array.append(ingredient["fluid"]["id"])
+        print("Printing ingredient array: ", ingredient_array)
+        #convert the array to a string seperated by commas
+        result_string = ','.join(map(str, ingredient_array))
+        print(result_string)
+
+        
+
+        print(drink.ingredients[0])
+        print(drink.ingredients[0]["fluid"])
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
         for ingredient in drink.ingredients:
+            #I need to create a text string seperated by commas which is an array of the ingredients ids
             cursor.execute(
-                "INSERT INTO Ingredients (id, amount_in_cl, fluid_id, drink_id) VALUES (?, ?, ?, ?)",
-                (ingredient.id, ingredient.amount_in_cl, ingredient.fluid.id, drink_id)
+                "INSERT INTO Ingredients (amount_in_cl, fluid_id) VALUES (?, ?)",
+                (ingredient["amountInCl"], ingredient["fluid"]["id"])
             )
+        print("Added ingredients")
+        
+           # Insert into Drinks table using the existing image_id since we can't directly insert the image object
+        print(drink.name)
+        print(drink.image["id"])
+        cursor.execute(
+            "INSERT INTO Drinks (name, ingredients_ids, image_id) VALUES (?, ?, ?)",
+            (drink.name, result_string, drink.image["id"])
+        
+        )
+        print("Added drink")
 
         connection.commit()
+        print("Committed")
+        
 
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
         connection.rollback()
-
+        raise Exception("An error occurred while creating the drink.", e)
+        
     finally:
         cursor.close()
 
-    return drink_id 
 
     
 def delete_drink(connection: sqlite3.Connection, drink_id: int)->None:

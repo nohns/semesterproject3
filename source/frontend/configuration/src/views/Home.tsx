@@ -71,6 +71,7 @@ function Home(): JSX.Element {
   const handleDrinkClick = () => {
     console.log("I clicked the drinks button");
     const newFluid: Fluid = {
+      id: 1,
       name: "new fluid",
     };
 

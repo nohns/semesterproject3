@@ -13,11 +13,11 @@ def get_fluids(database: Database)->list[Fluid]:
     
 def create_fluid(database: Database, name: str)->None:
     try:
-        fluid_id=database.create_fluid(name)
-        return fluid_id
+        database.create_fluid(name)
+        
     except Exception as e:
         print(f"error {e}, when trying to create fluid via controller")
-        raise Exception("fix the issue",e)
+        raise Exception("Unable to create fluid", e)
     
 def delete_fluid(database: Database, id: int)->None:
     try:

@@ -3,8 +3,8 @@ from domain.domain import Drink
 
 def create_drink(database: Database, drink: Drink)->None:
     try:
-        drink_id=database.create_drink(drink)
-        return drink_id
+        database.create_drink(drink)
+        
     except Exception as e:
         print(f"error {e}, when trying to create drink via controller")
 
