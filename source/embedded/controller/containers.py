@@ -2,7 +2,17 @@ from database.database import Database
 from domain.domain import FluidContainer
 
 def get_containers(database: Database)-> list[FluidContainer]:
-    return 0
+    try:
+        containers=database.get_containers()
+        return containers
+    except Exception as e:
+        print(f"error {e}, when trying to get containers from database to controller")
+        return None
     
 def change_containers(database: Database, id: int)->None:
-    return 0
+    try:
+        #database.change_containers(id)
+        return None
+    except Exception as e:
+        print(f"error {e}, when trying to change containers via controller")
+        return None

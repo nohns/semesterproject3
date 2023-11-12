@@ -26,4 +26,8 @@ def get_drinks(controller: Controller):
         return jsonify({"error": str(e)}), 500
     
 def pour_drink(controller: Controller):
-    return jsonify({"Hello": "World"})
+    try:
+        controller.pour_drink()
+        return jsonify({"message": "drink poured succesfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
