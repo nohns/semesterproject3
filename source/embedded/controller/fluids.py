@@ -2,7 +2,7 @@ from database.database import Database
 from domain.domain import Fluid
 
 
-def get_fluids(database: Database)->list(Fluid):
+def get_fluids(database: Database)->list[Fluid]:
     try:
         fluids=database.get_fluids()
         return fluids
@@ -20,4 +20,4 @@ def create_fluid(database: Database, name: str)->None:
         return None
     
 def delete_fluid(database: Database, id: int)->None:
-        return delete_fluid(self.database, id)
+        return delete_fluid(database, id)
