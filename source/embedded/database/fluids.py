@@ -9,18 +9,13 @@ def create_fluid(connection: sqlite3.Connection, name: str)->None:
             "INSERT INTO Fluids (name) VALUES (?)",
             (name,)
         )
-        
-        fluid_id = cursor.lastrowid
-        
-        
+                
         connection.commit()
         
-        return fluid_id 
-
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")
-        connection.rollback()  
-        return None  
+        connection.rollback()
+        raise Exception("An error occurred while creating the fluid.", e)    
 
     finally:
         cursor.close()

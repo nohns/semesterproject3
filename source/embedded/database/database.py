@@ -38,7 +38,7 @@ class Database:
          """
     CREATE TABLE IF NOT EXISTS FluidContainers 
     (
-        container_id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         fluid_amount_in_cl INTEGER NOT NULL,
         fluid_type_id INTEGER NOT NULL,
         FOREIGN KEY (fluid_type_id) REFERENCES Fluids(id)
@@ -50,9 +50,9 @@ class Database:
          """
     CREATE TABLE IF NOT EXISTS Drinks 
     (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        amount_in_cl INTEGER CHECK(amount_in_cl BETWEEN 0 AND 100) NOT NULL,
+        ingredients_ids TEXT,
         image_id INTEGER,
         FOREIGN KEY (image_id) REFERENCES Images(id)
     )
@@ -63,7 +63,7 @@ class Database:
          """
     CREATE TABLE IF NOT EXISTS Fluids 
     (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL
     )
     """
@@ -73,7 +73,7 @@ class Database:
          """
     CREATE TABLE IF NOT EXISTS Images 
     (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         path TEXT NOT NULL
     )
     """
@@ -84,15 +84,16 @@ class Database:
     
     CREATE TABLE IF NOT EXISTS Ingredients 
     (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         amount_in_cl INTEGER NOT NULL,
         fluid_id INTEGER NOT NULL,
-        drink_id INTEGER NOT NULL, 
         FOREIGN KEY (fluid_id) REFERENCES Fluids(id)
-        FOREIGN KEY (drink_id) REFERENCES Drinks(id)
     )
     """
                     )
+  
+        
+        
 
         #Close the cursor again
         cursor.close()
@@ -155,3 +156,15 @@ class Database:
     #This function is just there for now I think it has some purpose
     def set_status_to_true(self):
         return set_status_to_true(self.connection)
+    
+
+
+"""   CREATE TABLE IF NOT EXISTS Ingredients 
+    (
+        id INTEGER PRIMARY KEY,
+        amount_in_cl INTEGER NOT NULL,
+        fluid_id INTEGER NOT NULL,
+        drink_id INTEGER NOT NULL, 
+        FOREIGN KEY (fluid_id) REFERENCES Fluids(id)
+        FOREIGN KEY (drink_id) REFERENCES Drinks(id)
+    ) """

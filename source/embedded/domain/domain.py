@@ -27,7 +27,7 @@ class Fluid:
 @dataclass
 class Ingredient:
     id: Optional[int]
-    amount_in_cl: int
+    amountInCl: int
     fluid: Fluid
 
 @dataclass
