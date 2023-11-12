@@ -6,12 +6,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { http } from "@/api/axios";
 
 export interface Ingredient {
-  id: number;
+  id?: number;
   fluid: Fluid;
   amountInCl: number;
 }
 
-interface CreateDrinkRequest {
+export interface CreateDrinkRequest {
   imageId: number;
   name: string;
   ingredients: Ingredient[];
