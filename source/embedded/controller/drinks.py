@@ -1,9 +1,13 @@
 from database.database import Database
 from domain.domain import Drink
 
-def create_drink(database: Database)->None:
-
-    return 0
+def create_drink(database: Database, drink: Drink)->None:
+    try:
+        drink_id=database.create_drink(drink)
+        return drink_id
+    except Exception as e:
+        print(f"error {e}, when trying to create drink via controller")
+        return None
     
 def delete_drink(id: int, database: Database)->None:
     try:
