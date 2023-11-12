@@ -7,4 +7,4 @@ def get_images(database: Database) -> list[Image] :
         return images
     except Exception as e:
         print(f"error {e}, when trying to get images from database to controller")
-        return None
+        raise Exception("fix the issue",e)

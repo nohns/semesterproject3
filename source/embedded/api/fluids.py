@@ -21,7 +21,7 @@ def create_fluid(controller: Controller):
     
 def delete_fluid(id: int, controller: Controller):
     try:
-        controller.delete_fluid(fluid_id)
+        controller.delete_fluid(id)
         return jsonify({"message": "Fluid deleted succesfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
