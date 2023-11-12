@@ -10,7 +10,7 @@ if (ENV.MOCKED) {
   await import("./createFluid.mock.ts");
 }
 
-interface CreateFluidRequest {
+export interface CreateFluidRequest {
   name: string;
 }
 

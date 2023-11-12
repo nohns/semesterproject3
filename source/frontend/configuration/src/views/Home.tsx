@@ -2,7 +2,7 @@
 
 import useGetContainers from "@/api/endpoints/container/getContainers";
 import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
-import useGetFluids from "@/api/endpoints/fluid/getFluids";
+import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
 import useGetImages from "@/api/endpoints/images/getImages";
 
 import Header from "@/components/Header";
@@ -10,6 +10,15 @@ import Footer from "@/components/Footer";
 import ShowFluid from "./fluid/ShowFluid";
 import ShowDrink from "./drink/ShowDrink";
 import ShowImage from "./image/ShowImage";
+import CreateDrinkButton from "./drink/CreateDrinkButton";
+import CreateFluidButton from "./fluid/CreateFluidButton";
+import useCreateFluid, {
+  CreateFluidRequest,
+} from "@/api/endpoints/fluid/createFluid";
+import useCreateDrink, {
+  CreateDrinkRequest,
+  Ingredient,
+} from "@/api/endpoints/drinks/createDrink";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
@@ -43,6 +52,42 @@ function Home(): JSX.Element {
   console.log(drinks.data?.drinks);
   console.log(containers.data?.containers);
 
+  //Mutation functions er til at lave POST, PUT, DELETE requests
+  //De fungerer lidt anderledes ved at de først kører når man kalder .mutate på dem hvorimod query funktionerne vil køre lige med det samme
+  const fluidMutate = useCreateFluid();
+
+  const drinkMutate = useCreateDrink();
+
+  //her laver vi to onClick funktioner som kommer til at kalde de to mutation functions
+  const handleFluidClick = () => {
+    console.log("I clicked the fluids button");
+    const newFluid: CreateFluidRequest = {
+      name: "new fluid",
+    };
+
+    fluidMutate.mutate(newFluid);
+  };
+
+  const handleDrinkClick = () => {
+    console.log("I clicked the drinks button");
+    const newFluid: Fluid = {
+      name: "new fluid",
+    };
+
+    const newIngredient: Ingredient = {
+      fluid: newFluid,
+      amountInCl: 10,
+    };
+
+    const newDrink: CreateDrinkRequest = {
+      name: "new drink",
+      imageId: 1,
+      ingredients: [newIngredient, newIngredient],
+    };
+
+    drinkMutate.mutate(newDrink);
+  };
+
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
@@ -50,7 +95,10 @@ function Home(): JSX.Element {
         <Header />
         {/* <div className="flex-row flex"> */}
         <ShowFluid fluids={fluids.data?.fluids!} />
+        <CreateFluidButton createFluid={handleFluidClick} />
+
         <ShowDrink drinks={drinks.data?.drinks!} />
+        <CreateDrinkButton createDrink={handleDrinkClick} />
         <ShowImage images={images.data?.images!} />
         {/*   {images.data?.images?.map((image) => (
             <div className="flex flex-row" key={image.id}>
