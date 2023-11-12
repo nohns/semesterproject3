@@ -47,7 +47,7 @@ def delete_fluid(connection: sqlite3.Connection, fluid_id: int)->None:
         cursor.close()  
 
     
-def get_fluids(connection: sqlite3.Connection)-> list(Fluid) :
+def get_fluids(connection: sqlite3.Connection)-> list[Fluid] :
     cursor = connection.cursor()
 
     try:

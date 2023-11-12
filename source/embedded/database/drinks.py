@@ -54,7 +54,7 @@ def delete_drink(connection: sqlite3.Connection, drink_id: int)->None:
 
 
     
-def get_drinks(connection: sqlite3.Connection) -> list(Drink):
+def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
     cursor = connection.cursor()
 
     try:
