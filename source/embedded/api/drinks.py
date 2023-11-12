@@ -4,8 +4,10 @@ from domain.domain import Drink
 from domain.domain import json_to_dataclass
 
 def create_drink(controller: Controller):
+    print(f"Create_drink", request.get_json())
     try:
         data = json_to_dataclass(request.get_json(), Drink)
+        print("Recieved the following data: ",data)
         controller.create_drink(data)
         return jsonify({"message": "Drink created successfully"}), 200
     except Exception as e:
