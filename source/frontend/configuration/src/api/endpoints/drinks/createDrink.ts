@@ -6,15 +6,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { http } from "@/api/axios";
 
 export interface Ingredient {
-  id: number;
+  id?: number;
   fluid: Fluid;
   amountInCl: number;
 }
 
-interface CreateDrinkRequest {
+export interface CreateDrinkRequest {
   imageId: number;
-  name: string;
   ingredients: Ingredient[];
+  name: string;
 }
 export interface CreateDrinkResponse {}
 
@@ -43,8 +43,12 @@ const useCreateDrink = () => {
   return useMutation({
     mutationKey: ["createDrink"],
     mutationFn: (request: CreateDrinkRequest) => createDrink(request),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       queryClient.invalidateQueries(["getDrinks"]);
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
 };
