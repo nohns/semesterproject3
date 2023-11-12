@@ -28,8 +28,8 @@ class Controller:
     def get_containers(self) ->list(FluidContainer) :
         return get_containers(self.database)
     
-    def create_drink(self)->None:
-        return create_drink(self.database)
+    def create_drink(self, Drink: Drink)->None:
+        return create_drink(self.database, drink)
     
     def delete_drink(self)->None:
         return delete_drink(self.database)
@@ -43,17 +43,19 @@ class Controller:
     def get_fluids(self)->list(Fluid):
         return get_fluids(self.database)
     
-    def create_fluid(self)->None:
-        return create_fluid(self.database)
+    def create_fluid(self, name: str)->None:
+        return create_fluid(self.database, fluid)
     
-    def delete_fluid(self)->None:
-        return delete_fluid(self.database)
+    def delete_fluid(self, id: int)->None:
+        return delete_fluid(self.database, id)
     
     def get_images(self)->list(Image):
         return get_images(self.database)
 
     def update(self)->bool:
         return update(self.database)
+    
+
     
 
 
