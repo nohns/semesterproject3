@@ -8,7 +8,7 @@ def get_fluids(database: Database)->list[Fluid]:
         return fluids
     except Exception as e:
         print(f"error {e}, when trying to get fluids via controller")
-        return None
+        raise Exception("fix the issue",e)
        
     
 def create_fluid(database: Database, name: str)->None:
@@ -17,7 +17,7 @@ def create_fluid(database: Database, name: str)->None:
         return fluid_id
     except Exception as e:
         print(f"error {e}, when trying to create fluid via controller")
-        return None
+        raise Exception("fix the issue",e)
     
 def delete_fluid(database: Database, id: int)->None:
     try:
@@ -25,4 +25,4 @@ def delete_fluid(database: Database, id: int)->None:
         return None
     except Exception as e:
         print(f"error {e}, when trying to delete fluid via controller")
-        return None
+        raise Exception("fix the issue",e)

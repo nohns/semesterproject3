@@ -17,7 +17,7 @@ def delete_drink(id: int, database: Database)->None:
         return 1
     except Exception as e:
         print(f"error {e}, when trying to delete drink via controller")
-        return None
+        raise Exception("fix the issue",e)
     
 def get_drinks(database: Database)-> list[Drink]:
     try:
@@ -25,7 +25,7 @@ def get_drinks(database: Database)-> list[Drink]:
         return drinks
     except Exception as e:
       print(f"error {e}, when requesting drinks from database to controller")
-      return None
+      raise Exception("fix the issue",e)
     
 def pour_drink(database: Database):
     try:
@@ -33,6 +33,6 @@ def pour_drink(database: Database):
         return None
     except Exception as e:
       print(f"error {e}, when trying to pour drink via controller")
-      return None
+      raise Exception("fix the issue",e)
 
     
