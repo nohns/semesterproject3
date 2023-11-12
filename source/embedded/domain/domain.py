@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import Optional
+import dataclasses
 
 import json
 
@@ -75,10 +76,16 @@ json_data = '''{
 }'''
 
 # Parse the JSON data into a data class instance
-drink = json_to_dataclass(json.loads(json_data), Drink)
+#drink = json_to_dataclass(json.loads(json_data), Drink)
 
 # Printing the Drink object
-print(drink)
+""" print(drink.id)
+print(drink.image)
+print(drink.ingredients)
+print(drink.name)
+
+print(drink) """
+
 
 """ @dataclass
 class Statistics:
