@@ -20,4 +20,9 @@ def create_fluid(database: Database, name: str)->None:
         return None
     
 def delete_fluid(database: Database, id: int)->None:
-        return delete_fluid(database, id)
+    try:
+        database.delete_fluid(id)
+        return None
+    except Exception as e:
+        print(f"error {e}, when trying to delete fluid via controller")
+        return None

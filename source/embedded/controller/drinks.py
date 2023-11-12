@@ -26,6 +26,11 @@ def get_drinks(database: Database)-> list[Drink]:
       return None
     
 def pour_drink(database: Database):
+    try:
+        database.pour_drink()
+        return None
+    except Exception as e:
+      print(f"error {e}, when trying to pour drink via controller")
+      return None
 
-    return 0
     
