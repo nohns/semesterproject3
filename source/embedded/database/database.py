@@ -122,7 +122,7 @@ class Database:
     def change_containers(self, container_id: int, fluid_type_id: int, fluid_amount: int):
         return change_containers(self.connection, id)
     
-    def get_containers(self)-> FluidContainer :
+    def get_containers(self)-> list[FluidContainer] :
         return get_containers(self.connection)
     
     def create_drink(self, drink: Drink) ->None:
@@ -131,13 +131,13 @@ class Database:
     def delete_drink(self, id: int)->None:
         return delete_drink(self.connection)
     
-    def get_drinks(self) -> list(Drink):
+    def get_drinks(self) -> list[Drink]:
         return get_drinks(self.connection)
     
     def pour_drink(self, id: int)->None:
         return pour_drink(self.connection, id)
     
-    def get_fluids(self) -> list(Fluid):
+    def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.connection)
     
     def create_fluid(self, fluid: Fluid)->None:
@@ -146,7 +146,7 @@ class Database:
     def delete_fluid(self, id: int)->None:
         return delete_fluid(self.connection, id)
     
-    def get_images(self) -> list(Image):
+    def get_images(self) -> list[Image]:
         return get_images(self.connection)
        
     def update(self) ->bool:

@@ -1,7 +1,7 @@
 import sqlite3
 from domain.domain import FluidContainer
 
-def get_containers(connection: sqlite3.Connection)-> list(FluidContainer):
+def get_containers(connection: sqlite3.Connection)-> list[FluidContainer]:
     cursor = connection.cursor()
 
     try:
