@@ -1,38 +1,46 @@
 from dataclasses import dataclass
+from typing import Optional
+import dataclasses
 
+import json
 
+# Define a function to convert a JSON object to a data class instance
+def json_to_dataclass(json_data, dataclass_type):
+    try:
+        # Get the dataclass fields and their default values
+        defaults = {f.name: f.default for f in dataclass_type.__dataclass_fields__.values() if f.default is not dataclasses._MISSING_TYPE}
+        # Update the defaults with the actual json data
+        defaults.update(json_data)
+        # Create the dataclass instance
+        return dataclass_type(**defaults)
+    except Exception as e:
+        print(e)
+        raise ValueError(f"Error converting JSON to dataclass: {str(e)}")
+        
 
 # Domain classes
 @dataclass
 class Fluid:
     id: int
-    name: str
+    name: Optional[str]
 
 @dataclass
 class Ingredient:
-    id: int
-    amount_in_cl: int
+    id: Optional[int]
+    amountInCl: int
     fluid: Fluid
-
-@dataclass
-class Statistics:
-    amount_poured: int
-    pour_duration: int
-    error: str
-    timestamp: str
 
 @dataclass
 class Image:
     id: int
-    path: str
+    path: Optional[str]
 
 @dataclass
 class Drink:
-    id: int
+    id: Optional[int]
     name: str
-    amount_in_cl: int #0-100
     image: Image
-    Ingredients: list[Ingredient]
+    ingredients: list[Ingredient]
 
 @dataclass
 class FluidContainer:
@@ -41,8 +49,45 @@ class FluidContainer:
     fluid_type: Fluid
 
 
+json_data = '''{
+    "image": {
+        "id": 1,
+        "path": "https://i.imgur.com/5qkN7eN.png"
+    },
+    "name": "blå vand",
+    "ingredients": [
+      {
+        "id": 1,
+        "amountInCl": 10,
+        "fluid": {
+          "id": 1
+        }
+      },
+      {
+        "id": 2,
+        "amountInCl": 25,
+        "fluid": {
+          "id": 2
+        }
+      }
+    ]
+}'''
+
+# Parse the JSON data into a data class instance
+#drink = json_to_dataclass(json.loads(json_data), Drink)
+
+# Printing the Drink object
+""" print(drink.id)
+print(drink.image)
+print(drink.ingredients)
+print(drink.name)
+
+print(drink) """
 
 
-
-
-
+""" @dataclass
+class Statistics:
+    amount_poured: int
+    pour_duration: int
+    error: str
+    timestamp: str """

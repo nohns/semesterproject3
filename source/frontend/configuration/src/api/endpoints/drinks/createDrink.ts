@@ -4,29 +4,30 @@ import { Fluid } from "../fluid/getFluids";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { http } from "@/api/axios";
+import { Image } from "../images/getImages";
 
-interface Ingredient {
-  id: number;
+export interface Ingredient {
+  id?: number;
   fluid: Fluid;
   amountInCl: number;
 }
 
-interface CreateDrinkRequest {
-  imageId: number;
+export interface CreateDrinkRequest {
+  image: Image;
+  ingredients: Ingredient[];
   name: string;
-  Ingredient: Ingredient[];
 }
 export interface CreateDrinkResponse {}
 
 const createDrink = async ({
-  imageId,
+  image,
   name,
-  Ingredient,
+  ingredients,
 }: CreateDrinkRequest) => {
   const response = await http.post<CreateDrinkResponse>(`v1/drinks`, {
-    imageId,
+    image,
     name,
-    Ingredient,
+    ingredients,
   });
 
   if (response.status !== 200) {
@@ -43,8 +44,12 @@ const useCreateDrink = () => {
   return useMutation({
     mutationKey: ["createDrink"],
     mutationFn: (request: CreateDrinkRequest) => createDrink(request),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
       queryClient.invalidateQueries(["getDrinks"]);
+    },
+    onError: (error) => {
+      console.log(error);
     },
   });
 };
