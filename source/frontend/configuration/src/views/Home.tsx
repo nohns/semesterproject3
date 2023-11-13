@@ -60,18 +60,17 @@ function Home(): JSX.Element {
     <>
       <div className="flex flex-col">
         <Header />
-        <div className="text-white text-3xl ">
-          <div className="my-4">
-            Billeder med containers - Mængde af væske i beholder - Navn af væske
-            i beholder{" "}
+        <div className="flex flex-col">
+          <div className="flex flex-row justify-center ">
+            <div className="bg-red-500 p-40 py-52">Billede af container</div>
+            <div className="bg-red-300 p-40 py-52">Billede af container</div>
+            <div className="bg-red-700 p-40 py-52">Billede af container</div>
           </div>
-          <div className="my-4">
-            Knap til at ændre hvilke drinks man kan vælge
+          <div className="bg-green-500 mt-10 py-20">
+            Possible drink possibilities
           </div>
-
-          <div className="my-4">
-            Vise hvilke drinks man kan vælge imellem og hvilke væsker de består
-            af
+          <div className="bg-yellow-300 mt-10 w-32 mx-auto">
+            Configure drink
           </div>
         </div>
       </div>
