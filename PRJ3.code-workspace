@@ -12,10 +12,14 @@
 			"name": "Netlink driver prototype",
 			"path": "prototyping/rpi-netlink-module"
 		},
-    {
-      "name": "Flask Web server prototype",
+		{
+			"name": "Flask Web server prototype",
 			"path": "prototyping/rpi-api"
-    }
+		},
+		{
+			"name": "Linux driver",
+			"path": "source/driver"
+		}
 	],
 	"settings": {
 		"files.associations": {
@@ -42,7 +46,9 @@
 			"irq.h": "c",
 			"io.h": "c",
 			"serial.h": "c",
-			"serial_core.h": "c"
+			"serial_core.h": "c",
+			"uart.h": "c",
+			"wait.h": "c"
 		},
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.black-formatter"
