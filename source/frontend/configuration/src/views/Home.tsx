@@ -54,65 +54,27 @@ function Home(): JSX.Element {
 
   //Mutation functions er til at lave POST, PUT, DELETE requests
   //De fungerer lidt anderledes ved at de først kører når man kalder .mutate på dem hvorimod query funktionerne vil køre lige med det samme
-  const fluidMutate = useCreateFluid();
-
-  const drinkMutate = useCreateDrink();
-
-  //her laver vi to onClick funktioner som kommer til at kalde de to mutation functions
-  const handleFluidClick = () => {
-    console.log("I clicked the fluids button");
-    const newFluid: CreateFluidRequest = {
-      name: "new fluid",
-    };
-
-    fluidMutate.mutate(newFluid);
-  };
-
-  const handleDrinkClick = () => {
-    console.log("I clicked the drinks button");
-    const newFluid: Fluid = {
-      id: 1,
-      name: "new fluid",
-    };
-
-    const newIngredient: Ingredient = {
-      fluid: newFluid,
-      amountInCl: 10,
-    };
-
-    const newImage: Image = {
-      id: 1,
-    };
-
-    const newDrink: CreateDrinkRequest = {
-      name: "new drink",
-      image: newImage,
-      ingredients: [newIngredient, newIngredient],
-    };
-
-    drinkMutate.mutate(newDrink);
-  };
 
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
       <div className="flex flex-col">
         <Header />
-        {/* <div className="flex-row flex"> */}
-        {/* <ShowFluid fluids={fluids.data?.fluids!} /> */}
-        <CreateFluidButton createFluid={handleFluidClick} />
+        <div className="text-white text-3xl ">
+          <div className="my-4">
+            Billeder med containers - Mængde af væske i beholder - Navn af væske
+            i beholder{" "}
+          </div>
+          <div className="my-4">
+            Knap til at ændre hvilke drinks man kan vælge
+          </div>
 
-        {/* <ShowDrink drinks={drinks.data?.drinks!} /> */}
-        <CreateDrinkButton createDrink={handleDrinkClick} />
-        {/* <ShowImage images={images.data?.images!} /> */}
-        {/*   {images.data?.images?.map((image) => (
-            <div className="flex flex-row" key={image.id}>
-              <img src={image.path} />
-            </div>
-          ))} */}
+          <div className="my-4">
+            Vise hvilke drinks man kan vælge imellem og hvilke væsker de består
+            af
+          </div>
+        </div>
       </div>
-      {/* </div> */}
-      <Footer />
     </>
   );
 }
