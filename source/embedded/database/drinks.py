@@ -3,23 +3,8 @@ from domain.domain import Drink
 
 #Tvivler sgu på den her kommer til at virke
 #At dette virker vil kræve vi får ingredient information
-def create_drink(connection: sqlite3.Connection, drink: Drink)-> None:
-    
-
-    """   id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        ingredients_ids TEXT,
-        image_id INTEGER,
-        FOREIGN KEY (image_id) REFERENCES Images(id)
-    
-
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-        amount_in_cl INTEGER NOT NULL,
-        fluid_id INTEGER NOT NULL, """
-    
+def create_drink(connection: sqlite3.Connection, drink: Drink)-> None:    
     cursor = connection.cursor()
-
-
     try:
         print("Trying to do the thing")
 
@@ -27,20 +12,17 @@ def create_drink(connection: sqlite3.Connection, drink: Drink)-> None:
         ingredient_array = []
         print("Printing drink object: ", drink)
 
-
-
         #append the ingredients to the array
         for ingredient in drink.ingredients:
             ingredient_array.append(ingredient["fluid"]["id"])
+
         print("Printing ingredient array: ", ingredient_array)
         #convert the array to a string seperated by commas
         result_string = ','.join(map(str, ingredient_array))
         print(result_string)
 
         
-
-        print(drink.ingredients[0])
-        print(drink.ingredients[0]["fluid"])
+ 
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
         for ingredient in drink.ingredients:
             #I need to create a text string seperated by commas which is an array of the ingredients ids
