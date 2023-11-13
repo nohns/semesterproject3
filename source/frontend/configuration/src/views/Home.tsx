@@ -2,15 +2,27 @@
 
 import useGetContainers from "@/api/endpoints/container/getContainers";
 import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
-import useGetFluids from "@/api/endpoints/fluid/getFluids";
-import useGetImages from "@/api/endpoints/images/getImages";
+import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
+import useGetImages, { Image } from "@/api/endpoints/images/getImages";
 
-import MultiStep from "react-multistep";
-import Multistepform from "./multistepform/Multistepform";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ShowFluid from "./fluid/ShowFluid";
+import ShowDrink from "./drink/ShowDrink";
+import ShowImage from "./image/ShowImage";
+import CreateDrinkButton from "./drink/CreateDrinkButton";
+import CreateFluidButton from "./fluid/CreateFluidButton";
+import useCreateFluid, {
+  CreateFluidRequest,
+} from "@/api/endpoints/fluid/createFluid";
+import useCreateDrink, {
+  CreateDrinkRequest,
+  Ingredient,
+} from "@/api/endpoints/drinks/createDrink";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
-  const images = useGetImages();
+  //const images = useGetImages();
   //I kan kalde flere ting på dem de eneste som rigtigt er relevante er isLoading, isError og data
   //Altså om den er igang med at loade dataen stadig, om der er sket en fejl og så selve dataen
 
@@ -18,39 +30,89 @@ function Home(): JSX.Element {
   //Når man har et array så bruger man en funktion som hedder map til at loope henover dataen så kan man nemlig få flere ting til at render
   //Se neget i JSX'en
 
-  const fluids = useGetFluids();
+  //const fluids = useGetFluids();
 
-  const drinks = useGetDrinks();
+  //const drinks = useGetDrinks();
 
-  const containers = useGetContainers();
+  //const containers = useGetContainers();
 
   //Her tjekker vi altså for om dataen er loadet ind endnu, hvis den ikke er så viser vi bare en loading besked
-  if (
+  /*   if (
     images.isLoading ||
     fluids.isLoading ||
     drinks.isLoading ||
     containers.isLoading
   ) {
     return <div>Loading...</div>;
-  }
+  } */
 
-  //Hvis i åbner browseren og trykker inspect så kan i åbne developer tooling hvor i kan finde consollen browseren der logger jeg dataen ud
+  /*   //Hvis i åbner browseren og trykker inspect så kan i åbne developer tooling hvor i kan finde consollen browseren der logger jeg dataen ud
   console.log(images.data?.images);
   console.log(fluids.data?.fluids);
   console.log(drinks.data?.drinks);
-  console.log(containers.data?.containers);
+  console.log(containers.data?.containers); */
+
+  //Mutation functions er til at lave POST, PUT, DELETE requests
+  //De fungerer lidt anderledes ved at de først kører når man kalder .mutate på dem hvorimod query funktionerne vil køre lige med det samme
+  const fluidMutate = useCreateFluid();
+
+  const drinkMutate = useCreateDrink();
+
+  //her laver vi to onClick funktioner som kommer til at kalde de to mutation functions
+  const handleFluidClick = () => {
+    console.log("I clicked the fluids button");
+    const newFluid: CreateFluidRequest = {
+      name: "new fluid",
+    };
+
+    fluidMutate.mutate(newFluid);
+  };
+
+  const handleDrinkClick = () => {
+    console.log("I clicked the drinks button");
+    const newFluid: Fluid = {
+      id: 1,
+      name: "new fluid",
+    };
+
+    const newIngredient: Ingredient = {
+      fluid: newFluid,
+      amountInCl: 10,
+    };
+
+    const newImage: Image = {
+      id: 1,
+    };
+
+    const newDrink: CreateDrinkRequest = {
+      name: "new drink",
+      image: newImage,
+      ingredients: [newIngredient, newIngredient],
+    };
+
+    drinkMutate.mutate(newDrink);
+  };
 
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
       <div className="flex flex-col">
-        <Multistepform />
-        {images.data?.images?.map((image) => (
-          <div key={image.id}>
-            <img src={image.path} />
-          </div>
-        ))}
+        <Header />
+        {/* <div className="flex-row flex"> */}
+        {/* <ShowFluid fluids={fluids.data?.fluids!} /> */}
+        <CreateFluidButton createFluid={handleFluidClick} />
+
+        {/* <ShowDrink drinks={drinks.data?.drinks!} /> */}
+        <CreateDrinkButton createDrink={handleDrinkClick} />
+        {/* <ShowImage images={images.data?.images!} /> */}
+        {/*   {images.data?.images?.map((image) => (
+            <div className="flex flex-row" key={image.id}>
+              <img src={image.path} />
+            </div>
+          ))} */}
       </div>
+      {/* </div> */}
+      <Footer />
     </>
   );
 }

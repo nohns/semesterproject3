@@ -11,7 +11,7 @@ if (ENV.MOCKED) {
 }
 
 export interface Fluid {
-  id: number;
+  id?: number;
   name: string;
 }
 
