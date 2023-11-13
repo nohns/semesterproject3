@@ -91,6 +91,11 @@ class Database:
     )
     """
                     )
+        
+    def drinks(self):
+        cursor = self.connection.cursor()
+
+        sql="INSERT INTO Drinks (id, name, ingredients_ids, image_id, )"
   
         
         
