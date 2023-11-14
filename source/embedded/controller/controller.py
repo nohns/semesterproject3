@@ -1,6 +1,7 @@
 # Call controller class
 from database.database import Database
 from netlink.publisher import NetlinkPublisher
+from flask import Request
 
 from domain.domain import Fluid, Drink, FluidContainer, Image
 
@@ -30,8 +31,8 @@ class Controller:
     def get_containers(self) -> list[FluidContainer]:
         return get_containers(self.database)
 
-    def create_drink(self, drink: Drink) -> None:
-        return create_drink(self.database, drink)
+    def create_drink(self, data: Request) -> None:
+        return create_drink(self.database, data)
 
     def delete_drink(self) -> None:
         return delete_drink(self.database)
@@ -45,8 +46,8 @@ class Controller:
     def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.database)
 
-    def create_fluid(self, name: str) -> None:
-        return create_fluid(self.database, name)
+    def create_fluid(self, data: Request) -> None:
+        return create_fluid(self.database, data)
 
     def delete_fluid(self, fluid_id: int) -> bool:
         return delete_fluid(self.database, fluid_id)
