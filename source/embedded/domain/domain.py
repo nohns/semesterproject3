@@ -32,8 +32,8 @@ class Fluid:
 
 @dataclass
 class Ingredient:
-    amountInCl: int
     fluid: Fluid
+    amountInCl: int
     id: int = None
 
 
