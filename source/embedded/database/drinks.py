@@ -16,20 +16,55 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
         """
         )
         drinks = cursor.fetchall()
+
+        resulting_drinks_array = []
+
+        # drinks is an array of tuples, each tuple is a drink
         for drink in drinks:
-            ingredient_ids = list(map(int, drink[2].split(",")))
+            drink_id = drink[0]
+            drink_name = drink[1]
+            drink_ingredients = drink[2]
+            drink_image_id = drink[3]
+
+            # Get the list of ingredient ids
+            ingredient_ids = list(map(int, drink_ingredients.split(",")))
 
             ingredients = []
 
             for ingredient_id in ingredient_ids:
                 cursor.execute("SELECT * FROM Ingredients WHERE id=?", (ingredient_id,))
                 ingredient = cursor.fetchone()
+
                 if ingredient:
-                    ingredients.append(ingredient)
+                    fluid_id = ingredient[1]
+                    cursor.execute("SELECT * FROM Fluids WHERE id=?", (fluid_id,))
+                    fluid = cursor.fetchone()
 
-        print(ingredients)
+                    if fluid:
+                        fluid = Fluid(id=fluid[0], name=fluid[1])
+                        ingredient = Ingredient(id=ingredient_id, fluid=fluid)
+                        ingredients.append(ingredient)
+                    else:
+                        print(f"Fluid with ID: {fluid_id} not found")
+                        return
+                else:
+                    print(f"Ingredient with ID: {ingredient_id} not found")
+                    return
 
-        return drinks
+            cursor.execute("SELECT * FROM Images WHERE id=?", (drink_image_id,))
+            image = cursor.fetchone()
+            if image:
+                image = Image(id=image[0], path=image[1])
+            else:
+                print(f"Image with ID: {drink_image_id} not found")
+                return
+
+            drink = Drink(
+                name=drink_name, image=image, ingredients=ingredients, id=drink_id
+            )
+
+            resulting_drinks_array.append(drink)
+        return resulting_drinks_array
 
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")

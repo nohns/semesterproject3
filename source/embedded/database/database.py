@@ -86,8 +86,8 @@ class Database:
     CREATE TABLE IF NOT EXISTS Ingredients 
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        amount_in_cl INTEGER NOT NULL,
         fluid_id INTEGER NOT NULL,
+        amount_in_cl INTEGER NOT NULL,
         FOREIGN KEY (fluid_id) REFERENCES Fluids(id)
     )
     """
