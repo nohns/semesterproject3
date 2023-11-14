@@ -116,6 +116,8 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
 
         # Insert into Drinks table using the existing image_id since we can't directly insert the image object
         drink.image = json_to_dataclass(drink.image, Image)
+        cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image))
+        print("Database: Image has been added")
         cursor.execute(
             "INSERT INTO Drinks (name, ingredients_ids, image_id) VALUES (?, ?, ?)",
             (drink.name, ingredient_ids, drink.image.id),
