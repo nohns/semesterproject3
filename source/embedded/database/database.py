@@ -93,14 +93,6 @@ class Database:
     """
         )
 
-    def drinks(self):
-        cursor = self.connection.cursor()
-
-        sql = "INSERT INTO Drinks (id, name, ingredients_ids, image_id, )"
-
-        # Close the cursor again
-        cursor.close()
-
     def print_all_tables(self):
         try:
             cursor = self.connection.cursor()
