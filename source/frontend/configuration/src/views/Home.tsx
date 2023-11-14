@@ -1,5 +1,5 @@
 /** @format */
-
+import React from 'react';
 import useGetContainers from "@/api/endpoints/container/getContainers";
 import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
@@ -26,7 +26,7 @@ function Home(): JSX.Element {
   //I kan kalde flere ting på dem de eneste som rigtigt er relevante er isLoading, isError og data
   //Altså om den er igang med at loade dataen stadig, om der er sket en fejl og så selve dataen
 
-  //Nede I JSXen kan I så bruge de forskellige ting ofte bruger man conditional logik altså ternary operators(selvom det er noget pis) og så &&
+  //Nede I JSXen kan I så bruge de forskellige ting ofte bru ger man conditional logik altså ternary operators(selvom det er noget pis) og så &&
   //Når man har et array så bruger man en funktion som hedder map til at loope henover dataen så kan man nemlig få flere ting til at render
   //Se neget i JSX'en
 
@@ -58,23 +58,25 @@ function Home(): JSX.Element {
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
-      <div className="flex flex-col">
-        <Header />
-        <div className="flex flex-col">
-          <div className="flex flex-row justify-center ">
-            <div className="bg-red-500 p-40 py-52">Billede af container</div>
-            <div className="bg-red-300 p-40 py-52">Billede af container</div>
-            <div className="bg-red-700 p-40 py-52">Billede af container</div>
-          </div>
-          <div className="bg-green-500 mt-10 py-20">
-            Possible drink possibilities
-          </div>
-          <div className="bg-yellow-300 mt-10 w-32 mx-auto">
-            Configure drink
-          </div>
-        </div>
+  <div className="flex flex-col items-center">
+    <Header />
+    <div className="flex flex-col items-center mt-[-50px]" >
+      <div className="flex flex-row justify-center space-x-7 mt-10 ">
+        <div className="bg-gray-300 p-8 rounded-2xl h-56 w-64">Billede af container</div>
+        <div className="bg-gray-300 p-8 rounded-2xl h-56 w-64">Billede af container</div>
+        <div className="bg-gray-300 p-8 rounded-2xl h-56 w-64">Billede af container</div>
       </div>
-    </>
+      <div className="bg-cyan-200 mt-5 py-12  px-80 rounded-2xl">
+        Possible drink possibilities
+      </div>
+      <div className="bg-teal-300 mt-5 py-4 px-8 rounded-2xl">
+        Configure drink
+      </div>
+    </div>
+    <Footer/>
+  </div>
+</>
+
   );
 }
 
