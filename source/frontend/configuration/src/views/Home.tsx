@@ -4,6 +4,18 @@ import useGetContainers from "@/api/endpoints/container/getContainers";
 import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
 import useGetImages, { Image } from "@/api/endpoints/images/getImages";
+import { 
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  Dropdown, } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -58,25 +70,68 @@ function Home(): JSX.Element {
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
-  <div className="flex flex-col items-center">
-    <Header />
-    <div className="flex flex-col items-center mt-[-50px]" >
-      <div className="flex flex-row justify-center space-x-7 mt-10 ">
-        <div className="bg-gray-300 p-8 rounded-2xl h-56 w-64">Billede af container</div>
-        <div className="bg-gray-300 p-8 rounded-2xl h-56 w-64">Billede af container</div>
-        <div className="bg-gray-300 p-8 rounded-2xl h-56 w-64">Billede af container</div>
-      </div>
-      <div className="bg-cyan-200 mt-5 py-12  px-80 rounded-2xl">
-        Possible drink possibilities
-      </div>
-      <div className="bg-teal-300 mt-5 py-4 px-8 rounded-2xl">
-        Configure drink
-      </div>
-    </div>
-    <Footer/>
-  </div>
-</>
 
+      <div className="flex flex-col items-center">
+        <Header />
+        <div className="flex flex-col items-center mt-[-50px]">
+          <div className="flex flex-row justify-center space-x-7 mt-10">
+          <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
+          <DropdownMenu>
+            <DropdownMenuTrigger>Væske 1</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Væske 1</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Vodka</DropdownMenuItem>
+              <DropdownMenuItem>Gin</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Blå Booster</DropdownMenuItem>
+                <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
+                <DropdownMenuItem>Tonic</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          </div>
+          <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
+          <DropdownMenu>
+            <DropdownMenuTrigger>Væske 2</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Væske 2</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Vodka</DropdownMenuItem>
+              <DropdownMenuItem>Gin</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Blå Booster</DropdownMenuItem>
+                <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
+                <DropdownMenuItem>Tonic</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          </div>
+          
+          <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
+            <DropdownMenu>
+            <DropdownMenuTrigger>Væske 3</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Væske 3</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Vodka</DropdownMenuItem>
+              <DropdownMenuItem>Gin</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Blå Booster</DropdownMenuItem>
+                <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
+                <DropdownMenuItem>Tonic</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu></div>
+          
+          </div>
+          <div className="bg-emerald-600 mt-5 py-12  px-80 rounded-2xl transition duration-300 hover:bg-emerald-600 hover:darken-2 hover:opacity-75">
+            Possible drink possibilities
+          </div>
+          <div className="bg-pink-800 mt-5 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-800 hover:darken-2 hover:opacity-75">
+            Configure drink
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </>
   );
 }
 
