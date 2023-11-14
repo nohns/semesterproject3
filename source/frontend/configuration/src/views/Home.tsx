@@ -1,10 +1,10 @@
 /** @format */
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import useGetContainers from "@/api/endpoints/container/getContainers";
-import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
+import useGetDrinks, { Drink } from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
 import useGetImages, { Image } from "@/api/endpoints/images/getImages";
-import { 
+import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuTrigger,
@@ -13,9 +13,9 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  Dropdown, } from "@/components/ui/dropdown-menu";
+  Dropdown,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -31,6 +31,7 @@ import useCreateDrink, {
   CreateDrinkRequest,
   Ingredient,
 } from "@/api/endpoints/drinks/createDrink";
+import useCalculateDrinks from "@/hooks/CalculateDrinks";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
@@ -67,60 +68,84 @@ function Home(): JSX.Element {
   //Mutation functions er til at lave POST, PUT, DELETE requests
   //De fungerer lidt anderledes ved at de først kører når man kalder .mutate på dem hvorimod query funktionerne vil køre lige med det samme
 
+  //Lige noget test data for at validere magien
+  const fluids: Fluid[] = [
+    {
+      id: 4,
+      name: "Vodka",
+    },
+    {
+      id: 2,
+      name: "Blå booster",
+    },
+    {
+      id: 3,
+      name: "Vand",
+    },
+  ];
+
+  //Den her funktion returnerer et object calc som udelukkende returnerer en funktion som hedder calculate som kan bruges til at beregne drinks kombinationer
+  const calc = useCalculateDrinks();
+
+  //Så her kan man jo så kalde calculate med et array af fluids, det er så meningen at jeres dropdown menuer skal tilføje noget state som danner et array af fluid arrays :)
+  //Umiddelbart ville jeg bruge en useEffect hook hvor dependency arrayet er et array af jeres state arrays så kan i bare kalde calculate i useEffecten
+  const possibleDrinks = calc?.calculate(fluids);
+  console.log(possibleDrinks);
+  //Så ville jeg lave et komponent som tager imod en drink og displayer den
+
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
-
       <div className="flex flex-col items-center">
         <Header />
         <div className="flex flex-col items-center mt-[-50px]">
           <div className="flex flex-row justify-center space-x-7 mt-10">
-          <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
-          <DropdownMenu>
-            <DropdownMenuTrigger>Væske 1</DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Væske 1</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Vodka</DropdownMenuItem>
-              <DropdownMenuItem>Gin</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Blå Booster</DropdownMenuItem>
-                <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
-                <DropdownMenuItem>Tonic</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          </div>
-          <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
-          <DropdownMenu>
-            <DropdownMenuTrigger>Væske 2</DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Væske 2</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Vodka</DropdownMenuItem>
-              <DropdownMenuItem>Gin</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Blå Booster</DropdownMenuItem>
-                <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
-                <DropdownMenuItem>Tonic</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          </div>
-          
-          <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
-            <DropdownMenu>
-            <DropdownMenuTrigger>Væske 3</DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Væske 3</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Vodka</DropdownMenuItem>
-              <DropdownMenuItem>Gin</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Blå Booster</DropdownMenuItem>
-                <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
-                <DropdownMenuItem>Tonic</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu></div>
-          
+            <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
+              <DropdownMenu>
+                <DropdownMenuTrigger>Væske 1</DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Væske 1</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Vodka</DropdownMenuItem>
+                  <DropdownMenuItem>Gin</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Blå Booster</DropdownMenuItem>
+                  <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
+                  <DropdownMenuItem>Tonic</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+            <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
+              <DropdownMenu>
+                <DropdownMenuTrigger>Væske 2</DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Væske 2</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Vodka</DropdownMenuItem>
+                  <DropdownMenuItem>Gin</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Blå Booster</DropdownMenuItem>
+                  <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
+                  <DropdownMenuItem>Tonic</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
+              <DropdownMenu>
+                <DropdownMenuTrigger>Væske 3</DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>Væske 3</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Vodka</DropdownMenuItem>
+                  <DropdownMenuItem>Gin</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Blå Booster</DropdownMenuItem>
+                  <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
+                  <DropdownMenuItem>Tonic</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
           <div className="bg-emerald-600 mt-5 py-12  px-80 rounded-2xl transition duration-300 hover:bg-emerald-600 hover:darken-2 hover:opacity-75">
             Possible drink possibilities
