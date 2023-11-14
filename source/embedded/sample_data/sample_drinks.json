@@ -1,0 +1,37 @@
+{
+    "name": "Mojito",
+    "image": {
+      "id": "3",
+      "path": "/images/mojito.jpg"
+    },
+    "ingredients": [
+      {
+        "fluid": {
+          "name": "Rum",
+          "id": 1
+        },
+        "amountInCl": 15
+      },
+      {
+        "fluid": {
+          "name": "Mint Syrup",
+          "id": 2
+        },
+        "amountInCl": 10
+      },
+      {
+        "fluid": {
+          "name": "Lime Juice",
+          "id": 3
+        },
+        "amountInCl": 5
+      },
+      {
+        "fluid": {
+          "name": "Club Soda",
+          "id": 4
+        },
+        "amountInCl": 100
+      }
+    ]
+  }
