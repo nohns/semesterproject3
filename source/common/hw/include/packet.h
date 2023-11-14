@@ -8,12 +8,14 @@
 #include <stdlib.h>
 
 /**
- * @brief Type of packet. MSB is required to be 1 as this signals a header byte
+ * @brief Type of packet. (MAYBE: MSB is required to be 1 as this signals a
+ * header byte)
  */
 enum dmc_packet_type
 {
   DMC_PACKET_OUT_OF_ORDER = 0b10000000,
   DMC_PACKET_CONTAINER_WEIGHT_UPDATE = 0b10010010,
+  DMC_PACKET_USER_CONFIRM            = 0b10100000,
 };
 
 struct dmc_packet
