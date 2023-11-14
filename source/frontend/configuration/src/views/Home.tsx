@@ -4,21 +4,7 @@ import useGetContainers from "@/api/endpoints/container/getContainers";
 import useGetDrinks, { Drink } from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
 import useGetImages, { Image } from "@/api/endpoints/images/getImages";
-import {
-  DropdownMenu,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  Dropdown,
-} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import ShowFluid from "./fluid/ShowFluid";
 import ShowDrink from "./drink/ShowDrink";
 import ShowImage from "./image/ShowImage";
@@ -31,7 +17,20 @@ import useCreateDrink, {
   CreateDrinkRequest,
   Ingredient,
 } from "@/api/endpoints/drinks/createDrink";
+
 import useCalculateDrinks from "@/hooks/CalculateDrinks";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+
+import CustomDropdown from "@/components/Dropdown";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
@@ -100,52 +99,17 @@ function Home(): JSX.Element {
         <Header />
         <div className="flex flex-col items-center mt-[-50px]">
           <div className="flex flex-row justify-center space-x-7 mt-10">
-            <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
-              <DropdownMenu>
-                <DropdownMenuTrigger>Væske 1</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Væske 1</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Vodka</DropdownMenuItem>
-                  <DropdownMenuItem>Gin</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Blå Booster</DropdownMenuItem>
-                  <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
-                  <DropdownMenuItem>Tonic</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-            <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
-              <DropdownMenu>
-                <DropdownMenuTrigger>Væske 2</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Væske 2</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Vodka</DropdownMenuItem>
-                  <DropdownMenuItem>Gin</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Blå Booster</DropdownMenuItem>
-                  <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
-                  <DropdownMenuItem>Tonic</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
-            <div className="bg-neutral-400 p-20 rounded-2xl h-56 w-64 text-center transition duration-300 hover:bg-neutral-400 hover:darken-2 hover:opacity-75">
-              <DropdownMenu>
-                <DropdownMenuTrigger>Væske 3</DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>Væske 3</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Vodka</DropdownMenuItem>
-                  <DropdownMenuItem>Gin</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Blå Booster</DropdownMenuItem>
-                  <DropdownMenuItem>Appelsin juice</DropdownMenuItem>
-                  <DropdownMenuItem>Tonic</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+            {
+              // Map over tre drinks dropdowns
+              [...Array(3)].map((_, index) => (
+                <div className="bg-neutral-400 rounded-2xl w-56 aspect-square flex flex-col items-center gap-5 p-2 transition duration-300 hover:bg-neutral-500">
+                  <CustomDropdown className="bg-slate-100 w-40" />
+                  <div className="w-[40%] h-[60%] bg-white">
+                    {/* Importer billede af flaske her */}
+                  </div>
+                </div>
+              ))
+            }
           </div>
           <div className="bg-emerald-600 mt-5 py-12  px-80 rounded-2xl transition duration-300 hover:bg-emerald-600 hover:darken-2 hover:opacity-75">
             Possible drink possibilities
