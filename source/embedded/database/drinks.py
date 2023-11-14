@@ -1,5 +1,5 @@
 import sqlite3
-from domain.domain import Drink
+from domain.domain import Drink, Ingredient, Fluid, Image, json_to_dataclass
 
 # Tvivler sgu på den her kommer til at virke
 # At dette virker vil kræve vi får ingredient information
@@ -12,43 +12,22 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
         # Fetch drinks along with their images
         cursor.execute(
             """
-            SELECT Drinks.id, Drinks.name, Drinks.amount_in_cl, Images.path
-            FROM Drinks LEFT JOIN Images ON Drinks.image_id = Images.id
+            SELECT * FROM Drinks
         """
         )
-        drinks_data = cursor.fetchall()
+        drinks = cursor.fetchall()
+        for drink in drinks:
+            ingredient_ids = list(map(int, drink[2].split(",")))
 
-        # create list of drinks class objects
+            ingredients = []
 
-        drinks = []
-        for drink_data in drinks_data:
-            drink_id, name, amount_in_cl, image_path = drink_data
+            for ingredient_id in ingredient_ids:
+                cursor.execute("SELECT * FROM Ingredients WHERE id=?", (ingredient_id,))
+                ingredient = cursor.fetchone()
+                if ingredient:
+                    ingredients.append(ingredient)
 
-            # Fetch ingredients associated with each drink
-            cursor.execute(
-                """
-                SELECT Ingredients.amount_in_cl, Fluids.name
-                FROM Ingredients JOIN Fluids ON Ingredients.fluid_id = Fluids.id
-                WHERE Ingredients.drink_id = ?
-            """,
-                (drink_id,),
-            )
-            ingredients_data = cursor.fetchall()
-
-            ingredients = [
-                {"amount_in_cl": amount, "name": name}
-                for amount, name in ingredients_data
-            ]
-
-            # Building the drink object
-            drink = {
-                "id": drink_id,
-                "name": name,
-                "amount_in_cl": amount_in_cl,
-                "image_path": image_path,
-                "ingredients": ingredients,
-            }
-            drinks.append(drink)
+        print(ingredients)
 
         return drinks
 
@@ -68,38 +47,45 @@ def pour_drink(connection: sqlite3.Connection) -> None:
 def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
     cursor = connection.cursor()
     try:
-        print("Trying to do the thing")
+        print(f"Database: Attempting to create drink: {drink}")
 
-        # Create array to hold the result
-        ingredient_array = []
-        print("Printing drink object: ", drink)
+        # Convert ingredients to dataclass instance
+        ingredients = [
+            json_to_dataclass(ingredient, Ingredient)
+            for ingredient in drink.ingredients
+        ]
 
-        # append the ingredients to the array
-        for ingredient in drink.ingredients:
-            ingredient_array.append(ingredient["fluid"]["id"])
+        # Convert fluid in each ingredient to dataclass instance
+        for ingredient in ingredients:
+            ingredient.fluid = json_to_dataclass(ingredient.fluid, Fluid)
 
-        print("Printing ingredient array: ", ingredient_array)
+        # Extract fluid IDs from ingredients
+        ingredient_ids = [ingredient.fluid.id for ingredient in ingredients]
+
+        print(ingredients)
+
+        print("Database: Printing ingredient array: ", ingredients)
+
         # convert the array to a string seperated by commas
-        result_string = ",".join(map(str, ingredient_array))
-        print(result_string)
+        ingredient_ids = ",".join(map(str, ingredient_ids))
+        print("Database: Printing ingredient string: ", ingredient_ids)
 
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
-        for ingredient in drink.ingredients:
+        for ingredient in ingredients:
             # I need to create a text string seperated by commas which is an array of the ingredients ids
             cursor.execute(
                 "INSERT INTO Ingredients (amount_in_cl, fluid_id) VALUES (?, ?)",
-                (ingredient["amountInCl"], ingredient["fluid"]["id"]),
+                (ingredient.amountInCl, ingredient.fluid.id),
             )
-        print("Added ingredients")
+        print("Database: Ingredients have been added")
 
         # Insert into Drinks table using the existing image_id since we can't directly insert the image object
-        print(drink.name)
-        print(drink.image["id"])
+        drink.image = json_to_dataclass(drink.image, Image)
         cursor.execute(
             "INSERT INTO Drinks (name, ingredients_ids, image_id) VALUES (?, ?, ?)",
-            (drink.name, result_string, drink.image["id"]),
+            (drink.name, ingredient_ids, drink.image.id),
         )
-        print("Added drink")
+        print("Database: Drink has been added")
 
         connection.commit()
         print("Committed")

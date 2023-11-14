@@ -1,5 +1,6 @@
 from database.database import Database
-from domain.domain import Drink
+from domain.domain import Drink, json_to_dataclass
+from flask import Request
 
 
 def get_drinks(database: Database) -> list[Drink]:
@@ -20,13 +21,12 @@ def pour_drink(database: Database):
         raise Exception("fix the issue", e)
 
 
-def create_drink(database: Database, drink: Drink) -> None:
+def create_drink(database: Database, data: Request) -> None:
     try:
+        drink = json_to_dataclass(data, Drink)
         database.create_drink(drink)
     except Exception as e:
         print(f"error {e}, when trying to create drink via controller")
-
-        raise Exception("Something went to shit fix this error mesg if you find it", e)
 
 
 def delete_drink(id: int, database: Database) -> bool:
