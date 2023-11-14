@@ -8,34 +8,35 @@ from database.images import get_images
 
 from domain.domain import Drink, Fluid, Image, FluidContainer
 
- #Call database class
+
+# Call database class
 class Database:
     connection: sqlite3.Connection
 
     def __init__(self):
         print("Database initialized")
-        self.connection = sqlite3.connect('database.db', check_same_thread=False)
+        self.connection = sqlite3.connect("database.db", check_same_thread=False)
 
-        #Create the tables
+        # Create the tables
         self.create_tables()
 
         self.print_all_tables()
 
     def create_tables(self):
-        #create a boolean table for update
+        # create a boolean table for update
         cursor = self.connection.cursor()
-     
+
         cursor.execute(
-         """
+            """
     CREATE TABLE IF NOT EXISTS updates 
     (
         status BOOLEAN NOT NULL
     )
     """
-                    )
-        #create a table for containers
+        )
+        # create a table for containers
         cursor.execute(
-         """
+            """
     CREATE TABLE IF NOT EXISTS FluidContainers 
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,10 +45,10 @@ class Database:
         FOREIGN KEY (fluid_type_id) REFERENCES Fluids(id)
     )
     """
-                    )        
-        #create a table for drinks
+        )
+        # create a table for drinks
         cursor.execute(
-         """
+            """
     CREATE TABLE IF NOT EXISTS Drinks 
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -57,30 +58,30 @@ class Database:
         FOREIGN KEY (image_id) REFERENCES Images(id)
     )
     """
-                    )
-        #create a table for fluids
+        )
+        # create a table for fluids
         cursor.execute(
-         """
+            """
     CREATE TABLE IF NOT EXISTS Fluids 
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL
     )
     """
-                    )
-        #create a table for images
+        )
+        # create a table for images
         cursor.execute(
-         """
+            """
     CREATE TABLE IF NOT EXISTS Images 
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         path TEXT NOT NULL
     )
     """
-                    )
-        #create a table for ingredients
+        )
+        # create a table for ingredients
         cursor.execute(
-         """
+            """
     
     CREATE TABLE IF NOT EXISTS Ingredients 
     (
@@ -90,21 +91,18 @@ class Database:
         FOREIGN KEY (fluid_id) REFERENCES Fluids(id)
     )
     """
-                    )
-        
+        )
+
     def drinks(self):
         cursor = self.connection.cursor()
 
-        sql="INSERT INTO Drinks (id, name, ingredients_ids, image_id, )"
-  
-        
-        
+        sql = "INSERT INTO Drinks (id, name, ingredients_ids, image_id, )"
 
-        #Close the cursor again
+        # Close the cursor again
         cursor.close()
-    
+
     def print_all_tables(self):
-        try:    
+        try:
             cursor = self.connection.cursor()
 
             # Get the list of tables in the database
@@ -121,55 +119,45 @@ class Database:
 
             # Close the cursor and connection
             cursor.close()
-            
+
         except sqlite3.Error as e:
             print("SQLite error:", e)
 
-    def change_containers(self, container_id: int, fluid_type_id: int, fluid_amount: int):
+    def change_containers(
+        self, container_id: int, fluid_type_id: int, fluid_amount: int
+    ):
         return change_containers(self.connection, id)
-    
-    def get_containers(self)-> list[FluidContainer] :
+
+    def get_containers(self) -> list[FluidContainer]:
         return get_containers(self.connection)
-    
-    def create_drink(self, drink: Drink) ->None:
+
+    def create_drink(self, drink: Drink) -> None:
         return create_drink(self.connection, drink)
-    
-    def delete_drink(self, id: int)->None:
+
+    def delete_drink(self, id: int) -> None:
         return delete_drink(self.connection)
-    
+
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.connection)
-    
-    def pour_drink(self, id: int)->None:
+
+    def pour_drink(self, id: int) -> None:
         return pour_drink(self.connection, id)
-    
+
     def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.connection)
-    
-    def create_fluid(self, fluid: Fluid)->None:
+
+    def create_fluid(self, fluid: Fluid) -> None:
         return create_fluid(self.connection, fluid)
-    
-    def delete_fluid(self, id: int)->None:
-        return delete_fluid(self.connection, id)
-    
+
+    def delete_fluid(self, fluid_id: int) -> bool:
+        return delete_fluid(self.connection, fluid_id)
+
     def get_images(self) -> list[Image]:
         return get_images(self.connection)
-       
-    def update(self) ->bool:
+
+    def update(self) -> bool:
         return update(self.connection)
 
-    #This function is just there for now I think it has some purpose
+    # This function is just there for now I think it has some purpose
     def set_status_to_true(self):
         return set_status_to_true(self.connection)
-    
-
-
-"""   CREATE TABLE IF NOT EXISTS Ingredients 
-    (
-        id INTEGER PRIMARY KEY,
-        amount_in_cl INTEGER NOT NULL,
-        fluid_id INTEGER NOT NULL,
-        drink_id INTEGER NOT NULL, 
-        FOREIGN KEY (fluid_id) REFERENCES Fluids(id)
-        FOREIGN KEY (drink_id) REFERENCES Drinks(id)
-    ) """
