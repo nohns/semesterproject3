@@ -105,6 +105,15 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
         ingredient_ids = ",".join(map(str, ingredient_ids))
         print("Database: Printing ingredient string: ", ingredient_ids)
 
+        # Check if a drink with identical array of ingredient ids already exists
+        drinks=get_drinks()
+
+        for drinks.ingredient_id in drinks.ingredient_ids:
+            for ingredient in ingredients:
+                if drinks.ingredient_id==ingredient.fluid.id:
+                    print("Database: Drink already exists")
+                    return None
+
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
         for ingredient in ingredients:
             # I need to create a text string seperated by commas which is an array of the ingredients ids
@@ -112,6 +121,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
                 "INSERT INTO Ingredients (amount_in_cl, fluid_id) VALUES (?, ?)",
                 (ingredient.amountInCl, ingredient.fluid.id),
             )
+ 
         print("Database: Ingredients have been added")
 
         # Insert into Drinks table using the existing image_id since we can't directly insert the image object
