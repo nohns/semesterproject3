@@ -19,6 +19,10 @@
 		{
 			"name": "Linux driver",
 			"path": "source/driver"
+		},
+		{
+			"name": "Common",
+			"path": "source/common"
 		}
 	],
 	"settings": {
@@ -48,7 +52,14 @@
 			"serial.h": "c",
 			"serial_core.h": "c",
 			"uart.h": "c",
-			"wait.h": "c"
+			"wait.h": "c",
+			"packet.h": "c",
+			"message.h": "c",
+			"event.h": "c",
+			"constants.h": "c",
+			"util.h": "c",
+			"errno-base.h": "c",
+			"base_packet.h": "c"
 		},
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.black-formatter"
