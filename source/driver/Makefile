@@ -2,9 +2,9 @@
 #### Kernel module compilation configuration ####
 #################################################
 
-obj-m := dmc_driver.o
-dmc_driver-objs := dmc/uart.o
-ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Werror
+dmc_driver-objs := dmc_driver_main.o dmc/event.o dmc/netlink/handler.o dmc/netlink/message.o dmc/uart/handler.o
+obj-m += dmc_driver.o
+ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Werror -I$(src)/../common/hw/include
 
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
 KERNELDIR ?= ~/sources/rpi-5.4.83
@@ -15,7 +15,7 @@ BUILD_DIR := $(CURR_DIR)/build
 CROSS_COMPILE := arm-poky-linux-gnueabi-
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
 ARCH ?= arm
-HEADERS := $(dmc_driver-objs:.o=.h)
+#HEADERS := $(dmc_driver-objs:.o=.h)
 SOURCES := $(obj-m:.o=.c)
 SOURCES += $(dmc_driver-objs:.o=.c)
 
@@ -71,7 +71,7 @@ install: modules_install
 # It is not easy to set an output directory when building a kernel module. Per default, the output will just be in the
 # same directory as the source files, which is not very nice. So before building the module, we copy all the headers,
 # source files and the Makefile into a build directory (created if it doesn't exist). We then run make command from here.
-modules: $(HEADERS) $(SOURCES)
+modules:
 	$(MAKE_CMD) $@
 
 # Pass target onto the kernel module Makefile
