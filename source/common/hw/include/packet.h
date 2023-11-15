@@ -1,112 +1,225 @@
 #ifndef DMC_PACKET_H
 #define DMC_PACKET_H
 
-#ifdef MODULE // Include kernel space memory allocation with kmalloc
-#include <linux/slab.h>
+#include "base_packet.h"
+
+#ifdef MODULE
+#include <linux/types.h>
+#else
+#include <stdint.h>
 #endif
 
-#include <stdlib.h>
-
 /**
- * @brief Type of packet. (MAYBE: MSB is required to be 1 as this signals a
- * header byte)
+ * @brief Reason codes for why the machine is out of order
  */
-enum dmc_packet_type
-{
-  DMC_PACKET_OUT_OF_ORDER = 0b10000000,
-  DMC_PACKET_CONTAINER_WEIGHT_UPDATE = 0b10010010,
-  DMC_PACKET_USER_CONFIRM            = 0b10100000,
-};
-
-struct dmc_packet
+enum dmc_packet_out_of_order_reason
 {
   /**
-   * @brief Type of packet. This is the first byte received.
+   * @brief An unknown error has occured
    */
-  enum dmc_packet_type type;
+  DMC_PACKET_OUT_OF_ORDER_REASON_UNKNOWN = 0,
 
   /**
-   * @brief Data payload of packet
+   * @brief The machine detected that a fluid container
+   * was removed from the machine
    */
-  char *data;
-
-  /**
-   * @brief Length of payload in bytes.
-   */
-  size_t data_len;
+  DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_REMOVED = 1,
 };
 
 /**
- * @brief Allocates and initializes a packet with a type. Primarily
- * used when starting to read data from a given source.
+ * @brief Packet declaring machine is out of order with a reason code. So errors
+ * can be viewed on the touch screen UI.
+ *
+ * Direction: PSoC -> RPi
  */
-struct dmc_packet *dmc_packet_init(enum dmc_packet_type type)
+struct dmc_packet_out_of_order
 {
-  unsigned char data_bytes = type & 0b00001111;
+  /**
+   * @brief The reason code for the machine to be out of order. See enum
+   * dmc_packet_out_of_order_reason for what the codes mean
+   */
+  enum dmc_packet_out_of_order_reason reason;
+};
 
-  // Allocate and initialize packet with default values
-  struct dmc_packet *packet;
-#ifdef MODULE // Differeniate between kernel and use space allocations
-  packet = (struct dmc_packet *)kmalloc(sizeof(struct dmc_packet), GFP_KERNEL);
-#else
-  packet = (struct dmc_packet *)malloc(sizeof(struct dmc_packet));
-#endif
-  packet->type = type;
-  packet->data_len = 0;
-  packet->data = NULL;
+/**
+ * @brief Unmarshal data into out of order packet from base packet
+ */
+static void
+dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
+                                  struct dmc_packet *from)
+{
+  uint8_t offset = 0;
+  packet->reason = *(uint8_t *)(from->data + offset);
+}
 
-  // Allocate packet data if needed
-  if (data_bytes > 0)
+/**
+ * @brief Marshal out of order packet struct into base packet
+ */
+static int
+dmc_packet_marshal_out_of_order(struct dmc_packet *to,
+                                struct dmc_packet_out_of_order *packet)
+{
+  if (to == NULL)
   {
-#ifdef MODULE // Differeniate between kernel and use space allocations
-    packet->data = (char *)kmalloc(sizeof(char) * data_bytes, GFP_KERNEL);
-#else
-    packet->data = (char *)malloc(sizeof(char) * data_bytes);
-#endif
+    to = dmc_packet_init(DMC_PACKET_OUT_OF_ORDER);
+  }
+  if (to->type != DMC_PACKET_OUT_OF_ORDER)
+  {
+    return -1;
   }
 
-  return packet;
+  uint8_t offset = 0;
+  *(uint8_t *)(to->data + offset) = packet->reason;
+
+  return 0;
 }
 
 /**
- * @brief De-allocate packet and its data
+ * @brief Packet declaring that a new weight measurement has been made.
+ *
+ * Direction: PSoC -> RPi
  */
-void dmc_packet_free(struct dmc_packet *packet)
+struct dmc_packet_container_weight_measured
 {
-#ifdef MODULE // Differeniate between kernel and use space de-allocations
-  kfree((void *)packet->data);
-  kfree((void *)packet);
-#else
-  free((void *)packet->data);
-  free((void *)packet);
-#endif
+  /**
+   * @brief The container the measurement was from. Ranging from 0-2
+   */
+  uint8_t container;
+
+  /**
+   * @brief Weight measured in grams
+   */
+  int16_t weight;
+};
+
+/**
+ * @brief Unmarshal data into container weight measured packet from base packet
+ */
+static void dmc_packet_unmarshal_container_weight_measured(
+    struct dmc_packet_container_weight_measured *packet,
+    struct dmc_packet *from)
+{
+  uint8_t offset = 0;
+  packet->container = *(uint8_t *)(from->data + offset);
+
+  offset += sizeof(packet->container); // Move offset of previous data
+  packet->weight = *(uint16_t *)(from->data + offset);
 }
 
 /**
- * @brief Checks if a packet is fully complete, in the sense that all intended
- * data is received
- * @returns True, if packet is complete.
+ * @brief Marshal container weight measured packet struct into base packet
  */
-unsigned char dmc_packet_complete(struct dmc_packet *packet)
+static int dmc_packet_marshal_container_weight_measured(
+    struct dmc_packet *to, struct dmc_packet_container_weight_measured *packet)
 {
-  unsigned char data_bytes = packet->type & 0b00001111;
-  return data_bytes == packet->data_len;
-}
-
-/**
- * @brief Appends data byte to packet payload.
- * @returns 0 if successful, 1 if payload is already at capacity.
- */
-unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
-                                     unsigned char data)
-{
-  unsigned char data_bytes = packet->type & 0b00001111;
-  if (data_bytes == packet->data_len)
+  if (to == NULL)
   {
-    return 1;
+    to = dmc_packet_init(DMC_PACKET_CONTAINER_WEIGHT_MEASURED);
+  }
+  if (to->type != DMC_PACKET_CONTAINER_WEIGHT_MEASURED)
+  {
+    return -1;
   }
 
-  packet->data[packet->data_len++] = data;
+  uint8_t offset = 0;
+  *(uint8_t *)(to->data + offset) = packet->container;
+
+  offset += sizeof(packet->container); // Move offset of previous data
+  *(int16_t *)(to->data + offset) = packet->weight;
+
+  return 0;
+}
+
+/**
+ * @brief Packet declaring that a new weight measurement.
+ *
+ * Direction: RPi -> PSoC
+ */
+struct dmc_packet_user_confirm
+{
+};
+
+/**
+ * @brief Unmarshal data into user confirm packet from base packet
+ */
+static void
+dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
+                                  struct dmc_packet *from)
+
+{
+}
+
+/**
+ * @brief Marshal user confirm packet struct into base packet
+ */
+static int
+dmc_packet_marshal_user_confirm(struct dmc_packet *to,
+                                struct dmc_packet_user_confirm *packet)
+{
+  if (to == NULL)
+  {
+    to = dmc_packet_init(DMC_PACKET_USER_CONFIRM);
+  }
+  if (to->type != DMC_PACKET_USER_CONFIRM)
+  {
+    return -1;
+  }
+
+  return 0;
+}
+
+/**
+ * @brief Packet declaring that the machine should start to pour fluid.
+ *
+ * Direction: RPi -> PSoC
+ */
+struct dmc_packet_fluid_pour_requested
+{
+  /**
+   * @brief The container to pour from. Ranging from 0-2
+   */
+  uint8_t container;
+
+  /**
+   * @brief Amount to pour in centiliters
+   */
+  uint8_t amount;
+};
+
+/**
+ * @brief Unmarshal data into fluid pour requested packet from base packet
+ */
+static void dmc_packet_unmarshal_fluid_pour_requested(
+    struct dmc_packet_fluid_pour_requested *packet, struct dmc_packet *from)
+{
+  uint8_t offset = 0;
+  packet->container = *(uint8_t *)(from->data + offset);
+
+  offset += sizeof(packet->container); // Move offset of previous data
+  packet->amount = *(uint8_t *)(from->data + offset);
+}
+
+/**
+ * @brief Marshal fluid pour requested packet struct into base packet
+ */
+static int dmc_packet_marshal_fluid_pour_requested(
+    struct dmc_packet *to, struct dmc_packet_fluid_pour_requested *packet)
+{
+  if (to == NULL)
+  {
+    to = dmc_packet_init(DMC_PACKET_FLUID_POUR_REQUESTED);
+  }
+  if (to->type != DMC_PACKET_FLUID_POUR_REQUESTED)
+  {
+    return -1;
+  }
+
+  uint8_t offset = 0;
+  *(uint8_t *)(to->data + offset) = packet->container;
+
+  offset += sizeof(packet->container); // Move offset of previous data
+  *(uint8_t *)(to->data + offset) = packet->amount;
+
   return 0;
 }
 
