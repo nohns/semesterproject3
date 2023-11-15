@@ -3,14 +3,15 @@
         {
             "name": "RPi Driver",
             "includePath": [
-                "/home/stud/sources/rpi-5.4.83/include",
-                "/home/stud/sources/rpi-5.4.83/include/uapi",
-                "/home/stud/sources/rpi-5.4.83/include/generated",
-                "/home/stud/sources/rpi-5.4.83/include/generated/uapi",
-                "/home/stud/sources/rpi-5.4.83/arch/arm/include",
-                "/home/stud/sources/rpi-5.4.83/arch/arm/include/uapi",
-                "/home/stud/sources/rpi-5.4.83/arch/arm/include/generated",
-                "/home/stud/sources/rpi-5.4.83/arch/arm/include/generated/uapi"
+                "~/sources/rpi-5.4.83/include",
+                "~/sources/rpi-5.4.83/include/uapi",
+                "~/sources/rpi-5.4.83/include/generated",
+                "~/sources/rpi-5.4.83/include/generated/uapi",
+                "~/sources/rpi-5.4.83/arch/arm/include",
+                "~/sources/rpi-5.4.83/arch/arm/include/uapi",
+                "~/sources/rpi-5.4.83/arch/arm/include/generated",
+                "~/sources/rpi-5.4.83/arch/arm/include/generated/uapi",
+                "../common/hw/include"
             ],
             "defines": [
                 "__KERNEL__",
