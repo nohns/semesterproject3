@@ -1,32 +1,23 @@
 /** @format */
-
 //import { AiOutlineStock } from "react-icons/ai";
 import { GiDrinkMe } from "react-icons/gi";
-
 export default function Footer(): JSX.Element {
   return (
-    <footer className="px-6 pb-4 w-screen mt-auto">
-      <div className="text-1xl font-bold whitespace-nowrap text-white flex items-center justify-between pl-14 pr-14">
-        <div className=" flex items-center text-white">
-          {/* <AiOutlineStock className="h-8 w-8 mr-2 text-black" /> */}
-          <GiDrinkMe className="h-8 w-8 mr-2 text-white" />
-          DRINKSMACHINE
-        </div>
-
-        <div>
-          <div className="flex flex-col items-center"></div>
-          <div className="flex justify-center align-middle"></div>
-        </div>
-
-        <div className=" flex items-center text-white invisible">
-          {/*   <AiOutlineStock className="h-8 w-8 mr-2 text-black" /> */}
-          DRINKSMACHINE
-        </div>
+    <footer className="px-4 pb-2 w-screen mt-auto">
+      <div className="text-xl font-bold whitespace-nowrap text-white flex items-center justify-between pl-4 pr-4">
+        <GiDrinkMe className="h-6 w-6 mr-2 text-white" />
+        DRINKSMACHINE
       </div>
-
       <hr className="my-3 sm:mx-auto bg-red-500" />
-
-      <span className="block text-sm text-gray-400 sm:text-center ">
+      <hr className="my-2 sm:mx-auto bg-red-500" />
+      <span className="block text-s text-gray-400 sm:text-center mb-1">
+       <p><strong>Contact info:</strong></p>
+       <p>Email: contact@drinksmachine.com</p>
+       <p>Phone: (45) 11111111</p>
+      </span>
+    
+   
+      <span className="block text-xs text-gray-400 sm:text-center ">
         © 2023 DRINKSMACHINE™
       </span>
     </footer>
