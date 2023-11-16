@@ -3,8 +3,8 @@
 import httpMock from "@/api/axios.mock";
 import { GetDrinksResponse } from "./getDrinks";
 
-// Url to match v1/drinks
-const url = new RegExp(/v1\/drinks/);
+//Url to match v1/drinks
+const url = new RegExp(/v1\/drinks/); //I hate fucking regexes
 httpMock.onGet(url).reply(() => {
   const res: GetDrinksResponse = {
     drinks: [
@@ -15,86 +15,28 @@ httpMock.onGet(url).reply(() => {
           path: "src/assets/HotPot1.png",
         },
         name: "Blå vand",
-        ingredients: [
-          {
-            id: 1,
-            fluid: {
-              id: 1,
-              name: "Vodka",
-            },
-            amountInCl: 5,
-          },
-          {
-            id: 2,
-            fluid: {
-              id: 2,
-              name: "Blå booster",
-            },
-            amountInCl: 5,
-          },
-        ],
+        amountInCl: 10,
+        remainingFluid: 10,
       },
       {
         id: 2,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "src/assets/HotPot2.png",
         },
-        name: "Double blå vand",
-        ingredients: [
-          {
-            id: 1,
-            fluid: {
-              id: 1,
-              name: "Vodka",
-            },
-            amountInCl: 5,
-          },
-          {
-            id: 2,
-            fluid: {
-              id: 2,
-              name: "Blå booster",
-            },
-            amountInCl: 5,
-          },
-        ],
+        name: "Snapse Kondi",
+        amountInCl: 10,
+        remainingFluid: 100,
       },
       {
         id: 3,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "src/assets/HotPot3.png",
         },
-        name: "Vand",
-        ingredients: [
-          {
-            id: 3,
-            fluid: {
-              id: 3,
-              name: "Vand",
-            },
-            amountInCl: 5,
-          },
-        ],
-      },
-      {
-        id: 3,
-        image: {
-          id: 1,
-          path: "src/assets/HotPot1.png",
-        },
-        name: "Appelsin Juice",
-        ingredients: [
-          {
-            id: 4,
-            fluid: {
-              id: 4,
-              name: "Juice",
-            },
-            amountInCl: 5,
-          },
-        ],
+        name: "Vodka vand",
+        amountInCl: 10,
+        remainingFluid: 70,
       },
     ],
   };

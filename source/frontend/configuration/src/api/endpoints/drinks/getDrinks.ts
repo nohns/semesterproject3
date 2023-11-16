@@ -5,7 +5,6 @@ import ENV from "@/constants/env";
 import { useQuery } from "@tanstack/react-query";
 
 import { http } from "@/api/axios";
-import { Fluid } from "../fluid/getFluids.ts";
 
 if (ENV.MOCKED) {
   await import("./getDrinks.mock.ts");
@@ -15,14 +14,8 @@ export interface Drink {
   id: number;
   image: Image;
   name: string;
-  remainingFluid?: number;
-  ingredients: Ingredient[];
-}
-
-export interface Ingredient {
-  id: number;
-  fluid: Fluid;
   amountInCl: number;
+  remainingFluid: number;
 }
 
 interface Image {
