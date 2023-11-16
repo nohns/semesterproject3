@@ -22,7 +22,7 @@ function Header(): JSX.Element {
             style={{ transform: "scaleX(-1)" }}
           />
         </h1>
-        <p className="mt-2 text-lg">
+        <p className="mt-2 text-lg font-mono">
           Your favorite way to configure your drinks
         </p>
       </div>
