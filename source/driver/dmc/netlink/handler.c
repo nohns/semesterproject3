@@ -6,9 +6,9 @@
 // Keeps track of generic netlink commands
 enum rpi_netlink_genl_cmds
 {
-  DMC_DRIVER_GENL_CMD_UNSPECIFIED  = 0,
+  DMC_DRIVER_GENL_CMD_UNSPECIFIED = 0,
   DMC_DRIVER_GENL_CMD_HANDLE_EVENT = 1,
-  DMC_DRIVER_GENL_CMD_RAISE_EVENT  = 2,
+  DMC_DRIVER_GENL_CMD_RAISE_EVENT = 2,
   __DMC_DRIVER_GENL_CMD_MAX,
 };
 
@@ -20,15 +20,15 @@ static const struct dmc_netlink_handler *curr_handler;
 /**
  * @brief Handle raise event command. Propagates the event to
  */
-static int dmc_driver_raise_event_doit(struct sk_buff   *skb,
+static int dmc_driver_raise_event_doit(struct sk_buff *skb,
                                        struct genl_info *info)
 {
   int err;
 
   // Call the event handler
   struct dmc_netlink_event_msg event_msg = {
-      .buff     = skb,
-      .attrs    = info->attrs,
+      .buff = skb,
+      .attrs = info->attrs,
       .genl_hdr = info->genlhdr,
   };
 
@@ -61,7 +61,7 @@ static int dmc_driver_raise_event_doit(struct sk_buff   *skb,
 
 static const struct genl_ops genl_ops[] = {
     {
-        .cmd  = DMC_DRIVER_GENL_CMD_HANDLE_EVENT,
+        .cmd = DMC_DRIVER_GENL_CMD_HANDLE_EVENT,
         .doit = dmc_driver_raise_event_doit,
     },
 };
@@ -80,12 +80,12 @@ static const struct genl_multicast_group
 
 // Define Generic Netlink family
 static struct genl_family genl_fam = {
-    .name     = DMC_DRIVER_GENL_FAMILY_NAME,
-    .version  = DMC_DRIVER_GENL_VERSION,
-    .maxattr  = DMC_DRIVER_GENL_MAX_ATTR,
-    .ops      = genl_ops,
-    .n_ops    = ARRAY_SIZE(genl_ops),
-    .mcgrps   = genl_mcgrps,
+    .name = DMC_DRIVER_GENL_FAMILY_NAME,
+    .version = DMC_DRIVER_GENL_VERSION,
+    .maxattr = DMC_DRIVER_GENL_MAX_ATTR,
+    .ops = genl_ops,
+    .n_ops = ARRAY_SIZE(genl_ops),
+    .mcgrps = genl_mcgrps,
     .n_mcgrps = ARRAY_SIZE(genl_mcgrps),
 };
 
@@ -117,16 +117,18 @@ void dmc_unregister_netlink_handler(struct dmc_netlink_handler *handler)
 }
 
 int dmc_netlink_publish_event(const struct dmc_netlink_handler *handler,
-                              struct dmc_netlink_event_msg     *event_msg)
+                              struct dmc_netlink_event_msg *event_msg)
 {
   int err = 0;
 
   // If event_msg has not yet been prepared. User should call
   // dmc_netlink_prepare_event beforehand
-  if (event_msg->genl_hdr == NULL) return -EINVAL;
+  if (event_msg->genl_hdr == NULL)
+    return -EINVAL;
 
   // If handler is the current, then return bad address error
-  if (curr_handler == handler) return -EFAULT;
+  if (curr_handler == handler)
+    return -EFAULT;
 
   // Make sure the message containing the event is finalized
   genlmsg_end(event_msg->buff, event_msg->genl_hdr);
@@ -174,7 +176,7 @@ int dmc_netlink_prepare_event(struct dmc_netlink_event_msg *event_msg)
   }
 
   // Success! Set the pointers of the event message
-  event_msg->buff     = event_buf;
+  event_msg->buff = event_buf;
   event_msg->genl_hdr = hdr;
   return 0;
 }

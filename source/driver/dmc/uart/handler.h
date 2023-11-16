@@ -52,6 +52,6 @@ int dmc_uart_handler_start_recv(struct dmc_uart_handler *uart);
  * @brief Sends a packet over the uart
  */
 int dmc_uart_handler_send_packet(struct dmc_uart_handler *uart,
-                                 struct dmc_packet       *packet);
+                                 struct dmc_packet *packet);
 
 #endif // DMC_UART_HANDLER_H
