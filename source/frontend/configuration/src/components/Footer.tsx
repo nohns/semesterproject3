@@ -15,8 +15,6 @@ export default function Footer(): JSX.Element {
        <p>Email: contact@drinksmachine.com</p>
        <p>Phone: (45) 11111111</p>
       </span>
-    
-   
       <span className="block text-xs text-gray-400 sm:text-center ">
         © 2023 DRINKSMACHINE™
       </span>
