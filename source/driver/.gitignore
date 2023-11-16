@@ -1,8 +1,0 @@
-dmc_driver.ko
-dmc_driver.m*
-dmc_driver.o
-Module.symvers
-modules.order
-.dmc_driver*
-*.o
-*.o.cmd
