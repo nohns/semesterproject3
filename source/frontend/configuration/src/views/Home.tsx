@@ -121,6 +121,8 @@ function Home(): JSX.Element {
         </div>
         <Footer />
       </div>
+      {/* </div> */}
+      <Footer />
     </>
   );
 }
