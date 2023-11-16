@@ -1,12 +1,10 @@
 /** @format */
 
 import useGetContainers from "@/api/endpoints/container/getContainers";
-import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
+import useGetDrinks, { Drink } from "@/api/endpoints/drinks/getDrinks";
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
 import useGetImages, { Image } from "@/api/endpoints/images/getImages";
-
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
 import ShowFluid from "./fluid/ShowFluid";
 import ShowDrink from "./drink/ShowDrink";
 import ShowImage from "./image/ShowImage";
@@ -19,6 +17,21 @@ import useCreateDrink, {
   CreateDrinkRequest,
   Ingredient,
 } from "@/api/endpoints/drinks/createDrink";
+
+import useCalculateDrinks from "@/hooks/CalculateDrinks";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+
+import CustomDropdown from "@/components/Dropdown";
+import FluidBackdrop from "@/components/ui/FluidBackdrop";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
@@ -54,62 +67,59 @@ function Home(): JSX.Element {
 
   //Mutation functions er til at lave POST, PUT, DELETE requests
   //De fungerer lidt anderledes ved at de først kører når man kalder .mutate på dem hvorimod query funktionerne vil køre lige med det samme
-  const fluidMutate = useCreateFluid();
 
-  const drinkMutate = useCreateDrink();
-
-  //her laver vi to onClick funktioner som kommer til at kalde de to mutation functions
-  const handleFluidClick = () => {
-    console.log("I clicked the fluids button");
-    const newFluid: CreateFluidRequest = {
-      name: "new fluid",
-    };
-
-    fluidMutate.mutate(newFluid);
-  };
-
-  const handleDrinkClick = () => {
-    console.log("I clicked the drinks button");
-    const newFluid: Fluid = {
+  //Lige noget test data for at validere magien
+  const fluids: Fluid[] = [
+    {
+      id: 4,
+      name: "Vodka",
+    },
+    {
+      id: 5,
+      name: "Rom",
+    },
+    {
+      id: 2,
+      name: "Blå booster",
+    },
+    {
+      id: 3,
+      name: "Vand",
+    },
+    {
       id: 1,
-      name: "new fluid",
-    };
+      name: "Coca Cola",
+    },
+  ];
 
-    const newIngredient: Ingredient = {
-      fluid: newFluid,
-      amountInCl: 10,
-    };
+  //Den her funktion returnerer et object calc som udelukkende returnerer en funktion som hedder calculate som kan bruges til at beregne drinks kombinationer
+  const calc = useCalculateDrinks();
 
-    const newImage: Image = {
-      id: 1,
-    };
-
-    const newDrink: CreateDrinkRequest = {
-      name: "new drink",
-      image: newImage,
-      ingredients: [newIngredient, newIngredient],
-    };
-
-    drinkMutate.mutate(newDrink);
-  };
+  //Så her kan man jo så kalde calculate med et array af fluids, det er så meningen at jeres dropdown menuer skal tilføje noget state som danner et array af fluid arrays :)
+  //Umiddelbart ville jeg bruge en useEffect hook hvor dependency arrayet er et array af jeres state arrays så kan i bare kalde calculate i useEffecten
+  const possibleDrinks = calc?.calculate(fluids);
+  console.log(possibleDrinks);
+  //Så ville jeg lave et komponent som tager imod en drink og displayer den
 
   //Her kan i se at jeg bruger .map på data.images som jo er et array så kan vi render 3 billeder slef
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center">
         <Header />
-        {/* <div className="flex-row flex"> */}
-        {/* <ShowFluid fluids={fluids.data?.fluids!} /> */}
-        <CreateFluidButton createFluid={handleFluidClick} />
-
-        {/* <ShowDrink drinks={drinks.data?.drinks!} /> */}
-        <CreateDrinkButton createDrink={handleDrinkClick} />
-        {/* <ShowImage images={images.data?.images!} /> */}
-        {/*   {images.data?.images?.map((image) => (
-            <div className="flex flex-row" key={image.id}>
-              <img src={image.path} />
-            </div>
-          ))} */}
+        <div className="flex flex-col items-center mt-[-50px]">
+          <div className="flex flex-row justify-center space-x-7 mt-10">
+            <FluidBackdrop />
+            <FluidBackdrop />
+            <FluidBackdrop />
+          </div>
+          <div className="bg-emerald-600 mt-5 py-12  px-80 rounded-2xl transition duration-300 hover:bg-emerald-600 hover:darken-2 hover:opacity-75">
+            Possible drink possibilities
+          </div>
+          <div className="bg-pink-800 mt-5 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-800 hover:darken-2 hover:opacity-75">
+            Configure drink
+          </div>
+        </div>
+        <Footer />
       </div>
       {/* </div> */}
       <Footer />

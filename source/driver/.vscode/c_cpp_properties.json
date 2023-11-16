@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "RPi Driver",
+            "includePath": [
+                "~/sources/rpi-5.4.83/include",
+                "~/sources/rpi-5.4.83/include/uapi",
+                "~/sources/rpi-5.4.83/include/generated",
+                "~/sources/rpi-5.4.83/include/generated/uapi",
+                "~/sources/rpi-5.4.83/arch/arm/include",
+                "~/sources/rpi-5.4.83/arch/arm/include/uapi",
+                "~/sources/rpi-5.4.83/arch/arm/include/generated",
+                "~/sources/rpi-5.4.83/arch/arm/include/generated/uapi",
+                "../common/hw/include"
+            ],
+            "defines": [
+                "__KERNEL__",
+                "MODULE"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm64"
+        }
+    ],
+    "version": 4
+}
