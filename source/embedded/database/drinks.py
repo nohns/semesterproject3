@@ -114,15 +114,6 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
             print("Database: Drink already exists")
             return None
 
-
-
-        if any(allDrinks.ingredient_id in allDrinks.ingredients_ids for allDrinks.drink in allDrinks):
-        #allDrinks_ingredient_ids={allDrinks.ingredient.ingredient_id for allDrinks.drink in allDrinks.drinks for allDrinks.ingredient in allDrinks.drink.ingredients}
-
-        #if allDrinks_ingredient_ids.interaction(ingredient_ids):
-            print("Database: Drink already exists")
-            return None
-
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
         for ingredient in ingredients:
             # I need to create a text string seperated by commas which is an array of the ingredients ids
