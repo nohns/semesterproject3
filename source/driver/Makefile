@@ -2,9 +2,9 @@
 #### Kernel module compilation configuration ####
 #################################################
 
-dmc_driver-objs := dmc_driver_main.o dmc/event.o dmc/netlink/handler.o dmc/netlink/message.o dmc/uart/handler.o
+dmc_driver-objs := dmc_driver_main.o dmc/event.o dmc/ctrl/event_handler.o dmc/ctrl/packet_handler.o dmc/netlink/handler.o dmc/netlink/message.o dmc/uart/handler.o
 obj-m += dmc_driver.o
-ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Werror -I$(src)/../common/hw/include
+ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Wno-unused-function -Werror -I$(src)/../common/hw/include
 
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
 KERNELDIR ?= ~/sources/rpi-5.4.83

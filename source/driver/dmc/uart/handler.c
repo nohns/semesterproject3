@@ -17,7 +17,7 @@ static irqreturn_t dmc_uart_handle_irq(int irq_number, void *dev_data)
 /**
  * @brief Registers the necessary resources for the uart to function
  */
-int dmc_uart_register(struct dmc_uart_handler *uart)
+int dmc_uart_handler_register(struct dmc_uart_handler *uart)
 {
   int err;
 
@@ -65,7 +65,7 @@ fail_dmc_uart_reg_gpio_req_rx:
   return err;
 }
 
-int dmc_uart_unregister(struct dmc_uart_handler *uart)
+int dmc_uart_handler_unregister(struct dmc_uart_handler *uart)
 {
   free_irq(uart->irq_rx, NULL);
   gpio_free(uart->gpio_rx);
@@ -79,4 +79,11 @@ int dmc_uart_unregister(struct dmc_uart_handler *uart)
  * be called when start bit is receiving, which in general should be when the
  * interrupt triggers
  */
-int dmc_uart_start_recv(struct dmc_uart_handler *uart) { return 0; }
+int dmc_uart_handler_start_recv(struct dmc_uart_handler *uart) { return 0; }
+
+int dmc_uart_handler_send_packet(struct dmc_uart_handler *uart,
+                                 struct dmc_packet       *packet)
+{
+  // Return linux not implemented error
+  return -ENOSYS;
+}

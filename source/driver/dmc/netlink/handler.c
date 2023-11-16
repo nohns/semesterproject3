@@ -121,6 +121,10 @@ int dmc_netlink_publish_event(const struct dmc_netlink_handler *handler,
 {
   int err = 0;
 
+  // If event_msg has not yet been prepared. User should call
+  // dmc_netlink_prepare_event beforehand
+  if (event_msg->genl_hdr == NULL) return -EINVAL;
+
   // If handler is the current, then return bad address error
   if (curr_handler == handler) return -EFAULT;
 

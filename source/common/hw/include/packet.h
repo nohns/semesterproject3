@@ -20,10 +20,22 @@ enum dmc_packet_out_of_order_reason
   DMC_PACKET_OUT_OF_ORDER_REASON_UNKNOWN = 0,
 
   /**
-   * @brief The machine detected that a fluid container
+   * @brief The machine detected that a fluid container 1
    * was removed from the machine
    */
-  DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_REMOVED = 1,
+  DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_1_REMOVED = 1,
+
+  /**
+   * @brief The machine detected that a fluid container 2
+   * was removed from the machine
+   */
+  DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_2_REMOVED = 2,
+
+  /**
+   * @brief The machine detected that a fluid container 3
+   * was removed from the machine
+   */
+  DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_3_REMOVED = 3,
 };
 
 /**
@@ -44,19 +56,26 @@ struct dmc_packet_out_of_order
 /**
  * @brief Unmarshal data into out of order packet from base packet
  */
-static void
+static int
 dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
-                                  struct dmc_packet *from)
+                                  struct dmc_packet              *from)
 {
+  if (from->type != DMC_PACKET_OUT_OF_ORDER)
+  {
+    return -1;
+  }
+
   uint8_t offset = 0;
   packet->reason = *(uint8_t *)(from->data + offset);
+
+  return 0;
 }
 
 /**
  * @brief Marshal out of order packet struct into base packet
  */
 static int
-dmc_packet_marshal_out_of_order(struct dmc_packet *to,
+dmc_packet_marshal_out_of_order(struct dmc_packet              *to,
                                 struct dmc_packet_out_of_order *packet)
 {
   if (to == NULL)
@@ -68,7 +87,7 @@ dmc_packet_marshal_out_of_order(struct dmc_packet *to,
     return -1;
   }
 
-  uint8_t offset = 0;
+  uint8_t offset                  = 0;
   *(uint8_t *)(to->data + offset) = packet->reason;
 
   return 0;
@@ -95,15 +114,22 @@ struct dmc_packet_container_weight_measured
 /**
  * @brief Unmarshal data into container weight measured packet from base packet
  */
-static void dmc_packet_unmarshal_container_weight_measured(
+static int dmc_packet_unmarshal_container_weight_measured(
     struct dmc_packet_container_weight_measured *packet,
-    struct dmc_packet *from)
+    struct dmc_packet                           *from)
 {
-  uint8_t offset = 0;
+  if (from->type != DMC_PACKET_CONTAINER_WEIGHT_MEASURED)
+  {
+    return -1;
+  }
+
+  uint8_t offset    = 0;
   packet->container = *(uint8_t *)(from->data + offset);
 
   offset += sizeof(packet->container); // Move offset of previous data
   packet->weight = *(uint16_t *)(from->data + offset);
+
+  return 0;
 }
 
 /**
@@ -121,7 +147,7 @@ static int dmc_packet_marshal_container_weight_measured(
     return -1;
   }
 
-  uint8_t offset = 0;
+  uint8_t offset                  = 0;
   *(uint8_t *)(to->data + offset) = packet->container;
 
   offset += sizeof(packet->container); // Move offset of previous data
@@ -142,18 +168,23 @@ struct dmc_packet_user_confirm
 /**
  * @brief Unmarshal data into user confirm packet from base packet
  */
-static void
+static int
 dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
-                                  struct dmc_packet *from)
-
+                                  struct dmc_packet              *from)
 {
+  if (from->type != DMC_PACKET_USER_CONFIRM)
+  {
+    return -1;
+  }
+
+  return 0;
 }
 
 /**
  * @brief Marshal user confirm packet struct into base packet
  */
 static int
-dmc_packet_marshal_user_confirm(struct dmc_packet *to,
+dmc_packet_marshal_user_confirm(struct dmc_packet              *to,
                                 struct dmc_packet_user_confirm *packet)
 {
   if (to == NULL)
@@ -189,14 +220,21 @@ struct dmc_packet_fluid_pour_requested
 /**
  * @brief Unmarshal data into fluid pour requested packet from base packet
  */
-static void dmc_packet_unmarshal_fluid_pour_requested(
+static int dmc_packet_unmarshal_fluid_pour_requested(
     struct dmc_packet_fluid_pour_requested *packet, struct dmc_packet *from)
 {
-  uint8_t offset = 0;
+  if (from->type != DMC_PACKET_FLUID_POUR_REQUESTED)
+  {
+    return -1;
+  }
+
+  uint8_t offset    = 0;
   packet->container = *(uint8_t *)(from->data + offset);
 
   offset += sizeof(packet->container); // Move offset of previous data
   packet->amount = *(uint8_t *)(from->data + offset);
+
+  return 0;
 }
 
 /**
@@ -209,12 +247,12 @@ static int dmc_packet_marshal_fluid_pour_requested(
   {
     to = dmc_packet_init(DMC_PACKET_FLUID_POUR_REQUESTED);
   }
-  if (to->type != DMC_PACKET_FLUID_POUR_REQUESTED)
+  if (to != NULL && to->type != DMC_PACKET_FLUID_POUR_REQUESTED)
   {
     return -1;
   }
 
-  uint8_t offset = 0;
+  uint8_t offset                  = 0;
   *(uint8_t *)(to->data + offset) = packet->container;
 
   offset += sizeof(packet->container); // Move offset of previous data
