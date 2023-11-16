@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import CustomDropdown from "@/components/Dropdown";
+import FluidBackdrop from "@/components/ui/FluidBackdrop";
 
 function Home(): JSX.Element {
   //De her 4 er hooks som der laver API kald
@@ -38,7 +39,7 @@ function Home(): JSX.Element {
   //I kan kalde flere ting på dem de eneste som rigtigt er relevante er isLoading, isError og data
   //Altså om den er igang med at loade dataen stadig, om der er sket en fejl og så selve dataen
 
-  //Nede I JSXen kan I så bruge de forskellige ting ofte bru ger man conditional logik altså ternary operators(selvom det er noget pis) og så &&
+  //Nede I JSXen kan I så bruge de forskellige ting ofte bruger man conditional logik altså ternary operators(selvom det er noget pis) og så &&
   //Når man har et array så bruger man en funktion som hedder map til at loope henover dataen så kan man nemlig få flere ting til at render
   //Se neget i JSX'en
 
@@ -74,12 +75,20 @@ function Home(): JSX.Element {
       name: "Vodka",
     },
     {
+      id: 5,
+      name: "Rom",
+    },
+    {
       id: 2,
       name: "Blå booster",
     },
     {
       id: 3,
       name: "Vand",
+    },
+    {
+      id: 1,
+      name: "Coca Cola",
     },
   ];
 
@@ -99,17 +108,9 @@ function Home(): JSX.Element {
         <Header />
         <div className="flex flex-col items-center mt-[-50px]">
           <div className="flex flex-row justify-center space-x-7 mt-10">
-            {
-              // Map over tre drinks dropdowns
-              [...Array(3)].map((_, index) => (
-                <div className="bg-neutral-400 rounded-2xl w-56 aspect-square flex flex-col items-center gap-5 p-2 transition duration-300 hover:bg-neutral-500">
-                  <CustomDropdown className="bg-slate-100 w-40" />
-                  <div className="w-[40%] h-[60%] bg-white">
-                    {/* Importer billede af flaske her */}
-                  </div>
-                </div>
-              ))
-            }
+            <FluidBackdrop />
+            <FluidBackdrop />
+            <FluidBackdrop />
           </div>
           <div className="bg-emerald-600 mt-5 py-12  px-80 rounded-2xl transition duration-300 hover:bg-emerald-600 hover:darken-2 hover:opacity-75">
             Possible drink possibilities

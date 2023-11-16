@@ -21,6 +21,26 @@ httpMock.onGet(url).reply(() => {
         id: 3,
         path: "src/assets/HotPot3.png",
       },
+      {
+        id: 4,
+        path: "src/assets/Overblik_0-20.png",
+      },
+      {
+        id: 5,
+        path: "src/assets/Overblik_20-40.png",
+      },
+      {
+        id: 6,
+        path: "src/assets/Overblik_40-60.png",
+      },
+      {
+        id: 7,
+        path: "src/assets/Overblik_60-180.png",
+      },
+      {
+        id: 8,
+        path: "src/assets/Overblik_80-100.png",
+      },
     ],
   };
 
