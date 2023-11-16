@@ -108,9 +108,9 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
         # Check if a drink with identical array of ingredient ids already exists
         drinks=get_drinks()
 
-        for drinks.ingredient_id in drinks.ingredient_ids:
+        for drinks.ingredient in drinks.ingredients:
             for ingredient in ingredients:
-                if drinks.ingredient_id==ingredient.fluid.id:
+                if drinks.ingredient.id==ingredient.fluid.id:
                     print("Database: Drink already exists")
                     return None
 
