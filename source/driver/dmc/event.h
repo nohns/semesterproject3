@@ -8,36 +8,36 @@
  */
 enum dmc_event_type
 {
-   DMC_EVENT_TYPE_UNDEFINED = 0,
+  DMC_EVENT_TYPE_UNDEFINED = 0,
 
-   /* ##################### */
-   /*   Event type values   */
-   /* ##################### */
+  /* ##################### */
+  /*   Event type values   */
+  /* ##################### */
 
-   /**
-    * @brief See struct dmc_event_out_of_order
-    */
-   DMC_EVENT_TYPE_OUT_OF_ORDER = 1,
+  /**
+   * @brief See struct dmc_event_out_of_order
+   */
+  DMC_EVENT_TYPE_OUT_OF_ORDER = 1,
 
-   /**
-    * @brief See struct dmc_event_container_weight_changed
-    */
-   DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED = 2,
+  /**
+   * @brief See struct dmc_event_container_weight_changed
+   */
+  DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED = 2,
 
-   /**
-    * @brief See struct dmc_event_container_weight_measured
-    */
-   DMC_EVENT_TYPE_USER_CONFIRM = 3,
+  /**
+   * @brief See struct dmc_event_container_weight_measured
+   */
+  DMC_EVENT_TYPE_USER_CONFIRM = 3,
 
-   /**
-    * @brief See struct dmc_event_fluid_pour_requested
-    */
-   DMC_EVENT_TYPE_FLUID_POUR_REQUESTED = 4,
+  /**
+   * @brief See struct dmc_event_fluid_pour_requested
+   */
+  DMC_EVENT_TYPE_FLUID_POUR_REQUESTED = 4,
 
-   /* ##################### */
+  /* ##################### */
 
-   // Max event type
-   __DMC_EVENT_TYPE_MAX
+  // Max event type
+  __DMC_EVENT_TYPE_MAX
 };
 
 /**
@@ -45,7 +45,7 @@ enum dmc_event_type
  */
 struct dmc_base_event
 {
-   enum dmc_event_type type;
+  enum dmc_event_type type;
 };
 
 /**
@@ -62,24 +62,24 @@ int dmc_validate_base_event(struct dmc_base_event *base);
  */
 struct dmc_event_out_of_order
 {
-   // Top-level event metadata
-   struct dmc_base_event *base;
+  // Top-level event metadata
+  struct dmc_base_event *base;
 
-   /* ##################### */
-   /* Event specific fields */
-   /* ##################### */
+  /* ##################### */
+  /* Event specific fields */
+  /* ##################### */
 
-   /**
-    * @brief Message to display to user. Can take the form of any of the
-    * constants defined in out_of_order.h Null charater terminated.
-    */
-   char *message;
+  /**
+   * @brief Message to display to user. Can take the form of any of the
+   * constants defined in out_of_order.h Null charater terminated.
+   */
+  char *message;
 
-   /**
-    * @brief The reason code, which the message was derived from. See enum
-    * dmc_packet_out_of_order_reason for what the codes mean.
-    */
-   uint8_t reason;
+  /**
+   * @brief The reason code, which the message was derived from. See enum
+   * dmc_packet_out_of_order_reason for what the codes mean.
+   */
+  uint8_t reason;
 };
 
 /**
@@ -95,18 +95,18 @@ int dmc_validate_event_out_of_order(struct dmc_event_out_of_order *event);
  */
 struct dmc_event_container_weight_measured
 {
-   // Top-level event metadata
-   struct dmc_base_event *base;
+  // Top-level event metadata
+  struct dmc_base_event *base;
 
-   /**
-    * @brief The container the measurement was from. Ranging from 0-2
-    */
-   uint8_t container;
+  /**
+   * @brief The container the measurement was from. Ranging from 0-2
+   */
+  uint8_t container;
 
-   /**
-    * @brief Weight measured in grams
-    */
-   int16_t weight;
+  /**
+   * @brief Weight measured in grams
+   */
+  int16_t weight;
 };
 
 /**
@@ -116,8 +116,8 @@ struct dmc_event_container_weight_measured
  */
 struct dmc_event_user_confirm
 {
-   // Top-level event metadata
-   struct dmc_base_event *base;
+  // Top-level event metadata
+  struct dmc_base_event *base;
 };
 
 /**
@@ -127,18 +127,18 @@ struct dmc_event_user_confirm
  */
 struct dmc_event_fluid_pour_requested
 {
-   // Top-level event metadata
-   struct dmc_base_event *base;
+  // Top-level event metadata
+  struct dmc_base_event *base;
 
-   /**
-    * @brief The container to pour from. Ranging from 0-2
-    */
-   uint8_t container;
+  /**
+   * @brief The container to pour from. Ranging from 0-2
+   */
+  uint8_t container;
 
-   /**
-    * @brief Amount to pour in centiliters
-    */
-   uint8_t amount;
+  /**
+   * @brief Amount to pour in centiliters
+   */
+  uint8_t amount;
 };
 
 #endif // DMC_EVENT_H
