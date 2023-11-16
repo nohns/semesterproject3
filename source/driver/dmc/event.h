@@ -15,22 +15,22 @@ enum dmc_event_type
   /* ##################### */
 
   /**
-   * @brief See dmc_event_out_of_order
+   * @brief See struct dmc_event_out_of_order
    */
   DMC_EVENT_TYPE_OUT_OF_ORDER = 1,
 
   /**
-   * @brief See dmc_event_container_weight_changed
+   * @brief See struct dmc_event_container_weight_changed
    */
   DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED = 2,
 
   /**
-   * @brief See dmc_event_container_weight_measured
+   * @brief See struct dmc_event_container_weight_measured
    */
   DMC_EVENT_TYPE_USER_CONFIRM = 3,
 
   /**
-   * @brief See dmc_event_pour_fluid
+   * @brief See struct dmc_event_fluid_pour_requested
    */
   DMC_EVENT_TYPE_FLUID_POUR_REQUESTED = 4,
 
@@ -70,9 +70,16 @@ struct dmc_event_out_of_order
   /* ##################### */
 
   /**
-   * @brief Message to display to user. Null charater terminated.
+   * @brief Message to display to user. Can take the form of any of the
+   * constants defined in out_of_order.h Null charater terminated.
    */
-  char *f_msg;
+  char *message;
+
+  /**
+   * @brief The reason code, which the message was derived from. See enum
+   * dmc_packet_out_of_order_reason for what the codes mean.
+   */
+  uint8_t reason;
 };
 
 /**

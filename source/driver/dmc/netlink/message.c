@@ -24,6 +24,7 @@ enum dmc_event_nl_out_of_order_attr
   DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_UNSPECIFIED = 0,
   DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_TYPE        = DMC_EVENT_GENL_BASE_ATTR_TYPE,
   DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_MESSAGE     = 2,
+  DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_REASON      = 3,
   __DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_MAX,
 };
 
@@ -161,8 +162,14 @@ int dmc_netlink_marshal_event_out_of_order(
   // - MARK: Marshal event specific fields
 
   // Message
-  err = nla_put_string(event_msg->buff,
-                       DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_MESSAGE, event->f_msg);
+  err =
+      nla_put_string(event_msg->buff, DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_MESSAGE,
+                     event->message);
+  if (err != 0) return err;
+
+  // Reason
+  err = nla_put_u8(event_msg->buff, DMC_EVENT_GENL_OUT_OF_ORDER_ATTR_REASON,
+                   event->reason);
   if (err != 0) return err;
 
   return 0;
