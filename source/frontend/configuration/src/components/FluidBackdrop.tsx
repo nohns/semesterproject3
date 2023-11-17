@@ -26,9 +26,10 @@ const FluidBackdrop: React.FC<FLuidBackDropProps> = ({
         container={container}
         setContainer={setContainer}
         fluids={fluids}
-        className="bg-slate-100 w-40"
+        className="bg-gray-200 w-40 border-black border-2 rounded-xl"
       />
       <ShowContainer />
+      {/* <div className="text-black font-mono">current drink vodka</div> */}
     </div>
   );
 };
