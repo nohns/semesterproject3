@@ -3,6 +3,7 @@
 import React from "react";
 import CustomDropdown from "@/components/Dropdown";
 import { Fluid } from "@/api/endpoints/fluid/getFluids";
+import ShowContainer from "./ShowContainer";
 // import ShowImage from "@/views/image/ShowImage";
 // import useGetImages, { Image } from "@/api/endpoints/images/getImages";
 // import Overblik_80_100 from "@/assets/Overblik_80_100.png";
@@ -28,8 +29,7 @@ const FluidBackdrop: React.FC<FLuidBackDropProps> = ({
         className="bg-slate-100 w-40"
       />
       <div className="w-[40%] h-[60%] bg-white">
-        {/* <ShowImage image={images} /> */}
-        {/* Add your additional content here if needed */}
+        <ShowContainer />
       </div>
     </div>
   );
