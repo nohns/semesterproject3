@@ -52,7 +52,7 @@ class Drink:
 
 
 @dataclass
-class FluidContainer:
+class Container:
     fluid_amount_in_cl: int
     fluid: Fluid
     container_id: int = None

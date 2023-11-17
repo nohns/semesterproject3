@@ -1,15 +1,15 @@
 import sqlite3
 from domain.domain import FluidContainer
 
-def get_containers(connection: sqlite3.Connection)-> list[FluidContainer]:
+def get_containers(connection: sqlite3.Connection)-> list[Container]:
     cursor = connection.cursor()
 
     try:
         cursor.execute("""
-            SELECT FluidContainers.container_id, FluidContainers.fluid_amount_in_cl, 
+            SELECT Containers.container_id, Containers.fluid_amount_in_cl, 
                    Fluids.name as fluid_name
-            FROM FluidContainers
-            LEFT JOIN Fluids ON FluidContainers.fluid_type_id = Fluids.id
+            FROM Containers
+            LEFT JOIN Fluids ON Containers.fluid_type_id = Fluids.id
         """)
         containers_data = cursor.fetchall()
 
@@ -36,7 +36,7 @@ def change_containers(connection: sqlite3.Connection, container_id: int, fluid_t
 
     try:
         cursor.execute("""
-            UPDATE FluidContainers 
+            UPDATE Containers 
             SET fluid_type_id = ?, fluid_amount_in_cl = ? 
             WHERE container_id = ?
         """, (fluid_type_id, fluid_amount, container_id))
