@@ -14,6 +14,7 @@ if (ENV.MOCKED) {
 export interface FluidContainer {
   id: number;
   fluid: Fluid;
+  fluidAmountInCl: number;
 }
 
 interface GetContainersRequest {}
