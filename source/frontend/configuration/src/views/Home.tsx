@@ -88,11 +88,11 @@ function Home(): JSX.Element {
               fluids={fluids.data?.fluids!}
             />
           </div>
-          <div className="flex flex-col items-center text-white font-mono text-xl">
+          <div className="flex flex-col items-center text-white font-mono text-2xl font-bold mt-2 ">
             Possible drinks:
             {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
           </div>
-          <div className="bg-rose-700 mt-5 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-700 hover:opacity-75">
+          <div className="bg-rose-700 mt-3 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-700 hover:opacity-75">
             Update menu
           </div>
         </div>

@@ -18,6 +18,7 @@ function DrinkCard({ drinks }: DrinkCardProps): JSX.Element {
         }`}
             style={{
               backgroundImage: `url("src/assets/HotPot1.png")`,
+              paddingTop: "5px",
               backgroundPositionX: "center",
               backgroundPositionY: "bottom",
               backgroundSize: "auto 90%",
