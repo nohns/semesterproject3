@@ -3,7 +3,7 @@ from database.database import Database
 from netlink.publisher import NetlinkPublisher
 from flask import Request
 
-from domain.domain import Fluid, Drink, FluidContainer, Image
+from domain.domain import Fluid, Drink, Container, Image
 
 
 # <- IMPORT FUNCTIONS FROM OTHER FILES ->
@@ -28,7 +28,7 @@ class Controller:
     def change_containers(self, id: int):
         return change_containers(self.database, id)
 
-    def get_containers(self) -> list[FluidContainer]:
+    def get_containers(self) -> list[Container]:
         return get_containers(self.database)
 
     def create_drink(self, data: Request) -> None:

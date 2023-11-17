@@ -6,7 +6,7 @@ from database.drinks import create_drink, delete_drink, get_drinks, pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
 
-from domain.domain import Drink, Fluid, Image, FluidContainer
+from domain.domain import Drink, Fluid, Image, Container
 
 
 # Call database class
@@ -37,7 +37,7 @@ class Database:
         # create a table for containers
         cursor.execute(
             """
-    CREATE TABLE IF NOT EXISTS FluidContainers 
+    CREATE TABLE IF NOT EXISTS Containers 
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         fluid_amount_in_cl INTEGER NOT NULL,
@@ -120,7 +120,7 @@ class Database:
     ):
         return change_containers(self.connection, id)
 
-    def get_containers(self) -> list[FluidContainer]:
+    def get_containers(self) -> list[Container]:
         return get_containers(self.connection)
 
     def create_drink(self, drink: Drink) -> None:

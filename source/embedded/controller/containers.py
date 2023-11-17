@@ -1,8 +1,8 @@
 from database.database import Database
-from domain.domain import FluidContainer
+from domain.domain import Container
 
 
-def get_containers(database: Database) -> list[FluidContainer]:
+def get_containers(database: Database) -> list[Container]:
     try:
         containers = database.get_containers()
         return containers
