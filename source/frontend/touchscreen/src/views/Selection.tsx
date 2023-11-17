@@ -5,6 +5,7 @@ import { DrinkMachineState } from "@/App";
 import { useState } from "react";
 import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/toaster";
 
 import usePourDrink from "@/api/endpoints/drinks/pourDrink";
 import useGetDrinks, { Drink } from "@/api/endpoints/drinks/getDrinks";
@@ -83,11 +84,12 @@ function Selection({
           className="mt-auto mb-8 p-8 bg-white"
           disabled={selectedDrink ? false : true}
         >
-          <h2 className="scroll-m-20  text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+          <h2 className="scroll-m-20  text-3xl font-semibold tracking-tight transition-colors first:mt-0 ">
             Pour Drink
           </h2>
         </Button>
       </div>
+      <Toaster />
     </>
   );
 }
