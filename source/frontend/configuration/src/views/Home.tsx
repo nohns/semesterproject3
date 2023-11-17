@@ -87,8 +87,8 @@ function Home(): JSX.Element {
               fluids={fluids.data?.fluids!}
             />
           </div>
-          <div className="bg-emerald-600 mt-5 py-12  px-80 rounded-2xl transition duration-300 hover:bg-emerald-600 hover:darken-2 hover:opacity-75">
-            Possible drink possibilities
+          <div className="flex flex-col items-center text-white font-mono text-xl">
+            Possible drinks:
             {possibleDrinks && <ShowDrinks drinks={possibleDrinks!} />}
           </div>
           <div className="bg-pink-800 mt-5 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-800 hover:darken-2 hover:opacity-75">
