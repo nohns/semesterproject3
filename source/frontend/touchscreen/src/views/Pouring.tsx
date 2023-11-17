@@ -27,11 +27,16 @@ function Pouring({
     return pourTime;
   } */
 
+  let beat = new Audio("src/assets/elevator.mp3");
+  beat.volume = 0.4;
+
   //Timeout function which will change the view back to the selection screen
   useEffect(() => {
     //const pour = document.querySelector(".pour") as HTMLDivElement | null;
     const liquid = document.getElementById("liquid") as HTMLDivElement | null;
     const foam = document.querySelector(".beer-foam") as HTMLDivElement | null;
+
+    beat.play();
 
     /*  setTimeout(() => {
       if (pour) pour.style.height = "360px";
