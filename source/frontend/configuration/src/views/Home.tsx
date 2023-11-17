@@ -25,6 +25,7 @@ import CustomDropdown from "@/components/Dropdown";
 import FluidBackdrop from "@/components/FluidBackdrop";
 import { useEffect, useState } from "react";
 import { Drink } from "@/api/endpoints/drinks/getDrinks";
+import DrinkCard from "@/components/DrinkCard";
 
 function Home(): JSX.Element {
   const fluids = useGetFluids();
@@ -89,13 +90,12 @@ function Home(): JSX.Element {
           </div>
           <div className="flex flex-col items-center text-white font-mono text-xl">
             Possible drinks:
-            {possibleDrinks && <ShowDrinks drinks={possibleDrinks!} />}
+            {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
           </div>
-          <div className="bg-pink-800 mt-5 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-800 hover:darken-2 hover:opacity-75">
-            Configure drink
+          <div className="bg-rose-700 mt-5 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-700 hover:opacity-75">
+            Update menu
           </div>
         </div>
-        <Footer />
       </div>
       {/* </div> */}
       <Footer />
