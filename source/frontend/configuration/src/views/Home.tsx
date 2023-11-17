@@ -22,7 +22,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import CustomDropdown from "@/components/Dropdown";
-import FluidBackdrop from "@/components/ui/FluidBackdrop";
+import FluidBackdrop from "@/components/FluidBackdrop";
 import { useEffect, useState } from "react";
 import { Drink } from "@/api/endpoints/drinks/getDrinks";
 
