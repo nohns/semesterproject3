@@ -28,9 +28,7 @@ const FluidBackdrop: React.FC<FLuidBackDropProps> = ({
         fluids={fluids}
         className="bg-slate-100 w-40"
       />
-      <div className="w-[40%] h-[60%] bg-white">
-        <ShowContainer />
-      </div>
+      <ShowContainer />
     </div>
   );
 };
