@@ -20,10 +20,14 @@ class Database:
         # Create the tables
         self.create_tables()
 
+        # Seed the tables
+        self.seed_fluids()
+        self.seed_containers()
+
         self.print_all_tables()
 
     def create_tables(self):
-        # create a boolean table for update
+        # Create a boolean table for update
         cursor = self.connection.cursor()
 
         cursor.execute(
@@ -93,6 +97,38 @@ class Database:
     """
         )
 
+    def seed_fluids(self):
+        cursor = self.connection.cursor()
+        try:
+            # Check if fluids already seeded
+            cursor.execute("SELECT COUNT(*) FROM Fluids")
+            if cursor.fetchone()[0] == 0:  # If no fluids, then seed
+                fluids = ["Vodka", "Orange Juice", "Blue Booster"]  # Example fluid names
+                for fluid in fluids:
+                    cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid,))
+                self.connection.commit()
+        except sqlite3.Error as e:
+            print(f"SQLite error: {e}")
+            self.connection.rollback()
+        finally:
+            cursor.close()
+    
+    def seed_containers(self):
+        cursor = self.connection.cursor()
+        try:
+            # Check if containers already seeded
+            cursor.execute("SELECT COUNT(*) FROM Containers")
+            if cursor.fetchone()[0] == 0:  # If no containers, then seed
+                fluid_ids = [1, 2, 3]  # Replace with actual fluid IDs if different
+                for fluid_id in fluid_ids:
+                    cursor.execute("INSERT INTO Containers (fluid_amount_in_cl, fluid_type_id) VALUES (?, ?)", (100, fluid_id))
+                self.connection.commit()
+        except sqlite3.Error as e:
+            print(f"SQLite error: {e}")
+            self.connection.rollback()
+        finally:
+            cursor.close()   
+   
     def print_all_tables(self):
         try:
             cursor = self.connection.cursor()

@@ -8,7 +8,7 @@ def get_containers(database: Database) -> list[Container]:
         return containers
     except Exception as e:
         print(f"error {e}, when trying to get containers from database to controller")
-        return None
+        return []
 
 
 def change_containers(database: Database, id: int) -> None:

@@ -6,7 +6,7 @@ def get_containers(connection: sqlite3.Connection)-> list[Container]:
 
     try:
         cursor.execute("""
-            SELECT Containers.container_id, Containers.fluid_amount_in_cl, 
+            SELECT Containers.id, Containers.fluid_amount_in_cl, 
                    Fluids.name as fluid_name
             FROM Containers
             LEFT JOIN Fluids ON Containers.fluid_type_id = Fluids.id
