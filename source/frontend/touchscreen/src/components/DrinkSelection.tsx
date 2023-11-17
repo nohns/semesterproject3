@@ -2,6 +2,8 @@
 import { Drink } from "@/api/endpoints/drinks/getDrinks";
 
 import { Card, CardTitle } from "./ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "./ui/toaster";
 
 interface DrinkSelectionProps {
   drink: Drink;
@@ -28,6 +30,8 @@ function DrinkSelection({
   let beat2 = new Audio("src/assets/jaja.mp3");
   beat2.volume = 0.1;
 
+  const { toast } = useToast();
+
   return (
     <>
       <Card
@@ -47,7 +51,13 @@ function DrinkSelection({
           <div
             className="absolute top-0 left-0 w-full h-full flex items-center text-9xl justify-center text-red-500  text-center"
             /*  style={{ pointerEvents: "none" }} */
-            onClick={() => beat.play()}
+            onClick={() => {
+              toast({
+                variant: "destructive",
+                title: `Oh oh! Refill container with ${drink.name} `,
+                description: "Error: Refill container with vodka",
+              });
+            }}
           >
             X
           </div>
