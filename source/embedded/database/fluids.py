@@ -1,48 +1,8 @@
 import sqlite3
 from domain.domain import Fluid
 
-def create_fluid(connection: sqlite3.Connection, name: str)->None:
-    cursor = connection.cursor()
 
-    try:
-        cursor.execute(
-            "INSERT INTO Fluids (name) VALUES (?)",
-            (name,)
-        )
-                
-        connection.commit()
-        
-    except sqlite3.Error as e:
-        print(f"SQLite error: {e}")
-        connection.rollback()
-        raise Exception("An error occurred while creating the fluid.", e)    
-
-    finally:
-        cursor.close()
-
-    
-def delete_fluid(connection: sqlite3.Connection, fluid_id: int)->None:
-    cursor = connection.cursor()
-
-    try:
-        cursor.execute("DELETE FROM Fluids WHERE id = ?", (fluid_id,))
-        
-        if cursor.rowcount > 0:
-            connection.commit()  
-            return True 
-        else:
-            return False 
-
-    except sqlite3.Error as e:
-        print(f"SQLite error: {e}")
-        connection.rollback()  
-        return False  
-
-    finally:
-        cursor.close()  
-
-    
-def get_fluids(connection: sqlite3.Connection)-> list[Fluid] :
+def get_fluids(connection: sqlite3.Connection) -> list[Fluid]:
     cursor = connection.cursor()
 
     try:
@@ -52,7 +12,7 @@ def get_fluids(connection: sqlite3.Connection)-> list[Fluid] :
 
         # Creating a list of dictionaries, each representing a fluid
         fluids = [{"id": fluid_id, "name": name} for (fluid_id, name) in fluids_data]
-        
+
         return fluids  # Returning the list of fluids
 
     except sqlite3.Error as e:
@@ -61,3 +21,41 @@ def get_fluids(connection: sqlite3.Connection)-> list[Fluid] :
 
     finally:
         cursor.close()  # Ensure the cursor is closed
+
+
+def create_fluid(connection: sqlite3.Connection, fluid: Fluid) -> None:
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid.name,))
+
+        connection.commit()
+
+    except sqlite3.Error as e:
+        print(f"SQLite error: {e}")
+        connection.rollback()
+        raise Exception("An error occurred while creating the fluid.", e)
+
+    finally:
+        cursor.close()
+
+
+def delete_fluid(connection: sqlite3.Connection, fluid_id: int) -> bool:
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute("DELETE FROM Fluids WHERE id = ?", (fluid_id,))
+
+        if cursor.rowcount > 0:
+            connection.commit()
+            return True
+        else:
+            return False
+
+    except sqlite3.Error as e:
+        print(f"SQLite error: {e}")
+        connection.rollback()
+        return False
+
+    finally:
+        cursor.close()
