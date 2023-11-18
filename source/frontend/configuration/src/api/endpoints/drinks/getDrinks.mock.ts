@@ -79,15 +79,49 @@ httpMock.onGet(url).reply(() => {
         ],
       },
       {
-        id: 3,
+        id: 4,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "src/assets/HotPot2.png",
         },
-        name: "Appelsin Juice",
+        name: "Snapse Vand",
         ingredients: [
           {
-            id: 4,
+            id: 1,
+            fluid: {
+              id: 3,
+              name: "Vand",
+            },
+            amountInCl: 5,
+          },
+          {
+            id: 2,
+            fluid: {
+              id: 5,
+              name: "Snaps",
+            },
+            amountInCl: 5,
+          },
+        ],
+      },
+      {
+        id: 5,
+        image: {
+          id: 1,
+          path: "src/assets/HotPot2.png",
+        },
+        name: "Vodka Juice",
+        ingredients: [
+          {
+            id: 1,
+            fluid: {
+              id: 1,
+              name: "Vodka",
+            },
+            amountInCl: 5,
+          },
+          {
+            id: 2,
             fluid: {
               id: 4,
               name: "Juice",
