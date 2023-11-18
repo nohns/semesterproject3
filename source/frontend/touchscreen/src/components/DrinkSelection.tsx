@@ -1,5 +1,5 @@
 /** @format */
-import { Drink } from "@/api/endpoints/drinks/getDrinks";
+import { Drink, Ingredient } from "@/api/endpoints/drinks/getDrinks";
 
 import { Card, CardTitle } from "./ui/card";
 import { useToast } from "@/components/ui/use-toast";
@@ -20,6 +20,8 @@ function DrinkSelection({
     setSelectedDrink(drink);
     beat2.play();
   };
+
+  //I need a function which calculates the total amountInCl of the drink based on the array of ingredients
 
   const indicatorHeight = `${drink.remainingFluid}%`;
   console.log(indicatorHeight);

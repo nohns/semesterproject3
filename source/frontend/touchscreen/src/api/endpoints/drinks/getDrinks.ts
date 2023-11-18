@@ -14,7 +14,6 @@ export interface Drink {
   id: number;
   image: Image;
   name: string;
-  remainingFluid?: number;
   ingredients: Ingredient[];
 }
 
