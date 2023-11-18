@@ -1,17 +1,18 @@
 /** @format */
 
 import React from "react";
-import CustomDropdown from "@/components/Dropdown";
+import CustomDropdown from "@/components/CustomDropdown";
 import { Fluid } from "@/api/endpoints/fluid/getFluids";
 import ShowContainer from "./ShowContainer";
+import { FluidContainer } from "@/api/endpoints/container/getContainers";
 // import ShowImage from "@/views/image/ShowImage";
 // import useGetImages, { Image } from "@/api/endpoints/images/getImages";
 // import Overblik_80_100 from "@/assets/Overblik_80_100.png";
 // const images = useGetImages();
 
 interface FLuidBackDropProps {
-  container: Fluid;
-  setContainer: React.Dispatch<React.SetStateAction<Fluid>>;
+  container: FluidContainer;
+  setContainer: React.Dispatch<React.SetStateAction<FluidContainer>>;
   fluids: Fluid[];
 }
 
@@ -28,7 +29,7 @@ const FluidBackdrop: React.FC<FLuidBackDropProps> = ({
         fluids={fluids}
         className="bg-gray-200 w-40 border-black border-2 rounded-xl"
       />
-      <ShowContainer />
+      <ShowContainer fluidAmountInCl={container.fluidAmountInCl} />
       {/* <div className="text-black font-mono">current drink vodka</div> */}
     </div>
   );
