@@ -30,7 +30,7 @@ httpMock.onGet(url).reply(() => {
           id: 3,
           name: "Vand",
         },
-        fluidAmountInCl: 80,
+        fluidAmountInCl: 10,
       },
     ],
   };
