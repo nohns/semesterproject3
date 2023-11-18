@@ -1,9 +1,6 @@
 import sqlite3
 from domain.domain import Drink, Ingredient, Fluid, Image, json_to_dataclass
 
-# Tvivler sgu på den her kommer til at virke
-# At dette virker vil kræve vi får ingredient information
-
 
 def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
     cursor = connection.cursor()
@@ -19,7 +16,7 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
 
         resulting_drinks_array = []
 
-        # drinks is an array of tuples, each tuple is a drink
+        # Drinks is an array of tuples, each tuple is a drink
         for drink in drinks:
             drink_id = drink[0]
             drink_name = drink[1]

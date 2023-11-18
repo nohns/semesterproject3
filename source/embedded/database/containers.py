@@ -31,15 +31,16 @@ def get_containers(connection: sqlite3.Connection)-> list[Container]:
 
 
     
-def change_containers(connection: sqlite3.Connection, container_id: int, fluid_type_id: int, fluid_amount: int)->None:
+def change_containers(connection: sqlite3.Connection, container_id: int, new_fluid_id: int) -> bool:
     cursor = connection.cursor()
 
     try:
+        # Update the container with the new fluid type id
         cursor.execute("""
             UPDATE Containers 
-            SET fluid_type_id = ?, fluid_amount_in_cl = ? 
-            WHERE container_id = ?
-        """, (fluid_type_id, fluid_amount, container_id))
+            SET fluid_type_id = ?
+            WHERE id = ?
+        """, (new_fluid_id, container_id))
 
         connection.commit()
 
@@ -53,3 +54,4 @@ def change_containers(connection: sqlite3.Connection, container_id: int, fluid_t
 
     finally:
         cursor.close()
+

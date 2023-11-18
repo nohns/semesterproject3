@@ -151,10 +151,8 @@ class Database:
         except sqlite3.Error as e:
             print("SQLite error:", e)
 
-    def change_containers(
-        self, container_id: int, fluid_type_id: int, fluid_amount: int
-    ):
-        return change_containers(self.connection, id)
+    def change_containers(self, container_id: int, new_fluid_id: int) -> bool:
+        return change_containers(self.connection, container_id, new_fluid_id)
 
     def get_containers(self) -> list[Container]:
         return get_containers(self.connection)

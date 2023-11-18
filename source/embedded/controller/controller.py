@@ -24,12 +24,12 @@ class Controller:
         self.database = database
         self.netlink_publisher = netlink_publisher
 
-    # Probaly need to add more parameters to this
-    def change_containers(self, id: int):
-        return change_containers(self.database, id)
+    def change_containers(self, container_id: int, new_fluid_id: int) -> bool:
+        return change_containers(self.database, container_id, new_fluid_id)
 
     def get_containers(self) -> list[Container]:
         return get_containers(self.database)
+    
 
     def create_drink(self, data: Request) -> None:
         return create_drink(self.database, data)

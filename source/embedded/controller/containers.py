@@ -11,10 +11,10 @@ def get_containers(database: Database) -> list[Container]:
         return []
 
 
-def change_containers(database: Database, id: int) -> None:
+def change_containers(database: Database, container_id: int, new_fluid_id: int) -> bool:
     try:
-        # database.change_containers(id)
-        return None
+        return database.change_containers(container_id, new_fluid_id)
     except Exception as e:
         print(f"error {e}, when trying to change containers via controller")
-        raise Exception("fix the issue", e)
+        raise
+
