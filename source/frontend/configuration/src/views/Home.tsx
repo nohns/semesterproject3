@@ -1,6 +1,8 @@
 /** @format */
 
-import useGetContainers from "@/api/endpoints/container/getContainers";
+import useGetContainers, {
+  FluidContainer,
+} from "@/api/endpoints/container/getContainers";
 
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
 import useGetImages, { Image } from "@/api/endpoints/images/getImages";
@@ -22,9 +24,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import CustomDropdown from "@/components/Dropdown";
-import FluidBackdrop from "@/components/ui/FluidBackdrop";
+import FluidBackdrop from "@/components/FluidBackdrop";
 import { useEffect, useState } from "react";
 import { Drink } from "@/api/endpoints/drinks/getDrinks";
+import DrinkCard from "@/components/DrinkCard";
 
 function Home(): JSX.Element {
   const fluids = useGetFluids();
@@ -35,7 +38,11 @@ function Home(): JSX.Element {
 
   //let possibleDrinks = calc?.calculate(fluids.data?.fluids!);
 
-  const [container1, setContainer1] = useState<Fluid>({
+  const getContainers = useGetContainers();
+
+  const containers = getContainers.data?.containers!;
+
+  const [container1, setContainer1] = useState<FluidContainer>({
     id: 0,
     name: "Vælg væske",
   });
@@ -87,15 +94,14 @@ function Home(): JSX.Element {
               fluids={fluids.data?.fluids!}
             />
           </div>
-          <div className="bg-emerald-600 mt-5 py-12  px-80 rounded-2xl transition duration-300 hover:bg-emerald-600 hover:darken-2 hover:opacity-75">
-            Possible drink possibilities
-            {possibleDrinks && <ShowDrinks drinks={possibleDrinks!} />}
+          <div className="flex flex-col items-center text-white font-mono text-2xl font-bold mt-2 ">
+            Possible drinks:
+            {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
           </div>
-          <div className="bg-pink-800 mt-5 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-800 hover:darken-2 hover:opacity-75">
-            Configure drink
+          <div className="bg-rose-700 mt-3 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-700 hover:opacity-75">
+            Update menu
           </div>
         </div>
-        <Footer />
       </div>
       {/* </div> */}
       <Footer />
