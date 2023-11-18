@@ -1,6 +1,8 @@
 /** @format */
 
-import useGetContainers from "@/api/endpoints/container/getContainers";
+import useGetContainers, {
+  FluidContainer,
+} from "@/api/endpoints/container/getContainers";
 
 import useGetFluids, { Fluid } from "@/api/endpoints/fluid/getFluids";
 import useGetImages, { Image } from "@/api/endpoints/images/getImages";
@@ -36,7 +38,11 @@ function Home(): JSX.Element {
 
   //let possibleDrinks = calc?.calculate(fluids.data?.fluids!);
 
-  const [container1, setContainer1] = useState<Fluid>({
+  const getContainers = useGetContainers();
+
+  const containers = getContainers.data?.containers!;
+
+  const [container1, setContainer1] = useState<FluidContainer>({
     id: 0,
     name: "Vælg væske",
   });
