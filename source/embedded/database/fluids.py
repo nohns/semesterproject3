@@ -27,14 +27,15 @@ def create_fluid(connection: sqlite3.Connection, fluid: Fluid) -> None:
     cursor = connection.cursor()
 
     try:
-        cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid.name,))
+        # Check if a fluid with identical name already exists
+        all_fluids = get_fluids(connection)
 
-        # Check if a fluid with identical id already exists
-        allFluids = get_fluids(connection)
-
-        if any(existing_fluid["name"] == fluid.name for existing_fluid in allFluids):
+        if any(fluid.name == existing_fluid["name"] for existing_fluid in all_fluids):
+            print(fluid.name)
             print("Database: Fluid already exists")
-            return None
+            return
+
+        cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid.name,))
 
         connection.commit()
 
