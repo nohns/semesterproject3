@@ -21,7 +21,7 @@ class Database:
         self.create_tables()
 
         # Seed the tables
-        self.seed_fluids()
+        # self.seed_fluids()
         self.seed_containers()
 
         self.print_all_tables()
