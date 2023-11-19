@@ -1,17 +1,16 @@
 /** @format */
 
-import useGetDrinks, { Drink } from "@/api/endpoints/drinks/getDrinks";
+import { Drink } from "@/api/endpoints/drinks/getDrinks";
 import { Fluid } from "@/api/endpoints/fluid/getFluids";
 
-// O(n^3) Who the fuck cares it works
 const useCalculateDrinks = () => {
-  const { data } = useGetDrinks();
+  //const { data } = useGetDrinks();
+  console.log("useCalculateDrinkws called");
 
-  const calculate = (fluids: Fluid[]) => {
-    if (data?.drinks.length! > 0) {
-      const drinks = data?.drinks!;
-
+  const calculate = (fluids: Fluid[], drinks: Drink[]) => {
+    if (drinks.length > 0) {
       const possibleDrinks: Drink[] = [];
+      console.log("I am actually calculating stuff");
 
       drinks.forEach((drink) => {
         const isPossible = drink.ingredients.every((ingredient) =>
@@ -25,6 +24,7 @@ const useCalculateDrinks = () => {
 
       return possibleDrinks;
     }
+    return [];
   };
 
   return { calculate };

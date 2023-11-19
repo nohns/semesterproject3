@@ -1,5 +1,7 @@
+/** @format */
+
 import React from "react";
-import CustomDropdown from "@/components/Dropdown";
+import CustomDropdown from "@/components/CustomDropdown";
 // import ShowImage from "@/views/image/ShowImage";
 // import useGetImages, { Image } from "@/api/endpoints/images/getImages";
 // import Overblik_80_100 from "@/assets/Overblik_80_100.png";

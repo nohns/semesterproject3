@@ -59,3 +59,35 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes wave {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+
+
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 10px 0 rgba(220, 38, 38, 0.7); }
+  50% { box-shadow: 0 0 20px 10px rgba(255, 165, 0, 0.7); }
+  100% { box-shadow: 0 0 10px 0 rgba(74, 222, 128, 0.7); }
+}
+
+.selectedCard {
+  position: relative;
+  animation: wave 4s infinite;
+}
+
+.selectedCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: inherit;
+  animation: neonPulse 4s infinite;
+  animation-delay: 0s; /* Set the delay to 0s to synchronize with the main animation */
+}
