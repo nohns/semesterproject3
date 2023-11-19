@@ -29,7 +29,6 @@ class Controller:
 
     def get_containers(self) -> list[Container]:
         return get_containers(self.database)
-    
 
     def create_drink(self, data: Request) -> None:
         return create_drink(self.database, data)

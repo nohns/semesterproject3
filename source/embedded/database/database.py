@@ -26,6 +26,14 @@ class Database:
 
         self.print_all_tables()
 
+        from sample_data import fluids, drinks
+
+        print("Adding sample data to database")
+        for fluid in fluids:
+            create_fluid(self.connection, fluid)
+        for drink in drinks:
+            create_drink(self.connection, drink)
+
     def create_tables(self):
         # Create a boolean table for update
         cursor = self.connection.cursor()
@@ -103,7 +111,11 @@ class Database:
             # Check if fluids already seeded
             cursor.execute("SELECT COUNT(*) FROM Fluids")
             if cursor.fetchone()[0] == 0:  # If no fluids, then seed
-                fluids = ["Vodka", "Orange Juice", "Blue Booster"]  # Example fluid names
+                fluids = [
+                    "Vodka",
+                    "Orange Juice",
+                    "Blue Booster",
+                ]  # Example fluid names
                 for fluid in fluids:
                     cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid,))
                 self.connection.commit()
@@ -112,7 +124,7 @@ class Database:
             self.connection.rollback()
         finally:
             cursor.close()
-    
+
     def seed_containers(self):
         cursor = self.connection.cursor()
         try:
@@ -121,14 +133,17 @@ class Database:
             if cursor.fetchone()[0] == 0:  # If no containers, then seed
                 fluid_ids = [1, 2, 3]  # Replace with actual fluid IDs if different
                 for fluid_id in fluid_ids:
-                    cursor.execute("INSERT INTO Containers (fluid_amount_in_cl, fluid_type_id) VALUES (?, ?)", (100, fluid_id))
+                    cursor.execute(
+                        "INSERT INTO Containers (fluid_amount_in_cl, fluid_type_id) VALUES (?, ?)",
+                        (100, fluid_id),
+                    )
                 self.connection.commit()
         except sqlite3.Error as e:
             print(f"SQLite error: {e}")
             self.connection.rollback()
         finally:
-            cursor.close()   
-   
+            cursor.close()
+
     def print_all_tables(self):
         try:
             cursor = self.connection.cursor()
