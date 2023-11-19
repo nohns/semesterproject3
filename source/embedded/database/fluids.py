@@ -32,7 +32,7 @@ def create_fluid(connection: sqlite3.Connection, fluid: Fluid) -> None:
         # Check if a fluid with identical id already exists
         allFluids=get_fluids(connection)
 
-        if any(existing_fluid["id"]==fluid.id for existing_fluid in allFluids):
+        if any(existing_fluid["name"]==fluid.name for existing_fluid in allFluids):
             print("Database: Fluid already exists")
             return None
 
