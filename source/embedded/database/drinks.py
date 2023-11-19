@@ -13,6 +13,7 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
         """
         )
         drinks = cursor.fetchall()
+        return drinks
 
         resulting_drinks_array = []
 
@@ -103,13 +104,17 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
         print("Database: Printing ingredient string: ", ingredient_ids)
 
         # Check if a drink with identical array of ingredient ids already exists
-        allDrinks=get_drinks(connection)
+        """
+        allDrinks = get_drinks(connection)
 
-        allDrinks_ingredient_ids={ingredient.fluid.id for ingredient in ingredients for drink in allDrinks}
+        allDrinks_ingredient_ids = {
+            ingredient.fluid.id for ingredient in ingredients for drink in allDrinks
+        }
 
-        if allDrinks_ingredient_ids==drink.ingredient_ids:
+        if allDrinks_ingredient_ids == drink.ingredient_ids:
             print("Database: Drink already exists")
             return None
+        """
 
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
         for ingredient in ingredients:
@@ -118,12 +123,12 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
                 "INSERT INTO Ingredients (amount_in_cl, fluid_id) VALUES (?, ?)",
                 (ingredient.amountInCl, ingredient.fluid.id),
             )
- 
+
         print("Database: Ingredients have been added")
 
         # Insert into Drinks table using the existing image_id since we can't directly insert the image object
         drink.image = json_to_dataclass(drink.image, Image)
-        cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image))
+        cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image.path,))
         print("Database: Image has been added")
         cursor.execute(
             "INSERT INTO Drinks (name, ingredients_ids, image_id) VALUES (?, ?, ?)",
