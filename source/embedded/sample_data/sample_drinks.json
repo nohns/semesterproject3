@@ -1,7 +1,8 @@
-{
+[
+  {
     "name": "Mojito",
     "image": {
-      "id": "3",
+      "id": "1",
       "path": "/images/mojito.jpg"
     },
     "ingredients": [
@@ -34,4 +35,42 @@
         "amountInCl": 100
       }
     ]
+  },
+  {
+    "name": "Piña Colada",
+    "image": {
+      "id": "2",
+      "path": "/images/pina_colada.jpg"
+    },
+    "ingredients": [
+      {
+        "fluid": {
+          "name": "Rum",
+          "id": 1
+        },
+        "amountInCl": 30
+      },
+      {
+        "fluid": {
+          "name": "Coconut Cream",
+          "id": 5
+        },
+        "amountInCl": 30
+      },
+      {
+        "fluid": {
+          "name": "Pineapple Juice",
+          "id": 6
+        },
+        "amountInCl": 60
+      },
+      {
+        "fluid": {
+          "name": "Mint Syrup",
+          "id": 2
+        },
+        "amountInCl": 5
+      }
+    ]
   }
+]
