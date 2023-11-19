@@ -7,17 +7,13 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
 
     try:
         # Fetch drinks along with their images
-        cursor.execute(
-            """
-            SELECT * FROM Drinks
-        """
-        )
+        cursor.execute("SELECT * FROM Drinks")
+
         drinks = cursor.fetchall()
-        return drinks
 
         resulting_drinks_array = []
 
-        # Drinks is an array of tuples, each tuple is a drink
+        # Drinks is a list of lists with each list containing a drink
         for drink in drinks:
             drink_id = drink[0]
             drink_name = drink[1]
@@ -40,7 +36,9 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
 
                     if fluid:
                         fluid = Fluid(id=fluid[0], name=fluid[1])
-                        ingredient = Ingredient(id=ingredient_id, fluid=fluid)
+                        ingredient = Ingredient(
+                            id=ingredient_id, fluid=fluid, amountInCl=ingredient[2]
+                        )
                         ingredients.append(ingredient)
                     else:
                         print(f"Fluid with ID: {fluid_id} not found")
@@ -62,6 +60,7 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
             )
 
             resulting_drinks_array.append(drink)
+
         return resulting_drinks_array
 
     except sqlite3.Error as e:
