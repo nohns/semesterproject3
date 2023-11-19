@@ -14,7 +14,6 @@ class Api:
 
     def create_app(self):
         app = Flask(__name__)
-        app.debug = True
 
         # Add CORS with custom settings
         CORS(
