@@ -81,6 +81,13 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
     try:
         print(f"Database: Attempting to create drink: {drink}")
 
+        all_drinks = get_drinks(connection)
+        print(all_drinks)
+
+        if any(drink.name == existing_drink.name for existing_drink in all_drinks):
+            print(f"Database: '{drink.name}' already exists")
+            return
+
         # Convert ingredients to dataclass instance
         ingredients = [
             json_to_dataclass(ingredient, Ingredient)
