@@ -2,10 +2,13 @@
 
 import React from "react";
 
-interface ShowContainerProps {}
+interface ShowContainerProps {
+  fluidAmountInCl: number;
+}
 
-function ShowContainer({}: React.PropsWithChildren<ShowContainerProps>) {
-  const fluidAmountInCl = 81;
+function ShowContainer({
+  fluidAmountInCl,
+}: React.PropsWithChildren<ShowContainerProps>) {
   //We need to do some switch logic here to determine which image to show
   let image = "src/assets/Overblik_1_black_0_20.png";
 
