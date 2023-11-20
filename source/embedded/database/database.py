@@ -21,7 +21,7 @@ class Database:
         self.create_tables()
 
         # Seed the tables
-        #self.seed_fluids()
+        # self.seed_fluids()
         self.seed_containers()
 
         self.print_all_tables()
@@ -33,7 +33,6 @@ class Database:
             create_fluid(self.connection, fluid)
         for drink in drinks:
             create_drink(self.connection, drink)
-
 
     def create_tables(self):
         # Create a boolean table for update
