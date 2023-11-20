@@ -15,7 +15,7 @@ class Database:
 
     def __init__(self):
         print("Database initialized")
-        self.connection = sqlite3.connect("database.db", check_same_thread=False)
+        self.connection = sqlite3.connect("database2.db", check_same_thread=False)
 
         # Create the tables
         self.create_tables()
