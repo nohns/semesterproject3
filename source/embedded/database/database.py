@@ -15,16 +15,24 @@ class Database:
 
     def __init__(self):
         print("Database initialized")
-        self.connection = sqlite3.connect("database2.db", check_same_thread=False)
+        self.connection = sqlite3.connect("database.db", check_same_thread=False)
 
         # Create the tables
         self.create_tables()
 
         # Seed the tables
-        self.seed_fluids()
+        #self.seed_fluids()
         self.seed_containers()
 
         self.print_all_tables()
+
+        from sample_data import fluids, drinks
+
+        print("Adding sample data to database")
+        for fluid in fluids:
+            create_fluid(self.connection, fluid)
+        for drink in drinks:
+            create_drink(self.connection, drink)
 
 
     def create_tables(self):
