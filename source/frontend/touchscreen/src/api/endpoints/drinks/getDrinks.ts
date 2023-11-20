@@ -28,7 +28,7 @@ interface Image {
   path: string;
 }
 
-interface Fluid {
+export interface Fluid {
   id: number;
   name: string;
 }

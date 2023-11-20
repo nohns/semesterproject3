@@ -3,9 +3,9 @@
 import ENV from "@/constants/env";
 
 import { useQuery } from "@tanstack/react-query";
+import { Fluid } from "@/api/endpoints/drinks/getDrinks";
 
 import { http } from "@/api/axios";
-import { Fluid } from "../fluid/getFluids.ts";
 
 if (ENV.MOCKED) {
   await import("./getContainers.mock.ts");
