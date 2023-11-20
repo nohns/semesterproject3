@@ -74,7 +74,7 @@ httpMock.onGet(url).reply(() => {
               id: 3,
               name: "Vand",
             },
-            amountInCl: 5,
+            amountInCl: 20,
           },
         ],
       },
