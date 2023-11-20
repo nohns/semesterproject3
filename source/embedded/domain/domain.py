@@ -1,26 +1,29 @@
-from dataclasses import dataclass
-from typing import Optional
-import dataclasses
+from dataclasses import dataclass, fields, is_dataclass, MISSING
 
-import json
 
 
 # Define a function to convert a JSON object to a data class instance
 def json_to_dataclass(json_data, dataclass_type):
     try:
+        # Check if the provided type is indeed a dataclass
+        if not is_dataclass(dataclass_type):
+            raise TypeError("Provided type is not a dataclass.")
+
         # Get the dataclass fields and their default values
         defaults = {
-            f.name: f.default
-            for f in dataclass_type.__dataclass_fields__.values()
-            if f.default is not dataclasses._MISSING_TYPE
+            field.name: field.default
+            for field in fields(dataclass_type)
+            if field.default is not MISSING
         }
+
         # Update the defaults with the actual json data
         defaults.update(json_data)
+
         # Create the dataclass instance
         return dataclass_type(**defaults)
     except Exception as e:
         print(e)
-        raise ValueError(f"Error converting JSON to dataclass: {str(e)}")
+        raise ValueError(f"Error converting JSON to dataclass: {str(e)}") from e
 
 
 # Domain classes

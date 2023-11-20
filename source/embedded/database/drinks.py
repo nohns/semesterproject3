@@ -71,9 +71,8 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
         cursor.close()
 
 
-def pour_drink(connection: sqlite3.Connection) -> None:
-    # TODO: Implement
-    return 0
+# def pour_drink(connection: sqlite3.Connection) -> None:
+#     return 0
 
 
 def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
@@ -148,7 +147,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
         connection.rollback()
-        raise Exception("An error occurred while creating the drink.", e)
+        raise Exception("An error occurred while creating the drink.", e) from e
 
     finally:
         cursor.close()

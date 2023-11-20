@@ -2,7 +2,7 @@ import sqlite3
 
 from database.update import update, set_status_to_true
 from database.containers import change_containers, get_containers
-from database.drinks import create_drink, delete_drink, get_drinks, pour_drink
+from database.drinks import create_drink, delete_drink, get_drinks # , pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
 
@@ -21,7 +21,7 @@ class Database:
         self.create_tables()
 
         # Seed the tables
-        #self.seed_fluids()
+        # self.seed_fluids()
         self.seed_containers()
 
         self.print_all_tables()
@@ -33,7 +33,6 @@ class Database:
             create_fluid(self.connection, fluid)
         for drink in drinks:
             create_drink(self.connection, drink)
-
 
     def create_tables(self):
         # Create a boolean table for update
@@ -176,14 +175,14 @@ class Database:
     def create_drink(self, drink: Drink) -> None:
         return create_drink(self.connection, drink)
 
-    def delete_drink(self, id: int) -> None:
-        return delete_drink(self.connection)
+    def delete_drink(self, drink_id: int) -> None:
+        return delete_drink(self.connection, drink_id)
 
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.connection)
 
-    def pour_drink(self, id: int) -> None:
-        return pour_drink(self.connection, id)
+    # def pour_drink(self, id: int) -> None:
+    #     return pour_drink(self.connection, id)
 
     def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.connection)
