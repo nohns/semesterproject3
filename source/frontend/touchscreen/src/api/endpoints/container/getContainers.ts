@@ -1,15 +1,11 @@
 /** @format */
 
-import ENV from "@/constants/env";
-
 import { useQuery } from "@tanstack/react-query";
 import { Fluid } from "@/api/endpoints/drinks/getDrinks";
 
-import { http } from "@/api/axios";
-
-if (ENV.MOCKED) {
-  await import("./getContainers.mock.ts");
-}
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/container/getContainers.mock";
 
 export interface FluidContainer {
   id: number;

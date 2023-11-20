@@ -1,14 +1,8 @@
 /** @format */
 
-import ENV from "@/constants/env";
-
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
-
-if (ENV.MOCKED) {
-  await import("./getDrinks.mock.ts");
-}
+import http from "../../axios";
 
 const getUpdate = async () => {
   const response = await http.get(`v1/updates`);
