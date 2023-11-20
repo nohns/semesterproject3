@@ -33,8 +33,8 @@ class Controller:
     def create_drink(self, data: Request) -> None:
         return create_drink(self.database, data)
 
-    def delete_drink(self) -> None:
-        return delete_drink(self.database)
+    def delete_drink(self, drink_id: int) -> None:
+        return delete_drink(self.database, drink_id)
 
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.database)

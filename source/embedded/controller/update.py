@@ -10,4 +10,4 @@ def update(database: Database) -> bool:
 
     except Exception as e:
         print("Failed to get update from database", e)
-        raise Exception("Failed to get update from database", e)
+        raise Exception("Failed to get update from database", e) from e

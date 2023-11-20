@@ -1,5 +1,4 @@
 import sqlite3
-from domain.domain import Container
 
 
 def get_containers(connection: sqlite3.Connection) -> list[dict]:

@@ -42,7 +42,7 @@ def create_fluid(connection: sqlite3.Connection, fluid: Fluid) -> None:
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")
         connection.rollback()
-        raise Exception("An error occurred while creating the fluid.", e)
+        raise Exception("An error occurred while creating the fluid.", e) from e
 
     finally:
         cursor.close()

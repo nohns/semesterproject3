@@ -1,5 +1,5 @@
 from controller.controller import Controller
-from flask import Flask, Blueprint, request
+from flask import Flask, request
 from flask_cors import CORS
 
 
