@@ -2,13 +2,14 @@ from database.database import Database
 from domain.domain import Container
 
 
-def get_containers(database: Database) -> list[Container]:
+def get_containers(database: Database) -> dict:
     try:
         containers = database.get_containers()
-        return containers
+        return {'containers': containers}  # Wrap the list in a dictionary with the key 'containers'
     except Exception as e:
         print(f"error {e}, when trying to get containers from database to controller")
-        return []
+        raise Exception("Unable to get containers")
+
 
 
 def change_containers(database: Database, container_id: int, new_fluid_id: int) -> bool:

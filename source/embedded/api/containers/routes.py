@@ -9,8 +9,8 @@ def register_containers_bp(controller: Controller):
     @containers_bp.route("/", methods=["GET"])
     def get_containers():
         try:
-            containers = controller.get_containers()
-            return jsonify(containers), 200
+            containers_dict = controller.get_containers()  
+            return jsonify(containers_dict), 200  
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 

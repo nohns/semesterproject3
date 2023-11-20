@@ -1,24 +1,27 @@
 import sqlite3
 from domain.domain import Container
 
-def get_containers(connection: sqlite3.Connection)-> list[Container]:
+def get_containers(connection: sqlite3.Connection) -> list[dict]:
     cursor = connection.cursor()
 
     try:
         cursor.execute("""
             SELECT Containers.id, Containers.fluid_amount_in_cl, 
-                   Fluids.name as fluid_name
+                   Fluids.id as fluid_id, Fluids.name as fluid_name
             FROM Containers
             LEFT JOIN Fluids ON Containers.fluid_type_id = Fluids.id
         """)
         containers_data = cursor.fetchall()
 
-        # Format the data into a list of dictionaries
+        # Format the data into a list of dictionaries with nested fluid dictionary
         containers = [{
-            "container_id": c_id,
-            "fluid_amount_in_cl": f_amount,
-            "fluid_name": f_name
-        } for (c_id, f_amount, f_name) in containers_data]
+            "id": c_id,
+            "fluid": {
+                "id": fluid_id,
+                "name": fluid_name
+            },
+            "fluidAmountInCl": f_amount
+        } for (c_id, f_amount, fluid_id, fluid_name) in containers_data]
 
         return containers
 
@@ -28,6 +31,7 @@ def get_containers(connection: sqlite3.Connection)-> list[Container]:
 
     finally:
         cursor.close()
+
 
 
     
