@@ -1,6 +1,6 @@
 [
   {
-    "name": "Mojito",
+    "name": "Tis",
     "image": {
       "id": "1",
       "path": "/images/mojito.jpg"
@@ -8,66 +8,22 @@
     "ingredients": [
       {
         "fluid": {
-          "name": "Rum",
+          "name": "Vodka",
           "id": 1
         },
         "amountInCl": 15
       },
       {
         "fluid": {
-          "name": "Mint Syrup",
+          "name": "Blå booster",
           "id": 2
         },
         "amountInCl": 10
       },
       {
         "fluid": {
-          "name": "Lime Juice",
+          "name": "Vand",
           "id": 3
-        },
-        "amountInCl": 5
-      },
-      {
-        "fluid": {
-          "name": "Club Soda",
-          "id": 4
-        },
-        "amountInCl": 100
-      }
-    ]
-  },
-  {
-    "name": "Piña Colada",
-    "image": {
-      "id": "2",
-      "path": "/images/pina_colada.jpg"
-    },
-    "ingredients": [
-      {
-        "fluid": {
-          "name": "Rum",
-          "id": 1
-        },
-        "amountInCl": 30
-      },
-      {
-        "fluid": {
-          "name": "Coconut Cream",
-          "id": 5
-        },
-        "amountInCl": 30
-      },
-      {
-        "fluid": {
-          "name": "Pineapple Juice",
-          "id": 6
-        },
-        "amountInCl": 60
-      },
-      {
-        "fluid": {
-          "name": "Mint Syrup",
-          "id": 2
         },
         "amountInCl": 5
       }
