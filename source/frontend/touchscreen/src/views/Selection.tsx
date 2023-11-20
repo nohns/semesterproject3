@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import usePourDrink from "@/api/endpoints/drinks/pourDrink";
 import { Drink } from "@/api/endpoints/drinks/getDrinks";
 import useCalculateDrinks from "@/hooks/useCalculateDrinks";
-import { Toaster } from "@/components/ui/toaster";
 
 interface SelectionProps {
   setView: React.Dispatch<React.SetStateAction<DrinkMachineState>>;

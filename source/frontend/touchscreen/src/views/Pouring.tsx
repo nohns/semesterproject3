@@ -1,6 +1,6 @@
 /** @format */
 import { DrinkMachineState } from "@/App";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./animation.css";
 import Countdown from "@/components/Countdown";
 import { Drink } from "@/api/endpoints/drinks/getDrinks";

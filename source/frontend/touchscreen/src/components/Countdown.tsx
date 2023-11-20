@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 interface CountdownProps {
@@ -44,6 +44,8 @@ function Countdown({ time }: CountdownProps): JSX.Element {
         colors={["#4ade80", "#4ade80", "#4ade80", "#4ade80"]}
         colorsTime={[7, 5, 2, 0]}
         size={225}
+        strokeLinecap="square"
+        trailColor="#3d465c"
       >
         {renderTime}
       </CountdownCircleTimer>

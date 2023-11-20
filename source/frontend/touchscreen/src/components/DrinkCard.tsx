@@ -1,10 +1,9 @@
 /** @format */
-import { Drink, Ingredient } from "@/api/endpoints/drinks/getDrinks";
+import { Drink } from "@/api/endpoints/drinks/getDrinks";
 
 import { Card, CardTitle } from "./ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import useCalculateDrinks from "@/hooks/useCalculateDrinks";
-import { Toaster } from "./ui/toaster";
 
 interface DrinkCardProps {
   drink: Drink;
