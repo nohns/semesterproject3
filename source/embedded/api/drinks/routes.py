@@ -10,9 +10,10 @@ def register_drinks_bp(controller: Controller):
     def get_drinks():
         try:
             drinks = controller.get_drinks()
-            return jsonify({"drinks": drinks}), 200  # Wrap the list in a dictionary
+            return jsonify(drinks), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
+
 
     @drinks_bp.route("/", methods=["POST"])
     def create_drink():
