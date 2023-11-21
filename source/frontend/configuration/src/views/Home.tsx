@@ -23,7 +23,7 @@ function Home(): JSX.Element {
 
   const calc = useCalculateDrinks();
 
-  const [possibleDrinks, setPossibleDrinks] = useState<Drink[]>([]);
+  const [possibleDrinks, setPossibleDrinks] = useState<Drink[] | undefined>([]);
 
   //let possibleDrinks = calc?.calculate(fluids.data?.fluids!);
 
