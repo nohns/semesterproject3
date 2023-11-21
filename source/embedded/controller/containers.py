@@ -1,5 +1,6 @@
 from database.database import Database
 
+
 def get_containers(database: Database) -> dict:
     try:
         containers = database.get_containers()

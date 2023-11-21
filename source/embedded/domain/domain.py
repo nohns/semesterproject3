@@ -1,7 +1,6 @@
 from dataclasses import dataclass, fields, is_dataclass, MISSING
 
 
-
 # Define a function to convert a JSON object to a data class instance
 def json_to_dataclass(json_data, dataclass_type):
     try:

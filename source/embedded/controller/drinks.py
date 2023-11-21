@@ -3,13 +3,13 @@ from domain.domain import Drink, json_to_dataclass
 from flask import Request
 
 
-def get_drinks(database: Database) -> list[Drink]:
+def get_drinks(database: Database) -> dict:
     try:
         drinks = database.get_drinks()
-        return drinks
+        return {"drinks": drinks}  # Wrap the list in a dictionary
     except Exception as e:
         print(f"error {e}, when requesting drinks from database to controller")
-        raise Exception("fix the issue", e) from e
+        raise Exception("Unable to get drinks") from e
 
 
 def pour_drink(database: Database):
