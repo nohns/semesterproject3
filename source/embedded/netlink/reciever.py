@@ -8,3 +8,6 @@ class NetlinkReciever:
     def __init__(self, controller: Controller):
         print("NetlinkReciever initialized")
         self.controller = controller
+    
+    def run(self):
+        print("Netlink receiver start")
