@@ -6,5 +6,5 @@ class NetlinkReciever:
     controller: Controller
 
     def __init__(self, controller: Controller):
-        print("NetlinkReciever initialized")
+        print("NetlinkReceiver initialized")
         self.controller = controller
