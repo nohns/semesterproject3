@@ -27,6 +27,14 @@ def create_fluid(connection: sqlite3.Connection, fluid: Fluid) -> None:
     cursor = connection.cursor()
 
     try:
+        print(f"Database: Attempting to create fluid: {fluid}")
+        # Check if a fluid with identical name already exists
+        all_fluids = get_fluids(connection)
+
+        if any(fluid.name == existing_fluid["name"] for existing_fluid in all_fluids):
+            print(f"Database: '{fluid.name}' already exists")
+            return
+
         cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid.name,))
 
         connection.commit()
@@ -34,7 +42,7 @@ def create_fluid(connection: sqlite3.Connection, fluid: Fluid) -> None:
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")
         connection.rollback()
-        raise Exception("An error occurred while creating the fluid.", e)
+        raise Exception("An error occurred while creating the fluid.", e) from e
 
     finally:
         cursor.close()
