@@ -29,15 +29,16 @@ class Main:
         controller = Controller(database, netlink_publisher)
 
         # Since we are going to be recieving events from psoc and http requests from frontend we need to create threads for both
+        print("Setting up boundaries...")
         netlink_reciever = NetlinkReciever(controller)
         api = Api(controller)
-        api.run()
 
         # Create threads for netlink_reciever and api
-        netlink_reciever_thread = threading.Thread(target=netlink_reciever)
-        api_thread = threading.Thread(target=api)
+        netlink_reciever_thread = threading.Thread(target=netlink_reciever.run)
+        api_thread = threading.Thread(target=api.run)
 
         # Start the threads
+        print("Starting boundary threads...")
         netlink_reciever_thread.start()
         api_thread.start()
 
