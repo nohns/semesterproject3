@@ -40,7 +40,7 @@ class Controller:
         return get_drinks(self.database)
 
     def pour_drink(self) -> None:
-        return pour_drink(self.database)
+        return pour_drink(self.netlink_publisher)
 
     def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.database)

@@ -1,4 +1,5 @@
 from database.database import Database
+from  netlink.publisher import NetlinkPublisher
 from domain.domain import Drink, json_to_dataclass
 from flask import Request
 
@@ -12,9 +13,10 @@ def get_drinks(database: Database) -> dict:
         raise Exception("Unable to get drinks") from e
 
 
-def pour_drink(database: Database):
+def pour_drink(netlink_publisher: NetlinkPublisher) -> None:
     try:
-        database.pour_drink()
+        netlink_publisher.pour_drink()
+
         return None
     except Exception as e:
         print(f"error {e}, when trying to pour drink via controller")
