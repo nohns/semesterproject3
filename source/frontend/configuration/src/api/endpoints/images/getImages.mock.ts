@@ -23,23 +23,23 @@ httpMock.onGet(url).reply(() => {
       },
       {
         id: 4,
-        path: "src/assets/Overblik_0-20.png",
+        path: "src/assets/Overblik_1_black_0_20.png",
       },
       {
         id: 5,
-        path: "src/assets/Overblik_20-40.png",
+        path: "src/assets/Overblik_1_black_20_40.png",
       },
       {
         id: 6,
-        path: "src/assets/Overblik_40-60.png",
+        path: "src/assets/Overblik_1_black_40_60.png",
       },
       {
         id: 7,
-        path: "src/assets/Overblik_60-180.png",
+        path: "src/assets/Overblik_1_black_60_80.png",
       },
       {
         id: 8,
-        path: "src/assets/Overblik_80-100.png",
+        path: "src/assets/Overblik_1_black_80_100.png",
       },
     ],
   };

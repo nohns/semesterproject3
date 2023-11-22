@@ -11,6 +11,8 @@ httpMock.onGet(url).reply(() => {
       { id: 1, name: "Vodka" },
       { id: 2, name: "Blå booster" },
       { id: 3, name: "Vand" },
+      { id: 4, name: "Juice" },
+      { id: 5, name: "Snaps" },
     ],
   };
 
