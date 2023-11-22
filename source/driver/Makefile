@@ -7,14 +7,16 @@ obj-m += dmc_driver.o
 ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Wno-unused-function -Werror -I$(src)/../common/hw/include
 
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-KERNELDIR ?= ~/sources/rpi-5.4.83
-KERNELDIR ?= ~/sources/linux-6.2.0
+#KERNELDIR ?= ~/sources/linux
+#KERNELDIR ?= ~/sources/rpi-5.4.83
+KERNELDIR ?= /lib/modules/6.2.0-36-generic/build
 CURR_DIR := $(shell pwd)
 BUILD_DIR := $(CURR_DIR)/build
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-CROSS_COMPILE := arm-poky-linux-gnueabi-
+#CROSS_COMPILE ?= aarch64-linux-gnu-
+#CROSS_COMPILE ?= arm-poky-linux-gnueabi-
 # REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-ARCH ?= arm
+#ARCH ?= arm64
 #HEADERS := $(dmc_driver-objs:.o=.h)
 SOURCES := $(obj-m:.o=.c)
 SOURCES += $(dmc_driver-objs:.o=.c)
@@ -24,7 +26,7 @@ SOURCES += $(dmc_driver-objs:.o=.c)
 #####################################
 
 MODULE_KO := ${obj-m:.o=.ko}
-UPLOAD_TARGET := root@10.9.8.2
+UPLOAD_TARGET := pi@172.20.10.3
 UPLOAD_TARGET_DIR := ~/modules
 
 #########################
@@ -81,7 +83,7 @@ modules_install help clean:
 # Upload compilefd kernel module to Raspberry Pi Zero
 upload: modules
 	ssh $(UPLOAD_TARGET) "mkdir -p $(UPLOAD_TARGET_DIR)"
-	scp -pr $(BUILD_DIR)/$(MODULE_KO) $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)/$(MODULE_KO)
+	scp -pr $(MODULE_KO) $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)/$(MODULE_KO)
 
 
 
