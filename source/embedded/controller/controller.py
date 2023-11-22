@@ -18,11 +18,11 @@ from controller.images import get_images
 
 class Controller:
     database: Database
-    netlink_publisher: NetlinkPublisher
+    hardware: NetlinkPublisher
 
-    def __init__(self, database: Database, netlink_publisher: NetlinkPublisher):
+    def __init__(self, database: Database, hardware: NetlinkPublisher):
         self.database = database
-        self.netlink_publisher = netlink_publisher
+        self.hardware = hardware
 
     def change_containers(self, container_id: int, new_fluid_id: int) -> bool:
         return change_containers(self.database, container_id, new_fluid_id)
@@ -39,8 +39,8 @@ class Controller:
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.database)
 
-    def pour_drink(self) -> None:
-        return pour_drink(self.database)
+    def pour_drink(self, drink_id: int) -> None:
+        return pour_drink(self.database, self.hardware, drink_id)
 
     def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.database)
