@@ -23,8 +23,7 @@ function Home(): JSX.Element {
 
   const calc = useCalculateDrinks();
 
-  //Jeg mangler stadig at gøre default staten til whatever som vi læser ind fra fluid containersne
-  const [possibleDrinks, setPossibleDrinks] = useState<Drink[]>();
+  const [possibleDrinks, setPossibleDrinks] = useState<Drink[] | undefined>([]);
 
   //let possibleDrinks = calc?.calculate(fluids.data?.fluids!);
 

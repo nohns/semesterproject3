@@ -1,5 +1,5 @@
 from controller.controller import Controller
-from flask import Flask, Blueprint, request
+from flask import Flask, request
 from flask_cors import CORS
 
 
@@ -14,7 +14,6 @@ class Api:
 
     def create_app(self):
         app = Flask(__name__)
-        app.debug = True
 
         # Add CORS with custom settings
         CORS(

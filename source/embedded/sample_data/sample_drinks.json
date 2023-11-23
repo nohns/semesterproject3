@@ -1,37 +1,132 @@
-{
-    "name": "Mojito",
+[
+  {
+    "id": 1,
+    "name": "Blå vand",
     "image": {
-      "id": "3",
-      "path": "/images/mojito.jpg"
+      "id": 1,
+      "path": "src/assets/HotPot1.png"
     },
     "ingredients": [
       {
+        "id": 1,
         "fluid": {
-          "name": "Rum",
-          "id": 1
-        },
-        "amountInCl": 15
-      },
-      {
-        "fluid": {
-          "name": "Mint Syrup",
-          "id": 2
-        },
-        "amountInCl": 10
-      },
-      {
-        "fluid": {
-          "name": "Lime Juice",
-          "id": 3
+          "id": 1,
+          "name": "Vodka"
         },
         "amountInCl": 5
       },
       {
+        "id": 2,
         "fluid": {
-          "name": "Club Soda",
-          "id": 4
+          "id": 2,
+          "name": "Blå booster"
         },
-        "amountInCl": 100
+        "amountInCl": 5
+      }
+    ]
+  },
+
+
+  {
+    "id": 2,
+    "name": "Double blå vand",
+    "image": {
+      "id": 1,
+      "path": "src/assets/HotPot1.png"
+    },
+    "ingredients": [
+      {
+        "id": 1,
+        "fluid": {
+          "id": 1,
+          "name": "Vodka"
+        },
+        "amountInCl": 5
+      },
+      {
+        "id": 2,
+        "fluid": {
+          "id": 2,
+          "name": "Blå booster"
+        },
+        "amountInCl": 5
+      }
+    ]
+  },
+
+
+  {
+    "id": 3,
+    "name": "Vand",
+    "image": {
+      "id": 1,
+      "path": "src/assets/HotPot1.png"
+    },
+    "ingredients": [
+      {
+        "id": 3,
+        "fluid": {
+          "id": 3,
+          "name": "Vand"
+        },
+        "amountInCl": 5
+      }
+    ]
+  },
+
+
+  {
+    "id": 4,
+    "name": "Snapse Vand",
+    "image": {
+      "id": 1,
+      "path": "src/assets/HotPot2.png"
+    },
+    "ingredients": [
+      {
+        "id": 1,
+        "fluid": {
+          "id": 3,
+          "name": "Vand"
+        },
+        "amountInCl": 5
+      },
+      {
+        "id": 2,
+        "fluid": {
+          "id": 5,
+          "name": "Snaps"
+        },
+        "amountInCl": 5
+      }
+    ]
+  },
+
+  
+  {
+    "id": 5,
+    "name": "Vodka Juice",
+    "image": {
+      "id": 1,
+      "path": "src/assets/HotPot2.png"
+    },
+    "ingredients": [
+      {
+        "id": 1,
+        "fluid": {
+          "id": 1,
+          "name": "Vodka"
+        },
+        "amountInCl": 5
+      },
+      {
+        "id": 2,
+        "fluid": {
+          "id": 4,
+          "name": "Juice"
+        },
+        "amountInCl": 5
       }
     ]
   }
+]
