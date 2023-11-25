@@ -1,9 +1,14 @@
 /** @format */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-function Countdown(): JSX.Element {
-  const [count, setCount] = useState(60);
+interface CountdownProps {
+  time: number;
+}
+
+function Countdown({ time }: CountdownProps): JSX.Element {
+  const [count, setCount] = useState(time / 1000);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,12 +24,32 @@ function Countdown(): JSX.Element {
     };
   }, [count]);
 
+  const renderTime = ({ remainingTime }: any) => {
+    return (
+      <div className="flex flex-col items-center">
+        <div className="mx-auto font-thin">Remaining</div>
+        <h1 className=" scroll-m-20 text-white text-7xl font-bold z-10 tracking-tight lg:text-5xl border-white">
+          {remainingTime}
+        </h1>
+        <div className="mx-auto font-thin">seconds</div>
+      </div>
+    );
+  };
+
   return (
-    <div>
-      <h1 className="scroll-m-20 text-white mt-10 text-8xl font-extrabold z-10 tracking-tight lg:text-5xl border-white">
-        {count}
-      </h1>
-    </div>
+    <>
+      <CountdownCircleTimer
+        isPlaying
+        duration={time / 1000}
+        colors={["#4ade80", "#4ade80", "#4ade80", "#4ade80"]}
+        colorsTime={[7, 5, 2, 0]}
+        size={225}
+        strokeLinecap="square"
+        trailColor="#3d465c"
+      >
+        {renderTime}
+      </CountdownCircleTimer>
+    </>
   );
 }
 
