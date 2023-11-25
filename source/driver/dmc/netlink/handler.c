@@ -7,13 +7,11 @@
 #include "policy.h"
 
 // Keeps track of generic netlink commands
-enum rpi_netlink_genl_cmds
+enum dmc_genl_cmds
 {
-  DMC_DRIVER_GENL_CMD_UNSPECIFIED = 0,
-  DMC_DRIVER_GENL_CMD_RAISE_LIQUID_POUR_REQUESTED =
-      DMC_EVENT_TYPE_FLUID_POUR_REQUESTED,
-  DMC_DRIVER_GENL_CMD_RAISE_USER_CONFIRM = DMC_EVENT_TYPE_USER_CONFIRM,
-  __DMC_DRIVER_GENL_CMD_MAX              = __DMC_EVENT_TYPE_MAX,
+  DMC_GENL_CMD_UNSPECIFIED,
+  DMC_GENL_CMD_RAISE_EVENT,
+  __DMC_GENL_CMD_MAX,
 };
 
 // The current handler registered with the driver
@@ -82,32 +80,31 @@ static int dmc_driver_raise_event_doit(struct sk_buff   *skb,
   return 0;
 }
 
-static const struct genl_ops genl_ops[] = {
-    {.cmd    = DMC_DRIVER_GENL_CMD_RAISE_LIQUID_POUR_REQUESTED,
+static const struct genl_ops genl_ops[__DMC_GENL_CMD_MAX - 1] = {
+    {.cmd    = DMC_GENL_CMD_RAISE_EVENT,
      .doit   = dmc_driver_raise_event_doit,
-     .policy = dmc_genl_policy_liquid_pour_requested},
-    {.cmd    = DMC_DRIVER_GENL_CMD_RAISE_USER_CONFIRM,
-     .doit   = dmc_driver_raise_event_doit,
-     .policy = dmc_genl_policy_user_confirm},
+     .policy = dmc_genl_event_pol},
 };
 
-enum dmc_driver_genl_multicast_groups
+enum dmc_genl_multicast_groups
 {
-  DMC_DRIVER_GENL_MULTICAST_GROUP_EVENT = 0,
-  __DMC_DRIVER_GENL_MULTICAST_GROUP_MAX,
+  DMC_GENL_MULTICAST_GROUP_EVENT = 0,
+  __DMC_GENL_MULTICAST_GROUP_MAX,
 };
 
 static const struct genl_multicast_group
-    genl_mcgrps[__DMC_DRIVER_GENL_MULTICAST_GROUP_MAX] = {
-        [DMC_DRIVER_GENL_MULTICAST_GROUP_EVENT] =
-            {.name = DMC_DRIVER_GENL_MULTICAST_GROUP_NAME},
+    genl_mcgrps[__DMC_GENL_MULTICAST_GROUP_MAX] = {
+        [DMC_GENL_MULTICAST_GROUP_EVENT] =
+            {
+                .name = DMC_GENL_MULTICAST_GROUP_NAME,
+            },
 };
 
 // Define Generic Netlink family
 static struct genl_family genl_fam = {
-    .name     = DMC_DRIVER_GENL_FAMILY_NAME,
-    .version  = DMC_DRIVER_GENL_VERSION,
-    .maxattr  = DMC_DRIVER_GENL_MAX_ATTR,
+    .name     = DMC_GENL_FAMILY_NAME,
+    .version  = DMC_GENL_VERSION,
+    .maxattr  = __DMC_GENL_EVENT_ATTR_MAX,
     .ops      = genl_ops,
     .module   = THIS_MODULE,
     .n_ops    = ARRAY_SIZE(genl_ops),
@@ -126,7 +123,8 @@ int dmc_register_netlink_handler(struct dmc_netlink_handler *handler)
   err = genl_register_family(&genl_fam);
   if (err != 0)
   {
-    pr_crit("dmc_driver: failed to register generic netlink family\n");
+    pr_crit("dmc_driver: failed to register generic netlink family, err = %d\n",
+            err);
     return err;
   }
 
@@ -152,14 +150,14 @@ int dmc_netlink_publish_event(const struct dmc_netlink_handler *handler,
   if (event_msg->genl_hdr == NULL) return -EINVAL;
 
   // If handler is the current, then return bad address error
-  if (curr_handler == handler) return -EFAULT;
+  // if (curr_handler == handler) return -EFAULT;
 
   // Make sure the message containing the event is finalized
   genlmsg_end(event_msg->buff, event_msg->genl_hdr);
 
   // Send it over multicast to the event multicast group
   err = genlmsg_multicast(&genl_fam, event_msg->buff, 0,
-                          DMC_DRIVER_GENL_MULTICAST_GROUP_EVENT, GFP_KERNEL);
+                          DMC_GENL_MULTICAST_GROUP_EVENT, GFP_KERNEL);
   if (err == -ESRCH)
   {
     pr_warn(
@@ -177,7 +175,8 @@ int dmc_netlink_publish_event(const struct dmc_netlink_handler *handler,
   return err;
 }
 
-int dmc_netlink_prepare_event(struct dmc_netlink_event_msg *event_msg)
+int dmc_netlink_prepare_event(struct dmc_netlink_event_msg *event_msg,
+                              enum dmc_event_type           type)
 {
   void *hdr;
 
@@ -190,8 +189,8 @@ int dmc_netlink_prepare_event(struct dmc_netlink_event_msg *event_msg)
   }
 
   // Prepare by putting the generic netlink header into event buffer
-  hdr = genlmsg_put(event_buf, 0, 0, &genl_fam, 0,
-                    DMC_DRIVER_GENL_CMD_UNSPECIFIED);
+  hdr = genlmsg_put(event_buf, 0, DMC_GENL_MULTICAST_GROUP_EVENT, &genl_fam, 0,
+                    DMC_GENL_CMD_RAISE_EVENT);
   if (!hdr)
   {
     pr_err("dmc_driver: failed to allocate memory for genl header\n");
@@ -200,6 +199,7 @@ int dmc_netlink_prepare_event(struct dmc_netlink_event_msg *event_msg)
   }
 
   // Success! Set the pointers of the event message
+  event_msg->type     = type;
   event_msg->buff     = event_buf;
   event_msg->genl_hdr = hdr;
   return 0;

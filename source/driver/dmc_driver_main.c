@@ -70,6 +70,70 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
           "amount %d\n",
           event.container, event.amount);
 
+    // Create event representation of packet
+    struct dmc_base_event weight_base = {
+        .type = DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED,
+    };
+    struct dmc_event_container_weight_measured weight_event = {
+        .base      = &weight_base,
+        .container = 2,
+        .weight    = 1000,
+    };
+
+    // Prepare new netlink event message
+    struct dmc_netlink_event_msg nl_msg;
+    err = dmc_netlink_prepare_event(&nl_msg, weight_base.type);
+    if (err != 0) return err;
+
+    // Marshal event into netlink event message
+    err = dmc_netlink_marshal_event_container_weight_measured(&nl_msg,
+                                                              &weight_event);
+    if (err != 0)
+    {
+      DMC_D("dmc_driver: failed to marshal event. err = %d\n", err);
+      return err;
+    }
+
+    // Publish event
+    err = dmc_netlink_publish_event(&nl_handler, &nl_msg);
+    if (err != 0)
+    {
+      DMC_D("dmc_driver: failed to publish event. err = %d\n", err);
+      return err;
+    }
+
+    // Create event representation of packet
+    struct dmc_netlink_event_msg new_nl_msg;
+    struct dmc_base_event        out_of_order_base = {
+               .type = DMC_EVENT_TYPE_OUT_OF_ORDER,
+    };
+    struct dmc_event_out_of_order out_of_order_event = {
+        .base    = &out_of_order_base,
+        .message = "Help!",
+        .reason  = 1,
+    };
+
+    // Prepare new netlink event message
+    err = dmc_netlink_prepare_event(&new_nl_msg, out_of_order_base.type);
+    if (err != 0) return err;
+
+    // Marshal event into netlink event message
+    err = dmc_netlink_marshal_event_out_of_order(&new_nl_msg,
+                                                 &out_of_order_event);
+    if (err != 0)
+    {
+      DMC_D("dmc_driver: failed to marshal event. err = %d\n", err);
+      return err;
+    }
+
+    // Publish event
+    err = dmc_netlink_publish_event(&nl_handler, &new_nl_msg);
+    if (err != 0)
+    {
+      DMC_D("dmc_driver: failed to publish event. err = %d\n", err);
+      return err;
+    }
+
     // Call the event handler
     // err = dmc_ctrl_on_event_fluid_pour_requested(&evt_handler, &event);
     break;
