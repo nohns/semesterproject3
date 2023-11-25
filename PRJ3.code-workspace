@@ -64,7 +64,13 @@
 			"rcuwait.h": "c",
 			"signal.h": "c",
 			"task.h": "c",
-			"unified.h": "c"
+			"unified.h": "c",
+			"mm.h": "c",
+			"rbtree.h": "c",
+			"sched.h": "c",
+			"nodemask.h": "c",
+			"seccomp.h": "c",
+			"atomic.h": "c"
 		},
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.black-formatter"
