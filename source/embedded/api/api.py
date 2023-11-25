@@ -18,10 +18,12 @@ class Api:
         # Add CORS with custom settings
         CORS(
             app,
-            origins=["http://localhost:5173"],
+            origins=["http://localhost:5173", "http://localhost", "http://172.20.10.3"],
             allow_headers=["Content-Type", "Origin"],
             methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
         )
+
+
 
         # Register the routes
         self.register_routes(app)
