@@ -1,11 +1,11 @@
 /** @format */
 
-import httpMock from "@/api/axios.mock";
+import { mock } from "@/api/axios";
 import { GetDrinksResponse } from "./getDrinks";
 
 // Url to match v1/drinks
 const url = new RegExp(/v1\/drinks/);
-httpMock.onGet(url).reply(() => {
+mock.onGet(url).reply(() => {
   const res: GetDrinksResponse = {
     drinks: [
       {
