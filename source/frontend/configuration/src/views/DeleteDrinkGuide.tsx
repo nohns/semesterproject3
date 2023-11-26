@@ -35,17 +35,6 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
 
   const [step, setStep] = useState<GuideState>(GuideState.step1);
 
-  const handleStep = () => {
-    //Increment step to the next possible enum value
-    const nextStep = (Object.values(GuideState) as GuideState[]).find(
-      (stepValue: GuideState) => stepValue > step
-    );
-
-    if (nextStep) {
-      setStep(nextStep);
-    }
-  };
-
   const deleteDrink = useDeleteDrink();
   const deleteFluid = useDeleteFluid();
 
@@ -56,20 +45,60 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
   const renderView = () => {
     switch (step) {
       case GuideState.step1:
-        return <p>Would you like to delete a drink or a fluid?</p>;
+        return (
+          <div className="flex flex-col gap-2">
+            <div>
+              Would you like to delete a fluid or a drink from the menu?
+            </div>
+
+            <div className="flex flex-row gap-4 my-2">
+              <Button onClick={() => setStep(GuideState.step2)}>
+                Delete fluid
+              </Button>
+              <Button onClick={() => setStep(GuideState.step3)}>
+                Delete drink
+              </Button>
+            </div>
+          </div>
+        );
       case GuideState.step2:
-        return <p>When done, press "OK"</p>;
+        return (
+          <div>
+            <div>Which fluid would you like to delete?</div>
+            <div className="flex flex-row gap-4 my-2">
+              {fluids.data?.fluids.map((fluid) => (
+                <Button
+                  onClick={() => {
+                    deleteFluid.mutate({ id: fluid.id! });
+                    setStep(GuideState.step4);
+                  }}
+                >
+                  {fluid.name}
+                </Button>
+              ))}
+            </div>
+          </div>
+        );
       case GuideState.step3:
         return (
-          <p>The system will now pump out the fluid from the containers</p>
+          <div>
+            <div>Which drink would you like to delete?</div>
+            <div className="flex flex-row gap-4 my-2">
+              {drinks.data?.drinks.map((drink) => (
+                <Button
+                  onClick={() => {
+                    deleteDrink.mutate({ id: drink.id! });
+                    setStep(GuideState.step4);
+                  }}
+                >
+                  {drink.name}
+                </Button>
+              ))}
+            </div>
+          </div>
         );
       case GuideState.step4:
-        return (
-          <p>
-            The system will now show "Finished pumping out" and show what each
-            container should contain of fluid
-          </p>
-        );
+        return <p>Succesfully deleted the requested data</p>;
       default:
         return <p>Something went wrong :/</p>;
     }
@@ -83,13 +112,10 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete drink</AlertDialogTitle>
+            <AlertDialogTitle>Remove from menu</AlertDialogTitle>
             <AlertDialogDescription>{renderView()}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            {step !== GuideState.step4 && (
-              <Button onClick={handleStep}>Continue</Button>
-            )}
             {step === GuideState.step4 && (
               <CustomAlertDialogAction
                 onClose={() => setStep(GuideState.step1)}
