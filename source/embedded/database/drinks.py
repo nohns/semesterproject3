@@ -97,47 +97,39 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
         for ingredient in ingredients:
             ingredient.fluid = json_to_dataclass(ingredient.fluid, Fluid)
 
-        # Extract fluid IDs from ingredients
-        ingredient_ids = [ingredient.fluid.id for ingredient in ingredients]
-
-        print(ingredients)
-
-        print("Database: Printing ingredient array: ", ingredients)
-
-        # convert the array to a string seperated by commas
-        ingredient_ids = ",".join(map(str, ingredient_ids))
-        print("Database: Printing ingredient string: ", ingredient_ids)
-
-        # Check if a drink with identical array of ingredient ids already exists
-        """
-        allDrinks = get_drinks(connection)
-
-        allDrinks_ingredient_ids = {
-            ingredient.fluid.id for ingredient in ingredients for drink in allDrinks
-        }
-
-        if allDrinks_ingredient_ids == drink.ingredient_ids:
-            print("Database: Drink already exists")
-            return None
-        """
-
-        # Associate ingredients with the new drink using their existing IDs, think we have to do this
+        ingredient_ids = []
         for ingredient in ingredients:
-            # I need to create a text string seperated by commas which is an array of the ingredients ids
+            # Check if the ingredient already exists
             cursor.execute(
-                "INSERT INTO Ingredients (amount_in_cl, fluid_id) VALUES (?, ?)",
-                (ingredient.amountInCl, ingredient.fluid.id),
+                "SELECT id FROM Ingredients WHERE fluid_id = ? AND amount_in_cl = ?",
+                (ingredient.fluid.id, ingredient.amountInCl)
             )
+            existing_ingredient = cursor.fetchone()
 
-        print("Database: Ingredients have been added")
+            if existing_ingredient:
+                # If it exists, use the existing id
+                ingredient_id = existing_ingredient[0]
+            else:
+                # If not, insert the new ingredient and use its new id
+                cursor.execute(
+                    "INSERT INTO Ingredients (fluid_id, amount_in_cl) VALUES (?, ?)",
+                    (ingredient.fluid.id, ingredient.amountInCl)
+                )
+                ingredient_id = cursor.lastrowid  # This gets the new id
+
+            ingredient_ids.append(ingredient_id)
 
         # Insert into Drinks table using the existing image_id since we can't directly insert the image object
         drink.image = json_to_dataclass(drink.image, Image)
         cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image.path,))
+        image_id = cursor.lastrowid  # This gets the new id for the image
         print("Database: Image has been added")
+
+        # Convert the list of ingredient IDs to a string separated by commas
+        ingredient_ids_str = ",".join(map(str, ingredient_ids))
         cursor.execute(
             "INSERT INTO Drinks (name, ingredients_ids, image_id) VALUES (?, ?, ?)",
-            (drink.name, ingredient_ids, drink.image.id),
+            (drink.name, ingredient_ids_str, image_id),
         )
         print("Database: Drink has been added")
 
@@ -151,6 +143,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
 
     finally:
         cursor.close()
+
 
 
 def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
