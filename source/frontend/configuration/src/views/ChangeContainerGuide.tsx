@@ -24,9 +24,9 @@ enum GuideState {
   step4 = 75,
 }
 
-interface GuideProps {}
+interface ChangeContainerGuideProps {}
 
-function Guide({}: GuideProps) {
+function ChangeContainerGuide({}: ChangeContainerGuideProps) {
   //I want to do a switch statement on html content so we can have different guides for different steps
 
   const [step, setStep] = useState<GuideState>(GuideState.step1);
@@ -68,7 +68,9 @@ function Guide({}: GuideProps) {
   return (
     <>
       <AlertDialog>
-        <AlertDialogTrigger>Change menu</AlertDialogTrigger>
+        <AlertDialogTrigger className="py-10 px-16">
+          Change menu
+        </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Configuration guide</AlertDialogTitle>
@@ -93,7 +95,7 @@ function Guide({}: GuideProps) {
   );
 }
 
-export default Guide;
+export default ChangeContainerGuide;
 
 //1. Place the fluid containers under the outlet
 
