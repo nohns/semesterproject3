@@ -14,6 +14,8 @@ import useGetDrinks, { Drink } from "@/api/endpoints/drinks/getDrinks";
 import DrinkCard from "@/components/DrinkCard";
 import useChangeContainer from "@/api/endpoints/container/changeContainer";
 import useGetFluids from "@/api/endpoints/fluid/getFluids";
+import Guide from "./Guide";
+import { Button } from "@/components/ui/button";
 
 function Home(): JSX.Element {
   const fluids = useGetFluids();
@@ -24,8 +26,6 @@ function Home(): JSX.Element {
   const calc = useCalculateDrinks();
 
   const [possibleDrinks, setPossibleDrinks] = useState<Drink[]>([]);
-
-  //let possibleDrinks = calc?.calculate(fluids.data?.fluids!);
 
   const [container1, setContainer1] = useState<FluidContainer>({
     id: 0,
@@ -151,15 +151,12 @@ function Home(): JSX.Element {
             Possible drinks:
             {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
           </div>
-          <div
-            onClick={handleChangeContainer}
-            className="bg-rose-700 mt-3 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-700 hover:opacity-75"
-          >
-            Update menu
-          </div>
+          <Button className=" mt-3 py-4 px-8">
+            <Guide />
+          </Button>
         </div>
       </div>
-      {/* </div> */}
+
       <Footer />
     </>
   );
