@@ -11,6 +11,8 @@ DMC_EVENT_TYPE_GENL_OUT_OF_ORDER = 1
 DMC_EVENT_TYPE_GENL_CONTAINER_WEIGHT_MEASURED = 2
 DMC_EVENT_TYPE_GENL_USER_CONFIRM = 3
 DMC_EVENT_TYPE_GENL_FLUID_POUR_REQUESTED = 4
+DMC_EVENT_TYPE_GENL_MACHINE_OK = 5
+DMC_EVENT_TYPE_GENL_DEBUG = 6
 
 
 class eventmsg(genlmsg):
@@ -25,6 +27,8 @@ class eventmsg(genlmsg):
         ("DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_REASON", "uint8"),
         ("DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_CONTAINER", "uint8"),
         ("DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_AMOUNT", "uint8"),
+        ("DMC_GENL_EVENT_DEBUG_ATTR_EVENT_TYPE", "uint8"),
+        ("DMC_GENL_EVENT_DEBUG_ATTR_DATA", "uint8"),
     )
 
     def __init__(self, *argv, **kwarg):
@@ -113,4 +117,32 @@ class FluidPourRequestedEvent(object):
             "DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_CONTAINER"
         )
         self.amount = msg.get_attr("DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_AMOUNT")
+        return self
+    
+class MachineOkEvent(object):
+    def to_msg(self):
+        msg = eventmsg()
+        msg["attrs"] = [("DMC_GENL_EVENT_ATTR_TYPE", DMC_EVENT_TYPE_GENL_MACHINE_OK)]
+        return msg
+
+    def from_msg(self, msg: eventmsg):
+        return self
+
+class DebugEvent(object):
+    def __init__(self, event_type: int = None, data: int = None):
+        self.event_type = event_type
+        self.data = data
+
+    def to_msg(self):
+        msg = eventmsg()
+        msg["attrs"] = [
+            ("DMC_GENL_EVENT_ATTR_TYPE", DMC_EVENT_TYPE_GENL_DEBUG),
+            ("DMC_GENL_EVENT_DEBUG_ATTR_EVENT_TYPE", self.event_type),
+            ("DMC_GENL_EVENT_DEBUG_ATTR_DATA", self.data),
+        ]
+        return msg
+
+    def from_msg(self, msg: eventmsg):
+        self.event_type = msg.get_attr("DMC_GENL_EVENT_DEBUG_ATTR_EVENT_TYPE")
+        self.data = msg.get_attr("DMC_GENL_EVENT_DEBUG_ATTR_DATA")
         return self

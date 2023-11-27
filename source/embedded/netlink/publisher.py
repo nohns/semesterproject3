@@ -1,13 +1,12 @@
 import sys
 
-is_linux = sys.platform == "Linux"
+is_linux = sys.platform == "linux"
 if is_linux:
     from pyroute2.netlink import NLM_F_REQUEST
     from pyroute2.netlink.generic import GenericNetlinkSocket
-    from netlink.events import eventmsg, UserConfirmEvent, FluidPourRequestedEvent
+    from netlink.events import eventmsg, UserConfirmEvent, FluidPourRequestedEvent, DebugEvent
     from netlink.conf import DMC_DRIVER_GENL_FAMILY
 
-    # call netlink publisher class
     class NetlinkPublisher:
         genlsock: GenericNetlinkSocket
 
@@ -28,6 +27,13 @@ if is_linux:
         def pour_fluid(self, container: int, amount: int):
             # Create a new message
             msg = FluidPourRequestedEvent(container, amount).to_msg()
+
+            # Send the event message
+            self.genlsock.nlm_request(msg, self.genlsock.prid, msg_flags=NLM_F_REQUEST)
+
+        def debug(self, event_type: int, data: int):
+            # Create a new message
+            msg = DebugEvent(event_type, data).to_msg()
 
             # Send the event message
             self.genlsock.nlm_request(msg, self.genlsock.prid, msg_flags=NLM_F_REQUEST)

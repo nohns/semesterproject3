@@ -25,8 +25,11 @@ def get_drink_for_netlink(database: Database, drink_id: int) -> dict:
 
 def pour_drink(database: Database, hardware: NetlinkPublisher, drink_id: int):
     try:
-        # database.pour_drink()
-        hardware.pour_fluid(1, 5)
+        print(f"Controller: Attempting to pour drink with drink id: {drink_id}")
+        drink = database.get_drink_by_id(drink_id)
+        for ingredient in drink.ingredients:
+            container = database.get_container_by_fluid_id(ingredient.fluid.id)
+            hardware.pour_fluid(container.container_id, ingredient.amountInCl)
 
         return None
     except Exception as e:

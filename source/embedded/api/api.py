@@ -42,17 +42,20 @@ class Api:
         from api.fluids.routes import register_fluids_bp
         from api.drinks.routes import register_drinks_bp
         from api.updates.routes import register_updates_bp
+        from api.state.routes import register_state_bp
 
         containers_bp = register_containers_bp(self.controller)
         images_bp = register_images_bp(self.controller)
         drinks_bp = register_drinks_bp(self.controller)
         fluids_bp = register_fluids_bp(self.controller)
-        updates_bp = register_updates_bp(self.controller)
+        updates_bp = register_updates_bp(self.controller, self.controller.hardware)
+        state_bp = register_state_bp(self.controller)
         app.register_blueprint(containers_bp, url_prefix="/v1/containers")
         app.register_blueprint(images_bp, url_prefix="/v1/images")
         app.register_blueprint(drinks_bp, url_prefix="/v1/drinks")
         app.register_blueprint(fluids_bp, url_prefix="/v1/fluids")
         app.register_blueprint(updates_bp, url_prefix="/v1/updates")
+        app.register_blueprint(state_bp, url_prefix="/v1/state")
 
     def run(self, host="localhost", port=8000):
         self.app = self.create_app()

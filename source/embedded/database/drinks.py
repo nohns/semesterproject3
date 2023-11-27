@@ -71,7 +71,7 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
         cursor.close()
 
 
-def get_drink_for_netlink(connection: sqlite3.Connection, drink_id: int) -> Drink:
+def get_drink_by_id(connection: sqlite3.Connection, drink_id: int) -> Drink:
     cursor = connection.cursor()
     # This function should get a single drink by id
     try:
