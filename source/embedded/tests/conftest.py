@@ -1,37 +1,40 @@
 import pytest
-import threading
-
+from unittest.mock import MagicMock
 from controller.controller import Controller
 from database.database import Database
 from netlink.publisher import NetlinkPublisher
-from netlink.reciever import NetlinkReciever
 from api.api import Api
+from domain.domain import Fluid
 
 
-@pytest.fixture()
-def app():
-    database = Database()
-    netlink_publisher = NetlinkPublisher()
+class MockDatabase:
+    def get_fluids(self):
+        return [Fluid(id=1, name="Vand")]
+
+
+@pytest.fixture
+def app(api):
+    return api.create_app()
+
+
+@pytest.fixture
+def api():
+    database = MockDatabase()
+    netlink_publisher = MagicMock()
+
     controller = Controller(database, netlink_publisher)
-    netlink_reciever = NetlinkReciever(controller)
-    api = Api(controller)
-    api.app = api.create_app()
-    api.app.config.update(
-        {
-            "TESTING": True,
-        }
-    )
-    netlink_reciever_thread = threading.Thread(target=netlink_reciever)
-    api_thread = threading.Thread(target=api)
-
-    # Start the threads
-    netlink_reciever_thread.start()
-    api_thread.start()
-    yield app
-    netlink_reciever_thread.join()
-    api_thread.join()
+    return Api(controller)
 
 
-@pytest.fixture()
+@pytest.fixture
 def client(app):
     return app.test_client()
+
+
+@pytest.fixture
+def controller():
+    database = MockDatabase()
+    netlink_publisher = MagicMock()
+
+    controller = Controller(database, netlink_publisher)
+    return controller
