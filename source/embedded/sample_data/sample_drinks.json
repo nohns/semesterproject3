@@ -60,7 +60,7 @@
     "name": "Vand",
     "image": {
       "id": 1,
-      "path": "src/assets/HotPot1.png"
+      "path": "src/assets/HotPot3.png"
     },
     "ingredients": [
       {
@@ -80,7 +80,7 @@
     "name": "Snapse Vand",
     "image": {
       "id": 1,
-      "path": "src/assets/HotPot2.png"
+      "path": "src/assets/HotPot3.png"
     },
     "ingredients": [
       {
