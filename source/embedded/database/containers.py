@@ -1,5 +1,6 @@
 import sqlite3
 from domain.domain import Container
+from domain.domain import Fluid
 
 
 def get_containers(connection: sqlite3.Connection) -> list[dict]:
@@ -59,10 +60,11 @@ def get_container_by_fluid_id(connection: sqlite3.Connection, fluid_id: int) -> 
             fluid_name = container_data[3]
 
             container = Container(
-                id=container_id,
-                fluid={"id": fluid_id, "name": fluid_name},
-                fluidAmountInCl=fluid_amount,
-            )
+                fluid_amount_in_cl = fluid_amount,
+                fluid = Fluid(id=fluid_id, name=fluid_name),
+                container_id = container_id
+)
+
 
             return container
 
