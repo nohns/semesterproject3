@@ -1,8 +1,8 @@
 import sys
+from controller.controller import Controller
 is_linux = sys.platform == "Linux"
 if is_linux:
 
-    from controller.controller import Controller
     from pyroute2.netlink.generic import GenericNetlinkSocket
     from netlink.conf import DMC_DRIVER_GENL_FAMILY, DMC_DRIVER_GENL_MCAST_GROUP_NAME
     from netlink.events import eventmsg, OutOfOrderEvent, ContainerWeightMeasuredEvent, DMC_EVENT_TYPE_GENL_OUT_OF_ORDER, DMC_EVENT_TYPE_GENL_CONTAINER_WEIGHT_MEASURED
