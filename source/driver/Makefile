@@ -7,7 +7,7 @@ obj-m += dmc_driver.o
 overlay := dmc_overlay.dts
 ccflags-y := -std=gnu99 -DDEBUG -Wno-declaration-after-statement -Wno-unused-function -Werror -I$(src)/../common/hw/include
 
-ENV ?= "pi"
+ENV ?= "vm"
 ifeq ($(ENV), "vm")
 	KERNELDIR := /lib/modules/6.2.0-36-generic/build
 else ifeq ($(ENV), "pi")

@@ -64,4 +64,10 @@ int dmc_netlink_marshal_event_out_of_order(
     struct dmc_netlink_event_msg  *event_msg,
     struct dmc_event_out_of_order *event);
 
+/**
+ * @brief Marshal machine ok event into generic netlink message
+ */
+int dmc_genl_marshal_event_machine_ok(struct dmc_netlink_event_msg *event_msg,
+                                      struct dmc_event_machine_ok  *event);
+
 #endif // DMC_NETLINK_MESSAGE_H
