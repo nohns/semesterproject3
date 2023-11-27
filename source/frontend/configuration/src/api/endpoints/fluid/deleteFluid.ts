@@ -4,11 +4,9 @@ import ENV from "@/constants/env";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
-
-if (ENV.MOCKED) {
-  await import("./deleteFluid.mock.ts");
-}
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/fluid/deleteFluid.mock";
 
 interface DeleteFluidRequest {
   id: number;
