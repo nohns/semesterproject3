@@ -2,7 +2,7 @@ import sqlite3
 
 from database.update import update, set_status_to_true
 from database.containers import change_containers, get_containers
-from database.drinks import create_drink, delete_drink, get_drinks  # , pour_drink
+from database.drinks import create_drink, delete_drink, get_drinks, get_drink  # , pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
 
@@ -180,6 +180,9 @@ class Database:
 
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.connection)
+    
+    def get_drink(self, drink_id: int) -> Drink:
+        return get_drink(self.connection, drink_id)
 
     # def pour_drink(self, id: int) -> None:
     #     return pour_drink(self.connection, id)
