@@ -24,9 +24,7 @@ const useUpdate = () => {
     retryDelay: 5000,
     retry: true,
     onSuccess: () => {
-      //TODO: Verify if this works
-      queryClient.invalidateQueries(["getDrinks", "getFluids"]);
-      //Potentially add refetch interval within the use hook itself
+      queryClient.invalidateQueries(["getDrinks", "getContainers"]);
     },
   });
 
