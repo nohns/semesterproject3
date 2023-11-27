@@ -182,11 +182,19 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
 
             ingredient_ids.append(ingredient_id)
 
-        # Insert into Drinks table using the existing image_id since we can't directly insert the image object
+        # Check if the image already exists
         drink.image = json_to_dataclass(drink.image, Image)
-        cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image.path,))
-        image_id = cursor.lastrowid  # This gets the new id for the image
-        print("Database: Image has been added")
+        cursor.execute("SELECT id FROM Images WHERE path = ?", (drink.image.path,))
+        existing_image = cursor.fetchone()
+
+        if existing_image:
+            # If it exists, use the existing id
+            image_id = existing_image[0]
+        else:
+            # If not, insert the new image and use its new id
+            cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image.path,))
+            image_id = cursor.lastrowid  # This gets the new id for the image
+            print("Database: Image has been added")
 
         # Convert the list of ingredient IDs to a string separated by commas
         ingredient_ids_str = ",".join(map(str, ingredient_ids))
@@ -206,6 +214,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
 
     finally:
         cursor.close()
+
 
 
 def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
