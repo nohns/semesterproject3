@@ -18,6 +18,9 @@ test_drinks = [
         ],
     }
 ]
+test_containers = [
+    {"id": 1, "fluid": {"id": 1, "name": "Snaps"}, "fluidAmountInCl": 500}
+]
 
 
 class MockDatabase:
@@ -26,6 +29,9 @@ class MockDatabase:
 
     def get_drinks(self):
         return test_drinks
+
+    def get_containers(self):
+        return test_containers
 
 
 @pytest.fixture
