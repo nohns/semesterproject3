@@ -10,3 +10,7 @@ def test_get_drinks_api(client):
 
     actual_drinks = response.json["drinks"]
     assert actual_drinks == expected_drinks
+
+
+def test_get_drinks_controller(controller):
+    assert {"drinks": expected_drinks} == controller.get_drinks()
