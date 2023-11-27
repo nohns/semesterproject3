@@ -25,13 +25,6 @@ class Main:
         # Initialize all classes
         database = Database()
 
-        print("Testitestitest")
-        drink = database.get_drink_for_netlink(1)
-        print(drink)
-
-        container = database.get_container_by_fluid_id(1)
-        print(container)
-
         netlink_publisher = NetlinkPublisher()
 
         controller = Controller(database, netlink_publisher)
