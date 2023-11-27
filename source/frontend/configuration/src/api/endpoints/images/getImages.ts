@@ -17,7 +17,7 @@ export interface GetImagesResponse {
 }
 
 const getImages = async ({}: GetImagesRequest) => {
-  const response = await http.get<GetImagesResponse>(`v1/images`);
+  const response = await http.get<GetImagesResponse>(`v1/images/`);
 
   if (response.status !== 200) {
     console.log(response);

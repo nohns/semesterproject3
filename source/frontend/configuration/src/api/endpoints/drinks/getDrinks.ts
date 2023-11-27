@@ -34,7 +34,7 @@ export interface GetDrinksResponse {
 }
 
 const getDrinks = async ({}: GetDrinksRequest) => {
-  const response = await http.get<GetDrinksResponse>(`v1/drinks`);
+  const response = await http.get<GetDrinksResponse>(`v1/drinks/`);
 
   if (response.status !== 200) {
     console.log(response);

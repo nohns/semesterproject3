@@ -20,7 +20,7 @@ export interface GetFluidsResponse {
 }
 
 const getFluids = async ({}: GetFluidsRequest) => {
-  const response = await http.get<GetFluidsResponse>(`v1/fluids`);
+  const response = await http.get<GetFluidsResponse>(`v1/fluids/`);
 
   if (response.status !== 200) {
     console.log(response);
