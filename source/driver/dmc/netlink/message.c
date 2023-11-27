@@ -47,6 +47,25 @@ int dmc_netlink_unmarshal_event_fluid_pour_requested(
   return 0;
 }
 
+int dmc_netlink_unmarshal_machine_ok(struct dmc_event_machine_ok  *event,
+                                     struct dmc_netlink_event_msg *event_msg)
+{
+  // Unmarshal data
+  return 0;
+}
+
+int dmc_netlink_unmarshal_event_debug(struct dmc_event_debug       *event,
+                                      struct dmc_netlink_event_msg *event_msg)
+{
+  // Unmarshal data
+  event->event_type =
+      *(u8 *)nla_data(event_msg->attrs[DMC_GENL_EVENT_DEBUG_ATTR_EVENT_TYPE]);
+  event->data =
+      *(u8 *)nla_data(event_msg->attrs[DMC_GENL_EVENT_DEBUG_ATTR_DATA]);
+
+  return 0;
+}
+
 /* ################################# */
 /*     Functions for MARSHALLING     */
 /*  from netlink messages to events  */
