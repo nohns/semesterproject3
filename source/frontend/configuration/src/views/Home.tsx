@@ -131,7 +131,7 @@ function Home(): JSX.Element {
   //Hernede bliver alt magien samplet
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center ">
         <Header />
         <div className="flex flex-col items-center">
           <Card className="py-10 px-20 bg-zinc-800 w-full flex flex-col">
@@ -164,7 +164,7 @@ function Home(): JSX.Element {
               {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
             </h6>
           </Card>
-          <Card className="py-10 px-20 bg-zinc-800 mt-8 w-full flex flex-row justify-between gap-6">
+          <Card className="py-6 px-20 bg-zinc-800 mt-8 w-full flex flex-row justify-between gap-6">
             <div className="w-72 rounded-3xl bg-green-600 text-center text-white font-mono">
               <CreateDrinkGuide />
             </div>
