@@ -13,7 +13,7 @@
 #include "packet.h"
 
 // Forward declarations
-static int dmc_netlink_handle_event(struct dmc_base_event        *base,
+static int dmc_netlink_handle_event(struct dmc_base_event *base,
                                     struct dmc_netlink_event_msg *from_msg);
 static int dmc_uart_recv_byte(u8 data);
 
@@ -38,7 +38,7 @@ static struct dmc_ctrl_packet_handler pck_handler = {
 };
 
 // Handle incoming events from rpi via netlink
-static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
+static int dmc_netlink_handle_event(struct dmc_base_event *base_event,
                                     struct dmc_netlink_event_msg *from_msg)
 {
   int err;
@@ -52,7 +52,8 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
   {
     struct dmc_event_user_confirm event;
     err = dmc_netlink_unmarshal_event_user_confirm(&event, from_msg);
-    if (err != 0) break;
+    if (err != 0)
+      break;
 
     DMC_D("dmc_driver: recv user confirm event\n");
 
@@ -64,7 +65,8 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
   {
     struct dmc_event_fluid_pour_requested event;
     err = dmc_netlink_unmarshal_event_fluid_pour_requested(&event, from_msg);
-    if (err != 0) break;
+    if (err != 0)
+      break;
 
     DMC_D("dmc_driver: recv fluid poor requested event for container %d with "
           "amount %d\n",
@@ -81,7 +83,8 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
   }
 
   // If error was set during handling of event, propagate it
-  if (err != 0) return err;
+  if (err != 0)
+    return err;
 
   return 0;
 }
@@ -98,7 +101,8 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
   {
     struct dmc_packet_out_of_order packet;
     err = dmc_packet_unmarshal_out_of_order(&packet, base_packet);
-    if (err != 0) break;
+    if (err != 0)
+      break;
 
     // Call the packet handler
     err = dmc_ctrl_on_packet_out_of_order(&pck_handler, &packet);
@@ -108,7 +112,8 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
   {
     struct dmc_packet_container_weight_measured packet;
     err = dmc_packet_unmarshal_container_weight_measured(&packet, base_packet);
-    if (err != 0) break;
+    if (err != 0)
+      break;
 
     // Call the packet handler
     err = dmc_ctrl_on_packet_container_weight_measured(&pck_handler, &packet);
@@ -121,7 +126,8 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
   }
 
   // If error was set during handling of packet, propagate it
-  if (err != 0) return err;
+  if (err != 0)
+    return err;
 
   return 0;
 }
@@ -146,7 +152,8 @@ static int dmc_uart_recv_byte(u8 data)
     curr_packet = NULL;
 
     // If error was set during handling of packet, propagate it
-    if (err != 0) return err;
+    if (err != 0)
+      return err;
     return 0;
   }
 

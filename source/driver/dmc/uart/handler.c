@@ -47,7 +47,8 @@ int dmc_uart_handler_register(struct dmc_uart_handler *uart)
   // Request interrupt for rx gpio pin
   err = request_irq(uart->irq_rx, dmc_uart_handle_irq, IRQF_TRIGGER_FALLING,
                     "dmc_uart_rx", NULL);
-  if (err != 0) ERRGOTO(fail_dmc_uart_reg_irq_req, "Failed to \n");
+  if (err != 0)
+    ERRGOTO(fail_dmc_uart_reg_irq_req, "Failed to \n");
 
   // Success
   return 0;
@@ -82,7 +83,7 @@ int dmc_uart_handler_unregister(struct dmc_uart_handler *uart)
 int dmc_uart_handler_start_recv(struct dmc_uart_handler *uart) { return 0; }
 
 int dmc_uart_handler_send_packet(struct dmc_uart_handler *uart,
-                                 struct dmc_packet       *packet)
+                                 struct dmc_packet *packet)
 {
   // Return linux not implemented error
   return -ENOSYS;
