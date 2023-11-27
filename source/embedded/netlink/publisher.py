@@ -22,7 +22,7 @@ if is_linux:
             msg = UserConfirmEvent().to_msg()
 
                 # Send the event message
-                self.genlsock.nlm_request(msg, self.genlsock.prid, msg_flags=NLM_F_REQUEST)
+            self.genlsock.nlm_request(msg, self.genlsock.prid, msg_flags=NLM_F_REQUEST)
 
         def pour_fluid(self, container: int, amount: int):
             # Create a new message
