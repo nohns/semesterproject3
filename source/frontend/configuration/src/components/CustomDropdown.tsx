@@ -28,12 +28,10 @@ function CustomDropdown({
   fluids,
   className,
 }: CustomDropdownProps) {
-  //const [drinks, setDrinks] = useState("Vælg drink");
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className={className}>
-        <Button>{container.fluid.name}</Button>
+        <Button className="text-black">{container.fluid.name}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Drinks</DropdownMenuLabel>
