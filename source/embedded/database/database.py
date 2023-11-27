@@ -1,8 +1,17 @@
 import sqlite3
 
 from database.update import update, set_status_to_true
-from database.containers import change_containers, get_containers, get_container_by_fluid_id
-from database.drinks import create_drink, delete_drink, get_drinks, get_drink_for_netlink  # , pour_drink
+from database.containers import (
+    change_containers,
+    get_containers,
+    get_container_by_fluid_id,
+)
+from database.drinks import (
+    create_drink,
+    delete_drink,
+    get_drinks,
+    get_drink_for_netlink,
+)  # , pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
 
@@ -171,7 +180,7 @@ class Database:
 
     def get_containers(self) -> list[Container]:
         return get_containers(self.connection)
-    
+
     def get_container_by_fluid_id(self, fluid_id: int) -> Container:
         return get_container_by_fluid_id(self.connection, fluid_id)
 
@@ -183,7 +192,7 @@ class Database:
 
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.connection)
-    
+
     def get_drink_for_netlink(self, drink_id: int) -> Drink:
         return get_drink_for_netlink(self.connection, drink_id)
 

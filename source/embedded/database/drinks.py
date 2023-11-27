@@ -70,6 +70,7 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
     finally:
         cursor.close()
 
+
 def get_drink_for_netlink(connection: sqlite3.Connection, drink_id: int) -> Drink:
     cursor = connection.cursor()
     # This function should get a single drink by id
@@ -131,7 +132,6 @@ def get_drink_for_netlink(connection: sqlite3.Connection, drink_id: int) -> Drin
         return None
     finally:
         cursor.close()
-    
 
 
 # def pour_drink(connection: sqlite3.Connection) -> None:
@@ -165,7 +165,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
             # Check if the ingredient already exists
             cursor.execute(
                 "SELECT id FROM Ingredients WHERE fluid_id = ? AND amount_in_cl = ?",
-                (ingredient.fluid.id, ingredient.amountInCl)
+                (ingredient.fluid.id, ingredient.amountInCl),
             )
             existing_ingredient = cursor.fetchone()
 
@@ -176,7 +176,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
                 # If not, insert the new ingredient and use its new id
                 cursor.execute(
                     "INSERT INTO Ingredients (fluid_id, amount_in_cl) VALUES (?, ?)",
-                    (ingredient.fluid.id, ingredient.amountInCl)
+                    (ingredient.fluid.id, ingredient.amountInCl),
                 )
                 ingredient_id = cursor.lastrowid  # This gets the new id
 
@@ -206,7 +206,6 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
 
     finally:
         cursor.close()
-
 
 
 def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:

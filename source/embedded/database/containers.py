@@ -37,7 +37,9 @@ def get_containers(connection: sqlite3.Connection) -> list[dict]:
         cursor.close()
 
 
-def get_container_by_fluid_id(connection: sqlite3.Connection, fluid_id: int) -> Container:
+def get_container_by_fluid_id(
+    connection: sqlite3.Connection, fluid_id: int
+) -> Container:
     cursor = connection.cursor()
 
     try:
@@ -60,11 +62,10 @@ def get_container_by_fluid_id(connection: sqlite3.Connection, fluid_id: int) -> 
             fluid_name = container_data[3]
 
             container = Container(
-                fluid_amount_in_cl = fluid_amount,
-                fluid = Fluid(id=fluid_id, name=fluid_name),
-                container_id = container_id
-)
-
+                fluid_amount_in_cl=fluid_amount,
+                fluid=Fluid(id=fluid_id, name=fluid_name),
+                container_id=container_id,
+            )
 
             return container
 
@@ -77,6 +78,7 @@ def get_container_by_fluid_id(connection: sqlite3.Connection, fluid_id: int) -> 
 
     finally:
         cursor.close()
+
 
 def change_containers(
     connection: sqlite3.Connection, container_id: int, new_fluid_id: int

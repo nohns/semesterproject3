@@ -23,8 +23,6 @@ class Api:
             methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
         )
 
-
-
         # Register the routes
         self.register_routes(app)
 

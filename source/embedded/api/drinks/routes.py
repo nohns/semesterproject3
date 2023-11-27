@@ -14,7 +14,6 @@ def register_drinks_bp(controller: Controller):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-
     @drinks_bp.route("/", methods=["POST"])
     def create_drink():
         try:
