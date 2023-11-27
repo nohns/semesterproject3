@@ -7,21 +7,28 @@
 
 #define DMC_EVENT_GENL_BASE_POLICY_ATTR_TYPE NLA_U8
 
-// Command policy for raise liquid pour requested
-static const struct nla_policy dmc_genl_policy_liquid_pour_requested
-    [__DMC_EVENT_GENL_FLUID_POUR_REQUESTED_ATTR_MAX] = {
-        [DMC_EVENT_GENL_FLUID_POUR_REQUESTED_ATTR_TYPE] =
-            {.type = DMC_EVENT_GENL_BASE_POLICY_ATTR_TYPE},
-        [DMC_EVENT_GENL_FLUID_POUR_REQUESTED_ATTR_CONTAINER] = {.type = NLA_U8},
-        [DMC_EVENT_GENL_FLUID_POUR_REQUESTED_ATTR_AMOUNT]    = {.type = NLA_U8},
+static const struct nla_policy dmc_genl_event_pol[__DMC_GENL_EVENT_ATTR_MAX] = {
+    [DMC_GENL_EVENT_ATTR_UNSPECIFIED] = {.type = NLA_UNSPEC},
 
-};
+    // - Base event attributes -
 
-// Command policy for raise user confirm
-static const struct nla_policy dmc_genl_policy_user_confirm
-    [__DMC_EVENT_GENL_FLUID_POUR_REQUESTED_ATTR_MAX] = {
-        [DMC_EVENT_GENL_FLUID_POUR_REQUESTED_ATTR_TYPE] =
-            {.type = DMC_EVENT_GENL_BASE_POLICY_ATTR_TYPE},
+    [DMC_GENL_EVENT_BASE_ATTR_TYPE] = {.type = NLA_U8},
+
+    // - Container weight measured event attributes -
+
+    [DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_CONTAINER] = {.type =
+                                                                     NLA_U8},
+    [DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_WEIGHT] = {.type = NLA_S16},
+
+    // - Out of order event attributes -
+
+    [DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_MESSAGE] = {.type = NLA_NUL_STRING},
+    [DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_REASON]  = {.type = NLA_U8},
+
+    // - Fluid pour requested event attributes -
+
+    [DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_CONTAINER] = {.type = NLA_U8},
+    [DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_AMOUNT]    = {.type = NLA_U8},
 };
 
 #endif // DMC_NETLINK_POLICY_H

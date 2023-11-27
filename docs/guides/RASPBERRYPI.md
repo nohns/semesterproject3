@@ -23,7 +23,7 @@ You can now run commands on the Raspberry Pi!
 
 >Might not be needed, as we perhaps have to host the UI on the PC.
 
-Follow this guide on installing node via `apy`:
+Follow this guide on installing node via `apt`:
 https://pimylifeup.com/raspberry-pi-nodejs/
 
 ## FAQ:
