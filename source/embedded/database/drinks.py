@@ -1,25 +1,19 @@
 import sqlite3
 from domain.domain import Drink, Ingredient, Fluid, Image, json_to_dataclass
 
-# Tvivler sgu på den her kommer til at virke
-# At dette virker vil kræve vi får ingredient information
-
 
 def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
     cursor = connection.cursor()
 
     try:
         # Fetch drinks along with their images
-        cursor.execute(
-            """
-            SELECT * FROM Drinks
-        """
-        )
+        cursor.execute("SELECT * FROM Drinks")
+
         drinks = cursor.fetchall()
 
         resulting_drinks_array = []
 
-        # drinks is an array of tuples, each tuple is a drink
+        # Drinks is a list of lists with each list containing a drink
         for drink in drinks:
             drink_id = drink[0]
             drink_name = drink[1]
@@ -42,7 +36,9 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
 
                     if fluid:
                         fluid = Fluid(id=fluid[0], name=fluid[1])
-                        ingredient = Ingredient(id=ingredient_id, fluid=fluid)
+                        ingredient = Ingredient(
+                            id=ingredient_id, fluid=fluid, amountInCl=ingredient[2]
+                        )
                         ingredients.append(ingredient)
                     else:
                         print(f"Fluid with ID: {fluid_id} not found")
@@ -64,6 +60,7 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
             )
 
             resulting_drinks_array.append(drink)
+
         return resulting_drinks_array
 
     except sqlite3.Error as e:
@@ -74,15 +71,21 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
         cursor.close()
 
 
-def pour_drink(connection: sqlite3.Connection) -> None:
-    # TODO: Implement
-    return 0
+# def pour_drink(connection: sqlite3.Connection) -> None:
+#     return 0
 
 
 def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
     cursor = connection.cursor()
     try:
         print(f"Database: Attempting to create drink: {drink}")
+
+        all_drinks = get_drinks(connection)
+        print(all_drinks)
+
+        if any(drink.name == existing_drink.name for existing_drink in all_drinks):
+            print(f"Database: '{drink.name}' already exists")
+            return
 
         # Convert ingredients to dataclass instance
         ingredients = [
@@ -106,13 +109,17 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
         print("Database: Printing ingredient string: ", ingredient_ids)
 
         # Check if a drink with identical array of ingredient ids already exists
-        drinks=get_drinks()
+        """
+        allDrinks = get_drinks(connection)
 
-        for drinks.ingredient_id in drinks.ingredient_ids:
-            for ingredient in ingredients:
-                if drinks.ingredient_id==ingredient.fluid.id:
-                    print("Database: Drink already exists")
-                    return None
+        allDrinks_ingredient_ids = {
+            ingredient.fluid.id for ingredient in ingredients for drink in allDrinks
+        }
+
+        if allDrinks_ingredient_ids == drink.ingredient_ids:
+            print("Database: Drink already exists")
+            return None
+        """
 
         # Associate ingredients with the new drink using their existing IDs, think we have to do this
         for ingredient in ingredients:
@@ -121,12 +128,12 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
                 "INSERT INTO Ingredients (amount_in_cl, fluid_id) VALUES (?, ?)",
                 (ingredient.amountInCl, ingredient.fluid.id),
             )
- 
+
         print("Database: Ingredients have been added")
 
         # Insert into Drinks table using the existing image_id since we can't directly insert the image object
         drink.image = json_to_dataclass(drink.image, Image)
-        cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image))
+        cursor.execute("INSERT INTO Images (path) VALUES (?)", (drink.image.path,))
         print("Database: Image has been added")
         cursor.execute(
             "INSERT INTO Drinks (name, ingredients_ids, image_id) VALUES (?, ?, ?)",
@@ -140,7 +147,7 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
         connection.rollback()
-        raise Exception("An error occurred while creating the drink.", e)
+        raise Exception("An error occurred while creating the drink.", e) from e
 
     finally:
         cursor.close()

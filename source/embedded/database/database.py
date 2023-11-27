@@ -2,11 +2,11 @@ import sqlite3
 
 from database.update import update, set_status_to_true
 from database.containers import change_containers, get_containers
-from database.drinks import create_drink, delete_drink, get_drinks, pour_drink
+from database.drinks import create_drink, delete_drink, get_drinks  # , pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
 
-from domain.domain import Drink, Fluid, Image, FluidContainer
+from domain.domain import Drink, Fluid, Image, Container
 
 
 # Call database class
@@ -20,10 +20,22 @@ class Database:
         # Create the tables
         self.create_tables()
 
+        # Seed the tables
+        # self.seed_fluids()
+        self.seed_containers()
+
         self.print_all_tables()
 
+        from sample_data import fluids, drinks
+
+        print("Adding sample data to database")
+        for fluid in fluids:
+            create_fluid(self.connection, fluid)
+        for drink in drinks:
+            create_drink(self.connection, drink)
+
     def create_tables(self):
-        # create a boolean table for update
+        # Create a boolean table for update
         cursor = self.connection.cursor()
 
         cursor.execute(
@@ -37,7 +49,7 @@ class Database:
         # create a table for containers
         cursor.execute(
             """
-    CREATE TABLE IF NOT EXISTS FluidContainers 
+    CREATE TABLE IF NOT EXISTS Containers 
     (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         fluid_amount_in_cl INTEGER NOT NULL,
@@ -93,6 +105,45 @@ class Database:
     """
         )
 
+    def seed_fluids(self):
+        cursor = self.connection.cursor()
+        try:
+            # Check if fluids already seeded
+            cursor.execute("SELECT COUNT(*) FROM Fluids")
+            if cursor.fetchone()[0] == 0:  # If no fluids, then seed
+                fluids = [
+                    "Vodka",
+                    "Orange Juice",
+                    "Blue Booster",
+                ]  # Example fluid names
+                for fluid in fluids:
+                    cursor.execute("INSERT INTO Fluids (name) VALUES (?)", (fluid,))
+                self.connection.commit()
+        except sqlite3.Error as e:
+            print(f"SQLite error: {e}")
+            self.connection.rollback()
+        finally:
+            cursor.close()
+
+    def seed_containers(self):
+        cursor = self.connection.cursor()
+        try:
+            # Check if containers already seeded
+            cursor.execute("SELECT COUNT(*) FROM Containers")
+            if cursor.fetchone()[0] == 0:  # If no containers, then seed
+                fluid_ids = [1, 2, 3]  # Replace with actual fluid IDs if different
+                for fluid_id in fluid_ids:
+                    cursor.execute(
+                        "INSERT INTO Containers (fluid_amount_in_cl, fluid_type_id) VALUES (?, ?)",
+                        (100, fluid_id),
+                    )
+                self.connection.commit()
+        except sqlite3.Error as e:
+            print(f"SQLite error: {e}")
+            self.connection.rollback()
+        finally:
+            cursor.close()
+
     def print_all_tables(self):
         try:
             cursor = self.connection.cursor()
@@ -115,25 +166,23 @@ class Database:
         except sqlite3.Error as e:
             print("SQLite error:", e)
 
-    def change_containers(
-        self, container_id: int, fluid_type_id: int, fluid_amount: int
-    ):
-        return change_containers(self.connection, id)
+    def change_containers(self, container_id: int, new_fluid_id: int) -> bool:
+        return change_containers(self.connection, container_id, new_fluid_id)
 
-    def get_containers(self) -> list[FluidContainer]:
+    def get_containers(self) -> list[Container]:
         return get_containers(self.connection)
 
     def create_drink(self, drink: Drink) -> None:
         return create_drink(self.connection, drink)
 
-    def delete_drink(self, id: int) -> None:
-        return delete_drink(self.connection)
+    def delete_drink(self, drink_id: int) -> None:
+        return delete_drink(self.connection, drink_id)
 
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.connection)
 
-    def pour_drink(self, id: int) -> None:
-        return pour_drink(self.connection, id)
+    # def pour_drink(self, id: int) -> None:
+    #     return pour_drink(self.connection, id)
 
     def get_fluids(self) -> list[Fluid]:
         return get_fluids(self.connection)

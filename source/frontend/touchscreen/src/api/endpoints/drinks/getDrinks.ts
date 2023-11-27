@@ -1,26 +1,32 @@
 /** @format */
 
-import ENV from "@/constants/env";
-
 import { useQuery } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
-
-if (ENV.MOCKED) {
-  await import("./getDrinks.mock.ts");
-}
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/drinks/getDrinks.mock";
 
 export interface Drink {
   id: number;
   image: Image;
   name: string;
+  ingredients: Ingredient[];
+}
+
+export interface Ingredient {
+  id: number;
+  fluid: Fluid;
   amountInCl: number;
-  remainingFluid: number;
 }
 
 interface Image {
   id: number;
   path: string;
+}
+
+export interface Fluid {
+  id: number;
+  name: string;
 }
 
 interface GetDrinksRequest {}

@@ -1,4 +1,8 @@
+#include <linux/init.h>   /* Needed for the macros */
+#include <linux/kernel.h> /* Needed for KERN_INFO */
 #include <linux/module.h>
+#include <linux/module.h> /* Needed by all modules */
+#include <net/genetlink.h>
 
 #include "dmc/ctrl/event_handler.h"
 #include "dmc/ctrl/packet_handler.h"
@@ -9,7 +13,7 @@
 #include "packet.h"
 
 // Forward declarations
-static int dmc_netlink_handle_event(struct dmc_base_event        *base,
+static int dmc_netlink_handle_event(struct dmc_base_event *base,
                                     struct dmc_netlink_event_msg *from_msg);
 static int dmc_uart_recv_byte(u8 data);
 
@@ -19,23 +23,26 @@ static struct dmc_netlink_handler nl_handler = {
     .on_event_recv = dmc_netlink_handle_event,
 };
 
-static struct dmc_uart_handler uart_handler = {
+/*static struct dmc_uart_handler uart_handler = {
+    .gpio_rx      = 5,
+    .gpio_tx      = 6,
     .on_byte_recv = dmc_uart_recv_byte,
-};
+};*/
 
-static struct dmc_ctrl_event_handler evt_handler = {
+/*static struct dmc_ctrl_event_handler evt_handler = {
     .uart = &uart_handler,
-};
+};*/
 
 static struct dmc_ctrl_packet_handler pck_handler = {
     .nl_handler = &nl_handler,
 };
 
 // Handle incoming events from rpi via netlink
-static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
+static int dmc_netlink_handle_event(struct dmc_base_event *base_event,
                                     struct dmc_netlink_event_msg *from_msg)
 {
   int err;
+  DMC_D("Received event from netlink! type: %d\n", base_event->type);
 
   // Unmarshal event into specific event based on received event type.
   // Afterwards, call the appropriate control event handler function
@@ -45,20 +52,28 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
   {
     struct dmc_event_user_confirm event;
     err = dmc_netlink_unmarshal_event_user_confirm(&event, from_msg);
-    if (err != 0) break;
+    if (err != 0)
+      break;
+
+    DMC_D("dmc_driver: recv user confirm event\n");
 
     // Call the event handler
-    err = dmc_ctrl_on_event_user_confirm(&evt_handler, &event);
+    // err = dmc_ctrl_on_event_user_confirm(&evt_handler, &event);
     break;
   }
   case DMC_EVENT_TYPE_FLUID_POUR_REQUESTED:
   {
     struct dmc_event_fluid_pour_requested event;
     err = dmc_netlink_unmarshal_event_fluid_pour_requested(&event, from_msg);
-    if (err != 0) break;
+    if (err != 0)
+      break;
+
+    DMC_D("dmc_driver: recv fluid poor requested event for container %d with "
+          "amount %d\n",
+          event.container, event.amount);
 
     // Call the event handler
-    err = dmc_ctrl_on_event_fluid_pour_requested(&evt_handler, &event);
+    // err = dmc_ctrl_on_event_fluid_pour_requested(&evt_handler, &event);
     break;
   }
   default:
@@ -68,7 +83,8 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
   }
 
   // If error was set during handling of event, propagate it
-  if (err != 0) return err;
+  if (err != 0)
+    return err;
 
   return 0;
 }
@@ -85,7 +101,8 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
   {
     struct dmc_packet_out_of_order packet;
     err = dmc_packet_unmarshal_out_of_order(&packet, base_packet);
-    if (err != 0) break;
+    if (err != 0)
+      break;
 
     // Call the packet handler
     err = dmc_ctrl_on_packet_out_of_order(&pck_handler, &packet);
@@ -95,7 +112,8 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
   {
     struct dmc_packet_container_weight_measured packet;
     err = dmc_packet_unmarshal_container_weight_measured(&packet, base_packet);
-    if (err != 0) break;
+    if (err != 0)
+      break;
 
     // Call the packet handler
     err = dmc_ctrl_on_packet_container_weight_measured(&pck_handler, &packet);
@@ -108,7 +126,8 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
   }
 
   // If error was set during handling of packet, propagate it
-  if (err != 0) return err;
+  if (err != 0)
+    return err;
 
   return 0;
 }
@@ -133,7 +152,8 @@ static int dmc_uart_recv_byte(u8 data)
     curr_packet = NULL;
 
     // If error was set during handling of packet, propagate it
-    if (err != 0) return err;
+    if (err != 0)
+      return err;
     return 0;
   }
 
@@ -155,10 +175,10 @@ static int __init dmc_init(void)
             "dmc_driver: failed to register netlink handler\n");
 
   // Register drinks machine uart handler
-  err = dmc_uart_handler_register(&uart_handler);
+  /*err = dmc_uart_handler_register(&uart_handler);
   if (err != 0)
     ERRGOTO(fail_dmc_init_reg_uart_handler,
-            "dmc_driver: failed to register uart handler\n");
+            "dmc_driver: failed to register uart handler\n");*/
 
   // Register drinks machine control event handler
   /*err = dmc_ctrl_event_handler_register(&evt_handler);
@@ -176,13 +196,13 @@ static int __init dmc_init(void)
   pr_info("dmc_driver: initialized successfully!\n");
   return 0;
 
-  // Goto error handling...
+// Goto error handling...
 /*fail_dmc_init_reg_ctrl_pck_handler:
   dmc_ctrl_event_handler_unregister(&evt_handler);
 fail_dmc_init_reg_ctrl_evt_handler:
   dmc_uart_handler_unregister(&uart_handler);*/
-fail_dmc_init_reg_uart_handler:
-  dmc_unregister_netlink_handler(&nl_handler);
+/*fail_dmc_init_reg_uart_handler:
+  dmc_unregister_netlink_handler(&nl_handler);*/
 fail_dmc_init_reg_netlink_handler:
   return err;
 }
@@ -198,7 +218,7 @@ static void __exit dmc_exit(void)
   // dmc_ctrl_event_handler_unregister(&evt_handler);
 
   // Unregister drinks machine uart handler
-  dmc_uart_handler_unregister(&uart_handler);
+  // dmc_uart_handler_unregister(&uart_handler);
 
   // Unregister drinks machine netlink handler
   dmc_unregister_netlink_handler(&nl_handler);
