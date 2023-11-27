@@ -1,12 +1,12 @@
 /** @format */
 
-import httpMock from "@/api/axios.mock";
+import { mock } from "@/api/axios";
 
 import { GetImagesResponse } from "./getImages";
 
 //Regex to match v1/drinks/pour
 const url = new RegExp(/v1\/images/); //I hate fucking regexes
-httpMock.onGet(url).reply(() => {
+mock.onGet(url).reply(() => {
   const res: GetImagesResponse = {
     images: [
       {

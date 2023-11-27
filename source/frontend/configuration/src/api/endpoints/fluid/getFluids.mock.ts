@@ -1,11 +1,10 @@
 /** @format */
 
-import httpMock from "@/api/axios.mock";
-
+import { mock } from "@/api/axios";
 import { GetFluidsResponse } from "./getFluids";
 
 const url = new RegExp(/v1\/fluids/); // I hate fucking regexes
-httpMock.onGet(url).reply(() => {
+mock.onGet(url).reply(() => {
   const res: GetFluidsResponse = {
     fluids: [
       { id: 1, name: "Vodka" },

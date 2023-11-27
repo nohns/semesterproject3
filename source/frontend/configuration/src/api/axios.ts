@@ -1,12 +1,21 @@
 /** @format */
-
-import ENV from "@/constants/env";
 import axios from "axios";
+import AxiosMockAdapter from "axios-mock-adapter";
+import ENV from "@/constants/env";
 
-export const http = axios.create({
-  baseURL: ENV.API_URL || "http://localhost:9000",
-  timeout: 20000,
+console.log(ENV);
+
+export const mockInstance = axios.create();
+
+export const mock = new AxiosMockAdapter(mockInstance, {
+  delayResponse: 200,
+});
+
+const realInstance = axios.create({
+  baseURL: ENV.API_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
+
+export default ENV.MOCKED ? mockInstance : realInstance;
