@@ -10,10 +10,10 @@ export const mockInstance = axios.create();
 export const mock = new AxiosMockAdapter(mockInstance, {
   delayResponse: 200,
 });
-
 // Real axios instance
-
-const realInstance = axios.create();
+const realInstance = axios.create({
+  baseURL: "/api/",
+});
 
 if (ENV.MOCKED) {
   console.debug("Using mocked axios client");

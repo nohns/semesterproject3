@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import http from "../../axios";
 
 const getUpdate = async () => {
-  const response = await http.get(`v1/updates`);
+  const response = await http.get(`v1/updates/`);
 
   if (response.status !== 200) {
     console.log(response);

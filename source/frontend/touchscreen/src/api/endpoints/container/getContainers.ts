@@ -20,7 +20,7 @@ export interface GetContainersResponse {
 }
 
 const getContainers = async ({}: GetContainersRequest) => {
-  const response = await http.get<GetContainersResponse>(`v1/containers`);
+  const response = await http.get<GetContainersResponse>(`v1/containers/`);
 
   if (response.status !== 200) {
     console.log(response);
