@@ -1,4 +1,6 @@
-expected_fluids = [{"id": 1, "name": "Vand"}]
+from tests.conftest import test_fluids
+
+expected_fluids = test_fluids
 
 
 def test_get_fluids_api(client):
