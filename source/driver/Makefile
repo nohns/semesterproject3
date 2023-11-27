@@ -4,6 +4,7 @@
 
 dmc_driver-objs := dmc_driver_main.o dmc/event.o dmc/ctrl/event_handler.o dmc/ctrl/packet_handler.o dmc/netlink/handler.o dmc/netlink/message.o dmc/uart/handler.o
 obj-m += dmc_driver.o
+overlay := dmc_overlay.dts
 ccflags-y := -std=gnu99 -DDEBUG -Wno-declaration-after-statement -Wno-unused-function -Werror -I$(src)/../common/hw/include
 
 ENV ?= "pi"
@@ -21,6 +22,7 @@ CURR_DIR := $(shell pwd)
 SOURCES := $(obj-m:.o=.c)
 SOURCES += $(dmc_driver-objs:.o=.c)
 MODULE_KO := ${obj-m:.o=.ko}
+OVERLAY_OUT := ${overlay:.dts=.dtbo}
 
 #########################
 #### Other variables ####
@@ -44,6 +46,9 @@ MAKE_CMD := $(MAKE) $(ARCH_ARG) $(CROSS_COMPILE_ARG) -C $(KERNELDIR) M=$(shell p
 all default: modules
 install: modules_install
 
+$(OVERLAY_OUT): $(overlay)
+	dtc -@ -I dts -O dtb -o $@ $<
+
 modules:
 	@echo "Making for environment: $(ENV)"
 	$(MAKE_CMD) $@
@@ -52,10 +57,13 @@ modules:
 modules_install help clean: 
 	$(MAKE_CMD) $@
 
-# Upload compilefd kernel module to Raspberry Pi Zero
-upload: modules
+# Upload compiled kernel module to Raspberry Pi Zero
+upload: modules $(OVERLAY_OUT)
 	ssh $(UPLOAD_TARGET) "mkdir -p $(UPLOAD_TARGET_DIR)"
 	scp -pr $(MODULE_KO) $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)/$(MODULE_KO)
+	scp -pr $(OVERLAY_OUT) $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)/$(OVERLAY_OUT)
+	@echo "Uploaded $(MODULE_KO) and $(OVERLAY_OUT) to $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)"
+	@echo "Don't forget to install the overlay to /boot/overlays and add it to /boot/config.txt"
 
 
 
