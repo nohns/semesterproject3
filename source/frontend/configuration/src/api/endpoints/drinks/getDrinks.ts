@@ -12,15 +12,14 @@ if (ENV.MOCKED) {
 }
 
 export interface Drink {
-  id: number;
+  id?: number;
   image: Image;
   name: string;
-  remainingFluid?: number;
   ingredients: Ingredient[];
 }
 
 export interface Ingredient {
-  id: number;
+  id?: number;
   fluid: Fluid;
   amountInCl: number;
 }

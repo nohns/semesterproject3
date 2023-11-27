@@ -10,7 +10,10 @@ def register_fluids_bp(controller: Controller):
     def get_fluids():
         try:
             fluids = controller.get_fluids()
-            return jsonify(fluids), 200
+            return (
+                jsonify(fluids),
+                200,
+            )  # This will now return an object with a 'fluids' key
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
