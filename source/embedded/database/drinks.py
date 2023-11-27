@@ -70,6 +70,69 @@ def get_drinks(connection: sqlite3.Connection) -> list[Drink]:
     finally:
         cursor.close()
 
+def get_drink(connection: sqlite3.Connection, drink_id: int) -> Drink:
+    cursor = connection.cursor()
+    # This function should get a single drink by id
+    try:
+        cursor.execute("SELECT * FROM Drinks WHERE id=?", (drink_id,))
+        drink = cursor.fetchone()
+
+        if drink:
+            drink_id = drink[0]
+            drink_name = drink[1]
+            drink_ingredients = drink[2]
+            drink_image_id = drink[3]
+
+            # Get the list of ingredient ids
+            ingredient_ids = list(map(int, drink_ingredients.split(",")))
+
+            ingredients = []
+
+            for ingredient_id in ingredient_ids:
+                cursor.execute("SELECT * FROM Ingredients WHERE id=?", (ingredient_id,))
+                ingredient = cursor.fetchone()
+
+                if ingredient:
+                    fluid_id = ingredient[1]
+                    cursor.execute("SELECT * FROM Fluids WHERE id=?", (fluid_id,))
+                    fluid = cursor.fetchone()
+
+                    if fluid:
+                        fluid = Fluid(id=fluid[0], name=fluid[1])
+                        ingredient = Ingredient(
+                            id=ingredient_id, fluid=fluid, amountInCl=ingredient[2]
+                        )
+                        ingredients.append(ingredient)
+                    else:
+                        print(f"Fluid with ID: {fluid_id} not found")
+                        return
+                else:
+                    print(f"Ingredient with ID: {ingredient_id} not found")
+                    return
+
+            cursor.execute("SELECT * FROM Images WHERE id=?", (drink_image_id,))
+            image = cursor.fetchone()
+            if image:
+                image = Image(id=image[0], path=image[1])
+            else:
+                print(f"Image with ID: {drink_image_id} not found")
+                return
+
+            drink = Drink(
+                name=drink_name, image=image, ingredients=ingredients, id=drink_id
+            )
+
+            return drink
+        else:
+            print(f"Drink with ID: {drink_id} not found")
+            return
+    except sqlite3.Error as e:
+        print(f"SQLite error: {e}")
+        return None
+    finally:
+        cursor.close()
+    
+
 
 # def pour_drink(connection: sqlite3.Connection) -> None:
 #     return 0

@@ -12,6 +12,15 @@ def get_drinks(database: Database) -> dict:
     except Exception as e:
         print(f"error {e}, when requesting drinks from database to controller")
         raise Exception("Unable to get drinks") from e
+    
+
+def get_drink(database: Database, drink_id: int) -> dict:
+    try:
+        drink = database.get_drink(drink_id)
+        return {"drink": drink}
+    except Exception as e:
+        print(f"error {e}, when requesting drink from database to controller")
+        raise Exception("Unable to get drink") from e
 
 
 def pour_drink(database: Database, hardware: NetlinkPublisher, drink_id: int):
