@@ -15,6 +15,12 @@ import DrinkCard from "@/components/DrinkCard";
 import useChangeContainer from "@/api/endpoints/container/changeContainer";
 import useGetFluids from "@/api/endpoints/fluid/getFluids";
 
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import CreateDrinkGuide from "./CreateDrinkGuide";
+import ChangeContainerGuide from "./ChangeContainerGuide";
+import DeleteDrinkGuide from "./DeleteDrinkGuide";
+
 function Home(): JSX.Element {
   const fluids = useGetFluids();
   const drinks = useGetDrinks();
@@ -24,8 +30,6 @@ function Home(): JSX.Element {
   const calc = useCalculateDrinks();
 
   const [possibleDrinks, setPossibleDrinks] = useState<Drink[] | undefined>([]);
-
-  //let possibleDrinks = calc?.calculate(fluids.data?.fluids!);
 
   const [container1, setContainer1] = useState<FluidContainer>({
     id: 0,
@@ -127,39 +131,53 @@ function Home(): JSX.Element {
   //Hernede bliver alt magien samplet
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center ">
         <Header />
-        <div className="flex flex-col items-center mt-[-50px]">
-          <div className="flex flex-row justify-center space-x-7 mt-10">
-            <FluidBackdrop
-              container={container1!}
-              setContainer={setContainer1}
-              fluids={fluids.data?.fluids!}
-            />
-            <FluidBackdrop
-              container={container2!}
-              setContainer={setContainer2}
-              fluids={fluids.data?.fluids!}
-            />
-            <FluidBackdrop
-              container={container3!}
-              setContainer={setContainer3}
-              fluids={fluids.data?.fluids!}
-            />
-          </div>
-          <div className="flex flex-col items-center text-white font-mono text-2xl font-bold mt-2 ">
-            Possible drinks:
-            {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
-          </div>
-          <div
-            onClick={handleChangeContainer}
-            className="bg-rose-700 mt-3 py-4 px-8 rounded-2xl transition duration-300 hover:bg-pink-700 hover:opacity-75"
-          >
-            Update menu
-          </div>
+        <div className="flex flex-col items-center">
+          <Card className="py-10 px-20 bg-zinc-800 w-full flex flex-col">
+            <h1 className="mx-auto text-white font-mono text-6xl font-bold mt-2">
+              Drinks calculator
+            </h1>
+            <h6 className="mx-auto text-white font-mono text-sm ">
+              Click the containers to select new fluids and calculate possible
+              drink combinations!
+            </h6>
+            <div className="flex flex-row justify-center space-x-7 mt-10">
+              <FluidBackdrop
+                container={container1!}
+                setContainer={setContainer1}
+                fluids={fluids.data?.fluids!}
+              />
+              <FluidBackdrop
+                container={container2!}
+                setContainer={setContainer2}
+                fluids={fluids.data?.fluids!}
+              />
+              <FluidBackdrop
+                container={container3!}
+                setContainer={setContainer3}
+                fluids={fluids.data?.fluids!}
+              />
+            </div>
+            <h6 className="flex flex-col items-center text-white font-mono text-2xl mt-2 ">
+              Possible drinks
+              {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
+            </h6>
+          </Card>
+          <Card className="py-6 px-20 bg-zinc-800 mt-8 w-full flex flex-row justify-between gap-6">
+            <div className="w-72 rounded-3xl bg-green-600 text-center text-white font-mono">
+              <CreateDrinkGuide />
+            </div>
+            <div className="bg-green-600 rounded-3xl w-72 text-center text-white font-mono">
+              <ChangeContainerGuide />
+            </div>
+            <div className="bg-green-600 rounded-3xl w-72 text-center text-white font-mono">
+              <DeleteDrinkGuide />
+            </div>
+          </Card>
         </div>
       </div>
-      {/* </div> */}
+
       <Footer />
     </>
   );
