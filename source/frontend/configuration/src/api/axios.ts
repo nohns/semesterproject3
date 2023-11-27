@@ -11,6 +11,11 @@ export const mock = new AxiosMockAdapter(mockInstance, {
   delayResponse: 200,
 });
 
-const realInstance = axios.create();
+const realInstance = axios.create({
+  baseURL: ENV.API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export default ENV.MOCKED ? mockInstance : realInstance;
