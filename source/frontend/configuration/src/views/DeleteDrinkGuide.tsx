@@ -43,7 +43,7 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
         return (
           <div>
             <div>Which drink would you like to delete?</div>
-            <div className="flex flex-row gap-4 my-2">
+            <div className="flex flex-row flex-wrap gap-4 my-2">
               {drinks.data?.drinks.map((drink) => (
                 <Button
                   onClick={() => {
