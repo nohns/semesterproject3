@@ -24,6 +24,10 @@ class Main:
     def __init__(self):
         # Initialize all classes
         database = Database()
+
+        print("bhudbhusd")
+        drink = database.get_drink(1)
+        print(drink)
         netlink_publisher = NetlinkPublisher()
 
         controller = Controller(database, netlink_publisher)

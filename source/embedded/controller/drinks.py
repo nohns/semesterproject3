@@ -14,7 +14,7 @@ def get_drinks(database: Database) -> dict:
         raise Exception("Unable to get drinks") from e
     
 
-def get_drink(database: Database, drink_id: int) -> dict:
+def get_drink_for_netlink(database: Database, drink_id: int) -> dict:
     try:
         drink = database.get_drink(drink_id)
         return {"drink": drink}
