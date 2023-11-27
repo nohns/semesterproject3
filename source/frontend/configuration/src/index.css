@@ -1,7 +1,8 @@
+/** @format */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
 
 @layer base {
   :root {
@@ -24,9 +25,9 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
-    --radius: 0.5rem;
+    --radius: 1rem;
   }
- 
+
   .dark {
     --background: 20 14.3% 4.1%;
     --foreground: 0 0% 95%;
@@ -50,28 +51,28 @@
   }
 }
 
- 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 @keyframes wave {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-
-
 
 @keyframes neonPulse {
-  0% { box-shadow: 0 0 10px 0 rgba(220, 38, 38, 0.7); }
-  50% { box-shadow: 0 0 20px 10px rgba(255, 165, 0, 0.7); }
-  100% { box-shadow: 0 0 10px 0 rgba(74, 222, 128, 0.7); }
+  0% {
+    box-shadow: 0 0 10px 0 rgba(220, 38, 38, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(255, 165, 0, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 10px 0 rgba(74, 222, 128, 0.7);
+  }
 }
 
 .selectedCard {
