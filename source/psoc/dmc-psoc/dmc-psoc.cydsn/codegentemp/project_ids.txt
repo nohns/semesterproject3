@@ -1,0 +1,7 @@
+C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\dmc-psoc.cyprj|37b19db4-8b4e-4c43-82c2-8bb1629e6c68
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|f36b3a10-851c-4a87-a842-499f04bdc1f1
+C:\Users\Runeg\OneDrive - Aarhus universitet\Dokumenter\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|cabe5165-72e5-4f8a-8aeb-bba7a09ab5db
+C:\Users\Runeg\OneDrive - Aarhus universitet\Dokumenter\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|f5a3d2dc-4fb7-4a8a-be16-045c8b931cd8
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|c1bfa911-677e-41e8-8e9d-6c9987836e6a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|4a6a37f6-8181-4805-86cd-dc5b3b452169
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|936d800a-0cd5-4c6c-a98f-1fca495837ba

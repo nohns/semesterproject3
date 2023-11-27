@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="dmc-psoc\dmc-psoc\Source Files\main.c">
+<ExpandedNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\TopDesign</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Pins</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Analog</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Clocks</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Interrupts</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\DMA</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\System</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Directives</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Flash Security</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\EEPROM</v>
+<v>dmc-psoc\dmc-psoc\Header Files</v>
+<v>dmc-psoc\dmc-psoc\Header Files\cyapicallbacks.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\flags.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\job_queue.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\packet.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\packet_uart.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\pc_uart.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\pump_control.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\timers.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\weight.h</v>
+<v>dmc-psoc\dmc-psoc\Source Files</v>
+<v>dmc-psoc\dmc-psoc\Source Files\job_queue.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\main.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\packet_uart.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\pc_uart.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\pump_control.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\timers.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\weight.c</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5\UART_1</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\TopDesign</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Pins</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Analog</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Clocks</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Interrupts</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\DMA</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\System</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Directives</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\Flash Security</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.cydwr\EEPROM</v>
+<v>dmc-psoc\dmc-psoc\Header Files</v>
+<v>dmc-psoc\dmc-psoc\Header Files\cyapicallbacks.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\flags.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\job_queue.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\packet.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\packet_uart.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\pc_uart.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\pump_control.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\timers.h</v>
+<v>dmc-psoc\dmc-psoc\Header Files\weight.h</v>
+<v>dmc-psoc\dmc-psoc\Source Files</v>
+<v>dmc-psoc\dmc-psoc\Source Files\job_queue.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\main.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\packet_uart.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\pc_uart.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\pump_control.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\timers.c</v>
+<v>dmc-psoc\dmc-psoc\Source Files\weight.c</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5\ADC_SAR_1</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5\ADC_SAR_1_ExtVref</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5\ADC_SAR_1_IRQ</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5\ADC_SAR_1_theACLK</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5\AMux</v>
+<v>dmc-psoc\dmc-psoc\Generated_Source\PSoC5\check_weight_timer</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\TopDesign</v>
+<v>dmc-psoc\dmc-psoc\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\TopDesign</v>
+<v>dmc-psoc\dmc-psoc\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\CortexM3</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_ExtVref.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_theACLK.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\AMux.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\check_weight_timer.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\check_weight_timer_clock.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\check_weight_timer_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\gpio_pump_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\gpio_pump_2.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\gpio_pump_3.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_check_weight_timer.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_pump_timer_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_pump_timer_2.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_pump_timer_3.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\job_queue.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\packet_uart.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pc_uart.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_control.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_1_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_2.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_2_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_3.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_3_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_clock_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_clock_2.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pump_timer_clock_3.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\timers.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_BOOT.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_INT.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_IntClock.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_1_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\weight.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\weight_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\weight_2.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\weight_3.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\dmc-psoc.hex</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\dmc-psoc.map</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.gpdsc</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc.rpt</v>
+<v>dmc-psoc\dmc-psoc\dmc-psoc_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\CortexM3</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_ExtVref.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_theACLK.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\AMux.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\check_weight_timer.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\check_weight_timer_clock.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\check_weight_timer_PM.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\gpio_pump_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\gpio_pump_2.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\gpio_pump_3.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_check_weight_timer.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_pump_timer_1.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_pump_timer_2.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_pump_timer_3.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart_rx.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\job_queue.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\packet_uart.lst</v>
+<v>dmc-psoc\dmc-psoc\CortexM3\ARM_GCC_541\Debug\Listing Files\pc_uart.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\PSoC 5LP Architecture TRM</v>
+<v>dmc-psoc\dmc-psoc\CY8C58LP Family Datasheet</v>
+<v>dmc-psoc\dmc-psoc\System Reference Guides</v>
+<v>dmc-psoc\dmc-psoc\System Reference Guides\cy_boot_v6_0</v>
+<v>dmc-psoc\dmc-psoc\ADC_SAR_v3_10.pdf</v>
+<v>dmc-psoc\dmc-psoc\AMux_v1_80.pdf</v>
+<v>dmc-psoc\dmc-psoc\cy_clock_v2_20</v>
+<v>dmc-psoc\dmc-psoc\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>dmc-psoc\dmc-psoc\cy_isr_v1_70</v>
+<v>dmc-psoc\dmc-psoc\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>dmc-psoc\dmc-psoc\cy_pins_v2_20</v>
+<v>dmc-psoc\dmc-psoc\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>dmc-psoc\dmc-psoc\Timer_v2_80</v>
+<v>dmc-psoc\dmc-psoc\Timer_v2_80\Timer_v2_80.pdf</v>
+<v>dmc-psoc\dmc-psoc\UART_v2_50.pdf</v>
+<v>dmc-psoc\dmc-psoc\ZeroTerminal</v>
+<v>dmc-psoc\dmc-psoc\ZeroTerminal\ZeroTerminal.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc</v>
+<v>dmc-psoc\dmc-psoc\PSoC 5LP Architecture TRM</v>
+<v>dmc-psoc\dmc-psoc\CY8C58LP Family Datasheet</v>
+<v>dmc-psoc\dmc-psoc\System Reference Guides</v>
+<v>dmc-psoc\dmc-psoc\System Reference Guides\cy_boot_v6_0</v>
+<v>dmc-psoc\dmc-psoc\ADC_SAR_v3_10.pdf</v>
+<v>dmc-psoc\dmc-psoc\AMux_v1_80.pdf</v>
+<v>dmc-psoc\dmc-psoc\cy_clock_v2_20</v>
+<v>dmc-psoc\dmc-psoc\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>dmc-psoc\dmc-psoc\cy_isr_v1_70</v>
+<v>dmc-psoc\dmc-psoc\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>dmc-psoc\dmc-psoc\cy_pins_v2_20</v>
+<v>dmc-psoc\dmc-psoc\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>dmc-psoc\dmc-psoc\Timer_v2_80</v>
+<v>dmc-psoc\dmc-psoc\Timer_v2_80\Timer_v2_80.pdf</v>
+<v>dmc-psoc\dmc-psoc\UART_v2_50.pdf</v>
+<v>dmc-psoc\dmc-psoc\ZeroTerminal</v>
+<v>dmc-psoc\dmc-psoc\ZeroTerminal\ZeroTerminal.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\dmc-psoc.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\dmc-psoc.cydsn\dmc-psoc.cydwr" />
+<name v="..\..\common\hw\include\packet.h" />
+<name v=".\dmc-psoc.cydsn\cyapicallbacks.h" />
+<name v=".\dmc-psoc.cydsn\Generated_Source\PSoC5\project.h" />
+<name v=".\dmc-psoc.cydsn\job_queue.h" />
+<name v=".\dmc-psoc.cydsn\timers.c" />
+<name v=".\dmc-psoc.cydsn\timers.h" />
+<name v=".\dmc-psoc.cydsn\job_queue.c" />
+<name v=".\dmc-psoc.cydsn\Generated_Source\PSoC5\isr_pump_timer_2.h" />
+<name v=".\dmc-psoc.cydsn\main.c" />
+<name v=".\dmc-psoc.cydsn\Generated_Source\PSoC5\pump_timer_1.h" />
+<name v=".\dmc-psoc.cydsn\Generated_Source\PSoC5\cytypes.h" />
+<name v=".\dmc-psoc.cydsn\pump_control.h" />
+<name v=".\dmc-psoc.cydsn\pump_control.c" />
+<name v=".\dmc-psoc.cydsn\packet_uart.c" />
+<name v=".\dmc-psoc.cydsn\packet_uart.h" />
+<name v=".\dmc-psoc.cydsn\pc_uart.c" />
+<name v=".\dmc-psoc.cydsn\pc_uart.h" />
+<name v=".\dmc-psoc.cydsn\Generated_Source\PSoC5\UART_1.h" />
+<name v=".\dmc-psoc.cydsn\flags.h" />
+<name v=".\dmc-psoc.cydsn\weight.c" />
+<name v=".\dmc-psoc.cydsn\weight.h" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1084, 556" SelectedTabbedMdiWindow="f6761b31-73e7-4ee5-9107-22639d3c46dc"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3135dc3c-b690-43d3-926f-001b95cec47b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\TopDesign\TopDesign.cysch" Guid="032f8cc3-1f68-4bf9-8206-7e0ffb5b7d94" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\dmc-psoc.cydwr" Guid="5d99b796-2d6b-4536-bf58-c862467a3913" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\common\hw\include\packet.h" Guid="339286df-dbeb-428e-a1f2-b48b3a2e0bc1" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\cyapicallbacks.h" Guid="0554f898-a48b-477e-a91d-8058172babc5" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\Generated_Source\PSoC5\project.h" Guid="12511939-9032-4ecc-9761-59e71325291b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\job_queue.h" Guid="e77f44ed-8e17-4d62-a2d4-06b76743565b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\timers.c" Guid="059a2b38-bd2b-4ba3-95a8-bb05c64e67a3" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\timers.h" Guid="f7454b01-b01d-4ca8-b065-ab4f6fc8da53" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\job_queue.c" Guid="9c2c81af-f7ab-4522-a08b-412e0ce7a611" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\Generated_Source\PSoC5\isr_pump_timer_2.h" Guid="3cd3ce4a-effb-44b5-9bb0-226abac9218e" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\main.c" Guid="f6761b31-73e7-4ee5-9107-22639d3c46dc" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\Generated_Source\PSoC5\pump_timer_1.h" Guid="9934b932-1a0f-47d3-928b-1be4adcb759a" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\Generated_Source\PSoC5\cytypes.h" Guid="32773ddf-dc65-4810-80fb-739bbe997de3" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\pump_control.h" Guid="4dbe4870-0056-426e-8e38-f0e39a84c9e7" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\pump_control.c" Guid="27cdfc78-f986-463f-af61-29ea937c2556" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\packet_uart.c" Guid="30903b35-b3b3-436e-ad8b-1f1d4a272fb8" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\packet_uart.h" Guid="4c25a196-a45b-4240-94fb-1fc7b7532e76" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\pc_uart.c" Guid="fb6e1635-c30f-4d58-9f36-6d50c83a112d" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\pc_uart.h" Guid="09968a89-6dec-4143-b379-51dfc2cea73d" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\Generated_Source\PSoC5\UART_1.h" Guid="a02c4d82-0b64-45d2-aa7f-841dbb0d74d9" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\flags.h" Guid="3e81ef9f-559b-4d3c-ac05-798d636f5a95" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\weight.c" Guid="8c3d470a-7a2b-4340-934f-39d1cf20e55b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\weight.h" Guid="d543fd3f-6824-4b3b-af6c-2d1fc32be4cb" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>
