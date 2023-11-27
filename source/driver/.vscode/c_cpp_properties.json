@@ -3,14 +3,14 @@
         {
             "name": "RPi Driver",
             "includePath": [
-                "~/sources/rpi-5.4.83/include",
-                "~/sources/rpi-5.4.83/include/uapi",
-                "~/sources/rpi-5.4.83/include/generated",
-                "~/sources/rpi-5.4.83/include/generated/uapi",
-                "~/sources/rpi-5.4.83/arch/arm/include",
-                "~/sources/rpi-5.4.83/arch/arm/include/uapi",
-                "~/sources/rpi-5.4.83/arch/arm/include/generated",
-                "~/sources/rpi-5.4.83/arch/arm/include/generated/uapi",
+                "~/sources/linux-5.10.197/include",
+                "~/sources/linux-5.10.197/include/uapi",
+                "~/sources/linux-5.10.197/include/generated",
+                "~/sources/linux-5.10.197/include/generated/uapi",
+                "~/sources/linux-5.10.197/arch/arm64/include",
+                "~/sources/linux-5.10.197/arch/arm64/include/uapi",
+                "~/sources/linux-5.10.197/arch/arm64/include/generated",
+                "~/sources/linux-5.10.197/arch/arm64/include/generated/uapi",
                 "../common/hw/include"
             ],
             "defines": [

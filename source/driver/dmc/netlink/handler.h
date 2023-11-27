@@ -47,6 +47,7 @@ int dmc_netlink_publish_event(const struct dmc_netlink_handler *handler,
  * @brief Allocate and prepare a netlink event message for broadcasting.
  * @event_msg: Pointer to the event message to be prepared.
  */
-int dmc_netlink_prepare_event(struct dmc_netlink_event_msg *event_msg);
+int dmc_netlink_prepare_event(struct dmc_netlink_event_msg *event_msg,
+                              enum dmc_event_type           type);
 
 #endif // DMC_NETLINK_HANDLER_H
