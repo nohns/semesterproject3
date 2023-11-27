@@ -2,7 +2,9 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/container/changeContainer.mock";
 
 interface ChangeContainerRequest {
   id: number; //id of the container
