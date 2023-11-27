@@ -34,6 +34,16 @@ enum dmc_event_type
    */
   DMC_EVENT_TYPE_FLUID_POUR_REQUESTED = 4,
 
+  /**
+   * @brief See struct dmc_event_machine_ok
+   */
+  DMC_EVENT_TYPE_MACHINE_OK = 5,
+
+  /**
+   * @brief See struct dmc_event_debug
+   */
+  DMC_EVENT_TYPE_DEBUG = 6,
+
   /* ##################### */
 
   // Max event type
@@ -139,6 +149,32 @@ struct dmc_event_fluid_pour_requested
    * @brief Amount to pour in centiliters
    */
   uint8_t amount;
+};
+
+/**
+ * @brief Event for telling the machine that it is ok
+ */
+struct dmc_event_machine_ok
+{
+  struct dmc_base_event *base;
+};
+
+/**
+ * @brief Event for debugging purposes
+ */
+struct dmc_event_debug
+{
+  struct dmc_base_event *base;
+
+  /**
+   * @brief The sample event to publish to netlink
+   */
+  enum dmc_event_type event_type;
+
+  /**
+   * @brief The sample event to publish to netlink
+   */
+  uint8_t data;
 };
 
 #endif // DMC_EVENT_H
