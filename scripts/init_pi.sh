@@ -20,17 +20,13 @@ systemctl enable nginx
 systemctl start nginx
 echo "-----------------------"
 
-echo "--> Adding nginx touchscreen and config vhosts..."
-cp resources/nginx/touch.pi.local /etc/nginx/sites-available/
-cp resources/nginx/config.pi.local /etc/nginx/sites-available/
-ln -s /etc/nginx/sites-available/touch.pi.local /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/config.pi.local /etc/nginx/sites-enabled/
-systemctl reload nginx
-echo "-----------------------"
-
 # Setup hostnames
-echo "--> Setting up touch.pi.local and config.pi.local hostnames..."
+echo "--> Setting up DNS hostnames touch.pi.local and config.pi.local..."
 sh ./setup_hostnames.sh
 echo "-----------------------"
 
 echo "NOTICE: you are not done yet! You need to run deploy the frontend by running 'npm run deploy' from source/frontend/touch and source/frontend/configuration directories."
+
+echo "--> Setting up nginx hosts for touch.pi.local and config.pi.local domains..."
+sh ./setup_nginx.sh
+echo "-----------------------"
