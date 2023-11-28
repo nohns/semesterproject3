@@ -25,7 +25,7 @@ function Pouring({
   const POUR_TIME = calc.calcPourTime(selectedDrink!);
   console.log(POUR_TIME);
 
-  let beat = new Audio("src/assets/elevator.mp3");
+  let beat = new Audio("/assets/elevator.mp3");
   beat.volume = 0.2;
 
   //Timeout function which will change the view back to the selection screen

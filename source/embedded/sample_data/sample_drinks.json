@@ -4,7 +4,7 @@
     "name": "Blå vand",
     "image": {
       "id": 1,
-      "path": "src/assets/HotPot1.png"
+      "path": "/assets/HotPot1.png"
     },
     "ingredients": [
       {
@@ -26,13 +26,12 @@
     ]
   },
 
-
   {
     "id": 2,
     "name": "Double blå vand",
     "image": {
       "id": 1,
-      "path": "src/assets/HotPot1.png"
+      "path": "/assets/HotPot1.png"
     },
     "ingredients": [
       {
@@ -54,13 +53,12 @@
     ]
   },
 
-
   {
     "id": 3,
     "name": "Vand",
     "image": {
       "id": 1,
-      "path": "src/assets/HotPot3.png"
+      "path": "/assets/HotPot3.png"
     },
     "ingredients": [
       {
@@ -74,13 +72,12 @@
     ]
   },
 
-
   {
     "id": 4,
     "name": "Snapse Vand",
     "image": {
       "id": 1,
-      "path": "src/assets/HotPot3.png"
+      "path": "/assets/HotPot3.png"
     },
     "ingredients": [
       {
@@ -102,13 +99,12 @@
     ]
   },
 
-  
   {
     "id": 5,
     "name": "Vodka Juice",
     "image": {
       "id": 1,
-      "path": "src/assets/HotPot2.png"
+      "path": "/assets/HotPot2.png"
     },
     "ingredients": [
       {

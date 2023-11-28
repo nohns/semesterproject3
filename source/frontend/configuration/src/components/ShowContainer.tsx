@@ -10,22 +10,22 @@ function ShowContainer({
   fluidAmountInCl,
 }: React.PropsWithChildren<ShowContainerProps>) {
   //We need to do some switch logic here to determine which image to show
-  let image = "src/assets/Overblik_1_black_0_20.png";
+  let image = "/assets/Overblik_1_black_0_20.png";
 
   if (fluidAmountInCl >= 20) {
-    image = "src/assets/Overblik_1_black_0_20.png";
+    image = "/assets/Overblik_1_black_0_20.png";
   }
 
   if (fluidAmountInCl >= 40) {
-    image = "src/assets/Overblik_1_black_20_40.png";
+    image = "/assets/Overblik_1_black_20_40.png";
   }
 
   if (fluidAmountInCl >= 60) {
-    image = "src/assets/Overblik_1_black_40_60.png";
+    image = "/assets/Overblik_1_black_40_60.png";
   }
 
   if (fluidAmountInCl >= 80) {
-    image = "src/assets/Overblik_1_black_60_80.png";
+    image = "/assets/Overblik_1_black_60_80.png";
   }
 
   return (
