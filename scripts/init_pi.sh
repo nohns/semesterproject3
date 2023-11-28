@@ -25,8 +25,8 @@ echo "--> Setting up DNS hostnames touch.pi.local and config.pi.local..."
 sh ./setup_hostnames.sh
 echo "-----------------------"
 
-echo "NOTICE: you are not done yet! You need to run deploy the frontend by running 'npm run deploy' from source/frontend/touch and source/frontend/configuration directories."
-
 echo "--> Setting up nginx hosts for touch.pi.local and config.pi.local domains..."
 sh ./setup_nginx.sh
 echo "-----------------------"
+
+echo "NOTICE: you are not done yet! You need to run deploy the frontend by running 'npm run deploy' from source/frontend/touch and source/frontend/configuration directories."
