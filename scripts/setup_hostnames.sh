@@ -21,3 +21,6 @@ systemctl daemon-reload
 systemctl enable avahi-mdns-cname.service
 systemctl start avahi-mdns-cname.service
 
+echo "Adding hostnames to /etc/hosts..."
+echo "127.0.0.1       touch.pi.local" | sudo tee -a /etc/hosts
+echo "127.0.0.1       config.pi.local" | sudo tee -a /etc/hosts
