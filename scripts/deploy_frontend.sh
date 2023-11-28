@@ -17,9 +17,14 @@ elif [ "$1" = "configuration" ]; then
     VHOST_DIR="config.pi.local"
 fi
 
-echo "---> Building frontend..."
 cd ../source/frontend/$1
+
+
+echo "---> Installing dependencies..."
 npm i
+echo "---------------------"
+
+echo "---> Building frontend..."
 npx vite build
 echo "---------------------"
 
