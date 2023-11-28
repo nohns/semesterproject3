@@ -2,7 +2,10 @@ dmc_driver.ko
 dmc_driver.m*
 dmc_driver.o
 Module.symvers
+.Module.symvers.cmd
+.modules.order.cmd
 modules.order
 .dmc_driver*
 *.o
 *.o.cmd
+*.dtbo

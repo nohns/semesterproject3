@@ -11,6 +11,11 @@
 struct dmc_netlink_event_msg
 {
   /**
+   * @brief Type of event that this message contains
+  */
+  enum dmc_event_type type;
+
+  /**
    * @brief Ptr to underlying buffer for holding message representation of
    * event, that gets broadcasts
    */

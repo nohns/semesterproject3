@@ -26,7 +26,7 @@ int dmc_ctrl_on_event_user_confirm(struct dmc_ctrl_event_handler *evt_handler,
  * @returns 0 on success, negative on failure
  */
 int dmc_ctrl_on_event_fluid_pour_requested(
-    struct dmc_ctrl_event_handler         *evt_handler,
+    struct dmc_ctrl_event_handler *evt_handler,
     struct dmc_event_fluid_pour_requested *event);
 
 #endif // DMC_CTRL_EVENT_HANDLER_H

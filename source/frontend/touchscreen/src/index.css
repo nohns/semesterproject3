@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
 
 /* @layer base {
   :root {
@@ -73,7 +72,7 @@
     --ring: 224 71.4% 4.1%;
     --radius: 1rem;
   }
- 
+
   .dark {
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
@@ -96,7 +95,7 @@
     --ring: 216 12.2% 83.9%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -106,15 +105,15 @@
   }
 }
 
-.bg-martin{
-  background-image: url("src/assets/drink.png");
+.bg-martin {
+  background-image: url("/assets/drink.png");
   background-repeat: no-repeat;
   background-size: auto;
   background-position: bottom;
 }
 
 /* .bg-drink{
-  background-image: url("src/assets/drink.png");
+  background-image: url("/assets/drink.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -132,44 +131,41 @@
 
 .bg-drink {
   position: relative;
-  }
-  
-  .bg-drink::before {
+}
+
+.bg-drink::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("src/assets/drink.png");
+  background-image: url("/assets/drink.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   animation: tilt 3s infinite;
   z-index: 1; /* Adjust the z-index to position the pseudo-element behind the components */
-  }
-  
-  @keyframes tilt {
-  0%, 100% {
-  transform: rotate(-1deg);
+}
+
+@keyframes tilt {
+  0%,
+  100% {
+    transform: rotate(-1deg);
   }
   50% {
-  transform: rotate(1deg);
+    transform: rotate(1deg);
   }
-  }
+}
 
-  .pouring-container {
-    background-image: url("src/assets/test.png");
-    background-position: center;
-    background-size: auto 60%;
-    background-repeat: no-repeat;
-    position: relative;
-    /* Add any other styles or animations here */
-  }
-
- 
-
-
+.pouring-container {
+  background-image: url("/assets/test.png");
+  background-position: center;
+  background-size: auto 60%;
+  background-repeat: no-repeat;
+  position: relative;
+  /* Add any other styles or animations here */
+}
 
 .fade-enter {
   opacity: 0;
@@ -186,8 +182,7 @@
   transition: opacity 200ms;
 }
 
-
-@keyframes wave {
+/* @keyframes wave {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
@@ -196,4 +191,48 @@
 .selectedCard {
   animation: wave 2s infinite;
 }
+ */
 
+@keyframes wave {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes neonPulse {
+  /*  0% { box-shadow: 0 0 10px 0 rgba(220, 38, 38, 0.7); }
+  50% { box-shadow: 0 0 20px 10px rgba(255, 165, 0, 0.7); } */
+  0% {
+    box-shadow: 0 0 10px 0 rgba(74, 222, 128, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px 0 rgba(74, 222, 128, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 10px 0 rgba(74, 222, 128, 0.7);
+  }
+}
+
+.selectedCard {
+  position: relative;
+  animation: wave 4s infinite;
+}
+
+.selectedCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: inherit;
+  animation: neonPulse 4s infinite;
+  animation-delay: 0s; /* Set the delay to 0s to synchronize with the main animation */
+}

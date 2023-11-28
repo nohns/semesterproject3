@@ -11,4 +11,3 @@ def load_json_file(file_path, dataclass_type):
         instances.append(json_to_dataclass(item, dataclass_type))
 
     return instances
-

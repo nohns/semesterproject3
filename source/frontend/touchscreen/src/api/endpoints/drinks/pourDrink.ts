@@ -1,14 +1,10 @@
 /** @format */
 
-import ENV from "@/constants/env";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
-
-if (ENV.MOCKED) {
-  await import("./pourDrink.mock.ts");
-}
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/drinks/pourDrink.mock";
 
 interface PourDrinkRequest {
   id: number;
@@ -17,7 +13,7 @@ interface PourDrinkRequest {
 export interface PourDrinkResponse {}
 
 const pourDrink = async (request: PourDrinkRequest) => {
-  return await http.post<PourDrinkResponse>("v1/drinks/pour", request);
+  return await http.post<PourDrinkResponse>(`v1/drinks/pour/${request.id}`);
 };
 
 const usePourDrink = () => {

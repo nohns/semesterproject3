@@ -3,7 +3,10 @@
 import { Fluid } from "../fluid/getFluids";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/drinks/createDrink.mock";
+
 import { Image } from "../images/getImages";
 
 export interface Ingredient {
@@ -24,7 +27,7 @@ const createDrink = async ({
   name,
   ingredients,
 }: CreateDrinkRequest) => {
-  const response = await http.post<CreateDrinkResponse>(`v1/drinks`, {
+  const response = await http.post<CreateDrinkResponse>(`v1/drinks/`, {
     image,
     name,
     ingredients,

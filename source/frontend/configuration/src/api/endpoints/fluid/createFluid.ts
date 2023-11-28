@@ -1,14 +1,10 @@
 /** @format */
 
-import ENV from "@/constants/env";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
-
-if (ENV.MOCKED) {
-  await import("./createFluid.mock.ts");
-}
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/fluid/createFluid.mock";
 
 export interface CreateFluidRequest {
   name: string;
@@ -17,7 +13,7 @@ export interface CreateFluidRequest {
 export interface CreateFluidResponse {}
 
 const createFluid = async ({ name }: CreateFluidRequest) => {
-  const response = await http.post<CreateFluidResponse>(`v1/fluids`, {
+  const response = await http.post<CreateFluidResponse>(`v1/fluids/`, {
     name,
   });
 

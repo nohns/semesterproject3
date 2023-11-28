@@ -4,28 +4,25 @@
 
 dmc_driver-objs := dmc_driver_main.o dmc/event.o dmc/ctrl/event_handler.o dmc/ctrl/packet_handler.o dmc/netlink/handler.o dmc/netlink/message.o dmc/uart/handler.o
 obj-m += dmc_driver.o
-ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Wno-unused-function -Werror -I$(src)/../common/hw/include
+overlay := dmc_overlay.dts
+ccflags-y := -std=gnu99 -DDEBUG -Wno-declaration-after-statement -Wno-unused-function -Werror -I$(src)/../common/hw/include
 
-# REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-KERNELDIR ?= ~/sources/rpi-5.4.83
-KERNELDIR ?= ~/sources/linux-6.2.0
+ENV ?= "vm"
+ifeq ($(ENV), "vm")
+	KERNELDIR := /lib/modules/6.2.0-36-generic/build
+else ifeq ($(ENV), "pi")
+	KERNELDIR := ~/sources/linux
+	ARCH := arm64
+	CROSS_COMPILE := aarch64-linux-gnu-
+	UPLOAD_TARGET := pi@172.20.10.3
+	UPLOAD_TARGET_DIR := ~/modules
+endif
+
 CURR_DIR := $(shell pwd)
-BUILD_DIR := $(CURR_DIR)/build
-# REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-CROSS_COMPILE := arm-poky-linux-gnueabi-
-# REMOVE COMMENT BELOW FOR RASPBERRY PI LINUX COMPILATION
-ARCH ?= arm
-#HEADERS := $(dmc_driver-objs:.o=.h)
 SOURCES := $(obj-m:.o=.c)
 SOURCES += $(dmc_driver-objs:.o=.c)
-
-#####################################
-#### Target device configuration ####
-#####################################
-
 MODULE_KO := ${obj-m:.o=.ko}
-UPLOAD_TARGET := root@10.9.8.2
-UPLOAD_TARGET_DIR := ~/modules
+OVERLAY_OUT := ${overlay:.dts=.dtbo}
 
 #########################
 #### Other variables ####
@@ -49,39 +46,24 @@ MAKE_CMD := $(MAKE) $(ARCH_ARG) $(CROSS_COMPILE_ARG) -C $(KERNELDIR) M=$(shell p
 all default: modules
 install: modules_install
 
-########################################################
-#### Build directory preperation before compilation ####
-########################################################
+$(OVERLAY_OUT): $(overlay)
+	dtc -@ -I dts -O dtb -o $@ $<
 
-# $(BUILD_DIR):
-# 	mkdir $@
-
-# $(BUILD_DIR)/$(SOURCES): $(SOURCES) $(BUILD_DIR)
-# 	mkdir -p $(dir $@)
-# 	cp $< $@
-
-# $(BUILD_DIR)/$(HEADERS): $(HEADERS) $(BUILD_DIR)
-# 	mkdir -p $(dir $@)
-# 	cp $< $@
-
-# $(BUILD_DIR)/Makefile: Makefile
-# 	cp $< $@
-
-
-# It is not easy to set an output directory when building a kernel module. Per default, the output will just be in the
-# same directory as the source files, which is not very nice. So before building the module, we copy all the headers,
-# source files and the Makefile into a build directory (created if it doesn't exist). We then run make command from here.
 modules:
+	@echo "Making for environment: $(ENV)"
 	$(MAKE_CMD) $@
 
 # Pass target onto the kernel module Makefile
 modules_install help clean: 
 	$(MAKE_CMD) $@
 
-# Upload compilefd kernel module to Raspberry Pi Zero
-upload: modules
+# Upload compiled kernel module to Raspberry Pi Zero
+upload: modules $(OVERLAY_OUT)
 	ssh $(UPLOAD_TARGET) "mkdir -p $(UPLOAD_TARGET_DIR)"
-	scp -pr $(BUILD_DIR)/$(MODULE_KO) $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)/$(MODULE_KO)
+	scp -pr $(MODULE_KO) $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)/$(MODULE_KO)
+	scp -pr $(OVERLAY_OUT) $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)/$(OVERLAY_OUT)
+	@echo "Uploaded $(MODULE_KO) and $(OVERLAY_OUT) to $(UPLOAD_TARGET):$(UPLOAD_TARGET_DIR)"
+	@echo "Don't forget to install the overlay to /boot/overlays and add it to /boot/config.txt"
 
 
 

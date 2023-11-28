@@ -1,10 +1,22 @@
 import sqlite3
 
+# using time module
+import time
 from database.update import update, set_status_to_true
-from database.containers import change_containers, get_containers
-from database.drinks import create_drink, delete_drink, get_drinks # , pour_drink
+from database.containers import (
+    change_containers,
+    get_containers,
+    get_container_by_fluid_id,
+)
+from database.drinks import (
+    create_drink,
+    delete_drink,
+    get_drinks,
+    get_drink_by_id,
+)  # , pour_drink
 from database.fluids import get_fluids, create_fluid, delete_fluid
 from database.images import get_images
+from database.state import *
 
 from domain.domain import Drink, Fluid, Image, Container
 
@@ -22,6 +34,7 @@ class Database:
 
         # Seed the tables
         # self.seed_fluids()
+        self.seed_state()
         self.seed_containers()
 
         self.print_all_tables()
@@ -40,12 +53,15 @@ class Database:
 
         cursor.execute(
             """
-    CREATE TABLE IF NOT EXISTS updates 
+    CREATE TABLE IF NOT EXISTS state 
     (
-        status BOOLEAN NOT NULL
+        key TEXT PRIMARY KEY,
+        str_value TEXT,
+        int_value INTEGER
     )
     """
         )
+
         # create a table for containers
         cursor.execute(
             """
@@ -144,6 +160,30 @@ class Database:
         finally:
             cursor.close()
 
+    def seed_state(self):
+        print("Seeding state")
+        cursor = self.connection.cursor()
+        try:
+            curr_time_ms = int(time.time() * 1000)
+            print(f"curr time: {curr_time_ms} ms og type {type(curr_time_ms)}")
+            # Check if fluids already seeded
+            cursor.execute("SELECT COUNT(*) FROM State")
+            
+            count = cursor.fetchone()[0]
+           
+            if count == 0:  # If no state, then seed
+                cursor.execute("INSERT INTO State (key, int_value) VALUES ('last_update', ?)", (curr_time_ms,))
+                cursor.execute("INSERT INTO State (key, int_value) VALUES ('out_of_order', 0)")
+                cursor.execute("INSERT INTO State (key, str_value) VALUES ('out_of_order_message', '')")
+                cursor.execute("INSERT INTO State (key, int_value) VALUES ('out_of_order_reason', 0)")
+
+                self.connection.commit()
+        except sqlite3.Error as e:
+            print(f"SQLite error: {e}")
+            self.connection.rollback()
+        finally:
+            cursor.close()
+
     def print_all_tables(self):
         try:
             cursor = self.connection.cursor()
@@ -172,6 +212,9 @@ class Database:
     def get_containers(self) -> list[Container]:
         return get_containers(self.connection)
 
+    def get_container_by_fluid_id(self, fluid_id: int) -> Container:
+        return get_container_by_fluid_id(self.connection, fluid_id)
+
     def create_drink(self, drink: Drink) -> None:
         return create_drink(self.connection, drink)
 
@@ -180,6 +223,9 @@ class Database:
 
     def get_drinks(self) -> list[Drink]:
         return get_drinks(self.connection)
+
+    def get_drink_by_id(self, drink_id: int) -> Drink:
+        return get_drink_by_id(self.connection, drink_id)
 
     # def pour_drink(self, id: int) -> None:
     #     return pour_drink(self.connection, id)
@@ -198,7 +244,12 @@ class Database:
 
     def update(self) -> bool:
         return update(self.connection)
-
-    # This function is just there for now I think it has some purpose
-    def set_status_to_true(self):
-        return set_status_to_true(self.connection)
+    
+    def get_state(self) -> dict:
+        return get_state(self.connection)
+    
+    def set_state_out_of_order(self, message: str, reason: int) -> None:
+        return set_state_out_of_order(self.connection, message, reason)
+    
+    def clear_state_out_of_order(self) -> None:
+        return clear_state_out_of_order(self.connection)
