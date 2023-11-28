@@ -172,7 +172,7 @@ class Database:
             count = cursor.fetchone()[0]
            
             if count == 0:  # If no state, then seed
-                cursor.execute("INSERT INTO State (key, int_value) VALUES ('last_update', ?)", (curr_time_ms))
+                cursor.execute("INSERT INTO State (key, int_value) VALUES ('last_update', ?)", (curr_time_ms,))
                 cursor.execute("INSERT INTO State (key, int_value) VALUES ('out_of_order', 0)")
                 cursor.execute("INSERT INTO State (key, str_value) VALUES ('out_of_order_message', '')")
                 cursor.execute("INSERT INTO State (key, int_value) VALUES ('out_of_order_reason', 0)")
