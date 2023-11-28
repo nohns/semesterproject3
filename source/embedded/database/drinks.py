@@ -221,7 +221,6 @@ def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
     cursor = connection.cursor()
 
     try:
-        cursor.execute("DELETE FROM Ingredients WHERE drink_id = ?", (drink_id,))
         cursor.execute("DELETE FROM Drinks WHERE id = ?", (drink_id,))
 
         connection.commit()
@@ -229,6 +228,8 @@ def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
     except sqlite3.Error as e:
         print(f"An error occurred: {e}")
         connection.rollback()
+        raise
 
     finally:
         cursor.close()
+

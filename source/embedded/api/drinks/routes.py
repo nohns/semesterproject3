@@ -30,7 +30,7 @@ def register_drinks_bp(controller: Controller):
     @drinks_bp.route("/<int:drink_id>", methods=["DELETE"])
     def delete_drink(drink_id):
         try:
-            controller.delete_fluid(drink_id)
+            controller.delete_drink(drink_id)
             return jsonify({"message": "Drink deleted succesfully"}), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
