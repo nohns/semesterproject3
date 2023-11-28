@@ -24,5 +24,7 @@ npx vite build
 echo "---------------------"
 
 echo "---> Deploying frontend..."
+mkdir -p /var/www/$VHOST_DIR/dist
 cp -r dist/* /var/www/$VHOST_DIR/dist
+chown -R pi:pi /var/www/$VHOST_DIR
 echo "---------------------"
