@@ -18,15 +18,25 @@ if is_linux:
     class NetlinkReciever:
         controller: Controller
         genlsock: GenericNetlinkSocket
+        initialized = False
 
         def __init__(self, controller: Controller):
             print("NetlinkReceiver initialized")
             self.controller = controller
             self.genlsock = GenericNetlinkSocket()
-            self.genlsock.bind(DMC_DRIVER_GENL_FAMILY, eventmsg)
-            self.genlsock.add_membership(DMC_DRIVER_GENL_MCAST_GROUP_NAME)
+            try:
+                self.genlsock.bind(DMC_DRIVER_GENL_FAMILY, eventmsg)
+                self.genlsock.add_membership(DMC_DRIVER_GENL_MCAST_GROUP_NAME)
+                self.initialized = True
+            except Exception as e:
+                print(f"error {e}, when trying to bind to netlink socket")
+            
 
         def run(self):
+            if not self.initialized:
+                print("NetlinkReceiver not initialized, exiting")
+                return
+            
             print("Netlink receiver listening for events...")
             while True:
                 # Recieve the message
