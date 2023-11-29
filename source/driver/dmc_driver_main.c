@@ -281,6 +281,11 @@ static int dmc_uart_recv_byte(u8 data)
     return 0;
   }
 
+  // Add byte to packet
+  dmc_packet_append_byte(curr_packet, data);
+  pr_debug("dmc_driver: appended data bey. len now %ld\n",
+           curr_packet->data_len);
+
   // If packet is complete, handle it
   if (dmc_packet_complete(curr_packet))
   {
@@ -298,10 +303,6 @@ static int dmc_uart_recv_byte(u8 data)
     return 0;
   }
 
-  // Add byte to packet
-  dmc_packet_append_byte(curr_packet, data);
-  pr_debug("dmc_driver: appended data bey. len now %ld\n",
-           curr_packet->data_len);
   return 0;
 }
 
