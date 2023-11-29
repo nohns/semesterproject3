@@ -15,7 +15,7 @@ int dmc_uart_handler_register(int (*on_byte_recv)(u8 data));
 /**
  * @brief Unregisters uart resources
  */
-int dmc_uart_handler_unregister();
+int dmc_uart_handler_unregister(void);
 
 /**
  * @brief Sends a packet over the uart

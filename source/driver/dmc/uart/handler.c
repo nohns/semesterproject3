@@ -106,7 +106,7 @@ int dmc_uart_handler_register(int (*on_byte_recv)(u8 data))
   return 0;
 }
 
-int dmc_uart_handler_unregister()
+int dmc_uart_handler_unregister(void)
 {
   serdev_device_driver_unregister(&dmc_serdev_driver);
   return 0;
