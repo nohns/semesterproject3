@@ -17,7 +17,7 @@ else ifeq ($(ENV), "pi")
 	UPLOAD_TARGET := pi@172.20.10.5
 	UPLOAD_TARGET_DIR := ~/modules
 else ifeq ($(ENV), "native-pi")
-	KERNELDIR := /lib/modules/6.1.0-rpi6-rpi-2712/build
+	KERNELDIR := /lib/modules/$(shell uname -r)/build
 endif
 
 CURR_DIR := $(shell pwd)
