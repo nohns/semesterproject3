@@ -157,7 +157,8 @@ static int dmc_packet_marshal_container_weight_measured(
 }
 
 /**
- * @brief Packet declaring that a new weight measurement.
+ * @brief Packet declaring that a user has confirmed something on the
+ * touchscreen
  *
  * Direction: RPi -> PSoC
  */
@@ -192,6 +193,29 @@ dmc_packet_marshal_user_confirm(struct dmc_packet              *to,
     to = dmc_packet_init(DMC_PACKET_USER_CONFIRM);
   }
   if (to->type != DMC_PACKET_USER_CONFIRM)
+  {
+    return -1;
+  }
+
+  return 0;
+}
+
+/**
+ * @brief Packet declaring that machine is ok after being out of order
+ *
+ * Direction: RPi -> PSoC
+ */
+struct dmc_packet_machine_ok
+{
+};
+
+/**
+ * @brief Unmarshal data into machine ok packet from base packet
+ */
+static int dmc_packet_unmarshal_machine_ok(struct dmc_packet_machine_ok *packet,
+                                           struct dmc_packet            *from)
+{
+  if (from->type != DMC_PACKET_MACHINE_OK)
   {
     return -1;
   }

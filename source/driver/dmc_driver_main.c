@@ -253,6 +253,16 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
     err = dmc_ctrl_on_packet_container_weight_measured(&pck_handler, &packet);
     break;
   }
+  case DMC_PACKET_MACHINE_OK:
+  {
+    struct dmc_packet_machine_ok packet;
+    err = dmc_packet_unmarshal_machine_ok(&packet, base_packet);
+    if (err != 0) break;
+
+    // Call the packet handler
+    err = dmc_ctrl_on_packet_machine_ok(&pck_handler, &packet);
+    break;
+  }
   default:
     pr_notice("dmc_driver: received non-handled packet type %d from netlink\n",
               base_packet->type);
