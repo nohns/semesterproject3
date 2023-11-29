@@ -122,7 +122,7 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
     return -1;
   }
 
-  serdev_device_write_buf(curr_serdev, &(packet->type), 1);
+  serdev_device_write_buf(curr_serdev, (unsigned char *)(&(packet->type)), 1);
   if (err)
   {
     pr_debug("dmc_driver: error sending packet type via serdev, err = %d\n",
