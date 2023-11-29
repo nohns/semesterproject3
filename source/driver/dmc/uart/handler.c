@@ -27,7 +27,7 @@ static struct serdev_device_driver dmc_serdev_driver = {
         },
 };
 
-static int (*on_byte_recv)(u8 data) = NULL;
+static int (*dmc_on_byte_recv)(u8 data) = NULL;
 
 /**
  * @brief Callback is called whenever a character is received
@@ -40,7 +40,7 @@ static int dmc_serdev_recv(struct serdev_device *serdev,
   {
     pr_debug("dmc_driver: received byte %d of value %d in seq of size %ld\n", i,
              buffer[i], size);
-    if (on_byte_recv(buffer[i]) != 0)
+    if (dmc_on_byte_recv(buffer[i]) != 0)
     {
       pr_debug(
           "dmc_driver: error handling byte %d of value %d in seq of size %ld\n",
@@ -102,6 +102,7 @@ int dmc_uart_handler_register(int (*on_byte_recv)(u8 data))
   {
     return -err;
   }
+  dmc_on_byte_recv = on_byte_recv;
 
   // Success!
   return 0;
