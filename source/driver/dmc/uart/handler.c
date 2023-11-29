@@ -5,6 +5,7 @@
 #include <linux/platform_device.h>
 #include <linux/property.h>
 #include <linux/serdev.h>
+#include <linux/slab.h>
 
 /* Declate the probe and remove functions */
 static int  dmc_serdev_probe(struct serdev_device *serdev);
@@ -26,19 +27,35 @@ static struct serdev_device_driver dmc_serdev_driver = {
         },
 };
 
+static int (*on_byte_recv)(u8 data) = NULL;
+
 /**
  * @brief Callback is called whenever a character is received
  */
 static int dmc_serdev_recv(struct serdev_device *serdev,
                            const unsigned char *buffer, size_t size)
 {
-  printk("serdev_echo - Received %ld bytes with \"%s\"\n", size, buffer);
-  return serdev_device_write_buf(serdev, buffer, size);
+  DMC_D("dmc_driver: received %ld bytes with \"%s\"\n");
+
+  for (int i = 0; i < size; i++)
+  {
+    if (on_byte_recv(buffer[i]) != 0)
+    {
+      DMC_D(
+          "dmc_driver: error handling byte %d of value %d in seq of size %ld\n",
+          buffer[i], i, size);
+      return -1;
+    }
+  }
+
+  return 0;
 }
 
 static const struct serdev_device_ops dmc_serdev_ops = {
     .receive_buf = dmc_serdev_recv,
 };
+
+static struct serdev_device *curr_serdev = NULL;
 
 /**
  * @brief This function is called on loading the driver
@@ -46,23 +63,20 @@ static const struct serdev_device_ops dmc_serdev_ops = {
 static int dmc_serdev_probe(struct serdev_device *serdev)
 {
   int status;
-  printk("serdev_echo - Now I am in the probe function!\n");
+  DMC_D("dmc_driver: now I am in the probe function!\n");
 
   serdev_device_set_client_ops(serdev, &dmc_serdev_ops);
   status = serdev_device_open(serdev);
   if (status)
   {
-    printk("serdev_echo - Error opening serial port!\n");
+    DMC_D("dmc_driver: error opening serial port!\n");
     return -status;
   }
 
   serdev_device_set_baudrate(serdev, 9600);
   serdev_device_set_flow_control(serdev, false);
   serdev_device_set_parity(serdev, SERDEV_PARITY_NONE);
-
-  status = serdev_device_write_buf(
-      serdev, "Type something: ", sizeof("Type something: "));
-  printk("serdev_echo - Wrote %d bytes.\n", status);
+  curr_serdev = serdev;
 
   return 0;
 }
@@ -74,41 +88,54 @@ static void dmc_serdev_remove(struct serdev_device *serdev)
 {
   printk("serdev_echo - Now I am in the remove function\n");
   serdev_device_close(serdev);
+  curr_serdev = NULL;
 }
 
 /**
  * @brief Registers the necessary resources for the uart to function
  */
-int dmc_uart_handler_register(struct dmc_uart_handler *uart)
+int dmc_uart_handler_register(int (*on_byte_recv)(u8 data))
 {
-  if (serdev_device_driver_register(&dmc_serdev_driver))
+  int err;
+  if ((err = serdev_device_driver_register(&dmc_serdev_driver)))
   {
-    printk("serdev_echo - Error! Could not load driver\n");
-    return -1;
+    return -err;
   }
 
   // Success!
-  DMC_D("serdev_echo - Driver loaded successfully\n");
   return 0;
 }
 
-int dmc_uart_handler_unregister(struct dmc_uart_handler *uart)
+int dmc_uart_handler_unregister()
 {
   serdev_device_driver_unregister(&dmc_serdev_driver);
   return 0;
 }
 
-/**
- * @brief Starts the receiving sequence for a reading byte from the RX gpio,
- * using the configuration given in the dmc_uart struct. Usually, this should
- * be called when start bit is receiving, which in general should be when the
- * interrupt triggers
- */
-int dmc_uart_handler_start_recv(struct dmc_uart_handler *uart) { return 0; }
-
-int dmc_uart_handler_send_packet(struct dmc_uart_handler *uart,
-                                 struct dmc_packet       *packet)
+int dmc_uart_handler_send_packet(struct dmc_packet *packet)
 {
+  if (curr_serdev == NULL)
+  {
+    DMC_D("dmc_driver: error sending packet, no current serial device\n");
+    return -1;
+  }
+
   // Return linux not implemented error
+  size_t pcklen = packet->data_len + 1;
+  u8    *arr    = (u8 *)kmalloc(pcklen, GFP_KERNEL);
+  arr[0]        = packet->type;
+  for (int i = 0; i < packet->data_len; i++)
+  {
+    arr[i + 1] = packet->data[i];
+  }
+
+  int err = serdev_device_write_buf(curr_serdev, arr, pcklen);
+  kfree((void *)arr);
+  if (err)
+  {
+    DMC_D("dmc_driver: error sending packet via serdev, err = %d\n", err);
+    return -1;
+  }
+
   return -ENOSYS;
 }
