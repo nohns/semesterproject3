@@ -125,7 +125,7 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
   pr_debug("dmc_driver: sent packet type via serdev\n");
   pr_debug("dmc_driver: type ptr %d\n", packet->type);
   pr_debug("dmc_driver: data ptr %x\n", packet->data);
-  pr_debug("dmc_driver: data len %d\n", packet->data_len);
+  pr_debug("dmc_driver: data len %ld\n", packet->data_len);
 
   serdev_device_write_buf(curr_serdev, (unsigned char *)(&(packet->type)), 1);
   if (err)
