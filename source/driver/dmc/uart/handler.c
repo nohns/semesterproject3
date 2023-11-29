@@ -21,7 +21,7 @@ static struct serdev_device_driver dmc_serdev_driver = {
     .remove = dmc_serdev_remove,
     .driver =
         {
-            .name           = "dmc-dev",
+            .name           = "dmc-drier",
             .of_match_table = dmc_serdev_ids,
         },
 };
@@ -88,6 +88,7 @@ int dmc_uart_handler_register(struct dmc_uart_handler *uart)
   }
 
   // Success!
+  DMC_D("serdev_echo - Driver loaded successfully\n")
   return 0;
 }
 
