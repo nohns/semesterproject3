@@ -1,20 +1,14 @@
 /dts-v1/;
 /plugin/;
 / {
-	compatible = "brcm,bcm2712";
+	compatible = "brcm,bcm2835";
 	fragment@0 {
-		target = <&soc>;
+		target = <&uart1>;
 		__overlay__ {
-			fragment@0 {
-				target = <&uart4>;
-				__overlay__ {
-					dmcdev {
-						compatible = "prj3,dmcdev";
-						status = "okay";
-					};
-				};
+			dmcdev {
+				compatible = "prj3,dmcdev";
+				status = "okay";
 			};
-			
 		};
 	};
 };
