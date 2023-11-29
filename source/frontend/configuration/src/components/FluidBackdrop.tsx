@@ -22,7 +22,7 @@ const FluidBackdrop: React.FC<FLuidBackDropProps> = ({
   fluids,
 }) => {
   return (
-    <div className="bg-slate-500 rounded-2xl w-56 aspect-square flex flex-col items-center gap-5 p-2 transition duration-300 hover:bg-slate-600">
+    <div className="bg-slate-500 rounded-2xl w-56 aspect-square flex flex-col items-center gap-5 p-2 border-2 transition duration-300 hover:bg-slate-600">
       <CustomDropdown
         container={container}
         setContainer={setContainer}
