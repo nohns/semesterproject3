@@ -267,15 +267,23 @@ static struct dmc_packet *curr_packet = NULL;
 
 static int dmc_uart_recv_byte(u8 data)
 {
+  pr_debug("dmc_driver: received byte %d\n", data);
   // Start new packet if no packet is currently being received
   if (curr_packet == NULL)
   {
+    pr_debug("dmc_driver: starting new packet\n");
     curr_packet = dmc_packet_init(data);
+    pr_debug("dmc_driver: expecting %ld data bytes afterwards\n",
+             curr_packet->data_len);
   }
 
   // If packet is complete, handle it
   if (dmc_packet_complete(curr_packet))
   {
+    pr_debug("dmc_driver: packet complete with %ld data bytes. Now handling "
+             "packet...\n",
+             curr_packet->data_len);
+
     // Handle the complete packet and deallocate it afterwards
     int err = dmc_uart_handle_packet(curr_packet);
     dmc_packet_free(curr_packet);
@@ -288,6 +296,8 @@ static int dmc_uart_recv_byte(u8 data)
 
   // Add byte to packet
   dmc_packet_append_byte(curr_packet, data);
+  pr_debug("dmc_driver: appended data bey. len now %ld\n",
+           curr_packet->data_len);
   return 0;
 }
 
