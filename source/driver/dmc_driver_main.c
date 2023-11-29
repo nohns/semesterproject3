@@ -34,7 +34,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
                                     struct dmc_netlink_event_msg *from_msg)
 {
   int err;
-  DMC_D("Received event from netlink! type: %d\n", base_event->type);
+  pr_debug("Received event from netlink! type: %d\n", base_event->type);
 
   // Unmarshal event into specific event based on received event type.
   // Afterwards, call the appropriate control event handler function
@@ -46,7 +46,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
     err = dmc_netlink_unmarshal_event_user_confirm(&event, from_msg);
     if (err != 0) break;
 
-    DMC_D("dmc_driver: recv user confirm event\n");
+    pr_debug("dmc_driver: recv user confirm event\n");
 
     // Call the event handler
     // err = dmc_ctrl_on_event_user_confirm(&evt_handler, &event);
@@ -58,9 +58,10 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
     err = dmc_netlink_unmarshal_event_fluid_pour_requested(&event, from_msg);
     if (err != 0) break;
 
-    DMC_D("dmc_driver: recv fluid poor requested event for container %d with "
-          "amount %d\n",
-          event.container, event.amount);
+    pr_debug(
+        "dmc_driver: recv fluid poor requested event for container %d with "
+        "amount %d\n",
+        event.container, event.amount);
 
     // Call the event handler
     err = dmc_ctrl_on_event_fluid_pour_requested(&evt_handler, &event);
@@ -72,8 +73,8 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
     err = dmc_netlink_unmarshal_event_debug(&event, from_msg);
     if (err != 0) break;
 
-    DMC_D("dmc_driver: recv debug event with event type %d\n",
-          event.event_type);
+    pr_debug("dmc_driver: recv debug event with event type %d\n",
+             event.event_type);
 
     switch ((enum dmc_event_type)event.event_type)
     {
@@ -84,15 +85,15 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       switch (event.data)
       {
       case 2:
-        DMC_D("dmc_driver: debug event data is 1\n");
+        pr_debug("dmc_driver: debug event data is 1\n");
         message = DMC_OUT_OF_ORDER_MESSAGE_REASON_FLUID_CONTAINER_1_REMOVED;
         break;
       case 3:
-        DMC_D("dmc_driver: debug event data is 2\n");
+        pr_debug("dmc_driver: debug event data is 2\n");
         message = DMC_OUT_OF_ORDER_MESSAGE_REASON_FLUID_CONTAINER_2_REMOVED;
         break;
       case 4:
-        DMC_D("dmc_driver: debug event data is 3\n");
+        pr_debug("dmc_driver: debug event data is 3\n");
         message = DMC_OUT_OF_ORDER_MESSAGE_REASON_FLUID_CONTAINER_3_REMOVED;
         break;
       case 1:
@@ -121,7 +122,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
           dmc_netlink_marshal_event_out_of_order(&nl_msg, &out_of_order_event);
       if (err != 0)
       {
-        DMC_D("dmc_driver: debug failed to marshal event. err = %d\n", err);
+        pr_debug("dmc_driver: debug failed to marshal event. err = %d\n", err);
         return err;
       }
 
@@ -129,7 +130,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       err = dmc_netlink_publish_event(&nl_handler, &nl_msg);
       if (err != 0)
       {
-        DMC_D("dmc_driver: debug failed to publish event. err = %d\n", err);
+        pr_debug("dmc_driver: debug failed to publish event. err = %d\n", err);
         return err;
       }
       break;
@@ -155,7 +156,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
                                                                 &weight_event);
       if (err != 0)
       {
-        DMC_D("dmc_driver: debug failed to marshal event. err = %d\n", err);
+        pr_debug("dmc_driver: debug failed to marshal event. err = %d\n", err);
         return err;
       }
 
@@ -163,7 +164,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       err = dmc_netlink_publish_event(&nl_handler, &nl_msg);
       if (err != 0)
       {
-        DMC_D("dmc_driver: debug failed to publish event. err = %d\n", err);
+        pr_debug("dmc_driver: debug failed to publish event. err = %d\n", err);
         return err;
       }
 
@@ -187,7 +188,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       err = dmc_genl_marshal_event_machine_ok(&nl_msg, &machine_ok_event);
       if (err != 0)
       {
-        DMC_D("dmc_driver: debug failed to marshal event. err = %d\n", err);
+        pr_debug("dmc_driver: debug failed to marshal event. err = %d\n", err);
         return err;
       }
 
@@ -195,14 +196,15 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       err = dmc_netlink_publish_event(&nl_handler, &nl_msg);
       if (err != 0)
       {
-        DMC_D("dmc_driver: debug failed to publish event. err = %d\n", err);
+        pr_debug("dmc_driver: debug failed to publish event. err = %d\n", err);
         return err;
       }
 
       break;
     }
     default:
-      DMC_D("dmc_driver: debug event type %d not handled\n", event.event_type);
+      pr_debug("dmc_driver: debug event type %d not handled\n",
+               event.event_type);
       break;
     }
 

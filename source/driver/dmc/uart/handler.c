@@ -35,13 +35,13 @@ static int (*on_byte_recv)(u8 data) = NULL;
 static int dmc_serdev_recv(struct serdev_device *serdev,
                            const unsigned char *buffer, size_t size)
 {
-  DMC_D("dmc_driver: received %ld bytes with \"%s\"\n");
+  pr_debug("dmc_driver: received %ld bytes with \"%s\"\n");
 
   for (int i = 0; i < size; i++)
   {
     if (on_byte_recv(buffer[i]) != 0)
     {
-      DMC_D(
+      pr_debug(
           "dmc_driver: error handling byte %d of value %d in seq of size %ld\n",
           buffer[i], i, size);
       return -1;
@@ -63,13 +63,13 @@ static struct serdev_device *curr_serdev = NULL;
 static int dmc_serdev_probe(struct serdev_device *serdev)
 {
   int status;
-  DMC_D("dmc_driver: now I am in the probe function!\n");
+  pr_debug("dmc_driver: now I am in the probe function!\n");
 
   serdev_device_set_client_ops(serdev, &dmc_serdev_ops);
   status = serdev_device_open(serdev);
   if (status)
   {
-    DMC_D("dmc_driver: error opening serial port!\n");
+    pr_debug("dmc_driver: error opening serial port!\n");
     return -status;
   }
 
@@ -116,7 +116,7 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
 {
   if (curr_serdev == NULL)
   {
-    DMC_D("dmc_driver: error sending packet, no current serial device\n");
+    pr_debug("dmc_driver: error sending packet, no current serial device\n");
     return -1;
   }
 
@@ -133,7 +133,7 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
   kfree((void *)arr);
   if (err)
   {
-    DMC_D("dmc_driver: error sending packet via serdev, err = %d\n", err);
+    pr_debug("dmc_driver: error sending packet via serdev, err = %d\n", err);
     return -1;
   }
 
