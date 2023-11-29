@@ -90,6 +90,7 @@ dmc_packet_marshal_out_of_order(struct dmc_packet              *to,
   uint8_t offset                  = 0;
   *(uint8_t *)(to->data + offset) = packet->reason;
 
+  to->data_len = sizeof(packet->reason);
   return 0;
 }
 
@@ -153,6 +154,7 @@ static int dmc_packet_marshal_container_weight_measured(
   offset += sizeof(packet->container); // Move offset of previous data
   *(int16_t *)(to->data + offset) = packet->weight;
 
+  to->data_len = sizeof(packet->container) + sizeof(packet->weight);
   return 0;
 }
 
@@ -282,6 +284,7 @@ static int dmc_packet_marshal_fluid_pour_requested(
   offset += sizeof(packet->container); // Move offset of previous data
   *(uint8_t *)(to->data + offset) = packet->amount;
 
+  to->data_len = sizeof(packet->container) + sizeof(packet->amount);
   return 0;
 }
 
