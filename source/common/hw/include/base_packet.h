@@ -37,8 +37,6 @@ struct dmc_packet
   size_t data_len;
 };
 
-#define test 0b10000001 + 0b00001111
-
 /**
  * @brief Allocates and initializes a packet with a type. Primarily
  * used when starting to read data from a given source.
