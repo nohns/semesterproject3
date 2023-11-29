@@ -63,7 +63,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
           event.container, event.amount);
 
     // Call the event handler
-    // err = dmc_ctrl_on_event_fluid_pour_requested(&evt_handler, &event);
+    err = dmc_ctrl_on_event_fluid_pour_requested(&evt_handler, &event);
     break;
   }
   case DMC_EVENT_TYPE_DEBUG:
