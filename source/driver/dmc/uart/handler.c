@@ -28,26 +28,24 @@ static struct serdev_device_driver dmc_serdev_driver = {
 };
 
 static int (*dmc_on_byte_recv)(u8 data) = NULL;
-
+static int curr_buf_idx                 = 0;
 /**
  * @brief Callback is called whenever a character is received
  */
 static int dmc_serdev_recv(struct serdev_device *serdev,
                            const unsigned char *buffer, size_t size)
 {
-  pr_debug("dmc_driver: received bytes buffer of len %ld\n", size);
-  for (int i = 0; i < size; i++)
+  // pr_debug("dmc_driver: received bytes buffer of len %ld\n", size);
+  //  for (int i = 0; i < size; i++)
+  //{
+  pr_debug("dmc_driver: received byte i=%d of value %d in seq of size %ld\n",
+           curr_buf_idx, buffer[curr_buf_idx], size);
+  if (dmc_on_byte_recv(buffer[curr_buf_idx++]) != 0)
   {
-    pr_debug("dmc_driver: received byte %d of value %d in seq of size %ld\n", i,
-             buffer[i], size);
-    if (dmc_on_byte_recv(buffer[i]) != 0)
-    {
-      pr_debug(
-          "dmc_driver: error handling byte %d of value %d in seq of size %ld\n",
-          buffer[i], i, size);
-      return -1;
-    }
+    pr_debug("dmc_driver: error handling byte\n");
+    return -1;
   }
+  //}
 
   return 0;
 }
