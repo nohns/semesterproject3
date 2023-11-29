@@ -114,26 +114,26 @@ int dmc_uart_handler_unregister(void)
 
 int dmc_uart_handler_send_packet(struct dmc_packet *packet)
 {
+  int err;
+
   if (curr_serdev == NULL)
   {
     pr_debug("dmc_driver: error sending packet, no current serial device\n");
     return -1;
   }
 
-  // Return linux not implemented error
-  size_t pcklen = packet->data_len + 1;
-  u8    *arr    = (u8 *)kmalloc(pcklen, GFP_KERNEL);
-  arr[0]        = packet->type;
-  for (int i = 0; i < packet->data_len; i++)
-  {
-    arr[i + 1] = packet->data[i];
-  }
-
-  int err = serdev_device_write_buf(curr_serdev, arr, pcklen);
-  kfree((void *)arr);
+  serdev_device_write_buf(curr_serdev, &(packet->type), 1);
   if (err)
   {
-    pr_debug("dmc_driver: error sending packet via serdev, err = %d\n", err);
+    pr_debug("dmc_driver: error sending packet type via serdev, err = %d\n",
+             err);
+    return -1;
+  }
+  serdev_device_write_buf(curr_serdev, packet->data, packet->data_len);
+  if (err)
+  {
+    pr_debug("dmc_driver: error sending packet data via serdev, err = %d\n",
+             err);
     return -1;
   }
 
