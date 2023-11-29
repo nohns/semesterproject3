@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "Installing mdns-publisher..."
-rm -rf /usr/lib/python3.11/EXTERNALLY-MANAGED
 apt install libdbus-glib-1-dev libgirepository1.0-dev
 pip install mdns-publisher
 

@@ -2,7 +2,12 @@
 echo "Running Raspberry Pi initialization script..."
 apt update
 apt upgrade -y
-apt install -y ca-certificates curl gnupg python3-flask python3-flask-cors python3-pyroute2
+apt install -y ca-certificates curl gnupg 
+
+echo "--> Installing python dependencies..."
+rm -rf /usr/lib/python3.11/EXTERNALLY-MANAGED
+pip install flask flask-cors pyroute2
+echo "------------------------"
 
 # Install nodejs
 echo "--> Installing nodejs..."
