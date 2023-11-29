@@ -88,7 +88,7 @@ int dmc_uart_handler_register(struct dmc_uart_handler *uart)
   }
 
   // Success!
-  DMC_D("serdev_echo - Driver loaded successfully\n")
+  DMC_D("serdev_echo - Driver loaded successfully\n");
   return 0;
 }
 
