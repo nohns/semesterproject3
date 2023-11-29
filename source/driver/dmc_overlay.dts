@@ -6,7 +6,7 @@
 		target = <&soc>;
 		__overlay__ {
 			fragment@0 {
-				target = <&uart4>
+				target = <&uart4>;
 				__overlay__ {
 					dmcdev {
 						compatible = "prj3,dmcdev";
