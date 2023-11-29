@@ -219,6 +219,7 @@ function CreateDrinkGuide({}: CreateDrinkGuideProps) {
       case GuideState.step5:
         return (
           <div>
+            <div>Choose the amount of fluids in your drink </div>
             {selectedFluids.map((selectedFluid, i) => (
               <div
                 key={selectedFluid.id}
