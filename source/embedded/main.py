@@ -1,5 +1,5 @@
+#!/usr/bin/env python3
 import threading
-
 
 from controller.controller import Controller
 from database.database import Database
