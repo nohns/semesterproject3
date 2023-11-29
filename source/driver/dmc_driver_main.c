@@ -307,26 +307,26 @@ static int __init dmc_init(void)
             "dmc_driver: failed to register uart handler\n");
 
   // Register drinks machine control event handler
-  err = dmc_ctrl_event_handler_register(&evt_handler);
-  if (err != 0)
-    ERRGOTO(fail_dmc_init_reg_ctrl_evt_handler,
-            "dmc_driver: failed to register event handler\n");
+  /*err = dmc_ctrl_event_handler_register(&evt_handler);
+   if (err != 0)
+     ERRGOTO(fail_dmc_init_reg_ctrl_evt_handler,
+             "dmc_driver: failed to register event handler\n");
 
-  // Register drinks machine control packet handler
-  err = dmc_ctrl_packet_handler_register(&pck_handler);
-  if (err != 0)
-    ERRGOTO(fail_dmc_init_reg_ctrl_pck_handler,
-            "dmc_driver: failed to register packet handler\n");
+   // Register drinks machine control packet handler
+   err = dmc_ctrl_packet_handler_register(&pck_handler);
+   if (err != 0)
+     ERRGOTO(fail_dmc_init_reg_ctrl_pck_handler,
+             "dmc_driver: failed to register packet handler\n");*/
 
   // Success!
   pr_info("dmc_driver: initialized successfully!\n");
   return 0;
 
 // Goto error handling...
-fail_dmc_init_reg_ctrl_pck_handler:
+/*fail_dmc_init_reg_ctrl_pck_handler:
   dmc_ctrl_event_handler_unregister(&evt_handler);
 fail_dmc_init_reg_ctrl_evt_handler:
-  dmc_uart_handler_unregister();
+  dmc_uart_handler_unregister();*/
 fail_dmc_init_reg_uart_handler:
   dmc_unregister_netlink_handler(&nl_handler);
 fail_dmc_init_reg_netlink_handler:
@@ -338,10 +338,10 @@ static void __exit dmc_exit(void)
   pr_info("dmc_driver: unloading...\n");
 
   // Unregister drinks machine control packet handler
-  dmc_ctrl_packet_handler_unregister(&pck_handler);
+  // dmc_ctrl_packet_handler_unregister(&pck_handler);
 
   // Unregister drinks machine control event handler
-  dmc_ctrl_event_handler_unregister(&evt_handler);
+  // dmc_ctrl_event_handler_unregister(&evt_handler);
 
   // Unregister drinks machine uart handler
   dmc_uart_handler_unregister();
