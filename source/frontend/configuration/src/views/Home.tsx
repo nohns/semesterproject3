@@ -125,7 +125,7 @@ function Home(): JSX.Element {
 
   //Hvis der ikke er nogen fluids så kan vi ikke loade UI'et så vi returnerer bare en loading tekst
   if (fluids.isLoading || getContainers.isLoading || drinks.isLoading) {
-    return <div className="text-black text-9xl">Loading...</div>;
+    return <div className="text-black text-9xl text-center">Loading...</div>;
   }
 
   //Hernede bliver alt magien samplet
@@ -134,7 +134,7 @@ function Home(): JSX.Element {
       <div className="flex flex-col items-center ">
         <Header />
         <div className="flex flex-col items-center">
-          <Card className="py-10 px-20 bg-zinc-400 w-full flex flex-col">
+          <Card className="py-10 px-20 bg-zinc-400 w-full flex flex-col border-4">
             <h1 className="mx-auto text-white font-mono text-6xl font-bold mt-2">
               Drinks calculator
             </h1>
@@ -164,14 +164,14 @@ function Home(): JSX.Element {
               {possibleDrinks && <DrinkCard drinks={possibleDrinks} />}
             </h6>
           </Card>
-          <Card className="py-6 px-20 bg-zinc-400 mt-8 w-full flex flex-row justify-between gap-6">
-            <div className="w-72 rounded-3xl bg-emerald-500  text-center text-white font-mono transition duration-300 hover:bg-teal-500">
+          <Card className="py-6 px-20 bg-zinc-400 mt-8 w-full flex flex-row justify-between gap-6 border-4">
+            <div className="w-72 rounded-3xl bg-emerald-500  text-center text-white font-mono border-2 transition duration-300 hover:bg-teal-500">
               <CreateDrinkGuide />
             </div>
-            <div className="bg-emerald-500 rounded-3xl w-72 text-center text-white font-mono transition duration-300 hover:bg-teal-500">
+            <div className="bg-emerald-500 rounded-3xl w-72 text-center text-white font-mono border-2 transition duration-300 hover:bg-teal-500">
               <ChangeContainerGuide />
             </div>
-            <div className="bg-emerald-500 rounded-3xl w-72 text-center text-white font-mono transition duration-300 hover:bg-teal-500">
+            <div className="bg-emerald-500 rounded-3xl w-72 text-center text-white font-mono border-2 transition duration-300 hover:bg-teal-500">
               <DeleteDrinkGuide />
             </div>
           </Card>
