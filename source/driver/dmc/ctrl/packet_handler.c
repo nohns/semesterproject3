@@ -35,6 +35,11 @@ int dmc_ctrl_on_packet_out_of_order(struct dmc_ctrl_packet_handler *pck_handler,
     message = DMC_OUT_OF_ORDER_MESSAGE_REASON_FLUID_CONTAINER_3_REMOVED;
     break;
   }
+  default:
+  {
+    message = DMC_OUT_OF_ORDER_MESSAGE_REASON_UNKNOWN;
+    break;
+  }
   }
 
   pr_debug("ctrl on out of order before event init\n");
