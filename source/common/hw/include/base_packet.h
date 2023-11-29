@@ -91,6 +91,10 @@ static void dmc_packet_free(struct dmc_packet *packet)
 static unsigned char dmc_packet_complete(struct dmc_packet *packet)
 {
   unsigned char data_bytes = packet->type & 0b00001111;
+  pr_debug(
+      "dmc_driver: packet complete? required byte len %d == packet byte len "
+      "%d \n",
+      data_bytes, packet->data_len);
   return data_bytes == packet->data_len;
 }
 
