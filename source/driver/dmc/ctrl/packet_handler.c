@@ -133,4 +133,6 @@ int dmc_ctrl_on_packet_machine_ok(struct dmc_ctrl_packet_handler *pck_handler,
   // Publish event
   err = dmc_netlink_publish_event(pck_handler->nl_handler, &nl_msg);
   if (err != 0) return err;
+
+  return 0;
 }
