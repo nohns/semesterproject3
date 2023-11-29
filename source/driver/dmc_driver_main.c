@@ -278,6 +278,7 @@ static int dmc_uart_recv_byte(u8 data)
     curr_packet = dmc_packet_init(data);
     pr_debug("dmc_driver: expecting %ld data bytes afterwards\n",
              curr_packet->data_len);
+    return 0;
   }
 
   // If packet is complete, handle it
