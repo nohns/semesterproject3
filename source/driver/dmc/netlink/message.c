@@ -118,17 +118,25 @@ int dmc_netlink_marshal_event_out_of_order(
 {
   int err;
 
+  pr_debug("marshal out of order before base marshal\n");
+
   // Marshal base event
   err = dmc_netlink_marshal_base_event(event_msg, event->base);
   if (err != 0) return err;
 
   // - MARK: Marshal event specific fields
 
+  pr_debug("marshal out of order before put string\n");
+  pr_debug("str = %s\n", event->message);
+
   // Message
   err =
       nla_put_string(event_msg->buff, DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_MESSAGE,
                      event->message);
   if (err != 0) return err;
+
+  pr_debug("marshal out of order before put reason\n");
+  pr_debug("reason = %d\n", event->reason);
 
   // Reason
   err = nla_put_u8(event_msg->buff, DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_REASON,

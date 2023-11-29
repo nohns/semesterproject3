@@ -9,6 +9,8 @@ int dmc_ctrl_on_packet_out_of_order(struct dmc_ctrl_packet_handler *pck_handler,
 {
   int err;
 
+  pr_debug("ctrl on out of order before switch\n");
+
   // Decide what text message to include in event
   char *message;
   switch (packet->reason)
@@ -35,6 +37,8 @@ int dmc_ctrl_on_packet_out_of_order(struct dmc_ctrl_packet_handler *pck_handler,
   }
   }
 
+  pr_debug("ctrl on out of order before event init\n");
+
   // Create event representation of packet
   struct dmc_base_event base = {
       .type = DMC_EVENT_TYPE_OUT_OF_ORDER,
@@ -45,14 +49,20 @@ int dmc_ctrl_on_packet_out_of_order(struct dmc_ctrl_packet_handler *pck_handler,
       .reason  = packet->reason,
   };
 
+  pr_debug("ctrl on out of order before prepare nl msg\n");
+
   // Prepare new netlink event message
   struct dmc_netlink_event_msg nl_msg;
   err = dmc_netlink_prepare_event(&nl_msg, event.base->type);
   if (err != 0) return err;
 
+  pr_debug("ctrl on out of order before marshal event\n");
+
   // Marshal event into netlink event message
   err = dmc_netlink_marshal_event_out_of_order(&nl_msg, &event);
   if (err != 0) return err;
+
+  pr_debug("ctrl on out of order before publish event\n");
 
   // Publish event
   err = dmc_netlink_publish_event(pck_handler->nl_handler, &nl_msg);

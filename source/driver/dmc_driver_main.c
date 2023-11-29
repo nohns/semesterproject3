@@ -236,6 +236,9 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
     err = dmc_packet_unmarshal_out_of_order(&packet, base_packet);
     if (err != 0) break;
 
+    pr_debug("dmc_driver: recv out of order packet with reason %d\n",
+             packet.reason);
+
     // Call the packet handler
     err = dmc_ctrl_on_packet_out_of_order(&pck_handler, &packet);
     break;
