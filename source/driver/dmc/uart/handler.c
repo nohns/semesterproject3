@@ -35,8 +35,6 @@ static int (*on_byte_recv)(u8 data) = NULL;
 static int dmc_serdev_recv(struct serdev_device *serdev,
                            const unsigned char *buffer, size_t size)
 {
-  pr_debug("dmc_driver: received %ld bytes with \"%s\"\n");
-
   for (int i = 0; i < size; i++)
   {
     if (on_byte_recv(buffer[i]) != 0)
