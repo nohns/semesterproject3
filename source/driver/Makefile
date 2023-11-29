@@ -51,7 +51,7 @@ install: modules_install
 $(OVERLAY_OUT): $(overlay)
 	dtc -@ -I dts -O dtb -o $@ $<
 
-modules:
+modules: $(OVERLAY_OUT)
 	@echo "Making for environment: $(ENV)"
 	$(MAKE_CMD) $@
 
