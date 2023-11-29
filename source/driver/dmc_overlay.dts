@@ -3,12 +3,18 @@
 / {
 	compatible = "brcm,bcm2712";
 	fragment@0 {
-		target = <&uart4>;
+		target = <&soc>;
 		__overlay__ {
-			dmcdev {
-				compatible = "prj3,dmcdev";
-				status = "okay";
+			fragment@0 {
+				target = <&uart4>
+				__overlay__ {
+					dmcdev {
+						compatible = "prj3,dmcdev";
+						status = "okay";
+					};
+				};
 			};
+			
 		};
 	};
 };
