@@ -278,6 +278,21 @@ static int dmc_uart_recv_byte(u8 data)
     curr_packet = dmc_packet_init(data);
     pr_debug("dmc_driver: expecting %ld data bytes afterwards\n",
              curr_packet->data_len);
+
+    // If packet is not complete, we gotta get some more data before handling it
+    if (!dmc_packet_complete(curr_packet))
+    {
+      return 0;
+    }
+
+    // Handle the complete packet and deallocate it afterwards
+    int err = dmc_uart_handle_packet(curr_packet);
+    dmc_packet_free(curr_packet);
+    curr_packet = NULL;
+
+    // If error was set during handling of packet, propagate it
+    if (err != 0) return err;
+
     return 0;
   }
 
