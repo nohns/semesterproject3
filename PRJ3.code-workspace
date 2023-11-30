@@ -70,7 +70,9 @@
 			"sched.h": "c",
 			"nodemask.h": "c",
 			"seccomp.h": "c",
-			"atomic.h": "c"
+			"atomic.h": "c",
+			"slab.h": "c",
+			"types.h": "c"
 		},
 		"[python]": {
 			"editor.defaultFormatter": "ms-python.black-formatter"
