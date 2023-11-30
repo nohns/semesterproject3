@@ -7,7 +7,6 @@ from domain.domain import Fluid, Drink, Container, Image
 
 
 # <- IMPORT FUNCTIONS FROM OTHER FILES ->
-from controller.update import update
 from controller.containers import change_containers, get_containers, get_container_by_fluid_id, update_container_fluid_amount
 from controller.drinks import create_drink, delete_drink, get_drinks, pour_drink
 from controller.fluids import get_fluids, create_fluid, delete_fluid
