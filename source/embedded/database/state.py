@@ -7,7 +7,10 @@ def trigger_state_update(connection: sqlite3.Connection) -> None:
     try:
         print(f"Database: Attempting to trigger state update")
         curr_time_ms = int(round(time.time() * 1000))
-        cursor.execute("UPDATE State SET int_value = 1 WHERE key = 'last_update'", (curr_time_ms))
+        print(curr_time_ms)
+        cursor.execute("UPDATE State SET int_value = ? WHERE key = 'last_update'", (curr_time_ms,))
+
+
         connection.commit()
 
     except sqlite3.Error as e:

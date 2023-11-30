@@ -6,7 +6,6 @@ import Selection from "./views/Selection";
 import Pouring from "./views/Pouring";
 import { useEffect } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import useUpdate from "./api/endpoints/drinks/getUpdate";
 import { Drink } from "./api/endpoints/drinks/getDrinks";
 import { Toaster } from "./components/ui/toaster";
 import useGetState from "./api/endpoints/state/getState";

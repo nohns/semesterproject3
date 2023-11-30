@@ -59,10 +59,7 @@ class Controller:
 
     def get_images(self) -> list[Image]:
         return get_images(self.database)
-
-    def update(self) -> bool:
-        return update(self.database)
-    
+ 
     def get_state(self) -> dict:
         return get_state(self.database)
     
