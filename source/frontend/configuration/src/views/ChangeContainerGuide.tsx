@@ -48,7 +48,7 @@ function ChangeContainerGuide({}: ChangeContainerGuideProps) {
       case GuideState.step1:
         return <p>Place the fluid containers under the outlet</p>;
       case GuideState.step2:
-        return <p>When done, press "OK"</p>;
+        return <p>When done, press "Continue"</p>;
       case GuideState.step3:
         return (
           <p>The system will now pump out the fluid from the containers</p>
@@ -69,7 +69,7 @@ function ChangeContainerGuide({}: ChangeContainerGuideProps) {
     <>
       <AlertDialog>
         <AlertDialogTrigger className="py-10 px-16">
-          Change menu
+          Update menu
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
