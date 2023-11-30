@@ -122,9 +122,11 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
     return -1;
   }
 
-  pr_debug("dmc_driver: sent packet type via serdev\n");
-  pr_debug("dmc_driver: type ptr %d\n", packet->type);
+  pr_debug("dmc_driver: reading out packet values:\n");
+  pr_debug("dmc_driver: packet ptr %p\n", packet);
   pr_debug("dmc_driver: data ptr %p\n", packet->data);
+  pr_debug("dmc_driver: type ptr %d\n", packet->type);
+
   pr_debug("dmc_driver: data len %ld\n", packet->data_len);
 
   serdev_device_write_buf(curr_serdev, (unsigned char *)(&(packet->type)), 1);
@@ -134,15 +136,19 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
              err);
     return -1;
   }
+  pr_debug("dmc_driver: sent packet type via serdev\n");
 
-  serdev_device_write_buf(curr_serdev, packet->data, packet->data_len);
-  if (err)
+  if (packet->data != NULL && packet->data_len > 0)
   {
-    pr_debug("dmc_driver: error sending packet data via serdev, err = %d\n",
-             err);
-    return -1;
+    serdev_device_write_buf(curr_serdev, packet->data, packet->data_len);
+    if (err)
+    {
+      pr_debug("dmc_driver: error sending packet data via serdev, err = %d\n",
+               err);
+      return -1;
+    }
+    pr_debug("dmc_driver: sent packet data via serdev\n");
   }
-  pr_debug("dmc_driver: sent packet data via serdev\n");
 
   return -ENOSYS;
 }
