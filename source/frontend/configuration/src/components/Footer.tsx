@@ -3,7 +3,7 @@
 import { GiDrinkMe } from "react-icons/gi";
 export default function Footer(): JSX.Element {
   return (
-    <footer className="px-4 pb-2 w-screen mt-auto">
+    <footer className="px-4 pb-2 mt-auto">
       <div className="text-xl font-bold whitespace-nowrap text-white flex items-center justify-left pl-4 pr-4">
         <GiDrinkMe className="h-6 w-6 mr-2 text-white" />
         DRINKSMACHINE

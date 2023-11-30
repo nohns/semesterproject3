@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import http from "../../axios";
 
 const getUpdate = async () => {
-  const response = await http.get(`v1/updates`);
+  const response = await http.get(`v1/updates/`);
 
   if (response.status !== 200) {
     console.log(response);
@@ -24,9 +24,7 @@ const useUpdate = () => {
     retryDelay: 5000,
     retry: true,
     onSuccess: () => {
-      //TODO: Verify if this works
-      queryClient.invalidateQueries(["getDrinks", "getFluids"]);
-      //Potentially add refetch interval within the use hook itself
+      queryClient.invalidateQueries(["getDrinks", "getContainers"]);
     },
   });
 

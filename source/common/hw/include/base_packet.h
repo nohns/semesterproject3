@@ -13,10 +13,12 @@
  */
 enum dmc_packet_type
 {
-  DMC_PACKET_OUT_OF_ORDER              = 0b10000000,
+  DMC_PACKET_OUT_OF_ORDER              = 0b10000001,
   DMC_PACKET_CONTAINER_WEIGHT_MEASURED = 0b10010010,
   DMC_PACKET_USER_CONFIRM              = 0b10100000,
   DMC_PACKET_FLUID_POUR_REQUESTED      = 0b10110010,
+  DMC_PACKET_DEBUG                     = 0b11000010,
+  DMC_PACKET_MACHINE_OK                = 0b11010000,
 };
 
 struct dmc_packet

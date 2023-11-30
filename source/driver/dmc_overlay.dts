@@ -3,7 +3,7 @@
 / {
 	compatible = "brcm,bcm2835";
 	fragment@0 {
-		target = <&uart0>;
+		target = <&uart1>;
 		__overlay__ {
 			dmcdev {
 				compatible = "prj3,dmcdev";

@@ -1,5 +1,5 @@
+#!/usr/bin/env python3
 import threading
-
 
 from controller.controller import Controller
 from database.database import Database
@@ -11,19 +11,20 @@ from api.api import Api
 class Main:
     # Database and publishing events to psoc via netlink (pump control)
     database: Database
-    netlink_publisher: NetlinkPublisher
+    # netlink_publisher: NetlinkPublisher
 
     # Controller which handles logic will import domain classes
     controller: Controller
 
     # Recieving events from psoc via netlink (weight sensor)
-    netlink_reciever: NetlinkReciever
+    # netlink_reciever: NetlinkReciever
     # Recieving http requests from frontend
     api: Api
 
     def __init__(self):
         # Initialize all classes
         database = Database()
+
         netlink_publisher = NetlinkPublisher()
 
         controller = Controller(database, netlink_publisher)

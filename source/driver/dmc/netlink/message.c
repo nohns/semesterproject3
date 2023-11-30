@@ -47,6 +47,25 @@ int dmc_netlink_unmarshal_event_fluid_pour_requested(
   return 0;
 }
 
+int dmc_netlink_unmarshal_machine_ok(struct dmc_event_machine_ok  *event,
+                                     struct dmc_netlink_event_msg *event_msg)
+{
+  // Unmarshal data
+  return 0;
+}
+
+int dmc_netlink_unmarshal_event_debug(struct dmc_event_debug       *event,
+                                      struct dmc_netlink_event_msg *event_msg)
+{
+  // Unmarshal data
+  event->event_type =
+      *(u8 *)nla_data(event_msg->attrs[DMC_GENL_EVENT_DEBUG_ATTR_EVENT_TYPE]);
+  event->data =
+      *(u8 *)nla_data(event_msg->attrs[DMC_GENL_EVENT_DEBUG_ATTR_DATA]);
+
+  return 0;
+}
+
 /* ################################# */
 /*     Functions for MARSHALLING     */
 /*  from netlink messages to events  */
@@ -99,17 +118,25 @@ int dmc_netlink_marshal_event_out_of_order(
 {
   int err;
 
+  pr_debug("marshal out of order before base marshal\n");
+
   // Marshal base event
   err = dmc_netlink_marshal_base_event(event_msg, event->base);
   if (err != 0) return err;
 
   // - MARK: Marshal event specific fields
 
+  pr_debug("marshal out of order before put string\n");
+  pr_debug("str = %s\n", event->message);
+
   // Message
   err =
       nla_put_string(event_msg->buff, DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_MESSAGE,
                      event->message);
   if (err != 0) return err;
+
+  pr_debug("marshal out of order before put reason\n");
+  pr_debug("reason = %d\n", event->reason);
 
   // Reason
   err = nla_put_u8(event_msg->buff, DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_REASON,
@@ -121,6 +148,18 @@ int dmc_netlink_marshal_event_out_of_order(
 
 int dmc_genl_marshal_event_user_confirm(struct dmc_netlink_event_msg *event_msg,
                                         struct dmc_event_user_confirm *event)
+{
+  int err;
+
+  // Marshal base event
+  err = dmc_netlink_marshal_base_event(event_msg, event->base);
+  if (err != 0) return err;
+
+  return 0;
+}
+
+int dmc_genl_marshal_event_machine_ok(struct dmc_netlink_event_msg *event_msg,
+                                      struct dmc_event_machine_ok  *event)
 {
   int err;
 

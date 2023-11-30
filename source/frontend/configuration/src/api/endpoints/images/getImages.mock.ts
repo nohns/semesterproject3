@@ -11,35 +11,35 @@ mock.onGet(url).reply(() => {
     images: [
       {
         id: 1,
-        path: "src/assets/HotPot1.png",
+        path: "/assets/HotPot1.png",
       },
       {
         id: 2,
-        path: "src/assets/HotPot2.png",
+        path: "/assets/HotPot2.png",
       },
       {
         id: 3,
-        path: "src/assets/HotPot3.png",
+        path: "/assets/HotPot3.png",
       },
       {
         id: 4,
-        path: "src/assets/Overblik_1_black_0_20.png",
+        path: "/assets/Overblik_1_black_0_20.png",
       },
       {
         id: 5,
-        path: "src/assets/Overblik_1_black_20_40.png",
+        path: "/assets/Overblik_1_black_20_40.png",
       },
       {
         id: 6,
-        path: "src/assets/Overblik_1_black_40_60.png",
+        path: "/assets/Overblik_1_black_40_60.png",
       },
       {
         id: 7,
-        path: "src/assets/Overblik_1_black_60_80.png",
+        path: "/assets/Overblik_1_black_60_80.png",
       },
       {
         id: 8,
-        path: "src/assets/Overblik_1_black_80_100.png",
+        path: "/assets/Overblik_1_black_80_100.png",
       },
     ],
   };
