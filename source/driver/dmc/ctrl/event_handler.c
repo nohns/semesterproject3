@@ -42,7 +42,7 @@ int dmc_ctrl_on_event_fluid_pour_requested(
 
   // Marshal specific packet into base packet form
   struct dmc_packet *base_packet = NULL;
-  err = dmc_packet_marshal_fluid_pour_requested(base_packet, &packet);
+  err = dmc_packet_marshal_fluid_pour_requested(&base_packet, &packet);
   if (err != 0)
   {
     // Avoid memory leak if packet has been allocated
