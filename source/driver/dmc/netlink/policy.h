@@ -16,9 +16,9 @@ static const struct nla_policy dmc_genl_event_pol[__DMC_GENL_EVENT_ATTR_MAX] = {
 
     // - Container weight measured event attributes -
 
-    [DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_CONTAINER] = {.type =
+    [DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_CONTAINER] = {.type =
                                                                      NLA_U8},
-    [DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_WEIGHT] = {.type = NLA_S16},
+    [DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_WEIGHT] = {.type = NLA_S16},
 
     // - Out of order event attributes -
 
