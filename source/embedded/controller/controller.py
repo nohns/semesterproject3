@@ -8,7 +8,7 @@ from domain.domain import Fluid, Drink, Container, Image
 
 # <- IMPORT FUNCTIONS FROM OTHER FILES ->
 from controller.update import update
-from controller.containers import change_containers, get_containers
+from controller.containers import change_containers, get_containers, get_container_by_fluid_id, update_container_fluid_amount
 from controller.drinks import create_drink, delete_drink, get_drinks, pour_drink
 from controller.fluids import get_fluids, create_fluid, delete_fluid
 from controller.images import get_images
@@ -29,6 +29,12 @@ class Controller:
 
     def get_containers(self) -> list[Container]:
         return get_containers(self.database)
+    
+    def get_container_by_fluid_id(self, fluid_id: int) -> Container:
+        return get_container_by_fluid_id(self.database, fluid_id)
+    
+    def update_container_fluid_amount(self, container_id: int, fluid_amount_in_cl: float) -> bool:
+        return update_container_fluid_amount(self.database, container_id, fluid_amount_in_cl)
 
     def create_drink(self, data: Request) -> None:
         return create_drink(self.database, data)

@@ -7,6 +7,7 @@ from database.containers import (
     change_containers,
     get_containers,
     get_container_by_fluid_id,
+    update_container_fluid_amount,
 )
 from database.drinks import (
     create_drink,
@@ -214,6 +215,9 @@ class Database:
 
     def get_container_by_fluid_id(self, fluid_id: int) -> Container:
         return get_container_by_fluid_id(self.connection, fluid_id)
+    
+    def update_container_fluid_amount(self, container_id: int, fluid_amount_in_cl: float) -> bool:
+        return update_container_fluid_amount(self.connection, container_id, fluid_amount_in_cl)
 
     def create_drink(self, drink: Drink) -> None:
         return create_drink(self.connection, drink)

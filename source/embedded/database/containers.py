@@ -37,6 +37,8 @@ def get_containers(connection: sqlite3.Connection) -> list[dict]:
         cursor.close()
 
 
+
+
 def get_container_by_fluid_id(
     connection: sqlite3.Connection, fluid_id: int
 ) -> Container:
@@ -75,6 +77,32 @@ def get_container_by_fluid_id(
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")
         return None
+
+    finally:
+        cursor.close()
+
+
+def update_container_fluid_amount(connection: sqlite3.Connection, container_id: int, fluid_amount_in_cl: float) -> bool:
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute(
+            """
+            UPDATE Containers
+            SET fluid_amount_in_cl = ?
+            WHERE id = ?
+        """,
+            (fluid_amount_in_cl, container_id),
+        )
+
+        connection.commit()
+
+        return cursor.rowcount > 0
+
+    except sqlite3.Error as e:
+        print(f"SQLite error: {e}")
+        connection.rollback()
+        return False
 
     finally:
         cursor.close()
