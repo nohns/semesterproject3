@@ -2,7 +2,6 @@ import sqlite3
 
 # using time module
 import time
-from database.update import update, set_status_to_true
 from database.containers import (
     change_containers,
     get_containers,
@@ -241,9 +240,6 @@ class Database:
 
     def get_images(self) -> list[Image]:
         return get_images(self.connection)
-
-    def update(self) -> bool:
-        return update(self.connection)
     
     def get_state(self) -> dict:
         return get_state(self.connection)
