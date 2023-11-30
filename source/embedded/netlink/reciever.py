@@ -11,8 +11,8 @@ if is_linux:
         ContainerWeightMeasuredEvent,
         MachineOkEvent,
         DMC_EVENT_TYPE_GENL_OUT_OF_ORDER,
-        DMC_EVENT_TYPE_GENL_CONTAINER_WEIGHT_MEASURED,
-        DMC_EVENT_TYPE_GENL_MACHINE_OK
+        DMC_EVENT_TYPE_GENL_CONTAINER_VOLUME_MEASURED,
+        DMC_EVENT_TYPE_GENL_MACHINE_OK,
     )
 
     class NetlinkReciever:
@@ -30,13 +30,12 @@ if is_linux:
                 self.initialized = True
             except Exception as e:
                 print(f"error {e}, when trying to bind to netlink socket")
-            
 
         def run(self):
             if not self.initialized:
                 print("NetlinkReceiver not initialized, exiting")
                 return
-            
+
             print("Netlink receiver listening for events...")
             while True:
                 # Recieve the message
@@ -50,8 +49,8 @@ if is_linux:
 
             if evt_type == DMC_EVENT_TYPE_GENL_OUT_OF_ORDER:
                 self.handle_out_of_order(OutOfOrderEvent().from_msg(msg))
-            elif evt_type == DMC_EVENT_TYPE_GENL_CONTAINER_WEIGHT_MEASURED:
-                self.handle_container_weight_measured(
+            elif evt_type == DMC_EVENT_TYPE_GENL_CONTAINER_VOLUME_MEASURED:
+                self.handle_container_volume_measured(
                     ContainerWeightMeasuredEvent().from_msg(msg)
                 )
             elif evt_type == DMC_EVENT_TYPE_GENL_MACHINE_OK:
@@ -68,14 +67,16 @@ if is_linux:
             try:
                 self.controller.set_state_out_of_order(event.message, event.reason)
             except Exception as e:
-                print(f"error {e}, when trying to set state out of order via controller")
+                print(
+                    f"error {e}, when trying to set state out of order via controller"
+                )
 
-        def handle_container_weight_measured(self, event: ContainerWeightMeasuredEvent):
+        def handle_container_volume_measured(self, event: ContainerWeightMeasuredEvent):
             print(
-                "Container weight measured, container: "
+                "Container volume measured, container: "
                 + str(event.container)
-                + ", weight: "
-                + str(event.weight)
+                + ", volume: "
+                + str(event.volume)
             )
 
         def handle_machine_ok(self, event: MachineOkEvent):
@@ -83,7 +84,9 @@ if is_linux:
             try:
                 self.controller.clear_state_out_of_order()
             except Exception as e:
-                print(f"error {e}, when trying to clear state out of order via controller")
+                print(
+                    f"error {e}, when trying to clear state out of order via controller"
+                )
 
 else:
 

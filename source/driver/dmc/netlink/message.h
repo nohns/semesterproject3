@@ -51,11 +51,11 @@ int dmc_netlink_unmarshal_event_debug(struct dmc_event_debug       *event,
 /* ################################# */
 
 /**
- * @brief Marshal container weight measured event into generic netlink message
+ * @brief Marshal container volume measured event into generic netlink message
  */
-int dmc_netlink_marshal_event_container_weight_measured(
+int dmc_netlink_marshal_event_container_volume_measured(
     struct dmc_netlink_event_msg               *event_msg,
-    struct dmc_event_container_weight_measured *event);
+    struct dmc_event_container_volume_measured *event);
 
 /**
  * @brief Marshal out of order event into generic netlink message
