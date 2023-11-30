@@ -267,24 +267,32 @@ static int dmc_packet_unmarshal_fluid_pour_requested(
  * @brief Marshal fluid pour requested packet struct into base packet
  */
 static int dmc_packet_marshal_fluid_pour_requested(
-    struct dmc_packet *to, struct dmc_packet_fluid_pour_requested *packet)
+    struct dmc_packet **to, struct dmc_packet_fluid_pour_requested *packet)
 {
   if (to == NULL)
   {
-    to = dmc_packet_init(DMC_PACKET_FLUID_POUR_REQUESTED);
-  }
-  if (to != NULL && to->type != DMC_PACKET_FLUID_POUR_REQUESTED)
-  {
+    // Pointer to the pointer must not be null
     return -1;
   }
+  if (*to == NULL)
+  {
+    // If the underlying dmc_packet* is not yet allocalted, allocate it
+    *to = dmc_packet_init(DMC_PACKET_FLUID_POUR_REQUESTED);
+  }
+  if (*to != NULL && (*to)->type != DMC_PACKET_FLUID_POUR_REQUESTED)
+  {
+    // If type of underlying dmc_packet* is not the same as the packet type,
+    // then return error
+    return -2;
+  }
 
-  uint8_t offset                  = 0;
-  *(uint8_t *)(to->data + offset) = packet->container;
+  uint8_t offset                     = 0;
+  *(uint8_t *)((*to)->data + offset) = packet->container;
 
   offset += sizeof(packet->container); // Move offset of previous data
-  *(uint8_t *)(to->data + offset) = packet->amount;
+  *(uint8_t *)((*to)->data + offset) = packet->amount;
 
-  to->data_len = sizeof(packet->container) + sizeof(packet->amount);
+  (*to)->data_len = sizeof(packet->container) + sizeof(packet->amount);
   return 0;
 }
 
