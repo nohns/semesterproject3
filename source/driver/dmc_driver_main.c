@@ -42,19 +42,29 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
   {
   case DMC_EVENT_TYPE_USER_CONFIRM:
   {
-    struct dmc_event_user_confirm event;
+    struct dmc_base_event out_of_order_base = {
+        .type = DMC_EVENT_TYPE_USER_CONFIRM,
+    };
+    struct dmc_event_user_confirm event = {
+        .base = &out_of_order_base,
+    };
     err = dmc_netlink_unmarshal_event_user_confirm(&event, from_msg);
     if (err != 0) break;
 
     pr_debug("dmc_driver: recv user confirm event\n");
 
     // Call the event handler
-    // err = dmc_ctrl_on_event_user_confirm(&evt_handler, &event);
+    err = dmc_ctrl_on_event_user_confirm(&evt_handler, &event);
     break;
   }
   case DMC_EVENT_TYPE_FLUID_POUR_REQUESTED:
   {
-    struct dmc_event_fluid_pour_requested event;
+    struct dmc_base_event out_of_order_base = {
+        .type = DMC_EVENT_TYPE_OUT_OF_ORDER,
+    };
+    struct dmc_event_fluid_pour_requested event = {
+        .base = &out_of_order_base,
+    };
     err = dmc_netlink_unmarshal_event_fluid_pour_requested(&event, from_msg);
     if (err != 0) break;
 
@@ -179,24 +189,12 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
           .base = &machine_ok_base,
       };
 
-      // Prepare new netlink event message
-      struct dmc_netlink_event_msg nl_msg;
-      err = dmc_netlink_prepare_event(&nl_msg, machine_ok_base.type);
-      if (err != 0) return err;
-
-      // Marshal event into netlink event message
-      err = dmc_genl_marshal_event_machine_ok(&nl_msg, &machine_ok_event);
+      err = dmc_ctrl_on_packet_machine_ok(&pck_handler, &machine_ok_event);
       if (err != 0)
       {
-        pr_debug("dmc_driver: debug failed to marshal event. err = %d\n", err);
-        return err;
-      }
-
-      // Publish event
-      err = dmc_netlink_publish_event(&nl_handler, &nl_msg);
-      if (err != 0)
-      {
-        pr_debug("dmc_driver: debug failed to publish event. err = %d\n", err);
+        pr_debug(
+            "dmc_driver: debug failed to handle machine ok event. err = %d\n",
+            err);
         return err;
       }
 
@@ -235,9 +233,6 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
     struct dmc_packet_out_of_order packet;
     err = dmc_packet_unmarshal_out_of_order(&packet, base_packet);
     if (err != 0) break;
-
-    pr_debug("dmc_driver: recv out of order packet with reason %d\n",
-             packet.reason);
 
     // Call the packet handler
     err = dmc_ctrl_on_packet_out_of_order(&pck_handler, &packet);
