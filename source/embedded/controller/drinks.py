@@ -41,6 +41,7 @@ def create_drink(database: Database, data: Request) -> None:
     try:
         drink = json_to_dataclass(data, Drink)
         database.create_drink(drink)
+        database.trigger_state_update()
     except Exception as e:
         print(f"error {e}, when trying to create drink via controller")
 
@@ -48,6 +49,7 @@ def create_drink(database: Database, data: Request) -> None:
 def delete_drink(database: Database, drink_id: int) -> bool:
     try:
         database.delete_drink(drink_id)
+        database.trigger_state_update()
         return 1
     except Exception as e:
         print(f"error {e}, when trying to delete drink via controller")

@@ -253,3 +253,6 @@ class Database:
     
     def clear_state_out_of_order(self) -> None:
         return clear_state_out_of_order(self.connection)
+    
+    def trigger_state_update(self) -> None:
+        return trigger_state_update(self.connection)
