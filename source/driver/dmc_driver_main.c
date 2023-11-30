@@ -55,6 +55,12 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
 
     // Call the event handler
     err = dmc_ctrl_on_event_user_confirm(&evt_handler, &event);
+    if (err != 0)
+    {
+      pr_debug("dmc_driver: failed to handle user confirm event, err = %d\n",
+               err);
+      break;
+    }
     break;
   }
   case DMC_EVENT_TYPE_FLUID_POUR_REQUESTED:
@@ -175,26 +181,6 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       if (err != 0)
       {
         pr_debug("dmc_driver: debug failed to publish event. err = %d\n", err);
-        return err;
-      }
-
-      break;
-    }
-    case DMC_EVENT_TYPE_MACHINE_OK:
-    {
-      struct dmc_base_event machine_ok_base = {
-          .type = DMC_EVENT_TYPE_MACHINE_OK,
-      };
-      struct dmc_event_machine_ok machine_ok_event = {
-          .base = &machine_ok_base,
-      };
-
-      err = dmc_ctrl_on_packet_machine_ok(&pck_handler, &machine_ok_event);
-      if (err != 0)
-      {
-        pr_debug(
-            "dmc_driver: debug failed to handle machine ok event. err = %d\n",
-            err);
         return err;
       }
 

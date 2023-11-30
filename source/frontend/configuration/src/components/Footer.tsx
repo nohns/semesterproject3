@@ -10,14 +10,14 @@ export default function Footer(): JSX.Element {
       </div>
       <hr className="my-3 sm:mx-auto bg-red-500" />
 
-      <span className="block text-s text-gray-400 sm:text-center mb-1">
+      <span className="block text-s text-white sm:text-center mb-1">
         <p>
           <strong>Contact info:</strong>
         </p>
         <p>Email: contact@drinksmachine.com</p>
         <p>Phone: (45) 11111111</p>
       </span>
-      <span className="block text-xs text-gray-400 sm:text-center ">
+      <span className="block text-xs text-white sm:text-center ">
         © 2023 DRINKSMACHINE™
       </span>
     </footer>
