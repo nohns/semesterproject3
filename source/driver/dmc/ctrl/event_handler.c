@@ -12,7 +12,7 @@ int dmc_ctrl_on_event_user_confirm(struct dmc_ctrl_event_handler *evt_handler,
 
   // Marshal specific packet into base packet form
   struct dmc_packet *base_packet = NULL;
-  err = dmc_packet_marshal_user_confirm(base_packet, &packet);
+  err = dmc_packet_marshal_user_confirm(&base_packet, &packet);
   if (err != 0)
   {
     // Avoid memory leak if packet has been allocated
