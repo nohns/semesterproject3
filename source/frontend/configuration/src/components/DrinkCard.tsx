@@ -17,7 +17,7 @@ function DrinkCard({ drinks }: DrinkCardProps): JSX.Element {
             className={`flex flex-col w-48 h-48 m-3 rounded-2xl bg-emerald-500  shadow-2xl border-2 transition duration-300 hover:bg-teal-500 hover:opacity-75
         }`}
             style={{
-              backgroundImage: `url("/assets/Hotpot1.png")`,
+              backgroundImage: `url(${drink.image?.path})`,
               paddingTop: "5px",
               backgroundPositionX: "center",
               backgroundPositionY: "bottom",
