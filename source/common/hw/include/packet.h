@@ -75,22 +75,27 @@ dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
  * @brief Marshal out of order packet struct into base packet
  */
 static int
-dmc_packet_marshal_out_of_order(struct dmc_packet              *to,
+dmc_packet_marshal_out_of_order(struct dmc_packet             **to,
                                 struct dmc_packet_out_of_order *packet)
 {
   if (to == NULL)
   {
-    to = dmc_packet_init(DMC_PACKET_OUT_OF_ORDER);
-  }
-  if (to->type != DMC_PACKET_OUT_OF_ORDER)
-  {
+    // Pointer to the pointer must not be null
     return -1;
   }
+  if (*to == NULL)
+  {
+    *to = dmc_packet_init(DMC_PACKET_OUT_OF_ORDER);
+  }
+  if ((*to)->type != DMC_PACKET_OUT_OF_ORDER)
+  {
+    return -2;
+  }
 
-  uint8_t offset                  = 0;
-  *(uint8_t *)(to->data + offset) = packet->reason;
+  uint8_t offset                     = 0;
+  *(uint8_t *)((*to)->data + offset) = packet->reason;
 
-  to->data_len = sizeof(packet->reason);
+  (*to)->data_len = sizeof(packet->reason);
   return 0;
 }
 
@@ -137,24 +142,29 @@ static int dmc_packet_unmarshal_container_weight_measured(
  * @brief Marshal container weight measured packet struct into base packet
  */
 static int dmc_packet_marshal_container_weight_measured(
-    struct dmc_packet *to, struct dmc_packet_container_weight_measured *packet)
+    struct dmc_packet **to, struct dmc_packet_container_weight_measured *packet)
 {
   if (to == NULL)
   {
-    to = dmc_packet_init(DMC_PACKET_CONTAINER_WEIGHT_MEASURED);
-  }
-  if (to->type != DMC_PACKET_CONTAINER_WEIGHT_MEASURED)
-  {
+    // Pointer to the pointer must not be null
     return -1;
   }
+  if (*to == NULL)
+  {
+    *to = dmc_packet_init(DMC_PACKET_CONTAINER_WEIGHT_MEASURED);
+  }
+  if ((*to)->type != DMC_PACKET_CONTAINER_WEIGHT_MEASURED)
+  {
+    return -2;
+  }
 
-  uint8_t offset                  = 0;
-  *(uint8_t *)(to->data + offset) = packet->container;
+  uint8_t offset                     = 0;
+  *(uint8_t *)((*to)->data + offset) = packet->container;
 
   offset += sizeof(packet->container); // Move offset of previous data
-  *(int16_t *)(to->data + offset) = packet->weight;
+  *(int16_t *)((*to)->data + offset) = packet->weight;
 
-  to->data_len = sizeof(packet->container) + sizeof(packet->weight);
+  (*to)->data_len = sizeof(packet->container) + sizeof(packet->weight);
   return 0;
 }
 
@@ -187,16 +197,21 @@ dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
  * @brief Marshal user confirm packet struct into base packet
  */
 static int
-dmc_packet_marshal_user_confirm(struct dmc_packet              *to,
+dmc_packet_marshal_user_confirm(struct dmc_packet             **to,
                                 struct dmc_packet_user_confirm *packet)
 {
   if (to == NULL)
   {
-    to = dmc_packet_init(DMC_PACKET_USER_CONFIRM);
-  }
-  if (to->type != DMC_PACKET_USER_CONFIRM)
-  {
+    // Pointer to the pointer must not be null
     return -1;
+  }
+  if (*to == NULL)
+  {
+    *to = dmc_packet_init(DMC_PACKET_USER_CONFIRM);
+  }
+  if ((*to)->type != DMC_PACKET_USER_CONFIRM)
+  {
+    return -2;
   }
 
   return 0;
