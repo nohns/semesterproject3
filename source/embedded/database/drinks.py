@@ -216,7 +216,6 @@ def create_drink(connection: sqlite3.Connection, drink: Drink) -> None:
         cursor.close()
 
 
-
 def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
     cursor = connection.cursor()
 
@@ -227,7 +226,7 @@ def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
         drink = cursor.fetchone()
         if not drink:
             raise Exception(f"No Drink not found with ID: {drink_id}")
-        
+
         ingredient_ids = list(map(int, drink[0].split(",")))
 
         cursor.execute("DELETE FROM Drinks WHERE id = ?", (drink_id,))
@@ -236,7 +235,7 @@ def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
         for ingredient_id in ingredient_ids:
             cursor.execute(
                 "SELECT COUNT(*) FROM Drinks WHERE ',' || ingredients_ids || ',' LIKE ?",
-                (f'%,{ingredient_id},%',)
+                (f"%,{ingredient_id},%",),
             )
             if cursor.fetchone()[0] == 0:
                 # This ingredient is not used in any other drink
@@ -251,4 +250,3 @@ def delete_drink(connection: sqlite3.Connection, drink_id: int) -> bool:
 
     finally:
         cursor.close()
-

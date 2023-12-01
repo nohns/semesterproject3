@@ -168,14 +168,23 @@ class Database:
             print(f"curr time: {curr_time_ms} ms og type {type(curr_time_ms)}")
             # Check if fluids already seeded
             cursor.execute("SELECT COUNT(*) FROM State")
-            
+
             count = cursor.fetchone()[0]
-           
+
             if count == 0:  # If no state, then seed
-                cursor.execute("INSERT INTO State (key, int_value) VALUES ('last_update', ?)", (curr_time_ms,))
-                cursor.execute("INSERT INTO State (key, int_value) VALUES ('out_of_order', 0)")
-                cursor.execute("INSERT INTO State (key, str_value) VALUES ('out_of_order_message', '')")
-                cursor.execute("INSERT INTO State (key, int_value) VALUES ('out_of_order_reason', 0)")
+                cursor.execute(
+                    "INSERT INTO State (key, int_value) VALUES ('last_update', ?)",
+                    (curr_time_ms,),
+                )
+                cursor.execute(
+                    "INSERT INTO State (key, int_value) VALUES ('out_of_order', 0)"
+                )
+                cursor.execute(
+                    "INSERT INTO State (key, str_value) VALUES ('out_of_order_message', '')"
+                )
+                cursor.execute(
+                    "INSERT INTO State (key, int_value) VALUES ('out_of_order_reason', 0)"
+                )
 
                 self.connection.commit()
         except sqlite3.Error as e:
@@ -214,9 +223,13 @@ class Database:
 
     def get_container_by_fluid_id(self, fluid_id: int) -> Container:
         return get_container_by_fluid_id(self.connection, fluid_id)
-    
-    def update_container_fluid_amount(self, container_id: int, fluid_amount_in_cl: float) -> bool:
-        return update_container_fluid_amount(self.connection, container_id, fluid_amount_in_cl)
+
+    def update_container_fluid_amount(
+        self, container_id: int, fluid_amount_in_cl: float
+    ) -> bool:
+        return update_container_fluid_amount(
+            self.connection, container_id, fluid_amount_in_cl
+        )
 
     def create_drink(self, drink: Drink) -> None:
         return create_drink(self.connection, drink)
@@ -244,15 +257,15 @@ class Database:
 
     def get_images(self) -> list[Image]:
         return get_images(self.connection)
-    
+
     def get_state(self) -> dict:
         return get_state(self.connection)
-    
+
     def set_state_out_of_order(self, message: str, reason: int) -> None:
         return set_state_out_of_order(self.connection, message, reason)
-    
+
     def clear_state_out_of_order(self) -> None:
         return clear_state_out_of_order(self.connection)
-    
+
     def trigger_state_update(self) -> None:
         return trigger_state_update(self.connection)

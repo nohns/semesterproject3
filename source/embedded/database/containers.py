@@ -37,8 +37,6 @@ def get_containers(connection: sqlite3.Connection) -> list[dict]:
         cursor.close()
 
 
-
-
 def get_container_by_fluid_id(
     connection: sqlite3.Connection, fluid_id: int
 ) -> Container:
@@ -82,7 +80,9 @@ def get_container_by_fluid_id(
         cursor.close()
 
 
-def update_container_fluid_amount(connection: sqlite3.Connection, container_id: int, fluid_amount_in_cl: float) -> bool:
+def update_container_fluid_amount(
+    connection: sqlite3.Connection, container_id: int, fluid_amount_in_cl: float
+) -> bool:
     cursor = connection.cursor()
 
     try:
