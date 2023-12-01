@@ -150,5 +150,9 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
     pr_debug("dmc_driver: sent packet data via serdev\n");
   }
 
+  // Write 4 null bytes
+  char *nullb = "\0\0\0\0";
+  serdev_device_write_buf(curr_serdev, nullb, 4);
+
   return -ENOSYS;
 }
