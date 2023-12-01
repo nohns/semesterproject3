@@ -19,6 +19,7 @@ def create_fluid(database: Database, data: Request) -> None:
         fluid = json_to_dataclass(data, Fluid)
         print(fluid)
         database.create_fluid(fluid)
+        database.trigger_state_update()
     except Exception as e:
         print(f"error {e}, when trying to create fluid via controller")
         raise Exception("Unable to create fluid", e) from e
@@ -28,6 +29,7 @@ def delete_fluid(database: Database, fluid_id: int) -> bool:
     try:
         print(f"Controller: Attempting to delete fluid with fluid id: {fluid_id}")
         database.delete_fluid(fluid_id)
+        database.trigger_state_update()
     except Exception as e:
         print(f"error {e}, when trying to delete fluid via controller")
         raise Exception("Unable to delete fluid", e) from e

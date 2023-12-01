@@ -2,57 +2,53 @@
 
 #include "../include/packet.h"
 
-#define PACKET_TYPE_WITHOUT_DATA DMC_PACKET_OUT_OF_ORDER
-#define PACKET_TYPE_WITH_DATA DMC_PACKET_CONTAINER_WEIGHT_UPDATE
+#define PACKET_TYPE_WITHOUT_DATA DMC_PACKET_MACHINE_OK
+#define PACKET_TYPE_WITH_DATA DMC_PACKET_CONTAINER_VOLUME_MEASURED
 
 int main(void)
 {
-  // Test case 1: initialize packets correctly
-  struct dmc_packet *p1 = dmc_packet_init(PACKET_TYPE_WITHOUT_DATA);
-  struct dmc_packet *p2 = dmc_packet_init(PACKET_TYPE_WITH_DATA);
-  if (p1->data != NULL)
+  int err;
+
+  // Test case 1: null base packet, and marshal afterwards
+  struct dmc_packet_fluid_pour_requested packet = {
+      .container = 2,
+      .amount    = 1,
+  };
+
+  struct dmc_packet *base_packet = NULL;
+  err = dmc_packet_marshal_fluid_pour_requested(&base_packet, &packet);
+  if (err != 0)
   {
-    printf("packet type with 0 data bytes had payload allocated.\n");
+    printf("packet marshal failed with err = %d. expected success.\n", err);
+    if (base_packet != NULL) dmc_packet_free(base_packet);
     return 1;
   }
-  if (p1->data_len > 0)
+  if (base_packet == NULL)
   {
-    printf("packet initially had payload of length greater than 0\n");
+    printf(
+        "base_packet not allocated in marshal. expected non-null pointer.\n");
+    dmc_packet_free(base_packet);
     return 1;
   }
-
-  unsigned p2_data_bytes = PACKET_TYPE_WITH_DATA & 0b00001111;
-  if (p2->data == NULL)
+  struct dmc_packet_fluid_pour_requested unmarshalled_packet;
+  err = dmc_packet_unmarshal_fluid_pour_requested(&unmarshalled_packet,
+                                                  base_packet);
+  if (err != 0)
   {
-    printf("packet type with %d data bytes did NOT have payload allocated.\n",
-           p2_data_bytes);
+    printf("packet unmarshal failed with err = %d. expected success.\n", err);
+  }
+  dmc_packet_free(base_packet);
+
+  if (unmarshalled_packet.container != packet.container)
+  {
+    printf("unmarshalled packet container = %d, expected %d\n",
+           unmarshalled_packet.container, packet.container);
     return 1;
   }
-
-  // test case 2: append complete data
-  for (int i = 0; i < p2_data_bytes; i++)
+  if (unmarshalled_packet.amount != packet.amount)
   {
-    if (dmc_packet_append_byte(p2, 0b11111111) != 0)
-    {
-      printf("packet type with %d data bytes could not append byte with "
-             "payload length %ld\n",
-             p2_data_bytes, p2->data_len);
-      return 1;
-    }
-  }
-
-  if (p2->data_len != p2_data_bytes)
-  {
-    printf("packet type with %d data bytes had payload length %ld\n",
-           p2_data_bytes, p2->data_len);
-    return 1;
-  }
-
-  // test case 3: is packet complete
-  if (!dmc_packet_complete(p2))
-  {
-    printf("packet where amount of data bytes from type were equal to payload "
-           "data len, was NOT considered complete\n");
+    printf("unmarshalled packet amount = %d, expected %d\n",
+           unmarshalled_packet.amount, packet.amount);
     return 1;
   }
 

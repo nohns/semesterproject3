@@ -12,7 +12,7 @@ mock.onGet(url).reply(() => {
         id: 1,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "/assets/HotPot1.png",
         },
         name: "Blå vand",
         ingredients: [
@@ -38,7 +38,7 @@ mock.onGet(url).reply(() => {
         id: 2,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "/assets/HotPot1.png",
         },
         name: "Double blå vand",
         ingredients: [
@@ -64,7 +64,7 @@ mock.onGet(url).reply(() => {
         id: 3,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "/assets/HotPot1.png",
         },
         name: "Vand",
         ingredients: [
@@ -82,7 +82,7 @@ mock.onGet(url).reply(() => {
         id: 4,
         image: {
           id: 1,
-          path: "src/assets/HotPot2.png",
+          path: "/assets/HotPot2.png",
         },
         name: "Snapse Vand",
         ingredients: [
@@ -108,7 +108,7 @@ mock.onGet(url).reply(() => {
         id: 5,
         image: {
           id: 1,
-          path: "src/assets/HotPot2.png",
+          path: "/assets/HotPot2.png",
         },
         name: "Vodka Juice",
         ingredients: [

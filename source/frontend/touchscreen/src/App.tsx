@@ -6,9 +6,10 @@ import Selection from "./views/Selection";
 import Pouring from "./views/Pouring";
 import { useEffect } from "react";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import useUpdate from "./api/endpoints/drinks/getUpdate";
 import { Drink } from "./api/endpoints/drinks/getDrinks";
 import { Toaster } from "./components/ui/toaster";
+import useGetState from "./api/endpoints/state/getState";
+import OutOfOrder from "./views/OutOfOrder";
 
 //Create typed enum for our 3 different states
 export enum DrinkMachineState {
@@ -30,9 +31,8 @@ function App() {
     return () => clearTimeout(timeout);
   }, [view, setView]);
 
-  //will retry every 5 seconds
-  const updater = useUpdate();
-  console.log(updater.status);
+  //will retry every 5 seconds, but only rerender when new data is available
+  const state = useGetState();
 
   //We need to hold the state for the selected drink so we can pass it to multiple components
   const [selectedDrink, setSelectedDrink] = useState<Drink>();
@@ -48,6 +48,15 @@ function App() {
           classNames="fade"
         >
           {() => {
+            if (state.data?.out_of_order) {
+              return (
+                <OutOfOrder
+                  message={state.data.out_of_order_message}
+                  reason={state.data.out_of_order_reason}
+                />
+              );
+            }
+
             switch (view) {
               case DrinkMachineState.Selection:
                 return (

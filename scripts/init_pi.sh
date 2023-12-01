@@ -2,7 +2,12 @@
 echo "Running Raspberry Pi initialization script..."
 apt update
 apt upgrade -y
-apt install -y ca-certificates curl gnupg python3-flask python3-flask-cors python3-pyroute2
+apt install -y ca-certificates curl gnupg 
+
+echo "--> Installing python dependencies..."
+rm -rf /usr/lib/python3.11/EXTERNALLY-MANAGED
+pip install flask flask-cors pyroute2
+echo "------------------------"
 
 # Install nodejs
 echo "--> Installing nodejs..."
@@ -20,17 +25,13 @@ systemctl enable nginx
 systemctl start nginx
 echo "-----------------------"
 
-echo "--> Adding nginx touchscreen and config vhosts..."
-cp resources/nginx/touch.pi.local /etc/nginx/sites-available/
-cp resources/nginx/config.pi.local /etc/nginx/sites-available/
-ln -s /etc/nginx/sites-available/touch.pi.local /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/config.pi.local /etc/nginx/sites-enabled/
-systemctl reload nginx
+# Setup hostnames
+echo "--> Setting up DNS hostnames touch.pi.local and config.pi.local..."
+sh ./setup_hostnames.sh
 echo "-----------------------"
 
-# Setup hostnames
-echo "--> Setting up touch.pi.local and config.pi.local hostnames..."
-sh ./setup_hostnames.sh
+echo "--> Setting up nginx hosts for touch.pi.local and config.pi.local domains..."
+sh ./setup_nginx.sh
 echo "-----------------------"
 
 echo "NOTICE: you are not done yet! You need to run deploy the frontend by running 'npm run deploy' from source/frontend/touch and source/frontend/configuration directories."

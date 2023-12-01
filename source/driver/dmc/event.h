@@ -20,12 +20,12 @@ enum dmc_event_type
   DMC_EVENT_TYPE_OUT_OF_ORDER = 1,
 
   /**
-   * @brief See struct dmc_event_container_weight_changed
+   * @brief See struct dmc_event_container_volume_measured
    */
-  DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED = 2,
+  DMC_EVENT_TYPE_CONTAINER_VOLUME_MEASURED = 2,
 
   /**
-   * @brief See struct dmc_event_container_weight_measured
+   * @brief See struct dmc_event_container_volume_measured
    */
   DMC_EVENT_TYPE_USER_CONFIRM = 3,
 
@@ -33,6 +33,16 @@ enum dmc_event_type
    * @brief See struct dmc_event_fluid_pour_requested
    */
   DMC_EVENT_TYPE_FLUID_POUR_REQUESTED = 4,
+
+  /**
+   * @brief See struct dmc_event_machine_ok
+   */
+  DMC_EVENT_TYPE_MACHINE_OK = 5,
+
+  /**
+   * @brief See struct dmc_event_debug
+   */
+  DMC_EVENT_TYPE_DEBUG = 6,
 
   /* ##################### */
 
@@ -93,7 +103,7 @@ int dmc_validate_event_out_of_order(struct dmc_event_out_of_order *event);
  *
  * Direction: PSoC -> RPi
  */
-struct dmc_event_container_weight_measured
+struct dmc_event_container_volume_measured
 {
   // Top-level event metadata
   struct dmc_base_event *base;
@@ -104,9 +114,9 @@ struct dmc_event_container_weight_measured
   uint8_t container;
 
   /**
-   * @brief Weight measured in grams
+   * @brief Volume measured in centiliters
    */
-  int16_t weight;
+  uint8_t volume;
 };
 
 /**
@@ -139,6 +149,32 @@ struct dmc_event_fluid_pour_requested
    * @brief Amount to pour in centiliters
    */
   uint8_t amount;
+};
+
+/**
+ * @brief Event for telling the machine that it is ok
+ */
+struct dmc_event_machine_ok
+{
+  struct dmc_base_event *base;
+};
+
+/**
+ * @brief Event for debugging purposes
+ */
+struct dmc_event_debug
+{
+  struct dmc_base_event *base;
+
+  /**
+   * @brief The sample event to publish to netlink
+   */
+  enum dmc_event_type event_type;
+
+  /**
+   * @brief The sample event to publish to netlink
+   */
+  uint8_t data;
 };
 
 #endif // DMC_EVENT_H

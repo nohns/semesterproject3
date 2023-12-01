@@ -16,9 +16,9 @@ static const struct nla_policy dmc_genl_event_pol[__DMC_GENL_EVENT_ATTR_MAX] = {
 
     // - Container weight measured event attributes -
 
-    [DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_CONTAINER] = {.type =
+    [DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_CONTAINER] = {.type =
                                                                      NLA_U8},
-    [DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_WEIGHT] = {.type = NLA_S16},
+    [DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_VOLUME] = {.type = NLA_U8},
 
     // - Out of order event attributes -
 
@@ -29,6 +29,10 @@ static const struct nla_policy dmc_genl_event_pol[__DMC_GENL_EVENT_ATTR_MAX] = {
 
     [DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_CONTAINER] = {.type = NLA_U8},
     [DMC_GENL_EVENT_FLUID_POUR_REQUESTED_ATTR_AMOUNT]    = {.type = NLA_U8},
+
+    // - Debug event attributes -
+    [DMC_GENL_EVENT_DEBUG_ATTR_EVENT_TYPE] = {.type = NLA_U8},
+    [DMC_GENL_EVENT_DEBUG_ATTR_DATA]       = {.type = NLA_U8},
 };
 
 #endif // DMC_NETLINK_POLICY_H

@@ -13,7 +13,7 @@ interface PourDrinkRequest {
 export interface PourDrinkResponse {}
 
 const pourDrink = async (request: PourDrinkRequest) => {
-  return await http.post<PourDrinkResponse>("v1/drinks/pour", request);
+  return await http.post<PourDrinkResponse>(`v1/drinks/pour/${request.id}`);
 };
 
 const usePourDrink = () => {

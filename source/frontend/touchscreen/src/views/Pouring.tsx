@@ -25,7 +25,7 @@ function Pouring({
   const POUR_TIME = calc.calcPourTime(selectedDrink!);
   console.log(POUR_TIME);
 
-  let beat = new Audio("src/assets/elevator.mp3");
+  let beat = new Audio("/assets/elevator.mp3");
   beat.volume = 0.2;
 
   //Timeout function which will change the view back to the selection screen
@@ -53,7 +53,7 @@ function Pouring({
           POURING DRINK
         </h1>
         <h2 className="scroll-m-20 text-white text-3xl font-medium tracking-tight lg:text-5xl mb-4">
-          Blå vand
+          {selectedDrink?.name}
         </h2>
         <div className=" w-[70%] h-[70%]  flex flex-col rounded-xl mt-auto mb-10">
           <div className="mx-auto">

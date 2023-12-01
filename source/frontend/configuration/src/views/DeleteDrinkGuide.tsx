@@ -17,15 +17,12 @@ import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import CustomAlertDialogAction from "@/components/CustomAlertDialogAction";
 import useDeleteDrink from "@/api/endpoints/drinks/deleteDrink";
-import useDeleteFluid from "@/api/endpoints/fluid/deleteFluid";
-import useGetFluids from "@/api/endpoints/fluid/getFluids";
+
 import useGetDrinks from "@/api/endpoints/drinks/getDrinks";
 
 enum GuideState {
-  step1 = 10,
-  step2 = 25,
-  step3 = 50,
-  step4 = 75,
+  step1 = 50,
+  step2 = 99,
 }
 
 interface DeleteDrinkGuideProps {}
@@ -36,9 +33,7 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
   const [step, setStep] = useState<GuideState>(GuideState.step1);
 
   const deleteDrink = useDeleteDrink();
-  const deleteFluid = useDeleteFluid();
 
-  const fluids = useGetFluids();
   const drinks = useGetDrinks();
 
   //Steps passer ikke rigtigt med hvad der skal ske
@@ -46,49 +41,14 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
     switch (step) {
       case GuideState.step1:
         return (
-          <div className="flex flex-col gap-2">
-            <div>
-              Would you like to delete a fluid or a drink from the menu?
-            </div>
-
-            <div className="flex flex-row gap-4 my-2">
-              <Button onClick={() => setStep(GuideState.step2)}>
-                Delete fluid
-              </Button>
-              <Button onClick={() => setStep(GuideState.step3)}>
-                Delete drink
-              </Button>
-            </div>
-          </div>
-        );
-      case GuideState.step2:
-        return (
-          <div>
-            <div>Which fluid would you like to delete?</div>
-            <div className="flex flex-row gap-4 my-2">
-              {fluids.data?.fluids.map((fluid) => (
-                <Button
-                  onClick={() => {
-                    deleteFluid.mutate({ id: fluid.id! });
-                    setStep(GuideState.step4);
-                  }}
-                >
-                  {fluid.name}
-                </Button>
-              ))}
-            </div>
-          </div>
-        );
-      case GuideState.step3:
-        return (
           <div>
             <div>Which drink would you like to delete?</div>
-            <div className="flex flex-row gap-4 my-2">
+            <div className="flex flex-row flex-wrap gap-4 my-2">
               {drinks.data?.drinks.map((drink) => (
                 <Button
                   onClick={() => {
                     deleteDrink.mutate({ id: drink.id! });
-                    setStep(GuideState.step4);
+                    setStep(GuideState.step2);
                   }}
                 >
                   {drink.name}
@@ -97,7 +57,7 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
             </div>
           </div>
         );
-      case GuideState.step4:
+      case GuideState.step2:
         return <p>Succesfully deleted the requested data</p>;
       default:
         return <p>Something went wrong :/</p>;
@@ -116,7 +76,7 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
             <AlertDialogDescription>{renderView()}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            {step === GuideState.step4 && (
+            {step === GuideState.step2 && (
               <CustomAlertDialogAction
                 onClose={() => setStep(GuideState.step1)}
               >

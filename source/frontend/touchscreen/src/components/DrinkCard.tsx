@@ -25,10 +25,10 @@ function DrinkCard({
 
   //const indicatorHeight = `${drink.remainingFluid}%`;
 
-  let beat = new Audio("src/assets/noselect.mp3");
+  let beat = new Audio("/assets/noselect.mp3");
   beat.volume = 0.1;
 
-  let beat2 = new Audio("src/assets/jaja.mp3");
+  let beat2 = new Audio("/assets/jaja.mp3");
   beat2.volume = 0.1;
 
   const calc = useCalculateDrinks();

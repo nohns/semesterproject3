@@ -7,15 +7,17 @@ obj-m += dmc_driver.o
 overlay := dmc_overlay.dts
 ccflags-y := -std=gnu99 -DDEBUG -Wno-declaration-after-statement -Wno-unused-function -Werror -I$(src)/../common/hw/include
 
-ENV ?= "pi"
+ENV ?= "native-pi"
 ifeq ($(ENV), "vm")
 	KERNELDIR := /lib/modules/6.2.0-36-generic/build
 else ifeq ($(ENV), "pi")
 	KERNELDIR := ~/sources/linux
 	ARCH := arm64
 	CROSS_COMPILE := aarch64-linux-gnu-
-	UPLOAD_TARGET := pi@172.20.10.3
+	UPLOAD_TARGET := pi@172.20.10.5
 	UPLOAD_TARGET_DIR := ~/modules
+else ifeq ($(ENV), "native-pi")
+	KERNELDIR := /lib/modules/$(shell uname -r)/build
 endif
 
 CURR_DIR := $(shell pwd)
@@ -49,7 +51,7 @@ install: modules_install
 $(OVERLAY_OUT): $(overlay)
 	dtc -@ -I dts -O dtb -o $@ $<
 
-modules:
+modules: $(OVERLAY_OUT)
 	@echo "Making for environment: $(ENV)"
 	$(MAKE_CMD) $@
 

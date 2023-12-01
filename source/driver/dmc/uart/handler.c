@@ -1,90 +1,154 @@
 #include "handler.h"
 
-#include <linux/gpio.h>
-#include <linux/interrupt.h>
-#include <linux/wait.h>
+#include <linux/mod_devicetable.h>
+#include <linux/of_device.h>
+#include <linux/platform_device.h>
+#include <linux/property.h>
+#include <linux/serdev.h>
+#include <linux/slab.h>
 
-DECLARE_WAIT_QUEUE_HEAD(dmc_uart_wq);
+/* Declate the probe and remove functions */
+static int  dmc_serdev_probe(struct serdev_device *serdev);
+static void dmc_serdev_remove(struct serdev_device *serdev);
 
-static irqreturn_t dmc_uart_handle_irq(int irq_number, void *dev_data)
+static struct of_device_id dmc_serdev_ids[] = {{
+                                                   .compatible = "prj3,dmcdev",
+                                               },
+                                               {/* sentinel */}};
+MODULE_DEVICE_TABLE(of, dmc_serdev_ids);
+
+static struct serdev_device_driver dmc_serdev_driver = {
+    .probe  = dmc_serdev_probe,
+    .remove = dmc_serdev_remove,
+    .driver =
+        {
+            .name           = "dmc-drier",
+            .of_match_table = dmc_serdev_ids,
+        },
+};
+
+static int (*dmc_on_byte_recv)(u8 data) = NULL;
+static int curr_buf_idx                 = 0;
+/**
+ * @brief Callback is called whenever a character is received
+ */
+static int dmc_serdev_recv(struct serdev_device *serdev,
+                           const unsigned char *buffer, size_t size)
 {
+  // pr_debug("dmc_driver: received bytes buffer of len %ld\n", size);
+  //  for (int i = 0; i < size; i++)
+  //{
+  pr_debug("dmc_driver: received byte i=%d of value %d in seq of size %ld\n",
+           curr_buf_idx, buffer[curr_buf_idx], size);
+  if (dmc_on_byte_recv(buffer[curr_buf_idx++]) != 0)
+  {
+    pr_debug("dmc_driver: error handling byte\n");
+    return -1;
+  }
+  //}
 
-  wake_up_interruptible(&dmc_uart_wq);
+  return 0;
+}
 
-  return IRQ_HANDLED;
+static const struct serdev_device_ops dmc_serdev_ops = {
+    .receive_buf = dmc_serdev_recv,
+};
+
+static struct serdev_device *curr_serdev = NULL;
+
+/**
+ * @brief This function is called on loading the driver
+ */
+static int dmc_serdev_probe(struct serdev_device *serdev)
+{
+  int status;
+  pr_debug("dmc_driver: now I am in the probe function!\n");
+
+  serdev_device_set_client_ops(serdev, &dmc_serdev_ops);
+  status = serdev_device_open(serdev);
+  if (status)
+  {
+    pr_debug("dmc_driver: error opening serial port!\n");
+    return -status;
+  }
+
+  serdev_device_set_baudrate(serdev, 9600);
+  serdev_device_set_flow_control(serdev, false);
+  serdev_device_set_parity(serdev, SERDEV_PARITY_NONE);
+  curr_serdev = serdev;
+
+  return 0;
+}
+
+/**
+ * @brief This function is called on unloading the driver
+ */
+static void dmc_serdev_remove(struct serdev_device *serdev)
+{
+  printk("serdev_echo - Now I am in the remove function\n");
+  serdev_device_close(serdev);
+  curr_serdev = NULL;
 }
 
 /**
  * @brief Registers the necessary resources for the uart to function
  */
-int dmc_uart_handler_register(struct dmc_uart_handler *uart)
+int dmc_uart_handler_register(int (*on_byte_recv)(u8 data))
+{
+  int err;
+  if ((err = serdev_device_driver_register(&dmc_serdev_driver)))
+  {
+    return -err;
+  }
+  dmc_on_byte_recv = on_byte_recv;
+
+  // Success!
+  return 0;
+}
+
+int dmc_uart_handler_unregister(void)
+{
+  serdev_device_driver_unregister(&dmc_serdev_driver);
+  return 0;
+}
+
+int dmc_uart_handler_send_packet(struct dmc_packet *packet)
 {
   int err;
 
-  // Request RX and TX gpios
-  err = gpio_request(uart->gpio_rx, "dmc_uart_rx");
-  if (err != 0)
-    ERRGOTO(fail_dmc_uart_reg_gpio_req_rx,
-            "dmc_uart: failed gpio request for rx gpio %d\n", uart->gpio_rx);
-  err = gpio_request(uart->gpio_tx, "dmc_uart_tx");
-  if (err != 0)
-    ERRGOTO(fail_dmc_uart_reg_gpio_req_tx,
-            "dmc_uart: failed gpio request for tx gpio %d\n", uart->gpio_tx);
+  if (curr_serdev == NULL)
+  {
+    pr_debug("dmc_driver: error sending packet, no current serial device\n");
+    return -1;
+  }
 
-  // Set input and output for uart gpios
-  err = gpio_direction_input(uart->gpio_rx);
-  if (err != 0)
-    ERRGOTO(fail_dmc_uart_reg_gpio_dir_input_rx,
-            "dmc_uart: failed to set rx gpio %d to input\n", uart->gpio_rx);
-  err = gpio_direction_output(uart->gpio_tx, 1);
-  if (err != 0)
-    ERRGOTO(fail_dmc_uart_reg_gpio_dir_output_tx,
-            "dmc_uart: failed to set tx gpio %d to output\n", uart->gpio_tx);
+  pr_debug("dmc_driver: reading out packet values:\n");
+  pr_debug("dmc_driver: packet ptr %p\n", packet);
+  pr_debug("dmc_driver: data ptr %p\n", packet->data);
+  pr_debug("dmc_driver: type ptr %d\n", packet->type);
 
-  // Get IRQ number for uart rx gpio pin
-  uart->irq_rx = gpio_to_irq(uart->gpio_rx);
+  pr_debug("dmc_driver: data len %ld\n", packet->data_len);
 
-  // Request interrupt for rx gpio pin
-  err = request_irq(uart->irq_rx, dmc_uart_handle_irq, IRQF_TRIGGER_FALLING,
-                    "dmc_uart_rx", NULL);
-  if (err != 0)
-    ERRGOTO(fail_dmc_uart_reg_irq_req, "Failed to \n");
+  serdev_device_write_buf(curr_serdev, (unsigned char *)(&(packet->type)), 1);
+  if (err)
+  {
+    pr_debug("dmc_driver: error sending packet type via serdev, err = %d\n",
+             err);
+    return -1;
+  }
+  pr_debug("dmc_driver: sent packet type via serdev\n");
 
-  // Success
-  return 0;
+  if (packet->data != NULL && packet->data_len > 0)
+  {
+    serdev_device_write_buf(curr_serdev, packet->data, packet->data_len);
+    if (err)
+    {
+      pr_debug("dmc_driver: error sending packet data via serdev, err = %d\n",
+               err);
+      return -1;
+    }
+    pr_debug("dmc_driver: sent packet data via serdev\n");
+  }
 
-// Goto error handling...
-fail_dmc_uart_reg_irq_req:
-fail_dmc_uart_reg_gpio_dir_output_tx:
-fail_dmc_uart_reg_gpio_dir_input_rx:
-  gpio_free(uart->gpio_tx);
-
-fail_dmc_uart_reg_gpio_req_tx:
-  gpio_free(uart->gpio_rx);
-
-fail_dmc_uart_reg_gpio_req_rx:
-  return err;
-}
-
-int dmc_uart_handler_unregister(struct dmc_uart_handler *uart)
-{
-  free_irq(uart->irq_rx, NULL);
-  gpio_free(uart->gpio_rx);
-  gpio_free(uart->gpio_tx);
-  return 0;
-}
-
-/**
- * @brief Starts the receiving sequence for a reading byte from the RX gpio,
- * using the configuration given in the dmc_uart struct. Usually, this should
- * be called when start bit is receiving, which in general should be when the
- * interrupt triggers
- */
-int dmc_uart_handler_start_recv(struct dmc_uart_handler *uart) { return 0; }
-
-int dmc_uart_handler_send_packet(struct dmc_uart_handler *uart,
-                                 struct dmc_packet *packet)
-{
-  // Return linux not implemented error
   return -ENOSYS;
 }

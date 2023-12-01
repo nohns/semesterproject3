@@ -1,18 +1,19 @@
 /** @format */
 
-import httpMock from "@/api/axios.mock";
+import { mock } from "@/api/axios";
+
 import { GetDrinksResponse } from "./getDrinks";
 
 // Url to match v1/drinks
 const url = new RegExp(/v1\/drinks/);
-httpMock.onGet(url).reply(() => {
+mock.onGet(url).reply(() => {
   const res: GetDrinksResponse = {
     drinks: [
       {
         id: 1,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "/assets/HotPot1.png",
         },
         name: "Blå vand",
         ingredients: [
@@ -38,7 +39,7 @@ httpMock.onGet(url).reply(() => {
         id: 2,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "/assets/HotPot1.png",
         },
         name: "Double blå vand",
         ingredients: [
@@ -64,7 +65,7 @@ httpMock.onGet(url).reply(() => {
         id: 3,
         image: {
           id: 1,
-          path: "src/assets/HotPot1.png",
+          path: "/assets/HotPot1.png",
         },
         name: "Vand",
         ingredients: [
@@ -82,7 +83,7 @@ httpMock.onGet(url).reply(() => {
         id: 4,
         image: {
           id: 1,
-          path: "src/assets/HotPot2.png",
+          path: "/assets/HotPot2.png",
         },
         name: "Snapse Vand",
         ingredients: [
@@ -108,7 +109,7 @@ httpMock.onGet(url).reply(() => {
         id: 5,
         image: {
           id: 1,
-          path: "src/assets/HotPot2.png",
+          path: "/assets/HotPot2.png",
         },
         name: "Vodka Juice",
         ingredients: [

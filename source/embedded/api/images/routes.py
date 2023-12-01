@@ -10,7 +10,10 @@ def register_images_bp(controller: Controller):
     def get_images():
         try:
             images = controller.get_images()
-            return jsonify(images), 200
+            return (
+                jsonify(images),
+                200,
+            )  # This will now return an object with a 'images' key
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 

@@ -4,11 +4,9 @@ import ENV from "@/constants/env";
 
 import { useQuery } from "@tanstack/react-query";
 
-import { http } from "@/api/axios";
-
-if (ENV.MOCKED) {
-  await import("./getFluids.mock.ts");
-}
+import http from "../../axios";
+//import mocked data
+import "@/api/endpoints/fluid/getFluids.mock";
 
 export interface Fluid {
   id?: number;
@@ -22,7 +20,7 @@ export interface GetFluidsResponse {
 }
 
 const getFluids = async ({}: GetFluidsRequest) => {
-  const response = await http.get<GetFluidsResponse>(`v1/fluids`);
+  const response = await http.get<GetFluidsResponse>(`v1/fluids/`);
 
   if (response.status !== 200) {
     console.log(response);
