@@ -2,6 +2,8 @@ from database.database import Database
 from netlink.publisher import NetlinkPublisher
 from domain.domain import Drink, json_to_dataclass
 from flask import Request
+import time
+
 
 def get_drinks(database: Database) -> dict:
     try:
@@ -28,6 +30,7 @@ def pour_drink(database: Database, hardware: NetlinkPublisher, drink_id: int):
         for ingredient in drink.ingredients:
             container = database.get_container_by_fluid_id(ingredient.fluid.id)
             hardware.pour_fluid(container.container_id, ingredient.amountInCl)
+            time.sleep(0.050)
 
         return None
     except Exception as e:
