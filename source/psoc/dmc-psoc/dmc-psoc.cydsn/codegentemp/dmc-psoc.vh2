@@ -2,7 +2,7 @@
 --	Conversion of dmc-psoc.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Sat Nov 25 22:58:23 2023
+--	Fri Dec 01 10:37:32 2023
 --
 
 USE cypress.cypress.all;
@@ -12,355 +12,355 @@ ATTRIBUTE part_name of top_RTL:TYPE IS "cpsoc3";
 END top_RTL;
 --------------------------------------------------------
 ARCHITECTURE R_T_L OF top_RTL IS
-SIGNAL \UART_1:Net_9\ : bit;
-SIGNAL \UART_1:Net_61\ : bit;
+SIGNAL \uart_pc:Net_9\ : bit;
+SIGNAL \uart_pc:Net_61\ : bit;
 SIGNAL one : bit;
-SIGNAL \UART_1:BUART:clock_op\ : bit;
-SIGNAL \UART_1:BUART:reset_reg\ : bit;
-SIGNAL \UART_1:BUART:tx_hd_send_break\ : bit;
-SIGNAL \UART_1:BUART:HalfDuplexSend\ : bit;
-SIGNAL \UART_1:BUART:FinalParityType_1\ : bit;
-SIGNAL \UART_1:BUART:FinalParityType_0\ : bit;
-SIGNAL \UART_1:BUART:FinalAddrMode_2\ : bit;
-SIGNAL \UART_1:BUART:FinalAddrMode_1\ : bit;
-SIGNAL \UART_1:BUART:FinalAddrMode_0\ : bit;
-SIGNAL \UART_1:BUART:tx_ctrl_mark\ : bit;
-SIGNAL \UART_1:BUART:reset_sr\ : bit;
-SIGNAL \UART_1:BUART:HalfDuplexSend_last\ : bit;
+SIGNAL \uart_pc:BUART:clock_op\ : bit;
+SIGNAL \uart_pc:BUART:reset_reg\ : bit;
+SIGNAL \uart_pc:BUART:tx_hd_send_break\ : bit;
+SIGNAL \uart_pc:BUART:HalfDuplexSend\ : bit;
+SIGNAL \uart_pc:BUART:FinalParityType_1\ : bit;
+SIGNAL \uart_pc:BUART:FinalParityType_0\ : bit;
+SIGNAL \uart_pc:BUART:FinalAddrMode_2\ : bit;
+SIGNAL \uart_pc:BUART:FinalAddrMode_1\ : bit;
+SIGNAL \uart_pc:BUART:FinalAddrMode_0\ : bit;
+SIGNAL \uart_pc:BUART:tx_ctrl_mark\ : bit;
+SIGNAL \uart_pc:BUART:reset_sr\ : bit;
+SIGNAL \uart_pc:BUART:HalfDuplexSend_last\ : bit;
 SIGNAL Net_29 : bit;
-SIGNAL \UART_1:BUART:txn\ : bit;
+SIGNAL \uart_pc:BUART:txn\ : bit;
 SIGNAL Net_25 : bit;
-SIGNAL \UART_1:BUART:tx_interrupt_out\ : bit;
+SIGNAL \uart_pc:BUART:tx_interrupt_out\ : bit;
 SIGNAL Net_14 : bit;
-SIGNAL \UART_1:BUART:rx_interrupt_out\ : bit;
-SIGNAL \UART_1:BUART:tx_state_1\ : bit;
-SIGNAL \UART_1:BUART:tx_state_0\ : bit;
-SIGNAL \UART_1:BUART:tx_bitclk_enable_pre\ : bit;
+SIGNAL \uart_pc:BUART:rx_interrupt_out\ : bit;
+SIGNAL \uart_pc:BUART:tx_state_1\ : bit;
+SIGNAL \uart_pc:BUART:tx_state_0\ : bit;
+SIGNAL \uart_pc:BUART:tx_bitclk_enable_pre\ : bit;
 SIGNAL zero : bit;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ce0\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ce0\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:cl0\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:cl0\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:z0\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:z0\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ff0\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ff0\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ce1\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ce1\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:cl1\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:cl1\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:z1\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:z1\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ff1\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ff1\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ov_msb\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ov_msb\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:co_msb\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:co_msb\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:cmsb\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:cmsb\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:tx_shift_out\ : bit;
-SIGNAL \UART_1:BUART:tx_fifo_notfull\ : bit;
-SIGNAL \UART_1:BUART:tx_fifo_empty\ : bit;
-SIGNAL \UART_1:BUART:sTX:TxShifter:f1_bus_stat\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:f1_bus_stat\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:f1_blk_stat\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:f1_blk_stat\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ce0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ce0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:cl0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:cl0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:z0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:z0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ff0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ff0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ce1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ce1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:cl1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:cl1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:z1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:z1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ff1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ff1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:ov_msb_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:ov_msb_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:co_msb_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:co_msb_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:cmsb_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:cmsb_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:so_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:so_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:f0_bus_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:f0_bus_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:f0_blk_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:f0_blk_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:f1_bus_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:f1_bus_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sTX:TxShifter:f1_blk_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sTX:TxShifter:f1_blk_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:counter_load_not\ : bit;
-SIGNAL \UART_1:BUART:tx_state_2\ : bit;
-SIGNAL \UART_1:BUART:tx_bitclk_dp\ : bit;
-SIGNAL \UART_1:BUART:tx_counter_dp\ : bit;
-SIGNAL \UART_1:BUART:sc_out_7\ : bit;
-SIGNAL \UART_1:BUART:sc_out_6\ : bit;
-SIGNAL \UART_1:BUART:sc_out_5\ : bit;
-SIGNAL \UART_1:BUART:sc_out_4\ : bit;
-SIGNAL \UART_1:BUART:sc_out_3\ : bit;
-SIGNAL \UART_1:BUART:sc_out_2\ : bit;
-SIGNAL \UART_1:BUART:sc_out_1\ : bit;
-SIGNAL \UART_1:BUART:sc_out_0\ : bit;
-SIGNAL \UART_1:BUART:tx_counter_tc\ : bit;
-SIGNAL \UART_1:BUART:tx_status_6\ : bit;
-SIGNAL \UART_1:BUART:tx_status_5\ : bit;
-SIGNAL \UART_1:BUART:tx_status_4\ : bit;
-SIGNAL \UART_1:BUART:tx_status_0\ : bit;
-SIGNAL \UART_1:BUART:tx_status_1\ : bit;
-SIGNAL \UART_1:BUART:tx_status_2\ : bit;
-SIGNAL \UART_1:BUART:tx_status_3\ : bit;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ce0\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ce0\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:cl0\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:cl0\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:z0\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:z0\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ff0\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ff0\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ce1\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ce1\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:cl1\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:cl1\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:z1\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:z1\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ff1\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ff1\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ov_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ov_msb\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:co_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:co_msb\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:cmsb\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:cmsb\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:tx_shift_out\ : bit;
+SIGNAL \uart_pc:BUART:tx_fifo_notfull\ : bit;
+SIGNAL \uart_pc:BUART:tx_fifo_empty\ : bit;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:f1_bus_stat\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:f1_bus_stat\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:f1_blk_stat\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:f1_blk_stat\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ce0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ce0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:cl0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:cl0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:z0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:z0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ff0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ff0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ce1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ce1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:cl1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:cl1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:z1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:z1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ff1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ff1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:ov_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:ov_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:co_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:co_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:cmsb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:cmsb_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:so_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:so_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:f0_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:f0_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:f0_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:f0_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:f1_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:f1_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sTX:TxShifter:f1_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sTX:TxShifter:f1_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:counter_load_not\ : bit;
+SIGNAL \uart_pc:BUART:tx_state_2\ : bit;
+SIGNAL \uart_pc:BUART:tx_bitclk_dp\ : bit;
+SIGNAL \uart_pc:BUART:tx_counter_dp\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_7\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_6\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_5\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_4\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_3\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_2\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_1\ : bit;
+SIGNAL \uart_pc:BUART:sc_out_0\ : bit;
+SIGNAL \uart_pc:BUART:tx_counter_tc\ : bit;
+SIGNAL \uart_pc:BUART:tx_status_6\ : bit;
+SIGNAL \uart_pc:BUART:tx_status_5\ : bit;
+SIGNAL \uart_pc:BUART:tx_status_4\ : bit;
+SIGNAL \uart_pc:BUART:tx_status_0\ : bit;
+SIGNAL \uart_pc:BUART:tx_status_1\ : bit;
+SIGNAL \uart_pc:BUART:tx_status_2\ : bit;
+SIGNAL \uart_pc:BUART:tx_status_3\ : bit;
 SIGNAL Net_24 : bit;
-SIGNAL \UART_1:BUART:tx_bitclk\ : bit;
-SIGNAL \UART_1:BUART:tx_ctrl_mark_last\ : bit;
-SIGNAL \UART_1:BUART:tx_mark\ : bit;
-SIGNAL \UART_1:BUART:tx_parity_bit\ : bit;
-SIGNAL \UART_1:BUART:rx_addressmatch\ : bit;
-SIGNAL \UART_1:BUART:rx_addressmatch1\ : bit;
-SIGNAL \UART_1:BUART:rx_addressmatch2\ : bit;
-SIGNAL \UART_1:BUART:rx_state_1\ : bit;
-SIGNAL \UART_1:BUART:rx_state_0\ : bit;
-SIGNAL \UART_1:BUART:rx_bitclk_enable\ : bit;
-SIGNAL \UART_1:BUART:rx_postpoll\ : bit;
-SIGNAL \UART_1:BUART:rx_load_fifo\ : bit;
-SIGNAL \UART_1:BUART:sRX:RxShifter:cl0\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:cl0\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:z0\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:z0\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ff0\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ff0\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:cl1\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:cl1\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:z1\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:z1\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ff1\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ff1\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ov_msb\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ov_msb\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:co_msb\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:co_msb\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:cmsb\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:cmsb\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:hd_shift_out\ : bit;
-SIGNAL \UART_1:BUART:rx_fifonotempty\ : bit;
-SIGNAL \UART_1:BUART:rx_fifofull\ : bit;
-SIGNAL \UART_1:BUART:hd_tx_fifo_notfull\ : bit;
-SIGNAL \UART_1:BUART:hd_tx_fifo_empty\ : bit;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ce0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ce0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:cl0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:cl0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:z0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:z0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ff0_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ff0_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ce1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ce1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:cl1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:cl1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:z1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:z1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ff1_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ff1_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:ov_msb_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:ov_msb_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:co_msb_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:co_msb_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:cmsb_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:cmsb_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:so_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:so_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:f0_bus_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:f0_bus_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:f0_blk_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:f0_blk_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:f1_bus_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:f1_bus_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:RxShifter:f1_blk_stat_reg\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:RxShifter:f1_blk_stat_reg\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:rx_counter_load\ : bit;
-SIGNAL \UART_1:BUART:rx_state_3\ : bit;
-SIGNAL \UART_1:BUART:rx_state_2\ : bit;
-SIGNAL \UART_1:BUART:rx_bitclk_pre\ : bit;
-SIGNAL \UART_1:BUART:rx_count_2\ : bit;
-SIGNAL \UART_1:BUART:rx_count_1\ : bit;
-SIGNAL \UART_1:BUART:rx_count_0\ : bit;
-SIGNAL \UART_1:BUART:rx_bitclk_pre16x\ : bit;
-SIGNAL \UART_1:BUART:rx_count_6\ : bit;
-SIGNAL \UART_1:BUART:rx_count_5\ : bit;
-SIGNAL \UART_1:BUART:rx_count_4\ : bit;
-SIGNAL \UART_1:BUART:rx_count_3\ : bit;
-SIGNAL \UART_1:BUART:rx_count7_tc\ : bit;
-SIGNAL \UART_1:BUART:rx_count7_bit8_wire\ : bit;
-SIGNAL \UART_1:BUART:rx_bitclk\ : bit;
-SIGNAL \UART_1:BUART:rx_state_stop1_reg\ : bit;
-SIGNAL \UART_1:BUART:rx_poll_bit1\ : bit;
-SIGNAL \UART_1:BUART:rx_poll_bit2\ : bit;
-SIGNAL \UART_1:BUART:pollingrange\ : bit;
-SIGNAL \UART_1:BUART:pollcount_1\ : bit;
+SIGNAL \uart_pc:BUART:tx_bitclk\ : bit;
+SIGNAL \uart_pc:BUART:tx_ctrl_mark_last\ : bit;
+SIGNAL \uart_pc:BUART:tx_mark\ : bit;
+SIGNAL \uart_pc:BUART:tx_parity_bit\ : bit;
+SIGNAL \uart_pc:BUART:rx_addressmatch\ : bit;
+SIGNAL \uart_pc:BUART:rx_addressmatch1\ : bit;
+SIGNAL \uart_pc:BUART:rx_addressmatch2\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_1\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_0\ : bit;
+SIGNAL \uart_pc:BUART:rx_bitclk_enable\ : bit;
+SIGNAL \uart_pc:BUART:rx_postpoll\ : bit;
+SIGNAL \uart_pc:BUART:rx_load_fifo\ : bit;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:cl0\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:cl0\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:z0\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:z0\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ff0\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ff0\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:cl1\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:cl1\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:z1\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:z1\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ff1\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ff1\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ov_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ov_msb\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:co_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:co_msb\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:cmsb\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:cmsb\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:hd_shift_out\ : bit;
+SIGNAL \uart_pc:BUART:rx_fifonotempty\ : bit;
+SIGNAL \uart_pc:BUART:rx_fifofull\ : bit;
+SIGNAL \uart_pc:BUART:hd_tx_fifo_notfull\ : bit;
+SIGNAL \uart_pc:BUART:hd_tx_fifo_empty\ : bit;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ce0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ce0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:cl0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:cl0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:z0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:z0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ff0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ff0_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ce1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ce1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:cl1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:cl1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:z1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:z1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ff1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ff1_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:ov_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:ov_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:co_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:co_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:cmsb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:cmsb_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:so_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:so_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:f0_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:f0_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:f0_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:f0_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:f1_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:f1_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:RxShifter:f1_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:RxShifter:f1_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:rx_counter_load\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_3\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_2\ : bit;
+SIGNAL \uart_pc:BUART:rx_bitclk_pre\ : bit;
+SIGNAL \uart_pc:BUART:rx_count_2\ : bit;
+SIGNAL \uart_pc:BUART:rx_count_1\ : bit;
+SIGNAL \uart_pc:BUART:rx_count_0\ : bit;
+SIGNAL \uart_pc:BUART:rx_bitclk_pre16x\ : bit;
+SIGNAL \uart_pc:BUART:rx_count_6\ : bit;
+SIGNAL \uart_pc:BUART:rx_count_5\ : bit;
+SIGNAL \uart_pc:BUART:rx_count_4\ : bit;
+SIGNAL \uart_pc:BUART:rx_count_3\ : bit;
+SIGNAL \uart_pc:BUART:rx_count7_tc\ : bit;
+SIGNAL \uart_pc:BUART:rx_count7_bit8_wire\ : bit;
+SIGNAL \uart_pc:BUART:rx_bitclk\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_stop1_reg\ : bit;
+SIGNAL \uart_pc:BUART:rx_poll_bit1\ : bit;
+SIGNAL \uart_pc:BUART:rx_poll_bit2\ : bit;
+SIGNAL \uart_pc:BUART:pollingrange\ : bit;
+SIGNAL \uart_pc:BUART:pollcount_1\ : bit;
 SIGNAL Net_28 : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:add_vv_vv_MODGEN_1_1\ : bit;
-SIGNAL \UART_1:BUART:pollcount_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:add_vv_vv_MODGEN_1_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_2\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODIN1_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODIN1_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:b_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:b_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODIN2_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODIN2_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:gta_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_2:g2:a0:gta_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODIN3_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODIN3_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:gta_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:s23Poll:MODULE_3:g2:a0:gta_0\ : bit;
-SIGNAL \UART_1:BUART:rx_status_0\ : bit;
-SIGNAL \UART_1:BUART:rx_markspace_status\ : bit;
-SIGNAL \UART_1:BUART:rx_status_1\ : bit;
-SIGNAL \UART_1:BUART:rx_status_2\ : bit;
-SIGNAL \UART_1:BUART:rx_parity_error_status\ : bit;
-SIGNAL \UART_1:BUART:rx_status_3\ : bit;
-SIGNAL \UART_1:BUART:rx_stop_bit_error\ : bit;
-SIGNAL \UART_1:BUART:rx_status_4\ : bit;
-SIGNAL \UART_1:BUART:rx_status_5\ : bit;
-SIGNAL \UART_1:BUART:rx_status_6\ : bit;
-SIGNAL \UART_1:BUART:rx_addr_match_status\ : bit;
+SIGNAL add_vv_vv_MODGEN_1_1 : bit;
+SIGNAL \uart_pc:BUART:pollcount_0\ : bit;
+SIGNAL add_vv_vv_MODGEN_1_0 : bit;
+SIGNAL cmp_vv_vv_MODGEN_2 : bit;
+SIGNAL cmp_vv_vv_MODGEN_3 : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_1\ : bit;
+SIGNAL MODIN1_1 : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_0\ : bit;
+SIGNAL MODIN1_0 : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:b_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:b_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_1\ : bit;
+SIGNAL MODIN2_1 : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_0\ : bit;
+SIGNAL MODIN2_0 : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:gta_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_2:g2:a0:gta_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_1\ : bit;
+SIGNAL MODIN3_1 : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_0\ : bit;
+SIGNAL MODIN3_0 : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:gta_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:s23Poll:MODULE_3:g2:a0:gta_0\ : bit;
+SIGNAL \uart_pc:BUART:rx_status_0\ : bit;
+SIGNAL \uart_pc:BUART:rx_markspace_status\ : bit;
+SIGNAL \uart_pc:BUART:rx_status_1\ : bit;
+SIGNAL \uart_pc:BUART:rx_status_2\ : bit;
+SIGNAL \uart_pc:BUART:rx_parity_error_status\ : bit;
+SIGNAL \uart_pc:BUART:rx_status_3\ : bit;
+SIGNAL \uart_pc:BUART:rx_stop_bit_error\ : bit;
+SIGNAL \uart_pc:BUART:rx_status_4\ : bit;
+SIGNAL \uart_pc:BUART:rx_status_5\ : bit;
+SIGNAL \uart_pc:BUART:rx_status_6\ : bit;
+SIGNAL \uart_pc:BUART:rx_addr_match_status\ : bit;
 SIGNAL Net_18 : bit;
-SIGNAL \UART_1:BUART:rx_markspace_pre\ : bit;
-SIGNAL \UART_1:BUART:rx_parity_error_pre\ : bit;
-SIGNAL \UART_1:BUART:rx_break_status\ : bit;
-SIGNAL \UART_1:BUART:sRX:cmp_vv_vv_MODGEN_4\ : bit;
-SIGNAL \UART_1:BUART:rx_address_detected\ : bit;
-SIGNAL \UART_1:BUART:rx_last\ : bit;
-SIGNAL \UART_1:BUART:rx_parity_bit\ : bit;
-SIGNAL \UART_1:BUART:sRX:cmp_vv_vv_MODGEN_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newa_6\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newa_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newa_4\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newa_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODIN4_6\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newa_2\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODIN4_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newa_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODIN4_4\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODIN4_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newb_6\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newb_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newb_4\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newb_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newb_2\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newb_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:newb_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:dataa_6\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:dataa_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:dataa_4\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:dataa_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:dataa_2\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:dataa_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:dataa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:datab_6\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:datab_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:datab_4\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:datab_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:datab_2\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:datab_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:datab_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:lta_6\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:gta_6\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:lta_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:gta_5\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:lta_4\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:gta_4\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:lta_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:gta_3\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:lta_2\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:gta_2\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:lta_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:gta_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:lta_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_4:g2:a0:gta_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:newa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:newb_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:dataa_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:datab_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:a_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:b_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:aeqb_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:eq_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:eqi_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:aeqb_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:albi_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:agbi_1\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:lt_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:gt_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:lti_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:gti_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:albi_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:gx:u0:agbi_0\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:xeq\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:xneq\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:xlt\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:xlte\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:xgt\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:g1:a0:xgte\ : bit;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:lt\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:MODULE_5:lt\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:eq\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:MODULE_5:eq\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:gt\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:MODULE_5:gt\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:gte\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:MODULE_5:gte\:SIGNAL IS 2;
-SIGNAL \UART_1:BUART:sRX:MODULE_5:lte\ : bit;
-ATTRIBUTE port_state_att of \UART_1:BUART:sRX:MODULE_5:lte\:SIGNAL IS 2;
-SIGNAL tmpOE__Rx_1_net_0 : bit;
-SIGNAL tmpIO_0__Rx_1_net_0 : bit;
-TERMINAL tmpSIOVREF__Rx_1_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__Rx_1_net_0 : bit;
-SIGNAL tmpOE__Tx_1_net_0 : bit;
-SIGNAL tmpFB_0__Tx_1_net_0 : bit;
-SIGNAL tmpIO_0__Tx_1_net_0 : bit;
-TERMINAL tmpSIOVREF__Tx_1_net_0 : bit;
-SIGNAL tmpINTERRUPT_0__Tx_1_net_0 : bit;
+SIGNAL \uart_pc:BUART:rx_markspace_pre\ : bit;
+SIGNAL \uart_pc:BUART:rx_parity_error_pre\ : bit;
+SIGNAL \uart_pc:BUART:rx_break_status\ : bit;
+SIGNAL cmp_vv_vv_MODGEN_4 : bit;
+SIGNAL \uart_pc:BUART:rx_address_detected\ : bit;
+SIGNAL \uart_pc:BUART:rx_last\ : bit;
+SIGNAL \uart_pc:BUART:rx_parity_bit\ : bit;
+SIGNAL cmp_vv_vv_MODGEN_5 : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newa_6\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newa_5\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newa_4\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newa_3\ : bit;
+SIGNAL MODIN4_6 : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newa_2\ : bit;
+SIGNAL MODIN4_5 : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newa_1\ : bit;
+SIGNAL MODIN4_4 : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newa_0\ : bit;
+SIGNAL MODIN4_3 : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newb_6\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newb_5\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newb_4\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newb_3\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newb_2\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newb_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:newb_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:dataa_6\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:dataa_5\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:dataa_4\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:dataa_3\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:dataa_2\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:dataa_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:dataa_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:datab_6\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:datab_5\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:datab_4\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:datab_3\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:datab_2\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:datab_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:datab_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:lta_6\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:gta_6\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:lta_5\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:gta_5\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:lta_4\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:gta_4\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:lta_3\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:gta_3\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:lta_2\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:gta_2\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:lta_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:gta_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:lta_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_4:g2:a0:gta_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:newa_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:newb_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:dataa_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:datab_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:a_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:b_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:aeqb_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:eq_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:eqi_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:aeqb_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:albi_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:agbi_1\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:lt_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:gt_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:lti_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:gti_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:albi_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:gx:u0:agbi_0\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:xeq\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:xneq\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:xlt\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:xlte\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:xgt\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:g1:a0:xgte\ : bit;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:lt\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:MODULE_5:lt\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:eq\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:MODULE_5:eq\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:gt\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:MODULE_5:gt\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:gte\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:MODULE_5:gte\:SIGNAL IS 2;
+SIGNAL \uart_pc:BUART:sRX:MODULE_5:lte\ : bit;
+ATTRIBUTE port_state_att of \uart_pc:BUART:sRX:MODULE_5:lte\:SIGNAL IS 2;
+SIGNAL tmpOE__rx_pc_net_0 : bit;
+SIGNAL tmpIO_0__rx_pc_net_0 : bit;
+TERMINAL tmpSIOVREF__rx_pc_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__rx_pc_net_0 : bit;
+SIGNAL tmpOE__tx_pc_net_0 : bit;
+SIGNAL tmpFB_0__tx_pc_net_0 : bit;
+SIGNAL tmpIO_0__tx_pc_net_0 : bit;
+TERMINAL tmpSIOVREF__tx_pc_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__tx_pc_net_0 : bit;
 SIGNAL Net_10 : bit;
 SIGNAL Net_12 : bit;
 SIGNAL \pump_timer_1:Net_260\ : bit;
@@ -401,50 +401,50 @@ SIGNAL \check_weight_timer:Net_57\ : bit;
 SIGNAL Net_253 : bit;
 SIGNAL Net_254 : bit;
 SIGNAL \check_weight_timer:Net_102\ : bit;
-TERMINAL \ADC_SAR_1:Net_248\ : bit;
-TERMINAL \ADC_SAR_1:Net_368\ : bit;
+TERMINAL \weight_adc:Net_248\ : bit;
+TERMINAL \weight_adc:Net_368\ : bit;
 SIGNAL Net_261 : bit;
-SIGNAL \ADC_SAR_1:vp_ctl_0\ : bit;
-SIGNAL \ADC_SAR_1:vp_ctl_2\ : bit;
-SIGNAL \ADC_SAR_1:vn_ctl_1\ : bit;
-SIGNAL \ADC_SAR_1:vn_ctl_3\ : bit;
-SIGNAL \ADC_SAR_1:vp_ctl_1\ : bit;
-SIGNAL \ADC_SAR_1:vp_ctl_3\ : bit;
-SIGNAL \ADC_SAR_1:vn_ctl_0\ : bit;
-SIGNAL \ADC_SAR_1:vn_ctl_2\ : bit;
-SIGNAL \ADC_SAR_1:Net_385\ : bit;
-SIGNAL \ADC_SAR_1:Net_381\ : bit;
-SIGNAL \ADC_SAR_1:Net_188\ : bit;
-SIGNAL \ADC_SAR_1:Net_221\ : bit;
+SIGNAL \weight_adc:vp_ctl_0\ : bit;
+SIGNAL \weight_adc:vp_ctl_2\ : bit;
+SIGNAL \weight_adc:vn_ctl_1\ : bit;
+SIGNAL \weight_adc:vn_ctl_3\ : bit;
+SIGNAL \weight_adc:vp_ctl_1\ : bit;
+SIGNAL \weight_adc:vp_ctl_3\ : bit;
+SIGNAL \weight_adc:vn_ctl_0\ : bit;
+SIGNAL \weight_adc:vn_ctl_2\ : bit;
+SIGNAL \weight_adc:Net_385\ : bit;
+SIGNAL \weight_adc:Net_381\ : bit;
+SIGNAL \weight_adc:Net_188\ : bit;
+SIGNAL \weight_adc:Net_221\ : bit;
 TERMINAL Net_258 : bit;
-TERMINAL \ADC_SAR_1:Net_126\ : bit;
-TERMINAL \ADC_SAR_1:Net_215\ : bit;
-TERMINAL \ADC_SAR_1:Net_257\ : bit;
-SIGNAL \ADC_SAR_1:soc\ : bit;
-SIGNAL \ADC_SAR_1:Net_252\ : bit;
+TERMINAL \weight_adc:Net_126\ : bit;
+TERMINAL \weight_adc:Net_215\ : bit;
+TERMINAL \weight_adc:Net_257\ : bit;
+SIGNAL \weight_adc:soc\ : bit;
+SIGNAL \weight_adc:Net_252\ : bit;
 SIGNAL Net_264 : bit;
-SIGNAL \ADC_SAR_1:Net_207_11\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_10\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_9\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_8\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_7\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_6\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_5\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_4\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_3\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_2\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_1\ : bit;
-SIGNAL \ADC_SAR_1:Net_207_0\ : bit;
-TERMINAL \ADC_SAR_1:Net_267\ : bit;
-TERMINAL \ADC_SAR_1:Net_149\ : bit;
-TERMINAL \ADC_SAR_1:Net_209\ : bit;
-TERMINAL \ADC_SAR_1:Net_255\ : bit;
-SIGNAL \ADC_SAR_1:tmpOE__ExtVref_net_0\ : bit;
-SIGNAL \ADC_SAR_1:tmpFB_0__ExtVref_net_0\ : bit;
-SIGNAL \ADC_SAR_1:tmpIO_0__ExtVref_net_0\ : bit;
-TERMINAL \ADC_SAR_1:tmpSIOVREF__ExtVref_net_0\ : bit;
-SIGNAL \ADC_SAR_1:tmpINTERRUPT_0__ExtVref_net_0\ : bit;
-SIGNAL \ADC_SAR_1:Net_383\ : bit;
+SIGNAL \weight_adc:Net_207_11\ : bit;
+SIGNAL \weight_adc:Net_207_10\ : bit;
+SIGNAL \weight_adc:Net_207_9\ : bit;
+SIGNAL \weight_adc:Net_207_8\ : bit;
+SIGNAL \weight_adc:Net_207_7\ : bit;
+SIGNAL \weight_adc:Net_207_6\ : bit;
+SIGNAL \weight_adc:Net_207_5\ : bit;
+SIGNAL \weight_adc:Net_207_4\ : bit;
+SIGNAL \weight_adc:Net_207_3\ : bit;
+SIGNAL \weight_adc:Net_207_2\ : bit;
+SIGNAL \weight_adc:Net_207_1\ : bit;
+SIGNAL \weight_adc:Net_207_0\ : bit;
+TERMINAL \weight_adc:Net_267\ : bit;
+TERMINAL \weight_adc:Net_149\ : bit;
+TERMINAL \weight_adc:Net_209\ : bit;
+TERMINAL \weight_adc:Net_255\ : bit;
+SIGNAL \weight_adc:tmpOE__ExtVref_net_0\ : bit;
+SIGNAL \weight_adc:tmpFB_0__ExtVref_net_0\ : bit;
+SIGNAL \weight_adc:tmpIO_0__ExtVref_net_0\ : bit;
+TERMINAL \weight_adc:tmpSIOVREF__ExtVref_net_0\ : bit;
+SIGNAL \weight_adc:tmpINTERRUPT_0__ExtVref_net_0\ : bit;
+SIGNAL \weight_adc:Net_383\ : bit;
 TERMINAL Net_267 : bit;
 TERMINAL Net_266 : bit;
 TERMINAL Net_265 : bit;
@@ -478,150 +478,634 @@ SIGNAL tmpFB_0__gpio_pump_2_net_0 : bit;
 SIGNAL Net_289 : bit;
 TERMINAL tmpSIOVREF__gpio_pump_2_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__gpio_pump_2_net_0 : bit;
-SIGNAL \UART_1:BUART:reset_reg\\D\ : bit;
-SIGNAL \UART_1:BUART:txn\\D\ : bit;
-SIGNAL \UART_1:BUART:tx_state_1\\D\ : bit;
-SIGNAL \UART_1:BUART:tx_state_0\\D\ : bit;
-SIGNAL \UART_1:BUART:tx_state_2\\D\ : bit;
+SIGNAL \uart_rpi:Net_9\ : bit;
+SIGNAL \uart_rpi:Net_61\ : bit;
+SIGNAL \uart_rpi:BUART:clock_op\ : bit;
+SIGNAL \uart_rpi:BUART:reset_reg\ : bit;
+SIGNAL \uart_rpi:BUART:tx_hd_send_break\ : bit;
+SIGNAL \uart_rpi:BUART:HalfDuplexSend\ : bit;
+SIGNAL \uart_rpi:BUART:FinalParityType_1\ : bit;
+SIGNAL \uart_rpi:BUART:FinalParityType_0\ : bit;
+SIGNAL \uart_rpi:BUART:FinalAddrMode_2\ : bit;
+SIGNAL \uart_rpi:BUART:FinalAddrMode_1\ : bit;
+SIGNAL \uart_rpi:BUART:FinalAddrMode_0\ : bit;
+SIGNAL \uart_rpi:BUART:tx_ctrl_mark\ : bit;
+SIGNAL \uart_rpi:BUART:reset_sr\ : bit;
+SIGNAL \uart_rpi:BUART:HalfDuplexSend_last\ : bit;
+SIGNAL Net_299 : bit;
+SIGNAL \uart_rpi:BUART:txn\ : bit;
+SIGNAL Net_303 : bit;
+SIGNAL \uart_rpi:BUART:tx_interrupt_out\ : bit;
+SIGNAL Net_298 : bit;
+SIGNAL \uart_rpi:BUART:rx_interrupt_out\ : bit;
+SIGNAL \uart_rpi:BUART:tx_state_1\ : bit;
+SIGNAL \uart_rpi:BUART:tx_state_0\ : bit;
+SIGNAL \uart_rpi:BUART:tx_bitclk_enable_pre\ : bit;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ce0\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ce0\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:cl0\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:cl0\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:z0\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:z0\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ff0\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ff0\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ce1\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ce1\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:cl1\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:cl1\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:z1\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:z1\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ff1\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ff1\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ov_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ov_msb\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:co_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:co_msb\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:cmsb\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:cmsb\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:tx_shift_out\ : bit;
+SIGNAL \uart_rpi:BUART:tx_fifo_notfull\ : bit;
+SIGNAL \uart_rpi:BUART:tx_fifo_empty\ : bit;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:f1_bus_stat\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:f1_bus_stat\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:f1_blk_stat\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:f1_blk_stat\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ce0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ce0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:cl0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:cl0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:z0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:z0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ff0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ff0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ce1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ce1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:cl1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:cl1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:z1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:z1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ff1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ff1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:ov_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:ov_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:co_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:co_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:cmsb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:cmsb_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:so_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:so_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:f0_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:f0_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:f0_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:f0_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:f1_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:f1_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sTX:TxShifter:f1_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sTX:TxShifter:f1_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:counter_load_not\ : bit;
+SIGNAL \uart_rpi:BUART:tx_state_2\ : bit;
+SIGNAL \uart_rpi:BUART:tx_bitclk_dp\ : bit;
+SIGNAL \uart_rpi:BUART:tx_counter_dp\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_7\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_6\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_5\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_4\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_3\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_2\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_1\ : bit;
+SIGNAL \uart_rpi:BUART:sc_out_0\ : bit;
+SIGNAL \uart_rpi:BUART:tx_counter_tc\ : bit;
+SIGNAL \uart_rpi:BUART:tx_status_6\ : bit;
+SIGNAL \uart_rpi:BUART:tx_status_5\ : bit;
+SIGNAL \uart_rpi:BUART:tx_status_4\ : bit;
+SIGNAL \uart_rpi:BUART:tx_status_0\ : bit;
+SIGNAL \uart_rpi:BUART:tx_status_1\ : bit;
+SIGNAL \uart_rpi:BUART:tx_status_2\ : bit;
+SIGNAL \uart_rpi:BUART:tx_status_3\ : bit;
+SIGNAL Net_302 : bit;
+SIGNAL \uart_rpi:BUART:tx_bitclk\ : bit;
+SIGNAL \uart_rpi:BUART:tx_ctrl_mark_last\ : bit;
+SIGNAL \uart_rpi:BUART:tx_mark\ : bit;
+SIGNAL \uart_rpi:BUART:tx_parity_bit\ : bit;
+SIGNAL \uart_rpi:BUART:rx_addressmatch\ : bit;
+SIGNAL \uart_rpi:BUART:rx_addressmatch1\ : bit;
+SIGNAL \uart_rpi:BUART:rx_addressmatch2\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_1\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_0\ : bit;
+SIGNAL \uart_rpi:BUART:rx_bitclk_enable\ : bit;
+SIGNAL \uart_rpi:BUART:rx_postpoll\ : bit;
+SIGNAL \uart_rpi:BUART:rx_load_fifo\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:cl0\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:cl0\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:z0\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:z0\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ff0\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ff0\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:cl1\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:cl1\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:z1\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:z1\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ff1\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ff1\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ov_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ov_msb\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:co_msb\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:co_msb\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:cmsb\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:cmsb\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:hd_shift_out\ : bit;
+SIGNAL \uart_rpi:BUART:rx_fifonotempty\ : bit;
+SIGNAL \uart_rpi:BUART:rx_fifofull\ : bit;
+SIGNAL \uart_rpi:BUART:hd_tx_fifo_notfull\ : bit;
+SIGNAL \uart_rpi:BUART:hd_tx_fifo_empty\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ce0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ce0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:cl0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:cl0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:z0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:z0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ff0_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ff0_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ce1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ce1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:cl1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:cl1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:z1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:z1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ff1_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ff1_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:ov_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:ov_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:co_msb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:co_msb_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:cmsb_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:cmsb_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:so_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:so_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:f0_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:f0_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:f0_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:f0_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:f1_bus_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:f1_bus_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:RxShifter:f1_blk_stat_reg\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:RxShifter:f1_blk_stat_reg\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:rx_counter_load\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_3\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_2\ : bit;
+SIGNAL \uart_rpi:BUART:rx_bitclk_pre\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count_2\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count_1\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count_0\ : bit;
+SIGNAL \uart_rpi:BUART:rx_bitclk_pre16x\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count_6\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count_5\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count_4\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count_3\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count7_tc\ : bit;
+SIGNAL \uart_rpi:BUART:rx_count7_bit8_wire\ : bit;
+SIGNAL \uart_rpi:BUART:rx_bitclk\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_stop1_reg\ : bit;
+SIGNAL \uart_rpi:BUART:rx_poll_bit1\ : bit;
+SIGNAL \uart_rpi:BUART:rx_poll_bit2\ : bit;
+SIGNAL \uart_rpi:BUART:pollingrange\ : bit;
+SIGNAL \uart_rpi:BUART:pollcount_1\ : bit;
+SIGNAL Net_295 : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:add_vv_vv_MODGEN_6_1\ : bit;
+SIGNAL \uart_rpi:BUART:pollcount_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:add_vv_vv_MODGEN_6_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_7\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_8\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:a_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODIN5_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:a_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODIN5_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:b_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:b_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:c_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:c_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:b_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:newa_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODIN6_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:newa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODIN6_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:newb_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:newb_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:dataa_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:dataa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:datab_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:datab_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:lta_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:gta_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:lta_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_7:g2:a0:gta_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:newa_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODIN7_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:newa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODIN7_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:newb_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:newb_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:dataa_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:dataa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:datab_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:datab_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:lta_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:gta_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:lta_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:s23Poll:MODULE_8:g2:a0:gta_0\ : bit;
+SIGNAL \uart_rpi:BUART:rx_status_0\ : bit;
+SIGNAL \uart_rpi:BUART:rx_markspace_status\ : bit;
+SIGNAL \uart_rpi:BUART:rx_status_1\ : bit;
+SIGNAL \uart_rpi:BUART:rx_status_2\ : bit;
+SIGNAL \uart_rpi:BUART:rx_parity_error_status\ : bit;
+SIGNAL \uart_rpi:BUART:rx_status_3\ : bit;
+SIGNAL \uart_rpi:BUART:rx_stop_bit_error\ : bit;
+SIGNAL \uart_rpi:BUART:rx_status_4\ : bit;
+SIGNAL \uart_rpi:BUART:rx_status_5\ : bit;
+SIGNAL \uart_rpi:BUART:rx_status_6\ : bit;
+SIGNAL \uart_rpi:BUART:rx_addr_match_status\ : bit;
+SIGNAL Net_294 : bit;
+SIGNAL \uart_rpi:BUART:rx_markspace_pre\ : bit;
+SIGNAL \uart_rpi:BUART:rx_parity_error_pre\ : bit;
+SIGNAL \uart_rpi:BUART:rx_break_status\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:cmp_vv_vv_MODGEN_9\ : bit;
+SIGNAL \uart_rpi:BUART:rx_address_detected\ : bit;
+SIGNAL \uart_rpi:BUART:rx_last\ : bit;
+SIGNAL \uart_rpi:BUART:rx_parity_bit\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:cmp_vv_vv_MODGEN_10\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newa_6\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newa_5\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newa_4\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newa_3\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODIN8_6\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newa_2\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODIN8_5\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newa_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODIN8_4\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODIN8_3\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newb_6\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newb_5\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newb_4\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newb_3\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newb_2\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newb_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:newb_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:dataa_6\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:dataa_5\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:dataa_4\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:dataa_3\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:dataa_2\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:dataa_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:dataa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:datab_6\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:datab_5\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:datab_4\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:datab_3\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:datab_2\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:datab_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:datab_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:lta_6\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:gta_6\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:lta_5\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:gta_5\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:lta_4\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:gta_4\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:lta_3\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:gta_3\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:lta_2\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:gta_2\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:lta_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:gta_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:lta_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_9:g2:a0:gta_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:newa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:newb_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:dataa_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:datab_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:a_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:b_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:xnor_array_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:aeqb_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:eq_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:eqi_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:aeqb_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:albi_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:agbi_1\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:lt_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:gt_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:lti_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:gti_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:albi_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:gx:u0:agbi_0\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:xeq\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:xneq\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:xlt\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:xlte\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:xgt\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:g1:a0:xgte\ : bit;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:lt\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:MODULE_10:lt\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:eq\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:MODULE_10:eq\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:gt\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:MODULE_10:gt\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:gte\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:MODULE_10:gte\:SIGNAL IS 2;
+SIGNAL \uart_rpi:BUART:sRX:MODULE_10:lte\ : bit;
+ATTRIBUTE port_state_att of \uart_rpi:BUART:sRX:MODULE_10:lte\:SIGNAL IS 2;
+SIGNAL tmpOE__rx_rpi_net_0 : bit;
+SIGNAL tmpIO_0__rx_rpi_net_0 : bit;
+TERMINAL tmpSIOVREF__rx_rpi_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__rx_rpi_net_0 : bit;
+SIGNAL tmpOE__tx_rpi_net_0 : bit;
+SIGNAL tmpFB_0__tx_rpi_net_0 : bit;
+SIGNAL tmpIO_0__tx_rpi_net_0 : bit;
+TERMINAL tmpSIOVREF__tx_rpi_net_0 : bit;
+SIGNAL tmpINTERRUPT_0__tx_rpi_net_0 : bit;
+SIGNAL \uart_pc:BUART:reset_reg\\D\ : bit;
+SIGNAL \uart_pc:BUART:txn\\D\ : bit;
+SIGNAL \uart_pc:BUART:tx_state_1\\D\ : bit;
+SIGNAL \uart_pc:BUART:tx_state_0\\D\ : bit;
+SIGNAL \uart_pc:BUART:tx_state_2\\D\ : bit;
 SIGNAL Net_24D : bit;
-SIGNAL \UART_1:BUART:tx_bitclk\\D\ : bit;
-SIGNAL \UART_1:BUART:tx_ctrl_mark_last\\D\ : bit;
-SIGNAL \UART_1:BUART:tx_mark\\D\ : bit;
-SIGNAL \UART_1:BUART:tx_parity_bit\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_state_1\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_state_0\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_load_fifo\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_state_3\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_state_2\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_bitclk\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_state_stop1_reg\\D\ : bit;
-SIGNAL \UART_1:BUART:pollcount_1\\D\ : bit;
-SIGNAL \UART_1:BUART:pollcount_0\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_markspace_status\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_parity_error_status\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_stop_bit_error\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_addr_match_status\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_markspace_pre\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_parity_error_pre\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_break_status\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_address_detected\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_last\\D\ : bit;
-SIGNAL \UART_1:BUART:rx_parity_bit\\D\ : bit;
+SIGNAL \uart_pc:BUART:tx_bitclk\\D\ : bit;
+SIGNAL \uart_pc:BUART:tx_ctrl_mark_last\\D\ : bit;
+SIGNAL \uart_pc:BUART:tx_mark\\D\ : bit;
+SIGNAL \uart_pc:BUART:tx_parity_bit\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_1\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_0\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_load_fifo\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_3\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_2\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_bitclk\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_state_stop1_reg\\D\ : bit;
+SIGNAL \uart_pc:BUART:pollcount_1\\D\ : bit;
+SIGNAL \uart_pc:BUART:pollcount_0\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_markspace_status\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_parity_error_status\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_stop_bit_error\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_addr_match_status\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_markspace_pre\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_parity_error_pre\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_break_status\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_address_detected\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_last\\D\ : bit;
+SIGNAL \uart_pc:BUART:rx_parity_bit\\D\ : bit;
+SIGNAL \uart_rpi:BUART:reset_reg\\D\ : bit;
+SIGNAL \uart_rpi:BUART:txn\\D\ : bit;
+SIGNAL \uart_rpi:BUART:tx_state_1\\D\ : bit;
+SIGNAL \uart_rpi:BUART:tx_state_0\\D\ : bit;
+SIGNAL \uart_rpi:BUART:tx_state_2\\D\ : bit;
+SIGNAL Net_302D : bit;
+SIGNAL \uart_rpi:BUART:tx_bitclk\\D\ : bit;
+SIGNAL \uart_rpi:BUART:tx_ctrl_mark_last\\D\ : bit;
+SIGNAL \uart_rpi:BUART:tx_mark\\D\ : bit;
+SIGNAL \uart_rpi:BUART:tx_parity_bit\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_1\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_0\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_load_fifo\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_3\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_2\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_bitclk\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_state_stop1_reg\\D\ : bit;
+SIGNAL \uart_rpi:BUART:pollcount_1\\D\ : bit;
+SIGNAL \uart_rpi:BUART:pollcount_0\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_markspace_status\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_parity_error_status\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_stop_bit_error\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_addr_match_status\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_markspace_pre\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_parity_error_pre\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_break_status\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_address_detected\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_last\\D\ : bit;
+SIGNAL \uart_rpi:BUART:rx_parity_bit\\D\ : bit;
 BEGIN
 
 one <=  ('1') ;
 
-Net_29 <= (not \UART_1:BUART:txn\);
+Net_29 <= (not \uart_pc:BUART:txn\);
 
 zero <=  ('0') ;
 
-\UART_1:BUART:counter_load_not\ <= ((not \UART_1:BUART:tx_bitclk_enable_pre\ and \UART_1:BUART:tx_state_2\)
-	OR \UART_1:BUART:tx_state_0\
-	OR \UART_1:BUART:tx_state_1\);
+\uart_pc:BUART:counter_load_not\ <= ((not \uart_pc:BUART:tx_bitclk_enable_pre\ and \uart_pc:BUART:tx_state_2\)
+	OR \uart_pc:BUART:tx_state_0\
+	OR \uart_pc:BUART:tx_state_1\);
 
-\UART_1:BUART:tx_status_0\ <= ((not \UART_1:BUART:tx_state_1\ and not \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_bitclk_enable_pre\ and \UART_1:BUART:tx_fifo_empty\ and \UART_1:BUART:tx_state_2\));
+\uart_pc:BUART:tx_status_0\ <= ((not \uart_pc:BUART:tx_state_1\ and not \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_bitclk_enable_pre\ and \uart_pc:BUART:tx_fifo_empty\ and \uart_pc:BUART:tx_state_2\));
 
-\UART_1:BUART:tx_status_2\ <= (not \UART_1:BUART:tx_fifo_notfull\);
+\uart_pc:BUART:tx_status_2\ <= (not \uart_pc:BUART:tx_fifo_notfull\);
 
-Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_1\));
+Net_24D <= ((not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:tx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:tx_state_1\));
 
-\UART_1:BUART:tx_bitclk\\D\ <= ((not \UART_1:BUART:tx_state_2\ and \UART_1:BUART:tx_bitclk_enable_pre\)
-	OR (\UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_bitclk_enable_pre\)
-	OR (\UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_bitclk_enable_pre\));
+\uart_pc:BUART:tx_bitclk\\D\ <= ((not \uart_pc:BUART:tx_state_2\ and \uart_pc:BUART:tx_bitclk_enable_pre\)
+	OR (\uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_bitclk_enable_pre\)
+	OR (\uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_bitclk_enable_pre\));
 
-\UART_1:BUART:tx_mark\\D\ <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_mark\));
+\uart_pc:BUART:tx_mark\\D\ <= ((not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:tx_mark\));
 
-\UART_1:BUART:tx_state_2\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_2\ and \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_counter_dp\ and \UART_1:BUART:tx_bitclk\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_2\ and \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_bitclk\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_bitclk_enable_pre\ and \UART_1:BUART:tx_state_2\));
+\uart_pc:BUART:tx_state_2\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_2\ and \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_counter_dp\ and \uart_pc:BUART:tx_bitclk\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_2\ and \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_bitclk\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_bitclk_enable_pre\ and \uart_pc:BUART:tx_state_2\));
 
-\UART_1:BUART:tx_state_1\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_1\ and not \UART_1:BUART:tx_state_2\ and \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_bitclk\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_2\ and not \UART_1:BUART:tx_bitclk\ and \UART_1:BUART:tx_state_1\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_bitclk_enable_pre\ and \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_0\ and not \UART_1:BUART:tx_counter_dp\ and \UART_1:BUART:tx_state_1\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_state_2\));
+\uart_pc:BUART:tx_state_1\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_1\ and not \uart_pc:BUART:tx_state_2\ and \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_bitclk\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_2\ and not \uart_pc:BUART:tx_bitclk\ and \uart_pc:BUART:tx_state_1\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_bitclk_enable_pre\ and \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_0\ and not \uart_pc:BUART:tx_counter_dp\ and \uart_pc:BUART:tx_state_1\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_state_2\));
 
-\UART_1:BUART:tx_state_0\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_1\ and not \UART_1:BUART:tx_fifo_empty\ and \UART_1:BUART:tx_bitclk_enable_pre\ and \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_1\ and not \UART_1:BUART:tx_state_0\ and not \UART_1:BUART:tx_fifo_empty\ and not \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_bitclk_enable_pre\ and \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_2\ and not \UART_1:BUART:tx_bitclk\ and \UART_1:BUART:tx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_fifo_empty\ and \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_state_2\));
+\uart_pc:BUART:tx_state_0\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_1\ and not \uart_pc:BUART:tx_fifo_empty\ and \uart_pc:BUART:tx_bitclk_enable_pre\ and \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_1\ and not \uart_pc:BUART:tx_state_0\ and not \uart_pc:BUART:tx_fifo_empty\ and not \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_bitclk_enable_pre\ and \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_2\ and not \uart_pc:BUART:tx_bitclk\ and \uart_pc:BUART:tx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_fifo_empty\ and \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_state_2\));
 
-\UART_1:BUART:txn\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_0\ and not \UART_1:BUART:tx_shift_out\ and not \UART_1:BUART:tx_state_2\ and not \UART_1:BUART:tx_counter_dp\ and \UART_1:BUART:tx_state_1\ and \UART_1:BUART:tx_bitclk\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_1\ and not \UART_1:BUART:tx_state_2\ and not \UART_1:BUART:tx_bitclk\ and \UART_1:BUART:tx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_state_1\ and not \UART_1:BUART:tx_shift_out\ and not \UART_1:BUART:tx_state_2\ and \UART_1:BUART:tx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:tx_bitclk\ and \UART_1:BUART:txn\ and \UART_1:BUART:tx_state_1\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:txn\ and \UART_1:BUART:tx_state_2\));
+\uart_pc:BUART:txn\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_0\ and not \uart_pc:BUART:tx_shift_out\ and not \uart_pc:BUART:tx_state_2\ and not \uart_pc:BUART:tx_counter_dp\ and \uart_pc:BUART:tx_state_1\ and \uart_pc:BUART:tx_bitclk\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_1\ and not \uart_pc:BUART:tx_state_2\ and not \uart_pc:BUART:tx_bitclk\ and \uart_pc:BUART:tx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_state_1\ and not \uart_pc:BUART:tx_shift_out\ and not \uart_pc:BUART:tx_state_2\ and \uart_pc:BUART:tx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:tx_bitclk\ and \uart_pc:BUART:txn\ and \uart_pc:BUART:tx_state_1\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:txn\ and \uart_pc:BUART:tx_state_2\));
 
-\UART_1:BUART:tx_parity_bit\\D\ <= ((not \UART_1:BUART:tx_state_0\ and \UART_1:BUART:txn\ and \UART_1:BUART:tx_parity_bit\)
-	OR (not \UART_1:BUART:tx_state_1\ and not \UART_1:BUART:tx_state_0\ and \UART_1:BUART:tx_parity_bit\)
-	OR \UART_1:BUART:tx_parity_bit\);
+\uart_pc:BUART:tx_parity_bit\\D\ <= ((not \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:txn\ and \uart_pc:BUART:tx_parity_bit\)
+	OR (not \uart_pc:BUART:tx_state_1\ and not \uart_pc:BUART:tx_state_0\ and \uart_pc:BUART:tx_parity_bit\)
+	OR \uart_pc:BUART:tx_parity_bit\);
 
-\UART_1:BUART:rx_counter_load\ <= ((not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_0\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:rx_state_2\));
+\uart_pc:BUART:rx_counter_load\ <= ((not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_0\ and not \uart_pc:BUART:rx_state_3\ and not \uart_pc:BUART:rx_state_2\));
 
-\UART_1:BUART:rx_bitclk_pre\ <= ((not \UART_1:BUART:rx_count_2\ and not \UART_1:BUART:rx_count_1\ and not \UART_1:BUART:rx_count_0\));
+\uart_pc:BUART:rx_bitclk_pre\ <= ((not \uart_pc:BUART:rx_count_2\ and not \uart_pc:BUART:rx_count_1\ and not \uart_pc:BUART:rx_count_0\));
 
-\UART_1:BUART:rx_state_stop1_reg\\D\ <= (not \UART_1:BUART:rx_state_2\
-	OR not \UART_1:BUART:rx_state_3\
-	OR \UART_1:BUART:rx_state_0\
-	OR \UART_1:BUART:rx_state_1\);
+\uart_pc:BUART:rx_state_stop1_reg\\D\ <= (not \uart_pc:BUART:rx_state_2\
+	OR not \uart_pc:BUART:rx_state_3\
+	OR \uart_pc:BUART:rx_state_0\
+	OR \uart_pc:BUART:rx_state_1\);
 
-\UART_1:BUART:pollcount_1\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_count_2\ and not \UART_1:BUART:rx_count_1\ and not \UART_1:BUART:pollcount_1\ and Net_28 and \UART_1:BUART:pollcount_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_count_2\ and not \UART_1:BUART:rx_count_1\ and not \UART_1:BUART:pollcount_0\ and \UART_1:BUART:pollcount_1\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_count_2\ and not \UART_1:BUART:rx_count_1\ and not Net_28 and \UART_1:BUART:pollcount_1\));
+\uart_pc:BUART:pollcount_1\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_count_2\ and not \uart_pc:BUART:rx_count_1\ and not MODIN1_1 and Net_28 and MODIN1_0)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_count_2\ and not \uart_pc:BUART:rx_count_1\ and not MODIN1_0 and MODIN1_1)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_count_2\ and not \uart_pc:BUART:rx_count_1\ and not Net_28 and MODIN1_1));
 
-\UART_1:BUART:pollcount_0\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_count_2\ and not \UART_1:BUART:rx_count_1\ and not \UART_1:BUART:pollcount_0\ and Net_28)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_count_2\ and not \UART_1:BUART:rx_count_1\ and not Net_28 and \UART_1:BUART:pollcount_0\));
+\uart_pc:BUART:pollcount_0\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_count_2\ and not \uart_pc:BUART:rx_count_1\ and not MODIN1_0 and Net_28)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_count_2\ and not \uart_pc:BUART:rx_count_1\ and not Net_28 and MODIN1_0));
 
-\UART_1:BUART:rx_postpoll\ <= ((Net_28 and \UART_1:BUART:pollcount_0\)
-	OR \UART_1:BUART:pollcount_1\);
+\uart_pc:BUART:rx_postpoll\ <= ((Net_28 and MODIN1_0)
+	OR MODIN1_1);
 
-\UART_1:BUART:rx_status_4\ <= ((\UART_1:BUART:rx_load_fifo\ and \UART_1:BUART:rx_fifofull\));
+\uart_pc:BUART:rx_status_4\ <= ((\uart_pc:BUART:rx_load_fifo\ and \uart_pc:BUART:rx_fifofull\));
 
-\UART_1:BUART:rx_status_5\ <= ((\UART_1:BUART:rx_fifonotempty\ and \UART_1:BUART:rx_state_stop1_reg\));
+\uart_pc:BUART:rx_status_5\ <= ((\uart_pc:BUART:rx_fifonotempty\ and \uart_pc:BUART:rx_state_stop1_reg\));
 
-\UART_1:BUART:rx_stop_bit_error\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_0\ and not \UART_1:BUART:pollcount_1\ and not \UART_1:BUART:pollcount_0\ and \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_3\ and \UART_1:BUART:rx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_0\ and not \UART_1:BUART:pollcount_1\ and not Net_28 and \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_3\ and \UART_1:BUART:rx_state_2\));
+\uart_pc:BUART:rx_stop_bit_error\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_0\ and not MODIN1_1 and not MODIN1_0 and \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_3\ and \uart_pc:BUART:rx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_0\ and not Net_28 and not MODIN1_1 and \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_3\ and \uart_pc:BUART:rx_state_2\));
 
-\UART_1:BUART:rx_load_fifo\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_0\ and not \UART_1:BUART:rx_state_2\ and \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_3\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:rx_state_2\ and not \UART_1:BUART:rx_count_6\ and not \UART_1:BUART:rx_count_4\ and \UART_1:BUART:rx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:rx_state_2\ and not \UART_1:BUART:rx_count_6\ and not \UART_1:BUART:rx_count_5\ and \UART_1:BUART:rx_state_0\));
+\uart_pc:BUART:rx_load_fifo\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_0\ and not \uart_pc:BUART:rx_state_2\ and \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_3\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_3\ and not \uart_pc:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_4 and \uart_pc:BUART:rx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_3\ and not \uart_pc:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_5 and \uart_pc:BUART:rx_state_0\));
 
-\UART_1:BUART:rx_state_3\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_2\ and not \UART_1:BUART:rx_count_6\ and not \UART_1:BUART:rx_count_4\ and \UART_1:BUART:rx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_2\ and not \UART_1:BUART:rx_count_6\ and not \UART_1:BUART:rx_count_5\ and \UART_1:BUART:rx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_3\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_1\ and \UART_1:BUART:rx_state_3\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_2\ and \UART_1:BUART:rx_state_3\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_0\ and \UART_1:BUART:rx_state_3\));
+\uart_pc:BUART:rx_state_3\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_4 and \uart_pc:BUART:rx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_5 and \uart_pc:BUART:rx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_3\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_1\ and \uart_pc:BUART:rx_state_3\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_2\ and \uart_pc:BUART:rx_state_3\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_0\ and \uart_pc:BUART:rx_state_3\));
 
-\UART_1:BUART:rx_state_2\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_0\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:rx_state_2\ and not Net_28 and \UART_1:BUART:rx_last\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_0\ and not \UART_1:BUART:rx_state_2\ and \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_3\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:rx_count_6\ and not \UART_1:BUART:rx_count_4\ and \UART_1:BUART:rx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:rx_count_6\ and not \UART_1:BUART:rx_count_5\ and \UART_1:BUART:rx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_1\ and \UART_1:BUART:rx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_0\ and \UART_1:BUART:rx_state_2\));
+\uart_pc:BUART:rx_state_2\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_0\ and not \uart_pc:BUART:rx_state_3\ and not \uart_pc:BUART:rx_state_2\ and not Net_28 and \uart_pc:BUART:rx_last\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_0\ and not \uart_pc:BUART:rx_state_2\ and \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_3\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_3\ and not MODIN4_6 and not MODIN4_4 and \uart_pc:BUART:rx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_3\ and not MODIN4_6 and not MODIN4_5 and \uart_pc:BUART:rx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_1\ and \uart_pc:BUART:rx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_0\ and \uart_pc:BUART:rx_state_2\));
 
-\UART_1:BUART:rx_state_1\\D\ <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_1\));
+\uart_pc:BUART:rx_state_1\\D\ <= ((not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_1\));
 
-\UART_1:BUART:rx_state_0\\D\ <= ((not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:pollcount_1\ and not \UART_1:BUART:pollcount_0\ and \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and not \UART_1:BUART:rx_state_1\ and not \UART_1:BUART:rx_state_3\ and not \UART_1:BUART:pollcount_1\ and not Net_28 and \UART_1:BUART:rx_bitclk_enable\ and \UART_1:BUART:rx_state_2\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_0\ and \UART_1:BUART:rx_count_5\ and \UART_1:BUART:rx_count_4\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_0\ and \UART_1:BUART:rx_count_6\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_0\ and \UART_1:BUART:rx_state_3\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_1\ and \UART_1:BUART:rx_state_0\)
-	OR (not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_state_0\ and \UART_1:BUART:rx_state_2\));
+\uart_pc:BUART:rx_state_0\\D\ <= ((not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_3\ and not MODIN1_1 and not MODIN1_0 and \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and not \uart_pc:BUART:rx_state_1\ and not \uart_pc:BUART:rx_state_3\ and not Net_28 and not MODIN1_1 and \uart_pc:BUART:rx_bitclk_enable\ and \uart_pc:BUART:rx_state_2\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_0\ and MODIN4_5 and MODIN4_4)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_0\ and MODIN4_6)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_0\ and \uart_pc:BUART:rx_state_3\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_1\ and \uart_pc:BUART:rx_state_0\)
+	OR (not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_state_0\ and \uart_pc:BUART:rx_state_2\));
 
-\UART_1:BUART:rx_last\\D\ <= ((not \UART_1:BUART:reset_reg\ and Net_28));
+\uart_pc:BUART:rx_last\\D\ <= ((not \uart_pc:BUART:reset_reg\ and Net_28));
 
-\UART_1:BUART:rx_address_detected\\D\ <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:rx_address_detected\));
+\uart_pc:BUART:rx_address_detected\\D\ <= ((not \uart_pc:BUART:reset_reg\ and \uart_pc:BUART:rx_address_detected\));
 
-\UART_1:IntClock\:cy_clock_v1_0
+Net_299 <= (not \uart_rpi:BUART:txn\);
+
+\uart_rpi:BUART:counter_load_not\ <= ((not \uart_rpi:BUART:tx_bitclk_enable_pre\ and \uart_rpi:BUART:tx_state_2\)
+	OR \uart_rpi:BUART:tx_state_0\
+	OR \uart_rpi:BUART:tx_state_1\);
+
+\uart_rpi:BUART:tx_status_0\ <= ((not \uart_rpi:BUART:tx_state_1\ and not \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_bitclk_enable_pre\ and \uart_rpi:BUART:tx_fifo_empty\ and \uart_rpi:BUART:tx_state_2\));
+
+\uart_rpi:BUART:tx_status_2\ <= (not \uart_rpi:BUART:tx_fifo_notfull\);
+
+Net_302D <= ((not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:tx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:tx_state_1\));
+
+\uart_rpi:BUART:tx_bitclk\\D\ <= ((not \uart_rpi:BUART:tx_state_2\ and \uart_rpi:BUART:tx_bitclk_enable_pre\)
+	OR (\uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_bitclk_enable_pre\)
+	OR (\uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_bitclk_enable_pre\));
+
+\uart_rpi:BUART:tx_mark\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:tx_mark\));
+
+\uart_rpi:BUART:tx_state_2\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_2\ and \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_counter_dp\ and \uart_rpi:BUART:tx_bitclk\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_2\ and \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_bitclk\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_bitclk_enable_pre\ and \uart_rpi:BUART:tx_state_2\));
+
+\uart_rpi:BUART:tx_state_1\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_1\ and not \uart_rpi:BUART:tx_state_2\ and \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_bitclk\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_2\ and not \uart_rpi:BUART:tx_bitclk\ and \uart_rpi:BUART:tx_state_1\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_bitclk_enable_pre\ and \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_0\ and not \uart_rpi:BUART:tx_counter_dp\ and \uart_rpi:BUART:tx_state_1\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_state_2\));
+
+\uart_rpi:BUART:tx_state_0\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_1\ and not \uart_rpi:BUART:tx_fifo_empty\ and \uart_rpi:BUART:tx_bitclk_enable_pre\ and \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_1\ and not \uart_rpi:BUART:tx_state_0\ and not \uart_rpi:BUART:tx_fifo_empty\ and not \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_bitclk_enable_pre\ and \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_2\ and not \uart_rpi:BUART:tx_bitclk\ and \uart_rpi:BUART:tx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_fifo_empty\ and \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_state_2\));
+
+\uart_rpi:BUART:txn\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_0\ and not \uart_rpi:BUART:tx_shift_out\ and not \uart_rpi:BUART:tx_state_2\ and not \uart_rpi:BUART:tx_counter_dp\ and \uart_rpi:BUART:tx_state_1\ and \uart_rpi:BUART:tx_bitclk\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_1\ and not \uart_rpi:BUART:tx_state_2\ and not \uart_rpi:BUART:tx_bitclk\ and \uart_rpi:BUART:tx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_state_1\ and not \uart_rpi:BUART:tx_shift_out\ and not \uart_rpi:BUART:tx_state_2\ and \uart_rpi:BUART:tx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:tx_bitclk\ and \uart_rpi:BUART:txn\ and \uart_rpi:BUART:tx_state_1\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:txn\ and \uart_rpi:BUART:tx_state_2\));
+
+\uart_rpi:BUART:tx_parity_bit\\D\ <= ((not \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:txn\ and \uart_rpi:BUART:tx_parity_bit\)
+	OR (not \uart_rpi:BUART:tx_state_1\ and not \uart_rpi:BUART:tx_state_0\ and \uart_rpi:BUART:tx_parity_bit\)
+	OR \uart_rpi:BUART:tx_parity_bit\);
+
+\uart_rpi:BUART:rx_counter_load\ <= ((not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_0\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:rx_state_2\));
+
+\uart_rpi:BUART:rx_bitclk_pre\ <= ((not \uart_rpi:BUART:rx_count_2\ and not \uart_rpi:BUART:rx_count_1\ and not \uart_rpi:BUART:rx_count_0\));
+
+\uart_rpi:BUART:rx_state_stop1_reg\\D\ <= (not \uart_rpi:BUART:rx_state_2\
+	OR not \uart_rpi:BUART:rx_state_3\
+	OR \uart_rpi:BUART:rx_state_0\
+	OR \uart_rpi:BUART:rx_state_1\);
+
+\uart_rpi:BUART:pollcount_1\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_count_2\ and not \uart_rpi:BUART:rx_count_1\ and not \uart_rpi:BUART:pollcount_1\ and Net_295 and \uart_rpi:BUART:pollcount_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_count_2\ and not \uart_rpi:BUART:rx_count_1\ and not \uart_rpi:BUART:pollcount_0\ and \uart_rpi:BUART:pollcount_1\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_count_2\ and not \uart_rpi:BUART:rx_count_1\ and not Net_295 and \uart_rpi:BUART:pollcount_1\));
+
+\uart_rpi:BUART:pollcount_0\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_count_2\ and not \uart_rpi:BUART:rx_count_1\ and not \uart_rpi:BUART:pollcount_0\ and Net_295)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_count_2\ and not \uart_rpi:BUART:rx_count_1\ and not Net_295 and \uart_rpi:BUART:pollcount_0\));
+
+\uart_rpi:BUART:rx_postpoll\ <= ((Net_295 and \uart_rpi:BUART:pollcount_0\)
+	OR \uart_rpi:BUART:pollcount_1\);
+
+\uart_rpi:BUART:rx_status_4\ <= ((\uart_rpi:BUART:rx_load_fifo\ and \uart_rpi:BUART:rx_fifofull\));
+
+\uart_rpi:BUART:rx_status_5\ <= ((\uart_rpi:BUART:rx_fifonotempty\ and \uart_rpi:BUART:rx_state_stop1_reg\));
+
+\uart_rpi:BUART:rx_stop_bit_error\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_0\ and not \uart_rpi:BUART:pollcount_1\ and not \uart_rpi:BUART:pollcount_0\ and \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_3\ and \uart_rpi:BUART:rx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_0\ and not \uart_rpi:BUART:pollcount_1\ and not Net_295 and \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_3\ and \uart_rpi:BUART:rx_state_2\));
+
+\uart_rpi:BUART:rx_load_fifo\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_0\ and not \uart_rpi:BUART:rx_state_2\ and \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_3\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:rx_state_2\ and not \uart_rpi:BUART:rx_count_6\ and not \uart_rpi:BUART:rx_count_4\ and \uart_rpi:BUART:rx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:rx_state_2\ and not \uart_rpi:BUART:rx_count_6\ and not \uart_rpi:BUART:rx_count_5\ and \uart_rpi:BUART:rx_state_0\));
+
+\uart_rpi:BUART:rx_state_3\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_2\ and not \uart_rpi:BUART:rx_count_6\ and not \uart_rpi:BUART:rx_count_4\ and \uart_rpi:BUART:rx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_2\ and not \uart_rpi:BUART:rx_count_6\ and not \uart_rpi:BUART:rx_count_5\ and \uart_rpi:BUART:rx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_3\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_1\ and \uart_rpi:BUART:rx_state_3\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_2\ and \uart_rpi:BUART:rx_state_3\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_0\ and \uart_rpi:BUART:rx_state_3\));
+
+\uart_rpi:BUART:rx_state_2\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_0\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:rx_state_2\ and not Net_295 and \uart_rpi:BUART:rx_last\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_0\ and not \uart_rpi:BUART:rx_state_2\ and \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_3\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:rx_count_6\ and not \uart_rpi:BUART:rx_count_4\ and \uart_rpi:BUART:rx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:rx_count_6\ and not \uart_rpi:BUART:rx_count_5\ and \uart_rpi:BUART:rx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_1\ and \uart_rpi:BUART:rx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_0\ and \uart_rpi:BUART:rx_state_2\));
+
+\uart_rpi:BUART:rx_state_1\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_1\));
+
+\uart_rpi:BUART:rx_state_0\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:pollcount_1\ and not \uart_rpi:BUART:pollcount_0\ and \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and not \uart_rpi:BUART:rx_state_1\ and not \uart_rpi:BUART:rx_state_3\ and not \uart_rpi:BUART:pollcount_1\ and not Net_295 and \uart_rpi:BUART:rx_bitclk_enable\ and \uart_rpi:BUART:rx_state_2\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_0\ and \uart_rpi:BUART:rx_count_5\ and \uart_rpi:BUART:rx_count_4\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_0\ and \uart_rpi:BUART:rx_count_6\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_0\ and \uart_rpi:BUART:rx_state_3\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_1\ and \uart_rpi:BUART:rx_state_0\)
+	OR (not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_state_0\ and \uart_rpi:BUART:rx_state_2\));
+
+\uart_rpi:BUART:rx_last\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and Net_295));
+
+\uart_rpi:BUART:rx_address_detected\\D\ <= ((not \uart_rpi:BUART:reset_reg\ and \uart_rpi:BUART:rx_address_detected\));
+
+\uart_pc:IntClock\:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
 		id=>"b0162966-0060-4af5-82d1-fcb491ad7619/be0a0e37-ad17-42ca-b5a1-1a654d736358",
 		source_clock_id=>"",
@@ -629,14 +1113,14 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		period=>"2170138888.88889",
 		is_direct=>'0',
 		is_digital=>'1')
-	PORT MAP(clock_out=>\UART_1:Net_9\,
+	PORT MAP(clock_out=>\uart_pc:Net_9\,
 		dig_domain_out=>open);
-\UART_1:BUART:ClkSync\:cy_psoc3_udb_clock_enable_v1_0
+\uart_pc:BUART:ClkSync\:cy_psoc3_udb_clock_enable_v1_0
 	GENERIC MAP(sync_mode=>'1')
-	PORT MAP(clock_in=>\UART_1:Net_9\,
+	PORT MAP(clock_in=>\uart_pc:Net_9\,
 		enable=>one,
-		clock_out=>\UART_1:BUART:clock_op\);
-\UART_1:BUART:sTX:TxShifter:u0\:cy_psoc3_dp
+		clock_out=>\uart_pc:BUART:clock_op\);
+\uart_pc:BUART:sTX:TxShifter:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000000000000000000000000000000000000000000000000000011000000000000000000000000000010010000000000000000000000000000000000000011111111000000001111111111111111000000000000000001000100111100000000000000001100",
 		d0_init=>"00000000",
 		d1_init=>"00000000",
@@ -658,9 +1142,9 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		f0_blk_sync=>'1',
 		f1_bus_sync=>'1',
 		f1_blk_sync=>'1')
-	PORT MAP(reset=>\UART_1:BUART:reset_reg\,
-		clk=>\UART_1:BUART:clock_op\,
-		cs_addr=>(\UART_1:BUART:tx_state_1\, \UART_1:BUART:tx_state_0\, \UART_1:BUART:tx_bitclk_enable_pre\),
+	PORT MAP(reset=>\uart_pc:BUART:reset_reg\,
+		clk=>\uart_pc:BUART:clock_op\,
+		cs_addr=>(\uart_pc:BUART:tx_state_1\, \uart_pc:BUART:tx_state_0\, \uart_pc:BUART:tx_bitclk_enable_pre\),
 		route_si=>zero,
 		route_ci=>zero,
 		f0_load=>zero,
@@ -678,9 +1162,9 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		ov_msb=>open,
 		co_msb=>open,
 		cmsb=>open,
-		so=>\UART_1:BUART:tx_shift_out\,
-		f0_bus_stat=>\UART_1:BUART:tx_fifo_notfull\,
-		f0_blk_stat=>\UART_1:BUART:tx_fifo_empty\,
+		so=>\uart_pc:BUART:tx_shift_out\,
+		f0_bus_stat=>\uart_pc:BUART:tx_fifo_notfull\,
+		f0_blk_stat=>\uart_pc:BUART:tx_fifo_empty\,
 		f1_bus_stat=>open,
 		f1_blk_stat=>open,
 		ce0_reg=>open,
@@ -722,7 +1206,7 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		pi=>(zero, zero, zero, zero,
 			zero, zero, zero, zero),
 		po=>open);
-\UART_1:BUART:sTX:sCLOCK:TxBitClkGen\:cy_psoc3_dp
+\uart_pc:BUART:sTX:sCLOCK:TxBitClkGen\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
 		d0_init=>"00000000",
 		d1_init=>"00000000",
@@ -744,9 +1228,9 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		f0_blk_sync=>'1',
 		f1_bus_sync=>'1',
 		f1_blk_sync=>'1')
-	PORT MAP(reset=>\UART_1:BUART:reset_reg\,
-		clk=>\UART_1:BUART:clock_op\,
-		cs_addr=>(zero, zero, \UART_1:BUART:counter_load_not\),
+	PORT MAP(reset=>\uart_pc:BUART:reset_reg\,
+		clk=>\uart_pc:BUART:clock_op\,
+		cs_addr=>(zero, zero, \uart_pc:BUART:counter_load_not\),
 		route_si=>zero,
 		route_ci=>zero,
 		f0_load=>zero,
@@ -769,11 +1253,11 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		f0_blk_stat=>open,
 		f1_bus_stat=>open,
 		f1_blk_stat=>open,
-		ce0_reg=>\UART_1:BUART:tx_bitclk_enable_pre\,
+		ce0_reg=>\uart_pc:BUART:tx_bitclk_enable_pre\,
 		cl0_reg=>open,
 		z0_reg=>open,
 		ff0_reg=>open,
-		ce1_reg=>\UART_1:BUART:tx_counter_dp\,
+		ce1_reg=>\uart_pc:BUART:tx_counter_dp\,
 		cl1_reg=>open,
 		z1_reg=>open,
 		ff1_reg=>open,
@@ -807,18 +1291,18 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		cfbo=>open,
 		pi=>(zero, zero, zero, zero,
 			zero, zero, zero, zero),
-		po=>(\UART_1:BUART:sc_out_7\, \UART_1:BUART:sc_out_6\, \UART_1:BUART:sc_out_5\, \UART_1:BUART:sc_out_4\,
-			\UART_1:BUART:sc_out_3\, \UART_1:BUART:sc_out_2\, \UART_1:BUART:sc_out_1\, \UART_1:BUART:sc_out_0\));
-\UART_1:BUART:sTX:TxSts\:cy_psoc3_statusi
+		po=>(\uart_pc:BUART:sc_out_7\, \uart_pc:BUART:sc_out_6\, \uart_pc:BUART:sc_out_5\, \uart_pc:BUART:sc_out_4\,
+			\uart_pc:BUART:sc_out_3\, \uart_pc:BUART:sc_out_2\, \uart_pc:BUART:sc_out_1\, \uart_pc:BUART:sc_out_0\));
+\uart_pc:BUART:sTX:TxSts\:cy_psoc3_statusi
 	GENERIC MAP(cy_force_order=>'1',
 		cy_md_select=>"0000001",
 		cy_int_mask=>"1111111")
-	PORT MAP(reset=>\UART_1:BUART:reset_reg\,
-		clock=>\UART_1:BUART:clock_op\,
-		status=>(zero, zero, zero, \UART_1:BUART:tx_fifo_notfull\,
-			\UART_1:BUART:tx_status_2\, \UART_1:BUART:tx_fifo_empty\, \UART_1:BUART:tx_status_0\),
-		interrupt=>\UART_1:BUART:tx_interrupt_out\);
-\UART_1:BUART:sRX:RxShifter:u0\:cy_psoc3_dp
+	PORT MAP(reset=>\uart_pc:BUART:reset_reg\,
+		clock=>\uart_pc:BUART:clock_op\,
+		status=>(zero, zero, zero, \uart_pc:BUART:tx_fifo_notfull\,
+			\uart_pc:BUART:tx_status_2\, \uart_pc:BUART:tx_fifo_empty\, \uart_pc:BUART:tx_status_0\),
+		interrupt=>\uart_pc:BUART:tx_interrupt_out\);
+\uart_pc:BUART:sRX:RxShifter:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000000000000000000000000000000000000000000000000001001000000000100000000000000010000001100000001000000000000000100100001000011111111000000001111111111111111101000000110001001000001111100000000000000001100",
 		d0_init=>"00000000",
 		d1_init=>"00000000",
@@ -840,31 +1324,31 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		f0_blk_sync=>'1',
 		f1_bus_sync=>'1',
 		f1_blk_sync=>'1')
-	PORT MAP(reset=>\UART_1:BUART:reset_reg\,
-		clk=>\UART_1:BUART:clock_op\,
-		cs_addr=>(\UART_1:BUART:rx_state_1\, \UART_1:BUART:rx_state_0\, \UART_1:BUART:rx_bitclk_enable\),
-		route_si=>\UART_1:BUART:rx_postpoll\,
+	PORT MAP(reset=>\uart_pc:BUART:reset_reg\,
+		clk=>\uart_pc:BUART:clock_op\,
+		cs_addr=>(\uart_pc:BUART:rx_state_1\, \uart_pc:BUART:rx_state_0\, \uart_pc:BUART:rx_bitclk_enable\),
+		route_si=>\uart_pc:BUART:rx_postpoll\,
 		route_ci=>zero,
-		f0_load=>\UART_1:BUART:rx_load_fifo\,
+		f0_load=>\uart_pc:BUART:rx_load_fifo\,
 		f1_load=>zero,
 		d0_load=>zero,
 		d1_load=>zero,
-		ce0=>\UART_1:BUART:rx_addressmatch1\,
+		ce0=>\uart_pc:BUART:rx_addressmatch1\,
 		cl0=>open,
 		z0=>open,
 		ff0=>open,
-		ce1=>\UART_1:BUART:rx_addressmatch2\,
+		ce1=>\uart_pc:BUART:rx_addressmatch2\,
 		cl1=>open,
 		z1=>open,
 		ff1=>open,
 		ov_msb=>open,
 		co_msb=>open,
 		cmsb=>open,
-		so=>\UART_1:BUART:hd_shift_out\,
-		f0_bus_stat=>\UART_1:BUART:rx_fifonotempty\,
-		f0_blk_stat=>\UART_1:BUART:rx_fifofull\,
-		f1_bus_stat=>\UART_1:BUART:hd_tx_fifo_notfull\,
-		f1_blk_stat=>\UART_1:BUART:hd_tx_fifo_empty\,
+		so=>\uart_pc:BUART:hd_shift_out\,
+		f0_bus_stat=>\uart_pc:BUART:rx_fifonotempty\,
+		f0_blk_stat=>\uart_pc:BUART:rx_fifofull\,
+		f1_bus_stat=>\uart_pc:BUART:hd_tx_fifo_notfull\,
+		f1_blk_stat=>\uart_pc:BUART:hd_tx_fifo_empty\,
 		ce0_reg=>open,
 		cl0_reg=>open,
 		z0_reg=>open,
@@ -904,29 +1388,29 @@ Net_24D <= ((not \UART_1:BUART:reset_reg\ and \UART_1:BUART:tx_state_2\)
 		pi=>(zero, zero, zero, zero,
 			zero, zero, zero, zero),
 		po=>open);
-\UART_1:BUART:sRX:RxBitCounter\:cy_psoc3_count7
+\uart_pc:BUART:sRX:RxBitCounter\:cy_psoc3_count7
 	GENERIC MAP(cy_period=>"1110010",
 		cy_init_value=>"0000000",
 		cy_route_ld=>'1',
 		cy_route_en=>'1',
 		cy_alt_mode=>'0')
-	PORT MAP(clock=>\UART_1:BUART:clock_op\,
-		reset=>\UART_1:BUART:reset_reg\,
-		load=>\UART_1:BUART:rx_counter_load\,
+	PORT MAP(clock=>\uart_pc:BUART:clock_op\,
+		reset=>\uart_pc:BUART:reset_reg\,
+		load=>\uart_pc:BUART:rx_counter_load\,
 		enable=>one,
-		count=>(\UART_1:BUART:rx_count_6\, \UART_1:BUART:rx_count_5\, \UART_1:BUART:rx_count_4\, \UART_1:BUART:rx_count_3\,
-			\UART_1:BUART:rx_count_2\, \UART_1:BUART:rx_count_1\, \UART_1:BUART:rx_count_0\),
-		tc=>\UART_1:BUART:rx_count7_tc\);
-\UART_1:BUART:sRX:RxSts\:cy_psoc3_statusi
+		count=>(MODIN4_6, MODIN4_5, MODIN4_4, MODIN4_3,
+			\uart_pc:BUART:rx_count_2\, \uart_pc:BUART:rx_count_1\, \uart_pc:BUART:rx_count_0\),
+		tc=>\uart_pc:BUART:rx_count7_tc\);
+\uart_pc:BUART:sRX:RxSts\:cy_psoc3_statusi
 	GENERIC MAP(cy_force_order=>'1',
 		cy_md_select=>"1011111",
 		cy_int_mask=>"1111111")
-	PORT MAP(reset=>\UART_1:BUART:reset_reg\,
-		clock=>\UART_1:BUART:clock_op\,
-		status=>(zero, \UART_1:BUART:rx_status_5\, \UART_1:BUART:rx_status_4\, \UART_1:BUART:rx_status_3\,
-			\UART_1:BUART:rx_status_2\, zero, zero),
+	PORT MAP(reset=>\uart_pc:BUART:reset_reg\,
+		clock=>\uart_pc:BUART:clock_op\,
+		status=>(zero, \uart_pc:BUART:rx_status_5\, \uart_pc:BUART:rx_status_4\, \uart_pc:BUART:rx_status_3\,
+			\uart_pc:BUART:rx_status_2\, zero, zero),
 		interrupt=>Net_14);
-Rx_1:cy_psoc3_pins_v1_10
+rx_pc:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"1425177d-0d0e-4468-8bcc-e638e5509a9b",
 		drive_mode=>"001",
 		ibuf_enabled=>"1",
@@ -986,8 +1470,8 @@ Rx_1:cy_psoc3_pins_v1_10
 		y=>(zero),
 		fb=>Net_28,
 		analog=>(open),
-		io=>(tmpIO_0__Rx_1_net_0),
-		siovref=>(tmpSIOVREF__Rx_1_net_0),
+		io=>(tmpIO_0__rx_pc_net_0),
+		siovref=>(tmpSIOVREF__rx_pc_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>one,
@@ -995,8 +1479,8 @@ Rx_1:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>one,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__Rx_1_net_0);
-Tx_1:cy_psoc3_pins_v1_10
+		interrupt=>tmpINTERRUPT_0__rx_pc_net_0);
+tx_pc:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"ed092b9b-d398-4703-be89-cebf998501f6",
 		drive_mode=>"110",
 		ibuf_enabled=>"1",
@@ -1054,10 +1538,10 @@ Tx_1:cy_psoc3_pins_v1_10
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(one),
 		y=>Net_29,
-		fb=>(tmpFB_0__Tx_1_net_0),
+		fb=>(tmpFB_0__tx_pc_net_0),
 		analog=>(open),
-		io=>(tmpIO_0__Tx_1_net_0),
-		siovref=>(tmpSIOVREF__Tx_1_net_0),
+		io=>(tmpIO_0__tx_pc_net_0),
+		siovref=>(tmpSIOVREF__tx_pc_net_0),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>one,
@@ -1065,8 +1549,8 @@ Tx_1:cy_psoc3_pins_v1_10
 		out_clock=>zero,
 		out_clock_en=>one,
 		out_reset=>zero,
-		interrupt=>tmpINTERRUPT_0__Tx_1_net_0);
-isr_uart_rx:cy_isr_v1_0
+		interrupt=>tmpINTERRUPT_0__tx_pc_net_0);
+isr_uart_pc_rx:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_14);
@@ -1166,16 +1650,16 @@ isr_check_weight_timer:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_253);
-\ADC_SAR_1:cy_analog_virtualmux_3_connect\:cy_connect_v1_0
+\weight_adc:cy_analog_virtualmux_3_connect\:cy_connect_v1_0
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
-	PORT MAP(signal1=>\ADC_SAR_1:Net_248\,
-		signal2=>\ADC_SAR_1:Net_368\);
-\ADC_SAR_1:IRQ\:cy_isr_v1_0
+	PORT MAP(signal1=>\weight_adc:Net_248\,
+		signal2=>\weight_adc:Net_368\);
+\weight_adc:IRQ\:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10",
 		is_nmi=>'0')
 	PORT MAP(int_signal=>Net_261);
-\ADC_SAR_1:theACLK\:cy_clock_v1_0
+\weight_adc:theACLK\:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
 		id=>"47f040b0-35b6-4041-aa6c-0dba713bf8c3/696a0979-21fc-4185-bf38-6c79febcde7a",
 		source_clock_id=>"",
@@ -1183,47 +1667,47 @@ isr_check_weight_timer:cy_isr_v1_0
 		period=>"555555555.555556",
 		is_direct=>'0',
 		is_digital=>'0')
-	PORT MAP(clock_out=>\ADC_SAR_1:Net_385\,
-		dig_domain_out=>\ADC_SAR_1:Net_381\);
-\ADC_SAR_1:ADC_SAR\:cy_psoc5_sar_v2_0
+	PORT MAP(clock_out=>\weight_adc:Net_385\,
+		dig_domain_out=>\weight_adc:Net_381\);
+\weight_adc:ADC_SAR\:cy_psoc5_sar_v2_0
 	GENERIC MAP(cy_registers=>"")
 	PORT MAP(vplus=>Net_258,
-		vminus=>\ADC_SAR_1:Net_126\,
-		ext_pin=>\ADC_SAR_1:Net_215\,
-		vrefhi_out=>\ADC_SAR_1:Net_257\,
-		vref=>\ADC_SAR_1:Net_248\,
-		clock=>\ADC_SAR_1:Net_385\,
-		pump_clock=>\ADC_SAR_1:Net_385\,
+		vminus=>\weight_adc:Net_126\,
+		ext_pin=>\weight_adc:Net_215\,
+		vrefhi_out=>\weight_adc:Net_257\,
+		vref=>\weight_adc:Net_248\,
+		clock=>\weight_adc:Net_385\,
+		pump_clock=>\weight_adc:Net_385\,
 		sof_udb=>zero,
 		clk_udb=>zero,
 		vp_ctl_udb=>(zero, zero, zero, zero),
 		vn_ctl_udb=>(zero, zero, zero, zero),
-		irq=>\ADC_SAR_1:Net_252\,
+		irq=>\weight_adc:Net_252\,
 		next_out=>Net_264,
-		data_out=>(\ADC_SAR_1:Net_207_11\, \ADC_SAR_1:Net_207_10\, \ADC_SAR_1:Net_207_9\, \ADC_SAR_1:Net_207_8\,
-			\ADC_SAR_1:Net_207_7\, \ADC_SAR_1:Net_207_6\, \ADC_SAR_1:Net_207_5\, \ADC_SAR_1:Net_207_4\,
-			\ADC_SAR_1:Net_207_3\, \ADC_SAR_1:Net_207_2\, \ADC_SAR_1:Net_207_1\, \ADC_SAR_1:Net_207_0\),
+		data_out=>(\weight_adc:Net_207_11\, \weight_adc:Net_207_10\, \weight_adc:Net_207_9\, \weight_adc:Net_207_8\,
+			\weight_adc:Net_207_7\, \weight_adc:Net_207_6\, \weight_adc:Net_207_5\, \weight_adc:Net_207_4\,
+			\weight_adc:Net_207_3\, \weight_adc:Net_207_2\, \weight_adc:Net_207_1\, \weight_adc:Net_207_0\),
 		eof_udb=>Net_261);
-\ADC_SAR_1:cy_analog_virtualmux_2_connect\:cy_connect_v1_0
+\weight_adc:cy_analog_virtualmux_2_connect\:cy_connect_v1_0
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
-	PORT MAP(signal1=>\ADC_SAR_1:Net_215\,
-		signal2=>\ADC_SAR_1:Net_267\);
-\ADC_SAR_1:cy_analog_virtualmux_1_connect\:cy_connect_v1_0
+	PORT MAP(signal1=>\weight_adc:Net_215\,
+		signal2=>\weight_adc:Net_267\);
+\weight_adc:cy_analog_virtualmux_1_connect\:cy_connect_v1_0
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
-	PORT MAP(signal1=>\ADC_SAR_1:Net_126\,
-		signal2=>\ADC_SAR_1:Net_149\);
-\ADC_SAR_1:noconnect\:cy_analog_noconnect_v1_0
-	PORT MAP(noconnect=>\ADC_SAR_1:Net_209\);
-\ADC_SAR_1:cy_analog_virtualmux_4_connect\:cy_connect_v1_0
+	PORT MAP(signal1=>\weight_adc:Net_126\,
+		signal2=>\weight_adc:Net_149\);
+\weight_adc:noconnect\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\weight_adc:Net_209\);
+\weight_adc:cy_analog_virtualmux_4_connect\:cy_connect_v1_0
 	GENERIC MAP(sig_width=>1,
 		is_net_join=>'0')
-	PORT MAP(signal1=>\ADC_SAR_1:Net_257\,
-		signal2=>\ADC_SAR_1:Net_149\);
-\ADC_SAR_1:cy_analog_noconnect_1\:cy_analog_noconnect_v1_0
-	PORT MAP(noconnect=>\ADC_SAR_1:Net_255\);
-\ADC_SAR_1:ExtVref\:cy_psoc3_pins_v1_10
+	PORT MAP(signal1=>\weight_adc:Net_257\,
+		signal2=>\weight_adc:Net_149\);
+\weight_adc:cy_analog_noconnect_1\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\weight_adc:Net_255\);
+\weight_adc:ExtVref\:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"47f040b0-35b6-4041-aa6c-0dba713bf8c3/7e0d1a6c-1235-4546-a71b-ea6e528924f8",
 		drive_mode=>"000",
 		ibuf_enabled=>"0",
@@ -1281,10 +1765,10 @@ isr_check_weight_timer:cy_isr_v1_0
 		input_buffer_sel=>"00")
 	PORT MAP(oe=>(one),
 		y=>(zero),
-		fb=>(\ADC_SAR_1:tmpFB_0__ExtVref_net_0\),
-		analog=>\ADC_SAR_1:Net_267\,
-		io=>(\ADC_SAR_1:tmpIO_0__ExtVref_net_0\),
-		siovref=>(\ADC_SAR_1:tmpSIOVREF__ExtVref_net_0\),
+		fb=>(\weight_adc:tmpFB_0__ExtVref_net_0\),
+		analog=>\weight_adc:Net_267\,
+		io=>(\weight_adc:tmpIO_0__ExtVref_net_0\),
+		siovref=>(\weight_adc:tmpSIOVREF__ExtVref_net_0\),
 		annotation=>(open),
 		in_clock=>zero,
 		in_clock_en=>one,
@@ -1292,10 +1776,10 @@ isr_check_weight_timer:cy_isr_v1_0
 		out_clock=>zero,
 		out_clock_en=>one,
 		out_reset=>zero,
-		interrupt=>\ADC_SAR_1:tmpINTERRUPT_0__ExtVref_net_0\);
-\ADC_SAR_1:noconnect_1\:cy_analog_noconnect_v1_0
-	PORT MAP(noconnect=>\ADC_SAR_1:Net_368\);
-AMux:cy_psoc3_amux_v1_0
+		interrupt=>\weight_adc:tmpINTERRUPT_0__ExtVref_net_0\);
+\weight_adc:noconnect_1\:cy_analog_noconnect_v1_0
+	PORT MAP(noconnect=>\weight_adc:Net_368\);
+weight_selector:cy_psoc3_amux_v1_0
 	GENERIC MAP(cy_registers=>"",
 		muxin_width=>3,
 		hw_control=>'0',
@@ -1726,121 +2210,686 @@ gpio_pump_2:cy_psoc3_pins_v1_10
 		out_clock_en=>one,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__gpio_pump_2_net_0);
-\UART_1:BUART:reset_reg\:cy_dff
+\uart_rpi:IntClock\:cy_clock_v1_0
+	GENERIC MAP(cy_registers=>"",
+		id=>"645cd761-e02d-4a62-9d68-a1b0ebb7c6a4/be0a0e37-ad17-42ca-b5a1-1a654d736358",
+		source_clock_id=>"",
+		divisor=>0,
+		period=>"13020833333.3333",
+		is_direct=>'0',
+		is_digital=>'1')
+	PORT MAP(clock_out=>\uart_rpi:Net_9\,
+		dig_domain_out=>open);
+\uart_rpi:BUART:ClkSync\:cy_psoc3_udb_clock_enable_v1_0
+	GENERIC MAP(sync_mode=>'1')
+	PORT MAP(clock_in=>\uart_rpi:Net_9\,
+		enable=>one,
+		clock_out=>\uart_rpi:BUART:clock_op\);
+\uart_rpi:BUART:sTX:TxShifter:u0\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000000000000000000000000000000000000000000000000000000011000000000000000000000000000010010000000000000000000000000000000000000011111111000000001111111111111111000000000000000001000100111100000000000000001100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>\uart_rpi:BUART:reset_reg\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		cs_addr=>(\uart_rpi:BUART:tx_state_1\, \uart_rpi:BUART:tx_state_0\, \uart_rpi:BUART:tx_bitclk_enable_pre\),
+		route_si=>zero,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>zero,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\uart_rpi:BUART:tx_shift_out\,
+		f0_bus_stat=>\uart_rpi:BUART:tx_fifo_notfull\,
+		f0_blk_stat=>\uart_rpi:BUART:tx_fifo_empty\,
+		f1_bus_stat=>open,
+		f1_blk_stat=>open,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>open,
+		sir=>zero,
+		sor=>open,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>open,
+		cli=>(zero, zero),
+		clo=>open,
+		zi=>(zero, zero),
+		zo=>open,
+		fi=>(zero, zero),
+		fo=>open,
+		capi=>(zero, zero),
+		capo=>open,
+		cfbi=>zero,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\uart_rpi:BUART:sTX:sCLOCK:TxBitClkGen\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>\uart_rpi:BUART:reset_reg\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		cs_addr=>(zero, zero, \uart_rpi:BUART:counter_load_not\),
+		route_si=>zero,
+		route_ci=>zero,
+		f0_load=>zero,
+		f1_load=>zero,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>open,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>open,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>open,
+		f0_bus_stat=>open,
+		f0_blk_stat=>open,
+		f1_bus_stat=>open,
+		f1_blk_stat=>open,
+		ce0_reg=>\uart_rpi:BUART:tx_bitclk_enable_pre\,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>\uart_rpi:BUART:tx_counter_dp\,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>open,
+		sir=>zero,
+		sor=>open,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>open,
+		cli=>(zero, zero),
+		clo=>open,
+		zi=>(zero, zero),
+		zo=>open,
+		fi=>(zero, zero),
+		fo=>open,
+		capi=>(zero, zero),
+		capo=>open,
+		cfbi=>zero,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>(\uart_rpi:BUART:sc_out_7\, \uart_rpi:BUART:sc_out_6\, \uart_rpi:BUART:sc_out_5\, \uart_rpi:BUART:sc_out_4\,
+			\uart_rpi:BUART:sc_out_3\, \uart_rpi:BUART:sc_out_2\, \uart_rpi:BUART:sc_out_1\, \uart_rpi:BUART:sc_out_0\));
+\uart_rpi:BUART:sTX:TxSts\:cy_psoc3_statusi
+	GENERIC MAP(cy_force_order=>'1',
+		cy_md_select=>"0000001",
+		cy_int_mask=>"1111111")
+	PORT MAP(reset=>\uart_rpi:BUART:reset_reg\,
+		clock=>\uart_rpi:BUART:clock_op\,
+		status=>(zero, zero, zero, \uart_rpi:BUART:tx_fifo_notfull\,
+			\uart_rpi:BUART:tx_status_2\, \uart_rpi:BUART:tx_fifo_empty\, \uart_rpi:BUART:tx_status_0\),
+		interrupt=>\uart_rpi:BUART:tx_interrupt_out\);
+\uart_rpi:BUART:sRX:RxShifter:u0\:cy_psoc3_dp
+	GENERIC MAP(cy_dpconfig=>"0000000000000000000000000000000000000000000000000000001001000000000100000000000000010000001100000001000000000000000100100001000011111111000000001111111111111111101000000110001001000001111100000000000000001100",
+		d0_init=>"00000000",
+		d1_init=>"00000000",
+		a0_init=>"00000000",
+		a1_init=>"00000000",
+		ce0_sync=>'1',
+		cl0_sync=>'1',
+		z0_sync=>'1',
+		ff0_sync=>'1',
+		ce1_sync=>'1',
+		cl1_sync=>'1',
+		z1_sync=>'1',
+		ff1_sync=>'1',
+		ov_msb_sync=>'1',
+		co_msb_sync=>'1',
+		cmsb_sync=>'1',
+		so_sync=>'1',
+		f0_bus_sync=>'1',
+		f0_blk_sync=>'1',
+		f1_bus_sync=>'1',
+		f1_blk_sync=>'1')
+	PORT MAP(reset=>\uart_rpi:BUART:reset_reg\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		cs_addr=>(\uart_rpi:BUART:rx_state_1\, \uart_rpi:BUART:rx_state_0\, \uart_rpi:BUART:rx_bitclk_enable\),
+		route_si=>\uart_rpi:BUART:rx_postpoll\,
+		route_ci=>zero,
+		f0_load=>\uart_rpi:BUART:rx_load_fifo\,
+		f1_load=>zero,
+		d0_load=>zero,
+		d1_load=>zero,
+		ce0=>\uart_rpi:BUART:rx_addressmatch1\,
+		cl0=>open,
+		z0=>open,
+		ff0=>open,
+		ce1=>\uart_rpi:BUART:rx_addressmatch2\,
+		cl1=>open,
+		z1=>open,
+		ff1=>open,
+		ov_msb=>open,
+		co_msb=>open,
+		cmsb=>open,
+		so=>\uart_rpi:BUART:hd_shift_out\,
+		f0_bus_stat=>\uart_rpi:BUART:rx_fifonotempty\,
+		f0_blk_stat=>\uart_rpi:BUART:rx_fifofull\,
+		f1_bus_stat=>\uart_rpi:BUART:hd_tx_fifo_notfull\,
+		f1_blk_stat=>\uart_rpi:BUART:hd_tx_fifo_empty\,
+		ce0_reg=>open,
+		cl0_reg=>open,
+		z0_reg=>open,
+		ff0_reg=>open,
+		ce1_reg=>open,
+		cl1_reg=>open,
+		z1_reg=>open,
+		ff1_reg=>open,
+		ov_msb_reg=>open,
+		co_msb_reg=>open,
+		cmsb_reg=>open,
+		so_reg=>open,
+		f0_bus_stat_reg=>open,
+		f0_blk_stat_reg=>open,
+		f1_bus_stat_reg=>open,
+		f1_blk_stat_reg=>open,
+		ci=>zero,
+		co=>open,
+		sir=>zero,
+		sor=>open,
+		sil=>zero,
+		sol=>open,
+		msbi=>zero,
+		msbo=>open,
+		cei=>(zero, zero),
+		ceo=>open,
+		cli=>(zero, zero),
+		clo=>open,
+		zi=>(zero, zero),
+		zo=>open,
+		fi=>(zero, zero),
+		fo=>open,
+		capi=>(zero, zero),
+		capo=>open,
+		cfbi=>zero,
+		cfbo=>open,
+		pi=>(zero, zero, zero, zero,
+			zero, zero, zero, zero),
+		po=>open);
+\uart_rpi:BUART:sRX:RxBitCounter\:cy_psoc3_count7
+	GENERIC MAP(cy_period=>"1110010",
+		cy_init_value=>"0000000",
+		cy_route_ld=>'1',
+		cy_route_en=>'1',
+		cy_alt_mode=>'0')
+	PORT MAP(clock=>\uart_rpi:BUART:clock_op\,
+		reset=>\uart_rpi:BUART:reset_reg\,
+		load=>\uart_rpi:BUART:rx_counter_load\,
+		enable=>one,
+		count=>(\uart_rpi:BUART:rx_count_6\, \uart_rpi:BUART:rx_count_5\, \uart_rpi:BUART:rx_count_4\, \uart_rpi:BUART:rx_count_3\,
+			\uart_rpi:BUART:rx_count_2\, \uart_rpi:BUART:rx_count_1\, \uart_rpi:BUART:rx_count_0\),
+		tc=>\uart_rpi:BUART:rx_count7_tc\);
+\uart_rpi:BUART:sRX:RxSts\:cy_psoc3_statusi
+	GENERIC MAP(cy_force_order=>'1',
+		cy_md_select=>"1011111",
+		cy_int_mask=>"1111111")
+	PORT MAP(reset=>\uart_rpi:BUART:reset_reg\,
+		clock=>\uart_rpi:BUART:clock_op\,
+		status=>(zero, \uart_rpi:BUART:rx_status_5\, \uart_rpi:BUART:rx_status_4\, \uart_rpi:BUART:rx_status_3\,
+			\uart_rpi:BUART:rx_status_2\, zero, zero),
+		interrupt=>Net_298);
+rx_rpi:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"6fbd8c4e-d926-4a27-b547-4907ffde3889",
+		drive_mode=>"001",
+		ibuf_enabled=>"1",
+		init_dr_st=>"0",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"0",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"I",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"00",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(one),
+		y=>(zero),
+		fb=>Net_295,
+		analog=>(open),
+		io=>(tmpIO_0__rx_rpi_net_0),
+		siovref=>(tmpSIOVREF__rx_rpi_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>one,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>one,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__rx_rpi_net_0);
+tx_rpi:cy_psoc3_pins_v1_10
+	GENERIC MAP(id=>"37716566-bd3d-47aa-9f45-75918a9964b4",
+		drive_mode=>"110",
+		ibuf_enabled=>"1",
+		init_dr_st=>"1",
+		input_sync=>"1",
+		input_clk_en=>'0',
+		input_sync_mode=>"0",
+		intr_mode=>"00",
+		invert_in_clock=>'0',
+		invert_in_clock_en=>'0',
+		invert_in_reset=>'0',
+		invert_out_clock=>'0',
+		invert_out_clock_en=>'0',
+		invert_out_reset=>'0',
+		io_voltage=>"",
+		layout_mode=>"CONTIGUOUS",
+		output_conn=>"1",
+		output_sync=>"0",
+		output_clk_en=>'0',
+		output_mode=>"0",
+		output_reset=>'0',
+		output_clock_mode=>"0",
+		oe_sync=>"0",
+		oe_conn=>"0",
+		oe_reset=>'0',
+		pin_aliases=>"",
+		pin_mode=>"O",
+		por_state=>4,
+		sio_group_cnt=>0,
+		sio_hifreq=>"00000000",
+		sio_hyst=>"1",
+		sio_ibuf=>"00000000",
+		sio_info=>"00",
+		sio_obuf=>"00000000",
+		sio_refsel=>"00000000",
+		sio_vtrip=>"00000000",
+		sio_vohsel=>"00000000",
+		slew_rate=>"0",
+		spanning=>'0',
+		sw_only=>'0',
+		vtrip=>"10",
+		width=>1,
+		port_alias_required=>'0',
+		port_alias_group=>"",
+		use_annotation=>"0",
+		pa_in_clock=>-1,
+		pa_in_clock_en=>-1,
+		pa_in_reset=>-1,
+		pa_out_clock=>-1,
+		pa_out_clock_en=>-1,
+		pa_out_reset=>-1,
+		ovt_needed=>"0",
+		ovt_slew_control=>"00",
+		ovt_hyst_trim=>"0",
+		input_buffer_sel=>"00")
+	PORT MAP(oe=>(one),
+		y=>Net_299,
+		fb=>(tmpFB_0__tx_rpi_net_0),
+		analog=>(open),
+		io=>(tmpIO_0__tx_rpi_net_0),
+		siovref=>(tmpSIOVREF__tx_rpi_net_0),
+		annotation=>(open),
+		in_clock=>zero,
+		in_clock_en=>one,
+		in_reset=>zero,
+		out_clock=>zero,
+		out_clock_en=>one,
+		out_reset=>zero,
+		interrupt=>tmpINTERRUPT_0__tx_rpi_net_0);
+isr_uart_rpi_rx:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_298);
+\uart_pc:BUART:reset_reg\:cy_dff
 	PORT MAP(d=>zero,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:reset_reg\);
-\UART_1:BUART:txn\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:txn\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:txn\);
-\UART_1:BUART:tx_state_1\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:tx_state_1\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:tx_state_1\);
-\UART_1:BUART:tx_state_0\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:tx_state_0\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:tx_state_0\);
-\UART_1:BUART:tx_state_2\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:tx_state_2\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:tx_state_2\);
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:reset_reg\);
+\uart_pc:BUART:txn\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:txn\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:txn\);
+\uart_pc:BUART:tx_state_1\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:tx_state_1\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:tx_state_1\);
+\uart_pc:BUART:tx_state_0\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:tx_state_0\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:tx_state_0\);
+\uart_pc:BUART:tx_state_2\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:tx_state_2\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:tx_state_2\);
 Net_24:cy_dff
 	PORT MAP(d=>Net_24D,
-		clk=>\UART_1:BUART:clock_op\,
+		clk=>\uart_pc:BUART:clock_op\,
 		q=>Net_24);
-\UART_1:BUART:tx_bitclk\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:tx_bitclk\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:tx_bitclk\);
-\UART_1:BUART:tx_ctrl_mark_last\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:tx_ctrl_mark_last\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:tx_ctrl_mark_last\);
-\UART_1:BUART:tx_mark\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:tx_mark\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:tx_mark\);
-\UART_1:BUART:tx_parity_bit\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:tx_parity_bit\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:tx_parity_bit\);
-\UART_1:BUART:rx_state_1\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_state_1\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_state_1\);
-\UART_1:BUART:rx_state_0\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_state_0\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_state_0\);
-\UART_1:BUART:rx_load_fifo\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_load_fifo\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_load_fifo\);
-\UART_1:BUART:rx_state_3\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_state_3\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_state_3\);
-\UART_1:BUART:rx_state_2\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_state_2\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_state_2\);
-\UART_1:BUART:rx_bitclk\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_bitclk_pre\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_bitclk_enable\);
-\UART_1:BUART:rx_state_stop1_reg\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_state_stop1_reg\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_state_stop1_reg\);
-\UART_1:BUART:pollcount_1\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:pollcount_1\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:pollcount_1\);
-\UART_1:BUART:pollcount_0\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:pollcount_0\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:pollcount_0\);
-\UART_1:BUART:rx_markspace_status\:cy_dff
+\uart_pc:BUART:tx_bitclk\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:tx_bitclk\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:tx_bitclk\);
+\uart_pc:BUART:tx_ctrl_mark_last\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:tx_ctrl_mark_last\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:tx_ctrl_mark_last\);
+\uart_pc:BUART:tx_mark\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:tx_mark\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:tx_mark\);
+\uart_pc:BUART:tx_parity_bit\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:tx_parity_bit\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:tx_parity_bit\);
+\uart_pc:BUART:rx_state_1\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_state_1\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_state_1\);
+\uart_pc:BUART:rx_state_0\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_state_0\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_state_0\);
+\uart_pc:BUART:rx_load_fifo\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_load_fifo\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_load_fifo\);
+\uart_pc:BUART:rx_state_3\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_state_3\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_state_3\);
+\uart_pc:BUART:rx_state_2\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_state_2\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_state_2\);
+\uart_pc:BUART:rx_bitclk\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_bitclk_pre\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_bitclk_enable\);
+\uart_pc:BUART:rx_state_stop1_reg\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_state_stop1_reg\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_state_stop1_reg\);
+\uart_pc:BUART:pollcount_1\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:pollcount_1\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>MODIN1_1);
+\uart_pc:BUART:pollcount_0\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:pollcount_0\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>MODIN1_0);
+\uart_pc:BUART:rx_markspace_status\:cy_dff
 	PORT MAP(d=>zero,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_markspace_status\);
-\UART_1:BUART:rx_parity_error_status\:cy_dff
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_markspace_status\);
+\uart_pc:BUART:rx_parity_error_status\:cy_dff
 	PORT MAP(d=>zero,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_status_2\);
-\UART_1:BUART:rx_stop_bit_error\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_stop_bit_error\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_status_3\);
-\UART_1:BUART:rx_addr_match_status\:cy_dff
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_status_2\);
+\uart_pc:BUART:rx_stop_bit_error\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_stop_bit_error\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_status_3\);
+\uart_pc:BUART:rx_addr_match_status\:cy_dff
 	PORT MAP(d=>zero,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_addr_match_status\);
-\UART_1:BUART:rx_markspace_pre\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_markspace_pre\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_markspace_pre\);
-\UART_1:BUART:rx_parity_error_pre\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_parity_error_pre\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_parity_error_pre\);
-\UART_1:BUART:rx_break_status\:cy_dff
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_addr_match_status\);
+\uart_pc:BUART:rx_markspace_pre\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_markspace_pre\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_markspace_pre\);
+\uart_pc:BUART:rx_parity_error_pre\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_parity_error_pre\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_parity_error_pre\);
+\uart_pc:BUART:rx_break_status\:cy_dff
 	PORT MAP(d=>zero,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_break_status\);
-\UART_1:BUART:rx_address_detected\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_address_detected\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_address_detected\);
-\UART_1:BUART:rx_last\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_last\\D\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_last\);
-\UART_1:BUART:rx_parity_bit\:cy_dff
-	PORT MAP(d=>\UART_1:BUART:rx_parity_bit\,
-		clk=>\UART_1:BUART:clock_op\,
-		q=>\UART_1:BUART:rx_parity_bit\);
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_break_status\);
+\uart_pc:BUART:rx_address_detected\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_address_detected\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_address_detected\);
+\uart_pc:BUART:rx_last\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_last\\D\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_last\);
+\uart_pc:BUART:rx_parity_bit\:cy_dff
+	PORT MAP(d=>\uart_pc:BUART:rx_parity_bit\,
+		clk=>\uart_pc:BUART:clock_op\,
+		q=>\uart_pc:BUART:rx_parity_bit\);
+\uart_rpi:BUART:reset_reg\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:reset_reg\);
+\uart_rpi:BUART:txn\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:txn\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:txn\);
+\uart_rpi:BUART:tx_state_1\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:tx_state_1\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:tx_state_1\);
+\uart_rpi:BUART:tx_state_0\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:tx_state_0\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:tx_state_0\);
+\uart_rpi:BUART:tx_state_2\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:tx_state_2\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:tx_state_2\);
+Net_302:cy_dff
+	PORT MAP(d=>Net_302D,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>Net_302);
+\uart_rpi:BUART:tx_bitclk\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:tx_bitclk\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:tx_bitclk\);
+\uart_rpi:BUART:tx_ctrl_mark_last\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:tx_ctrl_mark_last\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:tx_ctrl_mark_last\);
+\uart_rpi:BUART:tx_mark\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:tx_mark\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:tx_mark\);
+\uart_rpi:BUART:tx_parity_bit\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:tx_parity_bit\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:tx_parity_bit\);
+\uart_rpi:BUART:rx_state_1\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_state_1\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_state_1\);
+\uart_rpi:BUART:rx_state_0\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_state_0\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_state_0\);
+\uart_rpi:BUART:rx_load_fifo\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_load_fifo\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_load_fifo\);
+\uart_rpi:BUART:rx_state_3\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_state_3\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_state_3\);
+\uart_rpi:BUART:rx_state_2\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_state_2\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_state_2\);
+\uart_rpi:BUART:rx_bitclk\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_bitclk_pre\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_bitclk_enable\);
+\uart_rpi:BUART:rx_state_stop1_reg\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_state_stop1_reg\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_state_stop1_reg\);
+\uart_rpi:BUART:pollcount_1\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:pollcount_1\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:pollcount_1\);
+\uart_rpi:BUART:pollcount_0\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:pollcount_0\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:pollcount_0\);
+\uart_rpi:BUART:rx_markspace_status\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_markspace_status\);
+\uart_rpi:BUART:rx_parity_error_status\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_status_2\);
+\uart_rpi:BUART:rx_stop_bit_error\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_stop_bit_error\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_status_3\);
+\uart_rpi:BUART:rx_addr_match_status\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_addr_match_status\);
+\uart_rpi:BUART:rx_markspace_pre\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_markspace_pre\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_markspace_pre\);
+\uart_rpi:BUART:rx_parity_error_pre\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_parity_error_pre\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_parity_error_pre\);
+\uart_rpi:BUART:rx_break_status\:cy_dff
+	PORT MAP(d=>zero,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_break_status\);
+\uart_rpi:BUART:rx_address_detected\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_address_detected\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_address_detected\);
+\uart_rpi:BUART:rx_last\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_last\\D\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_last\);
+\uart_rpi:BUART:rx_parity_bit\:cy_dff
+	PORT MAP(d=>\uart_rpi:BUART:rx_parity_bit\,
+		clk=>\uart_rpi:BUART:clock_op\,
+		q=>\uart_rpi:BUART:rx_parity_bit\);
 
 END R_T_L;

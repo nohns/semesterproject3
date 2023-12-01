@@ -24,19 +24,16 @@ void pump_fluid(enum dmc_pump pump)
     {
     case PUMP_1:
         {
-            //set_period(PUMP_TIMER_1, timer_calc);
             gpio_pump_1_Write(1);
             break;
         }
    case PUMP_2:
         {
-            //set_period(PUMP_TIMER_2, timer_calc);
             gpio_pump_2_Write(1);
             break;
         }
     case PUMP_3:
         {
-            //set_period(PUMP_TIMER_3, timer_calc);
             gpio_pump_3_Write(1);
             break;
         } 

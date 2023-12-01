@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 1
 
 
    1              		.syntax unified
@@ -26,7 +26,7 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 1
   23              		.thumb_func
   24              		.type	pump_fluid, %function
   25              	pump_fluid:
-  26              	.LFB1:
+  26              	.LFB64:
   27              		.file 1 "pump_control.c"
    1:pump_control.c **** /* ========================================
    2:pump_control.c ****  *
@@ -40,14 +40,14 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 1
   10:pump_control.c ****  * ========================================
   11:pump_control.c **** */
   12:pump_control.c **** #include "pump_control.h"
-  13:pump_control.c **** 
+  13:pump_control.c **** #include "project.h"
   14:pump_control.c **** 
-  15:pump_control.c **** //Times a million
-  16:pump_control.c **** static uint32_t period_pr_cL = 2400;
-  17:pump_control.c **** 
+  15:pump_control.c **** 
+  16:pump_control.c **** //Times a million
+  17:pump_control.c **** static uint32_t period_pr_cL = 2400;
   18:pump_control.c **** 
   19:pump_control.c **** //Used for calculating CL amount of liquid, to a timers period.
-  20:pump_control.c **** void pump_fluid(enum dmc_pump pump, uint8_t amount_in_cl)
+  20:pump_control.c **** void pump_fluid(enum dmc_pump pump)
   21:pump_control.c **** {
   28              		.loc 1 21 0
   29              		.cfi_startproc
@@ -58,766 +58,1096 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 1
   34              		.cfi_def_cfa_offset 8
   35              		.cfi_offset 3, -8
   36              		.cfi_offset 14, -4
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 2
 
 
-  22:pump_control.c ****     uint16_t timer_calc = amount_in_cl*2400;
-  37              		.loc 1 22 0
-  38 0002 01EB8101 		add	r1, r1, r1, lsl #2
-  39              	.LVL1:
-  40 0006 C1EB0111 		rsb	r1, r1, r1, lsl #4
-  41 000a 4B01     		lsls	r3, r1, #5
-  42 000c 99B2     		uxth	r1, r3
-  43              	.LVL2:
+  22:pump_control.c ****     
   23:pump_control.c ****     switch (pump)
-  44              		.loc 1 23 0
-  45 000e 0228     		cmp	r0, #2
-  46 0010 06D0     		beq	.L3
-  47 0012 0328     		cmp	r0, #3
-  48 0014 08D0     		beq	.L4
-  49 0016 0128     		cmp	r0, #1
-  50 0018 09D1     		bne	.L1
+  37              		.loc 1 23 0
+  38 0002 0228     		cmp	r0, #2
+  39 0004 06D0     		beq	.L3
+  40 0006 0328     		cmp	r0, #3
+  41 0008 08D0     		beq	.L4
+  42 000a 0128     		cmp	r0, #1
+  43 000c 09D1     		bne	.L1
   24:pump_control.c ****     {
   25:pump_control.c ****     case PUMP_1:
   26:pump_control.c ****         {
-  27:pump_control.c ****             set_period(PUMP_TIMER_1, timer_calc);
-  51              		.loc 1 27 0
-  52 001a FFF7FEFF 		bl	set_period
-  53              	.LVL3:
+  27:pump_control.c ****             gpio_pump_1_Write(1);
+  44              		.loc 1 27 0
+  45 000e FFF7FEFF 		bl	gpio_pump_1_Write
+  46              	.LVL1:
   28:pump_control.c ****             break;
-  54              		.loc 1 28 0
-  55 001e 08BD     		pop	{r3, pc}
-  56              	.LVL4:
-  57              	.L3:
+  47              		.loc 1 28 0
+  48 0012 08BD     		pop	{r3, pc}
+  49              	.LVL2:
+  50              	.L3:
   29:pump_control.c ****         }
   30:pump_control.c ****    case PUMP_2:
   31:pump_control.c ****         {
-  32:pump_control.c ****             set_period(PUMP_TIMER_2, timer_calc);
-  58              		.loc 1 32 0
-  59 0020 0220     		movs	r0, #2
-  60              	.LVL5:
-  61 0022 FFF7FEFF 		bl	set_period
-  62              	.LVL6:
+  32:pump_control.c ****             gpio_pump_2_Write(1);
+  51              		.loc 1 32 0
+  52 0014 0120     		movs	r0, #1
+  53              	.LVL3:
+  54 0016 FFF7FEFF 		bl	gpio_pump_2_Write
+  55              	.LVL4:
   33:pump_control.c ****             break;
-  63              		.loc 1 33 0
-  64 0026 08BD     		pop	{r3, pc}
-  65              	.LVL7:
-  66              	.L4:
+  56              		.loc 1 33 0
+  57 001a 08BD     		pop	{r3, pc}
+  58              	.LVL5:
+  59              	.L4:
   34:pump_control.c ****         }
   35:pump_control.c ****     case PUMP_3:
   36:pump_control.c ****         {
-  37:pump_control.c ****             set_period(PUMP_TIMER_3, timer_calc);
-  67              		.loc 1 37 0
-  68 0028 0320     		movs	r0, #3
-  69              	.LVL8:
-  70 002a FFF7FEFF 		bl	set_period
-  71              	.LVL9:
-  72              	.L1:
-  73 002e 08BD     		pop	{r3, pc}
-  74              		.cfi_endproc
-  75              	.LFE1:
-  76              		.size	pump_fluid, .-pump_fluid
-  77              		.text
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 3
+  37:pump_control.c ****             gpio_pump_3_Write(1);
+  60              		.loc 1 37 0
+  61 001c 0120     		movs	r0, #1
+  62              	.LVL6:
+  63 001e FFF7FEFF 		bl	gpio_pump_3_Write
+  64              	.LVL7:
+  65              	.L1:
+  66 0022 08BD     		pop	{r3, pc}
+  67              		.cfi_endproc
+  68              	.LFE64:
+  69              		.size	pump_fluid, .-pump_fluid
+  70              		.section	.text.is_pumping,"ax",%progbits
+  71              		.align	2
+  72              		.global	is_pumping
+  73              		.thumb
+  74              		.thumb_func
+  75              		.type	is_pumping, %function
+  76              	is_pumping:
+  77              	.LFB65:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 3
 
 
-  78              	.Letext0:
-  79              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
-  80              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
-  81              		.file 4 "timers.h"
-  82              		.file 5 "pump_control.h"
-  83              		.section	.debug_info,"",%progbits
-  84              	.Ldebug_info0:
-  85 0000 8B010000 		.4byte	0x18b
-  86 0004 0400     		.2byte	0x4
-  87 0006 00000000 		.4byte	.Ldebug_abbrev0
-  88 000a 04       		.byte	0x4
-  89 000b 01       		.uleb128 0x1
-  90 000c 40000000 		.4byte	.LASF30
-  91 0010 0C       		.byte	0xc
-  92 0011 1F010000 		.4byte	.LASF31
-  93 0015 2E010000 		.4byte	.LASF32
-  94 0019 00000000 		.4byte	.Ldebug_ranges0+0
-  95 001d 00000000 		.4byte	0
-  96 0021 00000000 		.4byte	.Ldebug_line0
-  97 0025 02       		.uleb128 0x2
-  98 0026 01       		.byte	0x1
-  99 0027 06       		.byte	0x6
- 100 0028 38020000 		.4byte	.LASF0
- 101 002c 03       		.uleb128 0x3
- 102 002d 00000000 		.4byte	.LASF3
- 103 0031 02       		.byte	0x2
- 104 0032 1D       		.byte	0x1d
- 105 0033 37000000 		.4byte	0x37
- 106 0037 02       		.uleb128 0x2
- 107 0038 01       		.byte	0x1
- 108 0039 08       		.byte	0x8
- 109 003a 32000000 		.4byte	.LASF1
- 110 003e 02       		.uleb128 0x2
- 111 003f 02       		.byte	0x2
- 112 0040 05       		.byte	0x5
- 113 0041 02020000 		.4byte	.LASF2
- 114 0045 03       		.uleb128 0x3
- 115 0046 00010000 		.4byte	.LASF4
- 116 004a 02       		.byte	0x2
- 117 004b 2B       		.byte	0x2b
- 118 004c 50000000 		.4byte	0x50
- 119 0050 02       		.uleb128 0x2
- 120 0051 02       		.byte	0x2
- 121 0052 07       		.byte	0x7
- 122 0053 E0000000 		.4byte	.LASF5
- 123 0057 02       		.uleb128 0x2
- 124 0058 04       		.byte	0x4
- 125 0059 05       		.byte	0x5
- 126 005a 1E020000 		.4byte	.LASF6
- 127 005e 03       		.uleb128 0x3
- 128 005f 14010000 		.4byte	.LASF7
- 129 0063 02       		.byte	0x2
- 130 0064 41       		.byte	0x41
- 131 0065 69000000 		.4byte	0x69
- 132 0069 02       		.uleb128 0x2
- 133 006a 04       		.byte	0x4
- 134 006b 07       		.byte	0x7
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 4
+  38:pump_control.c ****             break;
+  39:pump_control.c ****         } 
+  40:pump_control.c ****     }
+  41:pump_control.c **** }
+  42:pump_control.c **** 
+  43:pump_control.c **** int is_pumping(enum dmc_pump pump)
+  44:pump_control.c **** {
+  78              		.loc 1 44 0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              	.LVL8:
+  83 0000 08B5     		push	{r3, lr}
+  84              		.cfi_def_cfa_offset 8
+  85              		.cfi_offset 3, -8
+  86              		.cfi_offset 14, -4
+  45:pump_control.c ****     switch (pump)
+  87              		.loc 1 45 0
+  88 0002 0228     		cmp	r0, #2
+  89 0004 06D0     		beq	.L9
+  90 0006 0328     		cmp	r0, #3
+  91 0008 07D0     		beq	.L10
+  92 000a 0128     		cmp	r0, #1
+  93 000c 08D1     		bne	.L13
+  46:pump_control.c ****     {
+  47:pump_control.c ****     case PUMP_1: return gpio_pump_1_Read(); 
+  94              		.loc 1 47 0
+  95 000e FFF7FEFF 		bl	gpio_pump_1_Read
+  96              	.LVL9:
+  97 0012 08BD     		pop	{r3, pc}
+  98              	.LVL10:
+  99              	.L9:
+  48:pump_control.c ****     case PUMP_2: return gpio_pump_2_Read();
+ 100              		.loc 1 48 0
+ 101 0014 FFF7FEFF 		bl	gpio_pump_2_Read
+ 102              	.LVL11:
+ 103 0018 08BD     		pop	{r3, pc}
+ 104              	.LVL12:
+ 105              	.L10:
+  49:pump_control.c ****     case PUMP_3: return gpio_pump_3_Read();
+ 106              		.loc 1 49 0
+ 107 001a FFF7FEFF 		bl	gpio_pump_3_Read
+ 108              	.LVL13:
+ 109 001e 08BD     		pop	{r3, pc}
+ 110              	.LVL14:
+ 111              	.L13:
+ 112              	.LVL15:
+  50:pump_control.c ****     }
+  51:pump_control.c **** }
+ 113              		.loc 1 51 0
+ 114 0020 08BD     		pop	{r3, pc}
+ 115              		.cfi_endproc
+ 116              	.LFE65:
+ 117              		.size	is_pumping, .-is_pumping
+ 118 0022 00BF     		.section	.text.stop_pump,"ax",%progbits
+ 119              		.align	2
+ 120              		.global	stop_pump
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 4
 
 
- 135 006c CE000000 		.4byte	.LASF8
- 136 0070 02       		.uleb128 0x2
- 137 0071 08       		.byte	0x8
- 138 0072 05       		.byte	0x5
- 139 0073 B8010000 		.4byte	.LASF9
- 140 0077 02       		.uleb128 0x2
- 141 0078 08       		.byte	0x8
- 142 0079 07       		.byte	0x7
- 143 007a 81010000 		.4byte	.LASF10
- 144 007e 04       		.uleb128 0x4
- 145 007f 04       		.byte	0x4
- 146 0080 05       		.byte	0x5
- 147 0081 696E7400 		.ascii	"int\000"
- 148 0085 02       		.uleb128 0x2
- 149 0086 04       		.byte	0x4
- 150 0087 07       		.byte	0x7
- 151 0088 74010000 		.4byte	.LASF11
- 152 008c 02       		.uleb128 0x2
- 153 008d 08       		.byte	0x8
- 154 008e 04       		.byte	0x4
- 155 008f 2C020000 		.4byte	.LASF12
- 156 0093 02       		.uleb128 0x2
- 157 0094 04       		.byte	0x4
- 158 0095 07       		.byte	0x7
- 159 0096 AF010000 		.4byte	.LASF13
- 160 009a 02       		.uleb128 0x2
- 161 009b 01       		.byte	0x1
- 162 009c 08       		.byte	0x8
- 163 009d 27020000 		.4byte	.LASF14
- 164 00a1 03       		.uleb128 0x3
- 165 00a2 98010000 		.4byte	.LASF15
- 166 00a6 03       		.byte	0x3
- 167 00a7 18       		.byte	0x18
- 168 00a8 2C000000 		.4byte	0x2c
- 169 00ac 03       		.uleb128 0x3
- 170 00ad 0C020000 		.4byte	.LASF16
- 171 00b1 03       		.byte	0x3
- 172 00b2 24       		.byte	0x24
- 173 00b3 45000000 		.4byte	0x45
- 174 00b7 03       		.uleb128 0x3
- 175 00b8 15020000 		.4byte	.LASF17
- 176 00bc 03       		.byte	0x3
- 177 00bd 30       		.byte	0x30
- 178 00be 5E000000 		.4byte	0x5e
- 179 00c2 05       		.uleb128 0x5
- 180 00c3 A0010000 		.4byte	.LASF21
- 181 00c7 01       		.byte	0x1
- 182 00c8 37000000 		.4byte	0x37
- 183 00cc 04       		.byte	0x4
- 184 00cd 19       		.byte	0x19
- 185 00ce E5000000 		.4byte	0xe5
- 186 00d2 06       		.uleb128 0x6
- 187 00d3 25000000 		.4byte	.LASF18
- 188 00d7 01       		.byte	0x1
- 189 00d8 06       		.uleb128 0x6
- 190 00d9 C6010000 		.4byte	.LASF19
- 191 00dd 02       		.byte	0x2
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 5
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.type	stop_pump, %function
+ 124              	stop_pump:
+ 125              	.LFB66:
+  52:pump_control.c **** 
+  53:pump_control.c **** void stop_pump(enum dmc_pump pump)
+  54:pump_control.c **** {
+ 126              		.loc 1 54 0
+ 127              		.cfi_startproc
+ 128              		@ args = 0, pretend = 0, frame = 0
+ 129              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130              	.LVL16:
+ 131 0000 08B5     		push	{r3, lr}
+ 132              		.cfi_def_cfa_offset 8
+ 133              		.cfi_offset 3, -8
+ 134              		.cfi_offset 14, -4
+  55:pump_control.c ****     switch (pump)
+ 135              		.loc 1 55 0
+ 136 0002 0228     		cmp	r0, #2
+ 137 0004 07D0     		beq	.L17
+ 138 0006 0328     		cmp	r0, #3
+ 139 0008 09D0     		beq	.L18
+ 140 000a 0128     		cmp	r0, #1
+ 141 000c 0AD1     		bne	.L15
+  56:pump_control.c ****     {
+  57:pump_control.c ****     case PUMP_1:
+  58:pump_control.c ****         {
+  59:pump_control.c ****             gpio_pump_1_Write(0); 
+ 142              		.loc 1 59 0
+ 143 000e 0020     		movs	r0, #0
+ 144              	.LVL17:
+ 145 0010 FFF7FEFF 		bl	gpio_pump_1_Write
+ 146              	.LVL18:
+  60:pump_control.c ****             break;
+ 147              		.loc 1 60 0
+ 148 0014 08BD     		pop	{r3, pc}
+ 149              	.LVL19:
+ 150              	.L17:
+  61:pump_control.c ****         }
+  62:pump_control.c ****    case PUMP_2:
+  63:pump_control.c ****         {
+  64:pump_control.c ****             gpio_pump_2_Write(0); 
+ 151              		.loc 1 64 0
+ 152 0016 0020     		movs	r0, #0
+ 153              	.LVL20:
+ 154 0018 FFF7FEFF 		bl	gpio_pump_2_Write
+ 155              	.LVL21:
+  65:pump_control.c ****             break;
+ 156              		.loc 1 65 0
+ 157 001c 08BD     		pop	{r3, pc}
+ 158              	.LVL22:
+ 159              	.L18:
+  66:pump_control.c ****         }
+  67:pump_control.c ****     case PUMP_3:
+  68:pump_control.c ****         {
+  69:pump_control.c ****             gpio_pump_3_Write(0); 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 5
 
 
- 192 00de 06       		.uleb128 0x6
- 193 00df D3010000 		.4byte	.LASF20
- 194 00e3 03       		.byte	0x3
- 195 00e4 00       		.byte	0
- 196 00e5 05       		.uleb128 0x5
- 197 00e6 0B010000 		.4byte	.LASF22
- 198 00ea 01       		.byte	0x1
- 199 00eb 37000000 		.4byte	0x37
- 200 00ef 05       		.byte	0x5
- 201 00f0 12       		.byte	0x12
- 202 00f1 08010000 		.4byte	0x108
- 203 00f5 06       		.uleb128 0x6
- 204 00f6 ED010000 		.4byte	.LASF23
- 205 00fa 01       		.byte	0x1
- 206 00fb 06       		.uleb128 0x6
- 207 00fc F4010000 		.4byte	.LASF24
- 208 0100 02       		.byte	0x2
- 209 0101 06       		.uleb128 0x6
- 210 0102 FB010000 		.4byte	.LASF25
- 211 0106 03       		.byte	0x3
- 212 0107 00       		.byte	0
- 213 0108 07       		.uleb128 0x7
- 214 0109 15000000 		.4byte	.LASF33
- 215 010d 01       		.byte	0x1
- 216 010e 14       		.byte	0x14
- 217 010f 00000000 		.4byte	.LFB1
- 218 0113 30000000 		.4byte	.LFE1-.LFB1
- 219 0117 01       		.uleb128 0x1
- 220 0118 9C       		.byte	0x9c
- 221 0119 76010000 		.4byte	0x176
- 222 011d 08       		.uleb128 0x8
- 223 011e 20000000 		.4byte	.LASF26
- 224 0122 01       		.byte	0x1
- 225 0123 14       		.byte	0x14
- 226 0124 E5000000 		.4byte	0xe5
- 227 0128 00000000 		.4byte	.LLST0
- 228 012c 08       		.uleb128 0x8
- 229 012d F3000000 		.4byte	.LASF27
- 230 0131 01       		.byte	0x1
- 231 0132 14       		.byte	0x14
- 232 0133 A1000000 		.4byte	0xa1
- 233 0137 53000000 		.4byte	.LLST1
- 234 013b 09       		.uleb128 0x9
- 235 013c 44020000 		.4byte	.LASF28
- 236 0140 01       		.byte	0x1
- 237 0141 16       		.byte	0x16
- 238 0142 AC000000 		.4byte	0xac
- 239 0146 74000000 		.4byte	.LLST2
- 240 014a 0A       		.uleb128 0xa
- 241 014b 1E000000 		.4byte	.LVL3
- 242 014f 83010000 		.4byte	0x183
- 243 0153 0B       		.uleb128 0xb
- 244 0154 26000000 		.4byte	.LVL6
- 245 0158 83010000 		.4byte	0x183
- 246 015c 66010000 		.4byte	0x166
- 247 0160 0C       		.uleb128 0xc
- 248 0161 01       		.uleb128 0x1
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 6
+ 160              		.loc 1 69 0
+ 161 001e 0020     		movs	r0, #0
+ 162              	.LVL23:
+ 163 0020 FFF7FEFF 		bl	gpio_pump_3_Write
+ 164              	.LVL24:
+ 165              	.L15:
+ 166 0024 08BD     		pop	{r3, pc}
+ 167              		.cfi_endproc
+ 168              	.LFE66:
+ 169              		.size	stop_pump, .-stop_pump
+ 170 0026 00BF     		.text
+ 171              	.Letext0:
+ 172              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 173              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 174              		.file 4 "Generated_Source\\PSoC5/gpio_pump_1.h"
+ 175              		.file 5 "Generated_Source\\PSoC5/gpio_pump_2.h"
+ 176              		.file 6 "Generated_Source\\PSoC5/gpio_pump_3.h"
+ 177              		.file 7 "pump_control.h"
+ 178              		.file 8 "Generated_Source\\PSoC5/core_cm3.h"
+ 179              		.section	.debug_info,"",%progbits
+ 180              	.Ldebug_info0:
+ 181 0000 28020000 		.4byte	0x228
+ 182 0004 0400     		.2byte	0x4
+ 183 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 184 000a 04       		.byte	0x4
+ 185 000b 01       		.uleb128 0x1
+ 186 000c 5A000000 		.4byte	.LASF30
+ 187 0010 0C       		.byte	0xc
+ 188 0011 7D010000 		.4byte	.LASF31
+ 189 0015 8C010000 		.4byte	.LASF32
+ 190 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 191 001d 00000000 		.4byte	0
+ 192 0021 00000000 		.4byte	.Ldebug_line0
+ 193 0025 02       		.uleb128 0x2
+ 194 0026 01       		.byte	0x1
+ 195 0027 06       		.byte	0x6
+ 196 0028 40000000 		.4byte	.LASF0
+ 197 002c 02       		.uleb128 0x2
+ 198 002d 01       		.byte	0x1
+ 199 002e 08       		.byte	0x8
+ 200 002f 4C000000 		.4byte	.LASF1
+ 201 0033 02       		.uleb128 0x2
+ 202 0034 02       		.byte	0x2
+ 203 0035 05       		.byte	0x5
+ 204 0036 3A020000 		.4byte	.LASF2
+ 205 003a 02       		.uleb128 0x2
+ 206 003b 02       		.byte	0x2
+ 207 003c 07       		.byte	0x7
+ 208 003d 0B010000 		.4byte	.LASF3
+ 209 0041 03       		.uleb128 0x3
+ 210 0042 12000000 		.4byte	.LASF5
+ 211 0046 02       		.byte	0x2
+ 212 0047 3F       		.byte	0x3f
+ 213 0048 4C000000 		.4byte	0x4c
+ 214 004c 02       		.uleb128 0x2
+ 215 004d 04       		.byte	0x4
+ 216 004e 05       		.byte	0x5
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 6
 
 
- 249 0162 50       		.byte	0x50
- 250 0163 01       		.uleb128 0x1
- 251 0164 32       		.byte	0x32
- 252 0165 00       		.byte	0
- 253 0166 0D       		.uleb128 0xd
- 254 0167 2E000000 		.4byte	.LVL9
- 255 016b 83010000 		.4byte	0x183
- 256 016f 0C       		.uleb128 0xc
- 257 0170 01       		.uleb128 0x1
- 258 0171 50       		.byte	0x50
- 259 0172 01       		.uleb128 0x1
- 260 0173 33       		.byte	0x33
- 261 0174 00       		.byte	0
- 262 0175 00       		.byte	0
- 263 0176 0E       		.uleb128 0xe
- 264 0177 E0010000 		.4byte	.LASF29
- 265 017b 01       		.byte	0x1
- 266 017c 10       		.byte	0x10
- 267 017d B7000000 		.4byte	0xb7
- 268 0181 6009     		.2byte	0x960
- 269 0183 0F       		.uleb128 0xf
- 270 0184 0A000000 		.4byte	.LASF34
- 271 0188 0A000000 		.4byte	.LASF34
- 272 018c 04       		.byte	0x4
- 273 018d 2D       		.byte	0x2d
- 274 018e 00       		.byte	0
- 275              		.section	.debug_abbrev,"",%progbits
- 276              	.Ldebug_abbrev0:
- 277 0000 01       		.uleb128 0x1
- 278 0001 11       		.uleb128 0x11
- 279 0002 01       		.byte	0x1
- 280 0003 25       		.uleb128 0x25
- 281 0004 0E       		.uleb128 0xe
- 282 0005 13       		.uleb128 0x13
- 283 0006 0B       		.uleb128 0xb
- 284 0007 03       		.uleb128 0x3
- 285 0008 0E       		.uleb128 0xe
- 286 0009 1B       		.uleb128 0x1b
- 287 000a 0E       		.uleb128 0xe
- 288 000b 55       		.uleb128 0x55
- 289 000c 17       		.uleb128 0x17
- 290 000d 11       		.uleb128 0x11
- 291 000e 01       		.uleb128 0x1
- 292 000f 10       		.uleb128 0x10
- 293 0010 17       		.uleb128 0x17
- 294 0011 00       		.byte	0
- 295 0012 00       		.byte	0
- 296 0013 02       		.uleb128 0x2
- 297 0014 24       		.uleb128 0x24
- 298 0015 00       		.byte	0
- 299 0016 0B       		.uleb128 0xb
- 300 0017 0B       		.uleb128 0xb
- 301 0018 3E       		.uleb128 0x3e
- 302 0019 0B       		.uleb128 0xb
- 303 001a 03       		.uleb128 0x3
- 304 001b 0E       		.uleb128 0xe
- 305 001c 00       		.byte	0
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 7
+ 217 004f 4D020000 		.4byte	.LASF4
+ 218 0053 03       		.uleb128 0x3
+ 219 0054 56010000 		.4byte	.LASF6
+ 220 0058 02       		.byte	0x2
+ 221 0059 41       		.byte	0x41
+ 222 005a 5E000000 		.4byte	0x5e
+ 223 005e 02       		.uleb128 0x2
+ 224 005f 04       		.byte	0x4
+ 225 0060 07       		.byte	0x7
+ 226 0061 F9000000 		.4byte	.LASF7
+ 227 0065 02       		.uleb128 0x2
+ 228 0066 08       		.byte	0x8
+ 229 0067 05       		.byte	0x5
+ 230 0068 12020000 		.4byte	.LASF8
+ 231 006c 02       		.uleb128 0x2
+ 232 006d 08       		.byte	0x8
+ 233 006e 07       		.byte	0x7
+ 234 006f DF010000 		.4byte	.LASF9
+ 235 0073 04       		.uleb128 0x4
+ 236 0074 04       		.byte	0x4
+ 237 0075 05       		.byte	0x5
+ 238 0076 696E7400 		.ascii	"int\000"
+ 239 007a 02       		.uleb128 0x2
+ 240 007b 04       		.byte	0x4
+ 241 007c 07       		.byte	0x7
+ 242 007d D2010000 		.4byte	.LASF10
+ 243 0081 02       		.uleb128 0x2
+ 244 0082 08       		.byte	0x8
+ 245 0083 04       		.byte	0x4
+ 246 0084 56020000 		.4byte	.LASF11
+ 247 0088 02       		.uleb128 0x2
+ 248 0089 04       		.byte	0x4
+ 249 008a 07       		.byte	0x7
+ 250 008b 09020000 		.4byte	.LASF12
+ 251 008f 02       		.uleb128 0x2
+ 252 0090 01       		.byte	0x1
+ 253 0091 08       		.byte	0x8
+ 254 0092 20020000 		.4byte	.LASF13
+ 255 0096 03       		.uleb128 0x3
+ 256 0097 01020000 		.4byte	.LASF14
+ 257 009b 03       		.byte	0x3
+ 258 009c 2C       		.byte	0x2c
+ 259 009d 41000000 		.4byte	0x41
+ 260 00a1 03       		.uleb128 0x3
+ 261 00a2 44020000 		.4byte	.LASF15
+ 262 00a6 03       		.byte	0x3
+ 263 00a7 30       		.byte	0x30
+ 264 00a8 53000000 		.4byte	0x53
+ 265 00ac 05       		.uleb128 0x5
+ 266 00ad 3C010000 		.4byte	.LASF33
+ 267 00b1 01       		.byte	0x1
+ 268 00b2 2C000000 		.4byte	0x2c
+ 269 00b6 07       		.byte	0x7
+ 270 00b7 12       		.byte	0x12
+ 271 00b8 CF000000 		.4byte	0xcf
+ 272 00bc 06       		.uleb128 0x6
+ 273 00bd 25020000 		.4byte	.LASF16
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 7
 
 
- 306 001d 00       		.byte	0
- 307 001e 03       		.uleb128 0x3
- 308 001f 16       		.uleb128 0x16
- 309 0020 00       		.byte	0
- 310 0021 03       		.uleb128 0x3
- 311 0022 0E       		.uleb128 0xe
- 312 0023 3A       		.uleb128 0x3a
- 313 0024 0B       		.uleb128 0xb
- 314 0025 3B       		.uleb128 0x3b
- 315 0026 0B       		.uleb128 0xb
- 316 0027 49       		.uleb128 0x49
- 317 0028 13       		.uleb128 0x13
- 318 0029 00       		.byte	0
- 319 002a 00       		.byte	0
- 320 002b 04       		.uleb128 0x4
- 321 002c 24       		.uleb128 0x24
- 322 002d 00       		.byte	0
- 323 002e 0B       		.uleb128 0xb
- 324 002f 0B       		.uleb128 0xb
- 325 0030 3E       		.uleb128 0x3e
- 326 0031 0B       		.uleb128 0xb
- 327 0032 03       		.uleb128 0x3
- 328 0033 08       		.uleb128 0x8
- 329 0034 00       		.byte	0
- 330 0035 00       		.byte	0
- 331 0036 05       		.uleb128 0x5
- 332 0037 04       		.uleb128 0x4
- 333 0038 01       		.byte	0x1
- 334 0039 03       		.uleb128 0x3
- 335 003a 0E       		.uleb128 0xe
- 336 003b 0B       		.uleb128 0xb
- 337 003c 0B       		.uleb128 0xb
- 338 003d 49       		.uleb128 0x49
- 339 003e 13       		.uleb128 0x13
- 340 003f 3A       		.uleb128 0x3a
- 341 0040 0B       		.uleb128 0xb
- 342 0041 3B       		.uleb128 0x3b
- 343 0042 0B       		.uleb128 0xb
- 344 0043 01       		.uleb128 0x1
- 345 0044 13       		.uleb128 0x13
- 346 0045 00       		.byte	0
- 347 0046 00       		.byte	0
- 348 0047 06       		.uleb128 0x6
- 349 0048 28       		.uleb128 0x28
- 350 0049 00       		.byte	0
- 351 004a 03       		.uleb128 0x3
- 352 004b 0E       		.uleb128 0xe
- 353 004c 1C       		.uleb128 0x1c
- 354 004d 0B       		.uleb128 0xb
- 355 004e 00       		.byte	0
- 356 004f 00       		.byte	0
- 357 0050 07       		.uleb128 0x7
- 358 0051 2E       		.uleb128 0x2e
- 359 0052 01       		.byte	0x1
- 360 0053 3F       		.uleb128 0x3f
- 361 0054 19       		.uleb128 0x19
- 362 0055 03       		.uleb128 0x3
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 8
+ 274 00c1 01       		.byte	0x1
+ 275 00c2 06       		.uleb128 0x6
+ 276 00c3 2C020000 		.4byte	.LASF17
+ 277 00c7 02       		.byte	0x2
+ 278 00c8 06       		.uleb128 0x6
+ 279 00c9 33020000 		.4byte	.LASF18
+ 280 00cd 03       		.byte	0x3
+ 281 00ce 00       		.byte	0
+ 282 00cf 02       		.uleb128 0x2
+ 283 00d0 04       		.byte	0x4
+ 284 00d1 04       		.byte	0x4
+ 285 00d2 3A000000 		.4byte	.LASF19
+ 286 00d6 02       		.uleb128 0x2
+ 287 00d7 08       		.byte	0x8
+ 288 00d8 04       		.byte	0x4
+ 289 00d9 33000000 		.4byte	.LASF20
+ 290 00dd 07       		.uleb128 0x7
+ 291 00de F6010000 		.4byte	.LASF22
+ 292 00e2 01       		.byte	0x1
+ 293 00e3 14       		.byte	0x14
+ 294 00e4 00000000 		.4byte	.LFB64
+ 295 00e8 24000000 		.4byte	.LFE64-.LFB64
+ 296 00ec 01       		.uleb128 0x1
+ 297 00ed 9C       		.byte	0x9c
+ 298 00ee 2D010000 		.4byte	0x12d
+ 299 00f2 08       		.uleb128 0x8
+ 300 00f3 2E000000 		.4byte	.LASF21
+ 301 00f7 01       		.byte	0x1
+ 302 00f8 14       		.byte	0x14
+ 303 00f9 AC000000 		.4byte	0xac
+ 304 00fd 00000000 		.4byte	.LLST0
+ 305 0101 09       		.uleb128 0x9
+ 306 0102 12000000 		.4byte	.LVL1
+ 307 0106 E9010000 		.4byte	0x1e9
+ 308 010a 0A       		.uleb128 0xa
+ 309 010b 1A000000 		.4byte	.LVL4
+ 310 010f F4010000 		.4byte	0x1f4
+ 311 0113 1D010000 		.4byte	0x11d
+ 312 0117 0B       		.uleb128 0xb
+ 313 0118 01       		.uleb128 0x1
+ 314 0119 50       		.byte	0x50
+ 315 011a 01       		.uleb128 0x1
+ 316 011b 31       		.byte	0x31
+ 317 011c 00       		.byte	0
+ 318 011d 0C       		.uleb128 0xc
+ 319 011e 22000000 		.4byte	.LVL7
+ 320 0122 FF010000 		.4byte	0x1ff
+ 321 0126 0B       		.uleb128 0xb
+ 322 0127 01       		.uleb128 0x1
+ 323 0128 50       		.byte	0x50
+ 324 0129 01       		.uleb128 0x1
+ 325 012a 31       		.byte	0x31
+ 326 012b 00       		.byte	0
+ 327 012c 00       		.byte	0
+ 328 012d 0D       		.uleb128 0xd
+ 329 012e 62020000 		.4byte	.LASF34
+ 330 0132 01       		.byte	0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 8
 
 
- 363 0056 0E       		.uleb128 0xe
- 364 0057 3A       		.uleb128 0x3a
- 365 0058 0B       		.uleb128 0xb
- 366 0059 3B       		.uleb128 0x3b
- 367 005a 0B       		.uleb128 0xb
- 368 005b 27       		.uleb128 0x27
- 369 005c 19       		.uleb128 0x19
- 370 005d 11       		.uleb128 0x11
- 371 005e 01       		.uleb128 0x1
- 372 005f 12       		.uleb128 0x12
- 373 0060 06       		.uleb128 0x6
- 374 0061 40       		.uleb128 0x40
- 375 0062 18       		.uleb128 0x18
- 376 0063 9742     		.uleb128 0x2117
- 377 0065 19       		.uleb128 0x19
- 378 0066 01       		.uleb128 0x1
- 379 0067 13       		.uleb128 0x13
- 380 0068 00       		.byte	0
- 381 0069 00       		.byte	0
- 382 006a 08       		.uleb128 0x8
- 383 006b 05       		.uleb128 0x5
- 384 006c 00       		.byte	0
- 385 006d 03       		.uleb128 0x3
- 386 006e 0E       		.uleb128 0xe
- 387 006f 3A       		.uleb128 0x3a
- 388 0070 0B       		.uleb128 0xb
- 389 0071 3B       		.uleb128 0x3b
- 390 0072 0B       		.uleb128 0xb
- 391 0073 49       		.uleb128 0x49
- 392 0074 13       		.uleb128 0x13
- 393 0075 02       		.uleb128 0x2
- 394 0076 17       		.uleb128 0x17
- 395 0077 00       		.byte	0
- 396 0078 00       		.byte	0
- 397 0079 09       		.uleb128 0x9
- 398 007a 34       		.uleb128 0x34
- 399 007b 00       		.byte	0
- 400 007c 03       		.uleb128 0x3
- 401 007d 0E       		.uleb128 0xe
- 402 007e 3A       		.uleb128 0x3a
- 403 007f 0B       		.uleb128 0xb
- 404 0080 3B       		.uleb128 0x3b
- 405 0081 0B       		.uleb128 0xb
- 406 0082 49       		.uleb128 0x49
- 407 0083 13       		.uleb128 0x13
- 408 0084 02       		.uleb128 0x2
- 409 0085 17       		.uleb128 0x17
- 410 0086 00       		.byte	0
- 411 0087 00       		.byte	0
- 412 0088 0A       		.uleb128 0xa
- 413 0089 898201   		.uleb128 0x4109
- 414 008c 00       		.byte	0
- 415 008d 11       		.uleb128 0x11
- 416 008e 01       		.uleb128 0x1
- 417 008f 31       		.uleb128 0x31
- 418 0090 13       		.uleb128 0x13
- 419 0091 00       		.byte	0
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 9
+ 331 0133 2B       		.byte	0x2b
+ 332 0134 73000000 		.4byte	0x73
+ 333 0138 00000000 		.4byte	.LFB65
+ 334 013c 22000000 		.4byte	.LFE65-.LFB65
+ 335 0140 01       		.uleb128 0x1
+ 336 0141 9C       		.byte	0x9c
+ 337 0142 71010000 		.4byte	0x171
+ 338 0146 08       		.uleb128 0x8
+ 339 0147 2E000000 		.4byte	.LASF21
+ 340 014b 01       		.byte	0x1
+ 341 014c 2B       		.byte	0x2b
+ 342 014d AC000000 		.4byte	0xac
+ 343 0151 53000000 		.4byte	.LLST1
+ 344 0155 09       		.uleb128 0x9
+ 345 0156 12000000 		.4byte	.LVL9
+ 346 015a 0A020000 		.4byte	0x20a
+ 347 015e 09       		.uleb128 0x9
+ 348 015f 18000000 		.4byte	.LVL11
+ 349 0163 15020000 		.4byte	0x215
+ 350 0167 09       		.uleb128 0x9
+ 351 0168 1E000000 		.4byte	.LVL13
+ 352 016c 20020000 		.4byte	0x220
+ 353 0170 00       		.byte	0
+ 354 0171 07       		.uleb128 0x7
+ 355 0172 61010000 		.4byte	.LASF23
+ 356 0176 01       		.byte	0x1
+ 357 0177 35       		.byte	0x35
+ 358 0178 00000000 		.4byte	.LFB66
+ 359 017c 26000000 		.4byte	.LFE66-.LFB66
+ 360 0180 01       		.uleb128 0x1
+ 361 0181 9C       		.byte	0x9c
+ 362 0182 CB010000 		.4byte	0x1cb
+ 363 0186 08       		.uleb128 0x8
+ 364 0187 2E000000 		.4byte	.LASF21
+ 365 018b 01       		.byte	0x1
+ 366 018c 35       		.byte	0x35
+ 367 018d AC000000 		.4byte	0xac
+ 368 0191 BF000000 		.4byte	.LLST2
+ 369 0195 0A       		.uleb128 0xa
+ 370 0196 14000000 		.4byte	.LVL18
+ 371 019a E9010000 		.4byte	0x1e9
+ 372 019e A8010000 		.4byte	0x1a8
+ 373 01a2 0B       		.uleb128 0xb
+ 374 01a3 01       		.uleb128 0x1
+ 375 01a4 50       		.byte	0x50
+ 376 01a5 01       		.uleb128 0x1
+ 377 01a6 30       		.byte	0x30
+ 378 01a7 00       		.byte	0
+ 379 01a8 0A       		.uleb128 0xa
+ 380 01a9 1C000000 		.4byte	.LVL21
+ 381 01ad F4010000 		.4byte	0x1f4
+ 382 01b1 BB010000 		.4byte	0x1bb
+ 383 01b5 0B       		.uleb128 0xb
+ 384 01b6 01       		.uleb128 0x1
+ 385 01b7 50       		.byte	0x50
+ 386 01b8 01       		.uleb128 0x1
+ 387 01b9 30       		.byte	0x30
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 9
 
 
- 420 0092 00       		.byte	0
- 421 0093 0B       		.uleb128 0xb
- 422 0094 898201   		.uleb128 0x4109
- 423 0097 01       		.byte	0x1
- 424 0098 11       		.uleb128 0x11
- 425 0099 01       		.uleb128 0x1
- 426 009a 31       		.uleb128 0x31
- 427 009b 13       		.uleb128 0x13
- 428 009c 01       		.uleb128 0x1
- 429 009d 13       		.uleb128 0x13
- 430 009e 00       		.byte	0
- 431 009f 00       		.byte	0
- 432 00a0 0C       		.uleb128 0xc
- 433 00a1 8A8201   		.uleb128 0x410a
- 434 00a4 00       		.byte	0
- 435 00a5 02       		.uleb128 0x2
- 436 00a6 18       		.uleb128 0x18
- 437 00a7 9142     		.uleb128 0x2111
- 438 00a9 18       		.uleb128 0x18
- 439 00aa 00       		.byte	0
- 440 00ab 00       		.byte	0
- 441 00ac 0D       		.uleb128 0xd
- 442 00ad 898201   		.uleb128 0x4109
- 443 00b0 01       		.byte	0x1
- 444 00b1 11       		.uleb128 0x11
- 445 00b2 01       		.uleb128 0x1
- 446 00b3 31       		.uleb128 0x31
- 447 00b4 13       		.uleb128 0x13
- 448 00b5 00       		.byte	0
- 449 00b6 00       		.byte	0
- 450 00b7 0E       		.uleb128 0xe
- 451 00b8 34       		.uleb128 0x34
- 452 00b9 00       		.byte	0
- 453 00ba 03       		.uleb128 0x3
- 454 00bb 0E       		.uleb128 0xe
- 455 00bc 3A       		.uleb128 0x3a
- 456 00bd 0B       		.uleb128 0xb
- 457 00be 3B       		.uleb128 0x3b
- 458 00bf 0B       		.uleb128 0xb
- 459 00c0 49       		.uleb128 0x49
- 460 00c1 13       		.uleb128 0x13
- 461 00c2 1C       		.uleb128 0x1c
- 462 00c3 05       		.uleb128 0x5
- 463 00c4 00       		.byte	0
- 464 00c5 00       		.byte	0
- 465 00c6 0F       		.uleb128 0xf
- 466 00c7 2E       		.uleb128 0x2e
- 467 00c8 00       		.byte	0
- 468 00c9 3F       		.uleb128 0x3f
- 469 00ca 19       		.uleb128 0x19
- 470 00cb 3C       		.uleb128 0x3c
- 471 00cc 19       		.uleb128 0x19
- 472 00cd 6E       		.uleb128 0x6e
- 473 00ce 0E       		.uleb128 0xe
- 474 00cf 03       		.uleb128 0x3
- 475 00d0 0E       		.uleb128 0xe
- 476 00d1 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 10
+ 388 01ba 00       		.byte	0
+ 389 01bb 0C       		.uleb128 0xc
+ 390 01bc 24000000 		.4byte	.LVL24
+ 391 01c0 FF010000 		.4byte	0x1ff
+ 392 01c4 0B       		.uleb128 0xb
+ 393 01c5 01       		.uleb128 0x1
+ 394 01c6 50       		.byte	0x50
+ 395 01c7 01       		.uleb128 0x1
+ 396 01c8 30       		.byte	0x30
+ 397 01c9 00       		.byte	0
+ 398 01ca 00       		.byte	0
+ 399 01cb 0E       		.uleb128 0xe
+ 400 01cc 6D020000 		.4byte	.LASF35
+ 401 01d0 01       		.byte	0x1
+ 402 01d1 11       		.byte	0x11
+ 403 01d2 A1000000 		.4byte	0xa1
+ 404 01d6 6009     		.2byte	0x960
+ 405 01d8 0F       		.uleb128 0xf
+ 406 01d9 1E010000 		.4byte	.LASF36
+ 407 01dd 08       		.byte	0x8
+ 408 01de 1207     		.2byte	0x712
+ 409 01e0 E4010000 		.4byte	0x1e4
+ 410 01e4 10       		.uleb128 0x10
+ 411 01e5 96000000 		.4byte	0x96
+ 412 01e9 11       		.uleb128 0x11
+ 413 01ea 00000000 		.4byte	.LASF24
+ 414 01ee 00000000 		.4byte	.LASF24
+ 415 01f2 04       		.byte	0x4
+ 416 01f3 26       		.byte	0x26
+ 417 01f4 11       		.uleb128 0x11
+ 418 01f5 1C000000 		.4byte	.LASF25
+ 419 01f9 1C000000 		.4byte	.LASF25
+ 420 01fd 05       		.byte	0x5
+ 421 01fe 26       		.byte	0x26
+ 422 01ff 11       		.uleb128 0x11
+ 423 0200 6B010000 		.4byte	.LASF26
+ 424 0204 6B010000 		.4byte	.LASF26
+ 425 0208 06       		.byte	0x6
+ 426 0209 26       		.byte	0x26
+ 427 020a 11       		.uleb128 0x11
+ 428 020b 2B010000 		.4byte	.LASF27
+ 429 020f 2B010000 		.4byte	.LASF27
+ 430 0213 04       		.byte	0x4
+ 431 0214 29       		.byte	0x29
+ 432 0215 11       		.uleb128 0x11
+ 433 0216 45010000 		.4byte	.LASF28
+ 434 021a 45010000 		.4byte	.LASF28
+ 435 021e 05       		.byte	0x5
+ 436 021f 29       		.byte	0x29
+ 437 0220 11       		.uleb128 0x11
+ 438 0221 E8000000 		.4byte	.LASF29
+ 439 0225 E8000000 		.4byte	.LASF29
+ 440 0229 06       		.byte	0x6
+ 441 022a 29       		.byte	0x29
+ 442 022b 00       		.byte	0
+ 443              		.section	.debug_abbrev,"",%progbits
+ 444              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 10
 
 
- 477 00d2 0B       		.uleb128 0xb
- 478 00d3 3B       		.uleb128 0x3b
- 479 00d4 0B       		.uleb128 0xb
- 480 00d5 00       		.byte	0
- 481 00d6 00       		.byte	0
- 482 00d7 00       		.byte	0
- 483              		.section	.debug_loc,"",%progbits
- 484              	.Ldebug_loc0:
- 485              	.LLST0:
- 486 0000 00000000 		.4byte	.LVL0
- 487 0004 1D000000 		.4byte	.LVL3-1
- 488 0008 0100     		.2byte	0x1
- 489 000a 50       		.byte	0x50
- 490 000b 1D000000 		.4byte	.LVL3-1
- 491 000f 20000000 		.4byte	.LVL4
- 492 0013 0400     		.2byte	0x4
- 493 0015 F3       		.byte	0xf3
- 494 0016 01       		.uleb128 0x1
- 495 0017 50       		.byte	0x50
- 496 0018 9F       		.byte	0x9f
- 497 0019 20000000 		.4byte	.LVL4
- 498 001d 22000000 		.4byte	.LVL5
- 499 0021 0100     		.2byte	0x1
- 500 0023 50       		.byte	0x50
- 501 0024 22000000 		.4byte	.LVL5
- 502 0028 28000000 		.4byte	.LVL7
- 503 002c 0400     		.2byte	0x4
- 504 002e F3       		.byte	0xf3
- 505 002f 01       		.uleb128 0x1
- 506 0030 50       		.byte	0x50
- 507 0031 9F       		.byte	0x9f
- 508 0032 28000000 		.4byte	.LVL7
- 509 0036 2A000000 		.4byte	.LVL8
- 510 003a 0100     		.2byte	0x1
- 511 003c 50       		.byte	0x50
- 512 003d 2A000000 		.4byte	.LVL8
- 513 0041 30000000 		.4byte	.LFE1
- 514 0045 0400     		.2byte	0x4
- 515 0047 F3       		.byte	0xf3
- 516 0048 01       		.uleb128 0x1
- 517 0049 50       		.byte	0x50
- 518 004a 9F       		.byte	0x9f
- 519 004b 00000000 		.4byte	0
- 520 004f 00000000 		.4byte	0
- 521              	.LLST1:
- 522 0053 00000000 		.4byte	.LVL0
- 523 0057 06000000 		.4byte	.LVL1
- 524 005b 0100     		.2byte	0x1
- 525 005d 51       		.byte	0x51
- 526 005e 06000000 		.4byte	.LVL1
- 527 0062 30000000 		.4byte	.LFE1
- 528 0066 0400     		.2byte	0x4
- 529 0068 F3       		.byte	0xf3
- 530 0069 01       		.uleb128 0x1
- 531 006a 51       		.byte	0x51
- 532 006b 9F       		.byte	0x9f
- 533 006c 00000000 		.4byte	0
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 11
+ 445 0000 01       		.uleb128 0x1
+ 446 0001 11       		.uleb128 0x11
+ 447 0002 01       		.byte	0x1
+ 448 0003 25       		.uleb128 0x25
+ 449 0004 0E       		.uleb128 0xe
+ 450 0005 13       		.uleb128 0x13
+ 451 0006 0B       		.uleb128 0xb
+ 452 0007 03       		.uleb128 0x3
+ 453 0008 0E       		.uleb128 0xe
+ 454 0009 1B       		.uleb128 0x1b
+ 455 000a 0E       		.uleb128 0xe
+ 456 000b 55       		.uleb128 0x55
+ 457 000c 17       		.uleb128 0x17
+ 458 000d 11       		.uleb128 0x11
+ 459 000e 01       		.uleb128 0x1
+ 460 000f 10       		.uleb128 0x10
+ 461 0010 17       		.uleb128 0x17
+ 462 0011 00       		.byte	0
+ 463 0012 00       		.byte	0
+ 464 0013 02       		.uleb128 0x2
+ 465 0014 24       		.uleb128 0x24
+ 466 0015 00       		.byte	0
+ 467 0016 0B       		.uleb128 0xb
+ 468 0017 0B       		.uleb128 0xb
+ 469 0018 3E       		.uleb128 0x3e
+ 470 0019 0B       		.uleb128 0xb
+ 471 001a 03       		.uleb128 0x3
+ 472 001b 0E       		.uleb128 0xe
+ 473 001c 00       		.byte	0
+ 474 001d 00       		.byte	0
+ 475 001e 03       		.uleb128 0x3
+ 476 001f 16       		.uleb128 0x16
+ 477 0020 00       		.byte	0
+ 478 0021 03       		.uleb128 0x3
+ 479 0022 0E       		.uleb128 0xe
+ 480 0023 3A       		.uleb128 0x3a
+ 481 0024 0B       		.uleb128 0xb
+ 482 0025 3B       		.uleb128 0x3b
+ 483 0026 0B       		.uleb128 0xb
+ 484 0027 49       		.uleb128 0x49
+ 485 0028 13       		.uleb128 0x13
+ 486 0029 00       		.byte	0
+ 487 002a 00       		.byte	0
+ 488 002b 04       		.uleb128 0x4
+ 489 002c 24       		.uleb128 0x24
+ 490 002d 00       		.byte	0
+ 491 002e 0B       		.uleb128 0xb
+ 492 002f 0B       		.uleb128 0xb
+ 493 0030 3E       		.uleb128 0x3e
+ 494 0031 0B       		.uleb128 0xb
+ 495 0032 03       		.uleb128 0x3
+ 496 0033 08       		.uleb128 0x8
+ 497 0034 00       		.byte	0
+ 498 0035 00       		.byte	0
+ 499 0036 05       		.uleb128 0x5
+ 500 0037 04       		.uleb128 0x4
+ 501 0038 01       		.byte	0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 11
 
 
- 534 0070 00000000 		.4byte	0
- 535              	.LLST2:
- 536 0074 0E000000 		.4byte	.LVL2
- 537 0078 1D000000 		.4byte	.LVL3-1
- 538 007c 0100     		.2byte	0x1
- 539 007e 51       		.byte	0x51
- 540 007f 20000000 		.4byte	.LVL4
- 541 0083 25000000 		.4byte	.LVL6-1
- 542 0087 0100     		.2byte	0x1
- 543 0089 51       		.byte	0x51
- 544 008a 28000000 		.4byte	.LVL7
- 545 008e 2D000000 		.4byte	.LVL9-1
- 546 0092 0100     		.2byte	0x1
- 547 0094 51       		.byte	0x51
- 548 0095 00000000 		.4byte	0
- 549 0099 00000000 		.4byte	0
- 550              		.section	.debug_aranges,"",%progbits
- 551 0000 1C000000 		.4byte	0x1c
- 552 0004 0200     		.2byte	0x2
- 553 0006 00000000 		.4byte	.Ldebug_info0
- 554 000a 04       		.byte	0x4
- 555 000b 00       		.byte	0
- 556 000c 0000     		.2byte	0
- 557 000e 0000     		.2byte	0
- 558 0010 00000000 		.4byte	.LFB1
- 559 0014 30000000 		.4byte	.LFE1-.LFB1
- 560 0018 00000000 		.4byte	0
- 561 001c 00000000 		.4byte	0
- 562              		.section	.debug_ranges,"",%progbits
- 563              	.Ldebug_ranges0:
- 564 0000 00000000 		.4byte	.LFB1
- 565 0004 30000000 		.4byte	.LFE1
- 566 0008 00000000 		.4byte	0
- 567 000c 00000000 		.4byte	0
- 568              		.section	.debug_line,"",%progbits
- 569              	.Ldebug_line0:
- 570 0000 5C010000 		.section	.debug_str,"MS",%progbits,1
- 570      02004001 
- 570      00000201 
- 570      FB0E0D00 
- 570      01010101 
- 571              	.LASF3:
- 572 0000 5F5F7569 		.ascii	"__uint8_t\000"
- 572      6E74385F 
- 572      7400
- 573              	.LASF34:
- 574 000a 7365745F 		.ascii	"set_period\000"
- 574      70657269 
- 574      6F6400
- 575              	.LASF33:
- 576 0015 70756D70 		.ascii	"pump_fluid\000"
- 576      5F666C75 
- 576      696400
- 577              	.LASF26:
- 578 0020 70756D70 		.ascii	"pump\000"
- 578      00
- 579              	.LASF18:
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 12
+ 502 0039 03       		.uleb128 0x3
+ 503 003a 0E       		.uleb128 0xe
+ 504 003b 0B       		.uleb128 0xb
+ 505 003c 0B       		.uleb128 0xb
+ 506 003d 49       		.uleb128 0x49
+ 507 003e 13       		.uleb128 0x13
+ 508 003f 3A       		.uleb128 0x3a
+ 509 0040 0B       		.uleb128 0xb
+ 510 0041 3B       		.uleb128 0x3b
+ 511 0042 0B       		.uleb128 0xb
+ 512 0043 01       		.uleb128 0x1
+ 513 0044 13       		.uleb128 0x13
+ 514 0045 00       		.byte	0
+ 515 0046 00       		.byte	0
+ 516 0047 06       		.uleb128 0x6
+ 517 0048 28       		.uleb128 0x28
+ 518 0049 00       		.byte	0
+ 519 004a 03       		.uleb128 0x3
+ 520 004b 0E       		.uleb128 0xe
+ 521 004c 1C       		.uleb128 0x1c
+ 522 004d 0B       		.uleb128 0xb
+ 523 004e 00       		.byte	0
+ 524 004f 00       		.byte	0
+ 525 0050 07       		.uleb128 0x7
+ 526 0051 2E       		.uleb128 0x2e
+ 527 0052 01       		.byte	0x1
+ 528 0053 3F       		.uleb128 0x3f
+ 529 0054 19       		.uleb128 0x19
+ 530 0055 03       		.uleb128 0x3
+ 531 0056 0E       		.uleb128 0xe
+ 532 0057 3A       		.uleb128 0x3a
+ 533 0058 0B       		.uleb128 0xb
+ 534 0059 3B       		.uleb128 0x3b
+ 535 005a 0B       		.uleb128 0xb
+ 536 005b 27       		.uleb128 0x27
+ 537 005c 19       		.uleb128 0x19
+ 538 005d 11       		.uleb128 0x11
+ 539 005e 01       		.uleb128 0x1
+ 540 005f 12       		.uleb128 0x12
+ 541 0060 06       		.uleb128 0x6
+ 542 0061 40       		.uleb128 0x40
+ 543 0062 18       		.uleb128 0x18
+ 544 0063 9742     		.uleb128 0x2117
+ 545 0065 19       		.uleb128 0x19
+ 546 0066 01       		.uleb128 0x1
+ 547 0067 13       		.uleb128 0x13
+ 548 0068 00       		.byte	0
+ 549 0069 00       		.byte	0
+ 550 006a 08       		.uleb128 0x8
+ 551 006b 05       		.uleb128 0x5
+ 552 006c 00       		.byte	0
+ 553 006d 03       		.uleb128 0x3
+ 554 006e 0E       		.uleb128 0xe
+ 555 006f 3A       		.uleb128 0x3a
+ 556 0070 0B       		.uleb128 0xb
+ 557 0071 3B       		.uleb128 0x3b
+ 558 0072 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 12
 
 
- 580 0025 50554D50 		.ascii	"PUMP_TIMER_1\000"
- 580      5F54494D 
- 580      45525F31 
- 580      00
- 581              	.LASF1:
- 582 0032 756E7369 		.ascii	"unsigned char\000"
- 582      676E6564 
- 582      20636861 
- 582      7200
- 583              	.LASF30:
- 584 0040 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 584      43313120 
- 584      352E342E 
- 584      31203230 
- 584      31363036 
- 585 0073 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 585      20726576 
- 585      6973696F 
- 585      6E203233 
- 585      37373135 
- 586 00a6 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 586      66756E63 
- 586      74696F6E 
- 586      2D736563 
- 586      74696F6E 
- 587              	.LASF8:
- 588 00ce 6C6F6E67 		.ascii	"long unsigned int\000"
- 588      20756E73 
- 588      69676E65 
- 588      6420696E 
- 588      7400
- 589              	.LASF5:
- 590 00e0 73686F72 		.ascii	"short unsigned int\000"
- 590      7420756E 
- 590      7369676E 
- 590      65642069 
- 590      6E7400
- 591              	.LASF27:
- 592 00f3 616D6F75 		.ascii	"amount_in_cl\000"
- 592      6E745F69 
- 592      6E5F636C 
- 592      00
- 593              	.LASF4:
- 594 0100 5F5F7569 		.ascii	"__uint16_t\000"
- 594      6E743136 
- 594      5F7400
- 595              	.LASF22:
- 596 010b 646D635F 		.ascii	"dmc_pump\000"
- 596      70756D70 
- 596      00
- 597              	.LASF7:
- 598 0114 5F5F7569 		.ascii	"__uint32_t\000"
- 598      6E743332 
- 598      5F7400
- 599              	.LASF31:
- 600 011f 70756D70 		.ascii	"pump_control.c\000"
- 600      5F636F6E 
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 13
+ 559 0073 49       		.uleb128 0x49
+ 560 0074 13       		.uleb128 0x13
+ 561 0075 02       		.uleb128 0x2
+ 562 0076 17       		.uleb128 0x17
+ 563 0077 00       		.byte	0
+ 564 0078 00       		.byte	0
+ 565 0079 09       		.uleb128 0x9
+ 566 007a 898201   		.uleb128 0x4109
+ 567 007d 00       		.byte	0
+ 568 007e 11       		.uleb128 0x11
+ 569 007f 01       		.uleb128 0x1
+ 570 0080 31       		.uleb128 0x31
+ 571 0081 13       		.uleb128 0x13
+ 572 0082 00       		.byte	0
+ 573 0083 00       		.byte	0
+ 574 0084 0A       		.uleb128 0xa
+ 575 0085 898201   		.uleb128 0x4109
+ 576 0088 01       		.byte	0x1
+ 577 0089 11       		.uleb128 0x11
+ 578 008a 01       		.uleb128 0x1
+ 579 008b 31       		.uleb128 0x31
+ 580 008c 13       		.uleb128 0x13
+ 581 008d 01       		.uleb128 0x1
+ 582 008e 13       		.uleb128 0x13
+ 583 008f 00       		.byte	0
+ 584 0090 00       		.byte	0
+ 585 0091 0B       		.uleb128 0xb
+ 586 0092 8A8201   		.uleb128 0x410a
+ 587 0095 00       		.byte	0
+ 588 0096 02       		.uleb128 0x2
+ 589 0097 18       		.uleb128 0x18
+ 590 0098 9142     		.uleb128 0x2111
+ 591 009a 18       		.uleb128 0x18
+ 592 009b 00       		.byte	0
+ 593 009c 00       		.byte	0
+ 594 009d 0C       		.uleb128 0xc
+ 595 009e 898201   		.uleb128 0x4109
+ 596 00a1 01       		.byte	0x1
+ 597 00a2 11       		.uleb128 0x11
+ 598 00a3 01       		.uleb128 0x1
+ 599 00a4 31       		.uleb128 0x31
+ 600 00a5 13       		.uleb128 0x13
+ 601 00a6 00       		.byte	0
+ 602 00a7 00       		.byte	0
+ 603 00a8 0D       		.uleb128 0xd
+ 604 00a9 2E       		.uleb128 0x2e
+ 605 00aa 01       		.byte	0x1
+ 606 00ab 3F       		.uleb128 0x3f
+ 607 00ac 19       		.uleb128 0x19
+ 608 00ad 03       		.uleb128 0x3
+ 609 00ae 0E       		.uleb128 0xe
+ 610 00af 3A       		.uleb128 0x3a
+ 611 00b0 0B       		.uleb128 0xb
+ 612 00b1 3B       		.uleb128 0x3b
+ 613 00b2 0B       		.uleb128 0xb
+ 614 00b3 27       		.uleb128 0x27
+ 615 00b4 19       		.uleb128 0x19
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 13
 
 
- 600      74726F6C 
- 600      2E6300
- 601              	.LASF32:
- 602 012e 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
- 602      6F646520 
- 602      74696C20 
- 602      50524A33 
- 602      5C73656D 
- 603 015c 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
- 603      70736F63 
- 603      5C646D63 
- 603      2D70736F 
- 603      632E6379 
- 604              	.LASF11:
- 605 0174 756E7369 		.ascii	"unsigned int\000"
- 605      676E6564 
- 605      20696E74 
- 605      00
- 606              	.LASF10:
- 607 0181 6C6F6E67 		.ascii	"long long unsigned int\000"
- 607      206C6F6E 
- 607      6720756E 
- 607      7369676E 
- 607      65642069 
- 608              	.LASF15:
- 609 0198 75696E74 		.ascii	"uint8_t\000"
- 609      385F7400 
- 610              	.LASF21:
- 611 01a0 646D635F 		.ascii	"dmc_pump_timer\000"
- 611      70756D70 
- 611      5F74696D 
- 611      657200
- 612              	.LASF13:
- 613 01af 73697A65 		.ascii	"sizetype\000"
- 613      74797065 
- 613      00
- 614              	.LASF9:
- 615 01b8 6C6F6E67 		.ascii	"long long int\000"
- 615      206C6F6E 
- 615      6720696E 
- 615      7400
- 616              	.LASF19:
- 617 01c6 50554D50 		.ascii	"PUMP_TIMER_2\000"
- 617      5F54494D 
- 617      45525F32 
- 617      00
- 618              	.LASF20:
- 619 01d3 50554D50 		.ascii	"PUMP_TIMER_3\000"
- 619      5F54494D 
- 619      45525F33 
- 619      00
- 620              	.LASF29:
- 621 01e0 70657269 		.ascii	"period_pr_cL\000"
- 621      6F645F70 
- 621      725F634C 
- 621      00
- 622              	.LASF23:
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccwj9v6a.s 			page 14
+ 616 00b5 49       		.uleb128 0x49
+ 617 00b6 13       		.uleb128 0x13
+ 618 00b7 11       		.uleb128 0x11
+ 619 00b8 01       		.uleb128 0x1
+ 620 00b9 12       		.uleb128 0x12
+ 621 00ba 06       		.uleb128 0x6
+ 622 00bb 40       		.uleb128 0x40
+ 623 00bc 18       		.uleb128 0x18
+ 624 00bd 9742     		.uleb128 0x2117
+ 625 00bf 19       		.uleb128 0x19
+ 626 00c0 01       		.uleb128 0x1
+ 627 00c1 13       		.uleb128 0x13
+ 628 00c2 00       		.byte	0
+ 629 00c3 00       		.byte	0
+ 630 00c4 0E       		.uleb128 0xe
+ 631 00c5 34       		.uleb128 0x34
+ 632 00c6 00       		.byte	0
+ 633 00c7 03       		.uleb128 0x3
+ 634 00c8 0E       		.uleb128 0xe
+ 635 00c9 3A       		.uleb128 0x3a
+ 636 00ca 0B       		.uleb128 0xb
+ 637 00cb 3B       		.uleb128 0x3b
+ 638 00cc 0B       		.uleb128 0xb
+ 639 00cd 49       		.uleb128 0x49
+ 640 00ce 13       		.uleb128 0x13
+ 641 00cf 1C       		.uleb128 0x1c
+ 642 00d0 05       		.uleb128 0x5
+ 643 00d1 00       		.byte	0
+ 644 00d2 00       		.byte	0
+ 645 00d3 0F       		.uleb128 0xf
+ 646 00d4 34       		.uleb128 0x34
+ 647 00d5 00       		.byte	0
+ 648 00d6 03       		.uleb128 0x3
+ 649 00d7 0E       		.uleb128 0xe
+ 650 00d8 3A       		.uleb128 0x3a
+ 651 00d9 0B       		.uleb128 0xb
+ 652 00da 3B       		.uleb128 0x3b
+ 653 00db 05       		.uleb128 0x5
+ 654 00dc 49       		.uleb128 0x49
+ 655 00dd 13       		.uleb128 0x13
+ 656 00de 3F       		.uleb128 0x3f
+ 657 00df 19       		.uleb128 0x19
+ 658 00e0 3C       		.uleb128 0x3c
+ 659 00e1 19       		.uleb128 0x19
+ 660 00e2 00       		.byte	0
+ 661 00e3 00       		.byte	0
+ 662 00e4 10       		.uleb128 0x10
+ 663 00e5 35       		.uleb128 0x35
+ 664 00e6 00       		.byte	0
+ 665 00e7 49       		.uleb128 0x49
+ 666 00e8 13       		.uleb128 0x13
+ 667 00e9 00       		.byte	0
+ 668 00ea 00       		.byte	0
+ 669 00eb 11       		.uleb128 0x11
+ 670 00ec 2E       		.uleb128 0x2e
+ 671 00ed 00       		.byte	0
+ 672 00ee 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 14
 
 
- 623 01ed 50554D50 		.ascii	"PUMP_1\000"
- 623      5F3100
- 624              	.LASF24:
- 625 01f4 50554D50 		.ascii	"PUMP_2\000"
- 625      5F3200
- 626              	.LASF25:
- 627 01fb 50554D50 		.ascii	"PUMP_3\000"
- 627      5F3300
- 628              	.LASF2:
- 629 0202 73686F72 		.ascii	"short int\000"
- 629      7420696E 
- 629      7400
- 630              	.LASF16:
- 631 020c 75696E74 		.ascii	"uint16_t\000"
- 631      31365F74 
- 631      00
- 632              	.LASF17:
- 633 0215 75696E74 		.ascii	"uint32_t\000"
- 633      33325F74 
- 633      00
- 634              	.LASF6:
- 635 021e 6C6F6E67 		.ascii	"long int\000"
- 635      20696E74 
- 635      00
- 636              	.LASF14:
- 637 0227 63686172 		.ascii	"char\000"
- 637      00
- 638              	.LASF12:
- 639 022c 6C6F6E67 		.ascii	"long double\000"
- 639      20646F75 
- 639      626C6500 
- 640              	.LASF0:
- 641 0238 7369676E 		.ascii	"signed char\000"
- 641      65642063 
- 641      68617200 
- 642              	.LASF28:
- 643 0244 74696D65 		.ascii	"timer_calc\000"
- 643      725F6361 
- 643      6C6300
- 644              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 673 00ef 19       		.uleb128 0x19
+ 674 00f0 3C       		.uleb128 0x3c
+ 675 00f1 19       		.uleb128 0x19
+ 676 00f2 6E       		.uleb128 0x6e
+ 677 00f3 0E       		.uleb128 0xe
+ 678 00f4 03       		.uleb128 0x3
+ 679 00f5 0E       		.uleb128 0xe
+ 680 00f6 3A       		.uleb128 0x3a
+ 681 00f7 0B       		.uleb128 0xb
+ 682 00f8 3B       		.uleb128 0x3b
+ 683 00f9 0B       		.uleb128 0xb
+ 684 00fa 00       		.byte	0
+ 685 00fb 00       		.byte	0
+ 686 00fc 00       		.byte	0
+ 687              		.section	.debug_loc,"",%progbits
+ 688              	.Ldebug_loc0:
+ 689              	.LLST0:
+ 690 0000 00000000 		.4byte	.LVL0
+ 691 0004 11000000 		.4byte	.LVL1-1
+ 692 0008 0100     		.2byte	0x1
+ 693 000a 50       		.byte	0x50
+ 694 000b 11000000 		.4byte	.LVL1-1
+ 695 000f 14000000 		.4byte	.LVL2
+ 696 0013 0400     		.2byte	0x4
+ 697 0015 F3       		.byte	0xf3
+ 698 0016 01       		.uleb128 0x1
+ 699 0017 50       		.byte	0x50
+ 700 0018 9F       		.byte	0x9f
+ 701 0019 14000000 		.4byte	.LVL2
+ 702 001d 16000000 		.4byte	.LVL3
+ 703 0021 0100     		.2byte	0x1
+ 704 0023 50       		.byte	0x50
+ 705 0024 16000000 		.4byte	.LVL3
+ 706 0028 1C000000 		.4byte	.LVL5
+ 707 002c 0400     		.2byte	0x4
+ 708 002e F3       		.byte	0xf3
+ 709 002f 01       		.uleb128 0x1
+ 710 0030 50       		.byte	0x50
+ 711 0031 9F       		.byte	0x9f
+ 712 0032 1C000000 		.4byte	.LVL5
+ 713 0036 1E000000 		.4byte	.LVL6
+ 714 003a 0100     		.2byte	0x1
+ 715 003c 50       		.byte	0x50
+ 716 003d 1E000000 		.4byte	.LVL6
+ 717 0041 24000000 		.4byte	.LFE64
+ 718 0045 0400     		.2byte	0x4
+ 719 0047 F3       		.byte	0xf3
+ 720 0048 01       		.uleb128 0x1
+ 721 0049 50       		.byte	0x50
+ 722 004a 9F       		.byte	0x9f
+ 723 004b 00000000 		.4byte	0
+ 724 004f 00000000 		.4byte	0
+ 725              	.LLST1:
+ 726 0053 00000000 		.4byte	.LVL8
+ 727 0057 11000000 		.4byte	.LVL9-1
+ 728 005b 0100     		.2byte	0x1
+ 729 005d 50       		.byte	0x50
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 15
+
+
+ 730 005e 11000000 		.4byte	.LVL9-1
+ 731 0062 14000000 		.4byte	.LVL10
+ 732 0066 0400     		.2byte	0x4
+ 733 0068 F3       		.byte	0xf3
+ 734 0069 01       		.uleb128 0x1
+ 735 006a 50       		.byte	0x50
+ 736 006b 9F       		.byte	0x9f
+ 737 006c 14000000 		.4byte	.LVL10
+ 738 0070 17000000 		.4byte	.LVL11-1
+ 739 0074 0100     		.2byte	0x1
+ 740 0076 50       		.byte	0x50
+ 741 0077 17000000 		.4byte	.LVL11-1
+ 742 007b 1A000000 		.4byte	.LVL12
+ 743 007f 0400     		.2byte	0x4
+ 744 0081 F3       		.byte	0xf3
+ 745 0082 01       		.uleb128 0x1
+ 746 0083 50       		.byte	0x50
+ 747 0084 9F       		.byte	0x9f
+ 748 0085 1A000000 		.4byte	.LVL12
+ 749 0089 1D000000 		.4byte	.LVL13-1
+ 750 008d 0100     		.2byte	0x1
+ 751 008f 50       		.byte	0x50
+ 752 0090 1D000000 		.4byte	.LVL13-1
+ 753 0094 20000000 		.4byte	.LVL14
+ 754 0098 0400     		.2byte	0x4
+ 755 009a F3       		.byte	0xf3
+ 756 009b 01       		.uleb128 0x1
+ 757 009c 50       		.byte	0x50
+ 758 009d 9F       		.byte	0x9f
+ 759 009e 20000000 		.4byte	.LVL14
+ 760 00a2 20000000 		.4byte	.LVL15
+ 761 00a6 0100     		.2byte	0x1
+ 762 00a8 50       		.byte	0x50
+ 763 00a9 20000000 		.4byte	.LVL15
+ 764 00ad 22000000 		.4byte	.LFE65
+ 765 00b1 0400     		.2byte	0x4
+ 766 00b3 F3       		.byte	0xf3
+ 767 00b4 01       		.uleb128 0x1
+ 768 00b5 50       		.byte	0x50
+ 769 00b6 9F       		.byte	0x9f
+ 770 00b7 00000000 		.4byte	0
+ 771 00bb 00000000 		.4byte	0
+ 772              	.LLST2:
+ 773 00bf 00000000 		.4byte	.LVL16
+ 774 00c3 10000000 		.4byte	.LVL17
+ 775 00c7 0100     		.2byte	0x1
+ 776 00c9 50       		.byte	0x50
+ 777 00ca 10000000 		.4byte	.LVL17
+ 778 00ce 16000000 		.4byte	.LVL19
+ 779 00d2 0400     		.2byte	0x4
+ 780 00d4 F3       		.byte	0xf3
+ 781 00d5 01       		.uleb128 0x1
+ 782 00d6 50       		.byte	0x50
+ 783 00d7 9F       		.byte	0x9f
+ 784 00d8 16000000 		.4byte	.LVL19
+ 785 00dc 18000000 		.4byte	.LVL20
+ 786 00e0 0100     		.2byte	0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 16
+
+
+ 787 00e2 50       		.byte	0x50
+ 788 00e3 18000000 		.4byte	.LVL20
+ 789 00e7 1E000000 		.4byte	.LVL22
+ 790 00eb 0400     		.2byte	0x4
+ 791 00ed F3       		.byte	0xf3
+ 792 00ee 01       		.uleb128 0x1
+ 793 00ef 50       		.byte	0x50
+ 794 00f0 9F       		.byte	0x9f
+ 795 00f1 1E000000 		.4byte	.LVL22
+ 796 00f5 20000000 		.4byte	.LVL23
+ 797 00f9 0100     		.2byte	0x1
+ 798 00fb 50       		.byte	0x50
+ 799 00fc 20000000 		.4byte	.LVL23
+ 800 0100 26000000 		.4byte	.LFE66
+ 801 0104 0400     		.2byte	0x4
+ 802 0106 F3       		.byte	0xf3
+ 803 0107 01       		.uleb128 0x1
+ 804 0108 50       		.byte	0x50
+ 805 0109 9F       		.byte	0x9f
+ 806 010a 00000000 		.4byte	0
+ 807 010e 00000000 		.4byte	0
+ 808              		.section	.debug_aranges,"",%progbits
+ 809 0000 2C000000 		.4byte	0x2c
+ 810 0004 0200     		.2byte	0x2
+ 811 0006 00000000 		.4byte	.Ldebug_info0
+ 812 000a 04       		.byte	0x4
+ 813 000b 00       		.byte	0
+ 814 000c 0000     		.2byte	0
+ 815 000e 0000     		.2byte	0
+ 816 0010 00000000 		.4byte	.LFB64
+ 817 0014 24000000 		.4byte	.LFE64-.LFB64
+ 818 0018 00000000 		.4byte	.LFB65
+ 819 001c 22000000 		.4byte	.LFE65-.LFB65
+ 820 0020 00000000 		.4byte	.LFB66
+ 821 0024 26000000 		.4byte	.LFE66-.LFB66
+ 822 0028 00000000 		.4byte	0
+ 823 002c 00000000 		.4byte	0
+ 824              		.section	.debug_ranges,"",%progbits
+ 825              	.Ldebug_ranges0:
+ 826 0000 00000000 		.4byte	.LFB64
+ 827 0004 24000000 		.4byte	.LFE64
+ 828 0008 00000000 		.4byte	.LFB65
+ 829 000c 22000000 		.4byte	.LFE65
+ 830 0010 00000000 		.4byte	.LFB66
+ 831 0014 26000000 		.4byte	.LFE66
+ 832 0018 00000000 		.4byte	0
+ 833 001c 00000000 		.4byte	0
+ 834              		.section	.debug_line,"",%progbits
+ 835              	.Ldebug_line0:
+ 836 0000 D0010000 		.section	.debug_str,"MS",%progbits,1
+ 836      02008C01 
+ 836      00000201 
+ 836      FB0E0D00 
+ 836      01010101 
+ 837              	.LASF24:
+ 838 0000 6770696F 		.ascii	"gpio_pump_1_Write\000"
+ 838      5F70756D 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 17
+
+
+ 838      705F315F 
+ 838      57726974 
+ 838      6500
+ 839              	.LASF5:
+ 840 0012 5F5F696E 		.ascii	"__int32_t\000"
+ 840      7433325F 
+ 840      7400
+ 841              	.LASF25:
+ 842 001c 6770696F 		.ascii	"gpio_pump_2_Write\000"
+ 842      5F70756D 
+ 842      705F325F 
+ 842      57726974 
+ 842      6500
+ 843              	.LASF21:
+ 844 002e 70756D70 		.ascii	"pump\000"
+ 844      00
+ 845              	.LASF20:
+ 846 0033 646F7562 		.ascii	"double\000"
+ 846      6C6500
+ 847              	.LASF19:
+ 848 003a 666C6F61 		.ascii	"float\000"
+ 848      7400
+ 849              	.LASF0:
+ 850 0040 7369676E 		.ascii	"signed char\000"
+ 850      65642063 
+ 850      68617200 
+ 851              	.LASF1:
+ 852 004c 756E7369 		.ascii	"unsigned char\000"
+ 852      676E6564 
+ 852      20636861 
+ 852      7200
+ 853              	.LASF30:
+ 854 005a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 854      43313120 
+ 854      352E342E 
+ 854      31203230 
+ 854      31363036 
+ 855 008d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 855      20726576 
+ 855      6973696F 
+ 855      6E203233 
+ 855      37373135 
+ 856 00c0 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 856      66756E63 
+ 856      74696F6E 
+ 856      2D736563 
+ 856      74696F6E 
+ 857              	.LASF29:
+ 858 00e8 6770696F 		.ascii	"gpio_pump_3_Read\000"
+ 858      5F70756D 
+ 858      705F335F 
+ 858      52656164 
+ 858      00
+ 859              	.LASF7:
+ 860 00f9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 860      20756E73 
+ 860      69676E65 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 18
+
+
+ 860      6420696E 
+ 860      7400
+ 861              	.LASF3:
+ 862 010b 73686F72 		.ascii	"short unsigned int\000"
+ 862      7420756E 
+ 862      7369676E 
+ 862      65642069 
+ 862      6E7400
+ 863              	.LASF36:
+ 864 011e 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 864      52784275 
+ 864      66666572 
+ 864      00
+ 865              	.LASF27:
+ 866 012b 6770696F 		.ascii	"gpio_pump_1_Read\000"
+ 866      5F70756D 
+ 866      705F315F 
+ 866      52656164 
+ 866      00
+ 867              	.LASF33:
+ 868 013c 646D635F 		.ascii	"dmc_pump\000"
+ 868      70756D70 
+ 868      00
+ 869              	.LASF28:
+ 870 0145 6770696F 		.ascii	"gpio_pump_2_Read\000"
+ 870      5F70756D 
+ 870      705F325F 
+ 870      52656164 
+ 870      00
+ 871              	.LASF6:
+ 872 0156 5F5F7569 		.ascii	"__uint32_t\000"
+ 872      6E743332 
+ 872      5F7400
+ 873              	.LASF23:
+ 874 0161 73746F70 		.ascii	"stop_pump\000"
+ 874      5F70756D 
+ 874      7000
+ 875              	.LASF26:
+ 876 016b 6770696F 		.ascii	"gpio_pump_3_Write\000"
+ 876      5F70756D 
+ 876      705F335F 
+ 876      57726974 
+ 876      6500
+ 877              	.LASF31:
+ 878 017d 70756D70 		.ascii	"pump_control.c\000"
+ 878      5F636F6E 
+ 878      74726F6C 
+ 878      2E6300
+ 879              	.LASF32:
+ 880 018c 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
+ 880      6F646520 
+ 880      74696C20 
+ 880      50524A33 
+ 880      5C73656D 
+ 881 01ba 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
+ 881      70736F63 
+ 881      5C646D63 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 19
+
+
+ 881      2D70736F 
+ 881      632E6379 
+ 882              	.LASF10:
+ 883 01d2 756E7369 		.ascii	"unsigned int\000"
+ 883      676E6564 
+ 883      20696E74 
+ 883      00
+ 884              	.LASF9:
+ 885 01df 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 885      206C6F6E 
+ 885      6720756E 
+ 885      7369676E 
+ 885      65642069 
+ 886              	.LASF22:
+ 887 01f6 70756D70 		.ascii	"pump_fluid\000"
+ 887      5F666C75 
+ 887      696400
+ 888              	.LASF14:
+ 889 0201 696E7433 		.ascii	"int32_t\000"
+ 889      325F7400 
+ 890              	.LASF12:
+ 891 0209 73697A65 		.ascii	"sizetype\000"
+ 891      74797065 
+ 891      00
+ 892              	.LASF8:
+ 893 0212 6C6F6E67 		.ascii	"long long int\000"
+ 893      206C6F6E 
+ 893      6720696E 
+ 893      7400
+ 894              	.LASF13:
+ 895 0220 63686172 		.ascii	"char\000"
+ 895      00
+ 896              	.LASF16:
+ 897 0225 50554D50 		.ascii	"PUMP_1\000"
+ 897      5F3100
+ 898              	.LASF17:
+ 899 022c 50554D50 		.ascii	"PUMP_2\000"
+ 899      5F3200
+ 900              	.LASF18:
+ 901 0233 50554D50 		.ascii	"PUMP_3\000"
+ 901      5F3300
+ 902              	.LASF2:
+ 903 023a 73686F72 		.ascii	"short int\000"
+ 903      7420696E 
+ 903      7400
+ 904              	.LASF15:
+ 905 0244 75696E74 		.ascii	"uint32_t\000"
+ 905      33325F74 
+ 905      00
+ 906              	.LASF4:
+ 907 024d 6C6F6E67 		.ascii	"long int\000"
+ 907      20696E74 
+ 907      00
+ 908              	.LASF11:
+ 909 0256 6C6F6E67 		.ascii	"long double\000"
+ 909      20646F75 
+ 909      626C6500 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccIkLXDc.s 			page 20
+
+
+ 910              	.LASF34:
+ 911 0262 69735F70 		.ascii	"is_pumping\000"
+ 911      756D7069 
+ 911      6E6700
+ 912              	.LASF35:
+ 913 026d 70657269 		.ascii	"period_pr_cL\000"
+ 913      6F645F70 
+ 913      725F634C 
+ 913      00
+ 914              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -23,16 +23,16 @@ extern void cyfitter_cfg(void);
 
 /* Analog Set/Unset methods */
 extern void SetAnalogRoutingPumps(uint8 enabled);
-extern void AMux_Set(uint8 channel);
-extern void AMux_Unset(uint8 channel);
-/* AMux__addrTable is an implementation detail of the AMux.
+extern void weight_selector_Set(uint8 channel);
+extern void weight_selector_Unset(uint8 channel);
+/* weight_selector__addrTable is an implementation detail of the AMux.
    Code that depends on it may be incompatible with other versions
    of PSoC Creator. */
-extern uint8 CYXDATA * const CYCODE AMux__addrTable[6];
-/* AMux__maskTable is an implementation detail of the AMux.
+extern uint8 CYXDATA * const CYCODE weight_selector__addrTable[6];
+/* weight_selector__maskTable is an implementation detail of the AMux.
    Code that depends on it may be incompatible with other versions
    of PSoC Creator. */
-extern const uint8 CYCODE AMux__maskTable[6];
+extern const uint8 CYCODE weight_selector__maskTable[6];
 
 
 #endif /* CYFITTER_CFG_H */

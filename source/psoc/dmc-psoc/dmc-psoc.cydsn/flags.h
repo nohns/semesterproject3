@@ -13,6 +13,5 @@
 
 //All global flags are to be defined here.
 
-int is_pumping = 0;
 
 /* [] END OF FILE */

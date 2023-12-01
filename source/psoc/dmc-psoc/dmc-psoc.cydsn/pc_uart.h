@@ -13,8 +13,9 @@
 #define TEST_UART_H
 
 #include "project.h"
-#include "packet_uart.h"
 
+    
+void init_uart_pc();    
 void echo_uart(const char* string);
 
 /* [] END OF FILE */

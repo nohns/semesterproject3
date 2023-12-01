@@ -18,21 +18,18 @@
     
     
     enum dmc_weight_number{
-     WEIGHT_1 = 1,
-     WEIGHT_2 = 2,
-     WEIGHT_3 = 3,          
+         WEIGHT_1 = 1,
+         WEIGHT_2 = 2,
+         WEIGHT_3 = 3,          
     };
     
-    
-    
-    
     struct weight {
-     enum dmc_weight_number weight_number;
-     uint16_t result;
-     float tara;
-     float adc_divider;
-     uint16_t min;
-     uint16_t max;
+         enum dmc_weight_number weight_number;
+         uint16_t result;
+         float tara;
+         float adc_divider;
+         uint16_t min;
+         uint16_t max;
     };
     
     struct weight weight1;
@@ -43,8 +40,7 @@
 
     void set_current_weight(enum dmc_weight_number current_weight);
 
-    
-    void kalibrate_weights();
-    uint16_t measure_weight(enum dmc_weight_number weight);
+    void weight_init();
+    uint16_t measure_weight_value(enum dmc_weight_number weight);
     
 #endif //WEIGHT_H

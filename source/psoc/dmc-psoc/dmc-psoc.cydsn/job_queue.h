@@ -25,5 +25,6 @@ void init_queue();
 void job_enqueue_packet(struct dmc_packet* job_packet);
 struct dmc_packet* job_dequeue_packet();
 struct job* job_dequeue();
+void job_enqueue_timer(void* data);
 
 #endif //JOB_QUEUE_H

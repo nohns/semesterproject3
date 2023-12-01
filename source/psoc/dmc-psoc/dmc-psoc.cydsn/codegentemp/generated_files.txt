@@ -18,13 +18,13 @@
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\cyfitteriar.inc" value="HEADER;;;;;" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\cyfitter.h" value="HEADER;;;;;" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\cydisabledsheets.h" value="HEADER;;;;;" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\UART_1.c" value="SOURCE_C;CortexM3;;;;UART_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\UART_1.h" value="HEADER;;;;;UART_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\UART_1_PM.c" value="SOURCE_C;CortexM3;;;;UART_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\UART_1_INT.c" value="SOURCE_C;CortexM3;;;;UART_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\UART_1_BOOT.c" value="SOURCE_C;CortexM3;;;;UART_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_uart_rx.c" value="SOURCE_C;CortexM3;;;;isr_uart_rx" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_uart_rx.h" value="HEADER;;;;;isr_uart_rx" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_pc.c" value="SOURCE_C;CortexM3;;;;uart_pc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_pc.h" value="HEADER;;;;;uart_pc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_pc_PM.c" value="SOURCE_C;CortexM3;;;;uart_pc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_pc_INT.c" value="SOURCE_C;CortexM3;;;;uart_pc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_pc_BOOT.c" value="SOURCE_C;CortexM3;;;;uart_pc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_uart_pc_rx.c" value="SOURCE_C;CortexM3;;;;isr_uart_pc_rx" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_uart_pc_rx.h" value="HEADER;;;;;isr_uart_pc_rx" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\pump_timer_clock_1.c" value="SOURCE_C;CortexM3;;;;pump_timer_clock_1" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\pump_timer_clock_1.h" value="HEADER;;;;;pump_timer_clock_1" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\pump_timer_1.c" value="SOURCE_C;CortexM3;;;;pump_timer_1" />
@@ -53,12 +53,12 @@
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\check_weight_timer_PM.c" value="SOURCE_C;CortexM3;;;;check_weight_timer" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_check_weight_timer.c" value="SOURCE_C;CortexM3;;;;isr_check_weight_timer" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_check_weight_timer.h" value="HEADER;;;;;isr_check_weight_timer" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1.c" value="SOURCE_C;CortexM3;;;;ADC_SAR_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1.h" value="HEADER;;;;;ADC_SAR_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_INT.c" value="SOURCE_C;CortexM3;;;;ADC_SAR_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_PM.c" value="SOURCE_C;CortexM3;;;;ADC_SAR_1" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\AMux.c" value="SOURCE_C;CortexM3;;;;AMux" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\AMux.h" value="HEADER;;;;;AMux" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc.c" value="SOURCE_C;CortexM3;;;;weight_adc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc.h" value="HEADER;;;;;weight_adc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_INT.c" value="SOURCE_C;CortexM3;;;;weight_adc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_PM.c" value="SOURCE_C;CortexM3;;;;weight_adc" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_selector.c" value="SOURCE_C;CortexM3;;;;weight_selector" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_selector.h" value="HEADER;;;;;weight_selector" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_1_aliases.h" value="HEADER;;;;;weight_1" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_1.c" value="SOURCE_C;CortexM3;;;;weight_1" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_1.h" value="HEADER;;;;;weight_1" />
@@ -77,15 +77,24 @@
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\gpio_pump_2_aliases.h" value="HEADER;;;;;gpio_pump_2" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\gpio_pump_2.c" value="SOURCE_C;CortexM3;;;;gpio_pump_2" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\gpio_pump_2.h" value="HEADER;;;;;gpio_pump_2" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\UART_1_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_1_IntClock" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\UART_1_IntClock.h" value="HEADER;;;;;UART_1_IntClock" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_IRQ.c" value="SOURCE_C;CortexM3;;;;ADC_SAR_1_IRQ" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_IRQ.h" value="HEADER;;;;;ADC_SAR_1_IRQ" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_theACLK.c" value="SOURCE_C;CortexM3;;;;ADC_SAR_1_theACLK" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_theACLK.h" value="HEADER;;;;;ADC_SAR_1_theACLK" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_ExtVref_aliases.h" value="HEADER;;;;;ADC_SAR_1_ExtVref" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_ExtVref.c" value="SOURCE_C;CortexM3;;;;ADC_SAR_1_ExtVref" />
-  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\ADC_SAR_1_ExtVref.h" value="HEADER;;;;;ADC_SAR_1_ExtVref" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_rpi.c" value="SOURCE_C;CortexM3;;;;uart_rpi" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_rpi.h" value="HEADER;;;;;uart_rpi" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_rpi_PM.c" value="SOURCE_C;CortexM3;;;;uart_rpi" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_rpi_INT.c" value="SOURCE_C;CortexM3;;;;uart_rpi" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_rpi_BOOT.c" value="SOURCE_C;CortexM3;;;;uart_rpi" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_uart_rpi_rx.c" value="SOURCE_C;CortexM3;;;;isr_uart_rpi_rx" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\isr_uart_rpi_rx.h" value="HEADER;;;;;isr_uart_rpi_rx" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_pc_IntClock.c" value="SOURCE_C;CortexM3;;;;uart_pc_IntClock" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_pc_IntClock.h" value="HEADER;;;;;uart_pc_IntClock" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_IRQ.c" value="SOURCE_C;CortexM3;;;;weight_adc_IRQ" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_IRQ.h" value="HEADER;;;;;weight_adc_IRQ" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_theACLK.c" value="SOURCE_C;CortexM3;;;;weight_adc_theACLK" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_theACLK.h" value="HEADER;;;;;weight_adc_theACLK" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_ExtVref_aliases.h" value="HEADER;;;;;weight_adc_ExtVref" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_ExtVref.c" value="SOURCE_C;CortexM3;;;;weight_adc_ExtVref" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\weight_adc_ExtVref.h" value="HEADER;;;;;weight_adc_ExtVref" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_rpi_IntClock.c" value="SOURCE_C;CortexM3;;;;uart_rpi_IntClock" />
+  <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\uart_rpi_IntClock.h" value="HEADER;;;;;uart_rpi_IntClock" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\cm3gcc.ld" value="LINKER_SCRIPT;;;b98f980c-3bd1-4fc7-a887-c56a20a46fdd;;cy_boot" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\Cm3RealView.scat" value="LINKER_SCRIPT;;;fdb8e1ae-f83a-46cf-9446-1d703716f38a;;cy_boot" />
   <file name="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\codegentemp\Cm3Start.c" value="SOURCE_C;CortexM3;;;;cy_boot" />

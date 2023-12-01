@@ -1,22 +1,20 @@
---------------- Build Started: 11/25/2023 23:00:01 Project: dmc-psoc, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 12/01/2023 10:41:02 Project: dmc-psoc, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
-main.c: In function 'is_weight_within_threshold':
-main.c:36:9: warning: unused variable 'lower_threshold' [-Wunused-variable]
-     int lower_threshold;
-         ^
-main.c:35:9: warning: unused variable 'upper_threshold' [-Wunused-variable]
-     int upper_threshold;
-         ^
 main.c: In function 'handle_packet':
-main.c:77:5: warning: enumeration value 'DMC_PACKET_OUT_OF_ORDER' not handled in switch [-Wswitch]
+main.c:90:5: warning: enumeration value 'DMC_PACKET_OUT_OF_ORDER' not handled in switch [-Wswitch]
      switch(packet->type)
      ^
-main.c:77:5: warning: enumeration value 'DMC_PACKET_CONTAINER_WEIGHT_MEASURED' not handled in switch [-Wswitch]
-main.c:77:5: warning: enumeration value 'DMC_PACKET_USER_CONFIRM' not handled in switch [-Wswitch]
+main.c:90:5: warning: enumeration value 'DMC_PACKET_CONTAINER_WEIGHT_MEASURED' not handled in switch [-Wswitch]
+main.c: In function 'main':
+main.c:175:30: warning: passing argument 1 of 'handle_timer' from incompatible pointer type [-Wincompatible-pointer-types]
+                 handle_timer((struct timer_action*)current_job->data);
+                              ^
+main.c:112:6: note: expected 'struct dmc_timer_action *' but argument is of type 'struct timer_action *'
+ void handle_timer(struct dmc_timer_action* action)
+      ^
 In file included from ..\..\..\common\hw\include\packet.h:4:0,
                  from job_queue.h:10,
-                 from packet_uart.h:16,
                  from main.c:13:
 main.c: At top level:
 ..\..\..\common\hw\include\base_packet.h:91:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
@@ -26,13 +24,12 @@ main.c: At top level:
  static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
                       ^
 In file included from job_queue.h:10:0,
-                 from packet_uart.h:16,
                  from main.c:13:
 ..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
  dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
  ^
 ..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet              *to,
+ dmc_packet_marshal_out_of_order(struct dmc_packet *to,
  ^
 ..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
  static int dmc_packet_unmarshal_container_weight_measured(
@@ -44,12 +41,51 @@ In file included from job_queue.h:10:0,
  dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
  ^
 ..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet              *to,
+ dmc_packet_marshal_user_confirm(struct dmc_packet *to,
  ^
 ..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_marshal_fluid_pour_requested(
             ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/timers.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c timers.c -o .\CortexM3\ARM_GCC_541\Debug\timers.o
+In file included from ..\..\..\common\hw\include\packet.h:4:0,
+                 from job_queue.h:10,
+                 from timers.c:17:
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/job_queue.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c job_queue.c -o .\CortexM3\ARM_GCC_541\Debug\job_queue.o
+..\..\..\common\hw\include\base_packet.h:75:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
+ static void dmc_packet_free(struct dmc_packet *packet)
+             ^
+..\..\..\common\hw\include\base_packet.h:91:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
+ static unsigned char dmc_packet_complete(struct dmc_packet *packet)
+                      ^
+..\..\..\common\hw\include\base_packet.h:101:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
+ static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
+                      ^
+In file included from job_queue.h:10:0,
+                 from timers.c:17:
+..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
+ dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
+ ^
+..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
+ dmc_packet_marshal_out_of_order(struct dmc_packet *to,
+ ^
+..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_container_weight_measured(
+            ^
+..\..\..\common\hw\include\packet.h:138:12: warning: 'dmc_packet_marshal_container_weight_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_marshal_container_weight_measured(
+            ^
+..\..\..\common\hw\include\packet.h:172:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
+ ^
+..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_marshal_user_confirm(struct dmc_packet *to,
+ ^
+..\..\..\common\hw\include\packet.h:223:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_fluid_pour_requested(
+            ^
+..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
+ static int dmc_packet_marshal_fluid_pour_requested(
+            ^
 In file included from ..\..\..\common\hw\include\packet.h:4:0,
                  from job_queue.h:10,
                  from job_queue.c:15:
@@ -68,7 +104,7 @@ In file included from job_queue.h:10:0,
  dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
  ^
 ..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet              *to,
+ dmc_packet_marshal_out_of_order(struct dmc_packet *to,
  ^
 ..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
  static int dmc_packet_unmarshal_container_weight_measured(
@@ -80,7 +116,7 @@ In file included from job_queue.h:10:0,
  dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
  ^
 ..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet              *to,
+ dmc_packet_marshal_user_confirm(struct dmc_packet *to,
  ^
 ..\..\..\common\hw\include\packet.h:223:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_unmarshal_fluid_pour_requested(
@@ -88,65 +124,34 @@ In file included from job_queue.h:10:0,
 ..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_marshal_fluid_pour_requested(
             ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/packet_uart.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c packet_uart.c -o .\CortexM3\ARM_GCC_541\Debug\packet_uart.o
-In file included from ..\..\..\common\hw\include\packet.h:4:0,
-                 from job_queue.h:10,
-                 from packet_uart.h:16,
-                 from packet_uart.c:14:
-..\..\..\common\hw\include\base_packet.h:75:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
- static void dmc_packet_free(struct dmc_packet *packet)
-             ^
-In file included from job_queue.h:10:0,
-                 from packet_uart.h:16,
-                 from packet_uart.c:14:
-..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_control.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c pump_control.c -o .\CortexM3\ARM_GCC_541\Debug\pump_control.o
+pump_control.c:17:17: warning: 'period_pr_cL' defined but not used [-Wunused-variable]
+ static uint32_t period_pr_cL = 2400;
+                 ^
+pump_control.c: In function 'is_pumping':
+pump_control.c:51:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
  ^
-..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet              *to,
- ^
-..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_container_weight_measured(
-            ^
-..\..\..\common\hw\include\packet.h:138:12: warning: 'dmc_packet_marshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_container_weight_measured(
-            ^
-..\..\..\common\hw\include\packet.h:172:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
- ^
-..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet              *to,
- ^
-..\..\..\common\hw\include\packet.h:223:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_fluid_pour_requested(
-            ^
-..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_fluid_pour_requested(
-            ^
 arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pc_uart.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c pc_uart.c -o .\CortexM3\ARM_GCC_541\Debug\pc_uart.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/weight.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c weight.c -o .\CortexM3\ARM_GCC_541\Debug\weight.o
+weight.c: In function 'measure_weight_value':
+weight.c:101:24: warning: 'result' may be used uninitialized in this function [-Wmaybe-uninitialized]
+                 result += weight_adc_GetResult16();
+                        ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/bro.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c bro.c -o .\CortexM3\ARM_GCC_541\Debug\bro.o
 In file included from ..\..\..\common\hw\include\packet.h:4:0,
                  from job_queue.h:10,
-                 from packet_uart.h:16,
-                 from pc_uart.h:16,
-                 from pc_uart.c:12:
+                 from bro.c:13:
 ..\..\..\common\hw\include\base_packet.h:75:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
  static void dmc_packet_free(struct dmc_packet *packet)
              ^
-..\..\..\common\hw\include\base_packet.h:91:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
- static unsigned char dmc_packet_complete(struct dmc_packet *packet)
-                      ^
-..\..\..\common\hw\include\base_packet.h:101:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
- static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
-                      ^
 In file included from job_queue.h:10:0,
-                 from packet_uart.h:16,
-                 from pc_uart.h:16,
-                 from pc_uart.c:12:
+                 from bro.c:13:
 ..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
  dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
  ^
 ..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet              *to,
+ dmc_packet_marshal_out_of_order(struct dmc_packet *to,
  ^
 ..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
  static int dmc_packet_unmarshal_container_weight_measured(
@@ -158,7 +163,7 @@ In file included from job_queue.h:10:0,
  dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
  ^
 ..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet              *to,
+ dmc_packet_marshal_user_confirm(struct dmc_packet *to,
  ^
 ..\..\..\common\hw\include\packet.h:223:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_unmarshal_fluid_pour_requested(
@@ -166,64 +171,18 @@ In file included from job_queue.h:10:0,
 ..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_marshal_fluid_pour_requested(
             ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/weight.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c weight.c -o .\CortexM3\ARM_GCC_541\Debug\weight.o
-weight.c: In function 'check_weight':
-weight.c:96:1: warning: control reaches end of non-void function [-Wreturn-type]
- };
- ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/cyfitter_cfg.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\cyfitter_cfg.c -o .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/cymetadata.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\cymetadata.c -o .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/UART_1.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\UART_1.c -o .\CortexM3\ARM_GCC_541\Debug\UART_1.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/UART_1_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\UART_1_PM.c -o .\CortexM3\ARM_GCC_541\Debug\UART_1_PM.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/UART_1_INT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\UART_1_INT.c -o .\CortexM3\ARM_GCC_541\Debug\UART_1_INT.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/UART_1_BOOT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\UART_1_BOOT.c -o .\CortexM3\ARM_GCC_541\Debug\UART_1_BOOT.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/isr_uart_rx.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\isr_uart_rx.c -o .\CortexM3\ARM_GCC_541\Debug\isr_uart_rx.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/UART_1_IntClock.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\UART_1_IntClock.c -o .\CortexM3\ARM_GCC_541\Debug\UART_1_IntClock.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/Cm3Start.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\Cm3Start.c -o .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/CyDmac.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\CyDmac.c -o .\CortexM3\ARM_GCC_541\Debug\CyDmac.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/CyFlash.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\CyFlash.c -o .\CortexM3\ARM_GCC_541\Debug\CyFlash.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/CyLib.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\CyLib.c -o .\CortexM3\ARM_GCC_541\Debug\CyLib.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/cyPm.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\cyPm.c -o .\CortexM3\ARM_GCC_541\Debug\cyPm.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/CySpc.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\CySpc.c -o .\CortexM3\ARM_GCC_541\Debug\CySpc.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/cyutils.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\cyutils.c -o .\CortexM3\ARM_GCC_541\Debug\cyutils.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/cy_em_eeprom.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\cy_em_eeprom.c -o .\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/check_weight_timer.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\check_weight_timer.c -o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/check_weight_timer_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\check_weight_timer_PM.c -o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_PM.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_clock_1.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_clock_1.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_1.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_1.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_1.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_1_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_1_PM.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1_PM.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_clock_3.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_clock_3.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_3.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/isr_pump_timer_2.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\isr_pump_timer_2.c -o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_2.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_clock_2.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_clock_2.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_2.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_2.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_2.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_2_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_2_PM.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2_PM.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/isr_pump_timer_1.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\isr_pump_timer_1.c -o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_1.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_3.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_3.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_timer_3_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\pump_timer_3_PM.c -o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3_PM.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/isr_pump_timer_3.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\isr_pump_timer_3.c -o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_3.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/check_weight_timer_clock.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\check_weight_timer_clock.c -o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_clock.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/isr_check_weight_timer.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\isr_check_weight_timer.c -o .\CortexM3\ARM_GCC_541\Debug\isr_check_weight_timer.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/ADC_SAR_1.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\ADC_SAR_1.c -o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/ADC_SAR_1_INT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\ADC_SAR_1_INT.c -o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_INT.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/ADC_SAR_1_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\ADC_SAR_1_PM.c -o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_PM.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/AMux.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\AMux.c -o .\CortexM3\ARM_GCC_541\Debug\AMux.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/weight_1.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\weight_1.c -o .\CortexM3\ARM_GCC_541\Debug\weight_1.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/weight_2.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\weight_2.c -o .\CortexM3\ARM_GCC_541\Debug\weight_2.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/weight_3.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\weight_3.c -o .\CortexM3\ARM_GCC_541\Debug\weight_3.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/ADC_SAR_1_IRQ.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\ADC_SAR_1_IRQ.c -o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_IRQ.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/ADC_SAR_1_theACLK.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\ADC_SAR_1_theACLK.c -o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_theACLK.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/ADC_SAR_1_ExtVref.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\ADC_SAR_1_ExtVref.c -o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_ExtVref.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/gpio_pump_1.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\gpio_pump_1.c -o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_1.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/gpio_pump_3.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\gpio_pump_3.c -o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_3.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/gpio_pump_2.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\gpio_pump_2.c -o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_2.o
-arm-none-eabi-as.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -alh=.\CortexM3\ARM_GCC_541\Debug/CyBootAsmGnu.lst -g -W -o .\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o Generated_Source\PSoC5\CyBootAsmGnu.s
-arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a .\CortexM3\ARM_GCC_541\Debug\UART_1.o .\CortexM3\ARM_GCC_541\Debug\UART_1_PM.o .\CortexM3\ARM_GCC_541\Debug\UART_1_INT.o .\CortexM3\ARM_GCC_541\Debug\UART_1_BOOT.o .\CortexM3\ARM_GCC_541\Debug\isr_uart_rx.o .\CortexM3\ARM_GCC_541\Debug\UART_1_IntClock.o .\CortexM3\ARM_GCC_541\Debug\CyDmac.o .\CortexM3\ARM_GCC_541\Debug\CyFlash.o .\CortexM3\ARM_GCC_541\Debug\CyLib.o .\CortexM3\ARM_GCC_541\Debug\cyPm.o .\CortexM3\ARM_GCC_541\Debug\CySpc.o .\CortexM3\ARM_GCC_541\Debug\cyutils.o .\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_3.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_clock.o .\CortexM3\ARM_GCC_541\Debug\isr_check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1.o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_INT.o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_PM.o .\CortexM3\ARM_GCC_541\Debug\AMux.o .\CortexM3\ARM_GCC_541\Debug\weight_1.o .\CortexM3\ARM_GCC_541\Debug\weight_2.o .\CortexM3\ARM_GCC_541\Debug\weight_3.o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_IRQ.o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_theACLK.o .\CortexM3\ARM_GCC_541\Debug\ADC_SAR_1_ExtVref.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_1.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_3.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_2.o .\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi_PM.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_INT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi_INT.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_BOOT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi_BOOT.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_BOOT.o
+arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a .\CortexM3\ARM_GCC_541\Debug\CyDmac.o .\CortexM3\ARM_GCC_541\Debug\CyFlash.o .\CortexM3\ARM_GCC_541\Debug\CyLib.o .\CortexM3\ARM_GCC_541\Debug\cyPm.o .\CortexM3\ARM_GCC_541\Debug\CySpc.o .\CortexM3\ARM_GCC_541\Debug\cyutils.o .\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_3.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_clock.o .\CortexM3\ARM_GCC_541\Debug\isr_check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\weight_1.o .\CortexM3\ARM_GCC_541\Debug\weight_2.o .\CortexM3\ARM_GCC_541\Debug\weight_3.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_1.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_3.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_2.o .\CortexM3\ARM_GCC_541\Debug\weight_selector.o .\CortexM3\ARM_GCC_541\Debug\weight_adc.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_INT.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_PM.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_IRQ.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_theACLK.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_ExtVref.o .\CortexM3\ARM_GCC_541\Debug\uart_pc.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_PM.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_INT.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_BOOT.o .\CortexM3\ARM_GCC_541\Debug\isr_uart_pc_rx.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_PM.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_INT.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_BOOT.o .\CortexM3\ARM_GCC_541\Debug\isr_uart_rpi_rx.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_IntClock.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_IntClock.o .\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o
 arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a
-arm-none-eabi-gcc.exe -Wl,--start-group -o "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf" .\CortexM3\ARM_GCC_541\Debug\main.o .\CortexM3\ARM_GCC_541\Debug\timers.o .\CortexM3\ARM_GCC_541\Debug\job_queue.o .\CortexM3\ARM_GCC_541\Debug\pump_control.o .\CortexM3\ARM_GCC_541\Debug\packet_uart.o .\CortexM3\ARM_GCC_541\Debug\pc_uart.o .\CortexM3\ARM_GCC_541\Debug\weight.o .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_541\Debug\cymetadata.o .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_541\Debug/dmc-psoc.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects -Wl,--end-group
-.\CortexM3\ARM_GCC_541\Debug\main.o: In function `do_periodic_weight_check':
-C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn/main.c:48: undefined reference to `measure_weight'
-.\CortexM3\ARM_GCC_541\Debug\main.o: In function `handle_timer':
-C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn/main.c:103: undefined reference to `stop_pump'
-collect2.exe: error: ld returned 1 exit status
-The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
---------------- Build Failed: 11/25/2023 23:00:15 ---------------
+arm-none-eabi-gcc.exe -Wl,--start-group -o "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf" .\CortexM3\ARM_GCC_541\Debug\main.o .\CortexM3\ARM_GCC_541\Debug\timers.o .\CortexM3\ARM_GCC_541\Debug\job_queue.o .\CortexM3\ARM_GCC_541\Debug\pump_control.o .\CortexM3\ARM_GCC_541\Debug\pc_uart.o .\CortexM3\ARM_GCC_541\Debug\weight.o .\CortexM3\ARM_GCC_541\Debug\bro.o .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_541\Debug\cymetadata.o .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_541\Debug/dmc-psoc.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects -Wl,--end-group
+cyelftool.exe -C "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf" --flash_row_size 256 --flash_size 262144 --flash_offset 0x00000000
+No ELF section .cychecksum found, creating one
+Application checksum calculated and stored in ELF section .cychecksum
+Checksum calculated and stored in ELF section .cymeta
+cyelftool.exe -S "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf"
+Flash used: 7958 of 262144 bytes (3,0 %).
+SRAM used: 2665 of 65536 bytes (4,1 %). Stack: 2048 bytes. Heap: 128 bytes.
+--------------- Build Succeeded: 12/01/2023 10:41:04 ---------------

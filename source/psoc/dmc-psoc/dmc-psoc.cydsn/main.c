@@ -9,13 +9,14 @@
  *
  * ========================================
 */
-//#include "project.h"
-#include "packet_uart.h"
+#include "project.h"
 #include "job_queue.h"
 #include "pump_control.h"
 #include <stdio.h>
 #include "weight.h"
-#include "flags.h"
+#include "uart_rpi.h"
+#include "uart_pc.h"
+
 
 int MAX_VOLUME_IN_CONTAINER = 70;
 int PROCENTAGE_OF_MAX = 5;
@@ -31,14 +32,18 @@ int weight_to_cl(enum dmc_weight_number weight_to_calculate)
             * MAX_VOLUME_IN_CONTAINER;
 }
 
-int is_weight_within_threshold(uint16_t* measured_weight)
+int is_weight_within_lower_threshold(uint16_t measured_weight_value)
 {
-    int procentage_of_max = current_weight->max*0.1;
-    uint16_t upper_threshold = *measured_weight + procentage_of_max;
-    uint16_t lower_threshold = *measured_weight - procentage_of_max;
+    uint16_t lower_threshold = measured_weight_value - (current_weight->max*PROCENTAGE_OF_MAX); //Fix procentage of max
     
-    return (current_weight->result < upper_threshold 
-         && current_weight->result > lower_threshold);
+    return (current_weight->result > lower_threshold);
+}
+
+int is_weight_within_upper_threshold(uint16_t measured_weight_value)
+{
+    uint16_t upper_threshold = measured_weight_value + (current_weight->max*PROCENTAGE_OF_MAX);
+    
+    return (current_weight->result < upper_threshold);
 }
 
 void do_periodic_weight_check()
@@ -46,17 +51,24 @@ void do_periodic_weight_check()
     for (enum dmc_weight_number weight_to_check = WEIGHT_1; weight_to_check <= WEIGHT_3; weight_to_check++)
     {
         set_current_weight(weight_to_check);
-        uint16_t measured_weight = measure_weight(weight_to_check);
+        uint16_t measured_weight_value = measure_weight_value(weight_to_check);
+        
         if (!is_pumping((enum dmc_pump)weight_to_check))
         {
-            if (!is_weight_within_threshold(&measured_weight)){} //Ignore measurement
-                //SEND ERROR ON NO IM DIEING - SOMEBODY STOLE THE DAMN CONTAINER
-            else
-            //Make tara;
-            ;
-            //Husk at spørg om rækkefølge, giver det her mening?
+            if (!is_weight_within_lower_threshold(measured_weight_value)){} //Ignore measurement
+                //SEND ERROR ON NO IM DIEING - SOMEBODY STOLE THE DAMN 
+            
+            else if (!is_weight_within_upper_threshold(measured_weight_value))
+                current_weight->result = measured_weight_value;
+            
+            else 
+            {
+                //TARA
+                current_weight->tara = current_weight->result - measured_weight_value;
+            }
+           
         }
-        else current_weight->result = measured_weight;        
+        else current_weight->result = measured_weight_value;        
     }
 }
 
@@ -83,18 +95,21 @@ void handle_packet(struct dmc_packet* packet){
             dmc_packet_unmarshal_fluid_pour_requested(&requested_drink, packet);
             pump_fluid((enum dmc_pump)requested_drink.container);
             uint16_t timer_period = requested_drink.amount*PERIODS_PR_CL;
-            
             set_period((enum dmc_pump_timer)requested_drink.container, timer_period);
             break;
         }
-        
+        case DMC_PACKET_USER_CONFIRM:
+        {
+            //To do: Implement with touchscreen
+            break;
+        }
         
     }
     
     dmc_packet_free(packet);
 }
 
-void handle_timer(struct timer_action* action)
+void handle_timer(struct dmc_timer_action* action)
 {
     switch (action->type)
     {
@@ -109,29 +124,46 @@ void handle_timer(struct timer_action* action)
             break;
         }
     }  
+    dmc_timer_action_free(action);
 }
 
 
 int main(void)
 {
+    uart_pc_Start();
+    uart_pc_PutString("Program starting :)\r\n");
+    
+    CyGlobalIntEnable; /* Enable global interrupts. */
     init_queue();
-    init_uart();
+    init_uart_rpi(raise_flag);
+    
     init_timers();
+    
+    uart_pc_PutString("Program starting :)\r\n");
+    
     struct job* current_job;
     
     for(;;)
     {
+        
+        //uart_pc_PutString("Checking queue\r\n");
         current_job = job_dequeue();
         
+        
+        if (current_job == NULL)
+            continue;
+            
         switch (current_job->type)
         {
             case JOB_TYPE_UNDEFINED:
             {
+                uart_pc_PutString("Found job with type: UNDEFINED\r\n");
                 //Doo doo fart
                 break;
             }
             case JOB_TYPE_PACKET:
             {
+                uart_pc_PutString("Found job with type: PACKET\r\n");
                 handle_packet((struct dmc_packet*)current_job->data);
                 
                 //Piss boy 123
@@ -139,17 +171,14 @@ int main(void)
             }
             case JOB_TYPE_TIMER:
             {
+                uart_pc_PutString("Found job with type: TIMER\r\n");
                 handle_timer((struct timer_action*)current_job->data);
                 //Martin er en so
                 break;
             }
-            default:
+            default: uart_pc_PutString("Found job with type: DEFAULT\r\n");
             break;
         }
-        
-        
-        
-        
     }    
 }
 

@@ -148,7 +148,7 @@ static void CyClockStartupError(uint8 errorCode)
 }
 #endif
 
-#define CY_CFG_BASE_ADDR_COUNT 21u
+#define CY_CFG_BASE_ADDR_COUNT 30u
 CYPACKED typedef struct
 {
 	uint8 offset;
@@ -156,31 +156,37 @@ CYPACKED typedef struct
 } CYPACKED_ATTR cy_cfg_addrvalue_t;
 
 #define cy_cfg_addr_table ((const uint32 CYFAR *)0x48000000u)
-#define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x48000054u)
+#define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x48000078u)
 
 /* IOPORT_7 Address: CYDEV_PRTDSI_PRT12_BASE Size (bytes): 6 */
-#define BS_IOPORT_7_VAL ((const uint8 CYFAR *)0x480002C8u)
+#define BS_IOPORT_7_VAL ((const uint8 CYFAR *)0x480004CCu)
 
-/* UDB_0_0_0_CONFIG Address: CYDEV_UCFG_B1_P5_U0_BASE Size (bytes): 128 */
-#define BS_UDB_0_0_0_CONFIG_VAL ((const uint8 CYFAR *)0x480002D0u)
+/* UDB_1_3_1_CONFIG Address: CYDEV_UCFG_B0_P2_U1_BASE Size (bytes): 128 */
+#define BS_UDB_1_3_1_CONFIG_VAL ((const uint8 CYFAR *)0x480004D4u)
+
+/* UDB_1_0_0_CONFIG Address: CYDEV_UCFG_B1_P2_U0_BASE Size (bytes): 128 */
+#define BS_UDB_1_0_0_CONFIG_VAL ((const uint8 CYFAR *)0x48000554u)
+
+/* UDB_1_1_0_CONFIG Address: CYDEV_UCFG_B1_P3_U1_BASE Size (bytes): 128 */
+#define BS_UDB_1_1_0_CONFIG_VAL ((const uint8 CYFAR *)0x480005D4u)
 
 /* IOPINS0_0 Address: CYREG_PRT0_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_0_VAL ((const uint8 CYFAR *)0x48000350u)
+#define BS_IOPINS0_0_VAL ((const uint8 CYFAR *)0x48000654u)
 
 /* IOPINS0_7 Address: CYREG_PRT12_DR Size (bytes): 10 */
-#define BS_IOPINS0_7_VAL ((const uint8 CYFAR *)0x48000358u)
+#define BS_IOPINS0_7_VAL ((const uint8 CYFAR *)0x4800065Cu)
 
 /* IOPINS0_1 Address: CYREG_PRT1_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x48000364u)
+#define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x48000668u)
 
 /* IOPINS0_2 Address: CYREG_PRT2_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_2_VAL ((const uint8 CYFAR *)0x4800036Cu)
+#define BS_IOPINS0_2_VAL ((const uint8 CYFAR *)0x48000670u)
 
 /* IOPINS0_3 Address: CYREG_PRT3_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x48000374u)
+#define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x48000678u)
 
 /* CYDEV_CLKDIST_ACFG0_CFG0 Address: CYREG_CLKDIST_ACFG0_CFG0 Size (bytes): 4 */
-#define BS_CYDEV_CLKDIST_ACFG0_CFG0_VAL ((const uint8 CYFAR *)0x4800037Cu)
+#define BS_CYDEV_CLKDIST_ACFG0_CFG0_VAL ((const uint8 CYFAR *)0x48000680u)
 
 
 /*******************************************************************************
@@ -250,6 +256,8 @@ static void ClockSetup(void)
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_DCFG3_CFG0 + 0x2u), 0x18u);
 	CY_SET_XTND_REG16((void CYFAR *)(CYREG_CLKDIST_DCFG4_CFG0), 0x0033u);
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_DCFG4_CFG0 + 0x2u), 0x18u);
+	CY_SET_XTND_REG16((void CYFAR *)(CYREG_CLKDIST_DCFG5_CFG0), 0x0138u);
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_DCFG5_CFG0 + 0x2u), 0x18u);
 
 	/* Configure Analog Clocks based on settings from Clock DWR */
 	CYCONFIGCPY((void CYFAR *)(CYREG_CLKDIST_ACFG0_CFG0), (const void CYFAR *)(BS_CYDEV_CLKDIST_ACFG0_CFG0_VAL), 4u);
@@ -287,7 +295,7 @@ static void ClockSetup(void)
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_LD), 0x02u);
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_CLKDIST_DLY1), 0x04u);
 
-	CY_SET_XTND_REG8((void CYFAR *)(CYREG_PM_ACT_CFG2), ((CY_GET_XTND_REG8((void CYFAR *)CYREG_PM_ACT_CFG2) | 0x1Fu)));
+	CY_SET_XTND_REG8((void CYFAR *)(CYREG_PM_ACT_CFG2), ((CY_GET_XTND_REG8((void CYFAR *)CYREG_PM_ACT_CFG2) | 0x3Fu)));
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_PM_ACT_CFG1), ((CY_GET_XTND_REG8((void CYFAR *)CYREG_PM_ACT_CFG1) | 0x01u)));
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_PM_ACT_CFG0), ((CY_GET_XTND_REG8((void CYFAR *)CYREG_PM_ACT_CFG0) | 0x80u)));
 }
@@ -360,7 +368,7 @@ void SetAnalogRoutingPumps(uint8 enabled)
 #define CY_AMUX_UNUSED CYREG_BOOST_SR
 /* This is an implementation detail of the AMux. Code that depends on it may be
    incompatible with other versions of PSoC Creator. */
-uint8 CYXDATA * const CYCODE AMux__addrTable[6] = {
+uint8 CYXDATA * const CYCODE weight_selector__addrTable[6] = {
 	(uint8 CYXDATA *)CYREG_PRT2_AG, (uint8 CYXDATA *)CYREG_DSM0_SW0, 
 	(uint8 CYXDATA *)CYREG_PRT2_AG, (uint8 CYXDATA *)CY_AMUX_UNUSED, 
 	(uint8 CYXDATA *)CYREG_PRT2_AG, (uint8 CYXDATA *)CYREG_SAR1_SW0, 
@@ -368,14 +376,14 @@ uint8 CYXDATA * const CYCODE AMux__addrTable[6] = {
 
 /* This is an implementation detail of the AMux. Code that depends on it may be
    incompatible with other versions of PSoC Creator. */
-const uint8 CYCODE AMux__maskTable[6] = {
+const uint8 CYCODE weight_selector__maskTable[6] = {
 	0x01u, 0x02u, 
 	0x02u, 0x00u, 
 	0x04u, 0x04u, 
 };
 
 /*******************************************************************************
-* Function Name: AMux_Set
+* Function Name: weight_selector_Set
 ********************************************************************************
 * Summary:
 *  This function is used to set a particular channel as active on the AMux.
@@ -387,19 +395,19 @@ const uint8 CYCODE AMux__maskTable[6] = {
 *   void
 *
 *******************************************************************************/
-void AMux_Set(uint8 channel)
+void weight_selector_Set(uint8 channel)
 {
 	if (channel < 3)
 	{
 		channel += channel;
-		*AMux__addrTable[channel] |= AMux__maskTable[channel];
+		*weight_selector__addrTable[channel] |= weight_selector__maskTable[channel];
 		channel++;
-		*AMux__addrTable[channel] |= AMux__maskTable[channel];
+		*weight_selector__addrTable[channel] |= weight_selector__maskTable[channel];
 	}
 }
 
 /*******************************************************************************
-* Function Name: AMux_Unset
+* Function Name: weight_selector_Unset
 ********************************************************************************
 * Summary:
 *  This function is used to clear a particular channel from being active on the
@@ -412,14 +420,14 @@ void AMux_Set(uint8 channel)
 *   void
 *
 *******************************************************************************/
-void AMux_Unset(uint8 channel)
+void weight_selector_Unset(uint8 channel)
 {
 	if (channel < 3)
 	{
 		channel += channel;
-		*AMux__addrTable[channel] &= (uint8)~AMux__maskTable[channel];
+		*weight_selector__addrTable[channel] &= (uint8)~weight_selector__maskTable[channel];
 		channel++;
-		*AMux__addrTable[channel] &= (uint8)~AMux__maskTable[channel];
+		*weight_selector__addrTable[channel] &= (uint8)~weight_selector__maskTable[channel];
 	}
 }
 
@@ -471,9 +479,10 @@ void cyfitter_cfg(void)
 			{(void CYFAR *)(CYREG_TMR0_CFG0), 48u},
 			{(void CYFAR *)(CYREG_PRT4_DR), 48u},
 			{(void CYFAR *)(CYREG_PRT15_DR), 16u},
-			{(void CYFAR *)(CYDEV_UCFG_B0_P0_U0_BASE), 4096u},
-			{(void CYFAR *)(CYDEV_UCFG_B1_P2_U0_BASE), 1536u},
-			{(void CYFAR *)(CYDEV_UCFG_B1_P5_U1_BASE), 384u},
+			{(void CYFAR *)(CYDEV_UCFG_B0_P0_U0_BASE), 1152u},
+			{(void CYFAR *)(CYDEV_UCFG_B0_P2_ROUTE_BASE), 2816u},
+			{(void CYFAR *)(CYDEV_UCFG_B1_P2_U1_BASE), 512u},
+			{(void CYFAR *)(CYDEV_UCFG_B1_P3_ROUTE_BASE), 1280u},
 			{(void CYFAR *)(CYDEV_UCFG_DSI0_BASE), 2560u},
 			{(void CYFAR *)(CYDEV_UCFG_DSI12_BASE), 512u},
 			{(void CYFAR *)(CYREG_BCTL0_MDCLK_EN), 32u},
@@ -482,7 +491,9 @@ void cyfitter_cfg(void)
 		static const cfg_memcpy_t CYCODE cfg_memcpy_list [] = {
 			/* dest, src, size */
 			{(void CYFAR *)(CYDEV_PRTDSI_PRT12_BASE), BS_IOPORT_7_VAL, 6u},
-			{(void CYFAR *)(CYDEV_UCFG_B1_P5_U0_BASE), BS_UDB_0_0_0_CONFIG_VAL, 128u},
+			{(void CYFAR *)(CYDEV_UCFG_B0_P2_U1_BASE), BS_UDB_1_3_1_CONFIG_VAL, 128u},
+			{(void CYFAR *)(CYDEV_UCFG_B1_P2_U0_BASE), BS_UDB_1_0_0_CONFIG_VAL, 128u},
+			{(void CYFAR *)(CYDEV_UCFG_B1_P3_U1_BASE), BS_UDB_1_1_0_CONFIG_VAL, 128u},
 		};
 
 		uint8 CYDATA i;

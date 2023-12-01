@@ -14,7 +14,15 @@
 
 void echo_uart(const char* string)
 {
-    UART_1_PutStringConst(string);
+    uart_pc_PutStringConst(string);
 }
+
+void init_uart_pc()
+{
+    uart_pc_Start();
+
+}
+
+
 
 /* [] END OF FILE */

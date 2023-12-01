@@ -1,6 +1,6 @@
 // ======================================================================
 // dmc-psoc.v generated from TopDesign.cysch
-// 11/25/2023 at 22:58
+// 12/01/2023 at 10:37
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -170,7 +170,7 @@
 `include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.v"
 `endif
 
-// UART_v2_50(Address1=0, Address2=0, BaudRate=57600, BreakBitsRX=13, BreakBitsTX=13, BreakDetect=false, CRCoutputsEn=false, Enable_RX=1, Enable_RXIntInterrupt=0, Enable_TX=1, Enable_TXIntInterrupt=0, EnableHWAddress=0, EnIntRXInterrupt=false, EnIntTXInterrupt=false, FlowControl=0, HalfDuplexEn=false, HwTXEnSignal=true, InternalClock=true, InternalClockToleranceMinus=3.93736842105263, InternalClockTolerancePlus=3.93736842105263, InternalClockUsed=1, InterruptOnAddDetect=0, InterruptOnAddressMatch=0, InterruptOnBreak=0, InterruptOnByteRcvd=1, InterruptOnOverrunError=0, InterruptOnParityError=0, InterruptOnStopError=0, InterruptOnTXComplete=false, InterruptOnTXFifoEmpty=false, InterruptOnTXFifoFull=false, InterruptOnTXFifoNotFull=false, IntOnAddressDetect=false, IntOnAddressMatch=false, IntOnBreak=false, IntOnByteRcvd=true, IntOnOverrunError=false, IntOnParityError=false, IntOnStopError=false, NumDataBits=8, NumStopBits=1, OverSamplingRate=8, ParityType=0, ParityTypeSw=false, RequiredClock=460800, RXAddressMode=0, RXBufferSize=4, RxBuffRegSizeReplacementString=uint8, RXEnable=true, TXBitClkGenDP=true, TXBufferSize=4, TxBuffRegSizeReplacementString=uint8, TXEnable=true, Use23Polling=true, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=UART_v2_50, CY_CONFIG_TITLE=UART_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=UART_1, CY_INSTANCE_SHORT_NAME=UART_1, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=50, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=UART_1, )
+// UART_v2_50(Address1=0, Address2=0, BaudRate=57600, BreakBitsRX=13, BreakBitsTX=13, BreakDetect=false, CRCoutputsEn=false, Enable_RX=1, Enable_RXIntInterrupt=0, Enable_TX=1, Enable_TXIntInterrupt=0, EnableHWAddress=0, EnIntRXInterrupt=false, EnIntTXInterrupt=false, FlowControl=0, HalfDuplexEn=false, HwTXEnSignal=true, InternalClock=true, InternalClockToleranceMinus=3.93736842105263, InternalClockTolerancePlus=3.93736842105263, InternalClockUsed=1, InterruptOnAddDetect=0, InterruptOnAddressMatch=0, InterruptOnBreak=0, InterruptOnByteRcvd=1, InterruptOnOverrunError=0, InterruptOnParityError=0, InterruptOnStopError=0, InterruptOnTXComplete=false, InterruptOnTXFifoEmpty=false, InterruptOnTXFifoFull=false, InterruptOnTXFifoNotFull=false, IntOnAddressDetect=false, IntOnAddressMatch=false, IntOnBreak=false, IntOnByteRcvd=true, IntOnOverrunError=false, IntOnParityError=false, IntOnStopError=false, NumDataBits=8, NumStopBits=1, OverSamplingRate=8, ParityType=0, ParityTypeSw=false, RequiredClock=460800, RXAddressMode=0, RXBufferSize=4, RxBuffRegSizeReplacementString=uint8, RXEnable=true, TXBitClkGenDP=true, TXBufferSize=4, TxBuffRegSizeReplacementString=uint8, TXEnable=true, Use23Polling=true, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=UART_v2_50, CY_CONFIG_TITLE=uart_pc, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=uart_pc, CY_INSTANCE_SHORT_NAME=uart_pc, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=50, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=uart_pc, )
 module UART_v2_50_0 (
     clock,
     cts_n,
@@ -595,7 +595,7 @@ endmodule
 `include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v"
 `endif
 
-// ADC_SAR_v3_10(ADC_Clock=1, ADC_Clock_Frequency=1800000, ADC_Input_Range=1, ADC_Power=0, ADC_Reference=2, ADC_Resolution=12, ADC_SampleMode=0, Enable_next_out=false, Ref_Voltage=2.5, Ref_Voltage_mV=2500, rm_int=false, Sample_Precharge=6, Sample_Rate=100000, Sample_Rate_def=631579, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=ADC_SAR_v3_10, CY_CONFIG_TITLE=ADC_SAR_1, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=ADC_SAR_1, CY_INSTANCE_SHORT_NAME=ADC_SAR_1, CY_MAJOR_VERSION=3, CY_MINOR_VERSION=10, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=ADC_SAR_1, )
+// ADC_SAR_v3_10(ADC_Clock=1, ADC_Clock_Frequency=1800000, ADC_Input_Range=1, ADC_Power=0, ADC_Reference=2, ADC_Resolution=12, ADC_SampleMode=0, Enable_next_out=false, Ref_Voltage=2.5, Ref_Voltage_mV=2500, rm_int=false, Sample_Precharge=6, Sample_Rate=100000, Sample_Rate_def=631579, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=ADC_SAR_v3_10, CY_CONFIG_TITLE=weight_adc, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=weight_adc, CY_INSTANCE_SHORT_NAME=weight_adc, CY_MAJOR_VERSION=3, CY_MINOR_VERSION=10, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=weight_adc, )
 module ADC_SAR_v3_10_5 (
     aclk,
     eoc,
@@ -827,9 +827,122 @@ endmodule
 `include "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\AMux_v1_80\AMux_v1_80.v"
 `endif
 
+// UART_v2_50(Address1=0, Address2=0, BaudRate=9600, BreakBitsRX=13, BreakBitsTX=13, BreakDetect=false, CRCoutputsEn=false, Enable_RX=1, Enable_RXIntInterrupt=0, Enable_TX=1, Enable_TXIntInterrupt=0, EnableHWAddress=0, EnIntRXInterrupt=false, EnIntTXInterrupt=false, FlowControl=0, HalfDuplexEn=false, HwTXEnSignal=true, InternalClock=true, InternalClockToleranceMinus=3.93736842105263, InternalClockTolerancePlus=3.93736842105263, InternalClockUsed=1, InterruptOnAddDetect=0, InterruptOnAddressMatch=0, InterruptOnBreak=0, InterruptOnByteRcvd=1, InterruptOnOverrunError=0, InterruptOnParityError=0, InterruptOnStopError=0, InterruptOnTXComplete=false, InterruptOnTXFifoEmpty=false, InterruptOnTXFifoFull=false, InterruptOnTXFifoNotFull=false, IntOnAddressDetect=false, IntOnAddressMatch=false, IntOnBreak=false, IntOnByteRcvd=true, IntOnOverrunError=false, IntOnParityError=false, IntOnStopError=false, NumDataBits=8, NumStopBits=1, OverSamplingRate=8, ParityType=0, ParityTypeSw=false, RequiredClock=76800, RXAddressMode=0, RXBufferSize=4, RxBuffRegSizeReplacementString=uint8, RXEnable=true, TXBitClkGenDP=true, TXBufferSize=4, TxBuffRegSizeReplacementString=uint8, TXEnable=true, Use23Polling=true, CY_API_CALLBACK_HEADER_INCLUDE=#include "cyapicallbacks.h", CY_COMMENT=, CY_COMPONENT_NAME=UART_v2_50, CY_CONFIG_TITLE=uart_rpi, CY_CONST_CONFIG=true, CY_CONTROL_FILE=<:default:>, CY_DATASHEET_FILE=<:default:>, CY_FITTER_NAME=uart_rpi, CY_INSTANCE_SHORT_NAME=uart_rpi, CY_MAJOR_VERSION=2, CY_MINOR_VERSION=50, CY_PDL_DRIVER_NAME=, CY_PDL_DRIVER_REQ_VERSION=, CY_PDL_DRIVER_SUBGROUP=, CY_PDL_DRIVER_VARIANT=, CY_REMOVE=false, CY_SUPPRESS_API_GEN=false, CY_VERSION=PSoC Creator  4.4, INSTANCE_NAME=uart_rpi, )
+module UART_v2_50_6 (
+    clock,
+    cts_n,
+    reset,
+    rts_n,
+    rx,
+    rx_clk,
+    rx_data,
+    rx_interrupt,
+    tx,
+    tx_clk,
+    tx_data,
+    tx_en,
+    tx_interrupt);
+    input       clock;
+    input       cts_n;
+    input       reset;
+    output      rts_n;
+    input       rx;
+    output      rx_clk;
+    output      rx_data;
+    output      rx_interrupt;
+    output      tx;
+    output      tx_clk;
+    output      tx_data;
+    output      tx_en;
+    output      tx_interrupt;
+
+    parameter Address1 = 0;
+    parameter Address2 = 0;
+    parameter EnIntRXInterrupt = 0;
+    parameter EnIntTXInterrupt = 0;
+    parameter FlowControl = 0;
+    parameter HalfDuplexEn = 0;
+    parameter HwTXEnSignal = 1;
+    parameter NumDataBits = 8;
+    parameter NumStopBits = 1;
+    parameter ParityType = 0;
+    parameter RXEnable = 1;
+    parameter TXEnable = 1;
+
+          wire  Net_289;
+          wire  Net_61;
+          wire  Net_9;
+
+
+	cy_clock_v1_0
+		#(.id("645cd761-e02d-4a62-9d68-a1b0ebb7c6a4/be0a0e37-ad17-42ca-b5a1-1a654d736358"),
+		  .source_clock_id(""),
+		  .divisor(0),
+		  .period("13020833333.3333"),
+		  .is_direct(0),
+		  .is_digital(1))
+		IntClock
+		 (.clock_out(Net_9));
+
+
+	// VirtualMux_1 (cy_virtualmux_v1_0)
+	assign Net_61 = Net_9;
+
+    B_UART_v2_50 BUART (
+        .clock(Net_61),
+        .cts_n(cts_n),
+        .reset(reset),
+        .rts_n(rts_n),
+        .rx(rx),
+        .rx_clk(rx_clk),
+        .rx_data(rx_data),
+        .rx_interrupt(rx_interrupt),
+        .tx(tx),
+        .tx_clk(tx_clk),
+        .tx_data(tx_data),
+        .tx_en(tx_en),
+        .tx_interrupt(tx_interrupt));
+    defparam BUART.Address1 = 0;
+    defparam BUART.Address2 = 0;
+    defparam BUART.BreakBitsRX = 13;
+    defparam BUART.BreakBitsTX = 13;
+    defparam BUART.BreakDetect = 0;
+    defparam BUART.CRCoutputsEn = 0;
+    defparam BUART.FlowControl = 0;
+    defparam BUART.HalfDuplexEn = 0;
+    defparam BUART.HwTXEnSignal = 1;
+    defparam BUART.NumDataBits = 8;
+    defparam BUART.NumStopBits = 1;
+    defparam BUART.OverSampleCount = 8;
+    defparam BUART.ParityType = 0;
+    defparam BUART.ParityTypeSw = 0;
+    defparam BUART.RXAddressMode = 0;
+    defparam BUART.RXEnable = 1;
+    defparam BUART.RXStatusIntEnable = 1;
+    defparam BUART.TXBitClkGenDP = 1;
+    defparam BUART.TXEnable = 1;
+    defparam BUART.Use23Polling = 1;
+
+
+
+endmodule
+
 // top
 module top ;
 
+          wire  Net_303;
+          wire  Net_302;
+          wire  Net_301;
+          wire  Net_300;
+          wire  Net_299;
+          wire  Net_298;
+          wire  Net_297;
+          wire  Net_296;
+          wire  Net_295;
+          wire  Net_294;
+          wire  Net_293;
+          wire  Net_292;
+          wire  Net_291;
           wire  Net_289;
           wire  Net_290;
           wire  Net_286;
@@ -876,10 +989,10 @@ module top ;
           wire  Net_17;
           wire  Net_16;
           wire  Net_15;
+    electrical  Net_258;
     electrical  Net_267;
     electrical  Net_266;
     electrical  Net_265;
-    electrical  Net_258;
           wire  Net_257;
           wire  Net_249;
           wire  Net_240;
@@ -893,7 +1006,7 @@ module top ;
           wire  Net_12;
           wire  Net_14;
 
-    UART_v2_50_0 UART_1 (
+    UART_v2_50_0 uart_pc (
         .clock(1'b0),
         .cts_n(1'b0),
         .reset(1'b0),
@@ -907,23 +1020,23 @@ module top ;
         .tx_data(Net_23),
         .tx_en(Net_24),
         .tx_interrupt(Net_25));
-    defparam UART_1.Address1 = 0;
-    defparam UART_1.Address2 = 0;
-    defparam UART_1.EnIntRXInterrupt = 0;
-    defparam UART_1.EnIntTXInterrupt = 0;
-    defparam UART_1.FlowControl = 0;
-    defparam UART_1.HalfDuplexEn = 0;
-    defparam UART_1.HwTXEnSignal = 1;
-    defparam UART_1.NumDataBits = 8;
-    defparam UART_1.NumStopBits = 1;
-    defparam UART_1.ParityType = 0;
-    defparam UART_1.RXEnable = 1;
-    defparam UART_1.TXEnable = 1;
+    defparam uart_pc.Address1 = 0;
+    defparam uart_pc.Address2 = 0;
+    defparam uart_pc.EnIntRXInterrupt = 0;
+    defparam uart_pc.EnIntTXInterrupt = 0;
+    defparam uart_pc.FlowControl = 0;
+    defparam uart_pc.HalfDuplexEn = 0;
+    defparam uart_pc.HwTXEnSignal = 1;
+    defparam uart_pc.NumDataBits = 8;
+    defparam uart_pc.NumStopBits = 1;
+    defparam uart_pc.ParityType = 0;
+    defparam uart_pc.RXEnable = 1;
+    defparam uart_pc.TXEnable = 1;
 
-	wire [0:0] tmpOE__Rx_1_net;
-	wire [0:0] tmpIO_0__Rx_1_net;
-	wire [0:0] tmpINTERRUPT_0__Rx_1_net;
-	electrical [0:0] tmpSIOVREF__Rx_1_net;
+	wire [0:0] tmpOE__rx_pc_net;
+	wire [0:0] tmpIO_0__rx_pc_net;
+	wire [0:0] tmpINTERRUPT_0__rx_pc_net;
+	electrical [0:0] tmpSIOVREF__rx_pc_net;
 
 	cy_psoc3_pins_v1_10
 		#(.id("1425177d-0d0e-4468-8bcc-e638e5509a9b"),
@@ -978,13 +1091,13 @@ module top ;
 		  .ovt_needed(1'b0),
 		  .ovt_slew_control(2'b00),
 		  .input_buffer_sel(2'b00))
-		Rx_1
-		 (.oe(tmpOE__Rx_1_net),
+		rx_pc
+		 (.oe(tmpOE__rx_pc_net),
 		  .y({1'b0}),
 		  .fb({Net_28}),
-		  .io({tmpIO_0__Rx_1_net[0:0]}),
-		  .siovref(tmpSIOVREF__Rx_1_net),
-		  .interrupt({tmpINTERRUPT_0__Rx_1_net[0:0]}),
+		  .io({tmpIO_0__rx_pc_net[0:0]}),
+		  .siovref(tmpSIOVREF__rx_pc_net),
+		  .interrupt({tmpINTERRUPT_0__rx_pc_net[0:0]}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -992,13 +1105,13 @@ module top ;
 		  .out_clock_en({1'b1}),
 		  .out_reset({1'b0}));
 
-	assign tmpOE__Rx_1_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+	assign tmpOE__rx_pc_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
-	wire [0:0] tmpOE__Tx_1_net;
-	wire [0:0] tmpFB_0__Tx_1_net;
-	wire [0:0] tmpIO_0__Tx_1_net;
-	wire [0:0] tmpINTERRUPT_0__Tx_1_net;
-	electrical [0:0] tmpSIOVREF__Tx_1_net;
+	wire [0:0] tmpOE__tx_pc_net;
+	wire [0:0] tmpFB_0__tx_pc_net;
+	wire [0:0] tmpIO_0__tx_pc_net;
+	wire [0:0] tmpINTERRUPT_0__tx_pc_net;
+	electrical [0:0] tmpSIOVREF__tx_pc_net;
 
 	cy_psoc3_pins_v1_10
 		#(.id("ed092b9b-d398-4703-be89-cebf998501f6"),
@@ -1053,13 +1166,13 @@ module top ;
 		  .ovt_needed(1'b0),
 		  .ovt_slew_control(2'b00),
 		  .input_buffer_sel(2'b00))
-		Tx_1
-		 (.oe(tmpOE__Tx_1_net),
+		tx_pc
+		 (.oe(tmpOE__tx_pc_net),
 		  .y({Net_29}),
-		  .fb({tmpFB_0__Tx_1_net[0:0]}),
-		  .io({tmpIO_0__Tx_1_net[0:0]}),
-		  .siovref(tmpSIOVREF__Tx_1_net),
-		  .interrupt({tmpINTERRUPT_0__Tx_1_net[0:0]}),
+		  .fb({tmpFB_0__tx_pc_net[0:0]}),
+		  .io({tmpIO_0__tx_pc_net[0:0]}),
+		  .siovref(tmpSIOVREF__tx_pc_net),
+		  .interrupt({tmpINTERRUPT_0__tx_pc_net[0:0]}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1067,12 +1180,12 @@ module top ;
 		  .out_clock_en({1'b1}),
 		  .out_reset({1'b0}));
 
-	assign tmpOE__Tx_1_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+	assign tmpOE__tx_pc_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
 
 
 	cy_isr_v1_0
 		#(.int_type(2'b10))
-		isr_uart_rx
+		isr_uart_pc_rx
 		 (.int_signal(Net_14));
 
 
@@ -1232,7 +1345,7 @@ module top ;
 		 (.int_signal(Net_253));
 
 
-    ADC_SAR_v3_10_5 ADC_SAR_1 (
+    ADC_SAR_v3_10_5 weight_adc (
         .aclk(1'b0),
         .eoc(Net_261),
         .eos(Net_264),
@@ -1241,10 +1354,10 @@ module top ;
         .vminus(Net_259),
         .vplus(Net_258));
 
-    // -- AMux AMux start -- ***
+    // -- AMux weight_selector start -- ***
     // -- Mux A --
     
-    cy_psoc3_amux_v1_0 AMux(
+    cy_psoc3_amux_v1_0 weight_selector(
         .muxin({
             Net_267,
             Net_266,
@@ -1253,12 +1366,12 @@ module top ;
         .vout(Net_258)
         );
     
-    defparam AMux.muxin_width = 3;
-    defparam AMux.init_mux_sel = 3'h0;
-    defparam AMux.one_active = 0;
-    defparam AMux.connect_mode = 1;
+    defparam weight_selector.muxin_width = 3;
+    defparam weight_selector.init_mux_sel = 3'h0;
+    defparam weight_selector.one_active = 0;
+    defparam weight_selector.connect_mode = 1;
     
-    // -- AMux AMux end --
+    // -- AMux weight_selector end --
 
 	wire [0:0] tmpOE__weight_1_net;
 	wire [0:0] tmpFB_0__weight_1_net;
@@ -1709,6 +1822,189 @@ module top ;
 		  .out_reset({1'b0}));
 
 	assign tmpOE__gpio_pump_2_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+
+    UART_v2_50_6 uart_rpi (
+        .clock(1'b0),
+        .cts_n(1'b0),
+        .reset(1'b0),
+        .rts_n(Net_294),
+        .rx(Net_295),
+        .rx_clk(Net_296),
+        .rx_data(Net_297),
+        .rx_interrupt(Net_298),
+        .tx(Net_299),
+        .tx_clk(Net_300),
+        .tx_data(Net_301),
+        .tx_en(Net_302),
+        .tx_interrupt(Net_303));
+    defparam uart_rpi.Address1 = 0;
+    defparam uart_rpi.Address2 = 0;
+    defparam uart_rpi.EnIntRXInterrupt = 0;
+    defparam uart_rpi.EnIntTXInterrupt = 0;
+    defparam uart_rpi.FlowControl = 0;
+    defparam uart_rpi.HalfDuplexEn = 0;
+    defparam uart_rpi.HwTXEnSignal = 1;
+    defparam uart_rpi.NumDataBits = 8;
+    defparam uart_rpi.NumStopBits = 1;
+    defparam uart_rpi.ParityType = 0;
+    defparam uart_rpi.RXEnable = 1;
+    defparam uart_rpi.TXEnable = 1;
+
+	wire [0:0] tmpOE__rx_rpi_net;
+	wire [0:0] tmpIO_0__rx_rpi_net;
+	wire [0:0] tmpINTERRUPT_0__rx_rpi_net;
+	electrical [0:0] tmpSIOVREF__rx_rpi_net;
+
+	cy_psoc3_pins_v1_10
+		#(.id("6fbd8c4e-d926-4a27-b547-4907ffde3889"),
+		  .drive_mode(3'b001),
+		  .ibuf_enabled(1'b1),
+		  .init_dr_st(1'b0),
+		  .input_clk_en(0),
+		  .input_sync(1'b1),
+		  .input_sync_mode(1'b0),
+		  .intr_mode(2'b00),
+		  .invert_in_clock(0),
+		  .invert_in_clock_en(0),
+		  .invert_in_reset(0),
+		  .invert_out_clock(0),
+		  .invert_out_clock_en(0),
+		  .invert_out_reset(0),
+		  .io_voltage(""),
+		  .layout_mode("CONTIGUOUS"),
+		  .oe_conn(1'b0),
+		  .oe_reset(0),
+		  .oe_sync(1'b0),
+		  .output_clk_en(0),
+		  .output_clock_mode(1'b0),
+		  .output_conn(1'b0),
+		  .output_mode(1'b0),
+		  .output_reset(0),
+		  .output_sync(1'b0),
+		  .pa_in_clock(-1),
+		  .pa_in_clock_en(-1),
+		  .pa_in_reset(-1),
+		  .pa_out_clock(-1),
+		  .pa_out_clock_en(-1),
+		  .pa_out_reset(-1),
+		  .pin_aliases(""),
+		  .pin_mode("I"),
+		  .por_state(4),
+		  .sio_group_cnt(0),
+		  .sio_hyst(1'b1),
+		  .sio_ibuf(""),
+		  .sio_info(2'b00),
+		  .sio_obuf(""),
+		  .sio_refsel(""),
+		  .sio_vtrip(""),
+		  .sio_hifreq(""),
+		  .sio_vohsel(""),
+		  .slew_rate(1'b0),
+		  .spanning(0),
+		  .use_annotation(1'b0),
+		  .vtrip(2'b00),
+		  .width(1),
+		  .ovt_hyst_trim(1'b0),
+		  .ovt_needed(1'b0),
+		  .ovt_slew_control(2'b00),
+		  .input_buffer_sel(2'b00))
+		rx_rpi
+		 (.oe(tmpOE__rx_rpi_net),
+		  .y({1'b0}),
+		  .fb({Net_295}),
+		  .io({tmpIO_0__rx_rpi_net[0:0]}),
+		  .siovref(tmpSIOVREF__rx_rpi_net),
+		  .interrupt({tmpINTERRUPT_0__rx_rpi_net[0:0]}),
+		  .in_clock({1'b0}),
+		  .in_clock_en({1'b1}),
+		  .in_reset({1'b0}),
+		  .out_clock({1'b0}),
+		  .out_clock_en({1'b1}),
+		  .out_reset({1'b0}));
+
+	assign tmpOE__rx_rpi_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+
+	wire [0:0] tmpOE__tx_rpi_net;
+	wire [0:0] tmpFB_0__tx_rpi_net;
+	wire [0:0] tmpIO_0__tx_rpi_net;
+	wire [0:0] tmpINTERRUPT_0__tx_rpi_net;
+	electrical [0:0] tmpSIOVREF__tx_rpi_net;
+
+	cy_psoc3_pins_v1_10
+		#(.id("37716566-bd3d-47aa-9f45-75918a9964b4"),
+		  .drive_mode(3'b110),
+		  .ibuf_enabled(1'b1),
+		  .init_dr_st(1'b1),
+		  .input_clk_en(0),
+		  .input_sync(1'b1),
+		  .input_sync_mode(1'b0),
+		  .intr_mode(2'b00),
+		  .invert_in_clock(0),
+		  .invert_in_clock_en(0),
+		  .invert_in_reset(0),
+		  .invert_out_clock(0),
+		  .invert_out_clock_en(0),
+		  .invert_out_reset(0),
+		  .io_voltage(""),
+		  .layout_mode("CONTIGUOUS"),
+		  .oe_conn(1'b0),
+		  .oe_reset(0),
+		  .oe_sync(1'b0),
+		  .output_clk_en(0),
+		  .output_clock_mode(1'b0),
+		  .output_conn(1'b1),
+		  .output_mode(1'b0),
+		  .output_reset(0),
+		  .output_sync(1'b0),
+		  .pa_in_clock(-1),
+		  .pa_in_clock_en(-1),
+		  .pa_in_reset(-1),
+		  .pa_out_clock(-1),
+		  .pa_out_clock_en(-1),
+		  .pa_out_reset(-1),
+		  .pin_aliases(""),
+		  .pin_mode("O"),
+		  .por_state(4),
+		  .sio_group_cnt(0),
+		  .sio_hyst(1'b1),
+		  .sio_ibuf(""),
+		  .sio_info(2'b00),
+		  .sio_obuf(""),
+		  .sio_refsel(""),
+		  .sio_vtrip(""),
+		  .sio_hifreq(""),
+		  .sio_vohsel(""),
+		  .slew_rate(1'b0),
+		  .spanning(0),
+		  .use_annotation(1'b0),
+		  .vtrip(2'b10),
+		  .width(1),
+		  .ovt_hyst_trim(1'b0),
+		  .ovt_needed(1'b0),
+		  .ovt_slew_control(2'b00),
+		  .input_buffer_sel(2'b00))
+		tx_rpi
+		 (.oe(tmpOE__tx_rpi_net),
+		  .y({Net_299}),
+		  .fb({tmpFB_0__tx_rpi_net[0:0]}),
+		  .io({tmpIO_0__tx_rpi_net[0:0]}),
+		  .siovref(tmpSIOVREF__tx_rpi_net),
+		  .interrupt({tmpINTERRUPT_0__tx_rpi_net[0:0]}),
+		  .in_clock({1'b0}),
+		  .in_clock_en({1'b1}),
+		  .in_reset({1'b0}),
+		  .out_clock({1'b0}),
+		  .out_clock_en({1'b1}),
+		  .out_reset({1'b0}));
+
+	assign tmpOE__tx_rpi_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		isr_uart_rpi_rx
+		 (.int_signal(Net_298));
+
 
 
 

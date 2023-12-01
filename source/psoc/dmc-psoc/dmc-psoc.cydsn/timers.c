@@ -14,6 +14,7 @@
 
 #include "timers.h"
 #include "project.h"
+#include "job_queue.h"
 //#include "job_queue.h"
 
 
@@ -24,7 +25,10 @@
 CY_ISR(ISR_pump_timer_1_handler)
 {
     pump_timer_1_Stop();
-    //job_enqueue_timer(stop pump 1)
+    struct dmc_timer_action* action = (struct dmc_timer_action*)malloc(sizeof(struct dmc_timer_action));
+    action->type = TIMER_ACTION_STOP_PUMP;
+    action->origin = PUMP_TIMER_1;
+    job_enqueue_timer((void*)action);
     
 }
 CY_ISR(ISR_pump_timer_2_handler)
@@ -40,6 +44,10 @@ CY_ISR(ISR_check_weight_timer_handler)
     
 }
 
+void dmc_timer_action_free(struct dmc_timer_action *timer_action)
+{
+    free(timer_action);
+}
 
 void init_timers()
 {
