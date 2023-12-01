@@ -130,7 +130,7 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
 
   pr_debug("dmc_driver: data len %ld\n", packet->data_len);
 
-    serdev_device_write_buf(curr_serdev, (unsigned char *)(&(packet->type)), 1);
+  serdev_device_write_buf(curr_serdev, (unsigned char *)(&(packet->type)), 1);
   if (err)
   {
     pr_debug("dmc_driver: error sending packet type via serdev, err = %d\n",
@@ -138,8 +138,6 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
     return -1;
   }
   pr_debug("dmc_driver: sent packet type via serdev\n");
-
-  mdelay(50);
 
   if (packet->data != NULL && packet->data_len > 0)
   {
