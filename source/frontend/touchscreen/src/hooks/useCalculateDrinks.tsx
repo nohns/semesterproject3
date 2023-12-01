@@ -3,6 +3,7 @@
 import useGetContainers from "@/api/endpoints/container/getContainers";
 import useGetDrinks, {
   Drink,
+  Fluid,
   Ingredient,
 } from "@/api/endpoints/drinks/getDrinks";
 
@@ -10,14 +11,21 @@ import useGetDrinks, {
 const useCalculateDrinks = () => {
   const { data } = useGetDrinks();
   const containers = useGetContainers();
+  console.log(containers.data);
 
+  //const fluids = containers.data?.containers!;
   const calcPossibleDrinks = () => {
     if (data?.drinks.length! > 0 && containers.data?.containers.length! > 0) {
       const drinks = data?.drinks!;
-      const fluids = containers.data?.containers!;
+      let fluids: Fluid[] = [];
+
+      //Loop over containers and append the fluid to fluids
+      containers.data?.containers.forEach((container) => {
+        fluids.push(container.fluid);
+      });
+      console.log("fluids", fluids);
 
       const possibleDrinks: Drink[] = [];
-
       drinks.forEach((drink) => {
         const isPossible = drink.ingredients.every((ingredient) =>
           fluids.some((fluid) => fluid.id === ingredient.fluid.id)
@@ -28,6 +36,9 @@ const useCalculateDrinks = () => {
         }
       });
 
+      return possibleDrinks;
+
+      console.log("POSSIBLE DRINKS KEKW", possibleDrinks);
       return possibleDrinks;
     }
   };
