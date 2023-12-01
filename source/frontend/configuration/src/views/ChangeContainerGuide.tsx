@@ -12,8 +12,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import useGetContainers, {
+  FluidContainer,
+} from "@/api/endpoints/container/getContainers";
+import useGetFluids from "@/api/endpoints/fluid/getFluids";
 import { Progress } from "@/components/ui/progress";
 import CustomAlertDialogAction from "@/components/CustomAlertDialogAction";
 
@@ -22,12 +25,48 @@ enum GuideState {
   step2 = 25,
   step3 = 50,
   step4 = 75,
+  step5 = 95,
 }
 
 interface ChangeContainerGuideProps {}
 
 function ChangeContainerGuide({}: ChangeContainerGuideProps) {
+  const fluids = useGetFluids();
+  const getContainers = useGetContainers();
   //I want to do a switch statement on html content so we can have different guides for different steps
+  const [container1, setContainer1] = useState<FluidContainer>({
+    id: 0,
+    fluid: {
+      id: 0,
+      name: "Vælg væske",
+    },
+    fluidAmountInCl: 0,
+  });
+  const [container2, setContainer2] = useState<FluidContainer>({
+    id: 0,
+    fluid: {
+      id: 0,
+      name: "Vælg væske",
+    },
+    fluidAmountInCl: 50,
+  });
+  const [container3, setContainer3] = useState<FluidContainer>({
+    id: 0,
+    fluid: {
+      id: 0,
+      name: "Vælg væske",
+    },
+    fluidAmountInCl: 100,
+  });
+
+  useEffect(() => {
+    if (getContainers.isLoading) {
+      return;
+    }
+    setContainer1(getContainers.data?.containers![0]!);
+    setContainer2(getContainers.data?.containers![1]!);
+    setContainer3(getContainers.data?.containers![2]!);
+  }, [getContainers.isLoading]);
 
   const [step, setStep] = useState<GuideState>(GuideState.step1);
 
@@ -46,19 +85,23 @@ function ChangeContainerGuide({}: ChangeContainerGuideProps) {
   const renderView = () => {
     switch (step) {
       case GuideState.step1:
-        return <p>Place the fluid containers under the outlet</p>;
+        return <p>Place a cup under the outlet.</p>;
       case GuideState.step2:
-        return <p>When done, press "Continue"</p>;
+        return <p>Lift the tube out of the fluid in the container.</p>;
       case GuideState.step3:
-        return (
-          <p>The system will now pump out the fluid from the containers</p>
-        );
+        return <p> start the pump and wait until liquid stops comimg out.</p>;
       case GuideState.step4:
         return (
           <p>
-            The system will now show "Finished pumping out" and show what each
-            container should contain of fluid
+            {" "}
+            Stop the pump and lift the container out to refill it. \n
+            container1: {container1.fluid.name} \t container2:
+            {container2.fluid.name} \t container3: {container3.fluid.name}
           </p>
+        );
+      case GuideState.step5:
+        return (
+          <p>The system is now configured with the new liquids and drinks</p>
         );
       default:
         return <p>Something went wrong :/</p>;
