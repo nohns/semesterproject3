@@ -223,6 +223,8 @@
 <Unloaded />
 <OpenDocs>
 <name v=".\main.c" />
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\psoc-uart-prototype.cydwr" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -230,7 +232,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1084, 556" SelectedTabbedMdiWindow="5d24d120-3e2a-4be4-b2af-317a912b612b"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3135dc3c-b690-43d3-926f-001b95cec47b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\prototyping\psoc-uart\psoc-uart-prototype.cydsn\main.c" Guid="5d24d120-3e2a-4be4-b2af-317a912b612b" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1084, 556" SelectedTabbedMdiWindow="5d24d120-3e2a-4be4-b2af-317a912b612b"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="3135dc3c-b690-43d3-926f-001b95cec47b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\prototyping\psoc-uart\psoc-uart-prototype.cydsn\main.c" Guid="5d24d120-3e2a-4be4-b2af-317a912b612b" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\prototyping\psoc-uart\psoc-uart-prototype.cydsn\TopDesign\TopDesign.cysch" Guid="15242d25-aa20-4c77-a3d4-7665fd105d7a" /><DocumentWindow Key="C:\kode til PRJ3\semesterproject3\prototyping\psoc-uart\psoc-uart-prototype.cydsn\psoc-uart-prototype.cydwr" Guid="27b79ed2-0b7c-41f7-aec7-d2d7c8c5d0b2" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

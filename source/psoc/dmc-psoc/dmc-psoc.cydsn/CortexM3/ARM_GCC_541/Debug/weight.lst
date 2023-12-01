@@ -1,0 +1,1598 @@
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"weight.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.weight_init,"ax",%progbits
+  20              		.align	2
+  21              		.global	weight_init
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	weight_init, %function
+  25              	weight_init:
+  26              	.LFB63:
+  27              		.file 1 "weight.c"
+   1:weight.c      **** /* ========================================
+   2:weight.c      ****  *
+   3:weight.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:weight.c      ****  * All Rights Reserved
+   5:weight.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:weight.c      ****  *
+   7:weight.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:weight.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:weight.c      ****  *
+  10:weight.c      ****  * ========================================
+  11:weight.c      **** */
+  12:weight.c      **** 
+  13:weight.c      **** /* [] END OF FILE */
+  14:weight.c      **** 
+  15:weight.c      **** 
+  16:weight.c      ****     #include "weight.h"
+  17:weight.c      ****     #include "project.h"
+  18:weight.c      ****     
+  19:weight.c      ****     struct weight* current_weight;
+  20:weight.c      ****     
+  21:weight.c      ****     static int NUM_OF_MEASUREMENTS = 1;
+  22:weight.c      ****     
+  23:weight.c      ****     enum WEIGHT_DIVIDE{
+  24:weight.c      ****         WEIGHT_1_DIVIDER = 0,
+  25:weight.c      ****         WEIGHT_2_DIVIDER = 0,
+  26:weight.c      ****         WEIGHT_3_DIVIDER = 0,
+  27:weight.c      ****     };
+  28:weight.c      ****     
+  29:weight.c      ****     enum WEIGHT_MIN{
+  30:weight.c      ****         WEIGHT_1_MIN = 0,
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 2
+
+
+  31:weight.c      ****         WEIGHT_2_MIN = 0,
+  32:weight.c      ****         WEIGHT_3_MIN = 0,
+  33:weight.c      ****         
+  34:weight.c      ****     };
+  35:weight.c      ****     enum  WEIGHT_MAX{
+  36:weight.c      ****        WEIGHT_1_MAX = 0,
+  37:weight.c      ****        WEIGHT_2_MAX = 0,
+  38:weight.c      ****        WEIGHT_3_MAX = 0,        
+  39:weight.c      ****     };
+  40:weight.c      ****     
+  41:weight.c      ****    
+  42:weight.c      ****     
+  43:weight.c      ****     void weight_init()
+  44:weight.c      ****     {
+  28              		.loc 1 44 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  45:weight.c      ****     weight_selector_Init();
+  36              		.loc 1 45 0
+  37 0002 FFF7FEFF 		bl	weight_selector_Start
+  38              	.LVL0:
+  46:weight.c      ****     weight_adc_Start();
+  39              		.loc 1 46 0
+  40 0006 FFF7FEFF 		bl	weight_adc_Start
+  41              	.LVL1:
+  47:weight.c      ****     weight_adc_StartConvert();
+  42              		.loc 1 47 0
+  43 000a FFF7FEFF 		bl	weight_adc_StartConvert
+  44              	.LVL2:
+  48:weight.c      ****            
+  49:weight.c      ****     weight1.adc_divider = WEIGHT_1_DIVIDER;
+  45              		.loc 1 49 0
+  46 000e 0748     		ldr	r0, .L3
+  47 0010 0023     		movs	r3, #0
+  48 0012 8360     		str	r3, [r0, #8]	@ float
+  50:weight.c      ****     weight2.adc_divider = WEIGHT_2_DIVIDER;
+  49              		.loc 1 50 0
+  50 0014 0649     		ldr	r1, .L3+4
+  51 0016 8B60     		str	r3, [r1, #8]	@ float
+  51:weight.c      ****     weight3.adc_divider = WEIGHT_3_DIVIDER;
+  52              		.loc 1 51 0
+  53 0018 064A     		ldr	r2, .L3+8
+  54 001a 9360     		str	r3, [r2, #8]	@ float
+  52:weight.c      ****     
+  53:weight.c      ****     weight1.min = WEIGHT_1_MIN;
+  55              		.loc 1 53 0
+  56 001c 0023     		movs	r3, #0
+  57 001e 8381     		strh	r3, [r0, #12]	@ movhi
+  54:weight.c      ****     weight2.min = WEIGHT_2_MIN;
+  58              		.loc 1 54 0
+  59 0020 8B81     		strh	r3, [r1, #12]	@ movhi
+  55:weight.c      ****     weight3.min = WEIGHT_3_MIN;
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 3
+
+
+  60              		.loc 1 55 0
+  61 0022 9381     		strh	r3, [r2, #12]	@ movhi
+  56:weight.c      ****     
+  57:weight.c      ****     weight1.max = WEIGHT_1_MAX;
+  62              		.loc 1 57 0
+  63 0024 C381     		strh	r3, [r0, #14]	@ movhi
+  58:weight.c      ****     weight2.max = WEIGHT_2_MAX;
+  64              		.loc 1 58 0
+  65 0026 CB81     		strh	r3, [r1, #14]	@ movhi
+  59:weight.c      ****     weight3.max = WEIGHT_3_MAX;
+  66              		.loc 1 59 0
+  67 0028 D381     		strh	r3, [r2, #14]	@ movhi
+  68 002a 08BD     		pop	{r3, pc}
+  69              	.L4:
+  70              		.align	2
+  71              	.L3:
+  72 002c 00000000 		.word	weight1
+  73 0030 00000000 		.word	weight2
+  74 0034 00000000 		.word	weight3
+  75              		.cfi_endproc
+  76              	.LFE63:
+  77              		.size	weight_init, .-weight_init
+  78              		.section	.text.set_current_weight,"ax",%progbits
+  79              		.align	2
+  80              		.global	set_current_weight
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	set_current_weight, %function
+  84              	set_current_weight:
+  85              	.LFB64:
+  60:weight.c      ****     }
+  61:weight.c      ****     
+  62:weight.c      **** void set_current_weight(enum dmc_weight_number weight_number)
+  63:weight.c      **** {
+  86              		.loc 1 63 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              	.LVL3:
+  91 0000 08B5     		push	{r3, lr}
+  92              		.cfi_def_cfa_offset 8
+  93              		.cfi_offset 3, -8
+  94              		.cfi_offset 14, -4
+  64:weight.c      ****     switch(weight_number)
+  95              		.loc 1 64 0
+  96 0002 0228     		cmp	r0, #2
+  97 0004 0AD0     		beq	.L7
+  98 0006 0328     		cmp	r0, #3
+  99 0008 0FD0     		beq	.L8
+ 100 000a 0128     		cmp	r0, #1
+ 101 000c 14D1     		bne	.L11
+  65:weight.c      ****     {
+  66:weight.c      ****         case WEIGHT_1:
+  67:weight.c      ****     {
+  68:weight.c      ****         current_weight = &weight1;
+ 102              		.loc 1 68 0
+ 103 000e 0C4A     		ldr	r2, .L13
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 4
+
+
+ 104 0010 0C4B     		ldr	r3, .L13+4
+ 105 0012 1A60     		str	r2, [r3]
+  69:weight.c      ****         weight_selector_Select(0);
+ 106              		.loc 1 69 0
+ 107 0014 0020     		movs	r0, #0
+ 108              	.LVL4:
+ 109 0016 FFF7FEFF 		bl	weight_selector_Select
+ 110              	.LVL5:
+  70:weight.c      ****         break;
+ 111              		.loc 1 70 0
+ 112 001a 08BD     		pop	{r3, pc}
+ 113              	.LVL6:
+ 114              	.L7:
+  71:weight.c      ****     }
+  72:weight.c      ****         case WEIGHT_2:
+  73:weight.c      ****     {
+  74:weight.c      ****         current_weight = &weight2;
+ 115              		.loc 1 74 0
+ 116 001c 0A4A     		ldr	r2, .L13+8
+ 117 001e 094B     		ldr	r3, .L13+4
+ 118 0020 1A60     		str	r2, [r3]
+  75:weight.c      ****         weight_selector_Select(1);
+ 119              		.loc 1 75 0
+ 120 0022 0120     		movs	r0, #1
+ 121              	.LVL7:
+ 122 0024 FFF7FEFF 		bl	weight_selector_Select
+ 123              	.LVL8:
+  76:weight.c      ****         break;
+ 124              		.loc 1 76 0
+ 125 0028 08BD     		pop	{r3, pc}
+ 126              	.LVL9:
+ 127              	.L8:
+  77:weight.c      ****     }
+  78:weight.c      ****         case WEIGHT_3:
+  79:weight.c      ****     {
+  80:weight.c      ****         current_weight = &weight3;
+ 128              		.loc 1 80 0
+ 129 002a 084A     		ldr	r2, .L13+12
+ 130 002c 054B     		ldr	r3, .L13+4
+ 131 002e 1A60     		str	r2, [r3]
+  81:weight.c      ****         weight_selector_Select(2);
+ 132              		.loc 1 81 0
+ 133 0030 0220     		movs	r0, #2
+ 134              	.LVL10:
+ 135 0032 FFF7FEFF 		bl	weight_selector_Select
+ 136              	.LVL11:
+  82:weight.c      ****         break;
+ 137              		.loc 1 82 0
+ 138 0036 08BD     		pop	{r3, pc}
+ 139              	.LVL12:
+ 140              	.L11:
+  83:weight.c      ****     }
+  84:weight.c      ****     default: current_weight = NULL; 
+ 141              		.loc 1 84 0
+ 142 0038 0022     		movs	r2, #0
+ 143 003a 024B     		ldr	r3, .L13+4
+ 144 003c 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 5
+
+
+ 145 003e 08BD     		pop	{r3, pc}
+ 146              	.L14:
+ 147              		.align	2
+ 148              	.L13:
+ 149 0040 00000000 		.word	weight1
+ 150 0044 00000000 		.word	current_weight
+ 151 0048 00000000 		.word	weight2
+ 152 004c 00000000 		.word	weight3
+ 153              		.cfi_endproc
+ 154              	.LFE64:
+ 155              		.size	set_current_weight, .-set_current_weight
+ 156              		.section	.text.measure_weight_value,"ax",%progbits
+ 157              		.align	2
+ 158              		.global	measure_weight_value
+ 159              		.thumb
+ 160              		.thumb_func
+ 161              		.type	measure_weight_value, %function
+ 162              	measure_weight_value:
+ 163              	.LFB65:
+  85:weight.c      ****     }
+  86:weight.c      **** }
+  87:weight.c      **** 
+  88:weight.c      **** 
+  89:weight.c      ****     
+  90:weight.c      **** uint16_t measure_weight_value(enum dmc_weight_number weight_number)
+  91:weight.c      **** {
+ 164              		.loc 1 91 0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168              	.LVL13:
+ 169 0000 38B5     		push	{r3, r4, r5, lr}
+ 170              		.cfi_def_cfa_offset 16
+ 171              		.cfi_offset 3, -16
+ 172              		.cfi_offset 4, -12
+ 173              		.cfi_offset 5, -8
+ 174              		.cfi_offset 14, -4
+  92:weight.c      ****     set_current_weight(weight_number);
+ 175              		.loc 1 92 0
+ 176 0002 FFF7FEFF 		bl	set_current_weight
+ 177              	.LVL14:
+ 178              	.LBB2:
+  93:weight.c      ****     
+  94:weight.c      ****     uint32_t result;
+  95:weight.c      ****     
+  96:weight.c      ****     for (int i = 0; i < NUM_OF_MEASUREMENTS; i++)
+ 179              		.loc 1 96 0
+ 180 0006 0024     		movs	r4, #0
+ 181 0008 07E0     		b	.L16
+ 182              	.LVL15:
+ 183              	.L18:
+  97:weight.c      ****     {
+  98:weight.c      ****         
+  99:weight.c      ****         if (weight_adc_IsEndConversion(weight_adc_WAIT_FOR_RESULT))
+ 184              		.loc 1 99 0
+ 185 000a 0020     		movs	r0, #0
+ 186 000c FFF7FEFF 		bl	weight_adc_IsEndConversion
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 6
+
+
+ 187              	.LVL16:
+ 188 0010 10B1     		cbz	r0, .L17
+ 100:weight.c      ****             {
+ 101:weight.c      ****                 result += weight_adc_GetResult16();
+ 189              		.loc 1 101 0
+ 190 0012 FFF7FEFF 		bl	weight_adc_GetResult16
+ 191              	.LVL17:
+ 192 0016 0544     		add	r5, r5, r0
+ 193              	.LVL18:
+ 194              	.L17:
+  96:weight.c      ****     {
+ 195              		.loc 1 96 0 discriminator 2
+ 196 0018 0134     		adds	r4, r4, #1
+ 197              	.LVL19:
+ 198              	.L16:
+  96:weight.c      ****     {
+ 199              		.loc 1 96 0 is_stmt 0 discriminator 1
+ 200 001a 002C     		cmp	r4, #0
+ 201 001c F5DD     		ble	.L18
+ 202              	.LBE2:
+ 102:weight.c      ****             }
+ 103:weight.c      ****     }
+ 104:weight.c      ****     return result/NUM_OF_MEASUREMENTS;
+ 105:weight.c      **** 
+ 106:weight.c      **** };
+ 203              		.loc 1 106 0 is_stmt 1
+ 204 001e A8B2     		uxth	r0, r5
+ 205 0020 38BD     		pop	{r3, r4, r5, pc}
+ 206              		.cfi_endproc
+ 207              	.LFE65:
+ 208              		.size	measure_weight_value, .-measure_weight_value
+ 209              		.comm	current_weight,4,4
+ 210              		.comm	weight3,16,4
+ 211              		.comm	weight2,16,4
+ 212              		.comm	weight1,16,4
+ 213 0022 00BF     		.text
+ 214              	.Letext0:
+ 215              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 216              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 217              		.file 4 "weight.h"
+ 218              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 219              		.file 6 "Generated_Source\\PSoC5/weight_selector.h"
+ 220              		.file 7 "Generated_Source\\PSoC5/weight_adc.h"
+ 221              		.section	.debug_info,"",%progbits
+ 222              	.Ldebug_info0:
+ 223 0000 5D030000 		.4byte	0x35d
+ 224 0004 0400     		.2byte	0x4
+ 225 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 226 000a 04       		.byte	0x4
+ 227 000b 01       		.uleb128 0x1
+ 228 000c DB000000 		.4byte	.LASF52
+ 229 0010 0C       		.byte	0xc
+ 230 0011 D2010000 		.4byte	.LASF53
+ 231 0015 0B020000 		.4byte	.LASF54
+ 232 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 233 001d 00000000 		.4byte	0
+ 234 0021 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 7
+
+
+ 235 0025 02       		.uleb128 0x2
+ 236 0026 01       		.byte	0x1
+ 237 0027 06       		.byte	0x6
+ 238 0028 9A030000 		.4byte	.LASF0
+ 239 002c 02       		.uleb128 0x2
+ 240 002d 01       		.byte	0x1
+ 241 002e 08       		.byte	0x8
+ 242 002f CD000000 		.4byte	.LASF1
+ 243 0033 02       		.uleb128 0x2
+ 244 0034 02       		.byte	0x2
+ 245 0035 05       		.byte	0x5
+ 246 0036 25030000 		.4byte	.LASF2
+ 247 003a 03       		.uleb128 0x3
+ 248 003b A9010000 		.4byte	.LASF4
+ 249 003f 02       		.byte	0x2
+ 250 0040 2B       		.byte	0x2b
+ 251 0041 45000000 		.4byte	0x45
+ 252 0045 02       		.uleb128 0x2
+ 253 0046 02       		.byte	0x2
+ 254 0047 07       		.byte	0x7
+ 255 0048 69010000 		.4byte	.LASF3
+ 256 004c 03       		.uleb128 0x3
+ 257 004d 48000000 		.4byte	.LASF5
+ 258 0051 02       		.byte	0x2
+ 259 0052 3F       		.byte	0x3f
+ 260 0053 57000000 		.4byte	0x57
+ 261 0057 02       		.uleb128 0x2
+ 262 0058 04       		.byte	0x4
+ 263 0059 05       		.byte	0x5
+ 264 005a 67030000 		.4byte	.LASF6
+ 265 005e 03       		.uleb128 0x3
+ 266 005f DB010000 		.4byte	.LASF7
+ 267 0063 02       		.byte	0x2
+ 268 0064 41       		.byte	0x41
+ 269 0065 69000000 		.4byte	0x69
+ 270 0069 02       		.uleb128 0x2
+ 271 006a 04       		.byte	0x4
+ 272 006b 07       		.byte	0x7
+ 273 006c B4010000 		.4byte	.LASF8
+ 274 0070 02       		.uleb128 0x2
+ 275 0071 08       		.byte	0x8
+ 276 0072 05       		.byte	0x5
+ 277 0073 00000000 		.4byte	.LASF9
+ 278 0077 02       		.uleb128 0x2
+ 279 0078 08       		.byte	0x8
+ 280 0079 07       		.byte	0x7
+ 281 007a 88020000 		.4byte	.LASF10
+ 282 007e 04       		.uleb128 0x4
+ 283 007f 04       		.byte	0x4
+ 284 0080 05       		.byte	0x5
+ 285 0081 696E7400 		.ascii	"int\000"
+ 286 0085 02       		.uleb128 0x2
+ 287 0086 04       		.byte	0x4
+ 288 0087 07       		.byte	0x7
+ 289 0088 63020000 		.4byte	.LASF11
+ 290 008c 03       		.uleb128 0x3
+ 291 008d 2F030000 		.4byte	.LASF12
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 8
+
+
+ 292 0091 03       		.byte	0x3
+ 293 0092 24       		.byte	0x24
+ 294 0093 3A000000 		.4byte	0x3a
+ 295 0097 03       		.uleb128 0x3
+ 296 0098 CB020000 		.4byte	.LASF13
+ 297 009c 03       		.byte	0x3
+ 298 009d 2C       		.byte	0x2c
+ 299 009e 4C000000 		.4byte	0x4c
+ 300 00a2 03       		.uleb128 0x3
+ 301 00a3 5E030000 		.4byte	.LASF14
+ 302 00a7 03       		.byte	0x3
+ 303 00a8 30       		.byte	0x30
+ 304 00a9 5E000000 		.4byte	0x5e
+ 305 00ad 05       		.uleb128 0x5
+ 306 00ae 97010000 		.4byte	.LASF27
+ 307 00b2 01       		.byte	0x1
+ 308 00b3 2C000000 		.4byte	0x2c
+ 309 00b7 04       		.byte	0x4
+ 310 00b8 14       		.byte	0x14
+ 311 00b9 D0000000 		.4byte	0xd0
+ 312 00bd 06       		.uleb128 0x6
+ 313 00be 51020000 		.4byte	.LASF15
+ 314 00c2 01       		.byte	0x1
+ 315 00c3 06       		.uleb128 0x6
+ 316 00c4 5A020000 		.4byte	.LASF16
+ 317 00c8 02       		.byte	0x2
+ 318 00c9 06       		.uleb128 0x6
+ 319 00ca 9F020000 		.4byte	.LASF17
+ 320 00ce 03       		.byte	0x3
+ 321 00cf 00       		.byte	0
+ 322 00d0 07       		.uleb128 0x7
+ 323 00d1 A6000000 		.4byte	.LASF55
+ 324 00d5 10       		.byte	0x10
+ 325 00d6 04       		.byte	0x4
+ 326 00d7 1A       		.byte	0x1a
+ 327 00d8 25010000 		.4byte	0x125
+ 328 00dc 08       		.uleb128 0x8
+ 329 00dd DC020000 		.4byte	.LASF18
+ 330 00e1 04       		.byte	0x4
+ 331 00e2 1B       		.byte	0x1b
+ 332 00e3 AD000000 		.4byte	0xad
+ 333 00e7 00       		.byte	0
+ 334 00e8 08       		.uleb128 0x8
+ 335 00e9 F7010000 		.4byte	.LASF19
+ 336 00ed 04       		.byte	0x4
+ 337 00ee 1C       		.byte	0x1c
+ 338 00ef 8C000000 		.4byte	0x8c
+ 339 00f3 02       		.byte	0x2
+ 340 00f4 08       		.uleb128 0x8
+ 341 00f5 A8020000 		.4byte	.LASF20
+ 342 00f9 04       		.byte	0x4
+ 343 00fa 1D       		.byte	0x1d
+ 344 00fb 25010000 		.4byte	0x125
+ 345 00ff 04       		.byte	0x4
+ 346 0100 08       		.uleb128 0x8
+ 347 0101 38030000 		.4byte	.LASF21
+ 348 0105 04       		.byte	0x4
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 9
+
+
+ 349 0106 1E       		.byte	0x1e
+ 350 0107 25010000 		.4byte	0x125
+ 351 010b 08       		.byte	0x8
+ 352 010c 09       		.uleb128 0x9
+ 353 010d 6D696E00 		.ascii	"min\000"
+ 354 0111 04       		.byte	0x4
+ 355 0112 1F       		.byte	0x1f
+ 356 0113 8C000000 		.4byte	0x8c
+ 357 0117 0C       		.byte	0xc
+ 358 0118 09       		.uleb128 0x9
+ 359 0119 6D617800 		.ascii	"max\000"
+ 360 011d 04       		.byte	0x4
+ 361 011e 20       		.byte	0x20
+ 362 011f 8C000000 		.4byte	0x8c
+ 363 0123 0E       		.byte	0xe
+ 364 0124 00       		.byte	0
+ 365 0125 02       		.uleb128 0x2
+ 366 0126 04       		.byte	0x4
+ 367 0127 04       		.byte	0x4
+ 368 0128 C7000000 		.4byte	.LASF22
+ 369 012c 02       		.uleb128 0x2
+ 370 012d 08       		.byte	0x8
+ 371 012e 04       		.byte	0x4
+ 372 012f AD000000 		.4byte	.LASF23
+ 373 0133 02       		.uleb128 0x2
+ 374 0134 01       		.byte	0x1
+ 375 0135 08       		.byte	0x8
+ 376 0136 03030000 		.4byte	.LASF24
+ 377 013a 02       		.uleb128 0x2
+ 378 013b 08       		.byte	0x8
+ 379 013c 04       		.byte	0x4
+ 380 013d 81030000 		.4byte	.LASF25
+ 381 0141 02       		.uleb128 0x2
+ 382 0142 04       		.byte	0x4
+ 383 0143 07       		.byte	0x7
+ 384 0144 D3020000 		.4byte	.LASF26
+ 385 0148 05       		.uleb128 0x5
+ 386 0149 89010000 		.4byte	.LASF28
+ 387 014d 01       		.byte	0x1
+ 388 014e 2C000000 		.4byte	0x2c
+ 389 0152 01       		.byte	0x1
+ 390 0153 17       		.byte	0x17
+ 391 0154 6B010000 		.4byte	0x16b
+ 392 0158 06       		.uleb128 0x6
+ 393 0159 AD020000 		.4byte	.LASF29
+ 394 015d 00       		.byte	0
+ 395 015e 06       		.uleb128 0x6
+ 396 015f E6010000 		.4byte	.LASF30
+ 397 0163 00       		.byte	0
+ 398 0164 06       		.uleb128 0x6
+ 399 0165 70030000 		.4byte	.LASF31
+ 400 0169 00       		.byte	0
+ 401 016a 00       		.byte	0
+ 402 016b 05       		.uleb128 0x5
+ 403 016c A6030000 		.4byte	.LASF32
+ 404 0170 01       		.byte	0x1
+ 405 0171 2C000000 		.4byte	0x2c
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 10
+
+
+ 406 0175 01       		.byte	0x1
+ 407 0176 1D       		.byte	0x1d
+ 408 0177 8E010000 		.4byte	0x18e
+ 409 017b 06       		.uleb128 0x6
+ 410 017c BE020000 		.4byte	.LASF33
+ 411 0180 00       		.byte	0
+ 412 0181 06       		.uleb128 0x6
+ 413 0182 8D030000 		.4byte	.LASF34
+ 414 0186 00       		.byte	0
+ 415 0187 06       		.uleb128 0x6
+ 416 0188 84000000 		.4byte	.LASF35
+ 417 018c 00       		.byte	0
+ 418 018d 00       		.byte	0
+ 419 018e 05       		.uleb128 0x5
+ 420 018f 44030000 		.4byte	.LASF36
+ 421 0193 01       		.byte	0x1
+ 422 0194 2C000000 		.4byte	0x2c
+ 423 0198 01       		.byte	0x1
+ 424 0199 23       		.byte	0x23
+ 425 019a B1010000 		.4byte	0x1b1
+ 426 019e 06       		.uleb128 0x6
+ 427 019f FE010000 		.4byte	.LASF37
+ 428 01a3 00       		.byte	0
+ 429 01a4 06       		.uleb128 0x6
+ 430 01a5 10030000 		.4byte	.LASF38
+ 431 01a9 00       		.byte	0
+ 432 01aa 06       		.uleb128 0x6
+ 433 01ab 0E000000 		.4byte	.LASF39
+ 434 01af 00       		.byte	0
+ 435 01b0 00       		.byte	0
+ 436 01b1 0A       		.uleb128 0xa
+ 437 01b2 C6010000 		.4byte	.LASF56
+ 438 01b6 01       		.byte	0x1
+ 439 01b7 2B       		.byte	0x2b
+ 440 01b8 00000000 		.4byte	.LFB63
+ 441 01bc 38000000 		.4byte	.LFE63-.LFB63
+ 442 01c0 01       		.uleb128 0x1
+ 443 01c1 9C       		.byte	0x9c
+ 444 01c2 E2010000 		.4byte	0x1e2
+ 445 01c6 0B       		.uleb128 0xb
+ 446 01c7 06000000 		.4byte	.LVL0
+ 447 01cb 1E030000 		.4byte	0x31e
+ 448 01cf 0B       		.uleb128 0xb
+ 449 01d0 0A000000 		.4byte	.LVL1
+ 450 01d4 29030000 		.4byte	0x329
+ 451 01d8 0B       		.uleb128 0xb
+ 452 01d9 0E000000 		.4byte	.LVL2
+ 453 01dd 34030000 		.4byte	0x334
+ 454 01e1 00       		.byte	0
+ 455 01e2 0C       		.uleb128 0xc
+ 456 01e3 B4000000 		.4byte	.LASF57
+ 457 01e7 01       		.byte	0x1
+ 458 01e8 3E       		.byte	0x3e
+ 459 01e9 00000000 		.4byte	.LFB64
+ 460 01ed 50000000 		.4byte	.LFE64-.LFB64
+ 461 01f1 01       		.uleb128 0x1
+ 462 01f2 9C       		.byte	0x9c
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 11
+
+
+ 463 01f3 3C020000 		.4byte	0x23c
+ 464 01f7 0D       		.uleb128 0xd
+ 465 01f8 DC020000 		.4byte	.LASF18
+ 466 01fc 01       		.byte	0x1
+ 467 01fd 3E       		.byte	0x3e
+ 468 01fe AD000000 		.4byte	0xad
+ 469 0202 00000000 		.4byte	.LLST0
+ 470 0206 0E       		.uleb128 0xe
+ 471 0207 1A000000 		.4byte	.LVL5
+ 472 020b 3F030000 		.4byte	0x33f
+ 473 020f 19020000 		.4byte	0x219
+ 474 0213 0F       		.uleb128 0xf
+ 475 0214 01       		.uleb128 0x1
+ 476 0215 50       		.byte	0x50
+ 477 0216 01       		.uleb128 0x1
+ 478 0217 30       		.byte	0x30
+ 479 0218 00       		.byte	0
+ 480 0219 0E       		.uleb128 0xe
+ 481 021a 28000000 		.4byte	.LVL8
+ 482 021e 3F030000 		.4byte	0x33f
+ 483 0222 2C020000 		.4byte	0x22c
+ 484 0226 0F       		.uleb128 0xf
+ 485 0227 01       		.uleb128 0x1
+ 486 0228 50       		.byte	0x50
+ 487 0229 01       		.uleb128 0x1
+ 488 022a 31       		.byte	0x31
+ 489 022b 00       		.byte	0
+ 490 022c 10       		.uleb128 0x10
+ 491 022d 36000000 		.4byte	.LVL11
+ 492 0231 3F030000 		.4byte	0x33f
+ 493 0235 0F       		.uleb128 0xf
+ 494 0236 01       		.uleb128 0x1
+ 495 0237 50       		.byte	0x50
+ 496 0238 01       		.uleb128 0x1
+ 497 0239 32       		.byte	0x32
+ 498 023a 00       		.byte	0
+ 499 023b 00       		.byte	0
+ 500 023c 11       		.uleb128 0x11
+ 501 023d 91000000 		.4byte	.LASF58
+ 502 0241 01       		.byte	0x1
+ 503 0242 5A       		.byte	0x5a
+ 504 0243 8C000000 		.4byte	0x8c
+ 505 0247 00000000 		.4byte	.LFB65
+ 506 024b 22000000 		.4byte	.LFE65-.LFB65
+ 507 024f 01       		.uleb128 0x1
+ 508 0250 9C       		.byte	0x9c
+ 509 0251 B2020000 		.4byte	0x2b2
+ 510 0255 0D       		.uleb128 0xd
+ 511 0256 DC020000 		.4byte	.LASF18
+ 512 025a 01       		.byte	0x1
+ 513 025b 5A       		.byte	0x5a
+ 514 025c AD000000 		.4byte	0xad
+ 515 0260 5E000000 		.4byte	.LLST1
+ 516 0264 12       		.uleb128 0x12
+ 517 0265 F7010000 		.4byte	.LASF19
+ 518 0269 01       		.byte	0x1
+ 519 026a 5E       		.byte	0x5e
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 12
+
+
+ 520 026b A2000000 		.4byte	0xa2
+ 521 026f 01       		.uleb128 0x1
+ 522 0270 55       		.byte	0x55
+ 523 0271 13       		.uleb128 0x13
+ 524 0272 06000000 		.4byte	.LBB2
+ 525 0276 18000000 		.4byte	.LBE2-.LBB2
+ 526 027a A8020000 		.4byte	0x2a8
+ 527 027e 14       		.uleb128 0x14
+ 528 027f 6900     		.ascii	"i\000"
+ 529 0281 01       		.byte	0x1
+ 530 0282 60       		.byte	0x60
+ 531 0283 7E000000 		.4byte	0x7e
+ 532 0287 7F000000 		.4byte	.LLST2
+ 533 028b 0E       		.uleb128 0xe
+ 534 028c 10000000 		.4byte	.LVL16
+ 535 0290 4A030000 		.4byte	0x34a
+ 536 0294 9E020000 		.4byte	0x29e
+ 537 0298 0F       		.uleb128 0xf
+ 538 0299 01       		.uleb128 0x1
+ 539 029a 50       		.byte	0x50
+ 540 029b 01       		.uleb128 0x1
+ 541 029c 30       		.byte	0x30
+ 542 029d 00       		.byte	0
+ 543 029e 0B       		.uleb128 0xb
+ 544 029f 16000000 		.4byte	.LVL17
+ 545 02a3 55030000 		.4byte	0x355
+ 546 02a7 00       		.byte	0
+ 547 02a8 0B       		.uleb128 0xb
+ 548 02a9 06000000 		.4byte	.LVL14
+ 549 02ad E2010000 		.4byte	0x1e2
+ 550 02b1 00       		.byte	0
+ 551 02b2 15       		.uleb128 0x15
+ 552 02b3 B1030000 		.4byte	.LASF40
+ 553 02b7 01       		.byte	0x1
+ 554 02b8 15       		.byte	0x15
+ 555 02b9 BE020000 		.4byte	0x2be
+ 556 02bd 01       		.byte	0x1
+ 557 02be 16       		.uleb128 0x16
+ 558 02bf 7E000000 		.4byte	0x7e
+ 559 02c3 17       		.uleb128 0x17
+ 560 02c4 08030000 		.4byte	.LASF41
+ 561 02c8 04       		.byte	0x4
+ 562 02c9 23       		.byte	0x23
+ 563 02ca D0000000 		.4byte	0xd0
+ 564 02ce 05       		.uleb128 0x5
+ 565 02cf 03       		.byte	0x3
+ 566 02d0 00000000 		.4byte	weight1
+ 567 02d4 17       		.uleb128 0x17
+ 568 02d5 EA020000 		.4byte	.LASF42
+ 569 02d9 04       		.byte	0x4
+ 570 02da 24       		.byte	0x24
+ 571 02db D0000000 		.4byte	0xd0
+ 572 02df 05       		.uleb128 0x5
+ 573 02e0 03       		.byte	0x3
+ 574 02e1 00000000 		.4byte	weight2
+ 575 02e5 17       		.uleb128 0x17
+ 576 02e6 1D030000 		.4byte	.LASF43
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 13
+
+
+ 577 02ea 04       		.byte	0x4
+ 578 02eb 25       		.byte	0x25
+ 579 02ec D0000000 		.4byte	0xd0
+ 580 02f0 05       		.uleb128 0x5
+ 581 02f1 03       		.byte	0x3
+ 582 02f2 00000000 		.4byte	weight3
+ 583 02f6 17       		.uleb128 0x17
+ 584 02f7 4F030000 		.4byte	.LASF44
+ 585 02fb 01       		.byte	0x1
+ 586 02fc 13       		.byte	0x13
+ 587 02fd 07030000 		.4byte	0x307
+ 588 0301 05       		.uleb128 0x5
+ 589 0302 03       		.byte	0x3
+ 590 0303 00000000 		.4byte	current_weight
+ 591 0307 18       		.uleb128 0x18
+ 592 0308 04       		.byte	0x4
+ 593 0309 D0000000 		.4byte	0xd0
+ 594 030d 19       		.uleb128 0x19
+ 595 030e 7C010000 		.4byte	.LASF45
+ 596 0312 05       		.byte	0x5
+ 597 0313 1207     		.2byte	0x712
+ 598 0315 19030000 		.4byte	0x319
+ 599 0319 1A       		.uleb128 0x1a
+ 600 031a 97000000 		.4byte	0x97
+ 601 031e 1B       		.uleb128 0x1b
+ 602 031f 1B000000 		.4byte	.LASF46
+ 603 0323 1B000000 		.4byte	.LASF46
+ 604 0327 06       		.byte	0x6
+ 605 0328 25       		.byte	0x25
+ 606 0329 1B       		.uleb128 0x1b
+ 607 032a F2020000 		.4byte	.LASF47
+ 608 032e F2020000 		.4byte	.LASF47
+ 609 0332 07       		.byte	0x7
+ 610 0333 34       		.byte	0x34
+ 611 0334 1B       		.uleb128 0x1b
+ 612 0335 70020000 		.4byte	.LASF48
+ 613 0339 70020000 		.4byte	.LASF48
+ 614 033d 07       		.byte	0x7
+ 615 033e D1       		.byte	0xd1
+ 616 033f 1B       		.uleb128 0x1b
+ 617 0340 31000000 		.4byte	.LASF49
+ 618 0344 31000000 		.4byte	.LASF49
+ 619 0348 06       		.byte	0x6
+ 620 0349 57       		.byte	0x57
+ 621 034a 1B       		.uleb128 0x1b
+ 622 034b 52000000 		.4byte	.LASF50
+ 623 034f 52000000 		.4byte	.LASF50
+ 624 0353 07       		.byte	0x7
+ 625 0354 39       		.byte	0x39
+ 626 0355 1B       		.uleb128 0x1b
+ 627 0356 6D000000 		.4byte	.LASF51
+ 628 035a 6D000000 		.4byte	.LASF51
+ 629 035e 07       		.byte	0x7
+ 630 035f 3B       		.byte	0x3b
+ 631 0360 00       		.byte	0
+ 632              		.section	.debug_abbrev,"",%progbits
+ 633              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 14
+
+
+ 634 0000 01       		.uleb128 0x1
+ 635 0001 11       		.uleb128 0x11
+ 636 0002 01       		.byte	0x1
+ 637 0003 25       		.uleb128 0x25
+ 638 0004 0E       		.uleb128 0xe
+ 639 0005 13       		.uleb128 0x13
+ 640 0006 0B       		.uleb128 0xb
+ 641 0007 03       		.uleb128 0x3
+ 642 0008 0E       		.uleb128 0xe
+ 643 0009 1B       		.uleb128 0x1b
+ 644 000a 0E       		.uleb128 0xe
+ 645 000b 55       		.uleb128 0x55
+ 646 000c 17       		.uleb128 0x17
+ 647 000d 11       		.uleb128 0x11
+ 648 000e 01       		.uleb128 0x1
+ 649 000f 10       		.uleb128 0x10
+ 650 0010 17       		.uleb128 0x17
+ 651 0011 00       		.byte	0
+ 652 0012 00       		.byte	0
+ 653 0013 02       		.uleb128 0x2
+ 654 0014 24       		.uleb128 0x24
+ 655 0015 00       		.byte	0
+ 656 0016 0B       		.uleb128 0xb
+ 657 0017 0B       		.uleb128 0xb
+ 658 0018 3E       		.uleb128 0x3e
+ 659 0019 0B       		.uleb128 0xb
+ 660 001a 03       		.uleb128 0x3
+ 661 001b 0E       		.uleb128 0xe
+ 662 001c 00       		.byte	0
+ 663 001d 00       		.byte	0
+ 664 001e 03       		.uleb128 0x3
+ 665 001f 16       		.uleb128 0x16
+ 666 0020 00       		.byte	0
+ 667 0021 03       		.uleb128 0x3
+ 668 0022 0E       		.uleb128 0xe
+ 669 0023 3A       		.uleb128 0x3a
+ 670 0024 0B       		.uleb128 0xb
+ 671 0025 3B       		.uleb128 0x3b
+ 672 0026 0B       		.uleb128 0xb
+ 673 0027 49       		.uleb128 0x49
+ 674 0028 13       		.uleb128 0x13
+ 675 0029 00       		.byte	0
+ 676 002a 00       		.byte	0
+ 677 002b 04       		.uleb128 0x4
+ 678 002c 24       		.uleb128 0x24
+ 679 002d 00       		.byte	0
+ 680 002e 0B       		.uleb128 0xb
+ 681 002f 0B       		.uleb128 0xb
+ 682 0030 3E       		.uleb128 0x3e
+ 683 0031 0B       		.uleb128 0xb
+ 684 0032 03       		.uleb128 0x3
+ 685 0033 08       		.uleb128 0x8
+ 686 0034 00       		.byte	0
+ 687 0035 00       		.byte	0
+ 688 0036 05       		.uleb128 0x5
+ 689 0037 04       		.uleb128 0x4
+ 690 0038 01       		.byte	0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 15
+
+
+ 691 0039 03       		.uleb128 0x3
+ 692 003a 0E       		.uleb128 0xe
+ 693 003b 0B       		.uleb128 0xb
+ 694 003c 0B       		.uleb128 0xb
+ 695 003d 49       		.uleb128 0x49
+ 696 003e 13       		.uleb128 0x13
+ 697 003f 3A       		.uleb128 0x3a
+ 698 0040 0B       		.uleb128 0xb
+ 699 0041 3B       		.uleb128 0x3b
+ 700 0042 0B       		.uleb128 0xb
+ 701 0043 01       		.uleb128 0x1
+ 702 0044 13       		.uleb128 0x13
+ 703 0045 00       		.byte	0
+ 704 0046 00       		.byte	0
+ 705 0047 06       		.uleb128 0x6
+ 706 0048 28       		.uleb128 0x28
+ 707 0049 00       		.byte	0
+ 708 004a 03       		.uleb128 0x3
+ 709 004b 0E       		.uleb128 0xe
+ 710 004c 1C       		.uleb128 0x1c
+ 711 004d 0B       		.uleb128 0xb
+ 712 004e 00       		.byte	0
+ 713 004f 00       		.byte	0
+ 714 0050 07       		.uleb128 0x7
+ 715 0051 13       		.uleb128 0x13
+ 716 0052 01       		.byte	0x1
+ 717 0053 03       		.uleb128 0x3
+ 718 0054 0E       		.uleb128 0xe
+ 719 0055 0B       		.uleb128 0xb
+ 720 0056 0B       		.uleb128 0xb
+ 721 0057 3A       		.uleb128 0x3a
+ 722 0058 0B       		.uleb128 0xb
+ 723 0059 3B       		.uleb128 0x3b
+ 724 005a 0B       		.uleb128 0xb
+ 725 005b 01       		.uleb128 0x1
+ 726 005c 13       		.uleb128 0x13
+ 727 005d 00       		.byte	0
+ 728 005e 00       		.byte	0
+ 729 005f 08       		.uleb128 0x8
+ 730 0060 0D       		.uleb128 0xd
+ 731 0061 00       		.byte	0
+ 732 0062 03       		.uleb128 0x3
+ 733 0063 0E       		.uleb128 0xe
+ 734 0064 3A       		.uleb128 0x3a
+ 735 0065 0B       		.uleb128 0xb
+ 736 0066 3B       		.uleb128 0x3b
+ 737 0067 0B       		.uleb128 0xb
+ 738 0068 49       		.uleb128 0x49
+ 739 0069 13       		.uleb128 0x13
+ 740 006a 38       		.uleb128 0x38
+ 741 006b 0B       		.uleb128 0xb
+ 742 006c 00       		.byte	0
+ 743 006d 00       		.byte	0
+ 744 006e 09       		.uleb128 0x9
+ 745 006f 0D       		.uleb128 0xd
+ 746 0070 00       		.byte	0
+ 747 0071 03       		.uleb128 0x3
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 16
+
+
+ 748 0072 08       		.uleb128 0x8
+ 749 0073 3A       		.uleb128 0x3a
+ 750 0074 0B       		.uleb128 0xb
+ 751 0075 3B       		.uleb128 0x3b
+ 752 0076 0B       		.uleb128 0xb
+ 753 0077 49       		.uleb128 0x49
+ 754 0078 13       		.uleb128 0x13
+ 755 0079 38       		.uleb128 0x38
+ 756 007a 0B       		.uleb128 0xb
+ 757 007b 00       		.byte	0
+ 758 007c 00       		.byte	0
+ 759 007d 0A       		.uleb128 0xa
+ 760 007e 2E       		.uleb128 0x2e
+ 761 007f 01       		.byte	0x1
+ 762 0080 3F       		.uleb128 0x3f
+ 763 0081 19       		.uleb128 0x19
+ 764 0082 03       		.uleb128 0x3
+ 765 0083 0E       		.uleb128 0xe
+ 766 0084 3A       		.uleb128 0x3a
+ 767 0085 0B       		.uleb128 0xb
+ 768 0086 3B       		.uleb128 0x3b
+ 769 0087 0B       		.uleb128 0xb
+ 770 0088 11       		.uleb128 0x11
+ 771 0089 01       		.uleb128 0x1
+ 772 008a 12       		.uleb128 0x12
+ 773 008b 06       		.uleb128 0x6
+ 774 008c 40       		.uleb128 0x40
+ 775 008d 18       		.uleb128 0x18
+ 776 008e 9742     		.uleb128 0x2117
+ 777 0090 19       		.uleb128 0x19
+ 778 0091 01       		.uleb128 0x1
+ 779 0092 13       		.uleb128 0x13
+ 780 0093 00       		.byte	0
+ 781 0094 00       		.byte	0
+ 782 0095 0B       		.uleb128 0xb
+ 783 0096 898201   		.uleb128 0x4109
+ 784 0099 00       		.byte	0
+ 785 009a 11       		.uleb128 0x11
+ 786 009b 01       		.uleb128 0x1
+ 787 009c 31       		.uleb128 0x31
+ 788 009d 13       		.uleb128 0x13
+ 789 009e 00       		.byte	0
+ 790 009f 00       		.byte	0
+ 791 00a0 0C       		.uleb128 0xc
+ 792 00a1 2E       		.uleb128 0x2e
+ 793 00a2 01       		.byte	0x1
+ 794 00a3 3F       		.uleb128 0x3f
+ 795 00a4 19       		.uleb128 0x19
+ 796 00a5 03       		.uleb128 0x3
+ 797 00a6 0E       		.uleb128 0xe
+ 798 00a7 3A       		.uleb128 0x3a
+ 799 00a8 0B       		.uleb128 0xb
+ 800 00a9 3B       		.uleb128 0x3b
+ 801 00aa 0B       		.uleb128 0xb
+ 802 00ab 27       		.uleb128 0x27
+ 803 00ac 19       		.uleb128 0x19
+ 804 00ad 11       		.uleb128 0x11
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 17
+
+
+ 805 00ae 01       		.uleb128 0x1
+ 806 00af 12       		.uleb128 0x12
+ 807 00b0 06       		.uleb128 0x6
+ 808 00b1 40       		.uleb128 0x40
+ 809 00b2 18       		.uleb128 0x18
+ 810 00b3 9742     		.uleb128 0x2117
+ 811 00b5 19       		.uleb128 0x19
+ 812 00b6 01       		.uleb128 0x1
+ 813 00b7 13       		.uleb128 0x13
+ 814 00b8 00       		.byte	0
+ 815 00b9 00       		.byte	0
+ 816 00ba 0D       		.uleb128 0xd
+ 817 00bb 05       		.uleb128 0x5
+ 818 00bc 00       		.byte	0
+ 819 00bd 03       		.uleb128 0x3
+ 820 00be 0E       		.uleb128 0xe
+ 821 00bf 3A       		.uleb128 0x3a
+ 822 00c0 0B       		.uleb128 0xb
+ 823 00c1 3B       		.uleb128 0x3b
+ 824 00c2 0B       		.uleb128 0xb
+ 825 00c3 49       		.uleb128 0x49
+ 826 00c4 13       		.uleb128 0x13
+ 827 00c5 02       		.uleb128 0x2
+ 828 00c6 17       		.uleb128 0x17
+ 829 00c7 00       		.byte	0
+ 830 00c8 00       		.byte	0
+ 831 00c9 0E       		.uleb128 0xe
+ 832 00ca 898201   		.uleb128 0x4109
+ 833 00cd 01       		.byte	0x1
+ 834 00ce 11       		.uleb128 0x11
+ 835 00cf 01       		.uleb128 0x1
+ 836 00d0 31       		.uleb128 0x31
+ 837 00d1 13       		.uleb128 0x13
+ 838 00d2 01       		.uleb128 0x1
+ 839 00d3 13       		.uleb128 0x13
+ 840 00d4 00       		.byte	0
+ 841 00d5 00       		.byte	0
+ 842 00d6 0F       		.uleb128 0xf
+ 843 00d7 8A8201   		.uleb128 0x410a
+ 844 00da 00       		.byte	0
+ 845 00db 02       		.uleb128 0x2
+ 846 00dc 18       		.uleb128 0x18
+ 847 00dd 9142     		.uleb128 0x2111
+ 848 00df 18       		.uleb128 0x18
+ 849 00e0 00       		.byte	0
+ 850 00e1 00       		.byte	0
+ 851 00e2 10       		.uleb128 0x10
+ 852 00e3 898201   		.uleb128 0x4109
+ 853 00e6 01       		.byte	0x1
+ 854 00e7 11       		.uleb128 0x11
+ 855 00e8 01       		.uleb128 0x1
+ 856 00e9 31       		.uleb128 0x31
+ 857 00ea 13       		.uleb128 0x13
+ 858 00eb 00       		.byte	0
+ 859 00ec 00       		.byte	0
+ 860 00ed 11       		.uleb128 0x11
+ 861 00ee 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 18
+
+
+ 862 00ef 01       		.byte	0x1
+ 863 00f0 3F       		.uleb128 0x3f
+ 864 00f1 19       		.uleb128 0x19
+ 865 00f2 03       		.uleb128 0x3
+ 866 00f3 0E       		.uleb128 0xe
+ 867 00f4 3A       		.uleb128 0x3a
+ 868 00f5 0B       		.uleb128 0xb
+ 869 00f6 3B       		.uleb128 0x3b
+ 870 00f7 0B       		.uleb128 0xb
+ 871 00f8 27       		.uleb128 0x27
+ 872 00f9 19       		.uleb128 0x19
+ 873 00fa 49       		.uleb128 0x49
+ 874 00fb 13       		.uleb128 0x13
+ 875 00fc 11       		.uleb128 0x11
+ 876 00fd 01       		.uleb128 0x1
+ 877 00fe 12       		.uleb128 0x12
+ 878 00ff 06       		.uleb128 0x6
+ 879 0100 40       		.uleb128 0x40
+ 880 0101 18       		.uleb128 0x18
+ 881 0102 9742     		.uleb128 0x2117
+ 882 0104 19       		.uleb128 0x19
+ 883 0105 01       		.uleb128 0x1
+ 884 0106 13       		.uleb128 0x13
+ 885 0107 00       		.byte	0
+ 886 0108 00       		.byte	0
+ 887 0109 12       		.uleb128 0x12
+ 888 010a 34       		.uleb128 0x34
+ 889 010b 00       		.byte	0
+ 890 010c 03       		.uleb128 0x3
+ 891 010d 0E       		.uleb128 0xe
+ 892 010e 3A       		.uleb128 0x3a
+ 893 010f 0B       		.uleb128 0xb
+ 894 0110 3B       		.uleb128 0x3b
+ 895 0111 0B       		.uleb128 0xb
+ 896 0112 49       		.uleb128 0x49
+ 897 0113 13       		.uleb128 0x13
+ 898 0114 02       		.uleb128 0x2
+ 899 0115 18       		.uleb128 0x18
+ 900 0116 00       		.byte	0
+ 901 0117 00       		.byte	0
+ 902 0118 13       		.uleb128 0x13
+ 903 0119 0B       		.uleb128 0xb
+ 904 011a 01       		.byte	0x1
+ 905 011b 11       		.uleb128 0x11
+ 906 011c 01       		.uleb128 0x1
+ 907 011d 12       		.uleb128 0x12
+ 908 011e 06       		.uleb128 0x6
+ 909 011f 01       		.uleb128 0x1
+ 910 0120 13       		.uleb128 0x13
+ 911 0121 00       		.byte	0
+ 912 0122 00       		.byte	0
+ 913 0123 14       		.uleb128 0x14
+ 914 0124 34       		.uleb128 0x34
+ 915 0125 00       		.byte	0
+ 916 0126 03       		.uleb128 0x3
+ 917 0127 08       		.uleb128 0x8
+ 918 0128 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 19
+
+
+ 919 0129 0B       		.uleb128 0xb
+ 920 012a 3B       		.uleb128 0x3b
+ 921 012b 0B       		.uleb128 0xb
+ 922 012c 49       		.uleb128 0x49
+ 923 012d 13       		.uleb128 0x13
+ 924 012e 02       		.uleb128 0x2
+ 925 012f 17       		.uleb128 0x17
+ 926 0130 00       		.byte	0
+ 927 0131 00       		.byte	0
+ 928 0132 15       		.uleb128 0x15
+ 929 0133 34       		.uleb128 0x34
+ 930 0134 00       		.byte	0
+ 931 0135 03       		.uleb128 0x3
+ 932 0136 0E       		.uleb128 0xe
+ 933 0137 3A       		.uleb128 0x3a
+ 934 0138 0B       		.uleb128 0xb
+ 935 0139 3B       		.uleb128 0x3b
+ 936 013a 0B       		.uleb128 0xb
+ 937 013b 49       		.uleb128 0x49
+ 938 013c 13       		.uleb128 0x13
+ 939 013d 1C       		.uleb128 0x1c
+ 940 013e 0B       		.uleb128 0xb
+ 941 013f 00       		.byte	0
+ 942 0140 00       		.byte	0
+ 943 0141 16       		.uleb128 0x16
+ 944 0142 26       		.uleb128 0x26
+ 945 0143 00       		.byte	0
+ 946 0144 49       		.uleb128 0x49
+ 947 0145 13       		.uleb128 0x13
+ 948 0146 00       		.byte	0
+ 949 0147 00       		.byte	0
+ 950 0148 17       		.uleb128 0x17
+ 951 0149 34       		.uleb128 0x34
+ 952 014a 00       		.byte	0
+ 953 014b 03       		.uleb128 0x3
+ 954 014c 0E       		.uleb128 0xe
+ 955 014d 3A       		.uleb128 0x3a
+ 956 014e 0B       		.uleb128 0xb
+ 957 014f 3B       		.uleb128 0x3b
+ 958 0150 0B       		.uleb128 0xb
+ 959 0151 49       		.uleb128 0x49
+ 960 0152 13       		.uleb128 0x13
+ 961 0153 3F       		.uleb128 0x3f
+ 962 0154 19       		.uleb128 0x19
+ 963 0155 02       		.uleb128 0x2
+ 964 0156 18       		.uleb128 0x18
+ 965 0157 00       		.byte	0
+ 966 0158 00       		.byte	0
+ 967 0159 18       		.uleb128 0x18
+ 968 015a 0F       		.uleb128 0xf
+ 969 015b 00       		.byte	0
+ 970 015c 0B       		.uleb128 0xb
+ 971 015d 0B       		.uleb128 0xb
+ 972 015e 49       		.uleb128 0x49
+ 973 015f 13       		.uleb128 0x13
+ 974 0160 00       		.byte	0
+ 975 0161 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 20
+
+
+ 976 0162 19       		.uleb128 0x19
+ 977 0163 34       		.uleb128 0x34
+ 978 0164 00       		.byte	0
+ 979 0165 03       		.uleb128 0x3
+ 980 0166 0E       		.uleb128 0xe
+ 981 0167 3A       		.uleb128 0x3a
+ 982 0168 0B       		.uleb128 0xb
+ 983 0169 3B       		.uleb128 0x3b
+ 984 016a 05       		.uleb128 0x5
+ 985 016b 49       		.uleb128 0x49
+ 986 016c 13       		.uleb128 0x13
+ 987 016d 3F       		.uleb128 0x3f
+ 988 016e 19       		.uleb128 0x19
+ 989 016f 3C       		.uleb128 0x3c
+ 990 0170 19       		.uleb128 0x19
+ 991 0171 00       		.byte	0
+ 992 0172 00       		.byte	0
+ 993 0173 1A       		.uleb128 0x1a
+ 994 0174 35       		.uleb128 0x35
+ 995 0175 00       		.byte	0
+ 996 0176 49       		.uleb128 0x49
+ 997 0177 13       		.uleb128 0x13
+ 998 0178 00       		.byte	0
+ 999 0179 00       		.byte	0
+ 1000 017a 1B       		.uleb128 0x1b
+ 1001 017b 2E       		.uleb128 0x2e
+ 1002 017c 00       		.byte	0
+ 1003 017d 3F       		.uleb128 0x3f
+ 1004 017e 19       		.uleb128 0x19
+ 1005 017f 3C       		.uleb128 0x3c
+ 1006 0180 19       		.uleb128 0x19
+ 1007 0181 6E       		.uleb128 0x6e
+ 1008 0182 0E       		.uleb128 0xe
+ 1009 0183 03       		.uleb128 0x3
+ 1010 0184 0E       		.uleb128 0xe
+ 1011 0185 3A       		.uleb128 0x3a
+ 1012 0186 0B       		.uleb128 0xb
+ 1013 0187 3B       		.uleb128 0x3b
+ 1014 0188 0B       		.uleb128 0xb
+ 1015 0189 00       		.byte	0
+ 1016 018a 00       		.byte	0
+ 1017 018b 00       		.byte	0
+ 1018              		.section	.debug_loc,"",%progbits
+ 1019              	.Ldebug_loc0:
+ 1020              	.LLST0:
+ 1021 0000 00000000 		.4byte	.LVL3
+ 1022 0004 16000000 		.4byte	.LVL4
+ 1023 0008 0100     		.2byte	0x1
+ 1024 000a 50       		.byte	0x50
+ 1025 000b 16000000 		.4byte	.LVL4
+ 1026 000f 1C000000 		.4byte	.LVL6
+ 1027 0013 0400     		.2byte	0x4
+ 1028 0015 F3       		.byte	0xf3
+ 1029 0016 01       		.uleb128 0x1
+ 1030 0017 50       		.byte	0x50
+ 1031 0018 9F       		.byte	0x9f
+ 1032 0019 1C000000 		.4byte	.LVL6
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 21
+
+
+ 1033 001d 24000000 		.4byte	.LVL7
+ 1034 0021 0100     		.2byte	0x1
+ 1035 0023 50       		.byte	0x50
+ 1036 0024 24000000 		.4byte	.LVL7
+ 1037 0028 2A000000 		.4byte	.LVL9
+ 1038 002c 0400     		.2byte	0x4
+ 1039 002e F3       		.byte	0xf3
+ 1040 002f 01       		.uleb128 0x1
+ 1041 0030 50       		.byte	0x50
+ 1042 0031 9F       		.byte	0x9f
+ 1043 0032 2A000000 		.4byte	.LVL9
+ 1044 0036 32000000 		.4byte	.LVL10
+ 1045 003a 0100     		.2byte	0x1
+ 1046 003c 50       		.byte	0x50
+ 1047 003d 32000000 		.4byte	.LVL10
+ 1048 0041 38000000 		.4byte	.LVL12
+ 1049 0045 0400     		.2byte	0x4
+ 1050 0047 F3       		.byte	0xf3
+ 1051 0048 01       		.uleb128 0x1
+ 1052 0049 50       		.byte	0x50
+ 1053 004a 9F       		.byte	0x9f
+ 1054 004b 38000000 		.4byte	.LVL12
+ 1055 004f 50000000 		.4byte	.LFE64
+ 1056 0053 0100     		.2byte	0x1
+ 1057 0055 50       		.byte	0x50
+ 1058 0056 00000000 		.4byte	0
+ 1059 005a 00000000 		.4byte	0
+ 1060              	.LLST1:
+ 1061 005e 00000000 		.4byte	.LVL13
+ 1062 0062 05000000 		.4byte	.LVL14-1
+ 1063 0066 0100     		.2byte	0x1
+ 1064 0068 50       		.byte	0x50
+ 1065 0069 05000000 		.4byte	.LVL14-1
+ 1066 006d 22000000 		.4byte	.LFE65
+ 1067 0071 0400     		.2byte	0x4
+ 1068 0073 F3       		.byte	0xf3
+ 1069 0074 01       		.uleb128 0x1
+ 1070 0075 50       		.byte	0x50
+ 1071 0076 9F       		.byte	0x9f
+ 1072 0077 00000000 		.4byte	0
+ 1073 007b 00000000 		.4byte	0
+ 1074              	.LLST2:
+ 1075 007f 06000000 		.4byte	.LVL14
+ 1076 0083 0A000000 		.4byte	.LVL15
+ 1077 0087 0200     		.2byte	0x2
+ 1078 0089 30       		.byte	0x30
+ 1079 008a 9F       		.byte	0x9f
+ 1080 008b 0A000000 		.4byte	.LVL15
+ 1081 008f 22000000 		.4byte	.LFE65
+ 1082 0093 0100     		.2byte	0x1
+ 1083 0095 54       		.byte	0x54
+ 1084 0096 00000000 		.4byte	0
+ 1085 009a 00000000 		.4byte	0
+ 1086              		.section	.debug_aranges,"",%progbits
+ 1087 0000 2C000000 		.4byte	0x2c
+ 1088 0004 0200     		.2byte	0x2
+ 1089 0006 00000000 		.4byte	.Ldebug_info0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 22
+
+
+ 1090 000a 04       		.byte	0x4
+ 1091 000b 00       		.byte	0
+ 1092 000c 0000     		.2byte	0
+ 1093 000e 0000     		.2byte	0
+ 1094 0010 00000000 		.4byte	.LFB63
+ 1095 0014 38000000 		.4byte	.LFE63-.LFB63
+ 1096 0018 00000000 		.4byte	.LFB64
+ 1097 001c 50000000 		.4byte	.LFE64-.LFB64
+ 1098 0020 00000000 		.4byte	.LFB65
+ 1099 0024 22000000 		.4byte	.LFE65-.LFB65
+ 1100 0028 00000000 		.4byte	0
+ 1101 002c 00000000 		.4byte	0
+ 1102              		.section	.debug_ranges,"",%progbits
+ 1103              	.Ldebug_ranges0:
+ 1104 0000 00000000 		.4byte	.LFB63
+ 1105 0004 38000000 		.4byte	.LFE63
+ 1106 0008 00000000 		.4byte	.LFB64
+ 1107 000c 50000000 		.4byte	.LFE64
+ 1108 0010 00000000 		.4byte	.LFB65
+ 1109 0014 22000000 		.4byte	.LFE65
+ 1110 0018 00000000 		.4byte	0
+ 1111 001c 00000000 		.4byte	0
+ 1112              		.section	.debug_line,"",%progbits
+ 1113              	.Ldebug_line0:
+ 1114 0000 D0010000 		.section	.debug_str,"MS",%progbits,1
+ 1114      02007201 
+ 1114      00000201 
+ 1114      FB0E0D00 
+ 1114      01010101 
+ 1115              	.LASF9:
+ 1116 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1116      206C6F6E 
+ 1116      6720696E 
+ 1116      7400
+ 1117              	.LASF39:
+ 1118 000e 57454947 		.ascii	"WEIGHT_3_MAX\000"
+ 1118      48545F33 
+ 1118      5F4D4158 
+ 1118      00
+ 1119              	.LASF46:
+ 1120 001b 77656967 		.ascii	"weight_selector_Start\000"
+ 1120      68745F73 
+ 1120      656C6563 
+ 1120      746F725F 
+ 1120      53746172 
+ 1121              	.LASF49:
+ 1122 0031 77656967 		.ascii	"weight_selector_Select\000"
+ 1122      68745F73 
+ 1122      656C6563 
+ 1122      746F725F 
+ 1122      53656C65 
+ 1123              	.LASF5:
+ 1124 0048 5F5F696E 		.ascii	"__int32_t\000"
+ 1124      7433325F 
+ 1124      7400
+ 1125              	.LASF50:
+ 1126 0052 77656967 		.ascii	"weight_adc_IsEndConversion\000"
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 23
+
+
+ 1126      68745F61 
+ 1126      64635F49 
+ 1126      73456E64 
+ 1126      436F6E76 
+ 1127              	.LASF51:
+ 1128 006d 77656967 		.ascii	"weight_adc_GetResult16\000"
+ 1128      68745F61 
+ 1128      64635F47 
+ 1128      65745265 
+ 1128      73756C74 
+ 1129              	.LASF35:
+ 1130 0084 57454947 		.ascii	"WEIGHT_3_MIN\000"
+ 1130      48545F33 
+ 1130      5F4D494E 
+ 1130      00
+ 1131              	.LASF58:
+ 1132 0091 6D656173 		.ascii	"measure_weight_value\000"
+ 1132      7572655F 
+ 1132      77656967 
+ 1132      68745F76 
+ 1132      616C7565 
+ 1133              	.LASF55:
+ 1134 00a6 77656967 		.ascii	"weight\000"
+ 1134      687400
+ 1135              	.LASF23:
+ 1136 00ad 646F7562 		.ascii	"double\000"
+ 1136      6C6500
+ 1137              	.LASF57:
+ 1138 00b4 7365745F 		.ascii	"set_current_weight\000"
+ 1138      63757272 
+ 1138      656E745F 
+ 1138      77656967 
+ 1138      687400
+ 1139              	.LASF22:
+ 1140 00c7 666C6F61 		.ascii	"float\000"
+ 1140      7400
+ 1141              	.LASF1:
+ 1142 00cd 756E7369 		.ascii	"unsigned char\000"
+ 1142      676E6564 
+ 1142      20636861 
+ 1142      7200
+ 1143              	.LASF52:
+ 1144 00db 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1144      43313120 
+ 1144      352E342E 
+ 1144      31203230 
+ 1144      31363036 
+ 1145 010e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1145      20726576 
+ 1145      6973696F 
+ 1145      6E203233 
+ 1145      37373135 
+ 1146 0141 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1146      66756E63 
+ 1146      74696F6E 
+ 1146      2D736563 
+ 1146      74696F6E 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 24
+
+
+ 1147              	.LASF3:
+ 1148 0169 73686F72 		.ascii	"short unsigned int\000"
+ 1148      7420756E 
+ 1148      7369676E 
+ 1148      65642069 
+ 1148      6E7400
+ 1149              	.LASF45:
+ 1150 017c 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1150      52784275 
+ 1150      66666572 
+ 1150      00
+ 1151              	.LASF28:
+ 1152 0189 57454947 		.ascii	"WEIGHT_DIVIDE\000"
+ 1152      48545F44 
+ 1152      49564944 
+ 1152      4500
+ 1153              	.LASF27:
+ 1154 0197 646D635F 		.ascii	"dmc_weight_number\000"
+ 1154      77656967 
+ 1154      68745F6E 
+ 1154      756D6265 
+ 1154      7200
+ 1155              	.LASF4:
+ 1156 01a9 5F5F7569 		.ascii	"__uint16_t\000"
+ 1156      6E743136 
+ 1156      5F7400
+ 1157              	.LASF8:
+ 1158 01b4 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1158      20756E73 
+ 1158      69676E65 
+ 1158      6420696E 
+ 1158      7400
+ 1159              	.LASF56:
+ 1160 01c6 77656967 		.ascii	"weight_init\000"
+ 1160      68745F69 
+ 1160      6E697400 
+ 1161              	.LASF53:
+ 1162 01d2 77656967 		.ascii	"weight.c\000"
+ 1162      68742E63 
+ 1162      00
+ 1163              	.LASF7:
+ 1164 01db 5F5F7569 		.ascii	"__uint32_t\000"
+ 1164      6E743332 
+ 1164      5F7400
+ 1165              	.LASF30:
+ 1166 01e6 57454947 		.ascii	"WEIGHT_2_DIVIDER\000"
+ 1166      48545F32 
+ 1166      5F444956 
+ 1166      49444552 
+ 1166      00
+ 1167              	.LASF19:
+ 1168 01f7 72657375 		.ascii	"result\000"
+ 1168      6C7400
+ 1169              	.LASF37:
+ 1170 01fe 57454947 		.ascii	"WEIGHT_1_MAX\000"
+ 1170      48545F31 
+ 1170      5F4D4158 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 25
+
+
+ 1170      00
+ 1171              	.LASF54:
+ 1172 020b 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
+ 1172      6F646520 
+ 1172      74696C20 
+ 1172      50524A33 
+ 1172      5C73656D 
+ 1173 0239 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
+ 1173      70736F63 
+ 1173      5C646D63 
+ 1173      2D70736F 
+ 1173      632E6379 
+ 1174              	.LASF15:
+ 1175 0251 57454947 		.ascii	"WEIGHT_1\000"
+ 1175      48545F31 
+ 1175      00
+ 1176              	.LASF16:
+ 1177 025a 57454947 		.ascii	"WEIGHT_2\000"
+ 1177      48545F32 
+ 1177      00
+ 1178              	.LASF11:
+ 1179 0263 756E7369 		.ascii	"unsigned int\000"
+ 1179      676E6564 
+ 1179      20696E74 
+ 1179      00
+ 1180              	.LASF48:
+ 1181 0270 77656967 		.ascii	"weight_adc_StartConvert\000"
+ 1181      68745F61 
+ 1181      64635F53 
+ 1181      74617274 
+ 1181      436F6E76 
+ 1182              	.LASF10:
+ 1183 0288 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1183      206C6F6E 
+ 1183      6720756E 
+ 1183      7369676E 
+ 1183      65642069 
+ 1184              	.LASF17:
+ 1185 029f 57454947 		.ascii	"WEIGHT_3\000"
+ 1185      48545F33 
+ 1185      00
+ 1186              	.LASF20:
+ 1187 02a8 74617261 		.ascii	"tara\000"
+ 1187      00
+ 1188              	.LASF29:
+ 1189 02ad 57454947 		.ascii	"WEIGHT_1_DIVIDER\000"
+ 1189      48545F31 
+ 1189      5F444956 
+ 1189      49444552 
+ 1189      00
+ 1190              	.LASF33:
+ 1191 02be 57454947 		.ascii	"WEIGHT_1_MIN\000"
+ 1191      48545F31 
+ 1191      5F4D494E 
+ 1191      00
+ 1192              	.LASF13:
+ 1193 02cb 696E7433 		.ascii	"int32_t\000"
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 26
+
+
+ 1193      325F7400 
+ 1194              	.LASF26:
+ 1195 02d3 73697A65 		.ascii	"sizetype\000"
+ 1195      74797065 
+ 1195      00
+ 1196              	.LASF18:
+ 1197 02dc 77656967 		.ascii	"weight_number\000"
+ 1197      68745F6E 
+ 1197      756D6265 
+ 1197      7200
+ 1198              	.LASF42:
+ 1199 02ea 77656967 		.ascii	"weight2\000"
+ 1199      68743200 
+ 1200              	.LASF47:
+ 1201 02f2 77656967 		.ascii	"weight_adc_Start\000"
+ 1201      68745F61 
+ 1201      64635F53 
+ 1201      74617274 
+ 1201      00
+ 1202              	.LASF24:
+ 1203 0303 63686172 		.ascii	"char\000"
+ 1203      00
+ 1204              	.LASF41:
+ 1205 0308 77656967 		.ascii	"weight1\000"
+ 1205      68743100 
+ 1206              	.LASF38:
+ 1207 0310 57454947 		.ascii	"WEIGHT_2_MAX\000"
+ 1207      48545F32 
+ 1207      5F4D4158 
+ 1207      00
+ 1208              	.LASF43:
+ 1209 031d 77656967 		.ascii	"weight3\000"
+ 1209      68743300 
+ 1210              	.LASF2:
+ 1211 0325 73686F72 		.ascii	"short int\000"
+ 1211      7420696E 
+ 1211      7400
+ 1212              	.LASF12:
+ 1213 032f 75696E74 		.ascii	"uint16_t\000"
+ 1213      31365F74 
+ 1213      00
+ 1214              	.LASF21:
+ 1215 0338 6164635F 		.ascii	"adc_divider\000"
+ 1215      64697669 
+ 1215      64657200 
+ 1216              	.LASF36:
+ 1217 0344 57454947 		.ascii	"WEIGHT_MAX\000"
+ 1217      48545F4D 
+ 1217      415800
+ 1218              	.LASF44:
+ 1219 034f 63757272 		.ascii	"current_weight\000"
+ 1219      656E745F 
+ 1219      77656967 
+ 1219      687400
+ 1220              	.LASF14:
+ 1221 035e 75696E74 		.ascii	"uint32_t\000"
+ 1221      33325F74 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccfz4i9m.s 			page 27
+
+
+ 1221      00
+ 1222              	.LASF6:
+ 1223 0367 6C6F6E67 		.ascii	"long int\000"
+ 1223      20696E74 
+ 1223      00
+ 1224              	.LASF31:
+ 1225 0370 57454947 		.ascii	"WEIGHT_3_DIVIDER\000"
+ 1225      48545F33 
+ 1225      5F444956 
+ 1225      49444552 
+ 1225      00
+ 1226              	.LASF25:
+ 1227 0381 6C6F6E67 		.ascii	"long double\000"
+ 1227      20646F75 
+ 1227      626C6500 
+ 1228              	.LASF34:
+ 1229 038d 57454947 		.ascii	"WEIGHT_2_MIN\000"
+ 1229      48545F32 
+ 1229      5F4D494E 
+ 1229      00
+ 1230              	.LASF0:
+ 1231 039a 7369676E 		.ascii	"signed char\000"
+ 1231      65642063 
+ 1231      68617200 
+ 1232              	.LASF32:
+ 1233 03a6 57454947 		.ascii	"WEIGHT_MIN\000"
+ 1233      48545F4D 
+ 1233      494E00
+ 1234              	.LASF40:
+ 1235 03b1 4E554D5F 		.ascii	"NUM_OF_MEASUREMENTS\000"
+ 1235      4F465F4D 
+ 1235      45415355 
+ 1235      52454D45 
+ 1235      4E545300 
+ 1236              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
