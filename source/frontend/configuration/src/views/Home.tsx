@@ -125,8 +125,21 @@ function Home(): JSX.Element {
 
   //Hvis der ikke er nogen fluids så kan vi ikke loade UI'et så vi returnerer bare en loading tekst
   if (fluids.isLoading || getContainers.isLoading || drinks.isLoading) {
-    return <div className="text-black text-9xl text-center">Loading...</div>;
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        color: 'white',
+        fontSize: '8rem',
+        textAlign: 'center',
+      }}>
+        Loading...
+      </div>
+    );
   }
+  
 
   //Hernede bliver alt magien samplet
   return (
