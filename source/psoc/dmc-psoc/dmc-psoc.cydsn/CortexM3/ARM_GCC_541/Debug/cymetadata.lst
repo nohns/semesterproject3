@@ -1,0 +1,2261 @@
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cymetadata.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cy_metadata
+  20              		.global	cy_meta_flashprotect
+  21              		.global	cy_meta_wonvl
+  22              		.global	cy_meta_custnvl
+  23              		.global	cy_meta_configecc
+  24              		.section	.cyconfigecc,"a",%progbits
+  25              		.align	2
+  26              		.type	cy_meta_configecc, %object
+  27              		.size	cy_meta_configecc, 1668
+  28              	cy_meta_configecc:
+  29 0000 07       		.byte	7
+  30 0001 4F       		.byte	79
+  31 0002 00       		.byte	0
+  32 0003 40       		.byte	64
+  33 0004 03       		.byte	3
+  34 0005 64       		.byte	100
+  35 0006 00       		.byte	0
+  36 0007 40       		.byte	64
+  37 0008 03       		.byte	3
+  38 0009 65       		.byte	101
+  39 000a 00       		.byte	0
+  40 000b 40       		.byte	64
+  41 000c 01       		.byte	1
+  42 000d 03       		.byte	3
+  43 000e 01       		.byte	1
+  44 000f 40       		.byte	64
+  45 0010 14       		.byte	20
+  46 0011 04       		.byte	4
+  47 0012 01       		.byte	1
+  48 0013 40       		.byte	64
+  49 0014 39       		.byte	57
+  50 0015 05       		.byte	5
+  51 0016 01       		.byte	1
+  52 0017 40       		.byte	64
+  53 0018 6B       		.byte	107
+  54 0019 06       		.byte	6
+  55 001a 01       		.byte	1
+  56 001b 40       		.byte	64
+  57 001c 4A       		.byte	74
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 2
+
+
+  58 001d 07       		.byte	7
+  59 001e 01       		.byte	1
+  60 001f 40       		.byte	64
+  61 0020 04       		.byte	4
+  62 0021 08       		.byte	8
+  63 0022 01       		.byte	1
+  64 0023 40       		.byte	64
+  65 0024 05       		.byte	5
+  66 0025 09       		.byte	9
+  67 0026 01       		.byte	1
+  68 0027 40       		.byte	64
+  69 0028 01       		.byte	1
+  70 0029 0D       		.byte	13
+  71 002a 01       		.byte	1
+  72 002b 40       		.byte	64
+  73 002c 0A       		.byte	10
+  74 002d 14       		.byte	20
+  75 002e 01       		.byte	1
+  76 002f 40       		.byte	64
+  77 0030 44       		.byte	68
+  78 0031 15       		.byte	21
+  79 0032 01       		.byte	1
+  80 0033 40       		.byte	64
+  81 0034 34       		.byte	52
+  82 0035 16       		.byte	22
+  83 0036 01       		.byte	1
+  84 0037 40       		.byte	64
+  85 0038 54       		.byte	84
+  86 0039 17       		.byte	23
+  87 003a 01       		.byte	1
+  88 003b 40       		.byte	64
+  89 003c 02       		.byte	2
+  90 003d 19       		.byte	25
+  91 003e 01       		.byte	1
+  92 003f 40       		.byte	64
+  93 0040 02       		.byte	2
+  94 0041 1B       		.byte	27
+  95 0042 01       		.byte	1
+  96 0043 40       		.byte	64
+  97 0044 04       		.byte	4
+  98 0045 40       		.byte	64
+  99 0046 01       		.byte	1
+ 100 0047 40       		.byte	64
+ 101 0048 04       		.byte	4
+ 102 0049 41       		.byte	65
+ 103 004a 01       		.byte	1
+ 104 004b 40       		.byte	64
+ 105 004c 05       		.byte	5
+ 106 004d 42       		.byte	66
+ 107 004e 01       		.byte	1
+ 108 004f 40       		.byte	64
+ 109 0050 0D       		.byte	13
+ 110 0051 43       		.byte	67
+ 111 0052 01       		.byte	1
+ 112 0053 40       		.byte	64
+ 113 0054 01       		.byte	1
+ 114 0055 45       		.byte	69
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 3
+
+
+ 115 0056 01       		.byte	1
+ 116 0057 40       		.byte	64
+ 117 0058 01       		.byte	1
+ 118 0059 46       		.byte	70
+ 119 005a 01       		.byte	1
+ 120 005b 40       		.byte	64
+ 121 005c 01       		.byte	1
+ 122 005d 47       		.byte	71
+ 123 005e 01       		.byte	1
+ 124 005f 40       		.byte	64
+ 125 0060 04       		.byte	4
+ 126 0061 48       		.byte	72
+ 127 0062 01       		.byte	1
+ 128 0063 40       		.byte	64
+ 129 0064 04       		.byte	4
+ 130 0065 49       		.byte	73
+ 131 0066 01       		.byte	1
+ 132 0067 40       		.byte	64
+ 133 0068 03       		.byte	3
+ 134 0069 4C       		.byte	76
+ 135 006a 01       		.byte	1
+ 136 006b 40       		.byte	64
+ 137 006c 08       		.byte	8
+ 138 006d 4D       		.byte	77
+ 139 006e 01       		.byte	1
+ 140 006f 40       		.byte	64
+ 141 0070 04       		.byte	4
+ 142 0071 50       		.byte	80
+ 143 0072 01       		.byte	1
+ 144 0073 40       		.byte	64
+ 145 0074 01       		.byte	1
+ 146 0075 51       		.byte	81
+ 147 0076 01       		.byte	1
+ 148 0077 40       		.byte	64
+ 149 0078 0A       		.byte	10
+ 150 0079 1B       		.byte	27
+ 151 007a 0D       		.byte	13
+ 152 007b 20       		.byte	32
+ 153 007c 16       		.byte	22
+ 154 007d 1B       		.byte	27
+ 155 007e 19       		.byte	25
+ 156 007f 30       		.byte	48
+ 157 0080 22       		.byte	34
+ 158 0081 27       		.byte	39
+ 159 0082 25       		.byte	37
+ 160 0083 10       		.byte	16
+ 161 0084 2E       		.byte	46
+ 162 0085 27       		.byte	39
+ 163 0086 84       		.byte	-124
+ 164 0087 38       		.byte	56
+ 165 0088 85       		.byte	-123
+ 166 0089 72       		.byte	114
+ 167 008a 86       		.byte	-122
+ 168 008b 0F       		.byte	15
+ 169 008c 84       		.byte	-124
+ 170 008d 72       		.byte	114
+ 171 008e 85       		.byte	-123
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 4
+
+
+ 172 008f 0F       		.byte	15
+ 173 0090 87       		.byte	-121
+ 174 0091 38       		.byte	56
+ 175 0092 E6       		.byte	-26
+ 176 0093 02       		.byte	2
+ 177 0094 00       		.byte	0
+ 178 0095 01       		.byte	1
+ 179 0096 03       		.byte	3
+ 180 0097 01       		.byte	1
+ 181 0098 06       		.byte	6
+ 182 0099 04       		.byte	4
+ 183 009a 0B       		.byte	11
+ 184 009b 01       		.byte	1
+ 185 009c 1E       		.byte	30
+ 186 009d 02       		.byte	2
+ 187 009e 2A       		.byte	42
+ 188 009f 04       		.byte	4
+ 189 00a0 2E       		.byte	46
+ 190 00a1 02       		.byte	2
+ 191 00a2 32       		.byte	50
+ 192 00a3 01       		.byte	1
+ 193 00a4 34       		.byte	52
+ 194 00a5 04       		.byte	4
+ 195 00a6 35       		.byte	53
+ 196 00a7 01       		.byte	1
+ 197 00a8 36       		.byte	54
+ 198 00a9 02       		.byte	2
+ 199 00aa 3E       		.byte	62
+ 200 00ab 54       		.byte	84
+ 201 00ac 3F       		.byte	63
+ 202 00ad 10       		.byte	16
+ 203 00ae 54       		.byte	84
+ 204 00af 18       		.byte	24
+ 205 00b0 56       		.byte	86
+ 206 00b1 04       		.byte	4
+ 207 00b2 58       		.byte	88
+ 208 00b3 04       		.byte	4
+ 209 00b4 59       		.byte	89
+ 210 00b5 04       		.byte	4
+ 211 00b6 5B       		.byte	91
+ 212 00b7 04       		.byte	4
+ 213 00b8 5D       		.byte	93
+ 214 00b9 50       		.byte	80
+ 215 00ba 5F       		.byte	95
+ 216 00bb 01       		.byte	1
+ 217 00bc 00       		.byte	0
+ 218 00bd 02       		.byte	2
+ 219 00be 03       		.byte	3
+ 220 00bf 20       		.byte	32
+ 221 00c0 04       		.byte	4
+ 222 00c1 04       		.byte	4
+ 223 00c2 05       		.byte	5
+ 224 00c3 81       		.byte	-127
+ 225 00c4 07       		.byte	7
+ 226 00c5 08       		.byte	8
+ 227 00c6 0A       		.byte	10
+ 228 00c7 03       		.byte	3
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 5
+
+
+ 229 00c8 0C       		.byte	12
+ 230 00c9 40       		.byte	64
+ 231 00ca 0D       		.byte	13
+ 232 00cb 02       		.byte	2
+ 233 00cc 0E       		.byte	14
+ 234 00cd 28       		.byte	40
+ 235 00ce 11       		.byte	17
+ 236 00cf 20       		.byte	32
+ 237 00d0 12       		.byte	18
+ 238 00d1 01       		.byte	1
+ 239 00d2 14       		.byte	20
+ 240 00d3 04       		.byte	4
+ 241 00d4 16       		.byte	22
+ 242 00d5 90       		.byte	-112
+ 243 00d6 18       		.byte	24
+ 244 00d7 01       		.byte	1
+ 245 00d8 19       		.byte	25
+ 246 00d9 18       		.byte	24
+ 247 00da 1C       		.byte	28
+ 248 00db 04       		.byte	4
+ 249 00dc 1D       		.byte	29
+ 250 00dd 21       		.byte	33
+ 251 00de 1E       		.byte	30
+ 252 00df 55       		.byte	85
+ 253 00e0 22       		.byte	34
+ 254 00e1 20       		.byte	32
+ 255 00e2 25       		.byte	37
+ 256 00e3 12       		.byte	18
+ 257 00e4 26       		.byte	38
+ 258 00e5 0D       		.byte	13
+ 259 00e6 27       		.byte	39
+ 260 00e7 01       		.byte	1
+ 261 00e8 2C       		.byte	44
+ 262 00e9 04       		.byte	4
+ 263 00ea 2E       		.byte	46
+ 264 00eb 46       		.byte	70
+ 265 00ec 35       		.byte	53
+ 266 00ed A0       		.byte	-96
+ 267 00ee 36       		.byte	54
+ 268 00ef 05       		.byte	5
+ 269 00f0 39       		.byte	57
+ 270 00f1 02       		.byte	2
+ 271 00f2 3B       		.byte	59
+ 272 00f3 20       		.byte	32
+ 273 00f4 3C       		.byte	60
+ 274 00f5 80       		.byte	-128
+ 275 00f6 3D       		.byte	61
+ 276 00f7 0A       		.byte	10
+ 277 00f8 3E       		.byte	62
+ 278 00f9 A0       		.byte	-96
+ 279 00fa 44       		.byte	68
+ 280 00fb 40       		.byte	64
+ 281 00fc 45       		.byte	69
+ 282 00fd 29       		.byte	41
+ 283 00fe 4E       		.byte	78
+ 284 00ff 09       		.byte	9
+ 285 0100 56       		.byte	86
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 6
+
+
+ 286 0101 01       		.byte	1
+ 287 0102 57       		.byte	87
+ 288 0103 20       		.byte	32
+ 289 0104 5B       		.byte	91
+ 290 0105 01       		.byte	1
+ 291 0106 5E       		.byte	94
+ 292 0107 10       		.byte	16
+ 293 0108 60       		.byte	96
+ 294 0109 01       		.byte	1
+ 295 010a 61       		.byte	97
+ 296 010b 10       		.byte	16
+ 297 010c 62       		.byte	98
+ 298 010d 02       		.byte	2
+ 299 010e 6D       		.byte	109
+ 300 010f 40       		.byte	64
+ 301 0110 6F       		.byte	111
+ 302 0111 14       		.byte	20
+ 303 0112 75       		.byte	117
+ 304 0113 A0       		.byte	-96
+ 305 0114 76       		.byte	118
+ 306 0115 30       		.byte	48
+ 307 0116 77       		.byte	119
+ 308 0117 08       		.byte	8
+ 309 0118 86       		.byte	-122
+ 310 0119 02       		.byte	2
+ 311 011a C0       		.byte	-64
+ 312 011b FC       		.byte	-4
+ 313 011c C2       		.byte	-62
+ 314 011d F1       		.byte	-15
+ 315 011e C4       		.byte	-60
+ 316 011f 73       		.byte	115
+ 317 0120 CA       		.byte	-54
+ 318 0121 F0       		.byte	-16
+ 319 0122 CC       		.byte	-52
+ 320 0123 F0       		.byte	-16
+ 321 0124 CE       		.byte	-50
+ 322 0125 F5       		.byte	-11
+ 323 0126 D0       		.byte	-48
+ 324 0127 E0       		.byte	-32
+ 325 0128 D2       		.byte	-46
+ 326 0129 30       		.byte	48
+ 327 012a D6       		.byte	-42
+ 328 012b 21       		.byte	33
+ 329 012c D8       		.byte	-40
+ 330 012d 0D       		.byte	13
+ 331 012e 00       		.byte	0
+ 332 012f 01       		.byte	1
+ 333 0130 01       		.byte	1
+ 334 0131 20       		.byte	32
+ 335 0132 02       		.byte	2
+ 336 0133 0E       		.byte	14
+ 337 0134 03       		.byte	3
+ 338 0135 45       		.byte	69
+ 339 0136 04       		.byte	4
+ 340 0137 E7       		.byte	-25
+ 341 0138 08       		.byte	8
+ 342 0139 E7       		.byte	-25
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 7
+
+
+ 343 013a 09       		.byte	9
+ 344 013b 53       		.byte	83
+ 345 013c 0B       		.byte	11
+ 346 013d 04       		.byte	4
+ 347 013e 0D       		.byte	13
+ 348 013f 03       		.byte	3
+ 349 0140 0F       		.byte	15
+ 350 0141 44       		.byte	68
+ 351 0142 11       		.byte	17
+ 352 0143 0A       		.byte	10
+ 353 0144 13       		.byte	19
+ 354 0145 54       		.byte	84
+ 355 0146 14       		.byte	20
+ 356 0147 22       		.byte	34
+ 357 0148 16       		.byte	22
+ 358 0149 51       		.byte	81
+ 359 014a 18       		.byte	24
+ 360 014b 44       		.byte	68
+ 361 014c 19       		.byte	25
+ 362 014d 53       		.byte	83
+ 363 014e 1A       		.byte	26
+ 364 014f 31       		.byte	49
+ 365 0150 1B       		.byte	27
+ 366 0151 0C       		.byte	12
+ 367 0152 1F       		.byte	31
+ 368 0153 08       		.byte	8
+ 369 0154 2C       		.byte	44
+ 370 0155 80       		.byte	-128
+ 371 0156 30       		.byte	48
+ 372 0157 07       		.byte	7
+ 373 0158 32       		.byte	50
+ 374 0159 18       		.byte	24
+ 375 015a 33       		.byte	51
+ 376 015b 0F       		.byte	15
+ 377 015c 34       		.byte	52
+ 378 015d 60       		.byte	96
+ 379 015e 35       		.byte	53
+ 380 015f 40       		.byte	64
+ 381 0160 36       		.byte	54
+ 382 0161 80       		.byte	-128
+ 383 0162 37       		.byte	55
+ 384 0163 30       		.byte	48
+ 385 0164 39       		.byte	57
+ 386 0165 80       		.byte	-128
+ 387 0166 3B       		.byte	59
+ 388 0167 08       		.byte	8
+ 389 0168 3E       		.byte	62
+ 390 0169 04       		.byte	4
+ 391 016a 3F       		.byte	63
+ 392 016b 10       		.byte	16
+ 393 016c 40       		.byte	64
+ 394 016d 24       		.byte	36
+ 395 016e 41       		.byte	65
+ 396 016f 03       		.byte	3
+ 397 0170 46       		.byte	70
+ 398 0171 CC       		.byte	-52
+ 399 0172 47       		.byte	71
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 8
+
+
+ 400 0173 EB       		.byte	-21
+ 401 0174 48       		.byte	72
+ 402 0175 3C       		.byte	60
+ 403 0176 49       		.byte	73
+ 404 0177 FF       		.byte	-1
+ 405 0178 4A       		.byte	74
+ 406 0179 FF       		.byte	-1
+ 407 017a 4B       		.byte	75
+ 408 017b FF       		.byte	-1
+ 409 017c 4E       		.byte	78
+ 410 017d F0       		.byte	-16
+ 411 017e 4F       		.byte	79
+ 412 017f 44       		.byte	68
+ 413 0180 50       		.byte	80
+ 414 0181 0C       		.byte	12
+ 415 0182 54       		.byte	84
+ 416 0183 01       		.byte	1
+ 417 0184 58       		.byte	88
+ 418 0185 04       		.byte	4
+ 419 0186 59       		.byte	89
+ 420 0187 04       		.byte	4
+ 421 0188 5A       		.byte	90
+ 422 0189 04       		.byte	4
+ 423 018a 5B       		.byte	91
+ 424 018b 04       		.byte	4
+ 425 018c 5C       		.byte	92
+ 426 018d 55       		.byte	85
+ 427 018e 5D       		.byte	93
+ 428 018f 55       		.byte	85
+ 429 0190 5F       		.byte	95
+ 430 0191 01       		.byte	1
+ 431 0192 66       		.byte	102
+ 432 0193 C0       		.byte	-64
+ 433 0194 6A       		.byte	106
+ 434 0195 40       		.byte	64
+ 435 0196 6B       		.byte	107
+ 436 0197 02       		.byte	2
+ 437 0198 85       		.byte	-123
+ 438 0199 0C       		.byte	12
+ 439 019a 86       		.byte	-122
+ 440 019b 80       		.byte	-128
+ 441 019c 87       		.byte	-121
+ 442 019d 71       		.byte	113
+ 443 019e 88       		.byte	-120
+ 444 019f 2C       		.byte	44
+ 445 01a0 89       		.byte	-119
+ 446 01a1 DC       		.byte	-36
+ 447 01a2 8A       		.byte	-118
+ 448 01a3 83       		.byte	-125
+ 449 01a4 8B       		.byte	-117
+ 450 01a5 22       		.byte	34
+ 451 01a6 8D       		.byte	-115
+ 452 01a7 09       		.byte	9
+ 453 01a8 8E       		.byte	-114
+ 454 01a9 0C       		.byte	12
+ 455 01aa 8F       		.byte	-113
+ 456 01ab D0       		.byte	-48
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 9
+
+
+ 457 01ac 92       		.byte	-110
+ 458 01ad 40       		.byte	64
+ 459 01ae 94       		.byte	-108
+ 460 01af B1       		.byte	-79
+ 461 01b0 96       		.byte	-106
+ 462 01b1 06       		.byte	6
+ 463 01b2 97       		.byte	-105
+ 464 01b3 20       		.byte	32
+ 465 01b4 98       		.byte	-104
+ 466 01b5 B1       		.byte	-79
+ 467 01b6 99       		.byte	-103
+ 468 01b7 10       		.byte	16
+ 469 01b8 9A       		.byte	-102
+ 470 01b9 0E       		.byte	14
+ 471 01ba 9B       		.byte	-101
+ 472 01bb 40       		.byte	64
+ 473 01bc 9F       		.byte	-97
+ 474 01bd 03       		.byte	3
+ 475 01be A5       		.byte	-91
+ 476 01bf 14       		.byte	20
+ 477 01c0 A6       		.byte	-90
+ 478 01c1 08       		.byte	8
+ 479 01c2 A9       		.byte	-87
+ 480 01c3 10       		.byte	16
+ 481 01c4 AA       		.byte	-86
+ 482 01c5 93       		.byte	-109
+ 483 01c6 AB       		.byte	-85
+ 484 01c7 AC       		.byte	-84
+ 485 01c8 B0       		.byte	-80
+ 486 01c9 40       		.byte	64
+ 487 01ca B2       		.byte	-78
+ 488 01cb 0F       		.byte	15
+ 489 01cc B4       		.byte	-76
+ 490 01cd 80       		.byte	-128
+ 491 01ce B5       		.byte	-75
+ 492 01cf E0       		.byte	-32
+ 493 01d0 B6       		.byte	-74
+ 494 01d1 30       		.byte	48
+ 495 01d2 B7       		.byte	-73
+ 496 01d3 1F       		.byte	31
+ 497 01d4 B8       		.byte	-72
+ 498 01d5 80       		.byte	-128
+ 499 01d6 BA       		.byte	-70
+ 500 01d7 08       		.byte	8
+ 501 01d8 BB       		.byte	-69
+ 502 01d9 20       		.byte	32
+ 503 01da BE       		.byte	-66
+ 504 01db 50       		.byte	80
+ 505 01dc C0       		.byte	-64
+ 506 01dd 01       		.byte	1
+ 507 01de C5       		.byte	-59
+ 508 01df 04       		.byte	4
+ 509 01e0 C9       		.byte	-55
+ 510 01e1 FF       		.byte	-1
+ 511 01e2 CA       		.byte	-54
+ 512 01e3 07       		.byte	7
+ 513 01e4 CB       		.byte	-53
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 10
+
+
+ 514 01e5 FF       		.byte	-1
+ 515 01e6 CC       		.byte	-52
+ 516 01e7 40       		.byte	64
+ 517 01e8 CD       		.byte	-51
+ 518 01e9 20       		.byte	32
+ 519 01ea CE       		.byte	-50
+ 520 01eb F0       		.byte	-16
+ 521 01ec CF       		.byte	-49
+ 522 01ed 05       		.byte	5
+ 523 01ee D0       		.byte	-48
+ 524 01ef 08       		.byte	8
+ 525 01f0 D8       		.byte	-40
+ 526 01f1 04       		.byte	4
+ 527 01f2 D9       		.byte	-39
+ 528 01f3 04       		.byte	4
+ 529 01f4 DA       		.byte	-38
+ 530 01f5 04       		.byte	4
+ 531 01f6 DC       		.byte	-36
+ 532 01f7 44       		.byte	68
+ 533 01f8 DD       		.byte	-35
+ 534 01f9 04       		.byte	4
+ 535 01fa DF       		.byte	-33
+ 536 01fb 01       		.byte	1
+ 537 01fc E0       		.byte	-32
+ 538 01fd 40       		.byte	64
+ 539 01fe E1       		.byte	-31
+ 540 01ff A8       		.byte	-88
+ 541 0200 E2       		.byte	-30
+ 542 0201 40       		.byte	64
+ 543 0202 E3       		.byte	-29
+ 544 0203 20       		.byte	32
+ 545 0204 00       		.byte	0
+ 546 0205 50       		.byte	80
+ 547 0206 02       		.byte	2
+ 548 0207 10       		.byte	16
+ 549 0208 05       		.byte	5
+ 550 0209 01       		.byte	1
+ 551 020a 07       		.byte	7
+ 552 020b 14       		.byte	20
+ 553 020c 08       		.byte	8
+ 554 020d 29       		.byte	41
+ 555 020e 09       		.byte	9
+ 556 020f 20       		.byte	32
+ 557 0210 0A       		.byte	10
+ 558 0211 20       		.byte	32
+ 559 0212 0E       		.byte	14
+ 560 0213 24       		.byte	36
+ 561 0214 10       		.byte	16
+ 562 0215 28       		.byte	40
+ 563 0216 15       		.byte	21
+ 564 0217 40       		.byte	64
+ 565 0218 18       		.byte	24
+ 566 0219 34       		.byte	52
+ 567 021a 1A       		.byte	26
+ 568 021b 01       		.byte	1
+ 569 021c 1B       		.byte	27
+ 570 021d 02       		.byte	2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 11
+
+
+ 571 021e 1C       		.byte	28
+ 572 021f 80       		.byte	-128
+ 573 0220 1D       		.byte	29
+ 574 0221 09       		.byte	9
+ 575 0222 1E       		.byte	30
+ 576 0223 04       		.byte	4
+ 577 0224 1F       		.byte	31
+ 578 0225 40       		.byte	64
+ 579 0226 21       		.byte	33
+ 580 0227 20       		.byte	32
+ 581 0228 22       		.byte	34
+ 582 0229 40       		.byte	64
+ 583 022a 23       		.byte	35
+ 584 022b 04       		.byte	4
+ 585 022c 24       		.byte	36
+ 586 022d 08       		.byte	8
+ 587 022e 26       		.byte	38
+ 588 022f 80       		.byte	-128
+ 589 0230 27       		.byte	39
+ 590 0231 20       		.byte	32
+ 591 0232 28       		.byte	40
+ 592 0233 08       		.byte	8
+ 593 0234 2A       		.byte	42
+ 594 0235 04       		.byte	4
+ 595 0236 2C       		.byte	44
+ 596 0237 40       		.byte	64
+ 597 0238 2F       		.byte	47
+ 598 0239 40       		.byte	64
+ 599 023a 30       		.byte	48
+ 600 023b 28       		.byte	40
+ 601 023c 32       		.byte	50
+ 602 023d 40       		.byte	64
+ 603 023e 33       		.byte	51
+ 604 023f 40       		.byte	64
+ 605 0240 36       		.byte	54
+ 606 0241 80       		.byte	-128
+ 607 0242 37       		.byte	55
+ 608 0243 21       		.byte	33
+ 609 0244 38       		.byte	56
+ 610 0245 50       		.byte	80
+ 611 0246 3B       		.byte	59
+ 612 0247 04       		.byte	4
+ 613 0248 3D       		.byte	61
+ 614 0249 22       		.byte	34
+ 615 024a 3E       		.byte	62
+ 616 024b 20       		.byte	32
+ 617 024c 3F       		.byte	63
+ 618 024d 81       		.byte	-127
+ 619 024e 42       		.byte	66
+ 620 024f 01       		.byte	1
+ 621 0250 45       		.byte	69
+ 622 0251 01       		.byte	1
+ 623 0252 46       		.byte	70
+ 624 0253 20       		.byte	32
+ 625 0254 47       		.byte	71
+ 626 0255 20       		.byte	32
+ 627 0256 48       		.byte	72
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 12
+
+
+ 628 0257 21       		.byte	33
+ 629 0258 4A       		.byte	74
+ 630 0259 01       		.byte	1
+ 631 025a 50       		.byte	80
+ 632 025b 08       		.byte	8
+ 633 025c 54       		.byte	84
+ 634 025d 01       		.byte	1
+ 635 025e 56       		.byte	86
+ 636 025f 08       		.byte	8
+ 637 0260 57       		.byte	87
+ 638 0261 50       		.byte	80
+ 639 0262 58       		.byte	88
+ 640 0263 04       		.byte	4
+ 641 0264 5A       		.byte	90
+ 642 0265 04       		.byte	4
+ 643 0266 5C       		.byte	92
+ 644 0267 80       		.byte	-128
+ 645 0268 5D       		.byte	93
+ 646 0269 08       		.byte	8
+ 647 026a 5E       		.byte	94
+ 648 026b 02       		.byte	2
+ 649 026c 5F       		.byte	95
+ 650 026d 10       		.byte	16
+ 651 026e 63       		.byte	99
+ 652 026f 30       		.byte	48
+ 653 0270 91       		.byte	-111
+ 654 0271 40       		.byte	64
+ 655 0272 95       		.byte	-107
+ 656 0273 02       		.byte	2
+ 657 0274 97       		.byte	-105
+ 658 0275 20       		.byte	32
+ 659 0276 99       		.byte	-103
+ 660 0277 08       		.byte	8
+ 661 0278 9B       		.byte	-101
+ 662 0279 14       		.byte	20
+ 663 027a 9C       		.byte	-100
+ 664 027b 44       		.byte	68
+ 665 027c A2       		.byte	-94
+ 666 027d 30       		.byte	48
+ 667 027e A4       		.byte	-92
+ 668 027f 41       		.byte	65
+ 669 0280 A5       		.byte	-91
+ 670 0281 0C       		.byte	12
+ 671 0282 AE       		.byte	-82
+ 672 0283 12       		.byte	18
+ 673 0284 C0       		.byte	-64
+ 674 0285 77       		.byte	119
+ 675 0286 C2       		.byte	-62
+ 676 0287 6E       		.byte	110
+ 677 0288 C4       		.byte	-60
+ 678 0289 86       		.byte	-122
+ 679 028a CA       		.byte	-54
+ 680 028b 06       		.byte	6
+ 681 028c CC       		.byte	-52
+ 682 028d BE       		.byte	-66
+ 683 028e CE       		.byte	-50
+ 684 028f BE       		.byte	-66
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 13
+
+
+ 685 0290 D0       		.byte	-48
+ 686 0291 E8       		.byte	-24
+ 687 0292 D6       		.byte	-42
+ 688 0293 F0       		.byte	-16
+ 689 0294 E2       		.byte	-30
+ 690 0295 01       		.byte	1
+ 691 0296 E6       		.byte	-26
+ 692 0297 01       		.byte	1
+ 693 0298 B8       		.byte	-72
+ 694 0299 2A       		.byte	42
+ 695 029a BE       		.byte	-66
+ 696 029b 15       		.byte	21
+ 697 029c D8       		.byte	-40
+ 698 029d 04       		.byte	4
+ 699 029e DF       		.byte	-33
+ 700 029f 01       		.byte	1
+ 701 02a0 19       		.byte	25
+ 702 02a1 20       		.byte	32
+ 703 02a2 1A       		.byte	26
+ 704 02a3 90       		.byte	-112
+ 705 02a4 1B       		.byte	27
+ 706 02a5 08       		.byte	8
+ 707 02a6 82       		.byte	-126
+ 708 02a7 10       		.byte	16
+ 709 02a8 83       		.byte	-125
+ 710 02a9 08       		.byte	8
+ 711 02aa E6       		.byte	-26
+ 712 02ab 02       		.byte	2
+ 713 02ac 80       		.byte	-128
+ 714 02ad 02       		.byte	2
+ 715 02ae 94       		.byte	-108
+ 716 02af 01       		.byte	1
+ 717 02b0 B2       		.byte	-78
+ 718 02b1 02       		.byte	2
+ 719 02b2 B4       		.byte	-76
+ 720 02b3 01       		.byte	1
+ 721 02b4 BE       		.byte	-66
+ 722 02b5 14       		.byte	20
+ 723 02b6 D4       		.byte	-44
+ 724 02b7 01       		.byte	1
+ 725 02b8 D8       		.byte	-40
+ 726 02b9 04       		.byte	4
+ 727 02ba DB       		.byte	-37
+ 728 02bb 04       		.byte	4
+ 729 02bc DD       		.byte	-35
+ 730 02bd 40       		.byte	64
+ 731 02be DF       		.byte	-33
+ 732 02bf 01       		.byte	1
+ 733 02c0 01       		.byte	1
+ 734 02c1 20       		.byte	32
+ 735 02c2 03       		.byte	3
+ 736 02c3 A0       		.byte	-96
+ 737 02c4 06       		.byte	6
+ 738 02c5 10       		.byte	16
+ 739 02c6 07       		.byte	7
+ 740 02c7 60       		.byte	96
+ 741 02c8 08       		.byte	8
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 14
+
+
+ 742 02c9 11       		.byte	17
+ 743 02ca 09       		.byte	9
+ 744 02cb 80       		.byte	-128
+ 745 02cc 0A       		.byte	10
+ 746 02cd 18       		.byte	24
+ 747 02ce 0C       		.byte	12
+ 748 02cf 04       		.byte	4
+ 749 02d0 0E       		.byte	14
+ 750 02d1 20       		.byte	32
+ 751 02d2 10       		.byte	16
+ 752 02d3 A0       		.byte	-96
+ 753 02d4 13       		.byte	19
+ 754 02d5 50       		.byte	80
+ 755 02d6 19       		.byte	25
+ 756 02d7 25       		.byte	37
+ 757 02d8 1A       		.byte	26
+ 758 02d9 11       		.byte	17
+ 759 02da 1E       		.byte	30
+ 760 02db 08       		.byte	8
+ 761 02dc 1F       		.byte	31
+ 762 02dd 08       		.byte	8
+ 763 02de 20       		.byte	32
+ 764 02df 02       		.byte	2
+ 765 02e0 21       		.byte	33
+ 766 02e1 81       		.byte	-127
+ 767 02e2 22       		.byte	34
+ 768 02e3 24       		.byte	36
+ 769 02e4 23       		.byte	35
+ 770 02e5 01       		.byte	1
+ 771 02e6 28       		.byte	40
+ 772 02e7 11       		.byte	17
+ 773 02e8 29       		.byte	41
+ 774 02e9 20       		.byte	32
+ 775 02ea 2B       		.byte	43
+ 776 02eb 80       		.byte	-128
+ 777 02ec 30       		.byte	48
+ 778 02ed 80       		.byte	-128
+ 779 02ee 31       		.byte	49
+ 780 02ef 04       		.byte	4
+ 781 02f0 33       		.byte	51
+ 782 02f1 22       		.byte	34
+ 783 02f2 38       		.byte	56
+ 784 02f3 28       		.byte	40
+ 785 02f4 39       		.byte	57
+ 786 02f5 80       		.byte	-128
+ 787 02f6 3B       		.byte	59
+ 788 02f7 41       		.byte	65
+ 789 02f8 40       		.byte	64
+ 790 02f9 20       		.byte	32
+ 791 02fa 41       		.byte	65
+ 792 02fb 10       		.byte	16
+ 793 02fc 48       		.byte	72
+ 794 02fd 08       		.byte	8
+ 795 02fe 4A       		.byte	74
+ 796 02ff 10       		.byte	16
+ 797 0300 52       		.byte	82
+ 798 0301 14       		.byte	20
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 15
+
+
+ 799 0302 59       		.byte	89
+ 800 0303 01       		.byte	1
+ 801 0304 5D       		.byte	93
+ 802 0305 01       		.byte	1
+ 803 0306 5E       		.byte	94
+ 804 0307 48       		.byte	72
+ 805 0308 5F       		.byte	95
+ 806 0309 20       		.byte	32
+ 807 030a 68       		.byte	104
+ 808 030b 10       		.byte	16
+ 809 030c 69       		.byte	105
+ 810 030d 50       		.byte	80
+ 811 030e 70       		.byte	112
+ 812 030f B4       		.byte	-76
+ 813 0310 73       		.byte	115
+ 814 0311 10       		.byte	16
+ 815 0312 88       		.byte	-120
+ 816 0313 07       		.byte	7
+ 817 0314 89       		.byte	-119
+ 818 0315 01       		.byte	1
+ 819 0316 8A       		.byte	-118
+ 820 0317 20       		.byte	32
+ 821 0318 8F       		.byte	-113
+ 822 0319 08       		.byte	8
+ 823 031a 91       		.byte	-111
+ 824 031b A0       		.byte	-96
+ 825 031c 92       		.byte	-110
+ 826 031d 40       		.byte	64
+ 827 031e 95       		.byte	-107
+ 828 031f 52       		.byte	82
+ 829 0320 96       		.byte	-106
+ 830 0321 01       		.byte	1
+ 831 0322 98       		.byte	-104
+ 832 0323 20       		.byte	32
+ 833 0324 9B       		.byte	-101
+ 834 0325 40       		.byte	64
+ 835 0326 9C       		.byte	-100
+ 836 0327 03       		.byte	3
+ 837 0328 9D       		.byte	-99
+ 838 0329 20       		.byte	32
+ 839 032a 9E       		.byte	-98
+ 840 032b 14       		.byte	20
+ 841 032c A0       		.byte	-96
+ 842 032d 08       		.byte	8
+ 843 032e A3       		.byte	-93
+ 844 032f A2       		.byte	-94
+ 845 0330 A4       		.byte	-92
+ 846 0331 11       		.byte	17
+ 847 0332 B3       		.byte	-77
+ 848 0333 08       		.byte	8
+ 849 0334 C0       		.byte	-64
+ 850 0335 1E       		.byte	30
+ 851 0336 C2       		.byte	-62
+ 852 0337 2F       		.byte	47
+ 853 0338 C4       		.byte	-60
+ 854 0339 0F       		.byte	15
+ 855 033a CA       		.byte	-54
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 16
+
+
+ 856 033b 0F       		.byte	15
+ 857 033c CC       		.byte	-52
+ 858 033d 0F       		.byte	15
+ 859 033e CE       		.byte	-50
+ 860 033f 0F       		.byte	15
+ 861 0340 D0       		.byte	-48
+ 862 0341 06       		.byte	6
+ 863 0342 D2       		.byte	-46
+ 864 0343 04       		.byte	4
+ 865 0344 D6       		.byte	-42
+ 866 0345 F1       		.byte	-15
+ 867 0346 EA       		.byte	-22
+ 868 0347 20       		.byte	32
+ 869 0348 03       		.byte	3
+ 870 0349 03       		.byte	3
+ 871 034a 04       		.byte	4
+ 872 034b 10       		.byte	16
+ 873 034c 08       		.byte	8
+ 874 034d 14       		.byte	20
+ 875 034e 09       		.byte	9
+ 876 034f 01       		.byte	1
+ 877 0350 0B       		.byte	11
+ 878 0351 0E       		.byte	14
+ 879 0352 0C       		.byte	12
+ 880 0353 5C       		.byte	92
+ 881 0354 0E       		.byte	14
+ 882 0355 02       		.byte	2
+ 883 0356 10       		.byte	16
+ 884 0357 80       		.byte	-128
+ 885 0358 12       		.byte	18
+ 886 0359 03       		.byte	3
+ 887 035a 15       		.byte	21
+ 888 035b 01       		.byte	1
+ 889 035c 17       		.byte	23
+ 890 035d 16       		.byte	22
+ 891 035e 1B       		.byte	27
+ 892 035f 20       		.byte	32
+ 893 0360 1E       		.byte	30
+ 894 0361 20       		.byte	32
+ 895 0362 1F       		.byte	31
+ 896 0363 1C       		.byte	28
+ 897 0364 20       		.byte	32
+ 898 0365 09       		.byte	9
+ 899 0366 22       		.byte	34
+ 900 0367 10       		.byte	16
+ 901 0368 24       		.byte	36
+ 902 0369 6C       		.byte	108
+ 903 036a 26       		.byte	38
+ 904 036b 11       		.byte	17
+ 905 036c 28       		.byte	40
+ 906 036d 70       		.byte	112
+ 907 036e 2A       		.byte	42
+ 908 036f 0C       		.byte	12
+ 909 0370 2B       		.byte	43
+ 910 0371 08       		.byte	8
+ 911 0372 2D       		.byte	45
+ 912 0373 1C       		.byte	28
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 17
+
+
+ 913 0374 2F       		.byte	47
+ 914 0375 03       		.byte	3
+ 915 0376 30       		.byte	48
+ 916 0377 1F       		.byte	31
+ 917 0378 32       		.byte	50
+ 918 0379 80       		.byte	-128
+ 919 037a 33       		.byte	51
+ 920 037b 20       		.byte	32
+ 921 037c 34       		.byte	52
+ 922 037d 60       		.byte	96
+ 923 037e 35       		.byte	53
+ 924 037f 1A       		.byte	26
+ 925 0380 37       		.byte	55
+ 926 0381 0F       		.byte	15
+ 927 0382 38       		.byte	56
+ 928 0383 20       		.byte	32
+ 929 0384 3B       		.byte	59
+ 930 0385 A0       		.byte	-96
+ 931 0386 3E       		.byte	62
+ 932 0387 14       		.byte	20
+ 933 0388 40       		.byte	64
+ 934 0389 02       		.byte	2
+ 935 038a 46       		.byte	70
+ 936 038b 40       		.byte	64
+ 937 038c 49       		.byte	73
+ 938 038d FF       		.byte	-1
+ 939 038e 4A       		.byte	74
+ 940 038f 07       		.byte	7
+ 941 0390 4B       		.byte	75
+ 942 0391 FF       		.byte	-1
+ 943 0392 4C       		.byte	76
+ 944 0393 40       		.byte	64
+ 945 0394 4D       		.byte	77
+ 946 0395 20       		.byte	32
+ 947 0396 4E       		.byte	78
+ 948 0397 F0       		.byte	-16
+ 949 0398 4F       		.byte	79
+ 950 0399 05       		.byte	5
+ 951 039a 50       		.byte	80
+ 952 039b 08       		.byte	8
+ 953 039c 58       		.byte	88
+ 954 039d 04       		.byte	4
+ 955 039e 59       		.byte	89
+ 956 039f 04       		.byte	4
+ 957 03a0 5A       		.byte	90
+ 958 03a1 04       		.byte	4
+ 959 03a2 5C       		.byte	92
+ 960 03a3 55       		.byte	85
+ 961 03a4 5D       		.byte	93
+ 962 03a5 05       		.byte	5
+ 963 03a6 5F       		.byte	95
+ 964 03a7 01       		.byte	1
+ 965 03a8 60       		.byte	96
+ 966 03a9 40       		.byte	64
+ 967 03aa 61       		.byte	97
+ 968 03ab A8       		.byte	-88
+ 969 03ac 62       		.byte	98
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 18
+
+
+ 970 03ad 40       		.byte	64
+ 971 03ae 63       		.byte	99
+ 972 03af 20       		.byte	32
+ 973 03b0 00       		.byte	0
+ 974 03b1 20       		.byte	32
+ 975 03b2 01       		.byte	1
+ 976 03b3 40       		.byte	64
+ 977 03b4 03       		.byte	3
+ 978 03b5 A0       		.byte	-96
+ 979 03b6 05       		.byte	5
+ 980 03b7 80       		.byte	-128
+ 981 03b8 06       		.byte	6
+ 982 03b9 28       		.byte	40
+ 983 03ba 07       		.byte	7
+ 984 03bb 01       		.byte	1
+ 985 03bc 08       		.byte	8
+ 986 03bd 81       		.byte	-127
+ 987 03be 0A       		.byte	10
+ 988 03bf 01       		.byte	1
+ 989 03c0 0E       		.byte	14
+ 990 03c1 80       		.byte	-128
+ 991 03c2 0F       		.byte	15
+ 992 03c3 01       		.byte	1
+ 993 03c4 10       		.byte	16
+ 994 03c5 20       		.byte	32
+ 995 03c6 11       		.byte	17
+ 996 03c7 10       		.byte	16
+ 997 03c8 14       		.byte	20
+ 998 03c9 44       		.byte	68
+ 999 03ca 17       		.byte	23
+ 1000 03cb 28       		.byte	40
+ 1001 03cc 19       		.byte	25
+ 1002 03cd 40       		.byte	64
+ 1003 03ce 1A       		.byte	26
+ 1004 03cf 10       		.byte	16
+ 1005 03d0 1B       		.byte	27
+ 1006 03d1 A1       		.byte	-95
+ 1007 03d2 1D       		.byte	29
+ 1008 03d3 20       		.byte	32
+ 1009 03d4 1E       		.byte	30
+ 1010 03d5 80       		.byte	-128
+ 1011 03d6 1F       		.byte	31
+ 1012 03d7 08       		.byte	8
+ 1013 03d8 20       		.byte	32
+ 1014 03d9 41       		.byte	65
+ 1015 03da 21       		.byte	33
+ 1016 03db 10       		.byte	16
+ 1017 03dc 22       		.byte	34
+ 1018 03dd 10       		.byte	16
+ 1019 03de 25       		.byte	37
+ 1020 03df 14       		.byte	20
+ 1021 03e0 27       		.byte	39
+ 1022 03e1 09       		.byte	9
+ 1023 03e2 28       		.byte	40
+ 1024 03e3 01       		.byte	1
+ 1025 03e4 2A       		.byte	42
+ 1026 03e5 10       		.byte	16
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 19
+
+
+ 1027 03e6 2B       		.byte	43
+ 1028 03e7 20       		.byte	32
+ 1029 03e8 2D       		.byte	45
+ 1030 03e9 80       		.byte	-128
+ 1031 03ea 2E       		.byte	46
+ 1032 03eb 20       		.byte	32
+ 1033 03ec 30       		.byte	48
+ 1034 03ed 08       		.byte	8
+ 1035 03ee 31       		.byte	49
+ 1036 03ef 40       		.byte	64
+ 1037 03f0 32       		.byte	50
+ 1038 03f1 10       		.byte	16
+ 1039 03f2 34       		.byte	52
+ 1040 03f3 44       		.byte	68
+ 1041 03f4 36       		.byte	54
+ 1042 03f5 90       		.byte	-112
+ 1043 03f6 38       		.byte	56
+ 1044 03f7 60       		.byte	96
+ 1045 03f8 3B       		.byte	59
+ 1046 03f9 04       		.byte	4
+ 1047 03fa 3D       		.byte	61
+ 1048 03fb 20       		.byte	32
+ 1049 03fc 3F       		.byte	63
+ 1050 03fd 01       		.byte	1
+ 1051 03fe 40       		.byte	64
+ 1052 03ff 81       		.byte	-127
+ 1053 0400 42       		.byte	66
+ 1054 0401 10       		.byte	16
+ 1055 0402 45       		.byte	69
+ 1056 0403 20       		.byte	32
+ 1057 0404 48       		.byte	72
+ 1058 0405 21       		.byte	33
+ 1059 0406 49       		.byte	73
+ 1060 0407 20       		.byte	32
+ 1061 0408 4F       		.byte	79
+ 1062 0409 01       		.byte	1
+ 1063 040a 53       		.byte	83
+ 1064 040b 10       		.byte	16
+ 1065 040c 56       		.byte	86
+ 1066 040d 20       		.byte	32
+ 1067 040e 58       		.byte	88
+ 1068 040f 02       		.byte	2
+ 1069 0410 62       		.byte	98
+ 1070 0411 21       		.byte	33
+ 1071 0412 63       		.byte	99
+ 1072 0413 02       		.byte	2
+ 1073 0414 81       		.byte	-127
+ 1074 0415 40       		.byte	64
+ 1075 0416 82       		.byte	-126
+ 1076 0417 10       		.byte	16
+ 1077 0418 90       		.byte	-112
+ 1078 0419 20       		.byte	32
+ 1079 041a 92       		.byte	-110
+ 1080 041b 40       		.byte	64
+ 1081 041c 93       		.byte	-109
+ 1082 041d 04       		.byte	4
+ 1083 041e 94       		.byte	-108
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 20
+
+
+ 1084 041f 40       		.byte	64
+ 1085 0420 95       		.byte	-107
+ 1086 0421 02       		.byte	2
+ 1087 0422 96       		.byte	-106
+ 1088 0423 20       		.byte	32
+ 1089 0424 97       		.byte	-105
+ 1090 0425 21       		.byte	33
+ 1091 0426 98       		.byte	-104
+ 1092 0427 20       		.byte	32
+ 1093 0428 9A       		.byte	-102
+ 1094 0429 08       		.byte	8
+ 1095 042a 9B       		.byte	-101
+ 1096 042b 60       		.byte	96
+ 1097 042c 9C       		.byte	-100
+ 1098 042d 01       		.byte	1
+ 1099 042e 9E       		.byte	-98
+ 1100 042f 15       		.byte	21
+ 1101 0430 9F       		.byte	-97
+ 1102 0431 01       		.byte	1
+ 1103 0432 A0       		.byte	-96
+ 1104 0433 08       		.byte	8
+ 1105 0434 A2       		.byte	-94
+ 1106 0435 B0       		.byte	-80
+ 1107 0436 A3       		.byte	-93
+ 1108 0437 02       		.byte	2
+ 1109 0438 A5       		.byte	-91
+ 1110 0439 14       		.byte	20
+ 1111 043a A8       		.byte	-88
+ 1112 043b 04       		.byte	4
+ 1113 043c AA       		.byte	-86
+ 1114 043d 40       		.byte	64
+ 1115 043e B4       		.byte	-76
+ 1116 043f 84       		.byte	-124
+ 1117 0440 B6       		.byte	-74
+ 1118 0441 01       		.byte	1
+ 1119 0442 C0       		.byte	-64
+ 1120 0443 EF       		.byte	-17
+ 1121 0444 C2       		.byte	-62
+ 1122 0445 99       		.byte	-103
+ 1123 0446 C4       		.byte	-60
+ 1124 0447 76       		.byte	118
+ 1125 0448 CA       		.byte	-54
+ 1126 0449 3E       		.byte	62
+ 1127 044a CC       		.byte	-52
+ 1128 044b 7E       		.byte	126
+ 1129 044c CE       		.byte	-50
+ 1130 044d AE       		.byte	-82
+ 1131 044e D0       		.byte	-48
+ 1132 044f 2B       		.byte	43
+ 1133 0450 D2       		.byte	-46
+ 1134 0451 0C       		.byte	12
+ 1135 0452 D6       		.byte	-42
+ 1136 0453 01       		.byte	1
+ 1137 0454 D8       		.byte	-40
+ 1138 0455 0D       		.byte	13
+ 1139 0456 EE       		.byte	-18
+ 1140 0457 43       		.byte	67
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 21
+
+
+ 1141 0458 AA       		.byte	-86
+ 1142 0459 40       		.byte	64
+ 1143 045a AD       		.byte	-83
+ 1144 045b 20       		.byte	32
+ 1145 045c E0       		.byte	-32
+ 1146 045d 10       		.byte	16
+ 1147 045e E6       		.byte	-26
+ 1148 045f 20       		.byte	32
+ 1149 0460 30       		.byte	48
+ 1150 0461 10       		.byte	16
+ 1151 0462 33       		.byte	51
+ 1152 0463 01       		.byte	1
+ 1153 0464 37       		.byte	55
+ 1154 0465 10       		.byte	16
+ 1155 0466 CC       		.byte	-52
+ 1156 0467 70       		.byte	112
+ 1157 0468 84       		.byte	-124
+ 1158 0469 10       		.byte	16
+ 1159 046a 9C       		.byte	-100
+ 1160 046b 10       		.byte	16
+ 1161 046c 9F       		.byte	-97
+ 1162 046d 11       		.byte	17
+ 1163 046e E6       		.byte	-26
+ 1164 046f 40       		.byte	64
+ 1165 0470 02       		.byte	2
+ 1166 0471 80       		.byte	-128
+ 1167 0472 87       		.byte	-121
+ 1168 0473 01       		.byte	1
+ 1169 0474 9F       		.byte	-97
+ 1170 0475 11       		.byte	17
+ 1171 0476 C0       		.byte	-64
+ 1172 0477 10       		.byte	16
+ 1173 0478 E2       		.byte	-30
+ 1174 0479 40       		.byte	64
+ 1175 047a 63       		.byte	99
+ 1176 047b 20       		.byte	32
+ 1177 047c 67       		.byte	103
+ 1178 047d 20       		.byte	32
+ 1179 047e 73       		.byte	115
+ 1180 047f 80       		.byte	-128
+ 1181 0480 77       		.byte	119
+ 1182 0481 40       		.byte	64
+ 1183 0482 83       		.byte	-125
+ 1184 0483 C0       		.byte	-64
+ 1185 0484 9F       		.byte	-97
+ 1186 0485 10       		.byte	16
+ 1187 0486 AE       		.byte	-82
+ 1188 0487 80       		.byte	-128
+ 1189 0488 D8       		.byte	-40
+ 1190 0489 C0       		.byte	-64
+ 1191 048a DC       		.byte	-36
+ 1192 048b 80       		.byte	-128
+ 1193 048c DE       		.byte	-34
+ 1194 048d 20       		.byte	32
+ 1195 048e E2       		.byte	-30
+ 1196 048f 80       		.byte	-128
+ 1197 0490 E6       		.byte	-26
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 22
+
+
+ 1198 0491 80       		.byte	-128
+ 1199 0492 EC       		.byte	-20
+ 1200 0493 10       		.byte	16
+ 1201 0494 87       		.byte	-121
+ 1202 0495 10       		.byte	16
+ 1203 0496 97       		.byte	-105
+ 1204 0497 20       		.byte	32
+ 1205 0498 97       		.byte	-105
+ 1206 0499 20       		.byte	32
+ 1207 049a AB       		.byte	-85
+ 1208 049b 10       		.byte	16
+ 1209 049c AF       		.byte	-81
+ 1210 049d 10       		.byte	16
+ 1211 049e B7       		.byte	-73
+ 1212 049f 10       		.byte	16
+ 1213 04a0 EE       		.byte	-18
+ 1214 04a1 C0       		.byte	-64
+ 1215 04a2 74       		.byte	116
+ 1216 04a3 04       		.byte	4
+ 1217 04a4 A0       		.byte	-96
+ 1218 04a5 04       		.byte	4
+ 1219 04a6 B0       		.byte	-80
+ 1220 04a7 04       		.byte	4
+ 1221 04a8 DE       		.byte	-34
+ 1222 04a9 20       		.byte	32
+ 1223 04aa 1F       		.byte	31
+ 1224 04ab 10       		.byte	16
+ 1225 04ac 97       		.byte	-105
+ 1226 04ad 20       		.byte	32
+ 1227 04ae C6       		.byte	-58
+ 1228 04af 01       		.byte	1
+ 1229 04b0 10       		.byte	16
+ 1230 04b1 20       		.byte	32
+ 1231 04b2 7A       		.byte	122
+ 1232 04b3 01       		.byte	1
+ 1233 04b4 88       		.byte	-120
+ 1234 04b5 20       		.byte	32
+ 1235 04b6 8E       		.byte	-114
+ 1236 04b7 01       		.byte	1
+ 1237 04b8 C4       		.byte	-60
+ 1238 04b9 08       		.byte	8
+ 1239 04ba DC       		.byte	-36
+ 1240 04bb 01       		.byte	1
+ 1241 04bc E0       		.byte	-32
+ 1242 04bd 08       		.byte	8
+ 1243 04be E6       		.byte	-26
+ 1244 04bf 04       		.byte	4
+ 1245 04c0 00       		.byte	0
+ 1246 04c1 30       		.byte	48
+ 1247 04c2 0A       		.byte	10
+ 1248 04c3 30       		.byte	48
+ 1249 04c4 10       		.byte	16
+ 1250 04c5 30       		.byte	48
+ 1251 04c6 1A       		.byte	26
+ 1252 04c7 30       		.byte	48
+ 1253 04c8 00       		.byte	0
+ 1254 04c9 3F       		.byte	63
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 23
+
+
+ 1255 04ca 00       		.byte	0
+ 1256 04cb 00       		.byte	0
+ 1257 04cc 08       		.byte	8
+ 1258 04cd 80       		.byte	-128
+ 1259 04ce 00       		.byte	0
+ 1260 04cf 00       		.byte	0
+ 1261 04d0 44       		.byte	68
+ 1262 04d1 00       		.byte	0
+ 1263 04d2 00       		.byte	0
+ 1264 04d3 00       		.byte	0
+ 1265 04d4 1F       		.byte	31
+ 1266 04d5 00       		.byte	0
+ 1267 04d6 60       		.byte	96
+ 1268 04d7 63       		.byte	99
+ 1269 04d8 73       		.byte	115
+ 1270 04d9 00       		.byte	0
+ 1271 04da 0C       		.byte	12
+ 1272 04db 04       		.byte	4
+ 1273 04dc 04       		.byte	4
+ 1274 04dd 18       		.byte	24
+ 1275 04de 00       		.byte	0
+ 1276 04df 00       		.byte	0
+ 1277 04e0 08       		.byte	8
+ 1278 04e1 60       		.byte	96
+ 1279 04e2 00       		.byte	0
+ 1280 04e3 00       		.byte	0
+ 1281 04e4 5C       		.byte	92
+ 1282 04e5 1C       		.byte	28
+ 1283 04e6 23       		.byte	35
+ 1284 04e7 E2       		.byte	-30
+ 1285 04e8 01       		.byte	1
+ 1286 04e9 FF       		.byte	-1
+ 1287 04ea 00       		.byte	0
+ 1288 04eb 00       		.byte	0
+ 1289 04ec 7F       		.byte	127
+ 1290 04ed 08       		.byte	8
+ 1291 04ee 00       		.byte	0
+ 1292 04ef 00       		.byte	0
+ 1293 04f0 00       		.byte	0
+ 1294 04f1 10       		.byte	16
+ 1295 04f2 63       		.byte	99
+ 1296 04f3 00       		.byte	0
+ 1297 04f4 03       		.byte	3
+ 1298 04f5 24       		.byte	36
+ 1299 04f6 00       		.byte	0
+ 1300 04f7 00       		.byte	0
+ 1301 04f8 0C       		.byte	12
+ 1302 04f9 E7       		.byte	-25
+ 1303 04fa 00       		.byte	0
+ 1304 04fb 18       		.byte	24
+ 1305 04fc 02       		.byte	2
+ 1306 04fd 40       		.byte	64
+ 1307 04fe 00       		.byte	0
+ 1308 04ff 00       		.byte	0
+ 1309 0500 00       		.byte	0
+ 1310 0501 1C       		.byte	28
+ 1311 0502 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 24
+
+
+ 1312 0503 E1       		.byte	-31
+ 1313 0504 2C       		.byte	44
+ 1314 0505 1F       		.byte	31
+ 1315 0506 10       		.byte	16
+ 1316 0507 00       		.byte	0
+ 1317 0508 0F       		.byte	15
+ 1318 0509 80       		.byte	-128
+ 1319 050a 4C       		.byte	76
+ 1320 050b 60       		.byte	96
+ 1321 050c 00       		.byte	0
+ 1322 050d 20       		.byte	32
+ 1323 050e 22       		.byte	34
+ 1324 050f 0A       		.byte	10
+ 1325 0510 00       		.byte	0
+ 1326 0511 00       		.byte	0
+ 1327 0512 04       		.byte	4
+ 1328 0513 00       		.byte	0
+ 1329 0514 24       		.byte	36
+ 1330 0515 06       		.byte	6
+ 1331 0516 05       		.byte	5
+ 1332 0517 00       		.byte	0
+ 1333 0518 03       		.byte	3
+ 1334 0519 00       		.byte	0
+ 1335 051a E0       		.byte	-32
+ 1336 051b C0       		.byte	-64
+ 1337 051c 28       		.byte	40
+ 1338 051d FF       		.byte	-1
+ 1339 051e FF       		.byte	-1
+ 1340 051f FF       		.byte	-1
+ 1341 0520 62       		.byte	98
+ 1342 0521 A0       		.byte	-96
+ 1343 0522 F0       		.byte	-16
+ 1344 0523 41       		.byte	65
+ 1345 0524 0C       		.byte	12
+ 1346 0525 00       		.byte	0
+ 1347 0526 00       		.byte	0
+ 1348 0527 00       		.byte	0
+ 1349 0528 00       		.byte	0
+ 1350 0529 00       		.byte	0
+ 1351 052a 02       		.byte	2
+ 1352 052b 11       		.byte	17
+ 1353 052c 04       		.byte	4
+ 1354 052d 04       		.byte	4
+ 1355 052e 04       		.byte	4
+ 1356 052f 04       		.byte	4
+ 1357 0530 55       		.byte	85
+ 1358 0531 55       		.byte	85
+ 1359 0532 00       		.byte	0
+ 1360 0533 01       		.byte	1
+ 1361 0534 00       		.byte	0
+ 1362 0535 00       		.byte	0
+ 1363 0536 00       		.byte	0
+ 1364 0537 00       		.byte	0
+ 1365 0538 00       		.byte	0
+ 1366 0539 00       		.byte	0
+ 1367 053a 40       		.byte	64
+ 1368 053b 02       		.byte	2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 25
+
+
+ 1369 053c 00       		.byte	0
+ 1370 053d 10       		.byte	16
+ 1371 053e 30       		.byte	48
+ 1372 053f 10       		.byte	16
+ 1373 0540 00       		.byte	0
+ 1374 0541 10       		.byte	16
+ 1375 0542 10       		.byte	16
+ 1376 0543 12       		.byte	18
+ 1377 0544 00       		.byte	0
+ 1378 0545 00       		.byte	0
+ 1379 0546 00       		.byte	0
+ 1380 0547 00       		.byte	0
+ 1381 0548 00       		.byte	0
+ 1382 0549 00       		.byte	0
+ 1383 054a 00       		.byte	0
+ 1384 054b 00       		.byte	0
+ 1385 054c 00       		.byte	0
+ 1386 054d 00       		.byte	0
+ 1387 054e 00       		.byte	0
+ 1388 054f 00       		.byte	0
+ 1389 0550 00       		.byte	0
+ 1390 0551 00       		.byte	0
+ 1391 0552 00       		.byte	0
+ 1392 0553 00       		.byte	0
+ 1393 0554 02       		.byte	2
+ 1394 0555 FF       		.byte	-1
+ 1395 0556 00       		.byte	0
+ 1396 0557 00       		.byte	0
+ 1397 0558 03       		.byte	3
+ 1398 0559 18       		.byte	24
+ 1399 055a 00       		.byte	0
+ 1400 055b 00       		.byte	0
+ 1401 055c 73       		.byte	115
+ 1402 055d 08       		.byte	8
+ 1403 055e 0C       		.byte	12
+ 1404 055f 00       		.byte	0
+ 1405 0560 00       		.byte	0
+ 1406 0561 00       		.byte	0
+ 1407 0562 00       		.byte	0
+ 1408 0563 63       		.byte	99
+ 1409 0564 01       		.byte	1
+ 1410 0565 00       		.byte	0
+ 1411 0566 00       		.byte	0
+ 1412 0567 04       		.byte	4
+ 1413 0568 1F       		.byte	31
+ 1414 0569 1C       		.byte	28
+ 1415 056a 60       		.byte	96
+ 1416 056b E1       		.byte	-31
+ 1417 056c 5C       		.byte	92
+ 1418 056d 60       		.byte	96
+ 1419 056e 23       		.byte	35
+ 1420 056f 00       		.byte	0
+ 1421 0570 7F       		.byte	127
+ 1422 0571 10       		.byte	16
+ 1423 0572 00       		.byte	0
+ 1424 0573 00       		.byte	0
+ 1425 0574 08       		.byte	8
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 26
+
+
+ 1426 0575 40       		.byte	64
+ 1427 0576 00       		.byte	0
+ 1428 0577 00       		.byte	0
+ 1429 0578 04       		.byte	4
+ 1430 0579 1C       		.byte	28
+ 1431 057a 00       		.byte	0
+ 1432 057b E2       		.byte	-30
+ 1433 057c 0C       		.byte	12
+ 1434 057d E7       		.byte	-25
+ 1435 057e 00       		.byte	0
+ 1436 057f 18       		.byte	24
+ 1437 0580 00       		.byte	0
+ 1438 0581 24       		.byte	36
+ 1439 0582 63       		.byte	99
+ 1440 0583 00       		.byte	0
+ 1441 0584 10       		.byte	16
+ 1442 0585 80       		.byte	-128
+ 1443 0586 2C       		.byte	44
+ 1444 0587 1F       		.byte	31
+ 1445 0588 0F       		.byte	15
+ 1446 0589 60       		.byte	96
+ 1447 058a 4C       		.byte	76
+ 1448 058b 00       		.byte	0
+ 1449 058c 00       		.byte	0
+ 1450 058d 02       		.byte	2
+ 1451 058e 28       		.byte	40
+ 1452 058f 88       		.byte	-120
+ 1453 0590 00       		.byte	0
+ 1454 0591 00       		.byte	0
+ 1455 0592 01       		.byte	1
+ 1456 0593 00       		.byte	0
+ 1457 0594 26       		.byte	38
+ 1458 0595 03       		.byte	3
+ 1459 0596 00       		.byte	0
+ 1460 0597 00       		.byte	0
+ 1461 0598 00       		.byte	0
+ 1462 0599 0E       		.byte	14
+ 1463 059a C0       		.byte	-64
+ 1464 059b 0B       		.byte	11
+ 1465 059c 19       		.byte	25
+ 1466 059d FF       		.byte	-1
+ 1467 059e FF       		.byte	-1
+ 1468 059f FF       		.byte	-1
+ 1469 05a0 00       		.byte	0
+ 1470 05a1 00       		.byte	0
+ 1471 05a2 F0       		.byte	-16
+ 1472 05a3 44       		.byte	68
+ 1473 05a4 0C       		.byte	12
+ 1474 05a5 00       		.byte	0
+ 1475 05a6 00       		.byte	0
+ 1476 05a7 00       		.byte	0
+ 1477 05a8 00       		.byte	0
+ 1478 05a9 00       		.byte	0
+ 1479 05aa 02       		.byte	2
+ 1480 05ab 13       		.byte	19
+ 1481 05ac 04       		.byte	4
+ 1482 05ad 04       		.byte	4
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 27
+
+
+ 1483 05ae 04       		.byte	4
+ 1484 05af 04       		.byte	4
+ 1485 05b0 44       		.byte	68
+ 1486 05b1 44       		.byte	68
+ 1487 05b2 00       		.byte	0
+ 1488 05b3 01       		.byte	1
+ 1489 05b4 00       		.byte	0
+ 1490 05b5 00       		.byte	0
+ 1491 05b6 00       		.byte	0
+ 1492 05b7 00       		.byte	0
+ 1493 05b8 00       		.byte	0
+ 1494 05b9 00       		.byte	0
+ 1495 05ba C0       		.byte	-64
+ 1496 05bb 00       		.byte	0
+ 1497 05bc 00       		.byte	0
+ 1498 05bd 00       		.byte	0
+ 1499 05be 40       		.byte	64
+ 1500 05bf 02       		.byte	2
+ 1501 05c0 00       		.byte	0
+ 1502 05c1 00       		.byte	0
+ 1503 05c2 00       		.byte	0
+ 1504 05c3 00       		.byte	0
+ 1505 05c4 00       		.byte	0
+ 1506 05c5 00       		.byte	0
+ 1507 05c6 00       		.byte	0
+ 1508 05c7 00       		.byte	0
+ 1509 05c8 00       		.byte	0
+ 1510 05c9 00       		.byte	0
+ 1511 05ca 00       		.byte	0
+ 1512 05cb 00       		.byte	0
+ 1513 05cc 00       		.byte	0
+ 1514 05cd 00       		.byte	0
+ 1515 05ce 00       		.byte	0
+ 1516 05cf 00       		.byte	0
+ 1517 05d0 00       		.byte	0
+ 1518 05d1 00       		.byte	0
+ 1519 05d2 00       		.byte	0
+ 1520 05d3 00       		.byte	0
+ 1521 05d4 12       		.byte	18
+ 1522 05d5 00       		.byte	0
+ 1523 05d6 09       		.byte	9
+ 1524 05d7 00       		.byte	0
+ 1525 05d8 08       		.byte	8
+ 1526 05d9 31       		.byte	49
+ 1527 05da 14       		.byte	20
+ 1528 05db 40       		.byte	64
+ 1529 05dc 3F       		.byte	63
+ 1530 05dd A0       		.byte	-96
+ 1531 05de 00       		.byte	0
+ 1532 05df 41       		.byte	65
+ 1533 05e0 20       		.byte	32
+ 1534 05e1 00       		.byte	0
+ 1535 05e2 00       		.byte	0
+ 1536 05e3 80       		.byte	-128
+ 1537 05e4 05       		.byte	5
+ 1538 05e5 00       		.byte	0
+ 1539 05e6 0A       		.byte	10
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 28
+
+
+ 1540 05e7 00       		.byte	0
+ 1541 05e8 00       		.byte	0
+ 1542 05e9 02       		.byte	2
+ 1543 05ea 00       		.byte	0
+ 1544 05eb 50       		.byte	80
+ 1545 05ec 00       		.byte	0
+ 1546 05ed 31       		.byte	49
+ 1547 05ee 00       		.byte	0
+ 1548 05ef C0       		.byte	-64
+ 1549 05f0 00       		.byte	0
+ 1550 05f1 00       		.byte	0
+ 1551 05f2 40       		.byte	64
+ 1552 05f3 04       		.byte	4
+ 1553 05f4 00       		.byte	0
+ 1554 05f5 00       		.byte	0
+ 1555 05f6 00       		.byte	0
+ 1556 05f7 00       		.byte	0
+ 1557 05f8 00       		.byte	0
+ 1558 05f9 00       		.byte	0
+ 1559 05fa 40       		.byte	64
+ 1560 05fb 08       		.byte	8
+ 1561 05fc 3F       		.byte	63
+ 1562 05fd 30       		.byte	48
+ 1563 05fe 00       		.byte	0
+ 1564 05ff 40       		.byte	64
+ 1565 0600 00       		.byte	0
+ 1566 0601 00       		.byte	0
+ 1567 0602 00       		.byte	0
+ 1568 0603 04       		.byte	4
+ 1569 0604 40       		.byte	64
+ 1570 0605 03       		.byte	3
+ 1571 0606 20       		.byte	32
+ 1572 0607 00       		.byte	0
+ 1573 0608 1C       		.byte	28
+ 1574 0609 F0       		.byte	-16
+ 1575 060a 03       		.byte	3
+ 1576 060b 0C       		.byte	12
+ 1577 060c 00       		.byte	0
+ 1578 060d 02       		.byte	2
+ 1579 060e 00       		.byte	0
+ 1580 060f 20       		.byte	32
+ 1581 0610 00       		.byte	0
+ 1582 0611 00       		.byte	0
+ 1583 0612 01       		.byte	1
+ 1584 0613 40       		.byte	64
+ 1585 0614 63       		.byte	99
+ 1586 0615 05       		.byte	5
+ 1587 0616 04       		.byte	4
+ 1588 0617 00       		.byte	0
+ 1589 0618 01       		.byte	1
+ 1590 0619 0C       		.byte	12
+ 1591 061a E0       		.byte	-32
+ 1592 061b 00       		.byte	0
+ 1593 061c 09       		.byte	9
+ 1594 061d FF       		.byte	-1
+ 1595 061e FF       		.byte	-1
+ 1596 061f FF       		.byte	-1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 29
+
+
+ 1597 0620 62       		.byte	98
+ 1598 0621 A0       		.byte	-96
+ 1599 0622 F0       		.byte	-16
+ 1600 0623 41       		.byte	65
+ 1601 0624 0C       		.byte	12
+ 1602 0625 00       		.byte	0
+ 1603 0626 00       		.byte	0
+ 1604 0627 00       		.byte	0
+ 1605 0628 18       		.byte	24
+ 1606 0629 00       		.byte	0
+ 1607 062a 04       		.byte	4
+ 1608 062b 00       		.byte	0
+ 1609 062c 04       		.byte	4
+ 1610 062d 04       		.byte	4
+ 1611 062e 04       		.byte	4
+ 1612 062f 04       		.byte	4
+ 1613 0630 44       		.byte	68
+ 1614 0631 44       		.byte	68
+ 1615 0632 00       		.byte	0
+ 1616 0633 01       		.byte	1
+ 1617 0634 00       		.byte	0
+ 1618 0635 00       		.byte	0
+ 1619 0636 00       		.byte	0
+ 1620 0637 00       		.byte	0
+ 1621 0638 00       		.byte	0
+ 1622 0639 00       		.byte	0
+ 1623 063a 40       		.byte	64
+ 1624 063b 02       		.byte	2
+ 1625 063c 00       		.byte	0
+ 1626 063d 10       		.byte	16
+ 1627 063e 30       		.byte	48
+ 1628 063f 10       		.byte	16
+ 1629 0640 00       		.byte	0
+ 1630 0641 10       		.byte	16
+ 1631 0642 10       		.byte	16
+ 1632 0643 12       		.byte	18
+ 1633 0644 00       		.byte	0
+ 1634 0645 00       		.byte	0
+ 1635 0646 00       		.byte	0
+ 1636 0647 00       		.byte	0
+ 1637 0648 00       		.byte	0
+ 1638 0649 00       		.byte	0
+ 1639 064a 00       		.byte	0
+ 1640 064b 00       		.byte	0
+ 1641 064c 00       		.byte	0
+ 1642 064d 00       		.byte	0
+ 1643 064e 00       		.byte	0
+ 1644 064f 00       		.byte	0
+ 1645 0650 00       		.byte	0
+ 1646 0651 00       		.byte	0
+ 1647 0652 00       		.byte	0
+ 1648 0653 00       		.byte	0
+ 1649 0654 00       		.byte	0
+ 1650 0655 00       		.byte	0
+ 1651 0656 00       		.byte	0
+ 1652 0657 00       		.byte	0
+ 1653 0658 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 30
+
+
+ 1654 0659 00       		.byte	0
+ 1655 065a 04       		.byte	4
+ 1656 065b 00       		.byte	0
+ 1657 065c 88       		.byte	-120
+ 1658 065d 00       		.byte	0
+ 1659 065e 44       		.byte	68
+ 1660 065f 88       		.byte	-120
+ 1661 0660 88       		.byte	-120
+ 1662 0661 00       		.byte	0
+ 1663 0662 88       		.byte	-120
+ 1664 0663 00       		.byte	0
+ 1665 0664 00       		.byte	0
+ 1666 0665 00       		.byte	0
+ 1667 0666 00       		.byte	0
+ 1668 0667 00       		.byte	0
+ 1669 0668 00       		.byte	0
+ 1670 0669 0B       		.byte	11
+ 1671 066a 0B       		.byte	11
+ 1672 066b 00       		.byte	0
+ 1673 066c 00       		.byte	0
+ 1674 066d 00       		.byte	0
+ 1675 066e 00       		.byte	0
+ 1676 066f 00       		.byte	0
+ 1677 0670 00       		.byte	0
+ 1678 0671 00       		.byte	0
+ 1679 0672 00       		.byte	0
+ 1680 0673 00       		.byte	0
+ 1681 0674 00       		.byte	0
+ 1682 0675 00       		.byte	0
+ 1683 0676 07       		.byte	7
+ 1684 0677 00       		.byte	0
+ 1685 0678 00       		.byte	0
+ 1686 0679 00       		.byte	0
+ 1687 067a 07       		.byte	7
+ 1688 067b 00       		.byte	0
+ 1689 067c 00       		.byte	0
+ 1690 067d 00       		.byte	0
+ 1691 067e 00       		.byte	0
+ 1692 067f 00       		.byte	0
+ 1693 0680 0C       		.byte	12
+ 1694 0681 00       		.byte	0
+ 1695 0682 18       		.byte	24
+ 1696 0683 01       		.byte	1
+ 1697              		.section	.cywolatch,"a",%progbits
+ 1698              		.align	2
+ 1699              		.type	cy_meta_wonvl, %object
+ 1700              		.size	cy_meta_wonvl, 4
+ 1701              	cy_meta_wonvl:
+ 1702 0000 BC       		.byte	-68
+ 1703 0001 90       		.byte	-112
+ 1704 0002 AC       		.byte	-84
+ 1705 0003 AF       		.byte	-81
+ 1706              		.section	.cycustnvl,"a",%progbits
+ 1707              		.align	2
+ 1708              		.type	cy_meta_custnvl, %object
+ 1709              		.size	cy_meta_custnvl, 4
+ 1710              	cy_meta_custnvl:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 31
+
+
+ 1711 0000 00       		.byte	0
+ 1712 0001 00       		.byte	0
+ 1713 0002 40       		.byte	64
+ 1714 0003 05       		.byte	5
+ 1715              		.section	.cymeta,"a",%progbits
+ 1716              		.align	2
+ 1717              		.type	cy_metadata, %object
+ 1718              		.size	cy_metadata, 12
+ 1719              	cy_metadata:
+ 1720 0000 00       		.byte	0
+ 1721 0001 01       		.byte	1
+ 1722 0002 2E       		.byte	46
+ 1723 0003 16       		.byte	22
+ 1724 0004 10       		.byte	16
+ 1725 0005 69       		.byte	105
+ 1726 0006 00       		.byte	0
+ 1727 0007 01       		.byte	1
+ 1728 0008 00       		.byte	0
+ 1729 0009 00       		.byte	0
+ 1730 000a 00       		.byte	0
+ 1731 000b 00       		.byte	0
+ 1732              		.section	.cyflashprotect,"a",%progbits
+ 1733              		.align	2
+ 1734              		.type	cy_meta_flashprotect, %object
+ 1735              		.size	cy_meta_flashprotect, 256
+ 1736              	cy_meta_flashprotect:
+ 1737 0000 00000000 		.space	256
+ 1737      00000000 
+ 1737      00000000 
+ 1737      00000000 
+ 1737      00000000 
+ 1738              		.text
+ 1739              	.Letext0:
+ 1740              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1741              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1742              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 1743              		.section	.debug_info,"",%progbits
+ 1744              	.Ldebug_info0:
+ 1745 0000 34010000 		.4byte	0x134
+ 1746 0004 0400     		.2byte	0x4
+ 1747 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1748 000a 04       		.byte	0x4
+ 1749 000b 01       		.uleb128 0x1
+ 1750 000c 24000000 		.4byte	.LASF17
+ 1751 0010 0C       		.byte	0xc
+ 1752 0011 C4010000 		.4byte	.LASF18
+ 1753 0015 F9000000 		.4byte	.LASF19
+ 1754 0019 00000000 		.4byte	.Ldebug_line0
+ 1755 001d 02       		.uleb128 0x2
+ 1756 001e 01       		.byte	0x1
+ 1757 001f 06       		.byte	0x6
+ 1758 0020 B8010000 		.4byte	.LASF0
+ 1759 0024 03       		.uleb128 0x3
+ 1760 0025 00000000 		.4byte	.LASF9
+ 1761 0029 01       		.byte	0x1
+ 1762 002a 1D       		.byte	0x1d
+ 1763 002b 2F000000 		.4byte	0x2f
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 32
+
+
+ 1764 002f 02       		.uleb128 0x2
+ 1765 0030 01       		.byte	0x1
+ 1766 0031 08       		.byte	0x8
+ 1767 0032 16000000 		.4byte	.LASF1
+ 1768 0036 02       		.uleb128 0x2
+ 1769 0037 02       		.byte	0x2
+ 1770 0038 05       		.byte	0x5
+ 1771 0039 A5010000 		.4byte	.LASF2
+ 1772 003d 02       		.uleb128 0x2
+ 1773 003e 02       		.byte	0x2
+ 1774 003f 07       		.byte	0x7
+ 1775 0040 C4000000 		.4byte	.LASF3
+ 1776 0044 02       		.uleb128 0x2
+ 1777 0045 04       		.byte	0x4
+ 1778 0046 05       		.byte	0x5
+ 1779 0047 AF010000 		.4byte	.LASF4
+ 1780 004b 02       		.uleb128 0x2
+ 1781 004c 04       		.byte	0x4
+ 1782 004d 07       		.byte	0x7
+ 1783 004e B2000000 		.4byte	.LASF5
+ 1784 0052 02       		.uleb128 0x2
+ 1785 0053 08       		.byte	0x8
+ 1786 0054 05       		.byte	0x5
+ 1787 0055 97010000 		.4byte	.LASF6
+ 1788 0059 02       		.uleb128 0x2
+ 1789 005a 08       		.byte	0x8
+ 1790 005b 07       		.byte	0x7
+ 1791 005c 4C010000 		.4byte	.LASF7
+ 1792 0060 04       		.uleb128 0x4
+ 1793 0061 04       		.byte	0x4
+ 1794 0062 05       		.byte	0x5
+ 1795 0063 696E7400 		.ascii	"int\000"
+ 1796 0067 02       		.uleb128 0x2
+ 1797 0068 04       		.byte	0x4
+ 1798 0069 07       		.byte	0x7
+ 1799 006a 3F010000 		.4byte	.LASF8
+ 1800 006e 03       		.uleb128 0x3
+ 1801 006f 63010000 		.4byte	.LASF10
+ 1802 0073 02       		.byte	0x2
+ 1803 0074 18       		.byte	0x18
+ 1804 0075 24000000 		.4byte	0x24
+ 1805 0079 05       		.uleb128 0x5
+ 1806 007a 91000000 		.4byte	0x91
+ 1807 007e 8A000000 		.4byte	0x8a
+ 1808 0082 06       		.uleb128 0x6
+ 1809 0083 8A000000 		.4byte	0x8a
+ 1810 0087 8306     		.2byte	0x683
+ 1811 0089 00       		.byte	0
+ 1812 008a 02       		.uleb128 0x2
+ 1813 008b 04       		.byte	0x4
+ 1814 008c 07       		.byte	0x7
+ 1815 008d 8E010000 		.4byte	.LASF11
+ 1816 0091 07       		.uleb128 0x7
+ 1817 0092 6E000000 		.4byte	0x6e
+ 1818 0096 08       		.uleb128 0x8
+ 1819 0097 E7000000 		.4byte	.LASF12
+ 1820 009b 03       		.byte	0x3
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 33
+
+
+ 1821 009c 1F       		.byte	0x1f
+ 1822 009d A7000000 		.4byte	0xa7
+ 1823 00a1 05       		.uleb128 0x5
+ 1824 00a2 03       		.byte	0x3
+ 1825 00a3 00000000 		.4byte	cy_meta_configecc
+ 1826 00a7 07       		.uleb128 0x7
+ 1827 00a8 79000000 		.4byte	0x79
+ 1828 00ac 05       		.uleb128 0x5
+ 1829 00ad 91000000 		.4byte	0x91
+ 1830 00b1 BC000000 		.4byte	0xbc
+ 1831 00b5 09       		.uleb128 0x9
+ 1832 00b6 8A000000 		.4byte	0x8a
+ 1833 00ba 03       		.byte	0x3
+ 1834 00bb 00       		.byte	0
+ 1835 00bc 08       		.uleb128 0x8
+ 1836 00bd D7000000 		.4byte	.LASF13
+ 1837 00c1 03       		.byte	0x3
+ 1838 00c2 FD       		.byte	0xfd
+ 1839 00c3 CD000000 		.4byte	0xcd
+ 1840 00c7 05       		.uleb128 0x5
+ 1841 00c8 03       		.byte	0x3
+ 1842 00c9 00000000 		.4byte	cy_meta_custnvl
+ 1843 00cd 07       		.uleb128 0x7
+ 1844 00ce AC000000 		.4byte	0xac
+ 1845 00d2 0A       		.uleb128 0xa
+ 1846 00d3 80010000 		.4byte	.LASF14
+ 1847 00d7 03       		.byte	0x3
+ 1848 00d8 0B01     		.2byte	0x10b
+ 1849 00da E4000000 		.4byte	0xe4
+ 1850 00de 05       		.uleb128 0x5
+ 1851 00df 03       		.byte	0x3
+ 1852 00e0 00000000 		.4byte	cy_meta_wonvl
+ 1853 00e4 07       		.uleb128 0x7
+ 1854 00e5 AC000000 		.4byte	0xac
+ 1855 00e9 05       		.uleb128 0x5
+ 1856 00ea 91000000 		.4byte	0x91
+ 1857 00ee F9000000 		.4byte	0xf9
+ 1858 00f2 09       		.uleb128 0x9
+ 1859 00f3 8A000000 		.4byte	0x8a
+ 1860 00f7 FF       		.byte	0xff
+ 1861 00f8 00       		.byte	0
+ 1862 00f9 0A       		.uleb128 0xa
+ 1863 00fa 6B010000 		.4byte	.LASF15
+ 1864 00fe 03       		.byte	0x3
+ 1865 00ff 1901     		.2byte	0x119
+ 1866 0101 0B010000 		.4byte	0x10b
+ 1867 0105 05       		.uleb128 0x5
+ 1868 0106 03       		.byte	0x3
+ 1869 0107 00000000 		.4byte	cy_meta_flashprotect
+ 1870 010b 07       		.uleb128 0x7
+ 1871 010c E9000000 		.4byte	0xe9
+ 1872 0110 05       		.uleb128 0x5
+ 1873 0111 91000000 		.4byte	0x91
+ 1874 0115 20010000 		.4byte	0x120
+ 1875 0119 09       		.uleb128 0x9
+ 1876 011a 8A000000 		.4byte	0x8a
+ 1877 011e 0B       		.byte	0xb
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 34
+
+
+ 1878 011f 00       		.byte	0
+ 1879 0120 0A       		.uleb128 0xa
+ 1880 0121 0A000000 		.4byte	.LASF16
+ 1881 0125 03       		.byte	0x3
+ 1882 0126 4601     		.2byte	0x146
+ 1883 0128 32010000 		.4byte	0x132
+ 1884 012c 05       		.uleb128 0x5
+ 1885 012d 03       		.byte	0x3
+ 1886 012e 00000000 		.4byte	cy_metadata
+ 1887 0132 07       		.uleb128 0x7
+ 1888 0133 10010000 		.4byte	0x110
+ 1889 0137 00       		.byte	0
+ 1890              		.section	.debug_abbrev,"",%progbits
+ 1891              	.Ldebug_abbrev0:
+ 1892 0000 01       		.uleb128 0x1
+ 1893 0001 11       		.uleb128 0x11
+ 1894 0002 01       		.byte	0x1
+ 1895 0003 25       		.uleb128 0x25
+ 1896 0004 0E       		.uleb128 0xe
+ 1897 0005 13       		.uleb128 0x13
+ 1898 0006 0B       		.uleb128 0xb
+ 1899 0007 03       		.uleb128 0x3
+ 1900 0008 0E       		.uleb128 0xe
+ 1901 0009 1B       		.uleb128 0x1b
+ 1902 000a 0E       		.uleb128 0xe
+ 1903 000b 10       		.uleb128 0x10
+ 1904 000c 17       		.uleb128 0x17
+ 1905 000d 00       		.byte	0
+ 1906 000e 00       		.byte	0
+ 1907 000f 02       		.uleb128 0x2
+ 1908 0010 24       		.uleb128 0x24
+ 1909 0011 00       		.byte	0
+ 1910 0012 0B       		.uleb128 0xb
+ 1911 0013 0B       		.uleb128 0xb
+ 1912 0014 3E       		.uleb128 0x3e
+ 1913 0015 0B       		.uleb128 0xb
+ 1914 0016 03       		.uleb128 0x3
+ 1915 0017 0E       		.uleb128 0xe
+ 1916 0018 00       		.byte	0
+ 1917 0019 00       		.byte	0
+ 1918 001a 03       		.uleb128 0x3
+ 1919 001b 16       		.uleb128 0x16
+ 1920 001c 00       		.byte	0
+ 1921 001d 03       		.uleb128 0x3
+ 1922 001e 0E       		.uleb128 0xe
+ 1923 001f 3A       		.uleb128 0x3a
+ 1924 0020 0B       		.uleb128 0xb
+ 1925 0021 3B       		.uleb128 0x3b
+ 1926 0022 0B       		.uleb128 0xb
+ 1927 0023 49       		.uleb128 0x49
+ 1928 0024 13       		.uleb128 0x13
+ 1929 0025 00       		.byte	0
+ 1930 0026 00       		.byte	0
+ 1931 0027 04       		.uleb128 0x4
+ 1932 0028 24       		.uleb128 0x24
+ 1933 0029 00       		.byte	0
+ 1934 002a 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 35
+
+
+ 1935 002b 0B       		.uleb128 0xb
+ 1936 002c 3E       		.uleb128 0x3e
+ 1937 002d 0B       		.uleb128 0xb
+ 1938 002e 03       		.uleb128 0x3
+ 1939 002f 08       		.uleb128 0x8
+ 1940 0030 00       		.byte	0
+ 1941 0031 00       		.byte	0
+ 1942 0032 05       		.uleb128 0x5
+ 1943 0033 01       		.uleb128 0x1
+ 1944 0034 01       		.byte	0x1
+ 1945 0035 49       		.uleb128 0x49
+ 1946 0036 13       		.uleb128 0x13
+ 1947 0037 01       		.uleb128 0x1
+ 1948 0038 13       		.uleb128 0x13
+ 1949 0039 00       		.byte	0
+ 1950 003a 00       		.byte	0
+ 1951 003b 06       		.uleb128 0x6
+ 1952 003c 21       		.uleb128 0x21
+ 1953 003d 00       		.byte	0
+ 1954 003e 49       		.uleb128 0x49
+ 1955 003f 13       		.uleb128 0x13
+ 1956 0040 2F       		.uleb128 0x2f
+ 1957 0041 05       		.uleb128 0x5
+ 1958 0042 00       		.byte	0
+ 1959 0043 00       		.byte	0
+ 1960 0044 07       		.uleb128 0x7
+ 1961 0045 26       		.uleb128 0x26
+ 1962 0046 00       		.byte	0
+ 1963 0047 49       		.uleb128 0x49
+ 1964 0048 13       		.uleb128 0x13
+ 1965 0049 00       		.byte	0
+ 1966 004a 00       		.byte	0
+ 1967 004b 08       		.uleb128 0x8
+ 1968 004c 34       		.uleb128 0x34
+ 1969 004d 00       		.byte	0
+ 1970 004e 03       		.uleb128 0x3
+ 1971 004f 0E       		.uleb128 0xe
+ 1972 0050 3A       		.uleb128 0x3a
+ 1973 0051 0B       		.uleb128 0xb
+ 1974 0052 3B       		.uleb128 0x3b
+ 1975 0053 0B       		.uleb128 0xb
+ 1976 0054 49       		.uleb128 0x49
+ 1977 0055 13       		.uleb128 0x13
+ 1978 0056 3F       		.uleb128 0x3f
+ 1979 0057 19       		.uleb128 0x19
+ 1980 0058 02       		.uleb128 0x2
+ 1981 0059 18       		.uleb128 0x18
+ 1982 005a 00       		.byte	0
+ 1983 005b 00       		.byte	0
+ 1984 005c 09       		.uleb128 0x9
+ 1985 005d 21       		.uleb128 0x21
+ 1986 005e 00       		.byte	0
+ 1987 005f 49       		.uleb128 0x49
+ 1988 0060 13       		.uleb128 0x13
+ 1989 0061 2F       		.uleb128 0x2f
+ 1990 0062 0B       		.uleb128 0xb
+ 1991 0063 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 36
+
+
+ 1992 0064 00       		.byte	0
+ 1993 0065 0A       		.uleb128 0xa
+ 1994 0066 34       		.uleb128 0x34
+ 1995 0067 00       		.byte	0
+ 1996 0068 03       		.uleb128 0x3
+ 1997 0069 0E       		.uleb128 0xe
+ 1998 006a 3A       		.uleb128 0x3a
+ 1999 006b 0B       		.uleb128 0xb
+ 2000 006c 3B       		.uleb128 0x3b
+ 2001 006d 05       		.uleb128 0x5
+ 2002 006e 49       		.uleb128 0x49
+ 2003 006f 13       		.uleb128 0x13
+ 2004 0070 3F       		.uleb128 0x3f
+ 2005 0071 19       		.uleb128 0x19
+ 2006 0072 02       		.uleb128 0x2
+ 2007 0073 18       		.uleb128 0x18
+ 2008 0074 00       		.byte	0
+ 2009 0075 00       		.byte	0
+ 2010 0076 00       		.byte	0
+ 2011              		.section	.debug_aranges,"",%progbits
+ 2012 0000 14000000 		.4byte	0x14
+ 2013 0004 0200     		.2byte	0x2
+ 2014 0006 00000000 		.4byte	.Ldebug_info0
+ 2015 000a 04       		.byte	0x4
+ 2016 000b 00       		.byte	0
+ 2017 000c 0000     		.2byte	0
+ 2018 000e 0000     		.2byte	0
+ 2019 0010 00000000 		.4byte	0
+ 2020 0014 00000000 		.4byte	0
+ 2021              		.section	.debug_line,"",%progbits
+ 2022              	.Ldebug_line0:
+ 2023 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
+ 2023      02003701 
+ 2023      00000201 
+ 2023      FB0E0D00 
+ 2023      01010101 
+ 2024              	.LASF9:
+ 2025 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 2025      6E74385F 
+ 2025      7400
+ 2026              	.LASF16:
+ 2027 000a 63795F6D 		.ascii	"cy_metadata\000"
+ 2027      65746164 
+ 2027      61746100 
+ 2028              	.LASF1:
+ 2029 0016 756E7369 		.ascii	"unsigned char\000"
+ 2029      676E6564 
+ 2029      20636861 
+ 2029      7200
+ 2030              	.LASF17:
+ 2031 0024 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2031      43313120 
+ 2031      352E342E 
+ 2031      31203230 
+ 2031      31363036 
+ 2032 0057 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2032      20726576 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 37
+
+
+ 2032      6973696F 
+ 2032      6E203233 
+ 2032      37373135 
+ 2033 008a 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2033      66756E63 
+ 2033      74696F6E 
+ 2033      2D736563 
+ 2033      74696F6E 
+ 2034              	.LASF5:
+ 2035 00b2 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2035      20756E73 
+ 2035      69676E65 
+ 2035      6420696E 
+ 2035      7400
+ 2036              	.LASF3:
+ 2037 00c4 73686F72 		.ascii	"short unsigned int\000"
+ 2037      7420756E 
+ 2037      7369676E 
+ 2037      65642069 
+ 2037      6E7400
+ 2038              	.LASF13:
+ 2039 00d7 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 2039      6574615F 
+ 2039      63757374 
+ 2039      6E766C00 
+ 2040              	.LASF12:
+ 2041 00e7 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 2041      6574615F 
+ 2041      636F6E66 
+ 2041      69676563 
+ 2041      6300
+ 2042              	.LASF19:
+ 2043 00f9 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
+ 2043      6F646520 
+ 2043      74696C20 
+ 2043      50524A33 
+ 2043      5C73656D 
+ 2044 0127 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
+ 2044      70736F63 
+ 2044      5C646D63 
+ 2044      2D70736F 
+ 2044      632E6379 
+ 2045              	.LASF8:
+ 2046 013f 756E7369 		.ascii	"unsigned int\000"
+ 2046      676E6564 
+ 2046      20696E74 
+ 2046      00
+ 2047              	.LASF7:
+ 2048 014c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2048      206C6F6E 
+ 2048      6720756E 
+ 2048      7369676E 
+ 2048      65642069 
+ 2049              	.LASF10:
+ 2050 0163 75696E74 		.ascii	"uint8_t\000"
+ 2050      385F7400 
+ 2051              	.LASF15:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccNi34qf.s 			page 38
+
+
+ 2052 016b 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 2052      6574615F 
+ 2052      666C6173 
+ 2052      6870726F 
+ 2052      74656374 
+ 2053              	.LASF14:
+ 2054 0180 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 2054      6574615F 
+ 2054      776F6E76 
+ 2054      6C00
+ 2055              	.LASF11:
+ 2056 018e 73697A65 		.ascii	"sizetype\000"
+ 2056      74797065 
+ 2056      00
+ 2057              	.LASF6:
+ 2058 0197 6C6F6E67 		.ascii	"long long int\000"
+ 2058      206C6F6E 
+ 2058      6720696E 
+ 2058      7400
+ 2059              	.LASF2:
+ 2060 01a5 73686F72 		.ascii	"short int\000"
+ 2060      7420696E 
+ 2060      7400
+ 2061              	.LASF4:
+ 2062 01af 6C6F6E67 		.ascii	"long int\000"
+ 2062      20696E74 
+ 2062      00
+ 2063              	.LASF0:
+ 2064 01b8 7369676E 		.ascii	"signed char\000"
+ 2064      65642063 
+ 2064      68617200 
+ 2065              	.LASF18:
+ 2066 01c4 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 2066      72617465 
+ 2066      645F536F 
+ 2066      75726365 
+ 2066      5C50536F 
+ 2067              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

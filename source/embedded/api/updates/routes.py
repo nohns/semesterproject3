@@ -14,7 +14,7 @@ def register_updates_bp(controller: Controller, hardware: NetlinkPublisher):
             return jsonify({"success": True}), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
-        
+
     @updates_bp.route("/debug/<int:event_type>/<int:data>", methods=["POST"])
     def debug(event_type, data):
         hardware.debug(event_type, data)

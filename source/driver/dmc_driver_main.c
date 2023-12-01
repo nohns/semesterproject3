@@ -151,15 +151,15 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       }
       break;
     }
-    case DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED:
+    case DMC_EVENT_TYPE_CONTAINER_VOLUME_MEASURED:
     {
       struct dmc_base_event weight_base = {
-          .type = DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED,
+          .type = DMC_EVENT_TYPE_CONTAINER_VOLUME_MEASURED,
       };
-      struct dmc_event_container_weight_measured weight_event = {
+      struct dmc_event_container_volume_measured weight_event = {
           .base      = &weight_base,
           .container = 2,
-          .weight    = event.data,
+          .volume    = event.data,
       };
 
       // Prepare new netlink event message
@@ -168,7 +168,7 @@ static int dmc_netlink_handle_event(struct dmc_base_event        *base_event,
       if (err != 0) return err;
 
       // Marshal event into netlink event message
-      err = dmc_netlink_marshal_event_container_weight_measured(&nl_msg,
+      err = dmc_netlink_marshal_event_container_volume_measured(&nl_msg,
                                                                 &weight_event);
       if (err != 0)
       {
@@ -224,14 +224,14 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
     err = dmc_ctrl_on_packet_out_of_order(&pck_handler, &packet);
     break;
   }
-  case DMC_PACKET_CONTAINER_WEIGHT_MEASURED:
+  case DMC_PACKET_CONTAINER_VOLUME_MEASURED:
   {
-    struct dmc_packet_container_weight_measured packet;
-    err = dmc_packet_unmarshal_container_weight_measured(&packet, base_packet);
+    struct dmc_packet_container_volume_measured packet;
+    err = dmc_packet_unmarshal_container_volume_measured(&packet, base_packet);
     if (err != 0) break;
 
     // Call the packet handler
-    err = dmc_ctrl_on_packet_container_weight_measured(&pck_handler, &packet);
+    err = dmc_ctrl_on_packet_container_volume_measured(&pck_handler, &packet);
     break;
   }
   case DMC_PACKET_MACHINE_OK:
@@ -262,6 +262,12 @@ static struct dmc_packet *curr_packet = NULL;
 static int dmc_uart_recv_byte(u8 data)
 {
   pr_debug("dmc_driver: received byte %d\n", data);
+  if (data == 0)
+  {
+    pr_debug("dmc_driver: received byte 0, ignoring\n");
+    return 0;
+  }
+
   // Start new packet if no packet is currently being received
   if (curr_packet == NULL)
   {

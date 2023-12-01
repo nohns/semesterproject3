@@ -85,9 +85,9 @@ int dmc_netlink_marshal_base_event(struct dmc_netlink_event_msg *event_msg,
   return 0;
 }
 
-int dmc_netlink_marshal_event_container_weight_measured(
+int dmc_netlink_marshal_event_container_volume_measured(
     struct dmc_netlink_event_msg               *event_msg,
-    struct dmc_event_container_weight_measured *event)
+    struct dmc_event_container_volume_measured *event)
 {
   int err;
 
@@ -99,14 +99,14 @@ int dmc_netlink_marshal_event_container_weight_measured(
 
   // Container
   err = nla_put_u8(event_msg->buff,
-                   DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_CONTAINER,
+                   DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_CONTAINER,
                    event->container);
   if (err != 0) return err;
 
-  // Weight
-  err = nla_put_s16(event_msg->buff,
-                    DMC_GENL_EVENT_CONTAINER_WEIGHT_MEASURED_ATTR_WEIGHT,
-                    event->weight);
+  // Volume
+  err = nla_put_u8(event_msg->buff,
+                   DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_VOLUME,
+                   event->volume);
   if (err != 0) return err;
 
   return 0;

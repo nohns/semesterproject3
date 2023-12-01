@@ -4,7 +4,12 @@ is_linux = sys.platform == "linux"
 if is_linux:
     from pyroute2.netlink import NLM_F_REQUEST
     from pyroute2.netlink.generic import GenericNetlinkSocket
-    from netlink.events import eventmsg, UserConfirmEvent, FluidPourRequestedEvent, DebugEvent
+    from netlink.events import (
+        eventmsg,
+        UserConfirmEvent,
+        FluidPourRequestedEvent,
+        DebugEvent,
+    )
     from netlink.conf import DMC_DRIVER_GENL_FAMILY
 
     class NetlinkPublisher:
@@ -31,7 +36,6 @@ if is_linux:
             self.genlsock.nlm_request(msg, self.genlsock.prid, msg_flags=NLM_F_REQUEST)
 
         def user_confirm(self):
-            
             # Create a new message
             msg = UserConfirmEvent().to_msg()
 

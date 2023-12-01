@@ -21,12 +21,12 @@ int dmc_ctrl_on_packet_out_of_order(struct dmc_ctrl_packet_handler *pck_handler,
                                     struct dmc_packet_out_of_order *packet);
 
 /**
- * @brief Handles receiving a container weight measured packet from hardware.
+ * @brief Handles receiving a container volume measured packet from hardware.
  * @returns 0 on success, negative on failure
  */
-int dmc_ctrl_on_packet_container_weight_measured(
+int dmc_ctrl_on_packet_container_volume_measured(
     struct dmc_ctrl_packet_handler              *pck_handler,
-    struct dmc_packet_container_weight_measured *packet);
+    struct dmc_packet_container_volume_measured *packet);
 
 /**
  * @brief Handles receiving a machine ok packet from hardware.

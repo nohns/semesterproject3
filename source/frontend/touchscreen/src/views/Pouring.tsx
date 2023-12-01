@@ -32,19 +32,31 @@ function Pouring({
   useEffect(() => {
     const liquid = document.getElementById("liquid") as HTMLDivElement | null;
     const foam = document.querySelector(".beer-foam") as HTMLDivElement | null;
-
+    
+    let beat = new Audio("/assets/elevator.mp3");
+    beat.volume = 0.2;
     beat.play();
-
+  
     setTimeout(() => {
       if (liquid) liquid.style.height = "230px";
       if (foam) foam.style.bottom = "228px";
     }, 1500);
-
-    setTimeout(() => {
+  
+    const pourTimeout = setTimeout(() => {
       setSelectedDrink(undefined);
       setView(DrinkMachineState.Waiting);
+      beat.pause();
+      beat.currentTime = 0; // Resetting the audio to the start
     }, POUR_TIME + 2000);
-  }, []);
+  
+    // Cleanup function
+    return () => {
+      clearTimeout(pourTimeout);
+      beat.pause();
+      beat.currentTime = 0;
+    };
+  }, [POUR_TIME, setSelectedDrink, setView]);
+  
 
   return (
     <>
@@ -53,7 +65,7 @@ function Pouring({
           POURING DRINK
         </h1>
         <h2 className="scroll-m-20 text-white text-3xl font-medium tracking-tight lg:text-5xl mb-4">
-          Blå vand
+          {selectedDrink?.name}
         </h2>
         <div className=" w-[70%] h-[70%]  flex flex-col rounded-xl mt-auto mb-10">
           <div className="mx-auto">

@@ -76,20 +76,20 @@ int dmc_ctrl_on_packet_out_of_order(struct dmc_ctrl_packet_handler *pck_handler,
   return 0;
 }
 
-int dmc_ctrl_on_packet_container_weight_measured(
+int dmc_ctrl_on_packet_container_volume_measured(
     struct dmc_ctrl_packet_handler              *pck_handler,
-    struct dmc_packet_container_weight_measured *packet)
+    struct dmc_packet_container_volume_measured *packet)
 {
   int err;
 
   // Create event representation of packet
   struct dmc_base_event base = {
-      .type = DMC_EVENT_TYPE_CONTAINER_WEIGHT_MEASURED,
+      .type = DMC_EVENT_TYPE_CONTAINER_VOLUME_MEASURED,
   };
-  struct dmc_event_container_weight_measured event = {
+  struct dmc_event_container_volume_measured event = {
       .base      = &base,
       .container = packet->container,
-      .weight    = packet->weight,
+      .volume    = packet->volume,
   };
 
   // Prepare new netlink event message
@@ -98,7 +98,7 @@ int dmc_ctrl_on_packet_container_weight_measured(
   if (err != 0) return err;
 
   // Marshal event into netlink event message
-  err = dmc_netlink_marshal_event_container_weight_measured(&nl_msg, &event);
+  err = dmc_netlink_marshal_event_container_volume_measured(&nl_msg, &event);
   if (err != 0) return err;
 
   // Publish event

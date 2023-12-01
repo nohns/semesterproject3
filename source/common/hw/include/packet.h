@@ -104,7 +104,7 @@ dmc_packet_marshal_out_of_order(struct dmc_packet             **to,
  *
  * Direction: PSoC -> RPi
  */
-struct dmc_packet_container_weight_measured
+struct dmc_packet_container_volume_measured
 {
   /**
    * @brief The container the measurement was from. Ranging from 0-2
@@ -112,19 +112,19 @@ struct dmc_packet_container_weight_measured
   uint8_t container;
 
   /**
-   * @brief Weight measured in grams
+   * @brief Volume measured in centiliters
    */
-  int16_t weight;
+  int16_t volume;
 };
 
 /**
- * @brief Unmarshal data into container weight measured packet from base packet
+ * @brief Unmarshal data into container volume measured packet from base packet
  */
-static int dmc_packet_unmarshal_container_weight_measured(
-    struct dmc_packet_container_weight_measured *packet,
+static int dmc_packet_unmarshal_container_volume_measured(
+    struct dmc_packet_container_volume_measured *packet,
     struct dmc_packet                           *from)
 {
-  if (from->type != DMC_PACKET_CONTAINER_WEIGHT_MEASURED)
+  if (from->type != DMC_PACKET_CONTAINER_VOLUME_MEASURED)
   {
     return -1;
   }
@@ -133,16 +133,16 @@ static int dmc_packet_unmarshal_container_weight_measured(
   packet->container = *(uint8_t *)(from->data + offset);
 
   offset += sizeof(packet->container); // Move offset of previous data
-  packet->weight = *(uint16_t *)(from->data + offset);
+  packet->volume = *(uint8_t *)(from->data + offset);
 
   return 0;
 }
 
 /**
- * @brief Marshal container weight measured packet struct into base packet
+ * @brief Marshal container volume measured packet struct into base packet
  */
-static int dmc_packet_marshal_container_weight_measured(
-    struct dmc_packet **to, struct dmc_packet_container_weight_measured *packet)
+static int dmc_packet_marshal_container_volume_measured(
+    struct dmc_packet **to, struct dmc_packet_container_volume_measured *packet)
 {
   if (to == NULL)
   {
@@ -151,9 +151,9 @@ static int dmc_packet_marshal_container_weight_measured(
   }
   if (*to == NULL)
   {
-    *to = dmc_packet_init(DMC_PACKET_CONTAINER_WEIGHT_MEASURED);
+    *to = dmc_packet_init(DMC_PACKET_CONTAINER_VOLUME_MEASURED);
   }
-  if ((*to)->type != DMC_PACKET_CONTAINER_WEIGHT_MEASURED)
+  if ((*to)->type != DMC_PACKET_CONTAINER_VOLUME_MEASURED)
   {
     return -2;
   }
@@ -162,9 +162,9 @@ static int dmc_packet_marshal_container_weight_measured(
   *(uint8_t *)((*to)->data + offset) = packet->container;
 
   offset += sizeof(packet->container); // Move offset of previous data
-  *(int16_t *)((*to)->data + offset) = packet->weight;
+  *(uint8_t *)((*to)->data + offset) = packet->volume;
 
-  (*to)->data_len = sizeof(packet->container) + sizeof(packet->weight);
+  (*to)->data_len = sizeof(packet->container) + sizeof(packet->volume);
   return 0;
 }
 
