@@ -1,5 +1,6 @@
 #include "handler.h"
 
+#include <linux/delay.h>
 #include <linux/mod_devicetable.h>
 #include <linux/of_device.h>
 #include <linux/platform_device.h>
@@ -149,6 +150,8 @@ int dmc_uart_handler_send_packet(struct dmc_packet *packet)
     }
     pr_debug("dmc_driver: sent packet data via serdev\n");
   }
+
+  mdelay(50);
 
   // Write 4 null bytes
   char *nullb = "\0\0\0\0";
