@@ -58,7 +58,7 @@ function DeleteDrinkGuide({}: DeleteDrinkGuideProps) {
           </div>
         );
       case GuideState.step2:
-        return <p>Succesfully deleted the requested data</p>;
+        return <p>Succesfully deleted the requested drink</p>;
       default:
         return <p>Something went wrong :/</p>;
     }
