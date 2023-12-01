@@ -15,7 +15,6 @@ import DrinkCard from "@/components/DrinkCard";
 import useChangeContainer from "@/api/endpoints/container/changeContainer";
 import useGetFluids from "@/api/endpoints/fluid/getFluids";
 
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import CreateDrinkGuide from "./CreateDrinkGuide";
 import ChangeContainerGuide from "./ChangeContainerGuide";
@@ -88,8 +87,8 @@ function Home(): JSX.Element {
     console.log(possibleDrinks);
   }, [container1, container2, container3]);
 
-  const handleChangeContainer = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleChangeContainer = () => {
+    console.log("Changing container");
     changeContainer.mutate({
       id: container1.id,
       newFluidId: container1.fluid.id!,
@@ -126,20 +125,21 @@ function Home(): JSX.Element {
   //Hvis der ikke er nogen fluids så kan vi ikke loade UI'et så vi returnerer bare en loading tekst
   if (fluids.isLoading || getContainers.isLoading || drinks.isLoading) {
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        color: 'white',
-        fontSize: '8rem',
-        textAlign: 'center',
-      }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          color: "white",
+          fontSize: "8rem",
+          textAlign: "center",
+        }}
+      >
         Loading...
       </div>
     );
   }
-  
 
   //Hernede bliver alt magien samplet
   return (
@@ -182,7 +182,12 @@ function Home(): JSX.Element {
               <CreateDrinkGuide />
             </div>
             <div className="bg-emerald-500 rounded-3xl w-72 text-center text-white font-mono border-2 transition duration-300 hover:bg-teal-500">
-              <ChangeContainerGuide />
+              <ChangeContainerGuide
+                container1={container1}
+                container2={container2}
+                container3={container3}
+                handleChangeContainer={handleChangeContainer}
+              />
             </div>
             <div className="bg-emerald-500 rounded-3xl w-72 text-center text-white font-mono border-2 transition duration-300 hover:bg-teal-500">
               <DeleteDrinkGuide />
