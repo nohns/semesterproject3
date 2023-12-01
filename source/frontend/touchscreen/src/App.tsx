@@ -92,7 +92,7 @@ function App() {
   };
 
   return (
-    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-[800px] w-[480px]   bg-gradient-to-t from-green-400 via-red-600 to-green-400 p-1.5">
+    <div className="dark max-w-[480px] max-h-[800px] flex flex-col h-[800px] w-[480px] overflow-hidden  bg-gradient-to-t from-green-400 via-red-600 to-green-400 p-1.5">
       <div className="bg-gradient-to-t w-full h-full from-[#302E37] to bg-slate-800">
         <Toaster />
         {renderView()}
