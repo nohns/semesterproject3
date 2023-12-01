@@ -19,7 +19,7 @@ def register_containers_bp(controller: Controller):
         try:
             # Parse fluid id from JSON request
             new_fluid_data = request.get_json()
-            new_fluid_id = new_fluid_data.get("fluid_id")
+            new_fluid_id = new_fluid_data.get("newFluidId")
             if new_fluid_id is None:
                 return jsonify({"error": "No fluid id provided"}), 400
 

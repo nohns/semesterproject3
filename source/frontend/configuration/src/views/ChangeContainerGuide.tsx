@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import useGetContainers, {
   FluidContainer,
 } from "@/api/endpoints/container/getContainers";
-import useGetFluids from "@/api/endpoints/fluid/getFluids";
+
 import { Progress } from "@/components/ui/progress";
 import CustomAlertDialogAction from "@/components/CustomAlertDialogAction";
 
@@ -25,48 +25,25 @@ enum GuideState {
   step2 = 25,
   step3 = 50,
   step4 = 75,
-  step5 = 95,
+  step5 = 85,
+  step6 = 100,
 }
 
-interface ChangeContainerGuideProps {}
+interface ChangeContainerGuideProps {
+  container1: FluidContainer;
+  container2: FluidContainer;
+  container3: FluidContainer;
+  handleChangeContainer: () => void;
+}
 
-function ChangeContainerGuide({}: ChangeContainerGuideProps) {
-  const fluids = useGetFluids();
-  const getContainers = useGetContainers();
-  //I want to do a switch statement on html content so we can have different guides for different steps
-  const [container1, setContainer1] = useState<FluidContainer>({
-    id: 0,
-    fluid: {
-      id: 0,
-      name: "Vælg væske",
-    },
-    fluidAmountInCl: 0,
-  });
-  const [container2, setContainer2] = useState<FluidContainer>({
-    id: 0,
-    fluid: {
-      id: 0,
-      name: "Vælg væske",
-    },
-    fluidAmountInCl: 50,
-  });
-  const [container3, setContainer3] = useState<FluidContainer>({
-    id: 0,
-    fluid: {
-      id: 0,
-      name: "Vælg væske",
-    },
-    fluidAmountInCl: 100,
-  });
-
-  useEffect(() => {
-    if (getContainers.isLoading) {
-      return;
-    }
-    setContainer1(getContainers.data?.containers![0]!);
-    setContainer2(getContainers.data?.containers![1]!);
-    setContainer3(getContainers.data?.containers![2]!);
-  }, [getContainers.isLoading]);
+function ChangeContainerGuide({
+  container1,
+  container2,
+  container3,
+  handleChangeContainer,
+}: ChangeContainerGuideProps) {
+  //I think we just need to pass in the current state of the fluid containers and use those as instructions for the guide
+  //Then at the end we can call change container with the new containers
 
   const [step, setStep] = useState<GuideState>(GuideState.step1);
 
@@ -87,25 +64,49 @@ function ChangeContainerGuide({}: ChangeContainerGuideProps) {
       case GuideState.step1:
         return <p>Place a cup under the outlet.</p>;
       case GuideState.step2:
-        return <p>Lift the tube out of the fluid in the container.</p>;
+        return <p>Lift the tubes out of the fluid in the container.</p>;
       case GuideState.step3:
-        return <p> start the pump and wait until liquid stops comimg out.</p>;
+        return (
+          <p>
+            start the pump by flipping the switch on the machine and wait until
+            the remaining liquid in the tube stops comimg out.
+          </p>
+        );
       case GuideState.step4:
         return (
           <p>
-            {" "}
-            Stop the pump and lift the container out to refill it. \n
-            container1: {container1.fluid.name} \t container2:
-            {container2.fluid.name} \t container3: {container3.fluid.name}
+            Stop the pump by flipping the switch back and empty the liquid in
+            the containers manually
           </p>
         );
+
       case GuideState.step5:
+        return (
+          <div className="">
+            <p className="mb-4">
+              Fill the containers with the following liquid
+            </p>
+
+            <div className="border p-5 mt-4 flex gap-6 flex-col rounded-xl font-mono text-black text-lg">
+              <p className="border-b">container1: {container1.fluid.name}</p>
+              <p className="border-b">container2: {container2.fluid.name}</p>
+              <p className="border-b">container3: {container3.fluid.name}</p>
+            </div>
+          </div>
+        );
+      case GuideState.step6:
         return (
           <p>The system is now configured with the new liquids and drinks</p>
         );
       default:
         return <p>Something went wrong :/</p>;
     }
+  };
+
+  const handleSubmit = () => {
+    console.log("Submitting stuff");
+    handleChangeContainer();
+    setStep(GuideState.step1);
   };
 
   return (
@@ -120,13 +121,11 @@ function ChangeContainerGuide({}: ChangeContainerGuideProps) {
             <AlertDialogDescription>{renderView()}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            {step !== GuideState.step4 && (
+            {step !== GuideState.step6 && (
               <Button onClick={handleStep}>Continue</Button>
             )}
-            {step === GuideState.step4 && (
-              <CustomAlertDialogAction
-                onClose={() => setStep(GuideState.step1)}
-              >
+            {step === GuideState.step6 && (
+              <CustomAlertDialogAction onClose={() => handleSubmit()}>
                 Finish
               </CustomAlertDialogAction>
             )}
