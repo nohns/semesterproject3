@@ -57,6 +57,6 @@ class Api:
         app.register_blueprint(updates_bp, url_prefix="/v1/updates")
         app.register_blueprint(state_bp, url_prefix="/v1/state")
 
-    def run(self, host="localhost", port=8000):
+    def run(self, host="0.0.0.0", port=8000):
         self.app = self.create_app()
         self.app.run(host=host, port=port)
