@@ -50,6 +50,8 @@ const useGetDrinks = () => {
   const query = useQuery({
     queryKey: ["getDrinks"],
     staleTime: 1,
+    refetchIntervalInBackground: true,
+    refetchInterval: 2000,
     queryFn: () => getDrinks({}),
   });
 
