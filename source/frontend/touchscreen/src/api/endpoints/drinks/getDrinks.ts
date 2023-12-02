@@ -35,6 +35,7 @@ export interface GetDrinksResponse {
 }
 
 const getDrinks = async ({}: GetDrinksRequest) => {
+  console.log("GETTIN DA DRNIKS")
   const response = await http.get<GetDrinksResponse>(`v1/drinks/`);
 
   if (response.status !== 200) {
@@ -48,6 +49,7 @@ const getDrinks = async ({}: GetDrinksRequest) => {
 const useGetDrinks = () => {
   const query = useQuery({
     queryKey: ["getDrinks"],
+    staleTime: 1,
     queryFn: () => getDrinks({}),
   });
 
