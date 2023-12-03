@@ -32,8 +32,7 @@ class Database:
         # Create the tables
         self.create_tables()
 
-        # Seed the tables
-        # self.seed_fluids()
+        # Seed tables
         self.seed_state()
         self.seed_containers()
 
@@ -151,7 +150,7 @@ class Database:
                 for fluid_id in fluid_ids:
                     cursor.execute(
                         "INSERT INTO Containers (fluid_amount_in_cl, fluid_type_id) VALUES (?, ?)",
-                        (100, fluid_id),
+                        (70, fluid_id),
                     )
                 self.connection.commit()
         except sqlite3.Error as e:
