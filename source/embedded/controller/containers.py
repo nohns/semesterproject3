@@ -29,6 +29,7 @@ def update_container_fluid_amount(
         if fluid_amount_in_cl > 70:
             fluid_amount_in_cl = 70
 
+        database.trigger_state_update()
         database.update_container_fluid_amount(container_id, fluid_amount_in_cl)
         return True
 
