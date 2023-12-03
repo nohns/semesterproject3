@@ -51,7 +51,7 @@ if is_linux:
                 self.handle_out_of_order(OutOfOrderEvent().from_msg(msg))
             elif evt_type == DMC_EVENT_TYPE_GENL_CONTAINER_VOLUME_MEASURED:
                 self.handle_container_volume_measured(
-                    ContainerWeightMeasuredEvent().from_msg(msg)
+                    ContainerVolumeMeasuredEvent().from_msg(msg)
                 )
             elif evt_type == DMC_EVENT_TYPE_GENL_MACHINE_OK:
                 self.handle_machine_ok(MachineOkEvent().from_msg(msg))
@@ -72,6 +72,13 @@ if is_linux:
                 )
 
         def handle_container_volume_measured(self, event: ContainerVolumeMeasuredEvent):
+            print(
+                "Container volume measured for container "
+                + event.container
+                + " with "
+                + event.volume
+                + " cl"
+            )
             try:
                 self.controller.update_container_fluid_amount(
                     event.container, event.volume

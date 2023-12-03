@@ -41,6 +41,7 @@ class Controller:
     def update_container_fluid_amount(
         self, container_id: int, fluid_amount_in_cl: float
     ) -> bool:
+        print("trying to update container fluid amount!")
         return update_container_fluid_amount(
             self.database, container_id, fluid_amount_in_cl
         )
