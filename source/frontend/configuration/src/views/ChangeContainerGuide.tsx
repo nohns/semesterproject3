@@ -68,8 +68,8 @@ function ChangeContainerGuide({
       case GuideState.step3:
         return (
           <p>
-            start the pump by flipping the switch on the machine and wait until
-            the remaining liquid in the tube stops comimg out.
+            Start the pump by flipping the switch on the machine and wait until
+            the remaining liquid in the tube stops coming out.
           </p>
         );
       case GuideState.step4:
