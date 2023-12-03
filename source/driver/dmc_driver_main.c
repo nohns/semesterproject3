@@ -271,12 +271,22 @@ static int dmc_uart_recv_byte(u8 data)
   // Start new packet if no packet is currently being received
   if (curr_packet == NULL)
   {
+    // If starting data byte is not one of the expected type, just dont do
+    // anything
+    if (data != DMC_PACKET_OUT_OF_ORDER &&
+        data != DMC_PACKET_CONTAINER_VOLUME_MEASURED &&
+        data != DMC_PACKET_USER_CONFIRM &&
+        data != DMC_PACKET_FLUID_POUR_REQUESTED && data != DMC_PACKET_DEBUG &&
+        data != DMC_PACKET_MACHINE_OK)
+      return;
+
     pr_debug("dmc_driver: starting new packet\n");
     curr_packet = dmc_packet_init(data);
     pr_debug("dmc_driver: expecting %ld data bytes afterwards\n",
              curr_packet->data_len);
 
-    // If packet is not complete, we gotta get some more data before handling it
+    // If packet is not complete, we gotta get some more data before handling
+    // it
     if (!dmc_packet_complete(curr_packet))
     {
       return 0;
