@@ -278,7 +278,7 @@ static int dmc_uart_recv_byte(u8 data)
         data != DMC_PACKET_USER_CONFIRM &&
         data != DMC_PACKET_FLUID_POUR_REQUESTED && data != DMC_PACKET_DEBUG &&
         data != DMC_PACKET_MACHINE_OK)
-      return;
+      return -1;
 
     pr_debug("dmc_driver: starting new packet\n");
     curr_packet = dmc_packet_init(data);
