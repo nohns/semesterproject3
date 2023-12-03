@@ -74,9 +74,9 @@ if is_linux:
         def handle_container_volume_measured(self, event: ContainerVolumeMeasuredEvent):
             print(
                 "Container volume measured for container "
-                + event.container
+                + str(event.container)
                 + " with "
-                + event.volume
+                + str(event.volume)
                 + " cl"
             )
             try:
