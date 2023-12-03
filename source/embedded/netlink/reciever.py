@@ -73,7 +73,9 @@ if is_linux:
 
         def handle_container_volume_measured(self, event: ContainerVolumeMeasuredEvent):
             try:
-                self.controller.update_container_fluid_amount(event.container event.volume)
+                self.controller.update_container_fluid_amount(
+                    event.container, event.volume
+                )
             except Exception as e:
                 print(
                     f"error {e}, when trying to update container fluid amount via controller"
