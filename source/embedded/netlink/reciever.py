@@ -42,6 +42,7 @@ if is_linux:
                 messages = self.genlsock.get()
                 for msg in messages:
                     # Check if the message is a fluid pour event
+                    print("RECV netlink event!")
                     self.handle_msg(msg)
 
         def handle_msg(self, msg: eventmsg):
