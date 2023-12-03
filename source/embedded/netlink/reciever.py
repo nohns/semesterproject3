@@ -8,7 +8,7 @@ if is_linux:
     from netlink.events import (
         eventmsg,
         OutOfOrderEvent,
-        ContainerWeightMeasuredEvent,
+        ContainerVolumeMeasuredEvent,
         MachineOkEvent,
         DMC_EVENT_TYPE_GENL_OUT_OF_ORDER,
         DMC_EVENT_TYPE_GENL_CONTAINER_VOLUME_MEASURED,
@@ -71,13 +71,14 @@ if is_linux:
                     f"error {e}, when trying to set state out of order via controller"
                 )
 
-        def handle_container_volume_measured(self, event: ContainerWeightMeasuredEvent):
-            print(
-                "Container volume measured, container: "
-                + str(event.container)
-                + ", volume: "
-                + str(event.volume)
-            )
+        def handle_container_volume_measured(self, event: ContainerVolumeMeasuredEvent):
+            event.
+            try:
+                self.controller.update_container_fluid_amount(event.container event.volume)
+            except Exception as e:
+                print(
+                    f"error {e}, when trying to update container fluid amount via controller"
+                )
 
         def handle_machine_ok(self, event: MachineOkEvent):
             print("Machine is ok")
