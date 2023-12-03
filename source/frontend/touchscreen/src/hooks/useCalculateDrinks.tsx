@@ -101,8 +101,8 @@ const useCalculateDrinks = () => {
         highestFluidAmount = ingredient.amountInCl;
       }
     });
-    //Calculate the pour time based on the highest fluidAmountInCl // 0.16cl per second
-    totalPourTime = highestFluidAmount / 0.16;
+    //Calculate the pour time based on the highest fluidAmountInCl // 0.135cl per second
+    totalPourTime = highestFluidAmount / 0.135;
 
     //Convert to milliseconds
 
