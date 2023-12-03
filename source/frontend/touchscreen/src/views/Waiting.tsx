@@ -26,7 +26,7 @@ function Waiting({ setView }: WaitingProps): JSX.Element {
           className="mt-auto mb-8 p-8 bg-white z-10 selectedCard"
         >
           <h2 className="scroll-m-20 w-72 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-            Select drink
+            Select Drink
           </h2>
         </Button>
       </div>
