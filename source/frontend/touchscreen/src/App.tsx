@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setView(DrinkMachineState.Waiting);
-    }, 30000);
+    }, 200000);
 
     return () => clearTimeout(timeout);
   }, [view, setView]);
