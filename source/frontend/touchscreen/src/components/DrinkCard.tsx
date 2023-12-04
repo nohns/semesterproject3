@@ -40,7 +40,8 @@ function DrinkCard({
     beat.play();
     toast({
       title: `Oh oh! Its maintenance time!`,
-      description: `Refill container ${pourable.fluidThatMustBeRefilled[0].id} with ${pourable.fluidThatMustBeRefilled[0].fluid.name} to get this drink back on the menu!`,
+      //description: `Refill container ${pourable.fluidThatMustBeRefilled[0].id} with ${pourable.fluidThatMustBeRefilled[0].fluid.name} to get this drink back on the menu!`,
+      description: `Refill container 1 with ${pourable.fluidThatMustBeRefilled[0].fluid.name} to get this drink back on the menu!`,
     });
   };
 
