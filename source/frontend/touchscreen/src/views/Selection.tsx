@@ -23,11 +23,13 @@ function Selection({
   const calc = useCalculateDrinks();
   const drinks = calc.calcPossibleDrinks();
   console.log("Current configured drinks", drinks);
+  let beat = new Audio("/assets/click.mp3");
 
   const pour = usePourDrink();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    beat.play();
 
     pour.mutate({ id: selectedDrink?.id! });
 
