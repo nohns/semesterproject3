@@ -60,7 +60,7 @@ class OutOfOrderEvent(object):
         return self
 
 
-class ContainerWeightMeasuredEvent(object):
+class ContainerVolumeMeasuredEvent(object):
     def __init__(self, container: int = None, weight: int = None):
         self.container = container
         self.volume = weight

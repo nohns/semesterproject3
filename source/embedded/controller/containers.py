@@ -25,8 +25,14 @@ def update_container_fluid_amount(
     database: Database, container_id: int, fluid_amount_in_cl: float
 ) -> bool:
     try:
+        # Ensure the fluid amount does not exceed 70 cl
+        if fluid_amount_in_cl > 70:
+            fluid_amount_in_cl = 70
+
+        database.trigger_state_update()
         database.update_container_fluid_amount(container_id, fluid_amount_in_cl)
         return True
+
     except Exception as e:
         print(f"error {e}, when updating fluid amount in the database")
         raise Exception("Unable to update fluid amount") from e

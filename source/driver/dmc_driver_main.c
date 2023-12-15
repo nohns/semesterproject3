@@ -216,9 +216,13 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
   {
   case DMC_PACKET_OUT_OF_ORDER:
   {
+
     struct dmc_packet_out_of_order packet;
     err = dmc_packet_unmarshal_out_of_order(&packet, base_packet);
     if (err != 0) break;
+
+    pr_debug("dmc_driver: recv packet out of order with reason %d\n",
+             packet.reason);
 
     // Call the packet handler
     err = dmc_ctrl_on_packet_out_of_order(&pck_handler, &packet);
@@ -230,6 +234,10 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
     err = dmc_packet_unmarshal_container_volume_measured(&packet, base_packet);
     if (err != 0) break;
 
+    pr_debug(
+        "dmc_driver: recv packet vol measured for container %d with vol %d\n",
+        packet.container, packet.volume);
+
     // Call the packet handler
     err = dmc_ctrl_on_packet_container_volume_measured(&pck_handler, &packet);
     break;
@@ -239,6 +247,8 @@ static int dmc_uart_handle_packet(struct dmc_packet *base_packet)
     struct dmc_packet_machine_ok packet;
     err = dmc_packet_unmarshal_machine_ok(&packet, base_packet);
     if (err != 0) break;
+
+    pr_debug("dmc_driver: recv packet machine ok\n");
 
     // Call the packet handler
     err = dmc_ctrl_on_packet_machine_ok(&pck_handler, &packet);
@@ -261,22 +271,30 @@ static struct dmc_packet *curr_packet = NULL;
 
 static int dmc_uart_recv_byte(u8 data)
 {
-  pr_debug("dmc_driver: received byte %d\n", data);
+  // pr_debug("dmc_driver: received byte %d\n", data);
   if (data == 0)
   {
-    pr_debug("dmc_driver: received byte 0, ignoring\n");
+    // pr_debug("dmc_driver: received byte 0, ignoring\n");
     return 0;
   }
 
   // Start new packet if no packet is currently being received
   if (curr_packet == NULL)
   {
-    pr_debug("dmc_driver: starting new packet\n");
-    curr_packet = dmc_packet_init(data);
-    pr_debug("dmc_driver: expecting %ld data bytes afterwards\n",
-             curr_packet->data_len);
+    // If starting data byte is not one of the expected type, just dont do
+    // anything
+    if (data != DMC_PACKET_OUT_OF_ORDER &&
+        data != DMC_PACKET_CONTAINER_VOLUME_MEASURED &&
+        data != DMC_PACKET_USER_CONFIRM &&
+        data != DMC_PACKET_FLUID_POUR_REQUESTED && data != DMC_PACKET_DEBUG &&
+        data != DMC_PACKET_MACHINE_OK)
+      return -1;
 
-    // If packet is not complete, we gotta get some more data before handling it
+    // pr_debug("dmc_driver: starting new packet\n");
+    curr_packet = dmc_packet_init(data);
+
+    // If packet is not complete, we gotta get some more data before handling
+    // it
     if (!dmc_packet_complete(curr_packet))
     {
       return 0;
@@ -295,15 +313,15 @@ static int dmc_uart_recv_byte(u8 data)
 
   // Add byte to packet
   dmc_packet_append_byte(curr_packet, data);
-  pr_debug("dmc_driver: appended data bey. len now %ld\n",
-           curr_packet->data_len);
+  // pr_debug("dmc_driver: appended data bey. len now %ld\n",
+  //          curr_packet->data_len);
 
   // If packet is complete, handle it
   if (dmc_packet_complete(curr_packet))
   {
-    pr_debug("dmc_driver: packet complete with %ld data bytes. Now handling "
-             "packet...\n",
-             curr_packet->data_len);
+    // pr_debug("dmc_driver: packet complete with %ld data bytes. Now handling "
+    //          "packet...\n",
+    //          curr_packet->data_len);
 
     // Handle the complete packet and deallocate it afterwards
     int err = dmc_uart_handle_packet(curr_packet);

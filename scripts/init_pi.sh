@@ -34,4 +34,11 @@ echo "--> Setting up nginx hosts for touch.pi.local and config.pi.local domains.
 sh ./setup_nginx.sh
 echo "-----------------------"
 
+# Source linux kernel
+echo "--> Sourcing linux kernel..."
+sed -i '/^#\sdeb-src /s/^#//' "/etc/apt/sources.list"
+apt update
+apt source linux
+echo "-----------------------"
+
 echo "NOTICE: you are not done yet! You need to run deploy the frontend by running 'npm run deploy' from source/frontend/touch and source/frontend/configuration directories."

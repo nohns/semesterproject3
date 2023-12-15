@@ -13,7 +13,6 @@ const useCalculateDrinks = () => {
   const containers = useGetContainers();
   console.log(containers.data);
 
-  //const fluids = containers.data?.containers!;
   const calcPossibleDrinks = () => {
     if (data?.drinks.length! > 0 && containers.data?.containers.length! > 0) {
       const drinks = data?.drinks!;
@@ -23,7 +22,6 @@ const useCalculateDrinks = () => {
       containers.data?.containers.forEach((container) => {
         fluids.push(container.fluid);
       });
-      console.log("fluids", fluids);
 
       const possibleDrinks: Drink[] = [];
       drinks.forEach((drink) => {
@@ -36,9 +34,6 @@ const useCalculateDrinks = () => {
         }
       });
 
-      return possibleDrinks;
-
-      console.log("POSSIBLE DRINKS KEKW", possibleDrinks);
       return possibleDrinks;
     }
   };
@@ -101,8 +96,8 @@ const useCalculateDrinks = () => {
         highestFluidAmount = ingredient.amountInCl;
       }
     });
-    //Calculate the pour time based on the highest fluidAmountInCl // 0.16cl per second
-    totalPourTime = highestFluidAmount / 0.16;
+    //Calculate the pour time based on the highest fluidAmountInCl // 0.135cl per second
+    totalPourTime = highestFluidAmount / 0.135;
 
     //Convert to milliseconds
 

@@ -33,6 +33,7 @@ const getContainers = async ({}: GetContainersRequest) => {
 const useGetContainers = () => {
   const query = useQuery({
     queryKey: ["getContainers"],
+    staleTime: 1,
     queryFn: () => getContainers({}),
   });
 

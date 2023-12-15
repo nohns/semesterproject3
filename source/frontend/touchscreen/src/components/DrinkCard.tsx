@@ -26,10 +26,8 @@ function DrinkCard({
   //const indicatorHeight = `${drink.remainingFluid}%`;
 
   let beat = new Audio("/assets/noselect.mp3");
-  beat.volume = 0.1;
 
   let beat2 = new Audio("/assets/jaja.mp3");
-  beat2.volume = 0.1;
 
   const calc = useCalculateDrinks();
 
@@ -37,6 +35,15 @@ function DrinkCard({
   const fluidLeft = pourable?.lowestFluidLeft;
 
   const { toast } = useToast();
+
+  const handleDeniedClick = () => {
+    beat.play();
+    toast({
+      title: `Oh oh! Its maintenance time!`,
+      //description: `Refill container ${pourable.fluidThatMustBeRefilled[0].id} with ${pourable.fluidThatMustBeRefilled[0].fluid.name} to get this drink back on the menu!`,
+      description: `Refill container 1 with ${pourable.fluidThatMustBeRefilled[0].fluid.name} to get this drink back on the menu!`,
+    });
+  };
 
   return (
     <>
@@ -57,12 +64,7 @@ function DrinkCard({
           <div
             className="absolute top-0 left-0 w-full h-full flex items-center text-[10rem] justify-center text-red-700  text-center"
             /*  style={{ pointerEvents: "none" }} */
-            onClick={() => {
-              toast({
-                title: `Oh oh! Its maintenance time!`,
-                description: `Refill container ${pourable.fluidThatMustBeRefilled[0].id} with ${pourable.fluidThatMustBeRefilled[0].fluid.name} to get this drink back on the menu!`,
-              });
-            }}
+            onClick={handleDeniedClick}
           >
             X
           </div>

@@ -11,8 +11,12 @@ interface WaitingProps {
 //This view must show an awaiting screen when the UI has been inactive for a few minutes.
 //It should have a taking up majority of the screen and a button at the bottum to toggle to home screen.
 function Waiting({ setView }: WaitingProps): JSX.Element {
-  let beat = new Audio("/assets/jaja.mp3");
-  beat.volume = 0.1;
+  let beat = new Audio("/assets/click.mp3");
+
+  const handleOnClick = () => {
+    beat.play();
+    setView(DrinkMachineState.Selection);
+  };
 
   return (
     <>
@@ -22,11 +26,12 @@ function Waiting({ setView }: WaitingProps): JSX.Element {
         </h1>
 
         <Button
-          onClick={() => setView(DrinkMachineState.Selection)}
+          /* onClick={() => setView(DrinkMachineState.Selection)} */
+          onClick={handleOnClick}
           className="mt-auto mb-8 p-8 bg-white z-10 selectedCard"
         >
           <h2 className="scroll-m-20 w-72 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-            Select drink
+            Select Drink
           </h2>
         </Button>
       </div>

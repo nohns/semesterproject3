@@ -17,15 +17,15 @@ enum dmc_genl_event_genl_attr
 
   DMC_GENL_EVENT_BASE_ATTR_TYPE,
 
-  // - Container weight measured event attributes -
-
-  DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_CONTAINER,
-  DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_VOLUME,
-
   // - Out of order event attributes -
 
   DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_MESSAGE,
   DMC_GENL_EVENT_OUT_OF_ORDER_ATTR_REASON,
+
+  // - Container weight measured event attributes -
+
+  DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_CONTAINER,
+  DMC_GENL_EVENT_CONTAINER_VOLUME_MEASURED_ATTR_VOLUME,
 
   // - User confirm event attributes -
 
