@@ -13,7 +13,6 @@ const useCalculateDrinks = () => {
   const containers = useGetContainers();
   console.log(containers.data);
 
-  //const fluids = containers.data?.containers!;
   const calcPossibleDrinks = () => {
     if (data?.drinks.length! > 0 && containers.data?.containers.length! > 0) {
       const drinks = data?.drinks!;
@@ -23,7 +22,6 @@ const useCalculateDrinks = () => {
       containers.data?.containers.forEach((container) => {
         fluids.push(container.fluid);
       });
-      console.log("fluids", fluids);
 
       const possibleDrinks: Drink[] = [];
       drinks.forEach((drink) => {
@@ -36,9 +34,6 @@ const useCalculateDrinks = () => {
         }
       });
 
-      return possibleDrinks;
-
-      console.log("POSSIBLE DRINKS KEKW", possibleDrinks);
       return possibleDrinks;
     }
   };

@@ -8,14 +8,17 @@ import { Button } from "@/components/ui/button";
 import usePourDrink from "@/api/endpoints/drinks/pourDrink";
 import { Drink } from "@/api/endpoints/drinks/getDrinks";
 import useCalculateDrinks from "@/hooks/useCalculateDrinks";
+import { useEffect } from "react";
 
 interface SelectionProps {
+  view: DrinkMachineState;
   setView: React.Dispatch<React.SetStateAction<DrinkMachineState>>;
   selectedDrink: Drink | undefined;
   setSelectedDrink: React.Dispatch<React.SetStateAction<Drink | undefined>>;
 }
 
 function Selection({
+  view,
   setView,
   selectedDrink,
   setSelectedDrink,
@@ -24,6 +27,14 @@ function Selection({
   const drinks = calc.calcPossibleDrinks();
   console.log("Current configured drinks", drinks);
   let beat = new Audio("/assets/click.mp3");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setView(DrinkMachineState.Waiting);
+    }, 200000);
+
+    return () => clearTimeout(timeout);
+  }, [view, setView]);
 
   const pour = usePourDrink();
 

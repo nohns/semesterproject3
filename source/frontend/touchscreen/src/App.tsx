@@ -23,14 +23,6 @@ function App() {
     DrinkMachineState.Waiting
   );
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setView(DrinkMachineState.Waiting);
-    }, 200000);
-
-    return () => clearTimeout(timeout);
-  }, [view, setView]);
-
   //will retry every 5 seconds, but only rerender when new data is available
   const state = useGetState();
 
@@ -61,6 +53,7 @@ function App() {
               case DrinkMachineState.Selection:
                 return (
                   <Selection
+                    view={view}
                     setView={setView}
                     selectedDrink={selectedDrink}
                     setSelectedDrink={setSelectedDrink}
@@ -79,6 +72,7 @@ function App() {
               default:
                 return (
                   <Selection
+                    view={view}
                     setView={setView}
                     selectedDrink={selectedDrink}
                     setSelectedDrink={setSelectedDrink}
