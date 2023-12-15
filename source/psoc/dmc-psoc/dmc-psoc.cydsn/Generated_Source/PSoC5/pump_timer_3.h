@@ -36,8 +36,8 @@ extern uint8 pump_timer_3_initVar;
 *           Parameter Defaults
 **************************************/
 
-#define pump_timer_3_Resolution                 16u
-#define pump_timer_3_UsingFixedFunction         1u
+#define pump_timer_3_Resolution                 24u
+#define pump_timer_3_UsingFixedFunction         0u
 #define pump_timer_3_UsingHWCaptureCounter      0u
 #define pump_timer_3_SoftwareCaptureMode        0u
 #define pump_timer_3_SoftwareTriggerMode        0u
@@ -69,7 +69,7 @@ typedef struct
     uint8 TimerEnableState;
     #if(!pump_timer_3_UsingFixedFunction)
 
-        uint16 TimerUdb;
+        uint32 TimerUdb;
         uint8 InterruptMaskValue;
         #if (pump_timer_3_UsingHWCaptureCounter)
             uint8 TimerCaptureCounter;
@@ -100,11 +100,11 @@ uint8   pump_timer_3_ReadStatusRegister(void) ;
     void    pump_timer_3_WriteControlRegister(uint8 control) ;
 #endif /* (!pump_timer_3_UDB_CONTROL_REG_REMOVED) */
 
-uint16  pump_timer_3_ReadPeriod(void) ;
-void    pump_timer_3_WritePeriod(uint16 period) ;
-uint16  pump_timer_3_ReadCounter(void) ;
-void    pump_timer_3_WriteCounter(uint16 counter) ;
-uint16  pump_timer_3_ReadCapture(void) ;
+uint32  pump_timer_3_ReadPeriod(void) ;
+void    pump_timer_3_WritePeriod(uint32 period) ;
+uint32  pump_timer_3_ReadCounter(void) ;
+void    pump_timer_3_WriteCounter(uint32 counter) ;
+uint32  pump_timer_3_ReadCapture(void) ;
 void    pump_timer_3_SoftwareCapture(void) ;
 
 #if(!pump_timer_3_UsingFixedFunction) /* UDB Prototypes */
@@ -168,7 +168,7 @@ void pump_timer_3_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define pump_timer_3_INIT_PERIOD             59999u
+#define pump_timer_3_INIT_PERIOD             71999u
 #define pump_timer_3_INIT_CAPTURE_MODE       ((uint8)((uint8)1u << pump_timer_3_CTRL_CAP_MODE_SHIFT))
 #define pump_timer_3_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << pump_timer_3_CTRL_TRIG_MODE_SHIFT))
 #if (pump_timer_3_UsingFixedFunction)
@@ -313,54 +313,54 @@ void pump_timer_3_Wakeup(void)        ;
     #define pump_timer_3_CONTROL             (* (reg8 *) pump_timer_3_TimerUDB_sCTRLReg_SyncCtl_ctrlreg__CONTROL_REG )
     
     #if(pump_timer_3_Resolution <= 8u) /* 8-bit Timer */
-        #define pump_timer_3_CAPTURE_LSB         (* (reg8 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define pump_timer_3_CAPTURE_LSB_PTR       ((reg8 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define pump_timer_3_PERIOD_LSB          (* (reg8 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define pump_timer_3_PERIOD_LSB_PTR        ((reg8 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define pump_timer_3_COUNTER_LSB         (* (reg8 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
-        #define pump_timer_3_COUNTER_LSB_PTR       ((reg8 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define pump_timer_3_CAPTURE_LSB         (* (reg8 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+        #define pump_timer_3_CAPTURE_LSB_PTR       ((reg8 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+        #define pump_timer_3_PERIOD_LSB          (* (reg8 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+        #define pump_timer_3_PERIOD_LSB_PTR        ((reg8 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+        #define pump_timer_3_COUNTER_LSB         (* (reg8 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
+        #define pump_timer_3_COUNTER_LSB_PTR       ((reg8 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
     #elif(pump_timer_3_Resolution <= 16u) /* 8-bit Timer */
         #if(CY_PSOC3) /* 8-bit addres space */
-            #define pump_timer_3_CAPTURE_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define pump_timer_3_PERIOD_LSB          (* (reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define pump_timer_3_PERIOD_LSB_PTR        ((reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define pump_timer_3_COUNTER_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
-            #define pump_timer_3_COUNTER_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define pump_timer_3_CAPTURE_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+            #define pump_timer_3_PERIOD_LSB          (* (reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+            #define pump_timer_3_PERIOD_LSB_PTR        ((reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+            #define pump_timer_3_COUNTER_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
+            #define pump_timer_3_COUNTER_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
         #else /* 16-bit address space */
-            #define pump_timer_3_CAPTURE_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
-            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__16BIT_F0_REG )
-            #define pump_timer_3_PERIOD_LSB          (* (reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
-            #define pump_timer_3_PERIOD_LSB_PTR        ((reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__16BIT_D0_REG )
-            #define pump_timer_3_COUNTER_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
-            #define pump_timer_3_COUNTER_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__16BIT_A0_REG )
+            #define pump_timer_3_CAPTURE_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__16BIT_F0_REG )
+            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__16BIT_F0_REG )
+            #define pump_timer_3_PERIOD_LSB          (* (reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__16BIT_D0_REG )
+            #define pump_timer_3_PERIOD_LSB_PTR        ((reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__16BIT_D0_REG )
+            #define pump_timer_3_COUNTER_LSB         (* (reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__16BIT_A0_REG )
+            #define pump_timer_3_COUNTER_LSB_PTR       ((reg16 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__16BIT_A0_REG )
         #endif /* CY_PSOC3 */
     #elif(pump_timer_3_Resolution <= 24u)/* 24-bit Timer */
-        #define pump_timer_3_CAPTURE_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define pump_timer_3_CAPTURE_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-        #define pump_timer_3_PERIOD_LSB          (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define pump_timer_3_PERIOD_LSB_PTR        ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-        #define pump_timer_3_COUNTER_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
-        #define pump_timer_3_COUNTER_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
+        #define pump_timer_3_CAPTURE_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+        #define pump_timer_3_CAPTURE_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+        #define pump_timer_3_PERIOD_LSB          (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+        #define pump_timer_3_PERIOD_LSB_PTR        ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+        #define pump_timer_3_COUNTER_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
+        #define pump_timer_3_COUNTER_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
     #else /* 32-bit Timer */
         #if(CY_PSOC3 || CY_PSOC5) /* 8-bit address space */
-            #define pump_timer_3_CAPTURE_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__F0_REG )
-            #define pump_timer_3_PERIOD_LSB          (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define pump_timer_3_PERIOD_LSB_PTR        ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__D0_REG )
-            #define pump_timer_3_COUNTER_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
-            #define pump_timer_3_COUNTER_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
+            #define pump_timer_3_CAPTURE_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__F0_REG )
+            #define pump_timer_3_PERIOD_LSB          (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+            #define pump_timer_3_PERIOD_LSB_PTR        ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__D0_REG )
+            #define pump_timer_3_COUNTER_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
+            #define pump_timer_3_COUNTER_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
         #else /* 32-bit address space */
-            #define pump_timer_3_CAPTURE_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
-            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__32BIT_F0_REG )
-            #define pump_timer_3_PERIOD_LSB          (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
-            #define pump_timer_3_PERIOD_LSB_PTR        ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__32BIT_D0_REG )
-            #define pump_timer_3_COUNTER_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
-            #define pump_timer_3_COUNTER_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__32BIT_A0_REG )
+            #define pump_timer_3_CAPTURE_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__32BIT_F0_REG )
+            #define pump_timer_3_CAPTURE_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__32BIT_F0_REG )
+            #define pump_timer_3_PERIOD_LSB          (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__32BIT_D0_REG )
+            #define pump_timer_3_PERIOD_LSB_PTR        ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__32BIT_D0_REG )
+            #define pump_timer_3_COUNTER_LSB         (* (reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__32BIT_A0_REG )
+            #define pump_timer_3_COUNTER_LSB_PTR       ((reg32 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__32BIT_A0_REG )
         #endif /* CY_PSOC3 || CY_PSOC5 */ 
     #endif
 
-    #define pump_timer_3_COUNTER_LSB_PTR_8BIT       ((reg8 *) pump_timer_3_TimerUDB_sT16_timerdp_u0__A0_REG )
+    #define pump_timer_3_COUNTER_LSB_PTR_8BIT       ((reg8 *) pump_timer_3_TimerUDB_sT24_timerdp_u0__A0_REG )
     
     #if (pump_timer_3_UsingHWCaptureCounter)
         #define pump_timer_3_CAP_COUNT              (*(reg8 *) pump_timer_3_TimerUDB_sCapCount_counter__PERIOD_REG )

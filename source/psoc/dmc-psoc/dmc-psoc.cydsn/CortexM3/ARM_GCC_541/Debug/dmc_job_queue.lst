@@ -1,0 +1,3855 @@
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"dmc_job_queue.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.dmc_packet_init,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	dmc_packet_init, %function
+  24              	dmc_packet_init:
+  25              	.LFB0:
+  26              		.file 1 "..\\..\\..\\common\\hw\\include\\base_packet.h"
+   1:..\..\..\common\hw\include/base_packet.h **** #ifndef DMC_BASE_PACKET_H
+   2:..\..\..\common\hw\include/base_packet.h **** #define DMC_BASE_PACKET_H
+   3:..\..\..\common\hw\include/base_packet.h **** 
+   4:..\..\..\common\hw\include/base_packet.h **** #ifdef MODULE // Include kernel space memory allocation with kmalloc
+   5:..\..\..\common\hw\include/base_packet.h **** #include <linux/slab.h>
+   6:..\..\..\common\hw\include/base_packet.h **** #else
+   7:..\..\..\common\hw\include/base_packet.h **** #include <stdlib.h>
+   8:..\..\..\common\hw\include/base_packet.h **** #endif
+   9:..\..\..\common\hw\include/base_packet.h **** 
+  10:..\..\..\common\hw\include/base_packet.h **** /**
+  11:..\..\..\common\hw\include/base_packet.h ****  * @brief Type of packet. (MAYBE: MSB is required to be 1 as this signals a
+  12:..\..\..\common\hw\include/base_packet.h ****  * header byte)
+  13:..\..\..\common\hw\include/base_packet.h ****  */
+  14:..\..\..\common\hw\include/base_packet.h **** enum dmc_packet_type
+  15:..\..\..\common\hw\include/base_packet.h **** {
+  16:..\..\..\common\hw\include/base_packet.h ****   DMC_PACKET_OUT_OF_ORDER              = 0b10000001,
+  17:..\..\..\common\hw\include/base_packet.h ****   DMC_PACKET_CONTAINER_VOLUME_MEASURED = 0b10010010,
+  18:..\..\..\common\hw\include/base_packet.h ****   DMC_PACKET_USER_CONFIRM              = 0b10100000,
+  19:..\..\..\common\hw\include/base_packet.h ****   DMC_PACKET_FLUID_POUR_REQUESTED      = 0b10110010,
+  20:..\..\..\common\hw\include/base_packet.h ****   DMC_PACKET_DEBUG                     = 0b11000010,
+  21:..\..\..\common\hw\include/base_packet.h ****   DMC_PACKET_MACHINE_OK                = 0b11010000,
+  22:..\..\..\common\hw\include/base_packet.h **** };
+  23:..\..\..\common\hw\include/base_packet.h **** 
+  24:..\..\..\common\hw\include/base_packet.h **** struct dmc_packet
+  25:..\..\..\common\hw\include/base_packet.h **** {
+  26:..\..\..\common\hw\include/base_packet.h ****   /**
+  27:..\..\..\common\hw\include/base_packet.h ****    * @brief Type of packet. This is the first byte received.
+  28:..\..\..\common\hw\include/base_packet.h ****    */
+  29:..\..\..\common\hw\include/base_packet.h ****   enum dmc_packet_type type;
+  30:..\..\..\common\hw\include/base_packet.h **** 
+  31:..\..\..\common\hw\include/base_packet.h ****   /**
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 2
+
+
+  32:..\..\..\common\hw\include/base_packet.h ****    * @brief Data payload of packet
+  33:..\..\..\common\hw\include/base_packet.h ****    */
+  34:..\..\..\common\hw\include/base_packet.h ****   char *data;
+  35:..\..\..\common\hw\include/base_packet.h **** 
+  36:..\..\..\common\hw\include/base_packet.h ****   /**
+  37:..\..\..\common\hw\include/base_packet.h ****    * @brief Length of payload in bytes.
+  38:..\..\..\common\hw\include/base_packet.h ****    */
+  39:..\..\..\common\hw\include/base_packet.h ****   size_t data_len;
+  40:..\..\..\common\hw\include/base_packet.h **** };
+  41:..\..\..\common\hw\include/base_packet.h **** 
+  42:..\..\..\common\hw\include/base_packet.h **** /**
+  43:..\..\..\common\hw\include/base_packet.h ****  * @brief Allocates and initializes a packet with a type. Primarily
+  44:..\..\..\common\hw\include/base_packet.h ****  * used when starting to read data from a given source.
+  45:..\..\..\common\hw\include/base_packet.h ****  */
+  46:..\..\..\common\hw\include/base_packet.h **** static struct dmc_packet *dmc_packet_init(enum dmc_packet_type type)
+  47:..\..\..\common\hw\include/base_packet.h **** {
+  27              		.loc 1 47 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 84B0     		sub	sp, sp, #16
+  36              		.cfi_def_cfa_offset 24
+  37 0004 00AF     		add	r7, sp, #0
+  38              		.cfi_def_cfa_register 7
+  39 0006 0346     		mov	r3, r0
+  40 0008 FB71     		strb	r3, [r7, #7]
+  48:..\..\..\common\hw\include/base_packet.h ****   unsigned char data_bytes = type & 0b00001111;
+  41              		.loc 1 48 0
+  42 000a FB79     		ldrb	r3, [r7, #7]
+  43 000c 03F00F03 		and	r3, r3, #15
+  44 0010 FB73     		strb	r3, [r7, #15]
+  49:..\..\..\common\hw\include/base_packet.h **** 
+  50:..\..\..\common\hw\include/base_packet.h ****   // Allocate and initialize packet with default values
+  51:..\..\..\common\hw\include/base_packet.h ****   struct dmc_packet *packet;
+  52:..\..\..\common\hw\include/base_packet.h **** #ifdef MODULE // Differeniate between kernel and use space allocations
+  53:..\..\..\common\hw\include/base_packet.h ****   packet = (struct dmc_packet *)kmalloc(sizeof(struct dmc_packet), GFP_KERNEL);
+  54:..\..\..\common\hw\include/base_packet.h **** #else
+  55:..\..\..\common\hw\include/base_packet.h ****   packet = (struct dmc_packet *)malloc(sizeof(struct dmc_packet));
+  45              		.loc 1 55 0
+  46 0012 0C20     		movs	r0, #12
+  47 0014 FFF7FEFF 		bl	malloc
+  48 0018 0346     		mov	r3, r0
+  49 001a BB60     		str	r3, [r7, #8]
+  56:..\..\..\common\hw\include/base_packet.h **** #endif
+  57:..\..\..\common\hw\include/base_packet.h ****   packet->type     = type;
+  50              		.loc 1 57 0
+  51 001c BB68     		ldr	r3, [r7, #8]
+  52 001e FA79     		ldrb	r2, [r7, #7]
+  53 0020 1A70     		strb	r2, [r3]
+  58:..\..\..\common\hw\include/base_packet.h ****   packet->data_len = 0;
+  54              		.loc 1 58 0
+  55 0022 BB68     		ldr	r3, [r7, #8]
+  56 0024 0022     		movs	r2, #0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 3
+
+
+  57 0026 9A60     		str	r2, [r3, #8]
+  59:..\..\..\common\hw\include/base_packet.h ****   packet->data     = NULL;
+  58              		.loc 1 59 0
+  59 0028 BB68     		ldr	r3, [r7, #8]
+  60 002a 0022     		movs	r2, #0
+  61 002c 5A60     		str	r2, [r3, #4]
+  60:..\..\..\common\hw\include/base_packet.h **** 
+  61:..\..\..\common\hw\include/base_packet.h ****   // Allocate packet data if needed
+  62:..\..\..\common\hw\include/base_packet.h ****   if (data_bytes > 0)
+  62              		.loc 1 62 0
+  63 002e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  64 0030 002B     		cmp	r3, #0
+  65 0032 07D0     		beq	.L2
+  63:..\..\..\common\hw\include/base_packet.h ****   {
+  64:..\..\..\common\hw\include/base_packet.h **** #ifdef MODULE // Differeniate between kernel and use space allocations
+  65:..\..\..\common\hw\include/base_packet.h ****     packet->data = (char *)kmalloc(sizeof(char) * data_bytes, GFP_KERNEL);
+  66:..\..\..\common\hw\include/base_packet.h **** #else
+  67:..\..\..\common\hw\include/base_packet.h ****     packet->data = (char *)malloc(sizeof(char) * data_bytes);
+  66              		.loc 1 67 0
+  67 0034 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+  68 0036 1846     		mov	r0, r3
+  69 0038 FFF7FEFF 		bl	malloc
+  70 003c 0346     		mov	r3, r0
+  71 003e 1A46     		mov	r2, r3
+  72 0040 BB68     		ldr	r3, [r7, #8]
+  73 0042 5A60     		str	r2, [r3, #4]
+  74              	.L2:
+  68:..\..\..\common\hw\include/base_packet.h **** #endif
+  69:..\..\..\common\hw\include/base_packet.h ****   }
+  70:..\..\..\common\hw\include/base_packet.h **** 
+  71:..\..\..\common\hw\include/base_packet.h ****   return packet;
+  75              		.loc 1 71 0
+  76 0044 BB68     		ldr	r3, [r7, #8]
+  72:..\..\..\common\hw\include/base_packet.h **** }
+  77              		.loc 1 72 0
+  78 0046 1846     		mov	r0, r3
+  79 0048 1037     		adds	r7, r7, #16
+  80              		.cfi_def_cfa_offset 8
+  81 004a BD46     		mov	sp, r7
+  82              		.cfi_def_cfa_register 13
+  83              		@ sp needed
+  84 004c 80BD     		pop	{r7, pc}
+  85              		.cfi_endproc
+  86              	.LFE0:
+  87              		.size	dmc_packet_init, .-dmc_packet_init
+  88 004e 00BF     		.section	.text.dmc_packet_free,"ax",%progbits
+  89              		.align	2
+  90              		.thumb
+  91              		.thumb_func
+  92              		.type	dmc_packet_free, %function
+  93              	dmc_packet_free:
+  94              	.LFB1:
+  73:..\..\..\common\hw\include/base_packet.h **** 
+  74:..\..\..\common\hw\include/base_packet.h **** /**
+  75:..\..\..\common\hw\include/base_packet.h ****  * @brief De-allocate packet and its data
+  76:..\..\..\common\hw\include/base_packet.h ****  */
+  77:..\..\..\common\hw\include/base_packet.h **** static void dmc_packet_free(struct dmc_packet *packet)
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 4
+
+
+  78:..\..\..\common\hw\include/base_packet.h **** {
+  95              		.loc 1 78 0
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 8
+  98              		@ frame_needed = 1, uses_anonymous_args = 0
+  99 0000 80B5     		push	{r7, lr}
+ 100              		.cfi_def_cfa_offset 8
+ 101              		.cfi_offset 7, -8
+ 102              		.cfi_offset 14, -4
+ 103 0002 82B0     		sub	sp, sp, #8
+ 104              		.cfi_def_cfa_offset 16
+ 105 0004 00AF     		add	r7, sp, #0
+ 106              		.cfi_def_cfa_register 7
+ 107 0006 7860     		str	r0, [r7, #4]
+  79:..\..\..\common\hw\include/base_packet.h **** #ifdef MODULE // Differeniate between kernel and use space de-allocations
+  80:..\..\..\common\hw\include/base_packet.h ****   kfree((void *)packet->data);
+  81:..\..\..\common\hw\include/base_packet.h ****   kfree((void *)packet);
+  82:..\..\..\common\hw\include/base_packet.h **** #else
+  83:..\..\..\common\hw\include/base_packet.h ****   free((void *)packet->data);
+ 108              		.loc 1 83 0
+ 109 0008 7B68     		ldr	r3, [r7, #4]
+ 110 000a 5B68     		ldr	r3, [r3, #4]
+ 111 000c 1846     		mov	r0, r3
+ 112 000e FFF7FEFF 		bl	free
+  84:..\..\..\common\hw\include/base_packet.h ****   free((void *)packet);
+ 113              		.loc 1 84 0
+ 114 0012 7868     		ldr	r0, [r7, #4]
+ 115 0014 FFF7FEFF 		bl	free
+  85:..\..\..\common\hw\include/base_packet.h **** #endif
+  86:..\..\..\common\hw\include/base_packet.h **** }
+ 116              		.loc 1 86 0
+ 117 0018 00BF     		nop
+ 118 001a 0837     		adds	r7, r7, #8
+ 119              		.cfi_def_cfa_offset 8
+ 120 001c BD46     		mov	sp, r7
+ 121              		.cfi_def_cfa_register 13
+ 122              		@ sp needed
+ 123 001e 80BD     		pop	{r7, pc}
+ 124              		.cfi_endproc
+ 125              	.LFE1:
+ 126              		.size	dmc_packet_free, .-dmc_packet_free
+ 127              		.section	.text.dmc_packet_complete,"ax",%progbits
+ 128              		.align	2
+ 129              		.thumb
+ 130              		.thumb_func
+ 131              		.type	dmc_packet_complete, %function
+ 132              	dmc_packet_complete:
+ 133              	.LFB2:
+  87:..\..\..\common\hw\include/base_packet.h **** 
+  88:..\..\..\common\hw\include/base_packet.h **** /**
+  89:..\..\..\common\hw\include/base_packet.h ****  * @brief Checks if a packet is fully complete, in the sense that all intended
+  90:..\..\..\common\hw\include/base_packet.h ****  * data is received
+  91:..\..\..\common\hw\include/base_packet.h ****  * @returns True, if packet is complete.
+  92:..\..\..\common\hw\include/base_packet.h ****  */
+  93:..\..\..\common\hw\include/base_packet.h **** static unsigned char dmc_packet_complete(struct dmc_packet *packet)
+  94:..\..\..\common\hw\include/base_packet.h **** {
+ 134              		.loc 1 94 0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 5
+
+
+ 135              		.cfi_startproc
+ 136              		@ args = 0, pretend = 0, frame = 16
+ 137              		@ frame_needed = 1, uses_anonymous_args = 0
+ 138              		@ link register save eliminated.
+ 139 0000 80B4     		push	{r7}
+ 140              		.cfi_def_cfa_offset 4
+ 141              		.cfi_offset 7, -4
+ 142 0002 85B0     		sub	sp, sp, #20
+ 143              		.cfi_def_cfa_offset 24
+ 144 0004 00AF     		add	r7, sp, #0
+ 145              		.cfi_def_cfa_register 7
+ 146 0006 7860     		str	r0, [r7, #4]
+  95:..\..\..\common\hw\include/base_packet.h ****   unsigned char data_bytes = packet->type & 0b00001111;
+ 147              		.loc 1 95 0
+ 148 0008 7B68     		ldr	r3, [r7, #4]
+ 149 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 150 000c 03F00F03 		and	r3, r3, #15
+ 151 0010 FB73     		strb	r3, [r7, #15]
+  96:..\..\..\common\hw\include/base_packet.h ****   return data_bytes == packet->data_len;
+ 152              		.loc 1 96 0
+ 153 0012 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 154 0014 7B68     		ldr	r3, [r7, #4]
+ 155 0016 9B68     		ldr	r3, [r3, #8]
+ 156 0018 9A42     		cmp	r2, r3
+ 157 001a 0CBF     		ite	eq
+ 158 001c 0123     		moveq	r3, #1
+ 159 001e 0023     		movne	r3, #0
+ 160 0020 DBB2     		uxtb	r3, r3
+  97:..\..\..\common\hw\include/base_packet.h **** }
+ 161              		.loc 1 97 0
+ 162 0022 1846     		mov	r0, r3
+ 163 0024 1437     		adds	r7, r7, #20
+ 164              		.cfi_def_cfa_offset 4
+ 165 0026 BD46     		mov	sp, r7
+ 166              		.cfi_def_cfa_register 13
+ 167              		@ sp needed
+ 168 0028 80BC     		pop	{r7}
+ 169              		.cfi_restore 7
+ 170              		.cfi_def_cfa_offset 0
+ 171 002a 7047     		bx	lr
+ 172              		.cfi_endproc
+ 173              	.LFE2:
+ 174              		.size	dmc_packet_complete, .-dmc_packet_complete
+ 175              		.section	.text.dmc_packet_append_byte,"ax",%progbits
+ 176              		.align	2
+ 177              		.thumb
+ 178              		.thumb_func
+ 179              		.type	dmc_packet_append_byte, %function
+ 180              	dmc_packet_append_byte:
+ 181              	.LFB3:
+  98:..\..\..\common\hw\include/base_packet.h **** 
+  99:..\..\..\common\hw\include/base_packet.h **** /**
+ 100:..\..\..\common\hw\include/base_packet.h ****  * @brief Appends data byte to packet payload.
+ 101:..\..\..\common\hw\include/base_packet.h ****  * @returns 0 if successful, 1 if payload is already at capacity.
+ 102:..\..\..\common\hw\include/base_packet.h ****  */
+ 103:..\..\..\common\hw\include/base_packet.h **** static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
+ 104:..\..\..\common\hw\include/base_packet.h ****                                             unsigned char      data)
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 6
+
+
+ 105:..\..\..\common\hw\include/base_packet.h **** {
+ 182              		.loc 1 105 0
+ 183              		.cfi_startproc
+ 184              		@ args = 0, pretend = 0, frame = 16
+ 185              		@ frame_needed = 1, uses_anonymous_args = 0
+ 186              		@ link register save eliminated.
+ 187 0000 80B4     		push	{r7}
+ 188              		.cfi_def_cfa_offset 4
+ 189              		.cfi_offset 7, -4
+ 190 0002 85B0     		sub	sp, sp, #20
+ 191              		.cfi_def_cfa_offset 24
+ 192 0004 00AF     		add	r7, sp, #0
+ 193              		.cfi_def_cfa_register 7
+ 194 0006 7860     		str	r0, [r7, #4]
+ 195 0008 0B46     		mov	r3, r1
+ 196 000a FB70     		strb	r3, [r7, #3]
+ 106:..\..\..\common\hw\include/base_packet.h ****   unsigned char data_bytes = packet->type & 0b00001111;
+ 197              		.loc 1 106 0
+ 198 000c 7B68     		ldr	r3, [r7, #4]
+ 199 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 200 0010 03F00F03 		and	r3, r3, #15
+ 201 0014 FB73     		strb	r3, [r7, #15]
+ 107:..\..\..\common\hw\include/base_packet.h ****   if (data_bytes == packet->data_len)
+ 202              		.loc 1 107 0
+ 203 0016 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 204 0018 7B68     		ldr	r3, [r7, #4]
+ 205 001a 9B68     		ldr	r3, [r3, #8]
+ 206 001c 9A42     		cmp	r2, r3
+ 207 001e 01D1     		bne	.L8
+ 108:..\..\..\common\hw\include/base_packet.h ****   {
+ 109:..\..\..\common\hw\include/base_packet.h ****     return 1;
+ 208              		.loc 1 109 0
+ 209 0020 0123     		movs	r3, #1
+ 210 0022 0AE0     		b	.L9
+ 211              	.L8:
+ 110:..\..\..\common\hw\include/base_packet.h ****   }
+ 111:..\..\..\common\hw\include/base_packet.h **** 
+ 112:..\..\..\common\hw\include/base_packet.h ****   packet->data[packet->data_len++] = data;
+ 212              		.loc 1 112 0
+ 213 0024 7B68     		ldr	r3, [r7, #4]
+ 214 0026 5A68     		ldr	r2, [r3, #4]
+ 215 0028 7B68     		ldr	r3, [r7, #4]
+ 216 002a 9B68     		ldr	r3, [r3, #8]
+ 217 002c 581C     		adds	r0, r3, #1
+ 218 002e 7968     		ldr	r1, [r7, #4]
+ 219 0030 8860     		str	r0, [r1, #8]
+ 220 0032 1344     		add	r3, r3, r2
+ 221 0034 FA78     		ldrb	r2, [r7, #3]
+ 222 0036 1A70     		strb	r2, [r3]
+ 113:..\..\..\common\hw\include/base_packet.h ****   return 0;
+ 223              		.loc 1 113 0
+ 224 0038 0023     		movs	r3, #0
+ 225              	.L9:
+ 114:..\..\..\common\hw\include/base_packet.h **** }
+ 226              		.loc 1 114 0
+ 227 003a 1846     		mov	r0, r3
+ 228 003c 1437     		adds	r7, r7, #20
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 7
+
+
+ 229              		.cfi_def_cfa_offset 4
+ 230 003e BD46     		mov	sp, r7
+ 231              		.cfi_def_cfa_register 13
+ 232              		@ sp needed
+ 233 0040 80BC     		pop	{r7}
+ 234              		.cfi_restore 7
+ 235              		.cfi_def_cfa_offset 0
+ 236 0042 7047     		bx	lr
+ 237              		.cfi_endproc
+ 238              	.LFE3:
+ 239              		.size	dmc_packet_append_byte, .-dmc_packet_append_byte
+ 240              		.section	.text.dmc_packet_unmarshal_out_of_order,"ax",%progbits
+ 241              		.align	2
+ 242              		.thumb
+ 243              		.thumb_func
+ 244              		.type	dmc_packet_unmarshal_out_of_order, %function
+ 245              	dmc_packet_unmarshal_out_of_order:
+ 246              	.LFB4:
+ 247              		.file 2 "..\\..\\..\\common\\hw\\include\\packet.h"
+   1:..\..\..\common\hw\include/packet.h **** #ifndef DMC_PACKET_H
+   2:..\..\..\common\hw\include/packet.h **** #define DMC_PACKET_H
+   3:..\..\..\common\hw\include/packet.h **** 
+   4:..\..\..\common\hw\include/packet.h **** #include "base_packet.h"
+   5:..\..\..\common\hw\include/packet.h **** 
+   6:..\..\..\common\hw\include/packet.h **** #ifdef MODULE
+   7:..\..\..\common\hw\include/packet.h **** #include <linux/types.h>
+   8:..\..\..\common\hw\include/packet.h **** #else
+   9:..\..\..\common\hw\include/packet.h **** #include <stdint.h>
+  10:..\..\..\common\hw\include/packet.h **** #endif
+  11:..\..\..\common\hw\include/packet.h **** 
+  12:..\..\..\common\hw\include/packet.h **** /**
+  13:..\..\..\common\hw\include/packet.h ****  * @brief Reason codes for why the machine is out of order
+  14:..\..\..\common\hw\include/packet.h ****  */
+  15:..\..\..\common\hw\include/packet.h **** enum dmc_packet_out_of_order_reason
+  16:..\..\..\common\hw\include/packet.h **** {
+  17:..\..\..\common\hw\include/packet.h ****   /**
+  18:..\..\..\common\hw\include/packet.h ****    * @brief An unknown error has occured
+  19:..\..\..\common\hw\include/packet.h ****    */
+  20:..\..\..\common\hw\include/packet.h ****   DMC_PACKET_OUT_OF_ORDER_REASON_UNKNOWN = 0,
+  21:..\..\..\common\hw\include/packet.h **** 
+  22:..\..\..\common\hw\include/packet.h ****   /**
+  23:..\..\..\common\hw\include/packet.h ****    * @brief The machine detected that a fluid container 1
+  24:..\..\..\common\hw\include/packet.h ****    * was removed from the machine
+  25:..\..\..\common\hw\include/packet.h ****    */
+  26:..\..\..\common\hw\include/packet.h ****   DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_1_REMOVED = 1,
+  27:..\..\..\common\hw\include/packet.h **** 
+  28:..\..\..\common\hw\include/packet.h ****   /**
+  29:..\..\..\common\hw\include/packet.h ****    * @brief The machine detected that a fluid container 2
+  30:..\..\..\common\hw\include/packet.h ****    * was removed from the machine
+  31:..\..\..\common\hw\include/packet.h ****    */
+  32:..\..\..\common\hw\include/packet.h ****   DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_2_REMOVED = 2,
+  33:..\..\..\common\hw\include/packet.h **** 
+  34:..\..\..\common\hw\include/packet.h ****   /**
+  35:..\..\..\common\hw\include/packet.h ****    * @brief The machine detected that a fluid container 3
+  36:..\..\..\common\hw\include/packet.h ****    * was removed from the machine
+  37:..\..\..\common\hw\include/packet.h ****    */
+  38:..\..\..\common\hw\include/packet.h ****   DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_3_REMOVED = 3,
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 8
+
+
+  39:..\..\..\common\hw\include/packet.h **** };
+  40:..\..\..\common\hw\include/packet.h **** 
+  41:..\..\..\common\hw\include/packet.h **** /**
+  42:..\..\..\common\hw\include/packet.h ****  * @brief Packet declaring machine is out of order with a reason code. So errors
+  43:..\..\..\common\hw\include/packet.h ****  * can be viewed on the touch screen UI.
+  44:..\..\..\common\hw\include/packet.h ****  *
+  45:..\..\..\common\hw\include/packet.h ****  * Direction: PSoC -> RPi
+  46:..\..\..\common\hw\include/packet.h ****  */
+  47:..\..\..\common\hw\include/packet.h **** struct dmc_packet_out_of_order
+  48:..\..\..\common\hw\include/packet.h **** {
+  49:..\..\..\common\hw\include/packet.h ****   /**
+  50:..\..\..\common\hw\include/packet.h ****    * @brief The reason code for the machine to be out of order. See enum
+  51:..\..\..\common\hw\include/packet.h ****    * dmc_packet_out_of_order_reason for what the codes mean
+  52:..\..\..\common\hw\include/packet.h ****    */
+  53:..\..\..\common\hw\include/packet.h ****   enum dmc_packet_out_of_order_reason reason;
+  54:..\..\..\common\hw\include/packet.h **** };
+  55:..\..\..\common\hw\include/packet.h **** 
+  56:..\..\..\common\hw\include/packet.h **** /**
+  57:..\..\..\common\hw\include/packet.h ****  * @brief Unmarshal data into out of order packet from base packet
+  58:..\..\..\common\hw\include/packet.h ****  */
+  59:..\..\..\common\hw\include/packet.h **** static int
+  60:..\..\..\common\hw\include/packet.h **** dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
+  61:..\..\..\common\hw\include/packet.h ****                                   struct dmc_packet              *from)
+  62:..\..\..\common\hw\include/packet.h **** {
+ 248              		.loc 2 62 0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 16
+ 251              		@ frame_needed = 1, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253 0000 80B4     		push	{r7}
+ 254              		.cfi_def_cfa_offset 4
+ 255              		.cfi_offset 7, -4
+ 256 0002 85B0     		sub	sp, sp, #20
+ 257              		.cfi_def_cfa_offset 24
+ 258 0004 00AF     		add	r7, sp, #0
+ 259              		.cfi_def_cfa_register 7
+ 260 0006 7860     		str	r0, [r7, #4]
+ 261 0008 3960     		str	r1, [r7]
+  63:..\..\..\common\hw\include/packet.h ****   if (from->type != DMC_PACKET_OUT_OF_ORDER)
+ 262              		.loc 2 63 0
+ 263 000a 3B68     		ldr	r3, [r7]
+ 264 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 265 000e 812B     		cmp	r3, #129
+ 266 0010 02D0     		beq	.L11
+  64:..\..\..\common\hw\include/packet.h ****   {
+  65:..\..\..\common\hw\include/packet.h ****     return -1;
+ 267              		.loc 2 65 0
+ 268 0012 4FF0FF33 		mov	r3, #-1
+ 269 0016 09E0     		b	.L12
+ 270              	.L11:
+  66:..\..\..\common\hw\include/packet.h ****   }
+  67:..\..\..\common\hw\include/packet.h **** 
+  68:..\..\..\common\hw\include/packet.h ****   uint8_t offset = 0;
+ 271              		.loc 2 68 0
+ 272 0018 0023     		movs	r3, #0
+ 273 001a FB73     		strb	r3, [r7, #15]
+  69:..\..\..\common\hw\include/packet.h ****   packet->reason = *(uint8_t *)(from->data + offset);
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 9
+
+
+ 274              		.loc 2 69 0
+ 275 001c 3B68     		ldr	r3, [r7]
+ 276 001e 5A68     		ldr	r2, [r3, #4]
+ 277 0020 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 278 0022 1344     		add	r3, r3, r2
+ 279 0024 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 280 0026 7B68     		ldr	r3, [r7, #4]
+ 281 0028 1A70     		strb	r2, [r3]
+  70:..\..\..\common\hw\include/packet.h **** 
+  71:..\..\..\common\hw\include/packet.h ****   return 0;
+ 282              		.loc 2 71 0
+ 283 002a 0023     		movs	r3, #0
+ 284              	.L12:
+  72:..\..\..\common\hw\include/packet.h **** }
+ 285              		.loc 2 72 0
+ 286 002c 1846     		mov	r0, r3
+ 287 002e 1437     		adds	r7, r7, #20
+ 288              		.cfi_def_cfa_offset 4
+ 289 0030 BD46     		mov	sp, r7
+ 290              		.cfi_def_cfa_register 13
+ 291              		@ sp needed
+ 292 0032 80BC     		pop	{r7}
+ 293              		.cfi_restore 7
+ 294              		.cfi_def_cfa_offset 0
+ 295 0034 7047     		bx	lr
+ 296              		.cfi_endproc
+ 297              	.LFE4:
+ 298              		.size	dmc_packet_unmarshal_out_of_order, .-dmc_packet_unmarshal_out_of_order
+ 299 0036 00BF     		.section	.text.dmc_packet_marshal_out_of_order,"ax",%progbits
+ 300              		.align	2
+ 301              		.thumb
+ 302              		.thumb_func
+ 303              		.type	dmc_packet_marshal_out_of_order, %function
+ 304              	dmc_packet_marshal_out_of_order:
+ 305              	.LFB5:
+  73:..\..\..\common\hw\include/packet.h **** 
+  74:..\..\..\common\hw\include/packet.h **** /**
+  75:..\..\..\common\hw\include/packet.h ****  * @brief Marshal out of order packet struct into base packet
+  76:..\..\..\common\hw\include/packet.h ****  */
+  77:..\..\..\common\hw\include/packet.h **** static int
+  78:..\..\..\common\hw\include/packet.h **** dmc_packet_marshal_out_of_order(struct dmc_packet             **to,
+  79:..\..\..\common\hw\include/packet.h ****                                 struct dmc_packet_out_of_order *packet)
+  80:..\..\..\common\hw\include/packet.h **** {
+ 306              		.loc 2 80 0
+ 307              		.cfi_startproc
+ 308              		@ args = 0, pretend = 0, frame = 16
+ 309              		@ frame_needed = 1, uses_anonymous_args = 0
+ 310 0000 80B5     		push	{r7, lr}
+ 311              		.cfi_def_cfa_offset 8
+ 312              		.cfi_offset 7, -8
+ 313              		.cfi_offset 14, -4
+ 314 0002 84B0     		sub	sp, sp, #16
+ 315              		.cfi_def_cfa_offset 24
+ 316 0004 00AF     		add	r7, sp, #0
+ 317              		.cfi_def_cfa_register 7
+ 318 0006 7860     		str	r0, [r7, #4]
+ 319 0008 3960     		str	r1, [r7]
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 10
+
+
+  81:..\..\..\common\hw\include/packet.h ****   if (to == NULL)
+ 320              		.loc 2 81 0
+ 321 000a 7B68     		ldr	r3, [r7, #4]
+ 322 000c 002B     		cmp	r3, #0
+ 323 000e 02D1     		bne	.L14
+  82:..\..\..\common\hw\include/packet.h ****   {
+  83:..\..\..\common\hw\include/packet.h ****     // Pointer to the pointer must not be null
+  84:..\..\..\common\hw\include/packet.h ****     return -1;
+ 324              		.loc 2 84 0
+ 325 0010 4FF0FF33 		mov	r3, #-1
+ 326 0014 20E0     		b	.L15
+ 327              	.L14:
+  85:..\..\..\common\hw\include/packet.h ****   }
+  86:..\..\..\common\hw\include/packet.h ****   if (*to == NULL)
+ 328              		.loc 2 86 0
+ 329 0016 7B68     		ldr	r3, [r7, #4]
+ 330 0018 1B68     		ldr	r3, [r3]
+ 331 001a 002B     		cmp	r3, #0
+ 332 001c 05D1     		bne	.L16
+  87:..\..\..\common\hw\include/packet.h ****   {
+  88:..\..\..\common\hw\include/packet.h ****     *to = dmc_packet_init(DMC_PACKET_OUT_OF_ORDER);
+ 333              		.loc 2 88 0
+ 334 001e 8120     		movs	r0, #129
+ 335 0020 FFF7FEFF 		bl	dmc_packet_init
+ 336 0024 0246     		mov	r2, r0
+ 337 0026 7B68     		ldr	r3, [r7, #4]
+ 338 0028 1A60     		str	r2, [r3]
+ 339              	.L16:
+  89:..\..\..\common\hw\include/packet.h ****   }
+  90:..\..\..\common\hw\include/packet.h ****   if ((*to)->type != DMC_PACKET_OUT_OF_ORDER)
+ 340              		.loc 2 90 0
+ 341 002a 7B68     		ldr	r3, [r7, #4]
+ 342 002c 1B68     		ldr	r3, [r3]
+ 343 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 344 0030 812B     		cmp	r3, #129
+ 345 0032 02D0     		beq	.L17
+  91:..\..\..\common\hw\include/packet.h ****   {
+  92:..\..\..\common\hw\include/packet.h ****     return -2;
+ 346              		.loc 2 92 0
+ 347 0034 6FF00103 		mvn	r3, #1
+ 348 0038 0EE0     		b	.L15
+ 349              	.L17:
+  93:..\..\..\common\hw\include/packet.h ****   }
+  94:..\..\..\common\hw\include/packet.h **** 
+  95:..\..\..\common\hw\include/packet.h ****   uint8_t offset                     = 0;
+ 350              		.loc 2 95 0
+ 351 003a 0023     		movs	r3, #0
+ 352 003c FB73     		strb	r3, [r7, #15]
+  96:..\..\..\common\hw\include/packet.h ****   *(uint8_t *)((*to)->data + offset) = packet->reason;
+ 353              		.loc 2 96 0
+ 354 003e 7B68     		ldr	r3, [r7, #4]
+ 355 0040 1B68     		ldr	r3, [r3]
+ 356 0042 5A68     		ldr	r2, [r3, #4]
+ 357 0044 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 358 0046 1344     		add	r3, r3, r2
+ 359 0048 3A68     		ldr	r2, [r7]
+ 360 004a 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 11
+
+
+ 361 004c 1A70     		strb	r2, [r3]
+  97:..\..\..\common\hw\include/packet.h **** 
+  98:..\..\..\common\hw\include/packet.h ****   (*to)->data_len = 1;
+ 362              		.loc 2 98 0
+ 363 004e 7B68     		ldr	r3, [r7, #4]
+ 364 0050 1B68     		ldr	r3, [r3]
+ 365 0052 0122     		movs	r2, #1
+ 366 0054 9A60     		str	r2, [r3, #8]
+  99:..\..\..\common\hw\include/packet.h ****   return 0;
+ 367              		.loc 2 99 0
+ 368 0056 0023     		movs	r3, #0
+ 369              	.L15:
+ 100:..\..\..\common\hw\include/packet.h **** }
+ 370              		.loc 2 100 0
+ 371 0058 1846     		mov	r0, r3
+ 372 005a 1037     		adds	r7, r7, #16
+ 373              		.cfi_def_cfa_offset 8
+ 374 005c BD46     		mov	sp, r7
+ 375              		.cfi_def_cfa_register 13
+ 376              		@ sp needed
+ 377 005e 80BD     		pop	{r7, pc}
+ 378              		.cfi_endproc
+ 379              	.LFE5:
+ 380              		.size	dmc_packet_marshal_out_of_order, .-dmc_packet_marshal_out_of_order
+ 381              		.section	.text.dmc_packet_unmarshal_container_volume_measured,"ax",%progbits
+ 382              		.align	2
+ 383              		.thumb
+ 384              		.thumb_func
+ 385              		.type	dmc_packet_unmarshal_container_volume_measured, %function
+ 386              	dmc_packet_unmarshal_container_volume_measured:
+ 387              	.LFB6:
+ 101:..\..\..\common\hw\include/packet.h **** 
+ 102:..\..\..\common\hw\include/packet.h **** /**
+ 103:..\..\..\common\hw\include/packet.h ****  * @brief Packet declaring that a new weight measurement has been made.
+ 104:..\..\..\common\hw\include/packet.h ****  *
+ 105:..\..\..\common\hw\include/packet.h ****  * Direction: PSoC -> RPi
+ 106:..\..\..\common\hw\include/packet.h ****  */
+ 107:..\..\..\common\hw\include/packet.h **** struct dmc_packet_container_volume_measured
+ 108:..\..\..\common\hw\include/packet.h **** {
+ 109:..\..\..\common\hw\include/packet.h ****   /**
+ 110:..\..\..\common\hw\include/packet.h ****    * @brief The container the measurement was from. Ranging from 0-2
+ 111:..\..\..\common\hw\include/packet.h ****    */
+ 112:..\..\..\common\hw\include/packet.h ****   uint8_t container;
+ 113:..\..\..\common\hw\include/packet.h **** 
+ 114:..\..\..\common\hw\include/packet.h ****   /**
+ 115:..\..\..\common\hw\include/packet.h ****    * @brief Volume measured in centiliters
+ 116:..\..\..\common\hw\include/packet.h ****    */
+ 117:..\..\..\common\hw\include/packet.h ****   int16_t volume;
+ 118:..\..\..\common\hw\include/packet.h **** };
+ 119:..\..\..\common\hw\include/packet.h **** 
+ 120:..\..\..\common\hw\include/packet.h **** /**
+ 121:..\..\..\common\hw\include/packet.h ****  * @brief Unmarshal data into container volume measured packet from base packet
+ 122:..\..\..\common\hw\include/packet.h ****  */
+ 123:..\..\..\common\hw\include/packet.h **** static int dmc_packet_unmarshal_container_volume_measured(
+ 124:..\..\..\common\hw\include/packet.h ****     struct dmc_packet_container_volume_measured *packet,
+ 125:..\..\..\common\hw\include/packet.h ****     struct dmc_packet                           *from)
+ 126:..\..\..\common\hw\include/packet.h **** {
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 12
+
+
+ 388              		.loc 2 126 0
+ 389              		.cfi_startproc
+ 390              		@ args = 0, pretend = 0, frame = 16
+ 391              		@ frame_needed = 1, uses_anonymous_args = 0
+ 392              		@ link register save eliminated.
+ 393 0000 80B4     		push	{r7}
+ 394              		.cfi_def_cfa_offset 4
+ 395              		.cfi_offset 7, -4
+ 396 0002 85B0     		sub	sp, sp, #20
+ 397              		.cfi_def_cfa_offset 24
+ 398 0004 00AF     		add	r7, sp, #0
+ 399              		.cfi_def_cfa_register 7
+ 400 0006 7860     		str	r0, [r7, #4]
+ 401 0008 3960     		str	r1, [r7]
+ 127:..\..\..\common\hw\include/packet.h ****   if (from->type != DMC_PACKET_CONTAINER_VOLUME_MEASURED)
+ 402              		.loc 2 127 0
+ 403 000a 3B68     		ldr	r3, [r7]
+ 404 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 405 000e 922B     		cmp	r3, #146
+ 406 0010 02D0     		beq	.L19
+ 128:..\..\..\common\hw\include/packet.h ****   {
+ 129:..\..\..\common\hw\include/packet.h ****     return -1;
+ 407              		.loc 2 129 0
+ 408 0012 4FF0FF33 		mov	r3, #-1
+ 409 0016 14E0     		b	.L20
+ 410              	.L19:
+ 130:..\..\..\common\hw\include/packet.h ****   }
+ 131:..\..\..\common\hw\include/packet.h **** 
+ 132:..\..\..\common\hw\include/packet.h ****   uint8_t offset    = 0;
+ 411              		.loc 2 132 0
+ 412 0018 0023     		movs	r3, #0
+ 413 001a FB73     		strb	r3, [r7, #15]
+ 133:..\..\..\common\hw\include/packet.h ****   packet->container = *(uint8_t *)(from->data + offset);
+ 414              		.loc 2 133 0
+ 415 001c 3B68     		ldr	r3, [r7]
+ 416 001e 5A68     		ldr	r2, [r3, #4]
+ 417 0020 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 418 0022 1344     		add	r3, r3, r2
+ 419 0024 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 420 0026 7B68     		ldr	r3, [r7, #4]
+ 421 0028 1A70     		strb	r2, [r3]
+ 134:..\..\..\common\hw\include/packet.h **** 
+ 135:..\..\..\common\hw\include/packet.h ****   offset += sizeof(packet->container); // Move offset of previous data
+ 422              		.loc 2 135 0
+ 423 002a FB7B     		ldrb	r3, [r7, #15]
+ 424 002c 0133     		adds	r3, r3, #1
+ 425 002e FB73     		strb	r3, [r7, #15]
+ 136:..\..\..\common\hw\include/packet.h ****   packet->volume = *(uint8_t *)(from->data + offset);
+ 426              		.loc 2 136 0
+ 427 0030 3B68     		ldr	r3, [r7]
+ 428 0032 5A68     		ldr	r2, [r3, #4]
+ 429 0034 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 430 0036 1344     		add	r3, r3, r2
+ 431 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 432 003a 1AB2     		sxth	r2, r3
+ 433 003c 7B68     		ldr	r3, [r7, #4]
+ 434 003e 5A80     		strh	r2, [r3, #2]	@ movhi
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 13
+
+
+ 137:..\..\..\common\hw\include/packet.h **** 
+ 138:..\..\..\common\hw\include/packet.h ****   return 0;
+ 435              		.loc 2 138 0
+ 436 0040 0023     		movs	r3, #0
+ 437              	.L20:
+ 139:..\..\..\common\hw\include/packet.h **** }
+ 438              		.loc 2 139 0
+ 439 0042 1846     		mov	r0, r3
+ 440 0044 1437     		adds	r7, r7, #20
+ 441              		.cfi_def_cfa_offset 4
+ 442 0046 BD46     		mov	sp, r7
+ 443              		.cfi_def_cfa_register 13
+ 444              		@ sp needed
+ 445 0048 80BC     		pop	{r7}
+ 446              		.cfi_restore 7
+ 447              		.cfi_def_cfa_offset 0
+ 448 004a 7047     		bx	lr
+ 449              		.cfi_endproc
+ 450              	.LFE6:
+ 451              		.size	dmc_packet_unmarshal_container_volume_measured, .-dmc_packet_unmarshal_container_volume_meas
+ 452              		.section	.text.dmc_packet_marshal_container_volume_measured,"ax",%progbits
+ 453              		.align	2
+ 454              		.thumb
+ 455              		.thumb_func
+ 456              		.type	dmc_packet_marshal_container_volume_measured, %function
+ 457              	dmc_packet_marshal_container_volume_measured:
+ 458              	.LFB7:
+ 140:..\..\..\common\hw\include/packet.h **** 
+ 141:..\..\..\common\hw\include/packet.h **** /**
+ 142:..\..\..\common\hw\include/packet.h ****  * @brief Marshal container volume measured packet struct into base packet
+ 143:..\..\..\common\hw\include/packet.h ****  */
+ 144:..\..\..\common\hw\include/packet.h **** static int dmc_packet_marshal_container_volume_measured(
+ 145:..\..\..\common\hw\include/packet.h ****     struct dmc_packet **to, struct dmc_packet_container_volume_measured *packet)
+ 146:..\..\..\common\hw\include/packet.h **** {
+ 459              		.loc 2 146 0
+ 460              		.cfi_startproc
+ 461              		@ args = 0, pretend = 0, frame = 16
+ 462              		@ frame_needed = 1, uses_anonymous_args = 0
+ 463 0000 80B5     		push	{r7, lr}
+ 464              		.cfi_def_cfa_offset 8
+ 465              		.cfi_offset 7, -8
+ 466              		.cfi_offset 14, -4
+ 467 0002 84B0     		sub	sp, sp, #16
+ 468              		.cfi_def_cfa_offset 24
+ 469 0004 00AF     		add	r7, sp, #0
+ 470              		.cfi_def_cfa_register 7
+ 471 0006 7860     		str	r0, [r7, #4]
+ 472 0008 3960     		str	r1, [r7]
+ 147:..\..\..\common\hw\include/packet.h ****   if (to == NULL)
+ 473              		.loc 2 147 0
+ 474 000a 7B68     		ldr	r3, [r7, #4]
+ 475 000c 002B     		cmp	r3, #0
+ 476 000e 02D1     		bne	.L22
+ 148:..\..\..\common\hw\include/packet.h ****   {
+ 149:..\..\..\common\hw\include/packet.h ****     // Pointer to the pointer must not be null
+ 150:..\..\..\common\hw\include/packet.h ****     return -1;
+ 477              		.loc 2 150 0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 14
+
+
+ 478 0010 4FF0FF33 		mov	r3, #-1
+ 479 0014 2DE0     		b	.L23
+ 480              	.L22:
+ 151:..\..\..\common\hw\include/packet.h ****   }
+ 152:..\..\..\common\hw\include/packet.h ****   if (*to == NULL)
+ 481              		.loc 2 152 0
+ 482 0016 7B68     		ldr	r3, [r7, #4]
+ 483 0018 1B68     		ldr	r3, [r3]
+ 484 001a 002B     		cmp	r3, #0
+ 485 001c 05D1     		bne	.L24
+ 153:..\..\..\common\hw\include/packet.h ****   {
+ 154:..\..\..\common\hw\include/packet.h ****     *to = dmc_packet_init(DMC_PACKET_CONTAINER_VOLUME_MEASURED);
+ 486              		.loc 2 154 0
+ 487 001e 9220     		movs	r0, #146
+ 488 0020 FFF7FEFF 		bl	dmc_packet_init
+ 489 0024 0246     		mov	r2, r0
+ 490 0026 7B68     		ldr	r3, [r7, #4]
+ 491 0028 1A60     		str	r2, [r3]
+ 492              	.L24:
+ 155:..\..\..\common\hw\include/packet.h ****   }
+ 156:..\..\..\common\hw\include/packet.h ****   if ((*to)->type != DMC_PACKET_CONTAINER_VOLUME_MEASURED)
+ 493              		.loc 2 156 0
+ 494 002a 7B68     		ldr	r3, [r7, #4]
+ 495 002c 1B68     		ldr	r3, [r3]
+ 496 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 497 0030 922B     		cmp	r3, #146
+ 498 0032 02D0     		beq	.L25
+ 157:..\..\..\common\hw\include/packet.h ****   {
+ 158:..\..\..\common\hw\include/packet.h ****     return -2;
+ 499              		.loc 2 158 0
+ 500 0034 6FF00103 		mvn	r3, #1
+ 501 0038 1BE0     		b	.L23
+ 502              	.L25:
+ 159:..\..\..\common\hw\include/packet.h ****   }
+ 160:..\..\..\common\hw\include/packet.h **** 
+ 161:..\..\..\common\hw\include/packet.h ****   uint8_t offset                     = 0;
+ 503              		.loc 2 161 0
+ 504 003a 0023     		movs	r3, #0
+ 505 003c FB73     		strb	r3, [r7, #15]
+ 162:..\..\..\common\hw\include/packet.h ****   *(uint8_t *)((*to)->data + offset) = packet->container;
+ 506              		.loc 2 162 0
+ 507 003e 7B68     		ldr	r3, [r7, #4]
+ 508 0040 1B68     		ldr	r3, [r3]
+ 509 0042 5A68     		ldr	r2, [r3, #4]
+ 510 0044 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 511 0046 1344     		add	r3, r3, r2
+ 512 0048 3A68     		ldr	r2, [r7]
+ 513 004a 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 514 004c 1A70     		strb	r2, [r3]
+ 163:..\..\..\common\hw\include/packet.h **** 
+ 164:..\..\..\common\hw\include/packet.h ****   offset += sizeof(packet->container); // Move offset of previous data
+ 515              		.loc 2 164 0
+ 516 004e FB7B     		ldrb	r3, [r7, #15]
+ 517 0050 0133     		adds	r3, r3, #1
+ 518 0052 FB73     		strb	r3, [r7, #15]
+ 165:..\..\..\common\hw\include/packet.h ****   *(uint8_t *)((*to)->data + offset) = packet->volume;
+ 519              		.loc 2 165 0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 15
+
+
+ 520 0054 7B68     		ldr	r3, [r7, #4]
+ 521 0056 1B68     		ldr	r3, [r3]
+ 522 0058 5A68     		ldr	r2, [r3, #4]
+ 523 005a FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 524 005c 1344     		add	r3, r3, r2
+ 525 005e 3A68     		ldr	r2, [r7]
+ 526 0060 B2F90220 		ldrsh	r2, [r2, #2]
+ 527 0064 D2B2     		uxtb	r2, r2
+ 528 0066 1A70     		strb	r2, [r3]
+ 166:..\..\..\common\hw\include/packet.h **** 
+ 167:..\..\..\common\hw\include/packet.h ****   (*to)->data_len = sizeof(packet->container) + sizeof(packet->volume);
+ 529              		.loc 2 167 0
+ 530 0068 7B68     		ldr	r3, [r7, #4]
+ 531 006a 1B68     		ldr	r3, [r3]
+ 532 006c 0322     		movs	r2, #3
+ 533 006e 9A60     		str	r2, [r3, #8]
+ 168:..\..\..\common\hw\include/packet.h ****   return 0;
+ 534              		.loc 2 168 0
+ 535 0070 0023     		movs	r3, #0
+ 536              	.L23:
+ 169:..\..\..\common\hw\include/packet.h **** }
+ 537              		.loc 2 169 0
+ 538 0072 1846     		mov	r0, r3
+ 539 0074 1037     		adds	r7, r7, #16
+ 540              		.cfi_def_cfa_offset 8
+ 541 0076 BD46     		mov	sp, r7
+ 542              		.cfi_def_cfa_register 13
+ 543              		@ sp needed
+ 544 0078 80BD     		pop	{r7, pc}
+ 545              		.cfi_endproc
+ 546              	.LFE7:
+ 547              		.size	dmc_packet_marshal_container_volume_measured, .-dmc_packet_marshal_container_volume_measured
+ 548 007a 00BF     		.section	.text.dmc_packet_unmarshal_user_confirm,"ax",%progbits
+ 549              		.align	2
+ 550              		.thumb
+ 551              		.thumb_func
+ 552              		.type	dmc_packet_unmarshal_user_confirm, %function
+ 553              	dmc_packet_unmarshal_user_confirm:
+ 554              	.LFB8:
+ 170:..\..\..\common\hw\include/packet.h **** 
+ 171:..\..\..\common\hw\include/packet.h **** /**
+ 172:..\..\..\common\hw\include/packet.h ****  * @brief Packet declaring that a user has confirmed something on the
+ 173:..\..\..\common\hw\include/packet.h ****  * touchscreen
+ 174:..\..\..\common\hw\include/packet.h ****  *
+ 175:..\..\..\common\hw\include/packet.h ****  * Direction: RPi -> PSoC
+ 176:..\..\..\common\hw\include/packet.h ****  */
+ 177:..\..\..\common\hw\include/packet.h **** struct dmc_packet_user_confirm
+ 178:..\..\..\common\hw\include/packet.h **** {
+ 179:..\..\..\common\hw\include/packet.h **** };
+ 180:..\..\..\common\hw\include/packet.h **** 
+ 181:..\..\..\common\hw\include/packet.h **** /**
+ 182:..\..\..\common\hw\include/packet.h ****  * @brief Unmarshal data into user confirm packet from base packet
+ 183:..\..\..\common\hw\include/packet.h ****  */
+ 184:..\..\..\common\hw\include/packet.h **** static int
+ 185:..\..\..\common\hw\include/packet.h **** dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
+ 186:..\..\..\common\hw\include/packet.h ****                                   struct dmc_packet              *from)
+ 187:..\..\..\common\hw\include/packet.h **** {
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 16
+
+
+ 555              		.loc 2 187 0
+ 556              		.cfi_startproc
+ 557              		@ args = 0, pretend = 0, frame = 8
+ 558              		@ frame_needed = 1, uses_anonymous_args = 0
+ 559              		@ link register save eliminated.
+ 560 0000 80B4     		push	{r7}
+ 561              		.cfi_def_cfa_offset 4
+ 562              		.cfi_offset 7, -4
+ 563 0002 83B0     		sub	sp, sp, #12
+ 564              		.cfi_def_cfa_offset 16
+ 565 0004 00AF     		add	r7, sp, #0
+ 566              		.cfi_def_cfa_register 7
+ 567 0006 7860     		str	r0, [r7, #4]
+ 568 0008 3960     		str	r1, [r7]
+ 188:..\..\..\common\hw\include/packet.h ****   if (from->type != DMC_PACKET_USER_CONFIRM)
+ 569              		.loc 2 188 0
+ 570 000a 3B68     		ldr	r3, [r7]
+ 571 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 572 000e A02B     		cmp	r3, #160
+ 573 0010 02D0     		beq	.L27
+ 189:..\..\..\common\hw\include/packet.h ****   {
+ 190:..\..\..\common\hw\include/packet.h ****     return -1;
+ 574              		.loc 2 190 0
+ 575 0012 4FF0FF33 		mov	r3, #-1
+ 576 0016 00E0     		b	.L28
+ 577              	.L27:
+ 191:..\..\..\common\hw\include/packet.h ****   }
+ 192:..\..\..\common\hw\include/packet.h **** 
+ 193:..\..\..\common\hw\include/packet.h ****   return 0;
+ 578              		.loc 2 193 0
+ 579 0018 0023     		movs	r3, #0
+ 580              	.L28:
+ 194:..\..\..\common\hw\include/packet.h **** }
+ 581              		.loc 2 194 0
+ 582 001a 1846     		mov	r0, r3
+ 583 001c 0C37     		adds	r7, r7, #12
+ 584              		.cfi_def_cfa_offset 4
+ 585 001e BD46     		mov	sp, r7
+ 586              		.cfi_def_cfa_register 13
+ 587              		@ sp needed
+ 588 0020 80BC     		pop	{r7}
+ 589              		.cfi_restore 7
+ 590              		.cfi_def_cfa_offset 0
+ 591 0022 7047     		bx	lr
+ 592              		.cfi_endproc
+ 593              	.LFE8:
+ 594              		.size	dmc_packet_unmarshal_user_confirm, .-dmc_packet_unmarshal_user_confirm
+ 595              		.section	.text.dmc_packet_marshal_user_confirm,"ax",%progbits
+ 596              		.align	2
+ 597              		.thumb
+ 598              		.thumb_func
+ 599              		.type	dmc_packet_marshal_user_confirm, %function
+ 600              	dmc_packet_marshal_user_confirm:
+ 601              	.LFB9:
+ 195:..\..\..\common\hw\include/packet.h **** 
+ 196:..\..\..\common\hw\include/packet.h **** /**
+ 197:..\..\..\common\hw\include/packet.h ****  * @brief Marshal user confirm packet struct into base packet
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 17
+
+
+ 198:..\..\..\common\hw\include/packet.h ****  */
+ 199:..\..\..\common\hw\include/packet.h **** static int
+ 200:..\..\..\common\hw\include/packet.h **** dmc_packet_marshal_user_confirm(struct dmc_packet             **to,
+ 201:..\..\..\common\hw\include/packet.h ****                                 struct dmc_packet_user_confirm *packet)
+ 202:..\..\..\common\hw\include/packet.h **** {
+ 602              		.loc 2 202 0
+ 603              		.cfi_startproc
+ 604              		@ args = 0, pretend = 0, frame = 8
+ 605              		@ frame_needed = 1, uses_anonymous_args = 0
+ 606 0000 80B5     		push	{r7, lr}
+ 607              		.cfi_def_cfa_offset 8
+ 608              		.cfi_offset 7, -8
+ 609              		.cfi_offset 14, -4
+ 610 0002 82B0     		sub	sp, sp, #8
+ 611              		.cfi_def_cfa_offset 16
+ 612 0004 00AF     		add	r7, sp, #0
+ 613              		.cfi_def_cfa_register 7
+ 614 0006 7860     		str	r0, [r7, #4]
+ 615 0008 3960     		str	r1, [r7]
+ 203:..\..\..\common\hw\include/packet.h ****   if (to == NULL)
+ 616              		.loc 2 203 0
+ 617 000a 7B68     		ldr	r3, [r7, #4]
+ 618 000c 002B     		cmp	r3, #0
+ 619 000e 02D1     		bne	.L30
+ 204:..\..\..\common\hw\include/packet.h ****   {
+ 205:..\..\..\common\hw\include/packet.h ****     // Pointer to the pointer must not be null
+ 206:..\..\..\common\hw\include/packet.h ****     return -1;
+ 620              		.loc 2 206 0
+ 621 0010 4FF0FF33 		mov	r3, #-1
+ 622 0014 12E0     		b	.L31
+ 623              	.L30:
+ 207:..\..\..\common\hw\include/packet.h ****   }
+ 208:..\..\..\common\hw\include/packet.h ****   if (*to == NULL)
+ 624              		.loc 2 208 0
+ 625 0016 7B68     		ldr	r3, [r7, #4]
+ 626 0018 1B68     		ldr	r3, [r3]
+ 627 001a 002B     		cmp	r3, #0
+ 628 001c 05D1     		bne	.L32
+ 209:..\..\..\common\hw\include/packet.h ****   {
+ 210:..\..\..\common\hw\include/packet.h ****     *to = dmc_packet_init(DMC_PACKET_USER_CONFIRM);
+ 629              		.loc 2 210 0
+ 630 001e A020     		movs	r0, #160
+ 631 0020 FFF7FEFF 		bl	dmc_packet_init
+ 632 0024 0246     		mov	r2, r0
+ 633 0026 7B68     		ldr	r3, [r7, #4]
+ 634 0028 1A60     		str	r2, [r3]
+ 635              	.L32:
+ 211:..\..\..\common\hw\include/packet.h ****   }
+ 212:..\..\..\common\hw\include/packet.h ****   if ((*to)->type != DMC_PACKET_USER_CONFIRM)
+ 636              		.loc 2 212 0
+ 637 002a 7B68     		ldr	r3, [r7, #4]
+ 638 002c 1B68     		ldr	r3, [r3]
+ 639 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 640 0030 A02B     		cmp	r3, #160
+ 641 0032 02D0     		beq	.L33
+ 213:..\..\..\common\hw\include/packet.h ****   {
+ 214:..\..\..\common\hw\include/packet.h ****     return -2;
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 18
+
+
+ 642              		.loc 2 214 0
+ 643 0034 6FF00103 		mvn	r3, #1
+ 644 0038 00E0     		b	.L31
+ 645              	.L33:
+ 215:..\..\..\common\hw\include/packet.h ****   }
+ 216:..\..\..\common\hw\include/packet.h **** 
+ 217:..\..\..\common\hw\include/packet.h ****   return 0;
+ 646              		.loc 2 217 0
+ 647 003a 0023     		movs	r3, #0
+ 648              	.L31:
+ 218:..\..\..\common\hw\include/packet.h **** }
+ 649              		.loc 2 218 0
+ 650 003c 1846     		mov	r0, r3
+ 651 003e 0837     		adds	r7, r7, #8
+ 652              		.cfi_def_cfa_offset 8
+ 653 0040 BD46     		mov	sp, r7
+ 654              		.cfi_def_cfa_register 13
+ 655              		@ sp needed
+ 656 0042 80BD     		pop	{r7, pc}
+ 657              		.cfi_endproc
+ 658              	.LFE9:
+ 659              		.size	dmc_packet_marshal_user_confirm, .-dmc_packet_marshal_user_confirm
+ 660              		.section	.text.dmc_packet_unmarshal_machine_ok,"ax",%progbits
+ 661              		.align	2
+ 662              		.thumb
+ 663              		.thumb_func
+ 664              		.type	dmc_packet_unmarshal_machine_ok, %function
+ 665              	dmc_packet_unmarshal_machine_ok:
+ 666              	.LFB10:
+ 219:..\..\..\common\hw\include/packet.h **** 
+ 220:..\..\..\common\hw\include/packet.h **** /**
+ 221:..\..\..\common\hw\include/packet.h ****  * @brief Packet declaring that machine is ok after being out of order
+ 222:..\..\..\common\hw\include/packet.h ****  *
+ 223:..\..\..\common\hw\include/packet.h ****  * Direction: RPi -> PSoC
+ 224:..\..\..\common\hw\include/packet.h ****  */
+ 225:..\..\..\common\hw\include/packet.h **** struct dmc_packet_machine_ok
+ 226:..\..\..\common\hw\include/packet.h **** {
+ 227:..\..\..\common\hw\include/packet.h **** };
+ 228:..\..\..\common\hw\include/packet.h **** 
+ 229:..\..\..\common\hw\include/packet.h **** /**
+ 230:..\..\..\common\hw\include/packet.h ****  * @brief Unmarshal data into machine ok packet from base packet
+ 231:..\..\..\common\hw\include/packet.h ****  */
+ 232:..\..\..\common\hw\include/packet.h **** static int dmc_packet_unmarshal_machine_ok(struct dmc_packet_machine_ok *packet,
+ 233:..\..\..\common\hw\include/packet.h ****                                            struct dmc_packet            *from)
+ 234:..\..\..\common\hw\include/packet.h **** {
+ 667              		.loc 2 234 0
+ 668              		.cfi_startproc
+ 669              		@ args = 0, pretend = 0, frame = 8
+ 670              		@ frame_needed = 1, uses_anonymous_args = 0
+ 671              		@ link register save eliminated.
+ 672 0000 80B4     		push	{r7}
+ 673              		.cfi_def_cfa_offset 4
+ 674              		.cfi_offset 7, -4
+ 675 0002 83B0     		sub	sp, sp, #12
+ 676              		.cfi_def_cfa_offset 16
+ 677 0004 00AF     		add	r7, sp, #0
+ 678              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 19
+
+
+ 679 0006 7860     		str	r0, [r7, #4]
+ 680 0008 3960     		str	r1, [r7]
+ 235:..\..\..\common\hw\include/packet.h ****   if (from->type != DMC_PACKET_MACHINE_OK)
+ 681              		.loc 2 235 0
+ 682 000a 3B68     		ldr	r3, [r7]
+ 683 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 684 000e D02B     		cmp	r3, #208
+ 685 0010 02D0     		beq	.L35
+ 236:..\..\..\common\hw\include/packet.h ****   {
+ 237:..\..\..\common\hw\include/packet.h ****     return -1;
+ 686              		.loc 2 237 0
+ 687 0012 4FF0FF33 		mov	r3, #-1
+ 688 0016 00E0     		b	.L36
+ 689              	.L35:
+ 238:..\..\..\common\hw\include/packet.h ****   }
+ 239:..\..\..\common\hw\include/packet.h **** 
+ 240:..\..\..\common\hw\include/packet.h ****   return 0;
+ 690              		.loc 2 240 0
+ 691 0018 0023     		movs	r3, #0
+ 692              	.L36:
+ 241:..\..\..\common\hw\include/packet.h **** }
+ 693              		.loc 2 241 0
+ 694 001a 1846     		mov	r0, r3
+ 695 001c 0C37     		adds	r7, r7, #12
+ 696              		.cfi_def_cfa_offset 4
+ 697 001e BD46     		mov	sp, r7
+ 698              		.cfi_def_cfa_register 13
+ 699              		@ sp needed
+ 700 0020 80BC     		pop	{r7}
+ 701              		.cfi_restore 7
+ 702              		.cfi_def_cfa_offset 0
+ 703 0022 7047     		bx	lr
+ 704              		.cfi_endproc
+ 705              	.LFE10:
+ 706              		.size	dmc_packet_unmarshal_machine_ok, .-dmc_packet_unmarshal_machine_ok
+ 707              		.section	.text.dmc_packet_marshal_machine_ok,"ax",%progbits
+ 708              		.align	2
+ 709              		.thumb
+ 710              		.thumb_func
+ 711              		.type	dmc_packet_marshal_machine_ok, %function
+ 712              	dmc_packet_marshal_machine_ok:
+ 713              	.LFB11:
+ 242:..\..\..\common\hw\include/packet.h **** 
+ 243:..\..\..\common\hw\include/packet.h **** /**
+ 244:..\..\..\common\hw\include/packet.h ****  * @brief Marshal machine ok packet struct into base packet
+ 245:..\..\..\common\hw\include/packet.h ****  */
+ 246:..\..\..\common\hw\include/packet.h **** static int
+ 247:..\..\..\common\hw\include/packet.h **** dmc_packet_marshal_machine_ok(struct dmc_packet             **to,
+ 248:..\..\..\common\hw\include/packet.h ****                                 struct dmc_packet_machine_ok *packet)
+ 249:..\..\..\common\hw\include/packet.h **** {
+ 714              		.loc 2 249 0
+ 715              		.cfi_startproc
+ 716              		@ args = 0, pretend = 0, frame = 8
+ 717              		@ frame_needed = 1, uses_anonymous_args = 0
+ 718 0000 80B5     		push	{r7, lr}
+ 719              		.cfi_def_cfa_offset 8
+ 720              		.cfi_offset 7, -8
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 20
+
+
+ 721              		.cfi_offset 14, -4
+ 722 0002 82B0     		sub	sp, sp, #8
+ 723              		.cfi_def_cfa_offset 16
+ 724 0004 00AF     		add	r7, sp, #0
+ 725              		.cfi_def_cfa_register 7
+ 726 0006 7860     		str	r0, [r7, #4]
+ 727 0008 3960     		str	r1, [r7]
+ 250:..\..\..\common\hw\include/packet.h ****   if (to == NULL)
+ 728              		.loc 2 250 0
+ 729 000a 7B68     		ldr	r3, [r7, #4]
+ 730 000c 002B     		cmp	r3, #0
+ 731 000e 02D1     		bne	.L38
+ 251:..\..\..\common\hw\include/packet.h ****   {
+ 252:..\..\..\common\hw\include/packet.h ****     // Pointer to the pointer must not be null
+ 253:..\..\..\common\hw\include/packet.h ****     return -1;
+ 732              		.loc 2 253 0
+ 733 0010 4FF0FF33 		mov	r3, #-1
+ 734 0014 12E0     		b	.L39
+ 735              	.L38:
+ 254:..\..\..\common\hw\include/packet.h ****   }
+ 255:..\..\..\common\hw\include/packet.h ****   if (*to == NULL)
+ 736              		.loc 2 255 0
+ 737 0016 7B68     		ldr	r3, [r7, #4]
+ 738 0018 1B68     		ldr	r3, [r3]
+ 739 001a 002B     		cmp	r3, #0
+ 740 001c 05D1     		bne	.L40
+ 256:..\..\..\common\hw\include/packet.h ****   {
+ 257:..\..\..\common\hw\include/packet.h ****     *to = dmc_packet_init(DMC_PACKET_MACHINE_OK);
+ 741              		.loc 2 257 0
+ 742 001e D020     		movs	r0, #208
+ 743 0020 FFF7FEFF 		bl	dmc_packet_init
+ 744 0024 0246     		mov	r2, r0
+ 745 0026 7B68     		ldr	r3, [r7, #4]
+ 746 0028 1A60     		str	r2, [r3]
+ 747              	.L40:
+ 258:..\..\..\common\hw\include/packet.h ****   }
+ 259:..\..\..\common\hw\include/packet.h ****   if ((*to)->type != DMC_PACKET_MACHINE_OK)
+ 748              		.loc 2 259 0
+ 749 002a 7B68     		ldr	r3, [r7, #4]
+ 750 002c 1B68     		ldr	r3, [r3]
+ 751 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 752 0030 D02B     		cmp	r3, #208
+ 753 0032 02D0     		beq	.L41
+ 260:..\..\..\common\hw\include/packet.h ****   {
+ 261:..\..\..\common\hw\include/packet.h ****     return -2;
+ 754              		.loc 2 261 0
+ 755 0034 6FF00103 		mvn	r3, #1
+ 756 0038 00E0     		b	.L39
+ 757              	.L41:
+ 262:..\..\..\common\hw\include/packet.h ****   }
+ 263:..\..\..\common\hw\include/packet.h **** 
+ 264:..\..\..\common\hw\include/packet.h ****    return 0;
+ 758              		.loc 2 264 0
+ 759 003a 0023     		movs	r3, #0
+ 760              	.L39:
+ 265:..\..\..\common\hw\include/packet.h **** }
+ 761              		.loc 2 265 0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 21
+
+
+ 762 003c 1846     		mov	r0, r3
+ 763 003e 0837     		adds	r7, r7, #8
+ 764              		.cfi_def_cfa_offset 8
+ 765 0040 BD46     		mov	sp, r7
+ 766              		.cfi_def_cfa_register 13
+ 767              		@ sp needed
+ 768 0042 80BD     		pop	{r7, pc}
+ 769              		.cfi_endproc
+ 770              	.LFE11:
+ 771              		.size	dmc_packet_marshal_machine_ok, .-dmc_packet_marshal_machine_ok
+ 772              		.section	.text.dmc_packet_unmarshal_fluid_pour_requested,"ax",%progbits
+ 773              		.align	2
+ 774              		.thumb
+ 775              		.thumb_func
+ 776              		.type	dmc_packet_unmarshal_fluid_pour_requested, %function
+ 777              	dmc_packet_unmarshal_fluid_pour_requested:
+ 778              	.LFB12:
+ 266:..\..\..\common\hw\include/packet.h **** 
+ 267:..\..\..\common\hw\include/packet.h **** /**
+ 268:..\..\..\common\hw\include/packet.h ****  * @brief Packet declaring that the machine should start to pour fluid.
+ 269:..\..\..\common\hw\include/packet.h ****  *
+ 270:..\..\..\common\hw\include/packet.h ****  * Direction: RPi -> PSoC
+ 271:..\..\..\common\hw\include/packet.h ****  */
+ 272:..\..\..\common\hw\include/packet.h **** struct dmc_packet_fluid_pour_requested
+ 273:..\..\..\common\hw\include/packet.h **** {
+ 274:..\..\..\common\hw\include/packet.h ****   /**
+ 275:..\..\..\common\hw\include/packet.h ****    * @brief The container to pour from. Ranging from 0-2
+ 276:..\..\..\common\hw\include/packet.h ****    */
+ 277:..\..\..\common\hw\include/packet.h ****   uint8_t container;
+ 278:..\..\..\common\hw\include/packet.h **** 
+ 279:..\..\..\common\hw\include/packet.h ****   /**
+ 280:..\..\..\common\hw\include/packet.h ****    * @brief Amount to pour in centiliters
+ 281:..\..\..\common\hw\include/packet.h ****    */
+ 282:..\..\..\common\hw\include/packet.h ****   uint8_t amount;
+ 283:..\..\..\common\hw\include/packet.h **** };
+ 284:..\..\..\common\hw\include/packet.h **** 
+ 285:..\..\..\common\hw\include/packet.h **** /**
+ 286:..\..\..\common\hw\include/packet.h ****  * @brief Unmarshal data into fluid pour requested packet from base packet
+ 287:..\..\..\common\hw\include/packet.h ****  */
+ 288:..\..\..\common\hw\include/packet.h **** static int dmc_packet_unmarshal_fluid_pour_requested(
+ 289:..\..\..\common\hw\include/packet.h ****     struct dmc_packet_fluid_pour_requested *packet, struct dmc_packet *from)
+ 290:..\..\..\common\hw\include/packet.h **** {
+ 779              		.loc 2 290 0
+ 780              		.cfi_startproc
+ 781              		@ args = 0, pretend = 0, frame = 16
+ 782              		@ frame_needed = 1, uses_anonymous_args = 0
+ 783              		@ link register save eliminated.
+ 784 0000 80B4     		push	{r7}
+ 785              		.cfi_def_cfa_offset 4
+ 786              		.cfi_offset 7, -4
+ 787 0002 85B0     		sub	sp, sp, #20
+ 788              		.cfi_def_cfa_offset 24
+ 789 0004 00AF     		add	r7, sp, #0
+ 790              		.cfi_def_cfa_register 7
+ 791 0006 7860     		str	r0, [r7, #4]
+ 792 0008 3960     		str	r1, [r7]
+ 291:..\..\..\common\hw\include/packet.h ****   if (from->type != DMC_PACKET_FLUID_POUR_REQUESTED)
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 22
+
+
+ 793              		.loc 2 291 0
+ 794 000a 3B68     		ldr	r3, [r7]
+ 795 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 796 000e B22B     		cmp	r3, #178
+ 797 0010 02D0     		beq	.L43
+ 292:..\..\..\common\hw\include/packet.h ****   {
+ 293:..\..\..\common\hw\include/packet.h ****     return -1;
+ 798              		.loc 2 293 0
+ 799 0012 4FF0FF33 		mov	r3, #-1
+ 800 0016 13E0     		b	.L44
+ 801              	.L43:
+ 294:..\..\..\common\hw\include/packet.h ****   }
+ 295:..\..\..\common\hw\include/packet.h **** 
+ 296:..\..\..\common\hw\include/packet.h ****   uint8_t offset    = 0;
+ 802              		.loc 2 296 0
+ 803 0018 0023     		movs	r3, #0
+ 804 001a FB73     		strb	r3, [r7, #15]
+ 297:..\..\..\common\hw\include/packet.h ****   packet->container = *(uint8_t *)(from->data + offset);
+ 805              		.loc 2 297 0
+ 806 001c 3B68     		ldr	r3, [r7]
+ 807 001e 5A68     		ldr	r2, [r3, #4]
+ 808 0020 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 809 0022 1344     		add	r3, r3, r2
+ 810 0024 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 811 0026 7B68     		ldr	r3, [r7, #4]
+ 812 0028 1A70     		strb	r2, [r3]
+ 298:..\..\..\common\hw\include/packet.h **** 
+ 299:..\..\..\common\hw\include/packet.h ****   offset += sizeof(packet->container); // Move offset of previous data
+ 813              		.loc 2 299 0
+ 814 002a FB7B     		ldrb	r3, [r7, #15]
+ 815 002c 0133     		adds	r3, r3, #1
+ 816 002e FB73     		strb	r3, [r7, #15]
+ 300:..\..\..\common\hw\include/packet.h ****   packet->amount = *(uint8_t *)(from->data + offset);
+ 817              		.loc 2 300 0
+ 818 0030 3B68     		ldr	r3, [r7]
+ 819 0032 5A68     		ldr	r2, [r3, #4]
+ 820 0034 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 821 0036 1344     		add	r3, r3, r2
+ 822 0038 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 823 003a 7B68     		ldr	r3, [r7, #4]
+ 824 003c 5A70     		strb	r2, [r3, #1]
+ 301:..\..\..\common\hw\include/packet.h **** 
+ 302:..\..\..\common\hw\include/packet.h ****   return 0;
+ 825              		.loc 2 302 0
+ 826 003e 0023     		movs	r3, #0
+ 827              	.L44:
+ 303:..\..\..\common\hw\include/packet.h **** }
+ 828              		.loc 2 303 0
+ 829 0040 1846     		mov	r0, r3
+ 830 0042 1437     		adds	r7, r7, #20
+ 831              		.cfi_def_cfa_offset 4
+ 832 0044 BD46     		mov	sp, r7
+ 833              		.cfi_def_cfa_register 13
+ 834              		@ sp needed
+ 835 0046 80BC     		pop	{r7}
+ 836              		.cfi_restore 7
+ 837              		.cfi_def_cfa_offset 0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 23
+
+
+ 838 0048 7047     		bx	lr
+ 839              		.cfi_endproc
+ 840              	.LFE12:
+ 841              		.size	dmc_packet_unmarshal_fluid_pour_requested, .-dmc_packet_unmarshal_fluid_pour_requested
+ 842 004a 00BF     		.section	.text.dmc_packet_marshal_fluid_pour_requested,"ax",%progbits
+ 843              		.align	2
+ 844              		.thumb
+ 845              		.thumb_func
+ 846              		.type	dmc_packet_marshal_fluid_pour_requested, %function
+ 847              	dmc_packet_marshal_fluid_pour_requested:
+ 848              	.LFB13:
+ 304:..\..\..\common\hw\include/packet.h **** 
+ 305:..\..\..\common\hw\include/packet.h **** /**
+ 306:..\..\..\common\hw\include/packet.h ****  * @brief Marshal fluid pour requested packet struct into base packet
+ 307:..\..\..\common\hw\include/packet.h ****  */
+ 308:..\..\..\common\hw\include/packet.h **** static int dmc_packet_marshal_fluid_pour_requested(
+ 309:..\..\..\common\hw\include/packet.h ****     struct dmc_packet **to, struct dmc_packet_fluid_pour_requested *packet)
+ 310:..\..\..\common\hw\include/packet.h **** {
+ 849              		.loc 2 310 0
+ 850              		.cfi_startproc
+ 851              		@ args = 0, pretend = 0, frame = 16
+ 852              		@ frame_needed = 1, uses_anonymous_args = 0
+ 853 0000 80B5     		push	{r7, lr}
+ 854              		.cfi_def_cfa_offset 8
+ 855              		.cfi_offset 7, -8
+ 856              		.cfi_offset 14, -4
+ 857 0002 84B0     		sub	sp, sp, #16
+ 858              		.cfi_def_cfa_offset 24
+ 859 0004 00AF     		add	r7, sp, #0
+ 860              		.cfi_def_cfa_register 7
+ 861 0006 7860     		str	r0, [r7, #4]
+ 862 0008 3960     		str	r1, [r7]
+ 311:..\..\..\common\hw\include/packet.h ****   if (to == NULL)
+ 863              		.loc 2 311 0
+ 864 000a 7B68     		ldr	r3, [r7, #4]
+ 865 000c 002B     		cmp	r3, #0
+ 866 000e 02D1     		bne	.L46
+ 312:..\..\..\common\hw\include/packet.h ****   {
+ 313:..\..\..\common\hw\include/packet.h ****     // Pointer to the pointer must not be null
+ 314:..\..\..\common\hw\include/packet.h ****     return -1;
+ 867              		.loc 2 314 0
+ 868 0010 4FF0FF33 		mov	r3, #-1
+ 869 0014 2FE0     		b	.L47
+ 870              	.L46:
+ 315:..\..\..\common\hw\include/packet.h ****   }
+ 316:..\..\..\common\hw\include/packet.h ****   if (*to == NULL)
+ 871              		.loc 2 316 0
+ 872 0016 7B68     		ldr	r3, [r7, #4]
+ 873 0018 1B68     		ldr	r3, [r3]
+ 874 001a 002B     		cmp	r3, #0
+ 875 001c 05D1     		bne	.L48
+ 317:..\..\..\common\hw\include/packet.h ****   {
+ 318:..\..\..\common\hw\include/packet.h ****     // If the underlying dmc_packet* is not yet allocalted, allocate it
+ 319:..\..\..\common\hw\include/packet.h ****     *to = dmc_packet_init(DMC_PACKET_FLUID_POUR_REQUESTED);
+ 876              		.loc 2 319 0
+ 877 001e B220     		movs	r0, #178
+ 878 0020 FFF7FEFF 		bl	dmc_packet_init
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 24
+
+
+ 879 0024 0246     		mov	r2, r0
+ 880 0026 7B68     		ldr	r3, [r7, #4]
+ 881 0028 1A60     		str	r2, [r3]
+ 882              	.L48:
+ 320:..\..\..\common\hw\include/packet.h ****   }
+ 321:..\..\..\common\hw\include/packet.h ****   if (*to != NULL && (*to)->type != DMC_PACKET_FLUID_POUR_REQUESTED)
+ 883              		.loc 2 321 0
+ 884 002a 7B68     		ldr	r3, [r7, #4]
+ 885 002c 1B68     		ldr	r3, [r3]
+ 886 002e 002B     		cmp	r3, #0
+ 887 0030 07D0     		beq	.L49
+ 888              		.loc 2 321 0 is_stmt 0 discriminator 1
+ 889 0032 7B68     		ldr	r3, [r7, #4]
+ 890 0034 1B68     		ldr	r3, [r3]
+ 891 0036 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 892 0038 B22B     		cmp	r3, #178
+ 893 003a 02D0     		beq	.L49
+ 322:..\..\..\common\hw\include/packet.h ****   {
+ 323:..\..\..\common\hw\include/packet.h ****     // If type of underlying dmc_packet* is not the same as the packet type,
+ 324:..\..\..\common\hw\include/packet.h ****     // then return error
+ 325:..\..\..\common\hw\include/packet.h ****     return -2;
+ 894              		.loc 2 325 0 is_stmt 1
+ 895 003c 6FF00103 		mvn	r3, #1
+ 896 0040 19E0     		b	.L47
+ 897              	.L49:
+ 326:..\..\..\common\hw\include/packet.h ****   }
+ 327:..\..\..\common\hw\include/packet.h **** 
+ 328:..\..\..\common\hw\include/packet.h ****   uint8_t offset                     = 0;
+ 898              		.loc 2 328 0
+ 899 0042 0023     		movs	r3, #0
+ 900 0044 FB73     		strb	r3, [r7, #15]
+ 329:..\..\..\common\hw\include/packet.h ****   *(uint8_t *)((*to)->data + offset) = packet->container;
+ 901              		.loc 2 329 0
+ 902 0046 7B68     		ldr	r3, [r7, #4]
+ 903 0048 1B68     		ldr	r3, [r3]
+ 904 004a 5A68     		ldr	r2, [r3, #4]
+ 905 004c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 906 004e 1344     		add	r3, r3, r2
+ 907 0050 3A68     		ldr	r2, [r7]
+ 908 0052 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 909 0054 1A70     		strb	r2, [r3]
+ 330:..\..\..\common\hw\include/packet.h **** 
+ 331:..\..\..\common\hw\include/packet.h ****   offset += sizeof(packet->container); // Move offset of previous data
+ 910              		.loc 2 331 0
+ 911 0056 FB7B     		ldrb	r3, [r7, #15]
+ 912 0058 0133     		adds	r3, r3, #1
+ 913 005a FB73     		strb	r3, [r7, #15]
+ 332:..\..\..\common\hw\include/packet.h ****   *(uint8_t *)((*to)->data + offset) = packet->amount;
+ 914              		.loc 2 332 0
+ 915 005c 7B68     		ldr	r3, [r7, #4]
+ 916 005e 1B68     		ldr	r3, [r3]
+ 917 0060 5A68     		ldr	r2, [r3, #4]
+ 918 0062 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 919 0064 1344     		add	r3, r3, r2
+ 920 0066 3A68     		ldr	r2, [r7]
+ 921 0068 5278     		ldrb	r2, [r2, #1]	@ zero_extendqisi2
+ 922 006a 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 25
+
+
+ 333:..\..\..\common\hw\include/packet.h **** 
+ 334:..\..\..\common\hw\include/packet.h ****   (*to)->data_len = sizeof(packet->container) + sizeof(packet->amount);
+ 923              		.loc 2 334 0
+ 924 006c 7B68     		ldr	r3, [r7, #4]
+ 925 006e 1B68     		ldr	r3, [r3]
+ 926 0070 0222     		movs	r2, #2
+ 927 0072 9A60     		str	r2, [r3, #8]
+ 335:..\..\..\common\hw\include/packet.h ****   return 0;
+ 928              		.loc 2 335 0
+ 929 0074 0023     		movs	r3, #0
+ 930              	.L47:
+ 336:..\..\..\common\hw\include/packet.h **** }
+ 931              		.loc 2 336 0
+ 932 0076 1846     		mov	r0, r3
+ 933 0078 1037     		adds	r7, r7, #16
+ 934              		.cfi_def_cfa_offset 8
+ 935 007a BD46     		mov	sp, r7
+ 936              		.cfi_def_cfa_register 13
+ 937              		@ sp needed
+ 938 007c 80BD     		pop	{r7, pc}
+ 939              		.cfi_endproc
+ 940              	.LFE13:
+ 941              		.size	dmc_packet_marshal_fluid_pour_requested, .-dmc_packet_marshal_fluid_pour_requested
+ 942              		.global	queue_size
+ 943 007e 00BF     		.bss
+ 944              		.align	2
+ 945              		.type	queue_size, %object
+ 946              		.size	queue_size, 4
+ 947              	queue_size:
+ 948 0000 00000000 		.space	4
+ 949              		.comm	queue,80,4
+ 950              		.section	.text.job_enqueue,"ax",%progbits
+ 951              		.align	2
+ 952              		.global	job_enqueue
+ 953              		.thumb
+ 954              		.thumb_func
+ 955              		.type	job_enqueue, %function
+ 956              	job_enqueue:
+ 957              	.LFB15:
+ 958              		.file 3 "dmc_job_queue.c"
+   1:dmc_job_queue.c **** #include "dmc_job_queue.h"
+   2:dmc_job_queue.c **** 
+   3:dmc_job_queue.c **** #define MAX_QUEUE_JOBS 10
+   4:dmc_job_queue.c **** 
+   5:dmc_job_queue.c **** volatile int        queue_size = 0;
+   6:dmc_job_queue.c **** volatile struct job queue[MAX_QUEUE_JOBS];
+   7:dmc_job_queue.c **** 
+   8:dmc_job_queue.c **** void job_enqueue(enum job_type type, void *data)
+   9:dmc_job_queue.c **** {
+ 959              		.loc 3 9 0
+ 960              		.cfi_startproc
+ 961              		@ args = 0, pretend = 0, frame = 8
+ 962              		@ frame_needed = 1, uses_anonymous_args = 0
+ 963              		@ link register save eliminated.
+ 964 0000 80B4     		push	{r7}
+ 965              		.cfi_def_cfa_offset 4
+ 966              		.cfi_offset 7, -4
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 26
+
+
+ 967 0002 83B0     		sub	sp, sp, #12
+ 968              		.cfi_def_cfa_offset 16
+ 969 0004 00AF     		add	r7, sp, #0
+ 970              		.cfi_def_cfa_register 7
+ 971 0006 0346     		mov	r3, r0
+ 972 0008 3960     		str	r1, [r7]
+ 973 000a FB71     		strb	r3, [r7, #7]
+  10:dmc_job_queue.c ****   if (queue_size == MAX_QUEUE_JOBS)
+ 974              		.loc 3 10 0
+ 975 000c 0D4B     		ldr	r3, .L54
+ 976 000e 1B68     		ldr	r3, [r3]
+ 977 0010 0A2B     		cmp	r3, #10
+ 978 0012 12D0     		beq	.L53
+  11:dmc_job_queue.c ****   {
+  12:dmc_job_queue.c ****     return;
+  13:dmc_job_queue.c ****   }
+  14:dmc_job_queue.c **** 
+  15:dmc_job_queue.c ****   queue[queue_size].type = type;
+ 979              		.loc 3 15 0
+ 980 0014 0B4B     		ldr	r3, .L54
+ 981 0016 1B68     		ldr	r3, [r3]
+ 982 0018 0B49     		ldr	r1, .L54+4
+ 983 001a FA79     		ldrb	r2, [r7, #7]
+ 984 001c 01F83320 		strb	r2, [r1, r3, lsl #3]
+  16:dmc_job_queue.c ****   queue[queue_size].data = data;
+ 985              		.loc 3 16 0
+ 986 0020 084B     		ldr	r3, .L54
+ 987 0022 1B68     		ldr	r3, [r3]
+ 988 0024 084A     		ldr	r2, .L54+4
+ 989 0026 DB00     		lsls	r3, r3, #3
+ 990 0028 1344     		add	r3, r3, r2
+ 991 002a 3A68     		ldr	r2, [r7]
+ 992 002c 5A60     		str	r2, [r3, #4]
+  17:dmc_job_queue.c ****   queue_size++;
+ 993              		.loc 3 17 0
+ 994 002e 054B     		ldr	r3, .L54
+ 995 0030 1B68     		ldr	r3, [r3]
+ 996 0032 0133     		adds	r3, r3, #1
+ 997 0034 034A     		ldr	r2, .L54
+ 998 0036 1360     		str	r3, [r2]
+ 999 0038 00E0     		b	.L50
+ 1000              	.L53:
+  12:dmc_job_queue.c ****   }
+ 1001              		.loc 3 12 0
+ 1002 003a 00BF     		nop
+ 1003              	.L50:
+  18:dmc_job_queue.c **** }
+ 1004              		.loc 3 18 0
+ 1005 003c 0C37     		adds	r7, r7, #12
+ 1006              		.cfi_def_cfa_offset 4
+ 1007 003e BD46     		mov	sp, r7
+ 1008              		.cfi_def_cfa_register 13
+ 1009              		@ sp needed
+ 1010 0040 80BC     		pop	{r7}
+ 1011              		.cfi_restore 7
+ 1012              		.cfi_def_cfa_offset 0
+ 1013 0042 7047     		bx	lr
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 27
+
+
+ 1014              	.L55:
+ 1015              		.align	2
+ 1016              	.L54:
+ 1017 0044 00000000 		.word	queue_size
+ 1018 0048 00000000 		.word	queue
+ 1019              		.cfi_endproc
+ 1020              	.LFE15:
+ 1021              		.size	job_enqueue, .-job_enqueue
+ 1022              		.section	.text.job_dequeue,"ax",%progbits
+ 1023              		.align	2
+ 1024              		.global	job_dequeue
+ 1025              		.thumb
+ 1026              		.thumb_func
+ 1027              		.type	job_dequeue, %function
+ 1028              	job_dequeue:
+ 1029              	.LFB16:
+  19:dmc_job_queue.c **** 
+  20:dmc_job_queue.c **** int job_dequeue(struct job* next)
+  21:dmc_job_queue.c **** {
+ 1030              		.loc 3 21 0
+ 1031              		.cfi_startproc
+ 1032              		@ args = 0, pretend = 0, frame = 16
+ 1033              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1034              		@ link register save eliminated.
+ 1035 0000 80B4     		push	{r7}
+ 1036              		.cfi_def_cfa_offset 4
+ 1037              		.cfi_offset 7, -4
+ 1038 0002 85B0     		sub	sp, sp, #20
+ 1039              		.cfi_def_cfa_offset 24
+ 1040 0004 00AF     		add	r7, sp, #0
+ 1041              		.cfi_def_cfa_register 7
+ 1042 0006 7860     		str	r0, [r7, #4]
+  22:dmc_job_queue.c ****   if (queue_size == 0)
+ 1043              		.loc 3 22 0
+ 1044 0008 174B     		ldr	r3, .L61
+ 1045 000a 1B68     		ldr	r3, [r3]
+ 1046 000c 002B     		cmp	r3, #0
+ 1047 000e 01D1     		bne	.L57
+  23:dmc_job_queue.c ****     return 1;
+ 1048              		.loc 3 23 0
+ 1049 0010 0123     		movs	r3, #1
+ 1050 0012 23E0     		b	.L58
+ 1051              	.L57:
+  24:dmc_job_queue.c **** 
+  25:dmc_job_queue.c ****   *next = queue[0];
+ 1052              		.loc 3 25 0
+ 1053 0014 7B68     		ldr	r3, [r7, #4]
+ 1054 0016 154A     		ldr	r2, .L61+4
+ 1055 0018 92E80300 		ldmia	r2, {r0, r1}
+ 1056 001c 83E80300 		stmia	r3, {r0, r1}
+ 1057              	.LBB2:
+  26:dmc_job_queue.c **** 
+  27:dmc_job_queue.c ****   // Shift elements downwards
+  28:dmc_job_queue.c ****   for (int i = 1; i < queue_size; i++)
+ 1058              		.loc 3 28 0
+ 1059 0020 0123     		movs	r3, #1
+ 1060 0022 FB60     		str	r3, [r7, #12]
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 28
+
+
+ 1061 0024 0FE0     		b	.L59
+ 1062              	.L60:
+  29:dmc_job_queue.c ****   {
+  30:dmc_job_queue.c ****     queue[i - 1] = queue[i];
+ 1063              		.loc 3 30 0 discriminator 3
+ 1064 0026 FB68     		ldr	r3, [r7, #12]
+ 1065 0028 013B     		subs	r3, r3, #1
+ 1066 002a 1048     		ldr	r0, .L61+4
+ 1067 002c 0F49     		ldr	r1, .L61+4
+ 1068 002e FA68     		ldr	r2, [r7, #12]
+ 1069 0030 DB00     		lsls	r3, r3, #3
+ 1070 0032 0344     		add	r3, r3, r0
+ 1071 0034 D200     		lsls	r2, r2, #3
+ 1072 0036 0A44     		add	r2, r2, r1
+ 1073 0038 92E80300 		ldmia	r2, {r0, r1}
+ 1074 003c 83E80300 		stmia	r3, {r0, r1}
+  28:dmc_job_queue.c ****   {
+ 1075              		.loc 3 28 0 discriminator 3
+ 1076 0040 FB68     		ldr	r3, [r7, #12]
+ 1077 0042 0133     		adds	r3, r3, #1
+ 1078 0044 FB60     		str	r3, [r7, #12]
+ 1079              	.L59:
+  28:dmc_job_queue.c ****   {
+ 1080              		.loc 3 28 0 is_stmt 0 discriminator 1
+ 1081 0046 084B     		ldr	r3, .L61
+ 1082 0048 1B68     		ldr	r3, [r3]
+ 1083 004a FA68     		ldr	r2, [r7, #12]
+ 1084 004c 9A42     		cmp	r2, r3
+ 1085 004e EADB     		blt	.L60
+ 1086              	.LBE2:
+  31:dmc_job_queue.c ****   }
+  32:dmc_job_queue.c **** 
+  33:dmc_job_queue.c ****   queue_size--;
+ 1087              		.loc 3 33 0 is_stmt 1
+ 1088 0050 054B     		ldr	r3, .L61
+ 1089 0052 1B68     		ldr	r3, [r3]
+ 1090 0054 013B     		subs	r3, r3, #1
+ 1091 0056 044A     		ldr	r2, .L61
+ 1092 0058 1360     		str	r3, [r2]
+  34:dmc_job_queue.c ****   return 0;
+ 1093              		.loc 3 34 0
+ 1094 005a 0023     		movs	r3, #0
+ 1095              	.L58:
+  35:dmc_job_queue.c **** }
+ 1096              		.loc 3 35 0
+ 1097 005c 1846     		mov	r0, r3
+ 1098 005e 1437     		adds	r7, r7, #20
+ 1099              		.cfi_def_cfa_offset 4
+ 1100 0060 BD46     		mov	sp, r7
+ 1101              		.cfi_def_cfa_register 13
+ 1102              		@ sp needed
+ 1103 0062 80BC     		pop	{r7}
+ 1104              		.cfi_restore 7
+ 1105              		.cfi_def_cfa_offset 0
+ 1106 0064 7047     		bx	lr
+ 1107              	.L62:
+ 1108 0066 00BF     		.align	2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 29
+
+
+ 1109              	.L61:
+ 1110 0068 00000000 		.word	queue_size
+ 1111 006c 00000000 		.word	queue
+ 1112              		.cfi_endproc
+ 1113              	.LFE16:
+ 1114              		.size	job_dequeue, .-job_dequeue
+ 1115              		.section	.text.job_enqueue_packet,"ax",%progbits
+ 1116              		.align	2
+ 1117              		.global	job_enqueue_packet
+ 1118              		.thumb
+ 1119              		.thumb_func
+ 1120              		.type	job_enqueue_packet, %function
+ 1121              	job_enqueue_packet:
+ 1122              	.LFB17:
+  36:dmc_job_queue.c **** 
+  37:dmc_job_queue.c **** void job_enqueue_packet(struct dmc_packet *packet)
+  38:dmc_job_queue.c **** {
+ 1123              		.loc 3 38 0
+ 1124              		.cfi_startproc
+ 1125              		@ args = 0, pretend = 0, frame = 8
+ 1126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1127 0000 80B5     		push	{r7, lr}
+ 1128              		.cfi_def_cfa_offset 8
+ 1129              		.cfi_offset 7, -8
+ 1130              		.cfi_offset 14, -4
+ 1131 0002 82B0     		sub	sp, sp, #8
+ 1132              		.cfi_def_cfa_offset 16
+ 1133 0004 00AF     		add	r7, sp, #0
+ 1134              		.cfi_def_cfa_register 7
+ 1135 0006 7860     		str	r0, [r7, #4]
+  39:dmc_job_queue.c ****   // Enqueue packet
+  40:dmc_job_queue.c ****   job_enqueue(JOB_TYPE_PACKET, (void *)packet);
+ 1136              		.loc 3 40 0
+ 1137 0008 7968     		ldr	r1, [r7, #4]
+ 1138 000a 0120     		movs	r0, #1
+ 1139 000c FFF7FEFF 		bl	job_enqueue
+  41:dmc_job_queue.c **** }
+ 1140              		.loc 3 41 0
+ 1141 0010 00BF     		nop
+ 1142 0012 0837     		adds	r7, r7, #8
+ 1143              		.cfi_def_cfa_offset 8
+ 1144 0014 BD46     		mov	sp, r7
+ 1145              		.cfi_def_cfa_register 13
+ 1146              		@ sp needed
+ 1147 0016 80BD     		pop	{r7, pc}
+ 1148              		.cfi_endproc
+ 1149              	.LFE17:
+ 1150              		.size	job_enqueue_packet, .-job_enqueue_packet
+ 1151              		.section	.text.job_enqueue_timer,"ax",%progbits
+ 1152              		.align	2
+ 1153              		.global	job_enqueue_timer
+ 1154              		.thumb
+ 1155              		.thumb_func
+ 1156              		.type	job_enqueue_timer, %function
+ 1157              	job_enqueue_timer:
+ 1158              	.LFB18:
+  42:dmc_job_queue.c **** 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 30
+
+
+  43:dmc_job_queue.c **** void job_enqueue_timer(struct dmc_timer_action* action)
+  44:dmc_job_queue.c **** {
+ 1159              		.loc 3 44 0
+ 1160              		.cfi_startproc
+ 1161              		@ args = 0, pretend = 0, frame = 8
+ 1162              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1163 0000 80B5     		push	{r7, lr}
+ 1164              		.cfi_def_cfa_offset 8
+ 1165              		.cfi_offset 7, -8
+ 1166              		.cfi_offset 14, -4
+ 1167 0002 82B0     		sub	sp, sp, #8
+ 1168              		.cfi_def_cfa_offset 16
+ 1169 0004 00AF     		add	r7, sp, #0
+ 1170              		.cfi_def_cfa_register 7
+ 1171 0006 7860     		str	r0, [r7, #4]
+  45:dmc_job_queue.c ****   job_enqueue(JOB_TYPE_TIMER, (void*)action);
+ 1172              		.loc 3 45 0
+ 1173 0008 7968     		ldr	r1, [r7, #4]
+ 1174 000a 0220     		movs	r0, #2
+ 1175 000c FFF7FEFF 		bl	job_enqueue
+  46:dmc_job_queue.c **** }
+ 1176              		.loc 3 46 0
+ 1177 0010 00BF     		nop
+ 1178 0012 0837     		adds	r7, r7, #8
+ 1179              		.cfi_def_cfa_offset 8
+ 1180 0014 BD46     		mov	sp, r7
+ 1181              		.cfi_def_cfa_register 13
+ 1182              		@ sp needed
+ 1183 0016 80BD     		pop	{r7, pc}
+ 1184              		.cfi_endproc
+ 1185              	.LFE18:
+ 1186              		.size	job_enqueue_timer, .-job_enqueue_timer
+ 1187              		.text
+ 1188              	.Letext0:
+ 1189              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1190              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1191              		.file 6 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1192              		.file 7 "dmc_timers.h"
+ 1193              		.file 8 "dmc_job_queue.h"
+ 1194              		.section	.debug_info,"",%progbits
+ 1195              	.Ldebug_info0:
+ 1196 0000 F2060000 		.4byte	0x6f2
+ 1197 0004 0400     		.2byte	0x4
+ 1198 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1199 000a 04       		.byte	0x4
+ 1200 000b 01       		.uleb128 0x1
+ 1201 000c D2000000 		.4byte	.LASF79
+ 1202 0010 0C       		.byte	0xc
+ 1203 0011 EE020000 		.4byte	.LASF80
+ 1204 0015 48020000 		.4byte	.LASF81
+ 1205 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1206 001d 00000000 		.4byte	0
+ 1207 0021 00000000 		.4byte	.Ldebug_line0
+ 1208 0025 02       		.uleb128 0x2
+ 1209 0026 6D000000 		.4byte	.LASF4
+ 1210 002a 04       		.byte	0x4
+ 1211 002b D8       		.byte	0xd8
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 31
+
+
+ 1212 002c 30000000 		.4byte	0x30
+ 1213 0030 03       		.uleb128 0x3
+ 1214 0031 04       		.byte	0x4
+ 1215 0032 07       		.byte	0x7
+ 1216 0033 3F030000 		.4byte	.LASF0
+ 1217 0037 04       		.uleb128 0x4
+ 1218 0038 04       		.byte	0x4
+ 1219 0039 05       		.byte	0x5
+ 1220 003a 696E7400 		.ascii	"int\000"
+ 1221 003e 03       		.uleb128 0x3
+ 1222 003f 08       		.byte	0x8
+ 1223 0040 05       		.byte	0x5
+ 1224 0041 C4010000 		.4byte	.LASF1
+ 1225 0045 03       		.uleb128 0x3
+ 1226 0046 08       		.byte	0x8
+ 1227 0047 04       		.byte	0x4
+ 1228 0048 B3040000 		.4byte	.LASF2
+ 1229 004c 03       		.uleb128 0x3
+ 1230 004d 01       		.byte	0x1
+ 1231 004e 06       		.byte	0x6
+ 1232 004f D2010000 		.4byte	.LASF3
+ 1233 0053 02       		.uleb128 0x2
+ 1234 0054 A3000000 		.4byte	.LASF5
+ 1235 0058 05       		.byte	0x5
+ 1236 0059 1D       		.byte	0x1d
+ 1237 005a 5E000000 		.4byte	0x5e
+ 1238 005e 03       		.uleb128 0x3
+ 1239 005f 01       		.byte	0x1
+ 1240 0060 08       		.byte	0x8
+ 1241 0061 5C050000 		.4byte	.LASF6
+ 1242 0065 02       		.uleb128 0x2
+ 1243 0066 10030000 		.4byte	.LASF7
+ 1244 006a 05       		.byte	0x5
+ 1245 006b 29       		.byte	0x29
+ 1246 006c 70000000 		.4byte	0x70
+ 1247 0070 03       		.uleb128 0x3
+ 1248 0071 02       		.byte	0x2
+ 1249 0072 05       		.byte	0x5
+ 1250 0073 B4050000 		.4byte	.LASF8
+ 1251 0077 03       		.uleb128 0x3
+ 1252 0078 02       		.byte	0x2
+ 1253 0079 07       		.byte	0x7
+ 1254 007a A9030000 		.4byte	.LASF9
+ 1255 007e 03       		.uleb128 0x3
+ 1256 007f 04       		.byte	0x4
+ 1257 0080 05       		.byte	0x5
+ 1258 0081 36020000 		.4byte	.LASF10
+ 1259 0085 03       		.uleb128 0x3
+ 1260 0086 04       		.byte	0x4
+ 1261 0087 07       		.byte	0x7
+ 1262 0088 85030000 		.4byte	.LASF11
+ 1263 008c 03       		.uleb128 0x3
+ 1264 008d 08       		.byte	0x8
+ 1265 008e 07       		.byte	0x7
+ 1266 008f 96010000 		.4byte	.LASF12
+ 1267 0093 03       		.uleb128 0x3
+ 1268 0094 04       		.byte	0x4
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 32
+
+
+ 1269 0095 07       		.byte	0x7
+ 1270 0096 AA040000 		.4byte	.LASF13
+ 1271 009a 05       		.uleb128 0x5
+ 1272 009b 04       		.byte	0x4
+ 1273 009c 06       		.uleb128 0x6
+ 1274 009d 04       		.byte	0x4
+ 1275 009e A2000000 		.4byte	0xa2
+ 1276 00a2 03       		.uleb128 0x3
+ 1277 00a3 01       		.byte	0x1
+ 1278 00a4 08       		.byte	0x8
+ 1279 00a5 8A060000 		.4byte	.LASF14
+ 1280 00a9 07       		.uleb128 0x7
+ 1281 00aa 2A040000 		.4byte	.LASF26
+ 1282 00ae 01       		.byte	0x1
+ 1283 00af 5E000000 		.4byte	0x5e
+ 1284 00b3 01       		.byte	0x1
+ 1285 00b4 0E       		.byte	0xe
+ 1286 00b5 DE000000 		.4byte	0xde
+ 1287 00b9 08       		.uleb128 0x8
+ 1288 00ba 8E020000 		.4byte	.LASF15
+ 1289 00be 81       		.byte	0x81
+ 1290 00bf 08       		.uleb128 0x8
+ 1291 00c0 1A030000 		.4byte	.LASF16
+ 1292 00c4 92       		.byte	0x92
+ 1293 00c5 08       		.uleb128 0x8
+ 1294 00c6 54040000 		.4byte	.LASF17
+ 1295 00ca A0       		.byte	0xa0
+ 1296 00cb 08       		.uleb128 0x8
+ 1297 00cc BC030000 		.4byte	.LASF18
+ 1298 00d0 B2       		.byte	0xb2
+ 1299 00d1 08       		.uleb128 0x8
+ 1300 00d2 DC030000 		.4byte	.LASF19
+ 1301 00d6 C2       		.byte	0xc2
+ 1302 00d7 08       		.uleb128 0x8
+ 1303 00d8 1F000000 		.4byte	.LASF20
+ 1304 00dc D0       		.byte	0xd0
+ 1305 00dd 00       		.byte	0
+ 1306 00de 09       		.uleb128 0x9
+ 1307 00df 05030000 		.4byte	.LASF32
+ 1308 00e3 0C       		.byte	0xc
+ 1309 00e4 01       		.byte	0x1
+ 1310 00e5 18       		.byte	0x18
+ 1311 00e6 0F010000 		.4byte	0x10f
+ 1312 00ea 0A       		.uleb128 0xa
+ 1313 00eb CD000000 		.4byte	.LASF21
+ 1314 00ef 01       		.byte	0x1
+ 1315 00f0 1D       		.byte	0x1d
+ 1316 00f1 A9000000 		.4byte	0xa9
+ 1317 00f5 00       		.byte	0
+ 1318 00f6 0A       		.uleb128 0xa
+ 1319 00f7 97030000 		.4byte	.LASF22
+ 1320 00fb 01       		.byte	0x1
+ 1321 00fc 22       		.byte	0x22
+ 1322 00fd 9C000000 		.4byte	0x9c
+ 1323 0101 04       		.byte	0x4
+ 1324 0102 0A       		.uleb128 0xa
+ 1325 0103 ED050000 		.4byte	.LASF23
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 33
+
+
+ 1326 0107 01       		.byte	0x1
+ 1327 0108 27       		.byte	0x27
+ 1328 0109 25000000 		.4byte	0x25
+ 1329 010d 08       		.byte	0x8
+ 1330 010e 00       		.byte	0
+ 1331 010f 02       		.uleb128 0x2
+ 1332 0110 DF060000 		.4byte	.LASF24
+ 1333 0114 06       		.byte	0x6
+ 1334 0115 18       		.byte	0x18
+ 1335 0116 53000000 		.4byte	0x53
+ 1336 011a 02       		.uleb128 0x2
+ 1337 011b BC010000 		.4byte	.LASF25
+ 1338 011f 06       		.byte	0x6
+ 1339 0120 20       		.byte	0x20
+ 1340 0121 65000000 		.4byte	0x65
+ 1341 0125 07       		.uleb128 0x7
+ 1342 0126 00000000 		.4byte	.LASF27
+ 1343 012a 01       		.byte	0x1
+ 1344 012b 5E000000 		.4byte	0x5e
+ 1345 012f 02       		.byte	0x2
+ 1346 0130 0F       		.byte	0xf
+ 1347 0131 4E010000 		.4byte	0x14e
+ 1348 0135 08       		.uleb128 0x8
+ 1349 0136 FC040000 		.4byte	.LASF28
+ 1350 013a 00       		.byte	0
+ 1351 013b 08       		.uleb128 0x8
+ 1352 013c 4C030000 		.4byte	.LASF29
+ 1353 0140 01       		.byte	0x1
+ 1354 0141 08       		.uleb128 0x8
+ 1355 0142 6C040000 		.4byte	.LASF30
+ 1356 0146 02       		.byte	0x2
+ 1357 0147 08       		.uleb128 0x8
+ 1358 0148 23050000 		.4byte	.LASF31
+ 1359 014c 03       		.byte	0x3
+ 1360 014d 00       		.byte	0
+ 1361 014e 09       		.uleb128 0x9
+ 1362 014f BE050000 		.4byte	.LASF33
+ 1363 0153 01       		.byte	0x1
+ 1364 0154 02       		.byte	0x2
+ 1365 0155 2F       		.byte	0x2f
+ 1366 0156 67010000 		.4byte	0x167
+ 1367 015a 0A       		.uleb128 0xa
+ 1368 015b F6050000 		.4byte	.LASF34
+ 1369 015f 02       		.byte	0x2
+ 1370 0160 35       		.byte	0x35
+ 1371 0161 25010000 		.4byte	0x125
+ 1372 0165 00       		.byte	0
+ 1373 0166 00       		.byte	0
+ 1374 0167 09       		.uleb128 0x9
+ 1375 0168 11020000 		.4byte	.LASF35
+ 1376 016c 04       		.byte	0x4
+ 1377 016d 02       		.byte	0x2
+ 1378 016e 6B       		.byte	0x6b
+ 1379 016f 8C010000 		.4byte	0x18c
+ 1380 0173 0A       		.uleb128 0xa
+ 1381 0174 AD010000 		.4byte	.LASF36
+ 1382 0178 02       		.byte	0x2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 34
+
+
+ 1383 0179 70       		.byte	0x70
+ 1384 017a 0F010000 		.4byte	0x10f
+ 1385 017e 00       		.byte	0
+ 1386 017f 0A       		.uleb128 0xa
+ 1387 0180 F7060000 		.4byte	.LASF37
+ 1388 0184 02       		.byte	0x2
+ 1389 0185 75       		.byte	0x75
+ 1390 0186 1A010000 		.4byte	0x11a
+ 1391 018a 02       		.byte	0x2
+ 1392 018b 00       		.byte	0
+ 1393 018c 0B       		.uleb128 0xb
+ 1394 018d 7E010000 		.4byte	.LASF38
+ 1395 0191 00       		.byte	0
+ 1396 0192 02       		.byte	0x2
+ 1397 0193 B1       		.byte	0xb1
+ 1398 0194 0B       		.uleb128 0xb
+ 1399 0195 04060000 		.4byte	.LASF39
+ 1400 0199 00       		.byte	0
+ 1401 019a 02       		.byte	0x2
+ 1402 019b E1       		.byte	0xe1
+ 1403 019c 0C       		.uleb128 0xc
+ 1404 019d DC040000 		.4byte	.LASF40
+ 1405 01a1 02       		.byte	0x2
+ 1406 01a2 02       		.byte	0x2
+ 1407 01a3 1001     		.2byte	0x110
+ 1408 01a5 C4010000 		.4byte	0x1c4
+ 1409 01a9 0D       		.uleb128 0xd
+ 1410 01aa AD010000 		.4byte	.LASF36
+ 1411 01ae 02       		.byte	0x2
+ 1412 01af 1501     		.2byte	0x115
+ 1413 01b1 0F010000 		.4byte	0x10f
+ 1414 01b5 00       		.byte	0
+ 1415 01b6 0D       		.uleb128 0xd
+ 1416 01b7 BA060000 		.4byte	.LASF41
+ 1417 01bb 02       		.byte	0x2
+ 1418 01bc 1A01     		.2byte	0x11a
+ 1419 01be 0F010000 		.4byte	0x10f
+ 1420 01c2 01       		.byte	0x1
+ 1421 01c3 00       		.byte	0
+ 1422 01c4 07       		.uleb128 0x7
+ 1423 01c5 ED030000 		.4byte	.LASF42
+ 1424 01c9 01       		.byte	0x1
+ 1425 01ca 5E000000 		.4byte	0x5e
+ 1426 01ce 07       		.byte	0x7
+ 1427 01cf 15       		.byte	0x15
+ 1428 01d0 E7010000 		.4byte	0x1e7
+ 1429 01d4 08       		.uleb128 0x8
+ 1430 01d5 3A040000 		.4byte	.LASF43
+ 1431 01d9 01       		.byte	0x1
+ 1432 01da 08       		.uleb128 0x8
+ 1433 01db 47040000 		.4byte	.LASF44
+ 1434 01df 02       		.byte	0x2
+ 1435 01e0 08       		.uleb128 0x8
+ 1436 01e1 9C030000 		.4byte	.LASF45
+ 1437 01e5 03       		.byte	0x3
+ 1438 01e6 00       		.byte	0
+ 1439 01e7 07       		.uleb128 0x7
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 35
+
+
+ 1440 01e8 C6040000 		.4byte	.LASF46
+ 1441 01ec 01       		.byte	0x1
+ 1442 01ed 5E000000 		.4byte	0x5e
+ 1443 01f1 07       		.byte	0x7
+ 1444 01f2 1C       		.byte	0x1c
+ 1445 01f3 04020000 		.4byte	0x204
+ 1446 01f7 08       		.uleb128 0x8
+ 1447 01f8 59060000 		.4byte	.LASF47
+ 1448 01fc 00       		.byte	0
+ 1449 01fd 08       		.uleb128 0x8
+ 1450 01fe 70060000 		.4byte	.LASF48
+ 1451 0202 01       		.byte	0x1
+ 1452 0203 00       		.byte	0
+ 1453 0204 09       		.uleb128 0x9
+ 1454 0205 00020000 		.4byte	.LASF49
+ 1455 0209 02       		.byte	0x2
+ 1456 020a 07       		.byte	0x7
+ 1457 020b 22       		.byte	0x22
+ 1458 020c 29020000 		.4byte	0x229
+ 1459 0210 0A       		.uleb128 0xa
+ 1460 0211 CD000000 		.4byte	.LASF21
+ 1461 0215 07       		.byte	0x7
+ 1462 0216 23       		.byte	0x23
+ 1463 0217 E7010000 		.4byte	0x1e7
+ 1464 021b 00       		.byte	0
+ 1465 021c 0A       		.uleb128 0xa
+ 1466 021d FD050000 		.4byte	.LASF50
+ 1467 0221 07       		.byte	0x7
+ 1468 0222 24       		.byte	0x24
+ 1469 0223 C4010000 		.4byte	0x1c4
+ 1470 0227 01       		.byte	0x1
+ 1471 0228 00       		.byte	0
+ 1472 0229 07       		.uleb128 0x7
+ 1473 022a 3F020000 		.4byte	.LASF51
+ 1474 022e 01       		.byte	0x1
+ 1475 022f 5E000000 		.4byte	0x5e
+ 1476 0233 08       		.byte	0x8
+ 1477 0234 0D       		.byte	0xd
+ 1478 0235 4C020000 		.4byte	0x24c
+ 1479 0239 08       		.uleb128 0x8
+ 1480 023a 6B010000 		.4byte	.LASF52
+ 1481 023e 00       		.byte	0
+ 1482 023f 08       		.uleb128 0x8
+ 1483 0240 E7060000 		.4byte	.LASF53
+ 1484 0244 01       		.byte	0x1
+ 1485 0245 08       		.uleb128 0x8
+ 1486 0246 CC020000 		.4byte	.LASF54
+ 1487 024a 02       		.byte	0x2
+ 1488 024b 00       		.byte	0
+ 1489 024c 0E       		.uleb128 0xe
+ 1490 024d 6A6F6200 		.ascii	"job\000"
+ 1491 0251 08       		.byte	0x8
+ 1492 0252 08       		.byte	0x8
+ 1493 0253 13       		.byte	0x13
+ 1494 0254 71020000 		.4byte	0x271
+ 1495 0258 0A       		.uleb128 0xa
+ 1496 0259 CD000000 		.4byte	.LASF21
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 36
+
+
+ 1497 025d 08       		.byte	0x8
+ 1498 025e 14       		.byte	0x14
+ 1499 025f 29020000 		.4byte	0x229
+ 1500 0263 00       		.byte	0
+ 1501 0264 0A       		.uleb128 0xa
+ 1502 0265 97030000 		.4byte	.LASF22
+ 1503 0269 08       		.byte	0x8
+ 1504 026a 15       		.byte	0x15
+ 1505 026b 9A000000 		.4byte	0x9a
+ 1506 026f 04       		.byte	0x4
+ 1507 0270 00       		.byte	0
+ 1508 0271 0F       		.uleb128 0xf
+ 1509 0272 5D000000 		.4byte	.LASF57
+ 1510 0276 01       		.byte	0x1
+ 1511 0277 2E       		.byte	0x2e
+ 1512 0278 B5020000 		.4byte	0x2b5
+ 1513 027c 00000000 		.4byte	.LFB0
+ 1514 0280 4E000000 		.4byte	.LFE0-.LFB0
+ 1515 0284 01       		.uleb128 0x1
+ 1516 0285 9C       		.byte	0x9c
+ 1517 0286 B5020000 		.4byte	0x2b5
+ 1518 028a 10       		.uleb128 0x10
+ 1519 028b CD000000 		.4byte	.LASF21
+ 1520 028f 01       		.byte	0x1
+ 1521 0290 2E       		.byte	0x2e
+ 1522 0291 A9000000 		.4byte	0xa9
+ 1523 0295 02       		.uleb128 0x2
+ 1524 0296 91       		.byte	0x91
+ 1525 0297 6F       		.sleb128 -17
+ 1526 0298 11       		.uleb128 0x11
+ 1527 0299 0A070000 		.4byte	.LASF55
+ 1528 029d 01       		.byte	0x1
+ 1529 029e 30       		.byte	0x30
+ 1530 029f 5E000000 		.4byte	0x5e
+ 1531 02a3 02       		.uleb128 0x2
+ 1532 02a4 91       		.byte	0x91
+ 1533 02a5 77       		.sleb128 -9
+ 1534 02a6 11       		.uleb128 0x11
+ 1535 02a7 BF040000 		.4byte	.LASF56
+ 1536 02ab 01       		.byte	0x1
+ 1537 02ac 33       		.byte	0x33
+ 1538 02ad B5020000 		.4byte	0x2b5
+ 1539 02b1 02       		.uleb128 0x2
+ 1540 02b2 91       		.byte	0x91
+ 1541 02b3 70       		.sleb128 -16
+ 1542 02b4 00       		.byte	0
+ 1543 02b5 06       		.uleb128 0x6
+ 1544 02b6 04       		.byte	0x4
+ 1545 02b7 DE000000 		.4byte	0xde
+ 1546 02bb 12       		.uleb128 0x12
+ 1547 02bc 8F060000 		.4byte	.LASF82
+ 1548 02c0 01       		.byte	0x1
+ 1549 02c1 4D       		.byte	0x4d
+ 1550 02c2 00000000 		.4byte	.LFB1
+ 1551 02c6 20000000 		.4byte	.LFE1-.LFB1
+ 1552 02ca 01       		.uleb128 0x1
+ 1553 02cb 9C       		.byte	0x9c
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 37
+
+
+ 1554 02cc DF020000 		.4byte	0x2df
+ 1555 02d0 10       		.uleb128 0x10
+ 1556 02d1 BF040000 		.4byte	.LASF56
+ 1557 02d5 01       		.byte	0x1
+ 1558 02d6 4D       		.byte	0x4d
+ 1559 02d7 B5020000 		.4byte	0x2b5
+ 1560 02db 02       		.uleb128 0x2
+ 1561 02dc 91       		.byte	0x91
+ 1562 02dd 74       		.sleb128 -12
+ 1563 02de 00       		.byte	0
+ 1564 02df 13       		.uleb128 0x13
+ 1565 02e0 A6060000 		.4byte	.LASF58
+ 1566 02e4 01       		.byte	0x1
+ 1567 02e5 5D       		.byte	0x5d
+ 1568 02e6 5E000000 		.4byte	0x5e
+ 1569 02ea 00000000 		.4byte	.LFB2
+ 1570 02ee 2C000000 		.4byte	.LFE2-.LFB2
+ 1571 02f2 01       		.uleb128 0x1
+ 1572 02f3 9C       		.byte	0x9c
+ 1573 02f4 15030000 		.4byte	0x315
+ 1574 02f8 10       		.uleb128 0x10
+ 1575 02f9 BF040000 		.4byte	.LASF56
+ 1576 02fd 01       		.byte	0x1
+ 1577 02fe 5D       		.byte	0x5d
+ 1578 02ff B5020000 		.4byte	0x2b5
+ 1579 0303 02       		.uleb128 0x2
+ 1580 0304 91       		.byte	0x91
+ 1581 0305 6C       		.sleb128 -20
+ 1582 0306 11       		.uleb128 0x11
+ 1583 0307 0A070000 		.4byte	.LASF55
+ 1584 030b 01       		.byte	0x1
+ 1585 030c 5F       		.byte	0x5f
+ 1586 030d 5E000000 		.4byte	0x5e
+ 1587 0311 02       		.uleb128 0x2
+ 1588 0312 91       		.byte	0x91
+ 1589 0313 77       		.sleb128 -9
+ 1590 0314 00       		.byte	0
+ 1591 0315 13       		.uleb128 0x13
+ 1592 0316 D6050000 		.4byte	.LASF59
+ 1593 031a 01       		.byte	0x1
+ 1594 031b 67       		.byte	0x67
+ 1595 031c 5E000000 		.4byte	0x5e
+ 1596 0320 00000000 		.4byte	.LFB3
+ 1597 0324 44000000 		.4byte	.LFE3-.LFB3
+ 1598 0328 01       		.uleb128 0x1
+ 1599 0329 9C       		.byte	0x9c
+ 1600 032a 59030000 		.4byte	0x359
+ 1601 032e 10       		.uleb128 0x10
+ 1602 032f BF040000 		.4byte	.LASF56
+ 1603 0333 01       		.byte	0x1
+ 1604 0334 67       		.byte	0x67
+ 1605 0335 B5020000 		.4byte	0x2b5
+ 1606 0339 02       		.uleb128 0x2
+ 1607 033a 91       		.byte	0x91
+ 1608 033b 6C       		.sleb128 -20
+ 1609 033c 10       		.uleb128 0x10
+ 1610 033d 97030000 		.4byte	.LASF22
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 38
+
+
+ 1611 0341 01       		.byte	0x1
+ 1612 0342 68       		.byte	0x68
+ 1613 0343 5E000000 		.4byte	0x5e
+ 1614 0347 02       		.uleb128 0x2
+ 1615 0348 91       		.byte	0x91
+ 1616 0349 6B       		.sleb128 -21
+ 1617 034a 11       		.uleb128 0x11
+ 1618 034b 0A070000 		.4byte	.LASF55
+ 1619 034f 01       		.byte	0x1
+ 1620 0350 6A       		.byte	0x6a
+ 1621 0351 5E000000 		.4byte	0x5e
+ 1622 0355 02       		.uleb128 0x2
+ 1623 0356 91       		.byte	0x91
+ 1624 0357 77       		.sleb128 -9
+ 1625 0358 00       		.byte	0
+ 1626 0359 13       		.uleb128 0x13
+ 1627 035a 08040000 		.4byte	.LASF60
+ 1628 035e 02       		.byte	0x2
+ 1629 035f 3C       		.byte	0x3c
+ 1630 0360 37000000 		.4byte	0x37
+ 1631 0364 00000000 		.4byte	.LFB4
+ 1632 0368 36000000 		.4byte	.LFE4-.LFB4
+ 1633 036c 01       		.uleb128 0x1
+ 1634 036d 9C       		.byte	0x9c
+ 1635 036e 9D030000 		.4byte	0x39d
+ 1636 0372 10       		.uleb128 0x10
+ 1637 0373 BF040000 		.4byte	.LASF56
+ 1638 0377 02       		.byte	0x2
+ 1639 0378 3C       		.byte	0x3c
+ 1640 0379 9D030000 		.4byte	0x39d
+ 1641 037d 02       		.uleb128 0x2
+ 1642 037e 91       		.byte	0x91
+ 1643 037f 6C       		.sleb128 -20
+ 1644 0380 10       		.uleb128 0x10
+ 1645 0381 A5040000 		.4byte	.LASF61
+ 1646 0385 02       		.byte	0x2
+ 1647 0386 3D       		.byte	0x3d
+ 1648 0387 B5020000 		.4byte	0x2b5
+ 1649 038b 02       		.uleb128 0x2
+ 1650 038c 91       		.byte	0x91
+ 1651 038d 68       		.sleb128 -24
+ 1652 038e 11       		.uleb128 0x11
+ 1653 038f 9F060000 		.4byte	.LASF62
+ 1654 0393 02       		.byte	0x2
+ 1655 0394 44       		.byte	0x44
+ 1656 0395 0F010000 		.4byte	0x10f
+ 1657 0399 02       		.uleb128 0x2
+ 1658 039a 91       		.byte	0x91
+ 1659 039b 77       		.sleb128 -9
+ 1660 039c 00       		.byte	0
+ 1661 039d 06       		.uleb128 0x6
+ 1662 039e 04       		.byte	0x4
+ 1663 039f 4E010000 		.4byte	0x14e
+ 1664 03a3 0F       		.uleb128 0xf
+ 1665 03a4 6A050000 		.4byte	.LASF63
+ 1666 03a8 02       		.byte	0x2
+ 1667 03a9 4E       		.byte	0x4e
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 39
+
+
+ 1668 03aa 37000000 		.4byte	0x37
+ 1669 03ae 00000000 		.4byte	.LFB5
+ 1670 03b2 60000000 		.4byte	.LFE5-.LFB5
+ 1671 03b6 01       		.uleb128 0x1
+ 1672 03b7 9C       		.byte	0x9c
+ 1673 03b8 E6030000 		.4byte	0x3e6
+ 1674 03bc 14       		.uleb128 0x14
+ 1675 03bd 746F00   		.ascii	"to\000"
+ 1676 03c0 02       		.byte	0x2
+ 1677 03c1 4E       		.byte	0x4e
+ 1678 03c2 E6030000 		.4byte	0x3e6
+ 1679 03c6 02       		.uleb128 0x2
+ 1680 03c7 91       		.byte	0x91
+ 1681 03c8 6C       		.sleb128 -20
+ 1682 03c9 10       		.uleb128 0x10
+ 1683 03ca BF040000 		.4byte	.LASF56
+ 1684 03ce 02       		.byte	0x2
+ 1685 03cf 4F       		.byte	0x4f
+ 1686 03d0 9D030000 		.4byte	0x39d
+ 1687 03d4 02       		.uleb128 0x2
+ 1688 03d5 91       		.byte	0x91
+ 1689 03d6 68       		.sleb128 -24
+ 1690 03d7 11       		.uleb128 0x11
+ 1691 03d8 9F060000 		.4byte	.LASF62
+ 1692 03dc 02       		.byte	0x2
+ 1693 03dd 5F       		.byte	0x5f
+ 1694 03de 0F010000 		.4byte	0x10f
+ 1695 03e2 02       		.uleb128 0x2
+ 1696 03e3 91       		.byte	0x91
+ 1697 03e4 77       		.sleb128 -9
+ 1698 03e5 00       		.byte	0
+ 1699 03e6 06       		.uleb128 0x6
+ 1700 03e7 04       		.byte	0x4
+ 1701 03e8 B5020000 		.4byte	0x2b5
+ 1702 03ec 13       		.uleb128 0x13
+ 1703 03ed 74000000 		.4byte	.LASF64
+ 1704 03f1 02       		.byte	0x2
+ 1705 03f2 7B       		.byte	0x7b
+ 1706 03f3 37000000 		.4byte	0x37
+ 1707 03f7 00000000 		.4byte	.LFB6
+ 1708 03fb 4C000000 		.4byte	.LFE6-.LFB6
+ 1709 03ff 01       		.uleb128 0x1
+ 1710 0400 9C       		.byte	0x9c
+ 1711 0401 30040000 		.4byte	0x430
+ 1712 0405 10       		.uleb128 0x10
+ 1713 0406 BF040000 		.4byte	.LASF56
+ 1714 040a 02       		.byte	0x2
+ 1715 040b 7C       		.byte	0x7c
+ 1716 040c 30040000 		.4byte	0x430
+ 1717 0410 02       		.uleb128 0x2
+ 1718 0411 91       		.byte	0x91
+ 1719 0412 6C       		.sleb128 -20
+ 1720 0413 10       		.uleb128 0x10
+ 1721 0414 A5040000 		.4byte	.LASF61
+ 1722 0418 02       		.byte	0x2
+ 1723 0419 7D       		.byte	0x7d
+ 1724 041a B5020000 		.4byte	0x2b5
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 40
+
+
+ 1725 041e 02       		.uleb128 0x2
+ 1726 041f 91       		.byte	0x91
+ 1727 0420 68       		.sleb128 -24
+ 1728 0421 11       		.uleb128 0x11
+ 1729 0422 9F060000 		.4byte	.LASF62
+ 1730 0426 02       		.byte	0x2
+ 1731 0427 84       		.byte	0x84
+ 1732 0428 0F010000 		.4byte	0x10f
+ 1733 042c 02       		.uleb128 0x2
+ 1734 042d 91       		.byte	0x91
+ 1735 042e 77       		.sleb128 -9
+ 1736 042f 00       		.byte	0
+ 1737 0430 06       		.uleb128 0x6
+ 1738 0431 04       		.byte	0x4
+ 1739 0432 67010000 		.4byte	0x167
+ 1740 0436 0F       		.uleb128 0xf
+ 1741 0437 1A060000 		.4byte	.LASF65
+ 1742 043b 02       		.byte	0x2
+ 1743 043c 90       		.byte	0x90
+ 1744 043d 37000000 		.4byte	0x37
+ 1745 0441 00000000 		.4byte	.LFB7
+ 1746 0445 7A000000 		.4byte	.LFE7-.LFB7
+ 1747 0449 01       		.uleb128 0x1
+ 1748 044a 9C       		.byte	0x9c
+ 1749 044b 79040000 		.4byte	0x479
+ 1750 044f 14       		.uleb128 0x14
+ 1751 0450 746F00   		.ascii	"to\000"
+ 1752 0453 02       		.byte	0x2
+ 1753 0454 91       		.byte	0x91
+ 1754 0455 E6030000 		.4byte	0x3e6
+ 1755 0459 02       		.uleb128 0x2
+ 1756 045a 91       		.byte	0x91
+ 1757 045b 6C       		.sleb128 -20
+ 1758 045c 10       		.uleb128 0x10
+ 1759 045d BF040000 		.4byte	.LASF56
+ 1760 0461 02       		.byte	0x2
+ 1761 0462 91       		.byte	0x91
+ 1762 0463 30040000 		.4byte	0x430
+ 1763 0467 02       		.uleb128 0x2
+ 1764 0468 91       		.byte	0x91
+ 1765 0469 68       		.sleb128 -24
+ 1766 046a 11       		.uleb128 0x11
+ 1767 046b 9F060000 		.4byte	.LASF62
+ 1768 046f 02       		.byte	0x2
+ 1769 0470 A1       		.byte	0xa1
+ 1770 0471 0F010000 		.4byte	0x10f
+ 1771 0475 02       		.uleb128 0x2
+ 1772 0476 91       		.byte	0x91
+ 1773 0477 77       		.sleb128 -9
+ 1774 0478 00       		.byte	0
+ 1775 0479 13       		.uleb128 0x13
+ 1776 047a DE010000 		.4byte	.LASF66
+ 1777 047e 02       		.byte	0x2
+ 1778 047f B9       		.byte	0xb9
+ 1779 0480 37000000 		.4byte	0x37
+ 1780 0484 00000000 		.4byte	.LFB8
+ 1781 0488 24000000 		.4byte	.LFE8-.LFB8
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 41
+
+
+ 1782 048c 01       		.uleb128 0x1
+ 1783 048d 9C       		.byte	0x9c
+ 1784 048e AF040000 		.4byte	0x4af
+ 1785 0492 10       		.uleb128 0x10
+ 1786 0493 BF040000 		.4byte	.LASF56
+ 1787 0497 02       		.byte	0x2
+ 1788 0498 B9       		.byte	0xb9
+ 1789 0499 AF040000 		.4byte	0x4af
+ 1790 049d 02       		.uleb128 0x2
+ 1791 049e 91       		.byte	0x91
+ 1792 049f 74       		.sleb128 -12
+ 1793 04a0 10       		.uleb128 0x10
+ 1794 04a1 A5040000 		.4byte	.LASF61
+ 1795 04a5 02       		.byte	0x2
+ 1796 04a6 BA       		.byte	0xba
+ 1797 04a7 B5020000 		.4byte	0x2b5
+ 1798 04ab 02       		.uleb128 0x2
+ 1799 04ac 91       		.byte	0x91
+ 1800 04ad 70       		.sleb128 -16
+ 1801 04ae 00       		.byte	0
+ 1802 04af 06       		.uleb128 0x6
+ 1803 04b0 04       		.byte	0x4
+ 1804 04b1 8C010000 		.4byte	0x18c
+ 1805 04b5 0F       		.uleb128 0xf
+ 1806 04b6 AD000000 		.4byte	.LASF67
+ 1807 04ba 02       		.byte	0x2
+ 1808 04bb C8       		.byte	0xc8
+ 1809 04bc 37000000 		.4byte	0x37
+ 1810 04c0 00000000 		.4byte	.LFB9
+ 1811 04c4 44000000 		.4byte	.LFE9-.LFB9
+ 1812 04c8 01       		.uleb128 0x1
+ 1813 04c9 9C       		.byte	0x9c
+ 1814 04ca EA040000 		.4byte	0x4ea
+ 1815 04ce 14       		.uleb128 0x14
+ 1816 04cf 746F00   		.ascii	"to\000"
+ 1817 04d2 02       		.byte	0x2
+ 1818 04d3 C8       		.byte	0xc8
+ 1819 04d4 E6030000 		.4byte	0x3e6
+ 1820 04d8 02       		.uleb128 0x2
+ 1821 04d9 91       		.byte	0x91
+ 1822 04da 74       		.sleb128 -12
+ 1823 04db 10       		.uleb128 0x10
+ 1824 04dc BF040000 		.4byte	.LASF56
+ 1825 04e0 02       		.byte	0x2
+ 1826 04e1 C9       		.byte	0xc9
+ 1827 04e2 AF040000 		.4byte	0x4af
+ 1828 04e6 02       		.uleb128 0x2
+ 1829 04e7 91       		.byte	0x91
+ 1830 04e8 70       		.sleb128 -16
+ 1831 04e9 00       		.byte	0
+ 1832 04ea 13       		.uleb128 0x13
+ 1833 04eb AC020000 		.4byte	.LASF68
+ 1834 04ef 02       		.byte	0x2
+ 1835 04f0 E8       		.byte	0xe8
+ 1836 04f1 37000000 		.4byte	0x37
+ 1837 04f5 00000000 		.4byte	.LFB10
+ 1838 04f9 24000000 		.4byte	.LFE10-.LFB10
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 42
+
+
+ 1839 04fd 01       		.uleb128 0x1
+ 1840 04fe 9C       		.byte	0x9c
+ 1841 04ff 20050000 		.4byte	0x520
+ 1842 0503 10       		.uleb128 0x10
+ 1843 0504 BF040000 		.4byte	.LASF56
+ 1844 0508 02       		.byte	0x2
+ 1845 0509 E8       		.byte	0xe8
+ 1846 050a 20050000 		.4byte	0x520
+ 1847 050e 02       		.uleb128 0x2
+ 1848 050f 91       		.byte	0x91
+ 1849 0510 74       		.sleb128 -12
+ 1850 0511 10       		.uleb128 0x10
+ 1851 0512 A5040000 		.4byte	.LASF61
+ 1852 0516 02       		.byte	0x2
+ 1853 0517 E9       		.byte	0xe9
+ 1854 0518 B5020000 		.4byte	0x2b5
+ 1855 051c 02       		.uleb128 0x2
+ 1856 051d 91       		.byte	0x91
+ 1857 051e 70       		.sleb128 -16
+ 1858 051f 00       		.byte	0
+ 1859 0520 06       		.uleb128 0x6
+ 1860 0521 04       		.byte	0x4
+ 1861 0522 94010000 		.4byte	0x194
+ 1862 0526 0F       		.uleb128 0xf
+ 1863 0527 C1060000 		.4byte	.LASF69
+ 1864 052b 02       		.byte	0x2
+ 1865 052c F7       		.byte	0xf7
+ 1866 052d 37000000 		.4byte	0x37
+ 1867 0531 00000000 		.4byte	.LFB11
+ 1868 0535 44000000 		.4byte	.LFE11-.LFB11
+ 1869 0539 01       		.uleb128 0x1
+ 1870 053a 9C       		.byte	0x9c
+ 1871 053b 5B050000 		.4byte	0x55b
+ 1872 053f 14       		.uleb128 0x14
+ 1873 0540 746F00   		.ascii	"to\000"
+ 1874 0543 02       		.byte	0x2
+ 1875 0544 F7       		.byte	0xf7
+ 1876 0545 E6030000 		.4byte	0x3e6
+ 1877 0549 02       		.uleb128 0x2
+ 1878 054a 91       		.byte	0x91
+ 1879 054b 74       		.sleb128 -12
+ 1880 054c 10       		.uleb128 0x10
+ 1881 054d BF040000 		.4byte	.LASF56
+ 1882 0551 02       		.byte	0x2
+ 1883 0552 F8       		.byte	0xf8
+ 1884 0553 20050000 		.4byte	0x520
+ 1885 0557 02       		.uleb128 0x2
+ 1886 0558 91       		.byte	0x91
+ 1887 0559 70       		.sleb128 -16
+ 1888 055a 00       		.byte	0
+ 1889 055b 15       		.uleb128 0x15
+ 1890 055c 8A050000 		.4byte	.LASF70
+ 1891 0560 02       		.byte	0x2
+ 1892 0561 2001     		.2byte	0x120
+ 1893 0563 37000000 		.4byte	0x37
+ 1894 0567 00000000 		.4byte	.LFB12
+ 1895 056b 4A000000 		.4byte	.LFE12-.LFB12
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 43
+
+
+ 1896 056f 01       		.uleb128 0x1
+ 1897 0570 9C       		.byte	0x9c
+ 1898 0571 A3050000 		.4byte	0x5a3
+ 1899 0575 16       		.uleb128 0x16
+ 1900 0576 BF040000 		.4byte	.LASF56
+ 1901 057a 02       		.byte	0x2
+ 1902 057b 2101     		.2byte	0x121
+ 1903 057d A3050000 		.4byte	0x5a3
+ 1904 0581 02       		.uleb128 0x2
+ 1905 0582 91       		.byte	0x91
+ 1906 0583 6C       		.sleb128 -20
+ 1907 0584 16       		.uleb128 0x16
+ 1908 0585 A5040000 		.4byte	.LASF61
+ 1909 0589 02       		.byte	0x2
+ 1910 058a 2101     		.2byte	0x121
+ 1911 058c B5020000 		.4byte	0x2b5
+ 1912 0590 02       		.uleb128 0x2
+ 1913 0591 91       		.byte	0x91
+ 1914 0592 68       		.sleb128 -24
+ 1915 0593 17       		.uleb128 0x17
+ 1916 0594 9F060000 		.4byte	.LASF62
+ 1917 0598 02       		.byte	0x2
+ 1918 0599 2801     		.2byte	0x128
+ 1919 059b 0F010000 		.4byte	0x10f
+ 1920 059f 02       		.uleb128 0x2
+ 1921 05a0 91       		.byte	0x91
+ 1922 05a1 77       		.sleb128 -9
+ 1923 05a2 00       		.byte	0
+ 1924 05a3 06       		.uleb128 0x6
+ 1925 05a4 04       		.byte	0x4
+ 1926 05a5 9C010000 		.4byte	0x19c
+ 1927 05a9 18       		.uleb128 0x18
+ 1928 05aa 35000000 		.4byte	.LASF71
+ 1929 05ae 02       		.byte	0x2
+ 1930 05af 3401     		.2byte	0x134
+ 1931 05b1 37000000 		.4byte	0x37
+ 1932 05b5 00000000 		.4byte	.LFB13
+ 1933 05b9 7E000000 		.4byte	.LFE13-.LFB13
+ 1934 05bd 01       		.uleb128 0x1
+ 1935 05be 9C       		.byte	0x9c
+ 1936 05bf F0050000 		.4byte	0x5f0
+ 1937 05c3 19       		.uleb128 0x19
+ 1938 05c4 746F00   		.ascii	"to\000"
+ 1939 05c7 02       		.byte	0x2
+ 1940 05c8 3501     		.2byte	0x135
+ 1941 05ca E6030000 		.4byte	0x3e6
+ 1942 05ce 02       		.uleb128 0x2
+ 1943 05cf 91       		.byte	0x91
+ 1944 05d0 6C       		.sleb128 -20
+ 1945 05d1 16       		.uleb128 0x16
+ 1946 05d2 BF040000 		.4byte	.LASF56
+ 1947 05d6 02       		.byte	0x2
+ 1948 05d7 3501     		.2byte	0x135
+ 1949 05d9 A3050000 		.4byte	0x5a3
+ 1950 05dd 02       		.uleb128 0x2
+ 1951 05de 91       		.byte	0x91
+ 1952 05df 68       		.sleb128 -24
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 44
+
+
+ 1953 05e0 17       		.uleb128 0x17
+ 1954 05e1 9F060000 		.4byte	.LASF62
+ 1955 05e5 02       		.byte	0x2
+ 1956 05e6 4801     		.2byte	0x148
+ 1957 05e8 0F010000 		.4byte	0x10f
+ 1958 05ec 02       		.uleb128 0x2
+ 1959 05ed 91       		.byte	0x91
+ 1960 05ee 77       		.sleb128 -9
+ 1961 05ef 00       		.byte	0
+ 1962 05f0 1A       		.uleb128 0x1a
+ 1963 05f1 FE060000 		.4byte	.LASF73
+ 1964 05f5 03       		.byte	0x3
+ 1965 05f6 08       		.byte	0x8
+ 1966 05f7 00000000 		.4byte	.LFB15
+ 1967 05fb 4C000000 		.4byte	.LFE15-.LFB15
+ 1968 05ff 01       		.uleb128 0x1
+ 1969 0600 9C       		.byte	0x9c
+ 1970 0601 22060000 		.4byte	0x622
+ 1971 0605 10       		.uleb128 0x10
+ 1972 0606 CD000000 		.4byte	.LASF21
+ 1973 060a 03       		.byte	0x3
+ 1974 060b 08       		.byte	0x8
+ 1975 060c 29020000 		.4byte	0x229
+ 1976 0610 02       		.uleb128 0x2
+ 1977 0611 91       		.byte	0x91
+ 1978 0612 77       		.sleb128 -9
+ 1979 0613 10       		.uleb128 0x10
+ 1980 0614 97030000 		.4byte	.LASF22
+ 1981 0618 03       		.byte	0x3
+ 1982 0619 08       		.byte	0x8
+ 1983 061a 9A000000 		.4byte	0x9a
+ 1984 061e 02       		.uleb128 0x2
+ 1985 061f 91       		.byte	0x91
+ 1986 0620 70       		.sleb128 -16
+ 1987 0621 00       		.byte	0
+ 1988 0622 1B       		.uleb128 0x1b
+ 1989 0623 FC030000 		.4byte	.LASF83
+ 1990 0627 03       		.byte	0x3
+ 1991 0628 14       		.byte	0x14
+ 1992 0629 37000000 		.4byte	0x37
+ 1993 062d 00000000 		.4byte	.LFB16
+ 1994 0631 70000000 		.4byte	.LFE16-.LFB16
+ 1995 0635 01       		.uleb128 0x1
+ 1996 0636 9C       		.byte	0x9c
+ 1997 0637 60060000 		.4byte	0x660
+ 1998 063b 10       		.uleb128 0x10
+ 1999 063c B7010000 		.4byte	.LASF72
+ 2000 0640 03       		.byte	0x3
+ 2001 0641 14       		.byte	0x14
+ 2002 0642 60060000 		.4byte	0x660
+ 2003 0646 02       		.uleb128 0x2
+ 2004 0647 91       		.byte	0x91
+ 2005 0648 6C       		.sleb128 -20
+ 2006 0649 1C       		.uleb128 0x1c
+ 2007 064a 20000000 		.4byte	.LBB2
+ 2008 064e 30000000 		.4byte	.LBE2-.LBB2
+ 2009 0652 1D       		.uleb128 0x1d
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 45
+
+
+ 2010 0653 6900     		.ascii	"i\000"
+ 2011 0655 03       		.byte	0x3
+ 2012 0656 1C       		.byte	0x1c
+ 2013 0657 37000000 		.4byte	0x37
+ 2014 065b 02       		.uleb128 0x2
+ 2015 065c 91       		.byte	0x91
+ 2016 065d 74       		.sleb128 -12
+ 2017 065e 00       		.byte	0
+ 2018 065f 00       		.byte	0
+ 2019 0660 06       		.uleb128 0x6
+ 2020 0661 04       		.byte	0x4
+ 2021 0662 4C020000 		.4byte	0x24c
+ 2022 0666 1E       		.uleb128 0x1e
+ 2023 0667 DB020000 		.4byte	.LASF74
+ 2024 066b 03       		.byte	0x3
+ 2025 066c 25       		.byte	0x25
+ 2026 066d 00000000 		.4byte	.LFB17
+ 2027 0671 18000000 		.4byte	.LFE17-.LFB17
+ 2028 0675 01       		.uleb128 0x1
+ 2029 0676 9C       		.byte	0x9c
+ 2030 0677 8A060000 		.4byte	0x68a
+ 2031 067b 10       		.uleb128 0x10
+ 2032 067c BF040000 		.4byte	.LASF56
+ 2033 0680 03       		.byte	0x3
+ 2034 0681 25       		.byte	0x25
+ 2035 0682 B5020000 		.4byte	0x2b5
+ 2036 0686 02       		.uleb128 0x2
+ 2037 0687 91       		.byte	0x91
+ 2038 0688 74       		.sleb128 -12
+ 2039 0689 00       		.byte	0
+ 2040 068a 1E       		.uleb128 0x1e
+ 2041 068b 47060000 		.4byte	.LASF75
+ 2042 068f 03       		.byte	0x3
+ 2043 0690 2B       		.byte	0x2b
+ 2044 0691 00000000 		.4byte	.LFB18
+ 2045 0695 18000000 		.4byte	.LFE18-.LFB18
+ 2046 0699 01       		.uleb128 0x1
+ 2047 069a 9C       		.byte	0x9c
+ 2048 069b AE060000 		.4byte	0x6ae
+ 2049 069f 10       		.uleb128 0x10
+ 2050 06a0 FE020000 		.4byte	.LASF76
+ 2051 06a4 03       		.byte	0x3
+ 2052 06a5 2B       		.byte	0x2b
+ 2053 06a6 AE060000 		.4byte	0x6ae
+ 2054 06aa 02       		.uleb128 0x2
+ 2055 06ab 91       		.byte	0x91
+ 2056 06ac 74       		.sleb128 -12
+ 2057 06ad 00       		.byte	0
+ 2058 06ae 06       		.uleb128 0x6
+ 2059 06af 04       		.byte	0x4
+ 2060 06b0 04020000 		.4byte	0x204
+ 2061 06b4 1F       		.uleb128 0x1f
+ 2062 06b5 60010000 		.4byte	.LASF77
+ 2063 06b9 03       		.byte	0x3
+ 2064 06ba 05       		.byte	0x5
+ 2065 06bb C5060000 		.4byte	0x6c5
+ 2066 06bf 05       		.uleb128 0x5
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 46
+
+
+ 2067 06c0 03       		.byte	0x3
+ 2068 06c1 00000000 		.4byte	queue_size
+ 2069 06c5 20       		.uleb128 0x20
+ 2070 06c6 37000000 		.4byte	0x37
+ 2071 06ca 21       		.uleb128 0x21
+ 2072 06cb DA060000 		.4byte	0x6da
+ 2073 06cf DA060000 		.4byte	0x6da
+ 2074 06d3 22       		.uleb128 0x22
+ 2075 06d4 93000000 		.4byte	0x93
+ 2076 06d8 09       		.byte	0x9
+ 2077 06d9 00       		.byte	0
+ 2078 06da 20       		.uleb128 0x20
+ 2079 06db 4C020000 		.4byte	0x24c
+ 2080 06df 1F       		.uleb128 0x1f
+ 2081 06e0 A6020000 		.4byte	.LASF78
+ 2082 06e4 03       		.byte	0x3
+ 2083 06e5 06       		.byte	0x6
+ 2084 06e6 F0060000 		.4byte	0x6f0
+ 2085 06ea 05       		.uleb128 0x5
+ 2086 06eb 03       		.byte	0x3
+ 2087 06ec 00000000 		.4byte	queue
+ 2088 06f0 20       		.uleb128 0x20
+ 2089 06f1 CA060000 		.4byte	0x6ca
+ 2090 06f5 00       		.byte	0
+ 2091              		.section	.debug_abbrev,"",%progbits
+ 2092              	.Ldebug_abbrev0:
+ 2093 0000 01       		.uleb128 0x1
+ 2094 0001 11       		.uleb128 0x11
+ 2095 0002 01       		.byte	0x1
+ 2096 0003 25       		.uleb128 0x25
+ 2097 0004 0E       		.uleb128 0xe
+ 2098 0005 13       		.uleb128 0x13
+ 2099 0006 0B       		.uleb128 0xb
+ 2100 0007 03       		.uleb128 0x3
+ 2101 0008 0E       		.uleb128 0xe
+ 2102 0009 1B       		.uleb128 0x1b
+ 2103 000a 0E       		.uleb128 0xe
+ 2104 000b 55       		.uleb128 0x55
+ 2105 000c 17       		.uleb128 0x17
+ 2106 000d 11       		.uleb128 0x11
+ 2107 000e 01       		.uleb128 0x1
+ 2108 000f 10       		.uleb128 0x10
+ 2109 0010 17       		.uleb128 0x17
+ 2110 0011 00       		.byte	0
+ 2111 0012 00       		.byte	0
+ 2112 0013 02       		.uleb128 0x2
+ 2113 0014 16       		.uleb128 0x16
+ 2114 0015 00       		.byte	0
+ 2115 0016 03       		.uleb128 0x3
+ 2116 0017 0E       		.uleb128 0xe
+ 2117 0018 3A       		.uleb128 0x3a
+ 2118 0019 0B       		.uleb128 0xb
+ 2119 001a 3B       		.uleb128 0x3b
+ 2120 001b 0B       		.uleb128 0xb
+ 2121 001c 49       		.uleb128 0x49
+ 2122 001d 13       		.uleb128 0x13
+ 2123 001e 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 47
+
+
+ 2124 001f 00       		.byte	0
+ 2125 0020 03       		.uleb128 0x3
+ 2126 0021 24       		.uleb128 0x24
+ 2127 0022 00       		.byte	0
+ 2128 0023 0B       		.uleb128 0xb
+ 2129 0024 0B       		.uleb128 0xb
+ 2130 0025 3E       		.uleb128 0x3e
+ 2131 0026 0B       		.uleb128 0xb
+ 2132 0027 03       		.uleb128 0x3
+ 2133 0028 0E       		.uleb128 0xe
+ 2134 0029 00       		.byte	0
+ 2135 002a 00       		.byte	0
+ 2136 002b 04       		.uleb128 0x4
+ 2137 002c 24       		.uleb128 0x24
+ 2138 002d 00       		.byte	0
+ 2139 002e 0B       		.uleb128 0xb
+ 2140 002f 0B       		.uleb128 0xb
+ 2141 0030 3E       		.uleb128 0x3e
+ 2142 0031 0B       		.uleb128 0xb
+ 2143 0032 03       		.uleb128 0x3
+ 2144 0033 08       		.uleb128 0x8
+ 2145 0034 00       		.byte	0
+ 2146 0035 00       		.byte	0
+ 2147 0036 05       		.uleb128 0x5
+ 2148 0037 0F       		.uleb128 0xf
+ 2149 0038 00       		.byte	0
+ 2150 0039 0B       		.uleb128 0xb
+ 2151 003a 0B       		.uleb128 0xb
+ 2152 003b 00       		.byte	0
+ 2153 003c 00       		.byte	0
+ 2154 003d 06       		.uleb128 0x6
+ 2155 003e 0F       		.uleb128 0xf
+ 2156 003f 00       		.byte	0
+ 2157 0040 0B       		.uleb128 0xb
+ 2158 0041 0B       		.uleb128 0xb
+ 2159 0042 49       		.uleb128 0x49
+ 2160 0043 13       		.uleb128 0x13
+ 2161 0044 00       		.byte	0
+ 2162 0045 00       		.byte	0
+ 2163 0046 07       		.uleb128 0x7
+ 2164 0047 04       		.uleb128 0x4
+ 2165 0048 01       		.byte	0x1
+ 2166 0049 03       		.uleb128 0x3
+ 2167 004a 0E       		.uleb128 0xe
+ 2168 004b 0B       		.uleb128 0xb
+ 2169 004c 0B       		.uleb128 0xb
+ 2170 004d 49       		.uleb128 0x49
+ 2171 004e 13       		.uleb128 0x13
+ 2172 004f 3A       		.uleb128 0x3a
+ 2173 0050 0B       		.uleb128 0xb
+ 2174 0051 3B       		.uleb128 0x3b
+ 2175 0052 0B       		.uleb128 0xb
+ 2176 0053 01       		.uleb128 0x1
+ 2177 0054 13       		.uleb128 0x13
+ 2178 0055 00       		.byte	0
+ 2179 0056 00       		.byte	0
+ 2180 0057 08       		.uleb128 0x8
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 48
+
+
+ 2181 0058 28       		.uleb128 0x28
+ 2182 0059 00       		.byte	0
+ 2183 005a 03       		.uleb128 0x3
+ 2184 005b 0E       		.uleb128 0xe
+ 2185 005c 1C       		.uleb128 0x1c
+ 2186 005d 0B       		.uleb128 0xb
+ 2187 005e 00       		.byte	0
+ 2188 005f 00       		.byte	0
+ 2189 0060 09       		.uleb128 0x9
+ 2190 0061 13       		.uleb128 0x13
+ 2191 0062 01       		.byte	0x1
+ 2192 0063 03       		.uleb128 0x3
+ 2193 0064 0E       		.uleb128 0xe
+ 2194 0065 0B       		.uleb128 0xb
+ 2195 0066 0B       		.uleb128 0xb
+ 2196 0067 3A       		.uleb128 0x3a
+ 2197 0068 0B       		.uleb128 0xb
+ 2198 0069 3B       		.uleb128 0x3b
+ 2199 006a 0B       		.uleb128 0xb
+ 2200 006b 01       		.uleb128 0x1
+ 2201 006c 13       		.uleb128 0x13
+ 2202 006d 00       		.byte	0
+ 2203 006e 00       		.byte	0
+ 2204 006f 0A       		.uleb128 0xa
+ 2205 0070 0D       		.uleb128 0xd
+ 2206 0071 00       		.byte	0
+ 2207 0072 03       		.uleb128 0x3
+ 2208 0073 0E       		.uleb128 0xe
+ 2209 0074 3A       		.uleb128 0x3a
+ 2210 0075 0B       		.uleb128 0xb
+ 2211 0076 3B       		.uleb128 0x3b
+ 2212 0077 0B       		.uleb128 0xb
+ 2213 0078 49       		.uleb128 0x49
+ 2214 0079 13       		.uleb128 0x13
+ 2215 007a 38       		.uleb128 0x38
+ 2216 007b 0B       		.uleb128 0xb
+ 2217 007c 00       		.byte	0
+ 2218 007d 00       		.byte	0
+ 2219 007e 0B       		.uleb128 0xb
+ 2220 007f 13       		.uleb128 0x13
+ 2221 0080 00       		.byte	0
+ 2222 0081 03       		.uleb128 0x3
+ 2223 0082 0E       		.uleb128 0xe
+ 2224 0083 0B       		.uleb128 0xb
+ 2225 0084 0B       		.uleb128 0xb
+ 2226 0085 3A       		.uleb128 0x3a
+ 2227 0086 0B       		.uleb128 0xb
+ 2228 0087 3B       		.uleb128 0x3b
+ 2229 0088 0B       		.uleb128 0xb
+ 2230 0089 00       		.byte	0
+ 2231 008a 00       		.byte	0
+ 2232 008b 0C       		.uleb128 0xc
+ 2233 008c 13       		.uleb128 0x13
+ 2234 008d 01       		.byte	0x1
+ 2235 008e 03       		.uleb128 0x3
+ 2236 008f 0E       		.uleb128 0xe
+ 2237 0090 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 49
+
+
+ 2238 0091 0B       		.uleb128 0xb
+ 2239 0092 3A       		.uleb128 0x3a
+ 2240 0093 0B       		.uleb128 0xb
+ 2241 0094 3B       		.uleb128 0x3b
+ 2242 0095 05       		.uleb128 0x5
+ 2243 0096 01       		.uleb128 0x1
+ 2244 0097 13       		.uleb128 0x13
+ 2245 0098 00       		.byte	0
+ 2246 0099 00       		.byte	0
+ 2247 009a 0D       		.uleb128 0xd
+ 2248 009b 0D       		.uleb128 0xd
+ 2249 009c 00       		.byte	0
+ 2250 009d 03       		.uleb128 0x3
+ 2251 009e 0E       		.uleb128 0xe
+ 2252 009f 3A       		.uleb128 0x3a
+ 2253 00a0 0B       		.uleb128 0xb
+ 2254 00a1 3B       		.uleb128 0x3b
+ 2255 00a2 05       		.uleb128 0x5
+ 2256 00a3 49       		.uleb128 0x49
+ 2257 00a4 13       		.uleb128 0x13
+ 2258 00a5 38       		.uleb128 0x38
+ 2259 00a6 0B       		.uleb128 0xb
+ 2260 00a7 00       		.byte	0
+ 2261 00a8 00       		.byte	0
+ 2262 00a9 0E       		.uleb128 0xe
+ 2263 00aa 13       		.uleb128 0x13
+ 2264 00ab 01       		.byte	0x1
+ 2265 00ac 03       		.uleb128 0x3
+ 2266 00ad 08       		.uleb128 0x8
+ 2267 00ae 0B       		.uleb128 0xb
+ 2268 00af 0B       		.uleb128 0xb
+ 2269 00b0 3A       		.uleb128 0x3a
+ 2270 00b1 0B       		.uleb128 0xb
+ 2271 00b2 3B       		.uleb128 0x3b
+ 2272 00b3 0B       		.uleb128 0xb
+ 2273 00b4 01       		.uleb128 0x1
+ 2274 00b5 13       		.uleb128 0x13
+ 2275 00b6 00       		.byte	0
+ 2276 00b7 00       		.byte	0
+ 2277 00b8 0F       		.uleb128 0xf
+ 2278 00b9 2E       		.uleb128 0x2e
+ 2279 00ba 01       		.byte	0x1
+ 2280 00bb 03       		.uleb128 0x3
+ 2281 00bc 0E       		.uleb128 0xe
+ 2282 00bd 3A       		.uleb128 0x3a
+ 2283 00be 0B       		.uleb128 0xb
+ 2284 00bf 3B       		.uleb128 0x3b
+ 2285 00c0 0B       		.uleb128 0xb
+ 2286 00c1 27       		.uleb128 0x27
+ 2287 00c2 19       		.uleb128 0x19
+ 2288 00c3 49       		.uleb128 0x49
+ 2289 00c4 13       		.uleb128 0x13
+ 2290 00c5 11       		.uleb128 0x11
+ 2291 00c6 01       		.uleb128 0x1
+ 2292 00c7 12       		.uleb128 0x12
+ 2293 00c8 06       		.uleb128 0x6
+ 2294 00c9 40       		.uleb128 0x40
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 50
+
+
+ 2295 00ca 18       		.uleb128 0x18
+ 2296 00cb 9642     		.uleb128 0x2116
+ 2297 00cd 19       		.uleb128 0x19
+ 2298 00ce 01       		.uleb128 0x1
+ 2299 00cf 13       		.uleb128 0x13
+ 2300 00d0 00       		.byte	0
+ 2301 00d1 00       		.byte	0
+ 2302 00d2 10       		.uleb128 0x10
+ 2303 00d3 05       		.uleb128 0x5
+ 2304 00d4 00       		.byte	0
+ 2305 00d5 03       		.uleb128 0x3
+ 2306 00d6 0E       		.uleb128 0xe
+ 2307 00d7 3A       		.uleb128 0x3a
+ 2308 00d8 0B       		.uleb128 0xb
+ 2309 00d9 3B       		.uleb128 0x3b
+ 2310 00da 0B       		.uleb128 0xb
+ 2311 00db 49       		.uleb128 0x49
+ 2312 00dc 13       		.uleb128 0x13
+ 2313 00dd 02       		.uleb128 0x2
+ 2314 00de 18       		.uleb128 0x18
+ 2315 00df 00       		.byte	0
+ 2316 00e0 00       		.byte	0
+ 2317 00e1 11       		.uleb128 0x11
+ 2318 00e2 34       		.uleb128 0x34
+ 2319 00e3 00       		.byte	0
+ 2320 00e4 03       		.uleb128 0x3
+ 2321 00e5 0E       		.uleb128 0xe
+ 2322 00e6 3A       		.uleb128 0x3a
+ 2323 00e7 0B       		.uleb128 0xb
+ 2324 00e8 3B       		.uleb128 0x3b
+ 2325 00e9 0B       		.uleb128 0xb
+ 2326 00ea 49       		.uleb128 0x49
+ 2327 00eb 13       		.uleb128 0x13
+ 2328 00ec 02       		.uleb128 0x2
+ 2329 00ed 18       		.uleb128 0x18
+ 2330 00ee 00       		.byte	0
+ 2331 00ef 00       		.byte	0
+ 2332 00f0 12       		.uleb128 0x12
+ 2333 00f1 2E       		.uleb128 0x2e
+ 2334 00f2 01       		.byte	0x1
+ 2335 00f3 03       		.uleb128 0x3
+ 2336 00f4 0E       		.uleb128 0xe
+ 2337 00f5 3A       		.uleb128 0x3a
+ 2338 00f6 0B       		.uleb128 0xb
+ 2339 00f7 3B       		.uleb128 0x3b
+ 2340 00f8 0B       		.uleb128 0xb
+ 2341 00f9 27       		.uleb128 0x27
+ 2342 00fa 19       		.uleb128 0x19
+ 2343 00fb 11       		.uleb128 0x11
+ 2344 00fc 01       		.uleb128 0x1
+ 2345 00fd 12       		.uleb128 0x12
+ 2346 00fe 06       		.uleb128 0x6
+ 2347 00ff 40       		.uleb128 0x40
+ 2348 0100 18       		.uleb128 0x18
+ 2349 0101 9642     		.uleb128 0x2116
+ 2350 0103 19       		.uleb128 0x19
+ 2351 0104 01       		.uleb128 0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 51
+
+
+ 2352 0105 13       		.uleb128 0x13
+ 2353 0106 00       		.byte	0
+ 2354 0107 00       		.byte	0
+ 2355 0108 13       		.uleb128 0x13
+ 2356 0109 2E       		.uleb128 0x2e
+ 2357 010a 01       		.byte	0x1
+ 2358 010b 03       		.uleb128 0x3
+ 2359 010c 0E       		.uleb128 0xe
+ 2360 010d 3A       		.uleb128 0x3a
+ 2361 010e 0B       		.uleb128 0xb
+ 2362 010f 3B       		.uleb128 0x3b
+ 2363 0110 0B       		.uleb128 0xb
+ 2364 0111 27       		.uleb128 0x27
+ 2365 0112 19       		.uleb128 0x19
+ 2366 0113 49       		.uleb128 0x49
+ 2367 0114 13       		.uleb128 0x13
+ 2368 0115 11       		.uleb128 0x11
+ 2369 0116 01       		.uleb128 0x1
+ 2370 0117 12       		.uleb128 0x12
+ 2371 0118 06       		.uleb128 0x6
+ 2372 0119 40       		.uleb128 0x40
+ 2373 011a 18       		.uleb128 0x18
+ 2374 011b 9742     		.uleb128 0x2117
+ 2375 011d 19       		.uleb128 0x19
+ 2376 011e 01       		.uleb128 0x1
+ 2377 011f 13       		.uleb128 0x13
+ 2378 0120 00       		.byte	0
+ 2379 0121 00       		.byte	0
+ 2380 0122 14       		.uleb128 0x14
+ 2381 0123 05       		.uleb128 0x5
+ 2382 0124 00       		.byte	0
+ 2383 0125 03       		.uleb128 0x3
+ 2384 0126 08       		.uleb128 0x8
+ 2385 0127 3A       		.uleb128 0x3a
+ 2386 0128 0B       		.uleb128 0xb
+ 2387 0129 3B       		.uleb128 0x3b
+ 2388 012a 0B       		.uleb128 0xb
+ 2389 012b 49       		.uleb128 0x49
+ 2390 012c 13       		.uleb128 0x13
+ 2391 012d 02       		.uleb128 0x2
+ 2392 012e 18       		.uleb128 0x18
+ 2393 012f 00       		.byte	0
+ 2394 0130 00       		.byte	0
+ 2395 0131 15       		.uleb128 0x15
+ 2396 0132 2E       		.uleb128 0x2e
+ 2397 0133 01       		.byte	0x1
+ 2398 0134 03       		.uleb128 0x3
+ 2399 0135 0E       		.uleb128 0xe
+ 2400 0136 3A       		.uleb128 0x3a
+ 2401 0137 0B       		.uleb128 0xb
+ 2402 0138 3B       		.uleb128 0x3b
+ 2403 0139 05       		.uleb128 0x5
+ 2404 013a 27       		.uleb128 0x27
+ 2405 013b 19       		.uleb128 0x19
+ 2406 013c 49       		.uleb128 0x49
+ 2407 013d 13       		.uleb128 0x13
+ 2408 013e 11       		.uleb128 0x11
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 52
+
+
+ 2409 013f 01       		.uleb128 0x1
+ 2410 0140 12       		.uleb128 0x12
+ 2411 0141 06       		.uleb128 0x6
+ 2412 0142 40       		.uleb128 0x40
+ 2413 0143 18       		.uleb128 0x18
+ 2414 0144 9742     		.uleb128 0x2117
+ 2415 0146 19       		.uleb128 0x19
+ 2416 0147 01       		.uleb128 0x1
+ 2417 0148 13       		.uleb128 0x13
+ 2418 0149 00       		.byte	0
+ 2419 014a 00       		.byte	0
+ 2420 014b 16       		.uleb128 0x16
+ 2421 014c 05       		.uleb128 0x5
+ 2422 014d 00       		.byte	0
+ 2423 014e 03       		.uleb128 0x3
+ 2424 014f 0E       		.uleb128 0xe
+ 2425 0150 3A       		.uleb128 0x3a
+ 2426 0151 0B       		.uleb128 0xb
+ 2427 0152 3B       		.uleb128 0x3b
+ 2428 0153 05       		.uleb128 0x5
+ 2429 0154 49       		.uleb128 0x49
+ 2430 0155 13       		.uleb128 0x13
+ 2431 0156 02       		.uleb128 0x2
+ 2432 0157 18       		.uleb128 0x18
+ 2433 0158 00       		.byte	0
+ 2434 0159 00       		.byte	0
+ 2435 015a 17       		.uleb128 0x17
+ 2436 015b 34       		.uleb128 0x34
+ 2437 015c 00       		.byte	0
+ 2438 015d 03       		.uleb128 0x3
+ 2439 015e 0E       		.uleb128 0xe
+ 2440 015f 3A       		.uleb128 0x3a
+ 2441 0160 0B       		.uleb128 0xb
+ 2442 0161 3B       		.uleb128 0x3b
+ 2443 0162 05       		.uleb128 0x5
+ 2444 0163 49       		.uleb128 0x49
+ 2445 0164 13       		.uleb128 0x13
+ 2446 0165 02       		.uleb128 0x2
+ 2447 0166 18       		.uleb128 0x18
+ 2448 0167 00       		.byte	0
+ 2449 0168 00       		.byte	0
+ 2450 0169 18       		.uleb128 0x18
+ 2451 016a 2E       		.uleb128 0x2e
+ 2452 016b 01       		.byte	0x1
+ 2453 016c 03       		.uleb128 0x3
+ 2454 016d 0E       		.uleb128 0xe
+ 2455 016e 3A       		.uleb128 0x3a
+ 2456 016f 0B       		.uleb128 0xb
+ 2457 0170 3B       		.uleb128 0x3b
+ 2458 0171 05       		.uleb128 0x5
+ 2459 0172 27       		.uleb128 0x27
+ 2460 0173 19       		.uleb128 0x19
+ 2461 0174 49       		.uleb128 0x49
+ 2462 0175 13       		.uleb128 0x13
+ 2463 0176 11       		.uleb128 0x11
+ 2464 0177 01       		.uleb128 0x1
+ 2465 0178 12       		.uleb128 0x12
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 53
+
+
+ 2466 0179 06       		.uleb128 0x6
+ 2467 017a 40       		.uleb128 0x40
+ 2468 017b 18       		.uleb128 0x18
+ 2469 017c 9642     		.uleb128 0x2116
+ 2470 017e 19       		.uleb128 0x19
+ 2471 017f 01       		.uleb128 0x1
+ 2472 0180 13       		.uleb128 0x13
+ 2473 0181 00       		.byte	0
+ 2474 0182 00       		.byte	0
+ 2475 0183 19       		.uleb128 0x19
+ 2476 0184 05       		.uleb128 0x5
+ 2477 0185 00       		.byte	0
+ 2478 0186 03       		.uleb128 0x3
+ 2479 0187 08       		.uleb128 0x8
+ 2480 0188 3A       		.uleb128 0x3a
+ 2481 0189 0B       		.uleb128 0xb
+ 2482 018a 3B       		.uleb128 0x3b
+ 2483 018b 05       		.uleb128 0x5
+ 2484 018c 49       		.uleb128 0x49
+ 2485 018d 13       		.uleb128 0x13
+ 2486 018e 02       		.uleb128 0x2
+ 2487 018f 18       		.uleb128 0x18
+ 2488 0190 00       		.byte	0
+ 2489 0191 00       		.byte	0
+ 2490 0192 1A       		.uleb128 0x1a
+ 2491 0193 2E       		.uleb128 0x2e
+ 2492 0194 01       		.byte	0x1
+ 2493 0195 3F       		.uleb128 0x3f
+ 2494 0196 19       		.uleb128 0x19
+ 2495 0197 03       		.uleb128 0x3
+ 2496 0198 0E       		.uleb128 0xe
+ 2497 0199 3A       		.uleb128 0x3a
+ 2498 019a 0B       		.uleb128 0xb
+ 2499 019b 3B       		.uleb128 0x3b
+ 2500 019c 0B       		.uleb128 0xb
+ 2501 019d 27       		.uleb128 0x27
+ 2502 019e 19       		.uleb128 0x19
+ 2503 019f 11       		.uleb128 0x11
+ 2504 01a0 01       		.uleb128 0x1
+ 2505 01a1 12       		.uleb128 0x12
+ 2506 01a2 06       		.uleb128 0x6
+ 2507 01a3 40       		.uleb128 0x40
+ 2508 01a4 18       		.uleb128 0x18
+ 2509 01a5 9742     		.uleb128 0x2117
+ 2510 01a7 19       		.uleb128 0x19
+ 2511 01a8 01       		.uleb128 0x1
+ 2512 01a9 13       		.uleb128 0x13
+ 2513 01aa 00       		.byte	0
+ 2514 01ab 00       		.byte	0
+ 2515 01ac 1B       		.uleb128 0x1b
+ 2516 01ad 2E       		.uleb128 0x2e
+ 2517 01ae 01       		.byte	0x1
+ 2518 01af 3F       		.uleb128 0x3f
+ 2519 01b0 19       		.uleb128 0x19
+ 2520 01b1 03       		.uleb128 0x3
+ 2521 01b2 0E       		.uleb128 0xe
+ 2522 01b3 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 54
+
+
+ 2523 01b4 0B       		.uleb128 0xb
+ 2524 01b5 3B       		.uleb128 0x3b
+ 2525 01b6 0B       		.uleb128 0xb
+ 2526 01b7 27       		.uleb128 0x27
+ 2527 01b8 19       		.uleb128 0x19
+ 2528 01b9 49       		.uleb128 0x49
+ 2529 01ba 13       		.uleb128 0x13
+ 2530 01bb 11       		.uleb128 0x11
+ 2531 01bc 01       		.uleb128 0x1
+ 2532 01bd 12       		.uleb128 0x12
+ 2533 01be 06       		.uleb128 0x6
+ 2534 01bf 40       		.uleb128 0x40
+ 2535 01c0 18       		.uleb128 0x18
+ 2536 01c1 9742     		.uleb128 0x2117
+ 2537 01c3 19       		.uleb128 0x19
+ 2538 01c4 01       		.uleb128 0x1
+ 2539 01c5 13       		.uleb128 0x13
+ 2540 01c6 00       		.byte	0
+ 2541 01c7 00       		.byte	0
+ 2542 01c8 1C       		.uleb128 0x1c
+ 2543 01c9 0B       		.uleb128 0xb
+ 2544 01ca 01       		.byte	0x1
+ 2545 01cb 11       		.uleb128 0x11
+ 2546 01cc 01       		.uleb128 0x1
+ 2547 01cd 12       		.uleb128 0x12
+ 2548 01ce 06       		.uleb128 0x6
+ 2549 01cf 00       		.byte	0
+ 2550 01d0 00       		.byte	0
+ 2551 01d1 1D       		.uleb128 0x1d
+ 2552 01d2 34       		.uleb128 0x34
+ 2553 01d3 00       		.byte	0
+ 2554 01d4 03       		.uleb128 0x3
+ 2555 01d5 08       		.uleb128 0x8
+ 2556 01d6 3A       		.uleb128 0x3a
+ 2557 01d7 0B       		.uleb128 0xb
+ 2558 01d8 3B       		.uleb128 0x3b
+ 2559 01d9 0B       		.uleb128 0xb
+ 2560 01da 49       		.uleb128 0x49
+ 2561 01db 13       		.uleb128 0x13
+ 2562 01dc 02       		.uleb128 0x2
+ 2563 01dd 18       		.uleb128 0x18
+ 2564 01de 00       		.byte	0
+ 2565 01df 00       		.byte	0
+ 2566 01e0 1E       		.uleb128 0x1e
+ 2567 01e1 2E       		.uleb128 0x2e
+ 2568 01e2 01       		.byte	0x1
+ 2569 01e3 3F       		.uleb128 0x3f
+ 2570 01e4 19       		.uleb128 0x19
+ 2571 01e5 03       		.uleb128 0x3
+ 2572 01e6 0E       		.uleb128 0xe
+ 2573 01e7 3A       		.uleb128 0x3a
+ 2574 01e8 0B       		.uleb128 0xb
+ 2575 01e9 3B       		.uleb128 0x3b
+ 2576 01ea 0B       		.uleb128 0xb
+ 2577 01eb 27       		.uleb128 0x27
+ 2578 01ec 19       		.uleb128 0x19
+ 2579 01ed 11       		.uleb128 0x11
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 55
+
+
+ 2580 01ee 01       		.uleb128 0x1
+ 2581 01ef 12       		.uleb128 0x12
+ 2582 01f0 06       		.uleb128 0x6
+ 2583 01f1 40       		.uleb128 0x40
+ 2584 01f2 18       		.uleb128 0x18
+ 2585 01f3 9642     		.uleb128 0x2116
+ 2586 01f5 19       		.uleb128 0x19
+ 2587 01f6 01       		.uleb128 0x1
+ 2588 01f7 13       		.uleb128 0x13
+ 2589 01f8 00       		.byte	0
+ 2590 01f9 00       		.byte	0
+ 2591 01fa 1F       		.uleb128 0x1f
+ 2592 01fb 34       		.uleb128 0x34
+ 2593 01fc 00       		.byte	0
+ 2594 01fd 03       		.uleb128 0x3
+ 2595 01fe 0E       		.uleb128 0xe
+ 2596 01ff 3A       		.uleb128 0x3a
+ 2597 0200 0B       		.uleb128 0xb
+ 2598 0201 3B       		.uleb128 0x3b
+ 2599 0202 0B       		.uleb128 0xb
+ 2600 0203 49       		.uleb128 0x49
+ 2601 0204 13       		.uleb128 0x13
+ 2602 0205 3F       		.uleb128 0x3f
+ 2603 0206 19       		.uleb128 0x19
+ 2604 0207 02       		.uleb128 0x2
+ 2605 0208 18       		.uleb128 0x18
+ 2606 0209 00       		.byte	0
+ 2607 020a 00       		.byte	0
+ 2608 020b 20       		.uleb128 0x20
+ 2609 020c 35       		.uleb128 0x35
+ 2610 020d 00       		.byte	0
+ 2611 020e 49       		.uleb128 0x49
+ 2612 020f 13       		.uleb128 0x13
+ 2613 0210 00       		.byte	0
+ 2614 0211 00       		.byte	0
+ 2615 0212 21       		.uleb128 0x21
+ 2616 0213 01       		.uleb128 0x1
+ 2617 0214 01       		.byte	0x1
+ 2618 0215 49       		.uleb128 0x49
+ 2619 0216 13       		.uleb128 0x13
+ 2620 0217 01       		.uleb128 0x1
+ 2621 0218 13       		.uleb128 0x13
+ 2622 0219 00       		.byte	0
+ 2623 021a 00       		.byte	0
+ 2624 021b 22       		.uleb128 0x22
+ 2625 021c 21       		.uleb128 0x21
+ 2626 021d 00       		.byte	0
+ 2627 021e 49       		.uleb128 0x49
+ 2628 021f 13       		.uleb128 0x13
+ 2629 0220 2F       		.uleb128 0x2f
+ 2630 0221 0B       		.uleb128 0xb
+ 2631 0222 00       		.byte	0
+ 2632 0223 00       		.byte	0
+ 2633 0224 00       		.byte	0
+ 2634              		.section	.debug_aranges,"",%progbits
+ 2635 0000 A4000000 		.4byte	0xa4
+ 2636 0004 0200     		.2byte	0x2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 56
+
+
+ 2637 0006 00000000 		.4byte	.Ldebug_info0
+ 2638 000a 04       		.byte	0x4
+ 2639 000b 00       		.byte	0
+ 2640 000c 0000     		.2byte	0
+ 2641 000e 0000     		.2byte	0
+ 2642 0010 00000000 		.4byte	.LFB0
+ 2643 0014 4E000000 		.4byte	.LFE0-.LFB0
+ 2644 0018 00000000 		.4byte	.LFB1
+ 2645 001c 20000000 		.4byte	.LFE1-.LFB1
+ 2646 0020 00000000 		.4byte	.LFB2
+ 2647 0024 2C000000 		.4byte	.LFE2-.LFB2
+ 2648 0028 00000000 		.4byte	.LFB3
+ 2649 002c 44000000 		.4byte	.LFE3-.LFB3
+ 2650 0030 00000000 		.4byte	.LFB4
+ 2651 0034 36000000 		.4byte	.LFE4-.LFB4
+ 2652 0038 00000000 		.4byte	.LFB5
+ 2653 003c 60000000 		.4byte	.LFE5-.LFB5
+ 2654 0040 00000000 		.4byte	.LFB6
+ 2655 0044 4C000000 		.4byte	.LFE6-.LFB6
+ 2656 0048 00000000 		.4byte	.LFB7
+ 2657 004c 7A000000 		.4byte	.LFE7-.LFB7
+ 2658 0050 00000000 		.4byte	.LFB8
+ 2659 0054 24000000 		.4byte	.LFE8-.LFB8
+ 2660 0058 00000000 		.4byte	.LFB9
+ 2661 005c 44000000 		.4byte	.LFE9-.LFB9
+ 2662 0060 00000000 		.4byte	.LFB10
+ 2663 0064 24000000 		.4byte	.LFE10-.LFB10
+ 2664 0068 00000000 		.4byte	.LFB11
+ 2665 006c 44000000 		.4byte	.LFE11-.LFB11
+ 2666 0070 00000000 		.4byte	.LFB12
+ 2667 0074 4A000000 		.4byte	.LFE12-.LFB12
+ 2668 0078 00000000 		.4byte	.LFB13
+ 2669 007c 7E000000 		.4byte	.LFE13-.LFB13
+ 2670 0080 00000000 		.4byte	.LFB15
+ 2671 0084 4C000000 		.4byte	.LFE15-.LFB15
+ 2672 0088 00000000 		.4byte	.LFB16
+ 2673 008c 70000000 		.4byte	.LFE16-.LFB16
+ 2674 0090 00000000 		.4byte	.LFB17
+ 2675 0094 18000000 		.4byte	.LFE17-.LFB17
+ 2676 0098 00000000 		.4byte	.LFB18
+ 2677 009c 18000000 		.4byte	.LFE18-.LFB18
+ 2678 00a0 00000000 		.4byte	0
+ 2679 00a4 00000000 		.4byte	0
+ 2680              		.section	.debug_ranges,"",%progbits
+ 2681              	.Ldebug_ranges0:
+ 2682 0000 00000000 		.4byte	.LFB0
+ 2683 0004 4E000000 		.4byte	.LFE0
+ 2684 0008 00000000 		.4byte	.LFB1
+ 2685 000c 20000000 		.4byte	.LFE1
+ 2686 0010 00000000 		.4byte	.LFB2
+ 2687 0014 2C000000 		.4byte	.LFE2
+ 2688 0018 00000000 		.4byte	.LFB3
+ 2689 001c 44000000 		.4byte	.LFE3
+ 2690 0020 00000000 		.4byte	.LFB4
+ 2691 0024 36000000 		.4byte	.LFE4
+ 2692 0028 00000000 		.4byte	.LFB5
+ 2693 002c 60000000 		.4byte	.LFE5
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 57
+
+
+ 2694 0030 00000000 		.4byte	.LFB6
+ 2695 0034 4C000000 		.4byte	.LFE6
+ 2696 0038 00000000 		.4byte	.LFB7
+ 2697 003c 7A000000 		.4byte	.LFE7
+ 2698 0040 00000000 		.4byte	.LFB8
+ 2699 0044 24000000 		.4byte	.LFE8
+ 2700 0048 00000000 		.4byte	.LFB9
+ 2701 004c 44000000 		.4byte	.LFE9
+ 2702 0050 00000000 		.4byte	.LFB10
+ 2703 0054 24000000 		.4byte	.LFE10
+ 2704 0058 00000000 		.4byte	.LFB11
+ 2705 005c 44000000 		.4byte	.LFE11
+ 2706 0060 00000000 		.4byte	.LFB12
+ 2707 0064 4A000000 		.4byte	.LFE12
+ 2708 0068 00000000 		.4byte	.LFB13
+ 2709 006c 7E000000 		.4byte	.LFE13
+ 2710 0070 00000000 		.4byte	.LFB15
+ 2711 0074 4C000000 		.4byte	.LFE15
+ 2712 0078 00000000 		.4byte	.LFB16
+ 2713 007c 70000000 		.4byte	.LFE16
+ 2714 0080 00000000 		.4byte	.LFB17
+ 2715 0084 18000000 		.4byte	.LFE17
+ 2716 0088 00000000 		.4byte	.LFB18
+ 2717 008c 18000000 		.4byte	.LFE18
+ 2718 0090 00000000 		.4byte	0
+ 2719 0094 00000000 		.4byte	0
+ 2720              		.section	.debug_line,"",%progbits
+ 2721              	.Ldebug_line0:
+ 2722 0000 CB030000 		.section	.debug_str,"MS",%progbits,1
+ 2722      02000002 
+ 2722      00000201 
+ 2722      FB0E0D00 
+ 2722      01010101 
+ 2723              	.LASF27:
+ 2724 0000 646D635F 		.ascii	"dmc_packet_out_of_order_reason\000"
+ 2724      7061636B 
+ 2724      65745F6F 
+ 2724      75745F6F 
+ 2724      665F6F72 
+ 2725              	.LASF20:
+ 2726 001f 444D435F 		.ascii	"DMC_PACKET_MACHINE_OK\000"
+ 2726      5041434B 
+ 2726      45545F4D 
+ 2726      41434849 
+ 2726      4E455F4F 
+ 2727              	.LASF71:
+ 2728 0035 646D635F 		.ascii	"dmc_packet_marshal_fluid_pour_requested\000"
+ 2728      7061636B 
+ 2728      65745F6D 
+ 2728      61727368 
+ 2728      616C5F66 
+ 2729              	.LASF57:
+ 2730 005d 646D635F 		.ascii	"dmc_packet_init\000"
+ 2730      7061636B 
+ 2730      65745F69 
+ 2730      6E697400 
+ 2731              	.LASF4:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 58
+
+
+ 2732 006d 73697A65 		.ascii	"size_t\000"
+ 2732      5F7400
+ 2733              	.LASF64:
+ 2734 0074 646D635F 		.ascii	"dmc_packet_unmarshal_container_volume_measured\000"
+ 2734      7061636B 
+ 2734      65745F75 
+ 2734      6E6D6172 
+ 2734      7368616C 
+ 2735              	.LASF5:
+ 2736 00a3 5F5F7569 		.ascii	"__uint8_t\000"
+ 2736      6E74385F 
+ 2736      7400
+ 2737              	.LASF67:
+ 2738 00ad 646D635F 		.ascii	"dmc_packet_marshal_user_confirm\000"
+ 2738      7061636B 
+ 2738      65745F6D 
+ 2738      61727368 
+ 2738      616C5F75 
+ 2739              	.LASF21:
+ 2740 00cd 74797065 		.ascii	"type\000"
+ 2740      00
+ 2741              	.LASF79:
+ 2742 00d2 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2742      43313120 
+ 2742      352E342E 
+ 2742      31203230 
+ 2742      31363036 
+ 2743 0105 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2743      20726576 
+ 2743      6973696F 
+ 2743      6E203233 
+ 2743      37373135 
+ 2744 0138 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2744      66756E63 
+ 2744      74696F6E 
+ 2744      2D736563 
+ 2744      74696F6E 
+ 2745              	.LASF77:
+ 2746 0160 71756575 		.ascii	"queue_size\000"
+ 2746      655F7369 
+ 2746      7A6500
+ 2747              	.LASF52:
+ 2748 016b 4A4F425F 		.ascii	"JOB_TYPE_UNDEFINED\000"
+ 2748      54595045 
+ 2748      5F554E44 
+ 2748      4546494E 
+ 2748      454400
+ 2749              	.LASF38:
+ 2750 017e 646D635F 		.ascii	"dmc_packet_user_confirm\000"
+ 2750      7061636B 
+ 2750      65745F75 
+ 2750      7365725F 
+ 2750      636F6E66 
+ 2751              	.LASF12:
+ 2752 0196 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2752      206C6F6E 
+ 2752      6720756E 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 59
+
+
+ 2752      7369676E 
+ 2752      65642069 
+ 2753              	.LASF36:
+ 2754 01ad 636F6E74 		.ascii	"container\000"
+ 2754      61696E65 
+ 2754      7200
+ 2755              	.LASF72:
+ 2756 01b7 6E657874 		.ascii	"next\000"
+ 2756      00
+ 2757              	.LASF25:
+ 2758 01bc 696E7431 		.ascii	"int16_t\000"
+ 2758      365F7400 
+ 2759              	.LASF1:
+ 2760 01c4 6C6F6E67 		.ascii	"long long int\000"
+ 2760      206C6F6E 
+ 2760      6720696E 
+ 2760      7400
+ 2761              	.LASF3:
+ 2762 01d2 7369676E 		.ascii	"signed char\000"
+ 2762      65642063 
+ 2762      68617200 
+ 2763              	.LASF66:
+ 2764 01de 646D635F 		.ascii	"dmc_packet_unmarshal_user_confirm\000"
+ 2764      7061636B 
+ 2764      65745F75 
+ 2764      6E6D6172 
+ 2764      7368616C 
+ 2765              	.LASF49:
+ 2766 0200 646D635F 		.ascii	"dmc_timer_action\000"
+ 2766      74696D65 
+ 2766      725F6163 
+ 2766      74696F6E 
+ 2766      00
+ 2767              	.LASF35:
+ 2768 0211 646D635F 		.ascii	"dmc_packet_container_volume_measured\000"
+ 2768      7061636B 
+ 2768      65745F63 
+ 2768      6F6E7461 
+ 2768      696E6572 
+ 2769              	.LASF10:
+ 2770 0236 6C6F6E67 		.ascii	"long int\000"
+ 2770      20696E74 
+ 2770      00
+ 2771              	.LASF51:
+ 2772 023f 6A6F625F 		.ascii	"job_type\000"
+ 2772      74797065 
+ 2772      00
+ 2773              	.LASF81:
+ 2774 0248 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
+ 2774      6F646520 
+ 2774      74696C20 
+ 2774      50524A33 
+ 2774      5C73656D 
+ 2775 0276 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
+ 2775      70736F63 
+ 2775      5C646D63 
+ 2775      2D70736F 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 60
+
+
+ 2775      632E6379 
+ 2776              	.LASF15:
+ 2777 028e 444D435F 		.ascii	"DMC_PACKET_OUT_OF_ORDER\000"
+ 2777      5041434B 
+ 2777      45545F4F 
+ 2777      55545F4F 
+ 2777      465F4F52 
+ 2778              	.LASF78:
+ 2779 02a6 71756575 		.ascii	"queue\000"
+ 2779      6500
+ 2780              	.LASF68:
+ 2781 02ac 646D635F 		.ascii	"dmc_packet_unmarshal_machine_ok\000"
+ 2781      7061636B 
+ 2781      65745F75 
+ 2781      6E6D6172 
+ 2781      7368616C 
+ 2782              	.LASF54:
+ 2783 02cc 4A4F425F 		.ascii	"JOB_TYPE_TIMER\000"
+ 2783      54595045 
+ 2783      5F54494D 
+ 2783      455200
+ 2784              	.LASF74:
+ 2785 02db 6A6F625F 		.ascii	"job_enqueue_packet\000"
+ 2785      656E7175 
+ 2785      6575655F 
+ 2785      7061636B 
+ 2785      657400
+ 2786              	.LASF80:
+ 2787 02ee 646D635F 		.ascii	"dmc_job_queue.c\000"
+ 2787      6A6F625F 
+ 2787      71756575 
+ 2787      652E6300 
+ 2788              	.LASF76:
+ 2789 02fe 61637469 		.ascii	"action\000"
+ 2789      6F6E00
+ 2790              	.LASF32:
+ 2791 0305 646D635F 		.ascii	"dmc_packet\000"
+ 2791      7061636B 
+ 2791      657400
+ 2792              	.LASF7:
+ 2793 0310 5F5F696E 		.ascii	"__int16_t\000"
+ 2793      7431365F 
+ 2793      7400
+ 2794              	.LASF16:
+ 2795 031a 444D435F 		.ascii	"DMC_PACKET_CONTAINER_VOLUME_MEASURED\000"
+ 2795      5041434B 
+ 2795      45545F43 
+ 2795      4F4E5441 
+ 2795      494E4552 
+ 2796              	.LASF0:
+ 2797 033f 756E7369 		.ascii	"unsigned int\000"
+ 2797      676E6564 
+ 2797      20696E74 
+ 2797      00
+ 2798              	.LASF29:
+ 2799 034c 444D435F 		.ascii	"DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_1_RE"
+ 2799      5041434B 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 61
+
+
+ 2799      45545F4F 
+ 2799      55545F4F 
+ 2799      465F4F52 
+ 2800 037f 4D4F5645 		.ascii	"MOVED\000"
+ 2800      4400
+ 2801              	.LASF11:
+ 2802 0385 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2802      20756E73 
+ 2802      69676E65 
+ 2802      6420696E 
+ 2802      7400
+ 2803              	.LASF22:
+ 2804 0397 64617461 		.ascii	"data\000"
+ 2804      00
+ 2805              	.LASF45:
+ 2806 039c 50554D50 		.ascii	"PUMP_TIMER_3\000"
+ 2806      5F54494D 
+ 2806      45525F33 
+ 2806      00
+ 2807              	.LASF9:
+ 2808 03a9 73686F72 		.ascii	"short unsigned int\000"
+ 2808      7420756E 
+ 2808      7369676E 
+ 2808      65642069 
+ 2808      6E7400
+ 2809              	.LASF18:
+ 2810 03bc 444D435F 		.ascii	"DMC_PACKET_FLUID_POUR_REQUESTED\000"
+ 2810      5041434B 
+ 2810      45545F46 
+ 2810      4C554944 
+ 2810      5F504F55 
+ 2811              	.LASF19:
+ 2812 03dc 444D435F 		.ascii	"DMC_PACKET_DEBUG\000"
+ 2812      5041434B 
+ 2812      45545F44 
+ 2812      45425547 
+ 2812      00
+ 2813              	.LASF42:
+ 2814 03ed 646D635F 		.ascii	"dmc_pump_timer\000"
+ 2814      70756D70 
+ 2814      5F74696D 
+ 2814      657200
+ 2815              	.LASF83:
+ 2816 03fc 6A6F625F 		.ascii	"job_dequeue\000"
+ 2816      64657175 
+ 2816      65756500 
+ 2817              	.LASF60:
+ 2818 0408 646D635F 		.ascii	"dmc_packet_unmarshal_out_of_order\000"
+ 2818      7061636B 
+ 2818      65745F75 
+ 2818      6E6D6172 
+ 2818      7368616C 
+ 2819              	.LASF26:
+ 2820 042a 646D635F 		.ascii	"dmc_packet_type\000"
+ 2820      7061636B 
+ 2820      65745F74 
+ 2820      79706500 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 62
+
+
+ 2821              	.LASF43:
+ 2822 043a 50554D50 		.ascii	"PUMP_TIMER_1\000"
+ 2822      5F54494D 
+ 2822      45525F31 
+ 2822      00
+ 2823              	.LASF44:
+ 2824 0447 50554D50 		.ascii	"PUMP_TIMER_2\000"
+ 2824      5F54494D 
+ 2824      45525F32 
+ 2824      00
+ 2825              	.LASF17:
+ 2826 0454 444D435F 		.ascii	"DMC_PACKET_USER_CONFIRM\000"
+ 2826      5041434B 
+ 2826      45545F55 
+ 2826      5345525F 
+ 2826      434F4E46 
+ 2827              	.LASF30:
+ 2828 046c 444D435F 		.ascii	"DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_2_RE"
+ 2828      5041434B 
+ 2828      45545F4F 
+ 2828      55545F4F 
+ 2828      465F4F52 
+ 2829 049f 4D4F5645 		.ascii	"MOVED\000"
+ 2829      4400
+ 2830              	.LASF61:
+ 2831 04a5 66726F6D 		.ascii	"from\000"
+ 2831      00
+ 2832              	.LASF13:
+ 2833 04aa 73697A65 		.ascii	"sizetype\000"
+ 2833      74797065 
+ 2833      00
+ 2834              	.LASF2:
+ 2835 04b3 6C6F6E67 		.ascii	"long double\000"
+ 2835      20646F75 
+ 2835      626C6500 
+ 2836              	.LASF56:
+ 2837 04bf 7061636B 		.ascii	"packet\000"
+ 2837      657400
+ 2838              	.LASF46:
+ 2839 04c6 646D635F 		.ascii	"dmc_timer_action_type\000"
+ 2839      74696D65 
+ 2839      725F6163 
+ 2839      74696F6E 
+ 2839      5F747970 
+ 2840              	.LASF40:
+ 2841 04dc 646D635F 		.ascii	"dmc_packet_fluid_pour_requested\000"
+ 2841      7061636B 
+ 2841      65745F66 
+ 2841      6C756964 
+ 2841      5F706F75 
+ 2842              	.LASF28:
+ 2843 04fc 444D435F 		.ascii	"DMC_PACKET_OUT_OF_ORDER_REASON_UNKNOWN\000"
+ 2843      5041434B 
+ 2843      45545F4F 
+ 2843      55545F4F 
+ 2843      465F4F52 
+ 2844              	.LASF31:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 63
+
+
+ 2845 0523 444D435F 		.ascii	"DMC_PACKET_OUT_OF_ORDER_REASON_FLUID_CONTAINER_3_RE"
+ 2845      5041434B 
+ 2845      45545F4F 
+ 2845      55545F4F 
+ 2845      465F4F52 
+ 2846 0556 4D4F5645 		.ascii	"MOVED\000"
+ 2846      4400
+ 2847              	.LASF6:
+ 2848 055c 756E7369 		.ascii	"unsigned char\000"
+ 2848      676E6564 
+ 2848      20636861 
+ 2848      7200
+ 2849              	.LASF63:
+ 2850 056a 646D635F 		.ascii	"dmc_packet_marshal_out_of_order\000"
+ 2850      7061636B 
+ 2850      65745F6D 
+ 2850      61727368 
+ 2850      616C5F6F 
+ 2851              	.LASF70:
+ 2852 058a 646D635F 		.ascii	"dmc_packet_unmarshal_fluid_pour_requested\000"
+ 2852      7061636B 
+ 2852      65745F75 
+ 2852      6E6D6172 
+ 2852      7368616C 
+ 2853              	.LASF8:
+ 2854 05b4 73686F72 		.ascii	"short int\000"
+ 2854      7420696E 
+ 2854      7400
+ 2855              	.LASF33:
+ 2856 05be 646D635F 		.ascii	"dmc_packet_out_of_order\000"
+ 2856      7061636B 
+ 2856      65745F6F 
+ 2856      75745F6F 
+ 2856      665F6F72 
+ 2857              	.LASF59:
+ 2858 05d6 646D635F 		.ascii	"dmc_packet_append_byte\000"
+ 2858      7061636B 
+ 2858      65745F61 
+ 2858      7070656E 
+ 2858      645F6279 
+ 2859              	.LASF23:
+ 2860 05ed 64617461 		.ascii	"data_len\000"
+ 2860      5F6C656E 
+ 2860      00
+ 2861              	.LASF34:
+ 2862 05f6 72656173 		.ascii	"reason\000"
+ 2862      6F6E00
+ 2863              	.LASF50:
+ 2864 05fd 6F726967 		.ascii	"origin\000"
+ 2864      696E00
+ 2865              	.LASF39:
+ 2866 0604 646D635F 		.ascii	"dmc_packet_machine_ok\000"
+ 2866      7061636B 
+ 2866      65745F6D 
+ 2866      61636869 
+ 2866      6E655F6F 
+ 2867              	.LASF65:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 64
+
+
+ 2868 061a 646D635F 		.ascii	"dmc_packet_marshal_container_volume_measured\000"
+ 2868      7061636B 
+ 2868      65745F6D 
+ 2868      61727368 
+ 2868      616C5F63 
+ 2869              	.LASF75:
+ 2870 0647 6A6F625F 		.ascii	"job_enqueue_timer\000"
+ 2870      656E7175 
+ 2870      6575655F 
+ 2870      74696D65 
+ 2870      7200
+ 2871              	.LASF47:
+ 2872 0659 54494D45 		.ascii	"TIMER_ACTION_STOP_PUMP\000"
+ 2872      525F4143 
+ 2872      54494F4E 
+ 2872      5F53544F 
+ 2872      505F5055 
+ 2873              	.LASF48:
+ 2874 0670 54494D45 		.ascii	"TIMER_ACTION_CHECK_WEIGHT\000"
+ 2874      525F4143 
+ 2874      54494F4E 
+ 2874      5F434845 
+ 2874      434B5F57 
+ 2875              	.LASF14:
+ 2876 068a 63686172 		.ascii	"char\000"
+ 2876      00
+ 2877              	.LASF82:
+ 2878 068f 646D635F 		.ascii	"dmc_packet_free\000"
+ 2878      7061636B 
+ 2878      65745F66 
+ 2878      72656500 
+ 2879              	.LASF62:
+ 2880 069f 6F666673 		.ascii	"offset\000"
+ 2880      657400
+ 2881              	.LASF58:
+ 2882 06a6 646D635F 		.ascii	"dmc_packet_complete\000"
+ 2882      7061636B 
+ 2882      65745F63 
+ 2882      6F6D706C 
+ 2882      65746500 
+ 2883              	.LASF41:
+ 2884 06ba 616D6F75 		.ascii	"amount\000"
+ 2884      6E7400
+ 2885              	.LASF69:
+ 2886 06c1 646D635F 		.ascii	"dmc_packet_marshal_machine_ok\000"
+ 2886      7061636B 
+ 2886      65745F6D 
+ 2886      61727368 
+ 2886      616C5F6D 
+ 2887              	.LASF24:
+ 2888 06df 75696E74 		.ascii	"uint8_t\000"
+ 2888      385F7400 
+ 2889              	.LASF53:
+ 2890 06e7 4A4F425F 		.ascii	"JOB_TYPE_PACKET\000"
+ 2890      54595045 
+ 2890      5F504143 
+ 2890      4B455400 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccboIk6j.s 			page 65
+
+
+ 2891              	.LASF37:
+ 2892 06f7 766F6C75 		.ascii	"volume\000"
+ 2892      6D6500
+ 2893              	.LASF73:
+ 2894 06fe 6A6F625F 		.ascii	"job_enqueue\000"
+ 2894      656E7175 
+ 2894      65756500 
+ 2895              	.LASF55:
+ 2896 070a 64617461 		.ascii	"data_bytes\000"
+ 2896      5F627974 
+ 2896      657300
+ 2897              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

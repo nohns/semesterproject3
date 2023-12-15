@@ -402,12 +402,12 @@ void pump_timer_1_WriteControlRegister(uint8 control)
 *  The present value of the counter.
 *
 *******************************************************************************/
-uint16 pump_timer_1_ReadPeriod(void) 
+uint32 pump_timer_1_ReadPeriod(void) 
 {
    #if(pump_timer_1_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(pump_timer_1_PERIOD_LSB_PTR));
+       return ((uint32)CY_GET_REG16(pump_timer_1_PERIOD_LSB_PTR));
    #else
-       return (CY_GET_REG16(pump_timer_1_PERIOD_LSB_PTR));
+       return (CY_GET_REG24(pump_timer_1_PERIOD_LSB_PTR));
    #endif /* (pump_timer_1_UsingFixedFunction) */
 }
 
@@ -428,13 +428,13 @@ uint16 pump_timer_1_ReadPeriod(void)
 *  void
 *
 *******************************************************************************/
-void pump_timer_1_WritePeriod(uint16 period) 
+void pump_timer_1_WritePeriod(uint32 period) 
 {
     #if(pump_timer_1_UsingFixedFunction)
         uint16 period_temp = (uint16)period;
         CY_SET_REG16(pump_timer_1_PERIOD_LSB_PTR, period_temp);
     #else
-        CY_SET_REG16(pump_timer_1_PERIOD_LSB_PTR, period);
+        CY_SET_REG24(pump_timer_1_PERIOD_LSB_PTR, period);
     #endif /*Write Period value with appropriate resolution suffix depending on UDB or fixed function implementation */
 }
 
@@ -453,12 +453,12 @@ void pump_timer_1_WritePeriod(uint16 period)
 *  Present Capture value.
 *
 *******************************************************************************/
-uint16 pump_timer_1_ReadCapture(void) 
+uint32 pump_timer_1_ReadCapture(void) 
 {
    #if(pump_timer_1_UsingFixedFunction)
-       return ((uint16)CY_GET_REG16(pump_timer_1_CAPTURE_LSB_PTR));
+       return ((uint32)CY_GET_REG16(pump_timer_1_CAPTURE_LSB_PTR));
    #else
-       return (CY_GET_REG16(pump_timer_1_CAPTURE_LSB_PTR));
+       return (CY_GET_REG24(pump_timer_1_CAPTURE_LSB_PTR));
    #endif /* (pump_timer_1_UsingFixedFunction) */
 }
 
@@ -477,7 +477,7 @@ uint16 pump_timer_1_ReadCapture(void)
 *  void
 *
 *******************************************************************************/
-void pump_timer_1_WriteCounter(uint16 counter) 
+void pump_timer_1_WriteCounter(uint32 counter) 
 {
    #if(pump_timer_1_UsingFixedFunction)
         /* This functionality is removed until a FixedFunction HW update to
@@ -486,7 +486,7 @@ void pump_timer_1_WriteCounter(uint16 counter)
         CY_SET_REG16(pump_timer_1_COUNTER_LSB_PTR, (uint16)counter);
         
     #else
-        CY_SET_REG16(pump_timer_1_COUNTER_LSB_PTR, counter);
+        CY_SET_REG24(pump_timer_1_COUNTER_LSB_PTR, counter);
     #endif /* Set Write Counter only for the UDB implementation (Write Counter not available in fixed function Timer */
 }
 
@@ -505,7 +505,7 @@ void pump_timer_1_WriteCounter(uint16 counter)
 *  Present compare value.
 *
 *******************************************************************************/
-uint16 pump_timer_1_ReadCounter(void) 
+uint32 pump_timer_1_ReadCounter(void) 
 {
     /* Force capture by reading Accumulator */
     /* Must first do a software capture to be able to read the counter */
@@ -518,9 +518,9 @@ uint16 pump_timer_1_ReadCounter(void)
 
     /* Read the data from the FIFO (or capture register for Fixed Function)*/
     #if(pump_timer_1_UsingFixedFunction)
-        return ((uint16)CY_GET_REG16(pump_timer_1_CAPTURE_LSB_PTR));
+        return ((uint32)CY_GET_REG16(pump_timer_1_CAPTURE_LSB_PTR));
     #else
-        return (CY_GET_REG16(pump_timer_1_CAPTURE_LSB_PTR));
+        return (CY_GET_REG24(pump_timer_1_CAPTURE_LSB_PTR));
     #endif /* (pump_timer_1_UsingFixedFunction) */
 }
 

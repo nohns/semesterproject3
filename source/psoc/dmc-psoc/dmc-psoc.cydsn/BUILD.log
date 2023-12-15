@@ -1,188 +1,200 @@
---------------- Build Started: 12/01/2023 10:41:02 Project: dmc-psoc, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+--------------- Build Started: 12/15/2023 10:48:12 Project: dmc-psoc, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
 The code generation step is up to date.
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
-main.c: In function 'handle_packet':
-main.c:90:5: warning: enumeration value 'DMC_PACKET_OUT_OF_ORDER' not handled in switch [-Wswitch]
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/dmc_controller.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c dmc_controller.c -o .\CortexM3\ARM_GCC_541\Debug\dmc_controller.o
+dmc_controller.c: In function 'weight_to_cl':
+dmc_controller.c:52:12: warning: unused variable 'print' [-Wunused-variable]
+     double print = percent*70;
+            ^
+dmc_controller.c:42:14: warning: unused variable 'temp_min' [-Wunused-variable]
+     uint16_t temp_min = current_weight->min;
+              ^
+dmc_controller.c: In function 'handle_packet':
+dmc_controller.c:172:5: warning: enumeration value 'DMC_PACKET_OUT_OF_ORDER' not handled in switch [-Wswitch]
      switch(packet->type)
      ^
-main.c:90:5: warning: enumeration value 'DMC_PACKET_CONTAINER_WEIGHT_MEASURED' not handled in switch [-Wswitch]
-main.c: In function 'main':
-main.c:175:30: warning: passing argument 1 of 'handle_timer' from incompatible pointer type [-Wincompatible-pointer-types]
-                 handle_timer((struct timer_action*)current_job->data);
-                              ^
-main.c:112:6: note: expected 'struct dmc_timer_action *' but argument is of type 'struct timer_action *'
- void handle_timer(struct dmc_timer_action* action)
-      ^
+dmc_controller.c:172:5: warning: enumeration value 'DMC_PACKET_CONTAINER_VOLUME_MEASURED' not handled in switch [-Wswitch]
+dmc_controller.c:172:5: warning: enumeration value 'DMC_PACKET_USER_CONFIRM' not handled in switch [-Wswitch]
+dmc_controller.c:172:5: warning: enumeration value 'DMC_PACKET_DEBUG' not handled in switch [-Wswitch]
+dmc_controller.c:172:5: warning: enumeration value 'DMC_PACKET_MACHINE_OK' not handled in switch [-Wswitch]
+dmc_controller.c: In function 'main':
+dmc_controller.c:233:9: warning: enumeration value 'JOB_TYPE_UNDEFINED' not handled in switch [-Wswitch]
+         switch (current_job.type)
+         ^
 In file included from ..\..\..\common\hw\include\packet.h:4:0,
-                 from job_queue.h:10,
-                 from main.c:13:
-main.c: At top level:
-..\..\..\common\hw\include\base_packet.h:91:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
+                 from dmc_job_queue.h:10,
+                 from dmc_controller.c:13:
+dmc_controller.c: At top level:
+..\..\..\common\hw\include\base_packet.h:93:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
  static unsigned char dmc_packet_complete(struct dmc_packet *packet)
                       ^
-..\..\..\common\hw\include\base_packet.h:101:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
+..\..\..\common\hw\include\base_packet.h:103:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
  static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
                       ^
-In file included from job_queue.h:10:0,
-                 from main.c:13:
+In file included from dmc_job_queue.h:10:0,
+                 from dmc_controller.c:13:
 ..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
  dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
  ^
 ..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet *to,
+ dmc_packet_marshal_out_of_order(struct dmc_packet             **to,
  ^
-..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_container_weight_measured(
+..\..\..\common\hw\include\packet.h:123:12: warning: 'dmc_packet_unmarshal_container_volume_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_container_volume_measured(
             ^
-..\..\..\common\hw\include\packet.h:138:12: warning: 'dmc_packet_marshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_container_weight_measured(
+..\..\..\common\hw\include\packet.h:144:12: warning: 'dmc_packet_marshal_container_volume_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_marshal_container_volume_measured(
             ^
-..\..\..\common\hw\include\packet.h:172:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
+..\..\..\common\hw\include\packet.h:185:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
  dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
  ^
-..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet *to,
+..\..\..\common\hw\include\packet.h:200:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_marshal_user_confirm(struct dmc_packet             **to,
  ^
-..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
+..\..\..\common\hw\include\packet.h:232:12: warning: 'dmc_packet_unmarshal_machine_ok' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_machine_ok(struct dmc_packet_machine_ok *packet,
+            ^
+..\..\..\common\hw\include\packet.h:247:1: warning: 'dmc_packet_marshal_machine_ok' defined but not used [-Wunused-function]
+ dmc_packet_marshal_machine_ok(struct dmc_packet             **to,
+ ^
+..\..\..\common\hw\include\packet.h:308:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_marshal_fluid_pour_requested(
             ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/timers.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c timers.c -o .\CortexM3\ARM_GCC_541\Debug\timers.o
-In file included from ..\..\..\common\hw\include\packet.h:4:0,
-                 from job_queue.h:10,
-                 from timers.c:17:
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/job_queue.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c job_queue.c -o .\CortexM3\ARM_GCC_541\Debug\job_queue.o
-..\..\..\common\hw\include\base_packet.h:75:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
- static void dmc_packet_free(struct dmc_packet *packet)
-             ^
-..\..\..\common\hw\include\base_packet.h:91:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
- static unsigned char dmc_packet_complete(struct dmc_packet *packet)
-                      ^
-..\..\..\common\hw\include\base_packet.h:101:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
- static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
-                      ^
-In file included from job_queue.h:10:0,
-                 from timers.c:17:
-..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
- ^
-..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet *to,
- ^
-..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_container_weight_measured(
-            ^
-..\..\..\common\hw\include\packet.h:138:12: warning: 'dmc_packet_marshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_container_weight_measured(
-            ^
-..\..\..\common\hw\include\packet.h:172:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
- ^
-..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet *to,
- ^
-..\..\..\common\hw\include\packet.h:223:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_fluid_pour_requested(
-            ^
-..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_fluid_pour_requested(
-            ^
-In file included from ..\..\..\common\hw\include\packet.h:4:0,
-                 from job_queue.h:10,
-                 from job_queue.c:15:
-..\..\..\common\hw\include\base_packet.h:75:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
- static void dmc_packet_free(struct dmc_packet *packet)
-             ^
-..\..\..\common\hw\include\base_packet.h:91:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
- static unsigned char dmc_packet_complete(struct dmc_packet *packet)
-                      ^
-..\..\..\common\hw\include\base_packet.h:101:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
- static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
-                      ^
-In file included from job_queue.h:10:0,
-                 from job_queue.c:15:
-..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
- ^
-..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet *to,
- ^
-..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_container_weight_measured(
-            ^
-..\..\..\common\hw\include\packet.h:138:12: warning: 'dmc_packet_marshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_container_weight_measured(
-            ^
-..\..\..\common\hw\include\packet.h:172:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
- ^
-..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet *to,
- ^
-..\..\..\common\hw\include\packet.h:223:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_fluid_pour_requested(
-            ^
-..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_fluid_pour_requested(
-            ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pump_control.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c pump_control.c -o .\CortexM3\ARM_GCC_541\Debug\pump_control.o
-pump_control.c:17:17: warning: 'period_pr_cL' defined but not used [-Wunused-variable]
- static uint32_t period_pr_cL = 2400;
-                 ^
-pump_control.c: In function 'is_pumping':
-pump_control.c:51:1: warning: control reaches end of non-void function [-Wreturn-type]
+dmc_controller.c: In function 'PERIODS_PR_CL':
+dmc_controller.c:35:1: warning: control reaches end of non-void function [-Wreturn-type]
  }
  ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/pc_uart.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c pc_uart.c -o .\CortexM3\ARM_GCC_541\Debug\pc_uart.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/weight.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c weight.c -o .\CortexM3\ARM_GCC_541\Debug\weight.o
-weight.c: In function 'measure_weight_value':
-weight.c:101:24: warning: 'result' may be used uninitialized in this function [-Wmaybe-uninitialized]
-                 result += weight_adc_GetResult16();
-                        ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/bro.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c bro.c -o .\CortexM3\ARM_GCC_541\Debug\bro.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/dmc_timers.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c dmc_timers.c -o .\CortexM3\ARM_GCC_541\Debug\dmc_timers.o
 In file included from ..\..\..\common\hw\include\packet.h:4:0,
-                 from job_queue.h:10,
-                 from bro.c:13:
-..\..\..\common\hw\include\base_packet.h:75:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
+                 from dmc_job_queue.h:10,
+                 from dmc_timers.c:17:
+..\..\..\common\hw\include\base_packet.h:77:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
  static void dmc_packet_free(struct dmc_packet *packet)
              ^
-In file included from job_queue.h:10:0,
-                 from bro.c:13:
+..\..\..\common\hw\include\base_packet.h:93:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
+ static unsigned char dmc_packet_complete(struct dmc_packet *packet)
+                      ^
+..\..\..\common\hw\include\base_packet.h:103:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
+ static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
+                      ^
+In file included from dmc_job_queue.h:10:0,
+                 from dmc_timers.c:17:
 ..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
  dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
  ^
 ..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
- dmc_packet_marshal_out_of_order(struct dmc_packet *to,
+ dmc_packet_marshal_out_of_order(struct dmc_packet             **to,
  ^
-..\..\..\common\hw\include\packet.h:117:12: warning: 'dmc_packet_unmarshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_unmarshal_container_weight_measured(
+..\..\..\common\hw\include\packet.h:123:12: warning: 'dmc_packet_unmarshal_container_volume_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_container_volume_measured(
             ^
-..\..\..\common\hw\include\packet.h:138:12: warning: 'dmc_packet_marshal_container_weight_measured' defined but not used [-Wunused-function]
- static int dmc_packet_marshal_container_weight_measured(
+..\..\..\common\hw\include\packet.h:144:12: warning: 'dmc_packet_marshal_container_volume_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_marshal_container_volume_measured(
             ^
-..\..\..\common\hw\include\packet.h:172:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
+..\..\..\common\hw\include\packet.h:185:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
  dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
  ^
-..\..\..\common\hw\include\packet.h:187:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
- dmc_packet_marshal_user_confirm(struct dmc_packet *to,
+..\..\..\common\hw\include\packet.h:200:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_marshal_user_confirm(struct dmc_packet             **to,
  ^
-..\..\..\common\hw\include\packet.h:223:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
+..\..\..\common\hw\include\packet.h:232:12: warning: 'dmc_packet_unmarshal_machine_ok' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_machine_ok(struct dmc_packet_machine_ok *packet,
+            ^
+..\..\..\common\hw\include\packet.h:247:1: warning: 'dmc_packet_marshal_machine_ok' defined but not used [-Wunused-function]
+ dmc_packet_marshal_machine_ok(struct dmc_packet             **to,
+ ^
+..\..\..\common\hw\include\packet.h:288:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_unmarshal_fluid_pour_requested(
             ^
-..\..\..\common\hw\include\packet.h:243:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
+..\..\..\common\hw\include\packet.h:308:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
  static int dmc_packet_marshal_fluid_pour_requested(
             ^
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi_PM.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_PM.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_INT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi_INT.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_INT.o
-arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_BOOT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c Generated_Source\PSoC5\uart_rpi_BOOT.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_BOOT.o
-arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a .\CortexM3\ARM_GCC_541\Debug\CyDmac.o .\CortexM3\ARM_GCC_541\Debug\CyFlash.o .\CortexM3\ARM_GCC_541\Debug\CyLib.o .\CortexM3\ARM_GCC_541\Debug\cyPm.o .\CortexM3\ARM_GCC_541\Debug\CySpc.o .\CortexM3\ARM_GCC_541\Debug\cyutils.o .\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_3.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_clock.o .\CortexM3\ARM_GCC_541\Debug\isr_check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\weight_1.o .\CortexM3\ARM_GCC_541\Debug\weight_2.o .\CortexM3\ARM_GCC_541\Debug\weight_3.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_1.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_3.o .\CortexM3\ARM_GCC_541\Debug\gpio_pump_2.o .\CortexM3\ARM_GCC_541\Debug\weight_selector.o .\CortexM3\ARM_GCC_541\Debug\weight_adc.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_INT.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_PM.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_IRQ.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_theACLK.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_ExtVref.o .\CortexM3\ARM_GCC_541\Debug\uart_pc.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_PM.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_INT.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_BOOT.o .\CortexM3\ARM_GCC_541\Debug\isr_uart_pc_rx.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_PM.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_INT.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_BOOT.o .\CortexM3\ARM_GCC_541\Debug\isr_uart_rpi_rx.o .\CortexM3\ARM_GCC_541\Debug\uart_pc_IntClock.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_IntClock.o .\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/dmc_pump_control.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c dmc_pump_control.c -o .\CortexM3\ARM_GCC_541\Debug\dmc_pump_control.o
+dmc_pump_control.c: In function 'is_pumping':
+dmc_pump_control.c:56:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/dmc_weight.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c dmc_weight.c -o .\CortexM3\ARM_GCC_541\Debug\dmc_weight.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/dmc_uart_rpi.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c dmc_uart_rpi.c -o .\CortexM3\ARM_GCC_541\Debug\dmc_uart_rpi.o
+In file included from dmc_job_queue.h:10:0,
+                 from dmc_uart_rpi.c:13:
+..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
+ dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
+ ^
+..\..\..\common\hw\include\packet.h:123:12: warning: 'dmc_packet_unmarshal_container_volume_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_container_volume_measured(
+            ^
+..\..\..\common\hw\include\packet.h:185:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
+ ^
+..\..\..\common\hw\include\packet.h:200:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_marshal_user_confirm(struct dmc_packet             **to,
+ ^
+..\..\..\common\hw\include\packet.h:232:12: warning: 'dmc_packet_unmarshal_machine_ok' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_machine_ok(struct dmc_packet_machine_ok *packet,
+            ^
+..\..\..\common\hw\include\packet.h:288:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_fluid_pour_requested(
+            ^
+..\..\..\common\hw\include\packet.h:308:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
+ static int dmc_packet_marshal_fluid_pour_requested(
+            ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/dmc_job_queue.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c dmc_job_queue.c -o .\CortexM3\ARM_GCC_541\Debug\dmc_job_queue.o
+In file included from ..\..\..\common\hw\include\packet.h:4:0,
+                 from dmc_job_queue.h:10,
+                 from dmc_job_queue.c:1:
+..\..\..\common\hw\include\base_packet.h:77:13: warning: 'dmc_packet_free' defined but not used [-Wunused-function]
+ static void dmc_packet_free(struct dmc_packet *packet)
+             ^
+..\..\..\common\hw\include\base_packet.h:93:22: warning: 'dmc_packet_complete' defined but not used [-Wunused-function]
+ static unsigned char dmc_packet_complete(struct dmc_packet *packet)
+                      ^
+..\..\..\common\hw\include\base_packet.h:103:22: warning: 'dmc_packet_append_byte' defined but not used [-Wunused-function]
+ static unsigned char dmc_packet_append_byte(struct dmc_packet *packet,
+                      ^
+In file included from dmc_job_queue.h:10:0,
+                 from dmc_job_queue.c:1:
+..\..\..\common\hw\include\packet.h:60:1: warning: 'dmc_packet_unmarshal_out_of_order' defined but not used [-Wunused-function]
+ dmc_packet_unmarshal_out_of_order(struct dmc_packet_out_of_order *packet,
+ ^
+..\..\..\common\hw\include\packet.h:78:1: warning: 'dmc_packet_marshal_out_of_order' defined but not used [-Wunused-function]
+ dmc_packet_marshal_out_of_order(struct dmc_packet             **to,
+ ^
+..\..\..\common\hw\include\packet.h:123:12: warning: 'dmc_packet_unmarshal_container_volume_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_container_volume_measured(
+            ^
+..\..\..\common\hw\include\packet.h:144:12: warning: 'dmc_packet_marshal_container_volume_measured' defined but not used [-Wunused-function]
+ static int dmc_packet_marshal_container_volume_measured(
+            ^
+..\..\..\common\hw\include\packet.h:185:1: warning: 'dmc_packet_unmarshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_unmarshal_user_confirm(struct dmc_packet_user_confirm *packet,
+ ^
+..\..\..\common\hw\include\packet.h:200:1: warning: 'dmc_packet_marshal_user_confirm' defined but not used [-Wunused-function]
+ dmc_packet_marshal_user_confirm(struct dmc_packet             **to,
+ ^
+..\..\..\common\hw\include\packet.h:232:12: warning: 'dmc_packet_unmarshal_machine_ok' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_machine_ok(struct dmc_packet_machine_ok *packet,
+            ^
+..\..\..\common\hw\include\packet.h:247:1: warning: 'dmc_packet_marshal_machine_ok' defined but not used [-Wunused-function]
+ dmc_packet_marshal_machine_ok(struct dmc_packet             **to,
+ ^
+..\..\..\common\hw\include\packet.h:288:12: warning: 'dmc_packet_unmarshal_fluid_pour_requested' defined but not used [-Wunused-function]
+ static int dmc_packet_unmarshal_fluid_pour_requested(
+            ^
+..\..\..\common\hw\include\packet.h:308:12: warning: 'dmc_packet_marshal_fluid_pour_requested' defined but not used [-Wunused-function]
+ static int dmc_packet_marshal_fluid_pour_requested(
+            ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c Generated_Source\PSoC5\uart_rpi.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_PM.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c Generated_Source\PSoC5\uart_rpi_PM.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_INT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c Generated_Source\PSoC5\uart_rpi_INT.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/uart_rpi_BOOT.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c Generated_Source\PSoC5\uart_rpi_BOOT.c -o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_BOOT.o
+arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a .\CortexM3\ARM_GCC_541\Debug\CyDmac.o .\CortexM3\ARM_GCC_541\Debug\CyFlash.o .\CortexM3\ARM_GCC_541\Debug\CyLib.o .\CortexM3\ARM_GCC_541\Debug\cyPm.o .\CortexM3\ARM_GCC_541\Debug\CySpc.o .\CortexM3\ARM_GCC_541\Debug\cyutils.o .\CortexM3\ARM_GCC_541\Debug\cy_em_eeprom.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_1_PM.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_3.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_clock_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_2_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_1.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\pump_timer_3_PM.o .\CortexM3\ARM_GCC_541\Debug\isr_pump_timer_3.o .\CortexM3\ARM_GCC_541\Debug\check_weight_timer_clock.o .\CortexM3\ARM_GCC_541\Debug\isr_check_weight_timer.o .\CortexM3\ARM_GCC_541\Debug\weight_1.o .\CortexM3\ARM_GCC_541\Debug\weight_2.o .\CortexM3\ARM_GCC_541\Debug\weight_3.o .\CortexM3\ARM_GCC_541\Debug\weight_selector.o .\CortexM3\ARM_GCC_541\Debug\weight_adc.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_INT.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_PM.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_IRQ.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_theACLK.o .\CortexM3\ARM_GCC_541\Debug\weight_adc_ExtVref.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_PM.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_INT.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_BOOT.o .\CortexM3\ARM_GCC_541\Debug\isr_uart_rpi_rx.o .\CortexM3\ARM_GCC_541\Debug\uart_rpi_IntClock.o .\CortexM3\ARM_GCC_541\Debug\pump_3.o .\CortexM3\ARM_GCC_541\Debug\pump_1.o .\CortexM3\ARM_GCC_541\Debug\pump_2.o .\CortexM3\ARM_GCC_541\Debug\CyBootAsmGnu.o
 arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a
-arm-none-eabi-gcc.exe -Wl,--start-group -o "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf" .\CortexM3\ARM_GCC_541\Debug\main.o .\CortexM3\ARM_GCC_541\Debug\timers.o .\CortexM3\ARM_GCC_541\Debug\job_queue.o .\CortexM3\ARM_GCC_541\Debug\pump_control.o .\CortexM3\ARM_GCC_541\Debug\pc_uart.o .\CortexM3\ARM_GCC_541\Debug\weight.o .\CortexM3\ARM_GCC_541\Debug\bro.o .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_541\Debug\cymetadata.o .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_541\Debug/dmc-psoc.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects -Wl,--end-group
+arm-none-eabi-gcc.exe -Wl,--start-group -o "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf" .\CortexM3\ARM_GCC_541\Debug\dmc_controller.o .\CortexM3\ARM_GCC_541\Debug\dmc_timers.o .\CortexM3\ARM_GCC_541\Debug\dmc_pump_control.o .\CortexM3\ARM_GCC_541\Debug\dmc_weight.o .\CortexM3\ARM_GCC_541\Debug\dmc_uart_rpi.o .\CortexM3\ARM_GCC_541\Debug\dmc_job_queue.o .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_541\Debug\cymetadata.o .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o .\CortexM3\ARM_GCC_541\Debug\dmc-psoc.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_541\Debug\CyComponentLibrary.a" -mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_541\Debug/dmc-psoc.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -O0 -ffat-lto-objects -Wl,--end-group
 cyelftool.exe -C "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf" --flash_row_size 256 --flash_size 262144 --flash_offset 0x00000000
 No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S "C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\CortexM3\ARM_GCC_541\Debug\dmc-psoc.elf"
-Flash used: 7958 of 262144 bytes (3,0 %).
-SRAM used: 2665 of 65536 bytes (4,1 %). Stack: 2048 bytes. Heap: 128 bytes.
---------------- Build Succeeded: 12/01/2023 10:41:04 ---------------
+Flash used: 12272 of 262144 bytes (4,7 %).
+SRAM used: 4693 of 65536 bytes (7,2 %). Stack: 2048 bytes. Heap: 2048 bytes.
+--------------- Build Succeeded: 12/15/2023 10:48:14 ---------------

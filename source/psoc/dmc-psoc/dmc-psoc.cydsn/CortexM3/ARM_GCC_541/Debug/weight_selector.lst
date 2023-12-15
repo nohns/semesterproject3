@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 1
 
 
    1              		.syntax unified
@@ -10,7 +10,7 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
    7              		.eabi_attribute 24, 1
    8              		.eabi_attribute 25, 1
    9              		.eabi_attribute 26, 1
-  10              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 30, 6
   11              		.eabi_attribute 34, 1
   12              		.eabi_attribute 18, 4
   13              		.thumb
@@ -19,15 +19,20 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
   16              		.text
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
-  19              		.section	.text.weight_selector_Start,"ax",%progbits
-  20              		.align	2
-  21              		.global	weight_selector_Start
-  22              		.thumb
-  23              		.thumb_func
-  24              		.type	weight_selector_Start, %function
-  25              	weight_selector_Start:
-  26              	.LFB0:
-  27              		.file 1 "Generated_Source\\PSoC5\\weight_selector.c"
+  19              		.data
+  20              		.type	weight_selector_lastChannel, %object
+  21              		.size	weight_selector_lastChannel, 1
+  22              	weight_selector_lastChannel:
+  23 0000 FF       		.byte	-1
+  24              		.section	.text.weight_selector_Start,"ax",%progbits
+  25              		.align	2
+  26              		.global	weight_selector_Start
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	weight_selector_Start, %function
+  30              	weight_selector_Start:
+  31              	.LFB0:
+  32              		.file 1 "Generated_Source\\PSoC5\\weight_selector.c"
    1:Generated_Source\PSoC5/weight_selector.c **** /*******************************************************************************
    2:Generated_Source\PSoC5/weight_selector.c **** * File Name: weight_selector.c
    3:Generated_Source\PSoC5/weight_selector.c **** * Version 1.80
@@ -53,14 +58,14 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
   23:Generated_Source\PSoC5/weight_selector.c **** /*******************************************************************************
   24:Generated_Source\PSoC5/weight_selector.c **** * Function Name: weight_selector_Start
   25:Generated_Source\PSoC5/weight_selector.c **** ********************************************************************************
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 2
+
+
   26:Generated_Source\PSoC5/weight_selector.c **** * Summary:
   27:Generated_Source\PSoC5/weight_selector.c **** *  Disconnect all channels.
   28:Generated_Source\PSoC5/weight_selector.c **** *
   29:Generated_Source\PSoC5/weight_selector.c **** * Parameters:
   30:Generated_Source\PSoC5/weight_selector.c **** *  void
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 2
-
-
   31:Generated_Source\PSoC5/weight_selector.c **** *
   32:Generated_Source\PSoC5/weight_selector.c **** * Return:
   33:Generated_Source\PSoC5/weight_selector.c **** *  void
@@ -68,41 +73,44 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
   35:Generated_Source\PSoC5/weight_selector.c **** *******************************************************************************/
   36:Generated_Source\PSoC5/weight_selector.c **** void weight_selector_Start(void) 
   37:Generated_Source\PSoC5/weight_selector.c **** {
-  28              		.loc 1 37 0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 0
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32 0000 10B5     		push	{r4, lr}
-  33              		.cfi_def_cfa_offset 8
-  34              		.cfi_offset 4, -8
-  35              		.cfi_offset 14, -4
-  36              	.LVL0:
+  33              		.loc 1 37 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 8
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 80B5     		push	{r7, lr}
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 82B0     		sub	sp, sp, #8
+  42              		.cfi_def_cfa_offset 16
+  43 0004 00AF     		add	r7, sp, #0
+  44              		.cfi_def_cfa_register 7
   38:Generated_Source\PSoC5/weight_selector.c ****     uint8 chan;
   39:Generated_Source\PSoC5/weight_selector.c **** 
   40:Generated_Source\PSoC5/weight_selector.c ****     for(chan = 0u; chan < weight_selector_CHANNELS ; chan++)
-  37              		.loc 1 40 0
-  38 0002 0024     		movs	r4, #0
-  39 0004 04E0     		b	.L2
-  40              	.LVL1:
-  41              	.L3:
+  45              		.loc 1 40 0
+  46 0006 0023     		movs	r3, #0
+  47 0008 FB71     		strb	r3, [r7, #7]
+  48 000a 06E0     		b	.L2
+  49              	.L3:
   41:Generated_Source\PSoC5/weight_selector.c ****     {
   42:Generated_Source\PSoC5/weight_selector.c **** #if (weight_selector_MUXTYPE == weight_selector_MUX_SINGLE)
   43:Generated_Source\PSoC5/weight_selector.c ****         weight_selector_Unset(chan);
-  42              		.loc 1 43 0 discriminator 3
-  43 0006 2046     		mov	r0, r4
-  44 0008 FFF7FEFF 		bl	weight_selector_Unset
-  45              	.LVL2:
+  50              		.loc 1 43 0 discriminator 3
+  51 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  52 000e 1846     		mov	r0, r3
+  53 0010 FFF7FEFF 		bl	weight_selector_Unset
   40:Generated_Source\PSoC5/weight_selector.c ****     {
-  46              		.loc 1 40 0 discriminator 3
-  47 000c 0134     		adds	r4, r4, #1
-  48              	.LVL3:
-  49 000e E4B2     		uxtb	r4, r4
-  50              	.LVL4:
-  51              	.L2:
+  54              		.loc 1 40 0 discriminator 3
+  55 0014 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  56 0016 0133     		adds	r3, r3, #1
+  57 0018 FB71     		strb	r3, [r7, #7]
+  58              	.L2:
   40:Generated_Source\PSoC5/weight_selector.c ****     {
-  52              		.loc 1 40 0 is_stmt 0 discriminator 1
-  53 0010 022C     		cmp	r4, #2
-  54 0012 F8D9     		bls	.L3
+  59              		.loc 1 40 0 is_stmt 0 discriminator 1
+  60 001a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  61 001c 022B     		cmp	r3, #2
+  62 001e F5D9     		bls	.L3
   44:Generated_Source\PSoC5/weight_selector.c **** #else
   45:Generated_Source\PSoC5/weight_selector.c ****         weight_selector_CYAMUXSIDE_A_Unset(chan);
   46:Generated_Source\PSoC5/weight_selector.c ****         weight_selector_CYAMUXSIDE_B_Unset(chan);
@@ -110,31 +118,37 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
   48:Generated_Source\PSoC5/weight_selector.c ****     }
   49:Generated_Source\PSoC5/weight_selector.c **** 
   50:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_lastChannel = weight_selector_NULL_CHANNEL;
-  55              		.loc 1 50 0 is_stmt 1
-  56 0014 FF22     		movs	r2, #255
-  57 0016 014B     		ldr	r3, .L5
-  58 0018 1A70     		strb	r2, [r3]
-  59 001a 10BD     		pop	{r4, pc}
-  60              	.LVL5:
-  61              	.L6:
-  62              		.align	2
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 3
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 3
 
 
-  63              	.L5:
-  64 001c 00000000 		.word	.LANCHOR0
-  65              		.cfi_endproc
-  66              	.LFE0:
-  67              		.size	weight_selector_Start, .-weight_selector_Start
-  68              		.section	.text.weight_selector_Select,"ax",%progbits
-  69              		.align	2
-  70              		.global	weight_selector_Select
-  71              		.thumb
-  72              		.thumb_func
-  73              		.type	weight_selector_Select, %function
-  74              	weight_selector_Select:
-  75              	.LFB1:
+  63              		.loc 1 50 0 is_stmt 1
+  64 0020 034B     		ldr	r3, .L4
+  65 0022 FF22     		movs	r2, #255
+  66 0024 1A70     		strb	r2, [r3]
   51:Generated_Source\PSoC5/weight_selector.c **** }
+  67              		.loc 1 51 0
+  68 0026 00BF     		nop
+  69 0028 0837     		adds	r7, r7, #8
+  70              		.cfi_def_cfa_offset 8
+  71 002a BD46     		mov	sp, r7
+  72              		.cfi_def_cfa_register 13
+  73              		@ sp needed
+  74 002c 80BD     		pop	{r7, pc}
+  75              	.L5:
+  76 002e 00BF     		.align	2
+  77              	.L4:
+  78 0030 00000000 		.word	weight_selector_lastChannel
+  79              		.cfi_endproc
+  80              	.LFE0:
+  81              		.size	weight_selector_Start, .-weight_selector_Start
+  82              		.section	.text.weight_selector_Select,"ax",%progbits
+  83              		.align	2
+  84              		.global	weight_selector_Select
+  85              		.thumb
+  86              		.thumb_func
+  87              		.type	weight_selector_Select, %function
+  88              	weight_selector_Select:
+  89              	.LFB1:
   52:Generated_Source\PSoC5/weight_selector.c **** 
   53:Generated_Source\PSoC5/weight_selector.c **** 
   54:Generated_Source\PSoC5/weight_selector.c **** #if (!weight_selector_ATMOSTONE)
@@ -154,49 +168,60 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
   68:Generated_Source\PSoC5/weight_selector.c **** *******************************************************************************/
   69:Generated_Source\PSoC5/weight_selector.c **** void weight_selector_Select(uint8 channel) 
   70:Generated_Source\PSoC5/weight_selector.c **** {
-  76              		.loc 1 70 0
-  77              		.cfi_startproc
-  78              		@ args = 0, pretend = 0, frame = 0
-  79              		@ frame_needed = 0, uses_anonymous_args = 0
-  80              	.LVL6:
-  81 0000 10B5     		push	{r4, lr}
-  82              		.cfi_def_cfa_offset 8
-  83              		.cfi_offset 4, -8
-  84              		.cfi_offset 14, -4
-  85 0002 0446     		mov	r4, r0
+  90              		.loc 1 70 0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 8
+  93              		@ frame_needed = 1, uses_anonymous_args = 0
+  94 0000 80B5     		push	{r7, lr}
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 7, -8
+  97              		.cfi_offset 14, -4
+  98 0002 82B0     		sub	sp, sp, #8
+  99              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 4
+
+
+ 100 0004 00AF     		add	r7, sp, #0
+ 101              		.cfi_def_cfa_register 7
+ 102 0006 0346     		mov	r3, r0
+ 103 0008 FB71     		strb	r3, [r7, #7]
   71:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_DisconnectAll();        /* Disconnect all previous connections */
-  86              		.loc 1 71 0
-  87 0004 FFF7FEFF 		bl	weight_selector_Start
-  88              	.LVL7:
+ 104              		.loc 1 71 0
+ 105 000a FFF7FEFF 		bl	weight_selector_Start
   72:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_Connect(channel);       /* Make the given selection */
-  89              		.loc 1 72 0
-  90 0008 2046     		mov	r0, r4
-  91 000a FFF7FEFF 		bl	weight_selector_Set
-  92              	.LVL8:
+ 106              		.loc 1 72 0
+ 107 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 108 0010 1846     		mov	r0, r3
+ 109 0012 FFF7FEFF 		bl	weight_selector_Set
   73:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_lastChannel = channel;  /* Update last channel */
-  93              		.loc 1 73 0
-  94 000e 014B     		ldr	r3, .L9
-  95 0010 1C70     		strb	r4, [r3]
-  96 0012 10BD     		pop	{r4, pc}
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 4
-
-
-  97              	.L10:
-  98              		.align	2
-  99              	.L9:
- 100 0014 00000000 		.word	.LANCHOR0
- 101              		.cfi_endproc
- 102              	.LFE1:
- 103              		.size	weight_selector_Select, .-weight_selector_Select
- 104              		.section	.text.weight_selector_FastSelect,"ax",%progbits
- 105              		.align	2
- 106              		.global	weight_selector_FastSelect
- 107              		.thumb
- 108              		.thumb_func
- 109              		.type	weight_selector_FastSelect, %function
- 110              	weight_selector_FastSelect:
- 111              	.LFB2:
+ 110              		.loc 1 73 0
+ 111 0016 034A     		ldr	r2, .L7
+ 112 0018 FB79     		ldrb	r3, [r7, #7]
+ 113 001a 1370     		strb	r3, [r2]
   74:Generated_Source\PSoC5/weight_selector.c **** }
+ 114              		.loc 1 74 0
+ 115 001c 00BF     		nop
+ 116 001e 0837     		adds	r7, r7, #8
+ 117              		.cfi_def_cfa_offset 8
+ 118 0020 BD46     		mov	sp, r7
+ 119              		.cfi_def_cfa_register 13
+ 120              		@ sp needed
+ 121 0022 80BD     		pop	{r7, pc}
+ 122              	.L8:
+ 123              		.align	2
+ 124              	.L7:
+ 125 0024 00000000 		.word	weight_selector_lastChannel
+ 126              		.cfi_endproc
+ 127              	.LFE1:
+ 128              		.size	weight_selector_Select, .-weight_selector_Select
+ 129              		.section	.text.weight_selector_FastSelect,"ax",%progbits
+ 130              		.align	2
+ 131              		.global	weight_selector_FastSelect
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.type	weight_selector_FastSelect, %function
+ 135              	weight_selector_FastSelect:
+ 136              	.LFB2:
   75:Generated_Source\PSoC5/weight_selector.c **** #endif
   76:Generated_Source\PSoC5/weight_selector.c **** 
   77:Generated_Source\PSoC5/weight_selector.c **** 
@@ -213,47 +238,52 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
   88:Generated_Source\PSoC5/weight_selector.c **** *  channel:  The channel to connect to the common terminal.
   89:Generated_Source\PSoC5/weight_selector.c **** *
   90:Generated_Source\PSoC5/weight_selector.c **** * Return:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 5
+
+
   91:Generated_Source\PSoC5/weight_selector.c **** *  void
   92:Generated_Source\PSoC5/weight_selector.c **** *
   93:Generated_Source\PSoC5/weight_selector.c **** *******************************************************************************/
   94:Generated_Source\PSoC5/weight_selector.c **** void weight_selector_FastSelect(uint8 channel) 
   95:Generated_Source\PSoC5/weight_selector.c **** {
- 112              		.loc 1 95 0
- 113              		.cfi_startproc
- 114              		@ args = 0, pretend = 0, frame = 0
- 115              		@ frame_needed = 0, uses_anonymous_args = 0
- 116              	.LVL9:
- 117 0000 10B5     		push	{r4, lr}
- 118              		.cfi_def_cfa_offset 8
- 119              		.cfi_offset 4, -8
- 120              		.cfi_offset 14, -4
- 121 0002 0446     		mov	r4, r0
+ 137              		.loc 1 95 0
+ 138              		.cfi_startproc
+ 139              		@ args = 0, pretend = 0, frame = 8
+ 140              		@ frame_needed = 1, uses_anonymous_args = 0
+ 141 0000 80B5     		push	{r7, lr}
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 7, -8
+ 144              		.cfi_offset 14, -4
+ 145 0002 82B0     		sub	sp, sp, #8
+ 146              		.cfi_def_cfa_offset 16
+ 147 0004 00AF     		add	r7, sp, #0
+ 148              		.cfi_def_cfa_register 7
+ 149 0006 0346     		mov	r3, r0
+ 150 0008 FB71     		strb	r3, [r7, #7]
   96:Generated_Source\PSoC5/weight_selector.c ****     /* Disconnect the last valid channel */
   97:Generated_Source\PSoC5/weight_selector.c ****     if( weight_selector_lastChannel != weight_selector_NULL_CHANNEL)
- 122              		.loc 1 97 0
- 123 0004 054B     		ldr	r3, .L14
- 124 0006 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
- 125              	.LVL10:
- 126 0008 FF28     		cmp	r0, #255
- 127 000a 01D0     		beq	.L12
+ 151              		.loc 1 97 0
+ 152 000a 0A4B     		ldr	r3, .L11
+ 153 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 154 000e FF2B     		cmp	r3, #255
+ 155 0010 04D0     		beq	.L10
   98:Generated_Source\PSoC5/weight_selector.c ****     {
   99:Generated_Source\PSoC5/weight_selector.c ****         weight_selector_Disconnect(weight_selector_lastChannel);
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 5
-
-
- 128              		.loc 1 99 0
- 129 000c FFF7FEFF 		bl	weight_selector_Unset
- 130              	.LVL11:
- 131              	.L12:
+ 156              		.loc 1 99 0
+ 157 0012 084B     		ldr	r3, .L11
+ 158 0014 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 159 0016 1846     		mov	r0, r3
+ 160 0018 FFF7FEFF 		bl	weight_selector_Unset
+ 161              	.L10:
  100:Generated_Source\PSoC5/weight_selector.c ****     }
  101:Generated_Source\PSoC5/weight_selector.c **** 
  102:Generated_Source\PSoC5/weight_selector.c ****     /* Make the new channel connection */
  103:Generated_Source\PSoC5/weight_selector.c **** #if (weight_selector_MUXTYPE == weight_selector_MUX_SINGLE)
  104:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_Set(channel);
- 132              		.loc 1 104 0
- 133 0010 2046     		mov	r0, r4
- 134 0012 FFF7FEFF 		bl	weight_selector_Set
- 135              	.LVL12:
+ 162              		.loc 1 104 0
+ 163 001c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 164 001e 1846     		mov	r0, r3
+ 165 0020 FFF7FEFF 		bl	weight_selector_Set
  105:Generated_Source\PSoC5/weight_selector.c **** #else
  106:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_CYAMUXSIDE_A_Set(channel);
  107:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_CYAMUXSIDE_B_Set(channel);
@@ -261,611 +291,450 @@ ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 1
  109:Generated_Source\PSoC5/weight_selector.c **** 
  110:Generated_Source\PSoC5/weight_selector.c **** 
  111:Generated_Source\PSoC5/weight_selector.c ****     weight_selector_lastChannel = channel;   /* Update last channel */
- 136              		.loc 1 111 0
- 137 0016 014B     		ldr	r3, .L14
- 138 0018 1C70     		strb	r4, [r3]
- 139 001a 10BD     		pop	{r4, pc}
- 140              	.L15:
- 141              		.align	2
- 142              	.L14:
- 143 001c 00000000 		.word	.LANCHOR0
- 144              		.cfi_endproc
- 145              	.LFE2:
- 146              		.size	weight_selector_FastSelect, .-weight_selector_FastSelect
- 147              		.data
- 148              		.set	.LANCHOR0,. + 0
- 149              		.type	weight_selector_lastChannel, %object
- 150              		.size	weight_selector_lastChannel, 1
- 151              	weight_selector_lastChannel:
- 152 0000 FF       		.byte	-1
- 153              		.text
- 154              	.Letext0:
- 155              		.file 2 "Generated_Source\\PSoC5\\cyfitter_cfg.h"
- 156              		.file 3 "Generated_Source\\PSoC5\\cytypes.h"
- 157              		.section	.debug_info,"",%progbits
- 158              	.Ldebug_info0:
- 159 0000 61010000 		.4byte	0x161
- 160 0004 0400     		.2byte	0x4
- 161 0006 00000000 		.4byte	.Ldebug_abbrev0
- 162 000a 04       		.byte	0x4
- 163 000b 01       		.uleb128 0x1
- 164 000c 6B000000 		.4byte	.LASF20
- 165 0010 0C       		.byte	0xc
- 166 0011 DB010000 		.4byte	.LASF21
- 167 0015 25010000 		.4byte	.LASF22
- 168 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 169 001d 00000000 		.4byte	0
- 170 0021 00000000 		.4byte	.Ldebug_line0
- 171 0025 02       		.uleb128 0x2
- 172 0026 01       		.byte	0x1
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 6
+ 166              		.loc 1 111 0
+ 167 0024 034A     		ldr	r2, .L11
+ 168 0026 FB79     		ldrb	r3, [r7, #7]
+ 169 0028 1370     		strb	r3, [r2]
+ 112:Generated_Source\PSoC5/weight_selector.c **** }
+ 170              		.loc 1 112 0
+ 171 002a 00BF     		nop
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 6
 
 
- 173 0027 06       		.byte	0x6
- 174 0028 0D020000 		.4byte	.LASF0
- 175 002c 02       		.uleb128 0x2
- 176 002d 01       		.byte	0x1
- 177 002e 08       		.byte	0x8
- 178 002f 5D000000 		.4byte	.LASF1
- 179 0033 02       		.uleb128 0x2
- 180 0034 02       		.byte	0x2
- 181 0035 05       		.byte	0x5
- 182 0036 D1010000 		.4byte	.LASF2
- 183 003a 02       		.uleb128 0x2
- 184 003b 02       		.byte	0x2
- 185 003c 07       		.byte	0x7
- 186 003d 0B010000 		.4byte	.LASF3
- 187 0041 02       		.uleb128 0x2
- 188 0042 04       		.byte	0x4
- 189 0043 05       		.byte	0x5
- 190 0044 04020000 		.4byte	.LASF4
- 191 0048 02       		.uleb128 0x2
- 192 0049 04       		.byte	0x4
- 193 004a 07       		.byte	0x7
- 194 004b F9000000 		.4byte	.LASF5
- 195 004f 02       		.uleb128 0x2
- 196 0050 08       		.byte	0x8
- 197 0051 05       		.byte	0x5
- 198 0052 BE010000 		.4byte	.LASF6
- 199 0056 02       		.uleb128 0x2
- 200 0057 08       		.byte	0x8
- 201 0058 07       		.byte	0x7
- 202 0059 8C010000 		.4byte	.LASF7
- 203 005d 03       		.uleb128 0x3
- 204 005e 04       		.byte	0x4
- 205 005f 05       		.byte	0x5
- 206 0060 696E7400 		.ascii	"int\000"
- 207 0064 02       		.uleb128 0x2
- 208 0065 04       		.byte	0x4
- 209 0066 07       		.byte	0x7
- 210 0067 6B010000 		.4byte	.LASF8
- 211 006b 04       		.uleb128 0x4
- 212 006c 57000000 		.4byte	.LASF23
- 213 0070 03       		.byte	0x3
- 214 0071 E801     		.2byte	0x1e8
- 215 0073 2C000000 		.4byte	0x2c
- 216 0077 02       		.uleb128 0x2
- 217 0078 04       		.byte	0x4
- 218 0079 04       		.byte	0x4
- 219 007a 51000000 		.4byte	.LASF9
- 220 007e 02       		.uleb128 0x2
- 221 007f 08       		.byte	0x8
- 222 0080 04       		.byte	0x4
- 223 0081 1E010000 		.4byte	.LASF10
- 224 0085 02       		.uleb128 0x2
- 225 0086 01       		.byte	0x1
- 226 0087 08       		.byte	0x8
- 227 0088 CC010000 		.4byte	.LASF11
- 228 008c 05       		.uleb128 0x5
- 229 008d 24000000 		.4byte	.LASF12
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 7
+ 172 002c 0837     		adds	r7, r7, #8
+ 173              		.cfi_def_cfa_offset 8
+ 174 002e BD46     		mov	sp, r7
+ 175              		.cfi_def_cfa_register 13
+ 176              		@ sp needed
+ 177 0030 80BD     		pop	{r7, pc}
+ 178              	.L12:
+ 179 0032 00BF     		.align	2
+ 180              	.L11:
+ 181 0034 00000000 		.word	weight_selector_lastChannel
+ 182              		.cfi_endproc
+ 183              	.LFE2:
+ 184              		.size	weight_selector_FastSelect, .-weight_selector_FastSelect
+ 185              		.text
+ 186              	.Letext0:
+ 187              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 188              		.section	.debug_info,"",%progbits
+ 189              	.Ldebug_info0:
+ 190 0000 06010000 		.4byte	0x106
+ 191 0004 0400     		.2byte	0x4
+ 192 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 193 000a 04       		.byte	0x4
+ 194 000b 01       		.uleb128 0x1
+ 195 000c 24000000 		.4byte	.LASF18
+ 196 0010 0C       		.byte	0xc
+ 197 0011 B1010000 		.4byte	.LASF19
+ 198 0015 25010000 		.4byte	.LASF20
+ 199 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 200 001d 00000000 		.4byte	0
+ 201 0021 00000000 		.4byte	.Ldebug_line0
+ 202 0025 02       		.uleb128 0x2
+ 203 0026 01       		.byte	0x1
+ 204 0027 06       		.byte	0x6
+ 205 0028 E3010000 		.4byte	.LASF0
+ 206 002c 02       		.uleb128 0x2
+ 207 002d 01       		.byte	0x1
+ 208 002e 08       		.byte	0x8
+ 209 002f EB000000 		.4byte	.LASF1
+ 210 0033 02       		.uleb128 0x2
+ 211 0034 02       		.byte	0x2
+ 212 0035 05       		.byte	0x5
+ 213 0036 A7010000 		.4byte	.LASF2
+ 214 003a 02       		.uleb128 0x2
+ 215 003b 02       		.byte	0x2
+ 216 003c 07       		.byte	0x7
+ 217 003d 0B010000 		.4byte	.LASF3
+ 218 0041 02       		.uleb128 0x2
+ 219 0042 04       		.byte	0x4
+ 220 0043 05       		.byte	0x5
+ 221 0044 DA010000 		.4byte	.LASF4
+ 222 0048 02       		.uleb128 0x2
+ 223 0049 04       		.byte	0x4
+ 224 004a 07       		.byte	0x7
+ 225 004b F9000000 		.4byte	.LASF5
+ 226 004f 02       		.uleb128 0x2
+ 227 0050 08       		.byte	0x8
+ 228 0051 05       		.byte	0x5
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 7
 
 
- 230 0091 01       		.byte	0x1
- 231 0092 24       		.byte	0x24
- 232 0093 00000000 		.4byte	.LFB0
- 233 0097 20000000 		.4byte	.LFE0-.LFB0
- 234 009b 01       		.uleb128 0x1
- 235 009c 9C       		.byte	0x9c
- 236 009d C1000000 		.4byte	0xc1
- 237 00a1 06       		.uleb128 0x6
- 238 00a2 A3010000 		.4byte	.LASF16
- 239 00a6 01       		.byte	0x1
- 240 00a7 26       		.byte	0x26
- 241 00a8 6B000000 		.4byte	0x6b
- 242 00ac 00000000 		.4byte	.LLST0
- 243 00b0 07       		.uleb128 0x7
- 244 00b1 0C000000 		.4byte	.LVL2
- 245 00b5 4E010000 		.4byte	0x14e
- 246 00b9 08       		.uleb128 0x8
- 247 00ba 01       		.uleb128 0x1
- 248 00bb 50       		.byte	0x50
- 249 00bc 02       		.uleb128 0x2
- 250 00bd 74       		.byte	0x74
- 251 00be 00       		.sleb128 0
- 252 00bf 00       		.byte	0
- 253 00c0 00       		.byte	0
- 254 00c1 05       		.uleb128 0x5
- 255 00c2 3A000000 		.4byte	.LASF13
- 256 00c6 01       		.byte	0x1
- 257 00c7 45       		.byte	0x45
- 258 00c8 00000000 		.4byte	.LFB1
- 259 00cc 18000000 		.4byte	.LFE1-.LFB1
- 260 00d0 01       		.uleb128 0x1
- 261 00d1 9C       		.byte	0x9c
- 262 00d2 FF000000 		.4byte	0xff
- 263 00d6 09       		.uleb128 0x9
- 264 00d7 1C000000 		.4byte	.LASF15
- 265 00db 01       		.byte	0x1
- 266 00dc 45       		.byte	0x45
- 267 00dd 6B000000 		.4byte	0x6b
- 268 00e1 2A000000 		.4byte	.LLST1
- 269 00e5 0A       		.uleb128 0xa
- 270 00e6 08000000 		.4byte	.LVL7
- 271 00ea 8C000000 		.4byte	0x8c
- 272 00ee 07       		.uleb128 0x7
- 273 00ef 0E000000 		.4byte	.LVL8
- 274 00f3 59010000 		.4byte	0x159
- 275 00f7 08       		.uleb128 0x8
- 276 00f8 01       		.uleb128 0x1
- 277 00f9 50       		.byte	0x50
- 278 00fa 02       		.uleb128 0x2
- 279 00fb 74       		.byte	0x74
- 280 00fc 00       		.sleb128 0
- 281 00fd 00       		.byte	0
- 282 00fe 00       		.byte	0
- 283 00ff 05       		.uleb128 0x5
- 284 0100 19020000 		.4byte	.LASF14
- 285 0104 01       		.byte	0x1
- 286 0105 5E       		.byte	0x5e
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 8
+ 229 0052 94010000 		.4byte	.LASF6
+ 230 0056 02       		.uleb128 0x2
+ 231 0057 08       		.byte	0x8
+ 232 0058 07       		.byte	0x7
+ 233 0059 78010000 		.4byte	.LASF7
+ 234 005d 03       		.uleb128 0x3
+ 235 005e 04       		.byte	0x4
+ 236 005f 05       		.byte	0x5
+ 237 0060 696E7400 		.ascii	"int\000"
+ 238 0064 02       		.uleb128 0x2
+ 239 0065 04       		.byte	0x4
+ 240 0066 07       		.byte	0x7
+ 241 0067 6B010000 		.4byte	.LASF8
+ 242 006b 04       		.uleb128 0x4
+ 243 006c E5000000 		.4byte	.LASF21
+ 244 0070 02       		.byte	0x2
+ 245 0071 E801     		.2byte	0x1e8
+ 246 0073 2C000000 		.4byte	0x2c
+ 247 0077 02       		.uleb128 0x2
+ 248 0078 04       		.byte	0x4
+ 249 0079 04       		.byte	0x4
+ 250 007a DF000000 		.4byte	.LASF9
+ 251 007e 02       		.uleb128 0x2
+ 252 007f 08       		.byte	0x8
+ 253 0080 04       		.byte	0x4
+ 254 0081 1E010000 		.4byte	.LASF10
+ 255 0085 02       		.uleb128 0x2
+ 256 0086 01       		.byte	0x1
+ 257 0087 08       		.byte	0x8
+ 258 0088 A2010000 		.4byte	.LASF11
+ 259 008c 05       		.uleb128 0x5
+ 260 008d B2000000 		.4byte	.LASF12
+ 261 0091 01       		.byte	0x1
+ 262 0092 24       		.byte	0x24
+ 263 0093 00000000 		.4byte	.LFB0
+ 264 0097 34000000 		.4byte	.LFE0-.LFB0
+ 265 009b 01       		.uleb128 0x1
+ 266 009c 9C       		.byte	0x9c
+ 267 009d B0000000 		.4byte	0xb0
+ 268 00a1 06       		.uleb128 0x6
+ 269 00a2 8F010000 		.4byte	.LASF16
+ 270 00a6 01       		.byte	0x1
+ 271 00a7 26       		.byte	0x26
+ 272 00a8 6B000000 		.4byte	0x6b
+ 273 00ac 02       		.uleb128 0x2
+ 274 00ad 91       		.byte	0x91
+ 275 00ae 77       		.sleb128 -9
+ 276 00af 00       		.byte	0
+ 277 00b0 05       		.uleb128 0x5
+ 278 00b1 C8000000 		.4byte	.LASF13
+ 279 00b5 01       		.byte	0x1
+ 280 00b6 45       		.byte	0x45
+ 281 00b7 00000000 		.4byte	.LFB1
+ 282 00bb 28000000 		.4byte	.LFE1-.LFB1
+ 283 00bf 01       		.uleb128 0x1
+ 284 00c0 9C       		.byte	0x9c
+ 285 00c1 D4000000 		.4byte	0xd4
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 8
 
 
- 287 0106 00000000 		.4byte	.LFB2
- 288 010a 20000000 		.4byte	.LFE2-.LFB2
- 289 010e 01       		.uleb128 0x1
- 290 010f 9C       		.byte	0x9c
- 291 0110 3D010000 		.4byte	0x13d
- 292 0114 09       		.uleb128 0x9
- 293 0115 1C000000 		.4byte	.LASF15
- 294 0119 01       		.byte	0x1
- 295 011a 5E       		.byte	0x5e
- 296 011b 6B000000 		.4byte	0x6b
- 297 011f 4B000000 		.4byte	.LLST2
- 298 0123 0A       		.uleb128 0xa
- 299 0124 10000000 		.4byte	.LVL11
- 300 0128 4E010000 		.4byte	0x14e
- 301 012c 07       		.uleb128 0x7
- 302 012d 16000000 		.4byte	.LVL12
- 303 0131 59010000 		.4byte	0x159
- 304 0135 08       		.uleb128 0x8
- 305 0136 01       		.uleb128 0x1
- 306 0137 50       		.byte	0x50
- 307 0138 02       		.uleb128 0x2
- 308 0139 74       		.byte	0x74
- 309 013a 00       		.sleb128 0
- 310 013b 00       		.byte	0
- 311 013c 00       		.byte	0
- 312 013d 0B       		.uleb128 0xb
- 313 013e 00000000 		.4byte	.LASF17
- 314 0142 01       		.byte	0x1
- 315 0143 14       		.byte	0x14
- 316 0144 6B000000 		.4byte	0x6b
- 317 0148 05       		.uleb128 0x5
- 318 0149 03       		.byte	0x3
- 319 014a 00000000 		.4byte	weight_selector_lastChannel
- 320 014e 0C       		.uleb128 0xc
- 321 014f A8010000 		.4byte	.LASF18
- 322 0153 A8010000 		.4byte	.LASF18
- 323 0157 02       		.byte	0x2
- 324 0158 1B       		.byte	0x1b
- 325 0159 0C       		.uleb128 0xc
- 326 015a 78010000 		.4byte	.LASF19
- 327 015e 78010000 		.4byte	.LASF19
- 328 0162 02       		.byte	0x2
- 329 0163 1A       		.byte	0x1a
- 330 0164 00       		.byte	0
- 331              		.section	.debug_abbrev,"",%progbits
- 332              	.Ldebug_abbrev0:
- 333 0000 01       		.uleb128 0x1
- 334 0001 11       		.uleb128 0x11
- 335 0002 01       		.byte	0x1
- 336 0003 25       		.uleb128 0x25
- 337 0004 0E       		.uleb128 0xe
- 338 0005 13       		.uleb128 0x13
- 339 0006 0B       		.uleb128 0xb
- 340 0007 03       		.uleb128 0x3
- 341 0008 0E       		.uleb128 0xe
- 342 0009 1B       		.uleb128 0x1b
- 343 000a 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 9
+ 286 00c5 07       		.uleb128 0x7
+ 287 00c6 1C000000 		.4byte	.LASF15
+ 288 00ca 01       		.byte	0x1
+ 289 00cb 45       		.byte	0x45
+ 290 00cc 6B000000 		.4byte	0x6b
+ 291 00d0 02       		.uleb128 0x2
+ 292 00d1 91       		.byte	0x91
+ 293 00d2 77       		.sleb128 -9
+ 294 00d3 00       		.byte	0
+ 295 00d4 05       		.uleb128 0x5
+ 296 00d5 EF010000 		.4byte	.LASF14
+ 297 00d9 01       		.byte	0x1
+ 298 00da 5E       		.byte	0x5e
+ 299 00db 00000000 		.4byte	.LFB2
+ 300 00df 38000000 		.4byte	.LFE2-.LFB2
+ 301 00e3 01       		.uleb128 0x1
+ 302 00e4 9C       		.byte	0x9c
+ 303 00e5 F8000000 		.4byte	0xf8
+ 304 00e9 07       		.uleb128 0x7
+ 305 00ea 1C000000 		.4byte	.LASF15
+ 306 00ee 01       		.byte	0x1
+ 307 00ef 5E       		.byte	0x5e
+ 308 00f0 6B000000 		.4byte	0x6b
+ 309 00f4 02       		.uleb128 0x2
+ 310 00f5 91       		.byte	0x91
+ 311 00f6 77       		.sleb128 -9
+ 312 00f7 00       		.byte	0
+ 313 00f8 06       		.uleb128 0x6
+ 314 00f9 00000000 		.4byte	.LASF17
+ 315 00fd 01       		.byte	0x1
+ 316 00fe 14       		.byte	0x14
+ 317 00ff 6B000000 		.4byte	0x6b
+ 318 0103 05       		.uleb128 0x5
+ 319 0104 03       		.byte	0x3
+ 320 0105 00000000 		.4byte	weight_selector_lastChannel
+ 321 0109 00       		.byte	0
+ 322              		.section	.debug_abbrev,"",%progbits
+ 323              	.Ldebug_abbrev0:
+ 324 0000 01       		.uleb128 0x1
+ 325 0001 11       		.uleb128 0x11
+ 326 0002 01       		.byte	0x1
+ 327 0003 25       		.uleb128 0x25
+ 328 0004 0E       		.uleb128 0xe
+ 329 0005 13       		.uleb128 0x13
+ 330 0006 0B       		.uleb128 0xb
+ 331 0007 03       		.uleb128 0x3
+ 332 0008 0E       		.uleb128 0xe
+ 333 0009 1B       		.uleb128 0x1b
+ 334 000a 0E       		.uleb128 0xe
+ 335 000b 55       		.uleb128 0x55
+ 336 000c 17       		.uleb128 0x17
+ 337 000d 11       		.uleb128 0x11
+ 338 000e 01       		.uleb128 0x1
+ 339 000f 10       		.uleb128 0x10
+ 340 0010 17       		.uleb128 0x17
+ 341 0011 00       		.byte	0
+ 342 0012 00       		.byte	0
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 9
 
 
- 344 000b 55       		.uleb128 0x55
- 345 000c 17       		.uleb128 0x17
- 346 000d 11       		.uleb128 0x11
- 347 000e 01       		.uleb128 0x1
- 348 000f 10       		.uleb128 0x10
- 349 0010 17       		.uleb128 0x17
- 350 0011 00       		.byte	0
- 351 0012 00       		.byte	0
- 352 0013 02       		.uleb128 0x2
- 353 0014 24       		.uleb128 0x24
- 354 0015 00       		.byte	0
- 355 0016 0B       		.uleb128 0xb
- 356 0017 0B       		.uleb128 0xb
- 357 0018 3E       		.uleb128 0x3e
- 358 0019 0B       		.uleb128 0xb
- 359 001a 03       		.uleb128 0x3
- 360 001b 0E       		.uleb128 0xe
- 361 001c 00       		.byte	0
- 362 001d 00       		.byte	0
- 363 001e 03       		.uleb128 0x3
- 364 001f 24       		.uleb128 0x24
- 365 0020 00       		.byte	0
- 366 0021 0B       		.uleb128 0xb
- 367 0022 0B       		.uleb128 0xb
- 368 0023 3E       		.uleb128 0x3e
- 369 0024 0B       		.uleb128 0xb
- 370 0025 03       		.uleb128 0x3
- 371 0026 08       		.uleb128 0x8
- 372 0027 00       		.byte	0
- 373 0028 00       		.byte	0
- 374 0029 04       		.uleb128 0x4
- 375 002a 16       		.uleb128 0x16
- 376 002b 00       		.byte	0
- 377 002c 03       		.uleb128 0x3
- 378 002d 0E       		.uleb128 0xe
- 379 002e 3A       		.uleb128 0x3a
- 380 002f 0B       		.uleb128 0xb
- 381 0030 3B       		.uleb128 0x3b
- 382 0031 05       		.uleb128 0x5
- 383 0032 49       		.uleb128 0x49
- 384 0033 13       		.uleb128 0x13
- 385 0034 00       		.byte	0
- 386 0035 00       		.byte	0
- 387 0036 05       		.uleb128 0x5
- 388 0037 2E       		.uleb128 0x2e
- 389 0038 01       		.byte	0x1
- 390 0039 3F       		.uleb128 0x3f
- 391 003a 19       		.uleb128 0x19
- 392 003b 03       		.uleb128 0x3
- 393 003c 0E       		.uleb128 0xe
- 394 003d 3A       		.uleb128 0x3a
- 395 003e 0B       		.uleb128 0xb
- 396 003f 3B       		.uleb128 0x3b
- 397 0040 0B       		.uleb128 0xb
- 398 0041 27       		.uleb128 0x27
- 399 0042 19       		.uleb128 0x19
- 400 0043 11       		.uleb128 0x11
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 10
+ 343 0013 02       		.uleb128 0x2
+ 344 0014 24       		.uleb128 0x24
+ 345 0015 00       		.byte	0
+ 346 0016 0B       		.uleb128 0xb
+ 347 0017 0B       		.uleb128 0xb
+ 348 0018 3E       		.uleb128 0x3e
+ 349 0019 0B       		.uleb128 0xb
+ 350 001a 03       		.uleb128 0x3
+ 351 001b 0E       		.uleb128 0xe
+ 352 001c 00       		.byte	0
+ 353 001d 00       		.byte	0
+ 354 001e 03       		.uleb128 0x3
+ 355 001f 24       		.uleb128 0x24
+ 356 0020 00       		.byte	0
+ 357 0021 0B       		.uleb128 0xb
+ 358 0022 0B       		.uleb128 0xb
+ 359 0023 3E       		.uleb128 0x3e
+ 360 0024 0B       		.uleb128 0xb
+ 361 0025 03       		.uleb128 0x3
+ 362 0026 08       		.uleb128 0x8
+ 363 0027 00       		.byte	0
+ 364 0028 00       		.byte	0
+ 365 0029 04       		.uleb128 0x4
+ 366 002a 16       		.uleb128 0x16
+ 367 002b 00       		.byte	0
+ 368 002c 03       		.uleb128 0x3
+ 369 002d 0E       		.uleb128 0xe
+ 370 002e 3A       		.uleb128 0x3a
+ 371 002f 0B       		.uleb128 0xb
+ 372 0030 3B       		.uleb128 0x3b
+ 373 0031 05       		.uleb128 0x5
+ 374 0032 49       		.uleb128 0x49
+ 375 0033 13       		.uleb128 0x13
+ 376 0034 00       		.byte	0
+ 377 0035 00       		.byte	0
+ 378 0036 05       		.uleb128 0x5
+ 379 0037 2E       		.uleb128 0x2e
+ 380 0038 01       		.byte	0x1
+ 381 0039 3F       		.uleb128 0x3f
+ 382 003a 19       		.uleb128 0x19
+ 383 003b 03       		.uleb128 0x3
+ 384 003c 0E       		.uleb128 0xe
+ 385 003d 3A       		.uleb128 0x3a
+ 386 003e 0B       		.uleb128 0xb
+ 387 003f 3B       		.uleb128 0x3b
+ 388 0040 0B       		.uleb128 0xb
+ 389 0041 27       		.uleb128 0x27
+ 390 0042 19       		.uleb128 0x19
+ 391 0043 11       		.uleb128 0x11
+ 392 0044 01       		.uleb128 0x1
+ 393 0045 12       		.uleb128 0x12
+ 394 0046 06       		.uleb128 0x6
+ 395 0047 40       		.uleb128 0x40
+ 396 0048 18       		.uleb128 0x18
+ 397 0049 9642     		.uleb128 0x2116
+ 398 004b 19       		.uleb128 0x19
+ 399 004c 01       		.uleb128 0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 10
 
 
- 401 0044 01       		.uleb128 0x1
- 402 0045 12       		.uleb128 0x12
- 403 0046 06       		.uleb128 0x6
- 404 0047 40       		.uleb128 0x40
- 405 0048 18       		.uleb128 0x18
- 406 0049 9742     		.uleb128 0x2117
- 407 004b 19       		.uleb128 0x19
- 408 004c 01       		.uleb128 0x1
- 409 004d 13       		.uleb128 0x13
- 410 004e 00       		.byte	0
- 411 004f 00       		.byte	0
- 412 0050 06       		.uleb128 0x6
- 413 0051 34       		.uleb128 0x34
- 414 0052 00       		.byte	0
- 415 0053 03       		.uleb128 0x3
- 416 0054 0E       		.uleb128 0xe
- 417 0055 3A       		.uleb128 0x3a
- 418 0056 0B       		.uleb128 0xb
- 419 0057 3B       		.uleb128 0x3b
- 420 0058 0B       		.uleb128 0xb
- 421 0059 49       		.uleb128 0x49
- 422 005a 13       		.uleb128 0x13
- 423 005b 02       		.uleb128 0x2
- 424 005c 17       		.uleb128 0x17
- 425 005d 00       		.byte	0
- 426 005e 00       		.byte	0
- 427 005f 07       		.uleb128 0x7
- 428 0060 898201   		.uleb128 0x4109
- 429 0063 01       		.byte	0x1
- 430 0064 11       		.uleb128 0x11
- 431 0065 01       		.uleb128 0x1
- 432 0066 31       		.uleb128 0x31
- 433 0067 13       		.uleb128 0x13
- 434 0068 00       		.byte	0
- 435 0069 00       		.byte	0
- 436 006a 08       		.uleb128 0x8
- 437 006b 8A8201   		.uleb128 0x410a
- 438 006e 00       		.byte	0
- 439 006f 02       		.uleb128 0x2
- 440 0070 18       		.uleb128 0x18
- 441 0071 9142     		.uleb128 0x2111
- 442 0073 18       		.uleb128 0x18
- 443 0074 00       		.byte	0
- 444 0075 00       		.byte	0
- 445 0076 09       		.uleb128 0x9
- 446 0077 05       		.uleb128 0x5
- 447 0078 00       		.byte	0
- 448 0079 03       		.uleb128 0x3
- 449 007a 0E       		.uleb128 0xe
- 450 007b 3A       		.uleb128 0x3a
- 451 007c 0B       		.uleb128 0xb
- 452 007d 3B       		.uleb128 0x3b
- 453 007e 0B       		.uleb128 0xb
- 454 007f 49       		.uleb128 0x49
- 455 0080 13       		.uleb128 0x13
- 456 0081 02       		.uleb128 0x2
- 457 0082 17       		.uleb128 0x17
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 11
+ 400 004d 13       		.uleb128 0x13
+ 401 004e 00       		.byte	0
+ 402 004f 00       		.byte	0
+ 403 0050 06       		.uleb128 0x6
+ 404 0051 34       		.uleb128 0x34
+ 405 0052 00       		.byte	0
+ 406 0053 03       		.uleb128 0x3
+ 407 0054 0E       		.uleb128 0xe
+ 408 0055 3A       		.uleb128 0x3a
+ 409 0056 0B       		.uleb128 0xb
+ 410 0057 3B       		.uleb128 0x3b
+ 411 0058 0B       		.uleb128 0xb
+ 412 0059 49       		.uleb128 0x49
+ 413 005a 13       		.uleb128 0x13
+ 414 005b 02       		.uleb128 0x2
+ 415 005c 18       		.uleb128 0x18
+ 416 005d 00       		.byte	0
+ 417 005e 00       		.byte	0
+ 418 005f 07       		.uleb128 0x7
+ 419 0060 05       		.uleb128 0x5
+ 420 0061 00       		.byte	0
+ 421 0062 03       		.uleb128 0x3
+ 422 0063 0E       		.uleb128 0xe
+ 423 0064 3A       		.uleb128 0x3a
+ 424 0065 0B       		.uleb128 0xb
+ 425 0066 3B       		.uleb128 0x3b
+ 426 0067 0B       		.uleb128 0xb
+ 427 0068 49       		.uleb128 0x49
+ 428 0069 13       		.uleb128 0x13
+ 429 006a 02       		.uleb128 0x2
+ 430 006b 18       		.uleb128 0x18
+ 431 006c 00       		.byte	0
+ 432 006d 00       		.byte	0
+ 433 006e 00       		.byte	0
+ 434              		.section	.debug_aranges,"",%progbits
+ 435 0000 2C000000 		.4byte	0x2c
+ 436 0004 0200     		.2byte	0x2
+ 437 0006 00000000 		.4byte	.Ldebug_info0
+ 438 000a 04       		.byte	0x4
+ 439 000b 00       		.byte	0
+ 440 000c 0000     		.2byte	0
+ 441 000e 0000     		.2byte	0
+ 442 0010 00000000 		.4byte	.LFB0
+ 443 0014 34000000 		.4byte	.LFE0-.LFB0
+ 444 0018 00000000 		.4byte	.LFB1
+ 445 001c 28000000 		.4byte	.LFE1-.LFB1
+ 446 0020 00000000 		.4byte	.LFB2
+ 447 0024 38000000 		.4byte	.LFE2-.LFB2
+ 448 0028 00000000 		.4byte	0
+ 449 002c 00000000 		.4byte	0
+ 450              		.section	.debug_ranges,"",%progbits
+ 451              	.Ldebug_ranges0:
+ 452 0000 00000000 		.4byte	.LFB0
+ 453 0004 34000000 		.4byte	.LFE0
+ 454 0008 00000000 		.4byte	.LFB1
+ 455 000c 28000000 		.4byte	.LFE1
+ 456 0010 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 11
 
 
- 458 0083 00       		.byte	0
- 459 0084 00       		.byte	0
- 460 0085 0A       		.uleb128 0xa
- 461 0086 898201   		.uleb128 0x4109
- 462 0089 00       		.byte	0
- 463 008a 11       		.uleb128 0x11
- 464 008b 01       		.uleb128 0x1
- 465 008c 31       		.uleb128 0x31
- 466 008d 13       		.uleb128 0x13
- 467 008e 00       		.byte	0
- 468 008f 00       		.byte	0
- 469 0090 0B       		.uleb128 0xb
- 470 0091 34       		.uleb128 0x34
- 471 0092 00       		.byte	0
- 472 0093 03       		.uleb128 0x3
- 473 0094 0E       		.uleb128 0xe
- 474 0095 3A       		.uleb128 0x3a
- 475 0096 0B       		.uleb128 0xb
- 476 0097 3B       		.uleb128 0x3b
- 477 0098 0B       		.uleb128 0xb
- 478 0099 49       		.uleb128 0x49
- 479 009a 13       		.uleb128 0x13
- 480 009b 02       		.uleb128 0x2
- 481 009c 18       		.uleb128 0x18
- 482 009d 00       		.byte	0
- 483 009e 00       		.byte	0
- 484 009f 0C       		.uleb128 0xc
- 485 00a0 2E       		.uleb128 0x2e
- 486 00a1 00       		.byte	0
- 487 00a2 3F       		.uleb128 0x3f
- 488 00a3 19       		.uleb128 0x19
- 489 00a4 3C       		.uleb128 0x3c
- 490 00a5 19       		.uleb128 0x19
- 491 00a6 6E       		.uleb128 0x6e
- 492 00a7 0E       		.uleb128 0xe
- 493 00a8 03       		.uleb128 0x3
- 494 00a9 0E       		.uleb128 0xe
- 495 00aa 3A       		.uleb128 0x3a
- 496 00ab 0B       		.uleb128 0xb
- 497 00ac 3B       		.uleb128 0x3b
- 498 00ad 0B       		.uleb128 0xb
- 499 00ae 00       		.byte	0
- 500 00af 00       		.byte	0
- 501 00b0 00       		.byte	0
- 502              		.section	.debug_loc,"",%progbits
- 503              	.Ldebug_loc0:
- 504              	.LLST0:
- 505 0000 02000000 		.4byte	.LVL0
- 506 0004 06000000 		.4byte	.LVL1
- 507 0008 0200     		.2byte	0x2
- 508 000a 30       		.byte	0x30
- 509 000b 9F       		.byte	0x9f
- 510 000c 06000000 		.4byte	.LVL1
- 511 0010 0E000000 		.4byte	.LVL3
- 512 0014 0100     		.2byte	0x1
- 513 0016 54       		.byte	0x54
- 514 0017 10000000 		.4byte	.LVL4
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 12
+ 457 0014 38000000 		.4byte	.LFE2
+ 458 0018 00000000 		.4byte	0
+ 459 001c 00000000 		.4byte	0
+ 460              		.section	.debug_line,"",%progbits
+ 461              	.Ldebug_line0:
+ 462 0000 A0000000 		.section	.debug_str,"MS",%progbits,1
+ 462      02004C00 
+ 462      00000201 
+ 462      FB0E0D00 
+ 462      01010101 
+ 463              	.LASF17:
+ 464 0000 77656967 		.ascii	"weight_selector_lastChannel\000"
+ 464      68745F73 
+ 464      656C6563 
+ 464      746F725F 
+ 464      6C617374 
+ 465              	.LASF15:
+ 466 001c 6368616E 		.ascii	"channel\000"
+ 466      6E656C00 
+ 467              	.LASF18:
+ 468 0024 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 468      43313120 
+ 468      352E342E 
+ 468      31203230 
+ 468      31363036 
+ 469 0057 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 469      20726576 
+ 469      6973696F 
+ 469      6E203233 
+ 469      37373135 
+ 470 008a 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 470      66756E63 
+ 470      74696F6E 
+ 470      2D736563 
+ 470      74696F6E 
+ 471              	.LASF12:
+ 472 00b2 77656967 		.ascii	"weight_selector_Start\000"
+ 472      68745F73 
+ 472      656C6563 
+ 472      746F725F 
+ 472      53746172 
+ 473              	.LASF13:
+ 474 00c8 77656967 		.ascii	"weight_selector_Select\000"
+ 474      68745F73 
+ 474      656C6563 
+ 474      746F725F 
+ 474      53656C65 
+ 475              	.LASF9:
+ 476 00df 666C6F61 		.ascii	"float\000"
+ 476      7400
+ 477              	.LASF21:
+ 478 00e5 75696E74 		.ascii	"uint8\000"
+ 478      3800
+ 479              	.LASF1:
+ 480 00eb 756E7369 		.ascii	"unsigned char\000"
+ 480      676E6564 
+ 480      20636861 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 12
 
 
- 515 001b 1C000000 		.4byte	.LVL5
- 516 001f 0100     		.2byte	0x1
- 517 0021 54       		.byte	0x54
- 518 0022 00000000 		.4byte	0
- 519 0026 00000000 		.4byte	0
- 520              	.LLST1:
- 521 002a 00000000 		.4byte	.LVL6
- 522 002e 07000000 		.4byte	.LVL7-1
- 523 0032 0100     		.2byte	0x1
- 524 0034 50       		.byte	0x50
- 525 0035 07000000 		.4byte	.LVL7-1
- 526 0039 18000000 		.4byte	.LFE1
- 527 003d 0400     		.2byte	0x4
- 528 003f F3       		.byte	0xf3
- 529 0040 01       		.uleb128 0x1
- 530 0041 50       		.byte	0x50
- 531 0042 9F       		.byte	0x9f
- 532 0043 00000000 		.4byte	0
- 533 0047 00000000 		.4byte	0
- 534              	.LLST2:
- 535 004b 00000000 		.4byte	.LVL9
- 536 004f 08000000 		.4byte	.LVL10
- 537 0053 0100     		.2byte	0x1
- 538 0055 50       		.byte	0x50
- 539 0056 08000000 		.4byte	.LVL10
- 540 005a 20000000 		.4byte	.LFE2
- 541 005e 0400     		.2byte	0x4
- 542 0060 F3       		.byte	0xf3
- 543 0061 01       		.uleb128 0x1
- 544 0062 50       		.byte	0x50
- 545 0063 9F       		.byte	0x9f
- 546 0064 00000000 		.4byte	0
- 547 0068 00000000 		.4byte	0
- 548              		.section	.debug_aranges,"",%progbits
- 549 0000 2C000000 		.4byte	0x2c
- 550 0004 0200     		.2byte	0x2
- 551 0006 00000000 		.4byte	.Ldebug_info0
- 552 000a 04       		.byte	0x4
- 553 000b 00       		.byte	0
- 554 000c 0000     		.2byte	0
- 555 000e 0000     		.2byte	0
- 556 0010 00000000 		.4byte	.LFB0
- 557 0014 20000000 		.4byte	.LFE0-.LFB0
- 558 0018 00000000 		.4byte	.LFB1
- 559 001c 18000000 		.4byte	.LFE1-.LFB1
- 560 0020 00000000 		.4byte	.LFB2
- 561 0024 20000000 		.4byte	.LFE2-.LFB2
- 562 0028 00000000 		.4byte	0
- 563 002c 00000000 		.4byte	0
- 564              		.section	.debug_ranges,"",%progbits
- 565              	.Ldebug_ranges0:
- 566 0000 00000000 		.4byte	.LFB0
- 567 0004 20000000 		.4byte	.LFE0
- 568 0008 00000000 		.4byte	.LFB1
- 569 000c 18000000 		.4byte	.LFE1
- 570 0010 00000000 		.4byte	.LFB2
- 571 0014 20000000 		.4byte	.LFE2
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 13
+ 480      7200
+ 481              	.LASF5:
+ 482 00f9 6C6F6E67 		.ascii	"long unsigned int\000"
+ 482      20756E73 
+ 482      69676E65 
+ 482      6420696E 
+ 482      7400
+ 483              	.LASF3:
+ 484 010b 73686F72 		.ascii	"short unsigned int\000"
+ 484      7420756E 
+ 484      7369676E 
+ 484      65642069 
+ 484      6E7400
+ 485              	.LASF10:
+ 486 011e 646F7562 		.ascii	"double\000"
+ 486      6C6500
+ 487              	.LASF20:
+ 488 0125 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
+ 488      6F646520 
+ 488      74696C20 
+ 488      50524A33 
+ 488      5C73656D 
+ 489 0153 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
+ 489      70736F63 
+ 489      5C646D63 
+ 489      2D70736F 
+ 489      632E6379 
+ 490              	.LASF8:
+ 491 016b 756E7369 		.ascii	"unsigned int\000"
+ 491      676E6564 
+ 491      20696E74 
+ 491      00
+ 492              	.LASF7:
+ 493 0178 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 493      206C6F6E 
+ 493      6720756E 
+ 493      7369676E 
+ 493      65642069 
+ 494              	.LASF16:
+ 495 018f 6368616E 		.ascii	"chan\000"
+ 495      00
+ 496              	.LASF6:
+ 497 0194 6C6F6E67 		.ascii	"long long int\000"
+ 497      206C6F6E 
+ 497      6720696E 
+ 497      7400
+ 498              	.LASF11:
+ 499 01a2 63686172 		.ascii	"char\000"
+ 499      00
+ 500              	.LASF2:
+ 501 01a7 73686F72 		.ascii	"short int\000"
+ 501      7420696E 
+ 501      7400
+ 502              	.LASF19:
+ 503 01b1 47656E65 		.ascii	"Generated_Source\\PSoC5\\weight_selector.c\000"
+ 503      72617465 
+ 503      645F536F 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccDVjNCT.s 			page 13
 
 
- 572 0018 00000000 		.4byte	0
- 573 001c 00000000 		.4byte	0
- 574              		.section	.debug_line,"",%progbits
- 575              	.Ldebug_line0:
- 576 0000 AF000000 		.section	.debug_str,"MS",%progbits,1
- 576      02005E00 
- 576      00000201 
- 576      FB0E0D00 
- 576      01010101 
- 577              	.LASF17:
- 578 0000 77656967 		.ascii	"weight_selector_lastChannel\000"
- 578      68745F73 
- 578      656C6563 
- 578      746F725F 
- 578      6C617374 
- 579              	.LASF15:
- 580 001c 6368616E 		.ascii	"channel\000"
- 580      6E656C00 
- 581              	.LASF12:
- 582 0024 77656967 		.ascii	"weight_selector_Start\000"
- 582      68745F73 
- 582      656C6563 
- 582      746F725F 
- 582      53746172 
- 583              	.LASF13:
- 584 003a 77656967 		.ascii	"weight_selector_Select\000"
- 584      68745F73 
- 584      656C6563 
- 584      746F725F 
- 584      53656C65 
- 585              	.LASF9:
- 586 0051 666C6F61 		.ascii	"float\000"
- 586      7400
- 587              	.LASF23:
- 588 0057 75696E74 		.ascii	"uint8\000"
- 588      3800
- 589              	.LASF1:
- 590 005d 756E7369 		.ascii	"unsigned char\000"
- 590      676E6564 
- 590      20636861 
- 590      7200
- 591              	.LASF20:
- 592 006b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 592      43313120 
- 592      352E342E 
- 592      31203230 
- 592      31363036 
- 593 009e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 593      20726576 
- 593      6973696F 
- 593      6E203233 
- 593      37373135 
- 594 00d1 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 594      66756E63 
- 594      74696F6E 
- 594      2D736563 
- 594      74696F6E 
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 14
-
-
- 595              	.LASF5:
- 596 00f9 6C6F6E67 		.ascii	"long unsigned int\000"
- 596      20756E73 
- 596      69676E65 
- 596      6420696E 
- 596      7400
- 597              	.LASF3:
- 598 010b 73686F72 		.ascii	"short unsigned int\000"
- 598      7420756E 
- 598      7369676E 
- 598      65642069 
- 598      6E7400
- 599              	.LASF10:
- 600 011e 646F7562 		.ascii	"double\000"
- 600      6C6500
- 601              	.LASF22:
- 602 0125 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
- 602      6F646520 
- 602      74696C20 
- 602      50524A33 
- 602      5C73656D 
- 603 0153 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
- 603      70736F63 
- 603      5C646D63 
- 603      2D70736F 
- 603      632E6379 
- 604              	.LASF8:
- 605 016b 756E7369 		.ascii	"unsigned int\000"
- 605      676E6564 
- 605      20696E74 
- 605      00
- 606              	.LASF19:
- 607 0178 77656967 		.ascii	"weight_selector_Set\000"
- 607      68745F73 
- 607      656C6563 
- 607      746F725F 
- 607      53657400 
- 608              	.LASF7:
- 609 018c 6C6F6E67 		.ascii	"long long unsigned int\000"
- 609      206C6F6E 
- 609      6720756E 
- 609      7369676E 
- 609      65642069 
- 610              	.LASF16:
- 611 01a3 6368616E 		.ascii	"chan\000"
- 611      00
- 612              	.LASF18:
- 613 01a8 77656967 		.ascii	"weight_selector_Unset\000"
- 613      68745F73 
- 613      656C6563 
- 613      746F725F 
- 613      556E7365 
- 614              	.LASF6:
- 615 01be 6C6F6E67 		.ascii	"long long int\000"
- 615      206C6F6E 
- 615      6720696E 
- 615      7400
-ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccsVwxBm.s 			page 15
-
-
- 616              	.LASF11:
- 617 01cc 63686172 		.ascii	"char\000"
- 617      00
- 618              	.LASF2:
- 619 01d1 73686F72 		.ascii	"short int\000"
- 619      7420696E 
- 619      7400
- 620              	.LASF21:
- 621 01db 47656E65 		.ascii	"Generated_Source\\PSoC5\\weight_selector.c\000"
- 621      72617465 
- 621      645F536F 
- 621      75726365 
- 621      5C50536F 
- 622              	.LASF4:
- 623 0204 6C6F6E67 		.ascii	"long int\000"
- 623      20696E74 
- 623      00
- 624              	.LASF0:
- 625 020d 7369676E 		.ascii	"signed char\000"
- 625      65642063 
- 625      68617200 
- 626              	.LASF14:
- 627 0219 77656967 		.ascii	"weight_selector_FastSelect\000"
- 627      68745F73 
- 627      656C6563 
- 627      746F725F 
- 627      46617374 
- 628              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 503      75726365 
+ 503      5C50536F 
+ 504              	.LASF4:
+ 505 01da 6C6F6E67 		.ascii	"long int\000"
+ 505      20696E74 
+ 505      00
+ 506              	.LASF0:
+ 507 01e3 7369676E 		.ascii	"signed char\000"
+ 507      65642063 
+ 507      68617200 
+ 508              	.LASF14:
+ 509 01ef 77656967 		.ascii	"weight_selector_FastSelect\000"
+ 509      68745F73 
+ 509      656C6563 
+ 509      746F725F 
+ 509      46617374 
+ 510              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

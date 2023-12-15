@@ -6,8 +6,8 @@
     <Toolchain Name="ARM GCC Generic" Selected="True">
       <Tool Name="prebuild" Command="" Options="" />
       <Tool Name="assembler" Command="arm-none-eabi-as.exe" Options="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -alh=${OutputDir}/${CompileFile}.lst -g -W" />
-      <Tool Name="compiler" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og" />
-      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -Og -ffat-lto-objects" />
+      <Tool Name="compiler" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=${OutputDir}/${CompileFile}.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0" />
+      <Tool Name="linker" Command="arm-none-eabi-gcc.exe" Options="-mcpu=cortex-m3 -mthumb -L Generated_Source\PSoC5 -Wl,-Map,${OutputDir}/${ProjectShortName}.map -T Generated_Source\PSoC5\cm3gcc.ld -specs=nano.specs -Wl,--gc-sections -g -ffunction-sections -O0 -ffat-lto-objects" />
       <Tool Name="postbuild" Command="" Options="" />
     </Toolchain>
     <Toolchain Name="ARM MDK Generic" Selected="False">
@@ -27,7 +27,7 @@
   </Toolchains>
   <Project Name="dmc-psoc" Path="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn" Version="6.0" Type="Normal">
     <CMSIS_SVD_File>dmc-psoc.svd</CMSIS_SVD_File>
-    <Datasheet />
+    <Datasheet>dmc-psoc_datasheet.pdf</Datasheet>
     <LinkerFiles>
       <LinkerFile Toolchain="ARM GCC Generic">.\Generated_Source\PSoC5\cm3gcc.ld</LinkerFile>
       <LinkerFile Toolchain="ARM MDK Generic">.\Generated_Source\PSoC5\Cm3RealView.scat</LinkerFile>
@@ -36,22 +36,19 @@
     <Folders>
       <Folder BuildType="STRICT" Path="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn">
         <Files Root="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn">
-          <File BuildType="BUILD" Toolchain="">main.c</File>
-          <File BuildType="BUILD" Toolchain="">timers.c</File>
-          <File BuildType="BUILD" Toolchain="">job_queue.c</File>
-          <File BuildType="BUILD" Toolchain="">pump_control.c</File>
-          <File BuildType="BUILD" Toolchain="">pc_uart.c</File>
-          <File BuildType="BUILD" Toolchain="">weight.c</File>
-          <File BuildType="BUILD" Toolchain="">bro.c</File>
+          <File BuildType="BUILD" Toolchain="">dmc_controller.c</File>
+          <File BuildType="BUILD" Toolchain="">dmc_timers.c</File>
+          <File BuildType="BUILD" Toolchain="">dmc_pump_control.c</File>
+          <File BuildType="BUILD" Toolchain="">dmc_weight.c</File>
+          <File BuildType="BUILD" Toolchain="">dmc_uart_rpi.c</File>
+          <File BuildType="BUILD" Toolchain="">dmc_job_queue.c</File>
           <File BuildType="BUILD" Toolchain="">cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">..\..\..\common\hw\include\packet.h</File>
-          <File BuildType="BUILD" Toolchain="">job_queue.h</File>
-          <File BuildType="BUILD" Toolchain="">timers.h</File>
-          <File BuildType="BUILD" Toolchain="">pump_control.h</File>
-          <File BuildType="BUILD" Toolchain="">pc_uart.h</File>
-          <File BuildType="BUILD" Toolchain="">flags.h</File>
-          <File BuildType="BUILD" Toolchain="">weight.h</File>
-          <File BuildType="BUILD" Toolchain="">uart_rpi.h</File>
+          <File BuildType="BUILD" Toolchain="">dmc_job_queue.h</File>
+          <File BuildType="BUILD" Toolchain="">dmc_timers.h</File>
+          <File BuildType="BUILD" Toolchain="">dmc_pump_control.h</File>
+          <File BuildType="BUILD" Toolchain="">dmc_weight.h</File>
+          <File BuildType="BUILD" Toolchain="">dmc_uart_rpi.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\Generated_Source\PSoC5">
@@ -142,15 +139,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_3_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_3.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_3.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_1_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_3_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_3.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_3.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_2_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_2.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\gpio_pump_2.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_selector.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_selector.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_adc.c</File>
@@ -164,13 +152,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_adc_ExtVref_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_adc_ExtVref.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\weight_adc_ExtVref.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_pc.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_pc.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_pc_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_pc_INT.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_pc_BOOT.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart_pc_rx.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart_pc_rx.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_rpi.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_rpi.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_rpi_PM.c</File>
@@ -178,10 +159,17 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_rpi_BOOT.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart_rpi_rx.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart_rpi_rx.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_pc_IntClock.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_pc_IntClock.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_rpi_IntClock.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\uart_rpi_IntClock.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_3_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_3.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_3.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_1_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_2_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_2.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\pump_2.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\kode til PRJ3\semesterproject3\source\psoc\dmc-psoc\dmc-psoc.cydsn\Export\ARM_GCC_Generic">

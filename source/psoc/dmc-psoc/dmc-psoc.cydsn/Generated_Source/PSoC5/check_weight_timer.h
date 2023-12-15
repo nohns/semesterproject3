@@ -168,7 +168,7 @@ void check_weight_timer_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define check_weight_timer_INIT_PERIOD             999u
+#define check_weight_timer_INIT_PERIOD             2499u
 #define check_weight_timer_INIT_CAPTURE_MODE       ((uint8)((uint8)1u << check_weight_timer_CTRL_CAP_MODE_SHIFT))
 #define check_weight_timer_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << check_weight_timer_CTRL_TRIG_MODE_SHIFT))
 #if (check_weight_timer_UsingFixedFunction)

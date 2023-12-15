@@ -1,0 +1,986 @@
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"dmc_pump_control.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	pump_1_pumping
+  20              		.bss
+  21              		.align	2
+  22              		.type	pump_1_pumping, %object
+  23              		.size	pump_1_pumping, 4
+  24              	pump_1_pumping:
+  25 0000 00000000 		.space	4
+  26              		.global	pump_2_pumping
+  27              		.align	2
+  28              		.type	pump_2_pumping, %object
+  29              		.size	pump_2_pumping, 4
+  30              	pump_2_pumping:
+  31 0004 00000000 		.space	4
+  32              		.global	pump_3_pumping
+  33              		.align	2
+  34              		.type	pump_3_pumping, %object
+  35              		.size	pump_3_pumping, 4
+  36              	pump_3_pumping:
+  37 0008 00000000 		.space	4
+  38              		.section	.text.pump_fluid,"ax",%progbits
+  39              		.align	2
+  40              		.global	pump_fluid
+  41              		.thumb
+  42              		.thumb_func
+  43              		.type	pump_fluid, %function
+  44              	pump_fluid:
+  45              	.LFB63:
+  46              		.file 1 "dmc_pump_control.c"
+   1:dmc_pump_control.c **** /* ========================================
+   2:dmc_pump_control.c ****  *
+   3:dmc_pump_control.c ****  * Copyright YOUR COMPANY, THE YEAR
+   4:dmc_pump_control.c ****  * All Rights Reserved
+   5:dmc_pump_control.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:dmc_pump_control.c ****  *
+   7:dmc_pump_control.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:dmc_pump_control.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:dmc_pump_control.c ****  *
+  10:dmc_pump_control.c ****  * ========================================
+  11:dmc_pump_control.c **** */
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 2
+
+
+  12:dmc_pump_control.c **** #include "dmc_pump_control.h"
+  13:dmc_pump_control.c **** #include "project.h"
+  14:dmc_pump_control.c **** 
+  15:dmc_pump_control.c **** 
+  16:dmc_pump_control.c **** 
+  17:dmc_pump_control.c ****     int pump_1_pumping = 0;
+  18:dmc_pump_control.c ****     int pump_2_pumping = 0;
+  19:dmc_pump_control.c ****     int pump_3_pumping = 0;
+  20:dmc_pump_control.c **** 
+  21:dmc_pump_control.c ****     
+  22:dmc_pump_control.c **** void pump_fluid(enum dmc_pump pump)
+  23:dmc_pump_control.c **** {
+  47              		.loc 1 23 0
+  48              		.cfi_startproc
+  49              		@ args = 0, pretend = 0, frame = 8
+  50              		@ frame_needed = 1, uses_anonymous_args = 0
+  51 0000 80B5     		push	{r7, lr}
+  52              		.cfi_def_cfa_offset 8
+  53              		.cfi_offset 7, -8
+  54              		.cfi_offset 14, -4
+  55 0002 82B0     		sub	sp, sp, #8
+  56              		.cfi_def_cfa_offset 16
+  57 0004 00AF     		add	r7, sp, #0
+  58              		.cfi_def_cfa_register 7
+  59 0006 0346     		mov	r3, r0
+  60 0008 FB71     		strb	r3, [r7, #7]
+  24:dmc_pump_control.c ****     
+  25:dmc_pump_control.c ****     switch (pump)
+  61              		.loc 1 25 0
+  62 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  63 000c 022B     		cmp	r3, #2
+  64 000e 0BD0     		beq	.L3
+  65 0010 032B     		cmp	r3, #3
+  66 0012 10D0     		beq	.L4
+  67 0014 012B     		cmp	r3, #1
+  68 0016 00D0     		beq	.L5
+  26:dmc_pump_control.c ****     {
+  27:dmc_pump_control.c ****     case PUMP_1:
+  28:dmc_pump_control.c ****         {
+  29:dmc_pump_control.c ****             pump_1_Write(1);
+  30:dmc_pump_control.c ****             pump_1_pumping = 1;
+  31:dmc_pump_control.c ****             break;
+  32:dmc_pump_control.c ****         }
+  33:dmc_pump_control.c ****    case PUMP_2:
+  34:dmc_pump_control.c ****         {
+  35:dmc_pump_control.c ****             pump_2_Write(1);
+  36:dmc_pump_control.c ****             pump_2_pumping = 1;
+  37:dmc_pump_control.c ****             break;
+  38:dmc_pump_control.c ****         }
+  39:dmc_pump_control.c ****     case PUMP_3:
+  40:dmc_pump_control.c ****         {
+  41:dmc_pump_control.c ****             pump_3_Write(1);
+  42:dmc_pump_control.c ****             pump_3_pumping = 1;
+  43:dmc_pump_control.c ****             break;
+  44:dmc_pump_control.c ****         } 
+  45:dmc_pump_control.c ****     }
+  46:dmc_pump_control.c **** }
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 3
+
+
+  69              		.loc 1 46 0
+  70 0018 14E0     		b	.L6
+  71              	.L5:
+  29:dmc_pump_control.c ****             pump_1_pumping = 1;
+  72              		.loc 1 29 0
+  73 001a 0120     		movs	r0, #1
+  74 001c FFF7FEFF 		bl	pump_1_Write
+  30:dmc_pump_control.c ****             break;
+  75              		.loc 1 30 0
+  76 0020 0A4B     		ldr	r3, .L7
+  77 0022 0122     		movs	r2, #1
+  78 0024 1A60     		str	r2, [r3]
+  31:dmc_pump_control.c ****         }
+  79              		.loc 1 31 0
+  80 0026 0DE0     		b	.L2
+  81              	.L3:
+  35:dmc_pump_control.c ****             pump_2_pumping = 1;
+  82              		.loc 1 35 0
+  83 0028 0120     		movs	r0, #1
+  84 002a FFF7FEFF 		bl	pump_2_Write
+  36:dmc_pump_control.c ****             break;
+  85              		.loc 1 36 0
+  86 002e 084B     		ldr	r3, .L7+4
+  87 0030 0122     		movs	r2, #1
+  88 0032 1A60     		str	r2, [r3]
+  37:dmc_pump_control.c ****         }
+  89              		.loc 1 37 0
+  90 0034 06E0     		b	.L2
+  91              	.L4:
+  41:dmc_pump_control.c ****             pump_3_pumping = 1;
+  92              		.loc 1 41 0
+  93 0036 0120     		movs	r0, #1
+  94 0038 FFF7FEFF 		bl	pump_3_Write
+  42:dmc_pump_control.c ****             break;
+  95              		.loc 1 42 0
+  96 003c 054B     		ldr	r3, .L7+8
+  97 003e 0122     		movs	r2, #1
+  98 0040 1A60     		str	r2, [r3]
+  43:dmc_pump_control.c ****         } 
+  99              		.loc 1 43 0
+ 100 0042 00BF     		nop
+ 101              	.L2:
+ 102              	.L6:
+ 103              		.loc 1 46 0
+ 104 0044 00BF     		nop
+ 105 0046 0837     		adds	r7, r7, #8
+ 106              		.cfi_def_cfa_offset 8
+ 107 0048 BD46     		mov	sp, r7
+ 108              		.cfi_def_cfa_register 13
+ 109              		@ sp needed
+ 110 004a 80BD     		pop	{r7, pc}
+ 111              	.L8:
+ 112              		.align	2
+ 113              	.L7:
+ 114 004c 00000000 		.word	pump_1_pumping
+ 115 0050 00000000 		.word	pump_2_pumping
+ 116 0054 00000000 		.word	pump_3_pumping
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 4
+
+
+ 117              		.cfi_endproc
+ 118              	.LFE63:
+ 119              		.size	pump_fluid, .-pump_fluid
+ 120              		.section	.text.is_pumping,"ax",%progbits
+ 121              		.align	2
+ 122              		.global	is_pumping
+ 123              		.thumb
+ 124              		.thumb_func
+ 125              		.type	is_pumping, %function
+ 126              	is_pumping:
+ 127              	.LFB64:
+  47:dmc_pump_control.c **** 
+  48:dmc_pump_control.c **** int is_pumping(enum dmc_pump pump)
+  49:dmc_pump_control.c **** {
+ 128              		.loc 1 49 0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 8
+ 131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+ 133 0000 80B4     		push	{r7}
+ 134              		.cfi_def_cfa_offset 4
+ 135              		.cfi_offset 7, -4
+ 136 0002 83B0     		sub	sp, sp, #12
+ 137              		.cfi_def_cfa_offset 16
+ 138 0004 00AF     		add	r7, sp, #0
+ 139              		.cfi_def_cfa_register 7
+ 140 0006 0346     		mov	r3, r0
+ 141 0008 FB71     		strb	r3, [r7, #7]
+  50:dmc_pump_control.c ****     switch (pump)
+ 142              		.loc 1 50 0
+ 143 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 144 000c 022B     		cmp	r3, #2
+ 145 000e 06D0     		beq	.L11
+ 146 0010 032B     		cmp	r3, #3
+ 147 0012 07D0     		beq	.L12
+ 148 0014 012B     		cmp	r3, #1
+ 149 0016 08D1     		bne	.L15
+  51:dmc_pump_control.c ****     {
+  52:dmc_pump_control.c ****     case PUMP_1: return pump_1_pumping; 
+ 150              		.loc 1 52 0
+ 151 0018 064B     		ldr	r3, .L16
+ 152 001a 1B68     		ldr	r3, [r3]
+ 153 001c 05E0     		b	.L9
+ 154              	.L11:
+  53:dmc_pump_control.c ****     case PUMP_2: return pump_2_pumping;
+ 155              		.loc 1 53 0
+ 156 001e 064B     		ldr	r3, .L16+4
+ 157 0020 1B68     		ldr	r3, [r3]
+ 158 0022 02E0     		b	.L9
+ 159              	.L12:
+  54:dmc_pump_control.c ****     case PUMP_3: return pump_3_pumping;
+ 160              		.loc 1 54 0
+ 161 0024 054B     		ldr	r3, .L16+8
+ 162 0026 1B68     		ldr	r3, [r3]
+ 163 0028 FFE7     		b	.L9
+ 164              	.L15:
+ 165              	.L9:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 5
+
+
+  55:dmc_pump_control.c ****     }
+  56:dmc_pump_control.c **** }
+ 166              		.loc 1 56 0
+ 167 002a 1846     		mov	r0, r3
+ 168 002c 0C37     		adds	r7, r7, #12
+ 169              		.cfi_def_cfa_offset 4
+ 170 002e BD46     		mov	sp, r7
+ 171              		.cfi_def_cfa_register 13
+ 172              		@ sp needed
+ 173 0030 80BC     		pop	{r7}
+ 174              		.cfi_restore 7
+ 175              		.cfi_def_cfa_offset 0
+ 176 0032 7047     		bx	lr
+ 177              	.L17:
+ 178              		.align	2
+ 179              	.L16:
+ 180 0034 00000000 		.word	pump_1_pumping
+ 181 0038 00000000 		.word	pump_2_pumping
+ 182 003c 00000000 		.word	pump_3_pumping
+ 183              		.cfi_endproc
+ 184              	.LFE64:
+ 185              		.size	is_pumping, .-is_pumping
+ 186              		.section	.text.stop_pump,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	stop_pump
+ 189              		.thumb
+ 190              		.thumb_func
+ 191              		.type	stop_pump, %function
+ 192              	stop_pump:
+ 193              	.LFB65:
+  57:dmc_pump_control.c **** 
+  58:dmc_pump_control.c **** void stop_pump(enum dmc_pump pump)
+  59:dmc_pump_control.c **** {
+ 194              		.loc 1 59 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 8
+ 197              		@ frame_needed = 1, uses_anonymous_args = 0
+ 198 0000 80B5     		push	{r7, lr}
+ 199              		.cfi_def_cfa_offset 8
+ 200              		.cfi_offset 7, -8
+ 201              		.cfi_offset 14, -4
+ 202 0002 82B0     		sub	sp, sp, #8
+ 203              		.cfi_def_cfa_offset 16
+ 204 0004 00AF     		add	r7, sp, #0
+ 205              		.cfi_def_cfa_register 7
+ 206 0006 0346     		mov	r3, r0
+ 207 0008 FB71     		strb	r3, [r7, #7]
+  60:dmc_pump_control.c ****     switch (pump)
+ 208              		.loc 1 60 0
+ 209 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 210 000c 022B     		cmp	r3, #2
+ 211 000e 0BD0     		beq	.L20
+ 212 0010 032B     		cmp	r3, #3
+ 213 0012 10D0     		beq	.L21
+ 214 0014 012B     		cmp	r3, #1
+ 215 0016 00D0     		beq	.L22
+  61:dmc_pump_control.c ****     {
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 6
+
+
+  62:dmc_pump_control.c ****     case PUMP_1:
+  63:dmc_pump_control.c ****         {
+  64:dmc_pump_control.c ****             pump_1_Write(0);
+  65:dmc_pump_control.c ****             pump_1_pumping = 0;
+  66:dmc_pump_control.c ****             break;
+  67:dmc_pump_control.c ****         }
+  68:dmc_pump_control.c ****    case PUMP_2:
+  69:dmc_pump_control.c ****         {
+  70:dmc_pump_control.c ****             pump_2_Write(0); 
+  71:dmc_pump_control.c ****             pump_2_pumping = 0;
+  72:dmc_pump_control.c ****             break;
+  73:dmc_pump_control.c ****         }
+  74:dmc_pump_control.c ****     case PUMP_3:
+  75:dmc_pump_control.c ****         {
+  76:dmc_pump_control.c ****             pump_3_Write(0);
+  77:dmc_pump_control.c ****             pump_3_pumping = 0;
+  78:dmc_pump_control.c ****             break;
+  79:dmc_pump_control.c ****         } 
+  80:dmc_pump_control.c ****     }  
+  81:dmc_pump_control.c ****     
+  82:dmc_pump_control.c **** }
+ 216              		.loc 1 82 0
+ 217 0018 14E0     		b	.L23
+ 218              	.L22:
+  64:dmc_pump_control.c ****             pump_1_pumping = 0;
+ 219              		.loc 1 64 0
+ 220 001a 0020     		movs	r0, #0
+ 221 001c FFF7FEFF 		bl	pump_1_Write
+  65:dmc_pump_control.c ****             break;
+ 222              		.loc 1 65 0
+ 223 0020 0A4B     		ldr	r3, .L24
+ 224 0022 0022     		movs	r2, #0
+ 225 0024 1A60     		str	r2, [r3]
+  66:dmc_pump_control.c ****         }
+ 226              		.loc 1 66 0
+ 227 0026 0DE0     		b	.L19
+ 228              	.L20:
+  70:dmc_pump_control.c ****             pump_2_pumping = 0;
+ 229              		.loc 1 70 0
+ 230 0028 0020     		movs	r0, #0
+ 231 002a FFF7FEFF 		bl	pump_2_Write
+  71:dmc_pump_control.c ****             break;
+ 232              		.loc 1 71 0
+ 233 002e 084B     		ldr	r3, .L24+4
+ 234 0030 0022     		movs	r2, #0
+ 235 0032 1A60     		str	r2, [r3]
+  72:dmc_pump_control.c ****         }
+ 236              		.loc 1 72 0
+ 237 0034 06E0     		b	.L19
+ 238              	.L21:
+  76:dmc_pump_control.c ****             pump_3_pumping = 0;
+ 239              		.loc 1 76 0
+ 240 0036 0020     		movs	r0, #0
+ 241 0038 FFF7FEFF 		bl	pump_3_Write
+  77:dmc_pump_control.c ****             break;
+ 242              		.loc 1 77 0
+ 243 003c 054B     		ldr	r3, .L24+8
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 7
+
+
+ 244 003e 0022     		movs	r2, #0
+ 245 0040 1A60     		str	r2, [r3]
+  78:dmc_pump_control.c ****         } 
+ 246              		.loc 1 78 0
+ 247 0042 00BF     		nop
+ 248              	.L19:
+ 249              	.L23:
+ 250              		.loc 1 82 0
+ 251 0044 00BF     		nop
+ 252 0046 0837     		adds	r7, r7, #8
+ 253              		.cfi_def_cfa_offset 8
+ 254 0048 BD46     		mov	sp, r7
+ 255              		.cfi_def_cfa_register 13
+ 256              		@ sp needed
+ 257 004a 80BD     		pop	{r7, pc}
+ 258              	.L25:
+ 259              		.align	2
+ 260              	.L24:
+ 261 004c 00000000 		.word	pump_1_pumping
+ 262 0050 00000000 		.word	pump_2_pumping
+ 263 0054 00000000 		.word	pump_3_pumping
+ 264              		.cfi_endproc
+ 265              	.LFE65:
+ 266              		.size	stop_pump, .-stop_pump
+ 267              		.text
+ 268              	.Letext0:
+ 269              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 270              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 271              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 272              		.file 5 "dmc_pump_control.h"
+ 273              		.section	.debug_info,"",%progbits
+ 274              	.Ldebug_info0:
+ 275 0000 78010000 		.4byte	0x178
+ 276 0004 0400     		.2byte	0x4
+ 277 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 278 000a 04       		.byte	0x4
+ 279 000b 01       		.uleb128 0x1
+ 280 000c 00000000 		.4byte	.LASF26
+ 281 0010 0C       		.byte	0xc
+ 282 0011 DF010000 		.4byte	.LASF27
+ 283 0015 18010000 		.4byte	.LASF28
+ 284 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 285 001d 00000000 		.4byte	0
+ 286 0021 00000000 		.4byte	.Ldebug_line0
+ 287 0025 02       		.uleb128 0x2
+ 288 0026 05010000 		.4byte	.LASF29
+ 289 002a 01       		.byte	0x1
+ 290 002b 48000000 		.4byte	0x48
+ 291 002f 05       		.byte	0x5
+ 292 0030 10       		.byte	0x10
+ 293 0031 48000000 		.4byte	0x48
+ 294 0035 03       		.uleb128 0x3
+ 295 0036 C0010000 		.4byte	.LASF0
+ 296 003a 01       		.byte	0x1
+ 297 003b 03       		.uleb128 0x3
+ 298 003c C7010000 		.4byte	.LASF1
+ 299 0040 02       		.byte	0x2
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 8
+
+
+ 300 0041 03       		.uleb128 0x3
+ 301 0042 CE010000 		.4byte	.LASF2
+ 302 0046 03       		.byte	0x3
+ 303 0047 00       		.byte	0
+ 304 0048 04       		.uleb128 0x4
+ 305 0049 01       		.byte	0x1
+ 306 004a 08       		.byte	0x8
+ 307 004b B6000000 		.4byte	.LASF3
+ 308 004f 04       		.uleb128 0x4
+ 309 0050 01       		.byte	0x1
+ 310 0051 06       		.byte	0x6
+ 311 0052 AA000000 		.4byte	.LASF4
+ 312 0056 04       		.uleb128 0x4
+ 313 0057 02       		.byte	0x2
+ 314 0058 05       		.byte	0x5
+ 315 0059 D5010000 		.4byte	.LASF5
+ 316 005d 04       		.uleb128 0x4
+ 317 005e 02       		.byte	0x2
+ 318 005f 07       		.byte	0x7
+ 319 0060 E5000000 		.4byte	.LASF6
+ 320 0064 05       		.uleb128 0x5
+ 321 0065 8E000000 		.4byte	.LASF12
+ 322 0069 02       		.byte	0x2
+ 323 006a 3F       		.byte	0x3f
+ 324 006b 6F000000 		.4byte	0x6f
+ 325 006f 04       		.uleb128 0x4
+ 326 0070 04       		.byte	0x4
+ 327 0071 05       		.byte	0x5
+ 328 0072 F2010000 		.4byte	.LASF7
+ 329 0076 04       		.uleb128 0x4
+ 330 0077 04       		.byte	0x4
+ 331 0078 07       		.byte	0x7
+ 332 0079 D3000000 		.4byte	.LASF8
+ 333 007d 04       		.uleb128 0x4
+ 334 007e 08       		.byte	0x8
+ 335 007f 05       		.byte	0x5
+ 336 0080 AD010000 		.4byte	.LASF9
+ 337 0084 04       		.uleb128 0x4
+ 338 0085 08       		.byte	0x8
+ 339 0086 07       		.byte	0x7
+ 340 0087 7A010000 		.4byte	.LASF10
+ 341 008b 06       		.uleb128 0x6
+ 342 008c 04       		.byte	0x4
+ 343 008d 05       		.byte	0x5
+ 344 008e 696E7400 		.ascii	"int\000"
+ 345 0092 04       		.uleb128 0x4
+ 346 0093 04       		.byte	0x4
+ 347 0094 07       		.byte	0x7
+ 348 0095 6D010000 		.4byte	.LASF11
+ 349 0099 05       		.uleb128 0x5
+ 350 009a 9C010000 		.4byte	.LASF13
+ 351 009e 03       		.byte	0x3
+ 352 009f 2C       		.byte	0x2c
+ 353 00a0 64000000 		.4byte	0x64
+ 354 00a4 04       		.uleb128 0x4
+ 355 00a5 04       		.byte	0x4
+ 356 00a6 04       		.byte	0x4
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 9
+
+
+ 357 00a7 A4000000 		.4byte	.LASF14
+ 358 00ab 04       		.uleb128 0x4
+ 359 00ac 08       		.byte	0x8
+ 360 00ad 04       		.byte	0x4
+ 361 00ae 9D000000 		.4byte	.LASF15
+ 362 00b2 04       		.uleb128 0x4
+ 363 00b3 01       		.byte	0x1
+ 364 00b4 08       		.byte	0x8
+ 365 00b5 BB010000 		.4byte	.LASF16
+ 366 00b9 04       		.uleb128 0x4
+ 367 00ba 08       		.byte	0x8
+ 368 00bb 04       		.byte	0x4
+ 369 00bc FB010000 		.4byte	.LASF17
+ 370 00c0 04       		.uleb128 0x4
+ 371 00c1 04       		.byte	0x4
+ 372 00c2 07       		.byte	0x7
+ 373 00c3 A4010000 		.4byte	.LASF18
+ 374 00c7 07       		.uleb128 0x7
+ 375 00c8 91010000 		.4byte	.LASF20
+ 376 00cc 01       		.byte	0x1
+ 377 00cd 16       		.byte	0x16
+ 378 00ce 00000000 		.4byte	.LFB63
+ 379 00d2 58000000 		.4byte	.LFE63-.LFB63
+ 380 00d6 01       		.uleb128 0x1
+ 381 00d7 9C       		.byte	0x9c
+ 382 00d8 EB000000 		.4byte	0xeb
+ 383 00dc 08       		.uleb128 0x8
+ 384 00dd 98000000 		.4byte	.LASF19
+ 385 00e1 01       		.byte	0x1
+ 386 00e2 16       		.byte	0x16
+ 387 00e3 25000000 		.4byte	0x25
+ 388 00e7 02       		.uleb128 0x2
+ 389 00e8 91       		.byte	0x91
+ 390 00e9 77       		.sleb128 -9
+ 391 00ea 00       		.byte	0
+ 392 00eb 09       		.uleb128 0x9
+ 393 00ec 07020000 		.4byte	.LASF30
+ 394 00f0 01       		.byte	0x1
+ 395 00f1 30       		.byte	0x30
+ 396 00f2 8B000000 		.4byte	0x8b
+ 397 00f6 00000000 		.4byte	.LFB64
+ 398 00fa 40000000 		.4byte	.LFE64-.LFB64
+ 399 00fe 01       		.uleb128 0x1
+ 400 00ff 9C       		.byte	0x9c
+ 401 0100 13010000 		.4byte	0x113
+ 402 0104 08       		.uleb128 0x8
+ 403 0105 98000000 		.4byte	.LASF19
+ 404 0109 01       		.byte	0x1
+ 405 010a 30       		.byte	0x30
+ 406 010b 25000000 		.4byte	0x25
+ 407 010f 02       		.uleb128 0x2
+ 408 0110 91       		.byte	0x91
+ 409 0111 77       		.sleb128 -9
+ 410 0112 00       		.byte	0
+ 411 0113 07       		.uleb128 0x7
+ 412 0114 0E010000 		.4byte	.LASF21
+ 413 0118 01       		.byte	0x1
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 10
+
+
+ 414 0119 3A       		.byte	0x3a
+ 415 011a 00000000 		.4byte	.LFB65
+ 416 011e 58000000 		.4byte	.LFE65-.LFB65
+ 417 0122 01       		.uleb128 0x1
+ 418 0123 9C       		.byte	0x9c
+ 419 0124 37010000 		.4byte	0x137
+ 420 0128 08       		.uleb128 0x8
+ 421 0129 98000000 		.4byte	.LASF19
+ 422 012d 01       		.byte	0x1
+ 423 012e 3A       		.byte	0x3a
+ 424 012f 25000000 		.4byte	0x25
+ 425 0133 02       		.uleb128 0x2
+ 426 0134 91       		.byte	0x91
+ 427 0135 77       		.sleb128 -9
+ 428 0136 00       		.byte	0
+ 429 0137 0A       		.uleb128 0xa
+ 430 0138 F8000000 		.4byte	.LASF22
+ 431 013c 04       		.byte	0x4
+ 432 013d 1207     		.2byte	0x712
+ 433 013f 43010000 		.4byte	0x143
+ 434 0143 0B       		.uleb128 0xb
+ 435 0144 99000000 		.4byte	0x99
+ 436 0148 0C       		.uleb128 0xc
+ 437 0149 5E010000 		.4byte	.LASF23
+ 438 014d 01       		.byte	0x1
+ 439 014e 11       		.byte	0x11
+ 440 014f 8B000000 		.4byte	0x8b
+ 441 0153 05       		.uleb128 0x5
+ 442 0154 03       		.byte	0x3
+ 443 0155 00000000 		.4byte	pump_1_pumping
+ 444 0159 0C       		.uleb128 0xc
+ 445 015a 12020000 		.4byte	.LASF24
+ 446 015e 01       		.byte	0x1
+ 447 015f 12       		.byte	0x12
+ 448 0160 8B000000 		.4byte	0x8b
+ 449 0164 05       		.uleb128 0x5
+ 450 0165 03       		.byte	0x3
+ 451 0166 00000000 		.4byte	pump_2_pumping
+ 452 016a 0C       		.uleb128 0xc
+ 453 016b C4000000 		.4byte	.LASF25
+ 454 016f 01       		.byte	0x1
+ 455 0170 13       		.byte	0x13
+ 456 0171 8B000000 		.4byte	0x8b
+ 457 0175 05       		.uleb128 0x5
+ 458 0176 03       		.byte	0x3
+ 459 0177 00000000 		.4byte	pump_3_pumping
+ 460 017b 00       		.byte	0
+ 461              		.section	.debug_abbrev,"",%progbits
+ 462              	.Ldebug_abbrev0:
+ 463 0000 01       		.uleb128 0x1
+ 464 0001 11       		.uleb128 0x11
+ 465 0002 01       		.byte	0x1
+ 466 0003 25       		.uleb128 0x25
+ 467 0004 0E       		.uleb128 0xe
+ 468 0005 13       		.uleb128 0x13
+ 469 0006 0B       		.uleb128 0xb
+ 470 0007 03       		.uleb128 0x3
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 11
+
+
+ 471 0008 0E       		.uleb128 0xe
+ 472 0009 1B       		.uleb128 0x1b
+ 473 000a 0E       		.uleb128 0xe
+ 474 000b 55       		.uleb128 0x55
+ 475 000c 17       		.uleb128 0x17
+ 476 000d 11       		.uleb128 0x11
+ 477 000e 01       		.uleb128 0x1
+ 478 000f 10       		.uleb128 0x10
+ 479 0010 17       		.uleb128 0x17
+ 480 0011 00       		.byte	0
+ 481 0012 00       		.byte	0
+ 482 0013 02       		.uleb128 0x2
+ 483 0014 04       		.uleb128 0x4
+ 484 0015 01       		.byte	0x1
+ 485 0016 03       		.uleb128 0x3
+ 486 0017 0E       		.uleb128 0xe
+ 487 0018 0B       		.uleb128 0xb
+ 488 0019 0B       		.uleb128 0xb
+ 489 001a 49       		.uleb128 0x49
+ 490 001b 13       		.uleb128 0x13
+ 491 001c 3A       		.uleb128 0x3a
+ 492 001d 0B       		.uleb128 0xb
+ 493 001e 3B       		.uleb128 0x3b
+ 494 001f 0B       		.uleb128 0xb
+ 495 0020 01       		.uleb128 0x1
+ 496 0021 13       		.uleb128 0x13
+ 497 0022 00       		.byte	0
+ 498 0023 00       		.byte	0
+ 499 0024 03       		.uleb128 0x3
+ 500 0025 28       		.uleb128 0x28
+ 501 0026 00       		.byte	0
+ 502 0027 03       		.uleb128 0x3
+ 503 0028 0E       		.uleb128 0xe
+ 504 0029 1C       		.uleb128 0x1c
+ 505 002a 0B       		.uleb128 0xb
+ 506 002b 00       		.byte	0
+ 507 002c 00       		.byte	0
+ 508 002d 04       		.uleb128 0x4
+ 509 002e 24       		.uleb128 0x24
+ 510 002f 00       		.byte	0
+ 511 0030 0B       		.uleb128 0xb
+ 512 0031 0B       		.uleb128 0xb
+ 513 0032 3E       		.uleb128 0x3e
+ 514 0033 0B       		.uleb128 0xb
+ 515 0034 03       		.uleb128 0x3
+ 516 0035 0E       		.uleb128 0xe
+ 517 0036 00       		.byte	0
+ 518 0037 00       		.byte	0
+ 519 0038 05       		.uleb128 0x5
+ 520 0039 16       		.uleb128 0x16
+ 521 003a 00       		.byte	0
+ 522 003b 03       		.uleb128 0x3
+ 523 003c 0E       		.uleb128 0xe
+ 524 003d 3A       		.uleb128 0x3a
+ 525 003e 0B       		.uleb128 0xb
+ 526 003f 3B       		.uleb128 0x3b
+ 527 0040 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 12
+
+
+ 528 0041 49       		.uleb128 0x49
+ 529 0042 13       		.uleb128 0x13
+ 530 0043 00       		.byte	0
+ 531 0044 00       		.byte	0
+ 532 0045 06       		.uleb128 0x6
+ 533 0046 24       		.uleb128 0x24
+ 534 0047 00       		.byte	0
+ 535 0048 0B       		.uleb128 0xb
+ 536 0049 0B       		.uleb128 0xb
+ 537 004a 3E       		.uleb128 0x3e
+ 538 004b 0B       		.uleb128 0xb
+ 539 004c 03       		.uleb128 0x3
+ 540 004d 08       		.uleb128 0x8
+ 541 004e 00       		.byte	0
+ 542 004f 00       		.byte	0
+ 543 0050 07       		.uleb128 0x7
+ 544 0051 2E       		.uleb128 0x2e
+ 545 0052 01       		.byte	0x1
+ 546 0053 3F       		.uleb128 0x3f
+ 547 0054 19       		.uleb128 0x19
+ 548 0055 03       		.uleb128 0x3
+ 549 0056 0E       		.uleb128 0xe
+ 550 0057 3A       		.uleb128 0x3a
+ 551 0058 0B       		.uleb128 0xb
+ 552 0059 3B       		.uleb128 0x3b
+ 553 005a 0B       		.uleb128 0xb
+ 554 005b 27       		.uleb128 0x27
+ 555 005c 19       		.uleb128 0x19
+ 556 005d 11       		.uleb128 0x11
+ 557 005e 01       		.uleb128 0x1
+ 558 005f 12       		.uleb128 0x12
+ 559 0060 06       		.uleb128 0x6
+ 560 0061 40       		.uleb128 0x40
+ 561 0062 18       		.uleb128 0x18
+ 562 0063 9642     		.uleb128 0x2116
+ 563 0065 19       		.uleb128 0x19
+ 564 0066 01       		.uleb128 0x1
+ 565 0067 13       		.uleb128 0x13
+ 566 0068 00       		.byte	0
+ 567 0069 00       		.byte	0
+ 568 006a 08       		.uleb128 0x8
+ 569 006b 05       		.uleb128 0x5
+ 570 006c 00       		.byte	0
+ 571 006d 03       		.uleb128 0x3
+ 572 006e 0E       		.uleb128 0xe
+ 573 006f 3A       		.uleb128 0x3a
+ 574 0070 0B       		.uleb128 0xb
+ 575 0071 3B       		.uleb128 0x3b
+ 576 0072 0B       		.uleb128 0xb
+ 577 0073 49       		.uleb128 0x49
+ 578 0074 13       		.uleb128 0x13
+ 579 0075 02       		.uleb128 0x2
+ 580 0076 18       		.uleb128 0x18
+ 581 0077 00       		.byte	0
+ 582 0078 00       		.byte	0
+ 583 0079 09       		.uleb128 0x9
+ 584 007a 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 13
+
+
+ 585 007b 01       		.byte	0x1
+ 586 007c 3F       		.uleb128 0x3f
+ 587 007d 19       		.uleb128 0x19
+ 588 007e 03       		.uleb128 0x3
+ 589 007f 0E       		.uleb128 0xe
+ 590 0080 3A       		.uleb128 0x3a
+ 591 0081 0B       		.uleb128 0xb
+ 592 0082 3B       		.uleb128 0x3b
+ 593 0083 0B       		.uleb128 0xb
+ 594 0084 27       		.uleb128 0x27
+ 595 0085 19       		.uleb128 0x19
+ 596 0086 49       		.uleb128 0x49
+ 597 0087 13       		.uleb128 0x13
+ 598 0088 11       		.uleb128 0x11
+ 599 0089 01       		.uleb128 0x1
+ 600 008a 12       		.uleb128 0x12
+ 601 008b 06       		.uleb128 0x6
+ 602 008c 40       		.uleb128 0x40
+ 603 008d 18       		.uleb128 0x18
+ 604 008e 9742     		.uleb128 0x2117
+ 605 0090 19       		.uleb128 0x19
+ 606 0091 01       		.uleb128 0x1
+ 607 0092 13       		.uleb128 0x13
+ 608 0093 00       		.byte	0
+ 609 0094 00       		.byte	0
+ 610 0095 0A       		.uleb128 0xa
+ 611 0096 34       		.uleb128 0x34
+ 612 0097 00       		.byte	0
+ 613 0098 03       		.uleb128 0x3
+ 614 0099 0E       		.uleb128 0xe
+ 615 009a 3A       		.uleb128 0x3a
+ 616 009b 0B       		.uleb128 0xb
+ 617 009c 3B       		.uleb128 0x3b
+ 618 009d 05       		.uleb128 0x5
+ 619 009e 49       		.uleb128 0x49
+ 620 009f 13       		.uleb128 0x13
+ 621 00a0 3F       		.uleb128 0x3f
+ 622 00a1 19       		.uleb128 0x19
+ 623 00a2 3C       		.uleb128 0x3c
+ 624 00a3 19       		.uleb128 0x19
+ 625 00a4 00       		.byte	0
+ 626 00a5 00       		.byte	0
+ 627 00a6 0B       		.uleb128 0xb
+ 628 00a7 35       		.uleb128 0x35
+ 629 00a8 00       		.byte	0
+ 630 00a9 49       		.uleb128 0x49
+ 631 00aa 13       		.uleb128 0x13
+ 632 00ab 00       		.byte	0
+ 633 00ac 00       		.byte	0
+ 634 00ad 0C       		.uleb128 0xc
+ 635 00ae 34       		.uleb128 0x34
+ 636 00af 00       		.byte	0
+ 637 00b0 03       		.uleb128 0x3
+ 638 00b1 0E       		.uleb128 0xe
+ 639 00b2 3A       		.uleb128 0x3a
+ 640 00b3 0B       		.uleb128 0xb
+ 641 00b4 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 14
+
+
+ 642 00b5 0B       		.uleb128 0xb
+ 643 00b6 49       		.uleb128 0x49
+ 644 00b7 13       		.uleb128 0x13
+ 645 00b8 3F       		.uleb128 0x3f
+ 646 00b9 19       		.uleb128 0x19
+ 647 00ba 02       		.uleb128 0x2
+ 648 00bb 18       		.uleb128 0x18
+ 649 00bc 00       		.byte	0
+ 650 00bd 00       		.byte	0
+ 651 00be 00       		.byte	0
+ 652              		.section	.debug_aranges,"",%progbits
+ 653 0000 2C000000 		.4byte	0x2c
+ 654 0004 0200     		.2byte	0x2
+ 655 0006 00000000 		.4byte	.Ldebug_info0
+ 656 000a 04       		.byte	0x4
+ 657 000b 00       		.byte	0
+ 658 000c 0000     		.2byte	0
+ 659 000e 0000     		.2byte	0
+ 660 0010 00000000 		.4byte	.LFB63
+ 661 0014 58000000 		.4byte	.LFE63-.LFB63
+ 662 0018 00000000 		.4byte	.LFB64
+ 663 001c 40000000 		.4byte	.LFE64-.LFB64
+ 664 0020 00000000 		.4byte	.LFB65
+ 665 0024 58000000 		.4byte	.LFE65-.LFB65
+ 666 0028 00000000 		.4byte	0
+ 667 002c 00000000 		.4byte	0
+ 668              		.section	.debug_ranges,"",%progbits
+ 669              	.Ldebug_ranges0:
+ 670 0000 00000000 		.4byte	.LFB63
+ 671 0004 58000000 		.4byte	.LFE63
+ 672 0008 00000000 		.4byte	.LFB64
+ 673 000c 40000000 		.4byte	.LFE64
+ 674 0010 00000000 		.4byte	.LFB65
+ 675 0014 58000000 		.4byte	.LFE65
+ 676 0018 00000000 		.4byte	0
+ 677 001c 00000000 		.4byte	0
+ 678              		.section	.debug_line,"",%progbits
+ 679              	.Ldebug_line0:
+ 680 0000 B9010000 		.section	.debug_str,"MS",%progbits,1
+ 680      02006101 
+ 680      00000201 
+ 680      FB0E0D00 
+ 680      01010101 
+ 681              	.LASF26:
+ 682 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 682      43313120 
+ 682      352E342E 
+ 682      31203230 
+ 682      31363036 
+ 683 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 683      20726576 
+ 683      6973696F 
+ 683      6E203233 
+ 683      37373135 
+ 684 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 684      66756E63 
+ 684      74696F6E 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 15
+
+
+ 684      2D736563 
+ 684      74696F6E 
+ 685              	.LASF12:
+ 686 008e 5F5F696E 		.ascii	"__int32_t\000"
+ 686      7433325F 
+ 686      7400
+ 687              	.LASF19:
+ 688 0098 70756D70 		.ascii	"pump\000"
+ 688      00
+ 689              	.LASF15:
+ 690 009d 646F7562 		.ascii	"double\000"
+ 690      6C6500
+ 691              	.LASF14:
+ 692 00a4 666C6F61 		.ascii	"float\000"
+ 692      7400
+ 693              	.LASF4:
+ 694 00aa 7369676E 		.ascii	"signed char\000"
+ 694      65642063 
+ 694      68617200 
+ 695              	.LASF3:
+ 696 00b6 756E7369 		.ascii	"unsigned char\000"
+ 696      676E6564 
+ 696      20636861 
+ 696      7200
+ 697              	.LASF25:
+ 698 00c4 70756D70 		.ascii	"pump_3_pumping\000"
+ 698      5F335F70 
+ 698      756D7069 
+ 698      6E6700
+ 699              	.LASF8:
+ 700 00d3 6C6F6E67 		.ascii	"long unsigned int\000"
+ 700      20756E73 
+ 700      69676E65 
+ 700      6420696E 
+ 700      7400
+ 701              	.LASF6:
+ 702 00e5 73686F72 		.ascii	"short unsigned int\000"
+ 702      7420756E 
+ 702      7369676E 
+ 702      65642069 
+ 702      6E7400
+ 703              	.LASF22:
+ 704 00f8 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 704      52784275 
+ 704      66666572 
+ 704      00
+ 705              	.LASF29:
+ 706 0105 646D635F 		.ascii	"dmc_pump\000"
+ 706      70756D70 
+ 706      00
+ 707              	.LASF21:
+ 708 010e 73746F70 		.ascii	"stop_pump\000"
+ 708      5F70756D 
+ 708      7000
+ 709              	.LASF28:
+ 710 0118 433A5C6B 		.ascii	"C:\\kode til PRJ3\\semesterproject3\\source\\psoc\\"
+ 710      6F646520 
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 16
+
+
+ 710      74696C20 
+ 710      50524A33 
+ 710      5C73656D 
+ 711 0146 646D632D 		.ascii	"dmc-psoc\\dmc-psoc.cydsn\000"
+ 711      70736F63 
+ 711      5C646D63 
+ 711      2D70736F 
+ 711      632E6379 
+ 712              	.LASF23:
+ 713 015e 70756D70 		.ascii	"pump_1_pumping\000"
+ 713      5F315F70 
+ 713      756D7069 
+ 713      6E6700
+ 714              	.LASF11:
+ 715 016d 756E7369 		.ascii	"unsigned int\000"
+ 715      676E6564 
+ 715      20696E74 
+ 715      00
+ 716              	.LASF10:
+ 717 017a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 717      206C6F6E 
+ 717      6720756E 
+ 717      7369676E 
+ 717      65642069 
+ 718              	.LASF20:
+ 719 0191 70756D70 		.ascii	"pump_fluid\000"
+ 719      5F666C75 
+ 719      696400
+ 720              	.LASF13:
+ 721 019c 696E7433 		.ascii	"int32_t\000"
+ 721      325F7400 
+ 722              	.LASF18:
+ 723 01a4 73697A65 		.ascii	"sizetype\000"
+ 723      74797065 
+ 723      00
+ 724              	.LASF9:
+ 725 01ad 6C6F6E67 		.ascii	"long long int\000"
+ 725      206C6F6E 
+ 725      6720696E 
+ 725      7400
+ 726              	.LASF16:
+ 727 01bb 63686172 		.ascii	"char\000"
+ 727      00
+ 728              	.LASF0:
+ 729 01c0 50554D50 		.ascii	"PUMP_1\000"
+ 729      5F3100
+ 730              	.LASF1:
+ 731 01c7 50554D50 		.ascii	"PUMP_2\000"
+ 731      5F3200
+ 732              	.LASF2:
+ 733 01ce 50554D50 		.ascii	"PUMP_3\000"
+ 733      5F3300
+ 734              	.LASF5:
+ 735 01d5 73686F72 		.ascii	"short int\000"
+ 735      7420696E 
+ 735      7400
+ 736              	.LASF27:
+ARM GAS  C:\Users\Runeg\AppData\Local\Temp\ccMXqHO9.s 			page 17
+
+
+ 737 01df 646D635F 		.ascii	"dmc_pump_control.c\000"
+ 737      70756D70 
+ 737      5F636F6E 
+ 737      74726F6C 
+ 737      2E6300
+ 738              	.LASF7:
+ 739 01f2 6C6F6E67 		.ascii	"long int\000"
+ 739      20696E74 
+ 739      00
+ 740              	.LASF17:
+ 741 01fb 6C6F6E67 		.ascii	"long double\000"
+ 741      20646F75 
+ 741      626C6500 
+ 742              	.LASF30:
+ 743 0207 69735F70 		.ascii	"is_pumping\000"
+ 743      756D7069 
+ 743      6E6700
+ 744              	.LASF24:
+ 745 0212 70756D70 		.ascii	"pump_2_pumping\000"
+ 745      5F325F70 
+ 745      756D7069 
+ 745      6E6700
+ 746              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
